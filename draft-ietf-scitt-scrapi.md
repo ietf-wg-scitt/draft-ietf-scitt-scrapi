@@ -1,18 +1,29 @@
 ---
+v: 3
+
 title: SCITT Reference APIs
 abbrev: SCRAPI
 docname: draft-ietf-scitt-scrapi-latest
 stand_alone: true
-ipr: trust200902
 area: Security
-submissionType: IETF
-wg: TBD
+wg: SCITT
 kw: Internet-Draft
 cat: std
+consensus: yes
+submissiontype: IETF
+ipr: trust200902
 pi:
   toc: yes
   sortrefs: yes
   symrefs: yes
+
+kramdown_options:
+  auto_id_prefix: sec-
+
+venue:
+  group: SCITT
+  mail: scitt@ietf.org
+  github: ietf-wg-scitt/draft-ietf-scitt-scrapi
 
 author:
 - name: Henk Birkholz
