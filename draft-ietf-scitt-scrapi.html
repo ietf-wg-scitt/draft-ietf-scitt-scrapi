@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>SCITT Reference APIs</title>
+<meta content="Henk Birkholz" name="author">
+<meta content="Orie Steele" name="author">
+<meta content="Jon Geater" name="author">
+<meta content="
+       This document defines the SCITT REST API,
+an http interface to transparency services,
+supporting the primary operations needed to implement the SCITT Architecture  . 
+    " name="description">
+<meta content="xml2rfc 3.19.1" name="generator">
+<meta content="Internet-Draft" name="keyword">
+<meta content="draft-ietf-scitt-scrapi-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.19.1
+    Python 3.11.6
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.0
+    intervaltree 3.1.0
+    Jinja2 3.1.2
+    lxml 4.9.3
+    platformdirs 4.1.0
+    pycountry 22.3.5
+    PyYAML 6.0.1
+    requests 2.31.0
+    setuptools 68.2.2
+    six 1.16.0
+    wcwidth 0.2.13
+-->
+<link href="draft-ietf-scitt-scrapi.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 1;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl.olPercent {
+  --indent: 5ch;
+}
+dl > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+  margin-right: 1ch;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 2px 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 10ch;
+  margin-right: 1.5ch;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 12ch !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">SCRAPI</td>
+<td class="right">January 2024</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Birkholz, et al.</td>
+<td class="center">Expires 28 July 2024</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">TBD</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2024-01-25" class="published">25 January 2024</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2024-07-28">28 July 2024</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">H. Birkholz</div>
+<div class="org">Fraunhofer SIT</div>
+</div>
+<div class="author">
+      <div class="author-name">O. Steele</div>
+<div class="org">Transmute</div>
+</div>
+<div class="author">
+      <div class="author-name">J. Geater</div>
+<div class="org">DataTrails Inc.</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">SCITT Reference APIs</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">This document defines the SCITT REST API,
+an http interface to transparency services,
+supporting the primary operations needed to implement the SCITT Architecture <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-discussion-venues">
+<a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">Source for this draft and an issue tracker can be found at
+    <span><a href="https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi">https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 28 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-requirements-notation" class="internal xref">Requirements Notation</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-relation-to-identity" class="internal xref">Relation to Identity</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-authenticating-clients" class="internal xref">Authenticating Clients</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-discovering-federation" class="internal xref">Discovering Federation</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-discovering-feeds" class="internal xref">Discovering Feeds</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-scitt-reference-rest-api" class="internal xref">SCITT Reference REST API</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-key-binding-confirmation" class="internal xref">Key Binding Confirmation</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
+                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-challenge-endpoint" class="internal xref">Challenge Endpoint</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
+                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-registration-endpoint" class="internal xref">Registration Endpoint</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-messages" class="internal xref">Messages</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-register-signed-statement" class="internal xref">Register Signed Statement</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-retrieve-operation-status" class="internal xref">Retrieve Operation Status</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.3">
+                    <p id="section-toc.1-1.3.2.2.2.3.1"><a href="#section-3.2.3" class="auto internal xref">3.2.3</a>.  <a href="#name-retrieve-signed-statement" class="internal xref">Retrieve Signed Statement</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.4">
+                    <p id="section-toc.1-1.3.2.2.2.4.1"><a href="#section-3.2.4" class="auto internal xref">3.2.4</a>.  <a href="#name-retrieve-registration-recei" class="internal xref">Retrieve Registration Receipt</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-urn-sub-namespace-for-scitt" class="internal xref">URN Sub-namespace for SCITT (urn:ietf:params:scitt)</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-media-types" class="internal xref">Media Types</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-well-known-uris" class="internal xref">Well Known URIs</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-media-type-registration" class="internal xref">Media Type Registration</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-attic" class="internal xref">Attic</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">This API definition <span class="bcp14">MAY</span> be exposed externally as part of a suite of APIs,
+or be encapsulated internally and exposed indirectly via proprietary APIs.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<div id="requirements-notation">
+<section id="section-1.1">
+        <h3 id="name-requirements-notation">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-requirements-notation" class="section-name selfRef">Requirements Notation</a>
+        </h3>
+<p id="section-1.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="relation-to-identity">
+<section id="section-2">
+      <h2 id="name-relation-to-identity">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-relation-to-identity" class="section-name selfRef">Relation to Identity</a>
+      </h2>
+<p id="section-2-1">The SCITT REST API is designed to support identifier systems that are currently relevant to supply chains, including DID, x509 and PGP.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">In order to support these systems, the API must be aware of specific header parameters, in particular, <code>kid</code>, <code>x5u</code> and <code>x5c</code>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">The API enables implementers to deploy interoperable URIs for disclosing information feeds related to supply chain actors, and artifacts accessible via transparency services.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<div id="authenticating-clients">
+<section id="section-2.1">
+        <h3 id="name-authenticating-clients">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-authenticating-clients" class="section-name selfRef">Authenticating Clients</a>
+        </h3>
+<p id="section-2.1-1">TBD (comments on OAuth / Client Attestation).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="discovering-federation">
+<section id="section-2.2">
+        <h3 id="name-discovering-federation">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-discovering-federation" class="section-name selfRef">Discovering Federation</a>
+        </h3>
+<p id="section-2.2-1">TBD (comments on GAIN / OIDC).<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="discovering-feeds">
+<section id="section-2.3">
+        <h3 id="name-discovering-feeds">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-discovering-feeds" class="section-name selfRef">Discovering Feeds</a>
+        </h3>
+<p id="section-2.3-1">TBD (comments on URLs / QR Codes).<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="scitt-reference-rest-api">
+<section id="section-3">
+      <h2 id="name-scitt-reference-rest-api">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-scitt-reference-rest-api" class="section-name selfRef">SCITT Reference REST API</a>
+      </h2>
+<div id="key-binding-confirmation">
+<section id="section-3.1">
+        <h3 id="name-key-binding-confirmation">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-key-binding-confirmation" class="section-name selfRef">Key Binding Confirmation</a>
+        </h3>
+<p id="section-3.1-1">In cases where a signed statement is issued by one party and registered by another, there is a need to prove possession of key material and detect tampering while authenticating both parties.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Typically a nonce would be chosen by the transparency service and the second party would sign over the nonce, when registering the first issuer's signed statement.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">In order to avoid interactivity and improve interoperability, document describes a non-exclusive, but mandatory to support, confirmation scheme<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">In this scheme the verifier's challenge is a recent Unix timestamp, the presenting party need not request this information from the transparency service.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">Here is an example key binding token that can be paired with the confirmation claim in a signed statement:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-3.1-6">
+<pre>
+{
+  "iat": 1698077790,
+  "aud": "https://transparency.example",
+  "nonce": "1698077790"
+}
+</pre><a href="#section-3.1-6" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1-7">When applying registration policies to signed statements with confirmation, the transparency service acts as a verifier, and performs the following checks:<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.1-8">
+<li id="section-3.1-8.1">
+            <p id="section-3.1-8.1.1">verify the integrity of the issuer's signed statement<a href="#section-3.1-8.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.1-8.2">
+            <p id="section-3.1-8.2.1">confirm the verified content meets the registration policy for the transparency service.<a href="#section-3.1-8.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.1-8.3">
+            <p id="section-3.1-8.3.1">verify the key binding token, using the confirmation claim in the verified issuer signed statement<a href="#section-3.1-8.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.1-8.4">
+            <p id="section-3.1-8.4.1">ensure the key binding token has a nonce that is a string representation of a recent Unix timestamp<a href="#section-3.1-8.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<p id="section-3.1-9">The exact window of validity for proving possession is a configuration detail of the transparency service.
+Unix timestamps are used so that only a losely synchronised notion of time need be assumed and there is no requirement to account for timezones.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
+<p id="section-3.1-10">If the confirmation key is stolen, the attacker can produce key binding tokens from that point forward in time.
+In an interactive confirmation schema, the transparency service can force the confirmation key holder to produce a signature over a nonce that is not guessable, and this prevents certain attacks related to the duration of access to a signing capability and other timing details.
+However, the cost of coordinating with the transparency service, coupled with the purpose of registering with a transparency service (to obtain a receipt, proving a signed statement was acceptable at a point in time) justify specifying the recent timestamp nonce as a mandatory to implement context binding.<a href="#section-3.1-10" class="pilcrow">¶</a></p>
+<p id="section-3.1-11">In the case that a SCITT transparency service wants to support challenges (nonces) that are context binding, the transparency service can expose a "challenge token endpoint".<a href="#section-3.1-11" class="pilcrow">¶</a></p>
+<p id="section-3.1-12">This endpoint can process request parameters, and issuer a challenge token, that future registrations can use to bind to the original request.
+This interaction model works well for scenarios where requirements for a given registration might change over time, but it is important for the registering party to commit to acceptable values at the time that a signed statement is registered. These endpoints are optional to implement.<a href="#section-3.1-12" class="pilcrow">¶</a></p>
+<div id="challenge-endpoint">
+<section id="section-3.1.1">
+          <h4 id="name-challenge-endpoint">
+<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-challenge-endpoint" class="section-name selfRef">Challenge Endpoint</a>
+          </h4>
+<div id="request">
+<section id="section-3.1.1.1">
+            <h5 id="name-request">
+<a href="#section-3.1.1.1" class="section-number selfRef">3.1.1.1. </a><a href="#name-request" class="section-name selfRef">Request</a>
+            </h5>
+<div class="lang-http sourcecode" id="section-3.1.1.1-1">
+<pre>
+GET https://transparency.example/registration/challenge
+</pre><a href="#section-3.1.1.1-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="response">
+<section id="section-3.1.1.2">
+            <h5 id="name-response">
+<a href="#section-3.1.1.2" class="section-number selfRef">3.1.1.2. </a><a href="#name-response" class="section-name selfRef">Response</a>
+            </h5>
+<ul class="normal">
+<li class="normal" id="section-3.1.1.2-1.1">
+                <p id="section-3.1.1.2-1.1.1">Header: <code>Content-Type: application/json</code><a href="#section-3.1.1.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-3.1.1.2-1.2">
+                <p id="section-3.1.1.2-1.2.1">(Optional) Header: <code>Retry-After: &lt;seconds&gt;</code><a href="#section-3.1.1.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-3.1.1.2-1.3">
+                <p id="section-3.1.1.2-1.3.1">Query: <code>?intention={todo}</code><a href="#section-3.1.1.2-1.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-3.1.1.2-1.4">
+                <p id="section-3.1.1.2-1.4.1">Body: <code>{ "token": "JWT | SD-JWT | base64url( CWT | SD-CWT )&gt;" }</code><a href="#section-3.1.1.2-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="registration-endpoint">
+<section id="section-3.1.2">
+          <h4 id="name-registration-endpoint">
+<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-registration-endpoint" class="section-name selfRef">Registration Endpoint</a>
+          </h4>
+<div id="request-1">
+<section id="section-3.1.2.1">
+            <h5 id="name-request-2">
+<a href="#section-3.1.2.1" class="section-number selfRef">3.1.2.1. </a><a href="#name-request-2" class="section-name selfRef">Request</a>
+            </h5>
+<div class="lang-http sourcecode" id="section-3.1.2.1-1">
+<pre>
+POST https://transparency.example/registration
+</pre><a href="#section-3.1.2.1-1" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1.2.1-2">Headers:<a href="#section-3.1.2.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1.2.1-3.1">
+                <p id="section-3.1.2.1-3.1.1"><code>Content-Type: application/cose</code><a href="#section-3.1.2.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-3.1.2.1-4">Body: SCITT COSE_Sign1 message<a href="#section-3.1.2.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.2.1-5">Note: that the challenge token <span class="bcp14">MUST</span> be present and integrity protected when submitting signed statements to this endpoint.
+Note: this endpoint is a duplicate of <code>POST https://transparency.example/entries</code><a href="#section-3.1.2.1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="messages">
+<section id="section-3.2">
+        <h3 id="name-messages">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-messages" class="section-name selfRef">Messages</a>
+        </h3>
+<p id="section-3.2-1">All messages are sent as HTTP GET or POST requests.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a JSON problem details object (<span>[<a href="#RFC7807" class="cite xref">RFC7807</a>]</span>) containing:<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2-3.1">
+            <p id="section-3.2-3.1.1">type: A URI reference identifying the problem.
+To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".<a href="#section-3.2-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.2-3.2">
+            <p id="section-3.2-3.2.1">detail: A human-readable string describing the error that prevented the Transparency Service from processing the request, ideally with sufficient detail to enable the error to be rectified.<a href="#section-3.2-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-3.2-4">Error responses <span class="bcp14">SHOULD</span> be sent with the <code>Content-Type: application/problem+json</code> HTTP header.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-5">As an example, submitting a Signed Statement with an unsupported signature algorithm would return a <code>400 Bad Request</code> status code and the following body:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-3.2-6">
+<pre>
+{
+  "type": "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+  "detail": "Signing algorithm not support"
+}
+</pre><a href="#section-3.2-6" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2-7">Most error types are specific to the type of request and are defined in the respective subsections below.
+The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-3.2-7" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2-8.1">
+            <p id="section-3.2-8.1.1">Error code: <code>malformed</code> (The request could not be parsed).<a href="#section-3.2-8.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-3.2-9">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.
+Note that in the case of a 503 response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
+In the absence of this header field, this document does not specify a minimum.<a href="#section-3.2-9" class="pilcrow">¶</a></p>
+<div id="register-signed-statement">
+<section id="section-3.2.1">
+          <h4 id="name-register-signed-statement">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-register-signed-statement" class="section-name selfRef">Register Signed Statement</a>
+          </h4>
+<div id="request-2">
+<section id="section-3.2.1.1">
+            <h5 id="name-request-3">
+<a href="#section-3.2.1.1" class="section-number selfRef">3.2.1.1. </a><a href="#name-request-3" class="section-name selfRef">Request</a>
+            </h5>
+<div class="lang-http sourcecode" id="section-3.2.1.1-1">
+<pre>
+POST https://transparency.example/entries
+</pre><a href="#section-3.2.1.1-1" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.1.1-2">Headers:<a href="#section-3.2.1.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.1.1-3.1">
+                <p id="section-3.2.1.1-3.1.1"><code>Content-Type: application/cose</code><a href="#section-3.2.1.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-3.2.1.1-4">Body: SCITT COSE_Sign1 message<a href="#section-3.2.1.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="response-1">
+<section id="section-3.2.1.2">
+            <h5 id="name-response-2">
+<a href="#section-3.2.1.2" class="section-number selfRef">3.2.1.2. </a><a href="#name-response-2" class="section-name selfRef">Response</a>
+            </h5>
+<p id="section-3.2.1.2-1">One of the following:<a href="#section-3.2.1.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.1.2-2.1">
+                <p id="section-3.2.1.2-2.1.1">Status 201 - Registration is successful.<a href="#section-3.2.1.2-2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.1.2-2.1.2.1">
+                    <p id="section-3.2.1.2-2.1.2.1.1">Header <code>Location: &lt;Base URL&gt;/entries/&lt;Entry ID&gt;</code><a href="#section-3.2.1.2-2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.1.2-2.1.2.2">
+                    <p id="section-3.2.1.2-2.1.2.2.1">Header <code>Content-Type: application/json</code><a href="#section-3.2.1.2-2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.1.2-2.1.2.3">
+                    <p id="section-3.2.1.2-2.1.2.3.1">Body <code>{ "entryId": "&lt;Entry ID"&gt; }</code><a href="#section-3.2.1.2-2.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-3.2.1.2-2.2">
+                <p id="section-3.2.1.2-2.2.1">Status 202 - Registration is running.<a href="#section-3.2.1.2-2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.1.2-2.2.2.1">
+                    <p id="section-3.2.1.2-2.2.2.1.1">Header <code>Location: &lt;Base URL&gt;/operations/&lt;Operation ID&gt;</code><a href="#section-3.2.1.2-2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.1.2-2.2.2.2">
+                    <p id="section-3.2.1.2-2.2.2.2.1">Header <code>Content-Type: application/json</code><a href="#section-3.2.1.2-2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.1.2-2.2.2.3">
+                    <p id="section-3.2.1.2-2.2.2.3.1">(Optional) Header: <code>Retry-After: &lt;seconds&gt;</code><a href="#section-3.2.1.2-2.2.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.1.2-2.2.2.4">
+                    <p id="section-3.2.1.2-2.2.2.4.1">Body <code>{ "operationId": "&lt;Operation ID&gt;", "status": "running" }</code><a href="#section-3.2.1.2-2.2.2.4.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-3.2.1.2-2.3">
+                <p id="section-3.2.1.2-2.3.1">Status 400 - Registration was unsuccessful due to invalid input.<a href="#section-3.2.1.2-2.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.1.2-2.3.2.1">
+                    <p id="section-3.2.1.2-2.3.2.1.1">Error code <code>badSignatureAlgorithm</code><a href="#section-3.2.1.2-2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.1.2-2.3.2.2">
+                    <p id="section-3.2.1.2-2.3.2.2.1">TBD: more error codes to be defined<a href="#section-3.2.1.2-2.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+<p id="section-3.2.1.2-3">If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Registration status using the Operation ID returned in the response.
+Clients should always obtain a Receipt as a proof that Registration has succeeded.<a href="#section-3.2.1.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="retrieve-operation-status">
+<section id="section-3.2.2">
+          <h4 id="name-retrieve-operation-status">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-retrieve-operation-status" class="section-name selfRef">Retrieve Operation Status</a>
+          </h4>
+<div id="request-3">
+<section id="section-3.2.2.1">
+            <h5 id="name-request-4">
+<a href="#section-3.2.2.1" class="section-number selfRef">3.2.2.1. </a><a href="#name-request-4" class="section-name selfRef">Request</a>
+            </h5>
+<div class="lang-http sourcecode" id="section-3.2.2.1-1">
+<pre>
+GET https://transparency.example/operations/{operation_id}
+</pre><a href="#section-3.2.2.1-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="response-2">
+<section id="section-3.2.2.2">
+            <h5 id="name-response-3">
+<a href="#section-3.2.2.2" class="section-number selfRef">3.2.2.2. </a><a href="#name-response-3" class="section-name selfRef">Response</a>
+            </h5>
+<p id="section-3.2.2.2-1">One of the following:<a href="#section-3.2.2.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.2.2-2.1">
+                <p id="section-3.2.2.2-2.1.1">Status 200 - Registration is running<a href="#section-3.2.2.2-2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.2.2-2.1.2.1">
+                    <p id="section-3.2.2.2-2.1.2.1.1">Header: <code>Content-Type: application/json</code><a href="#section-3.2.2.2-2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.2.2-2.1.2.2">
+                    <p id="section-3.2.2.2-2.1.2.2.1">(Optional) Header: <code>Retry-After: &lt;seconds&gt;</code><a href="#section-3.2.2.2-2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.2.2-2.1.2.3">
+                    <p id="section-3.2.2.2-2.1.2.3.1">Body: <code>{ "operationId": "&lt;Operation ID&gt;", "status": "running" }</code><a href="#section-3.2.2.2-2.1.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-3.2.2.2-2.2">
+                <p id="section-3.2.2.2-2.2.1">Status 200 - Registration was successful<a href="#section-3.2.2.2-2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.2.2-2.2.2.1">
+                    <p id="section-3.2.2.2-2.2.2.1.1">Header: <code>Location: &lt;Base URL&gt;/entries/&lt;Entry ID&gt;</code><a href="#section-3.2.2.2-2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.2.2-2.2.2.2">
+                    <p id="section-3.2.2.2-2.2.2.2.1">Header: <code>Content-Type: application/json</code><a href="#section-3.2.2.2-2.2.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.2.2-2.2.2.3">
+                    <p id="section-3.2.2.2-2.2.2.3.1">Body: <code>{ "operationId": "&lt;Operation ID&gt;", "status": "succeeded", "entryId": "&lt;Entry ID&gt;" }</code><a href="#section-3.2.2.2-2.2.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-3.2.2.2-2.3">
+                <p id="section-3.2.2.2-2.3.1">Status 200 - Registration failed<a href="#section-3.2.2.2-2.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.2.2-2.3.2.1">
+                    <p id="section-3.2.2.2-2.3.2.1.1">Header <code>Content-Type: application/json</code><a href="#section-3.2.2.2-2.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.2.2-2.3.2.2">
+                    <p id="section-3.2.2.2-2.3.2.2.1">Body: <code>{ "operationId": "&lt;Operation ID&gt;", "status": "failed", "error": { "type": "&lt;type&gt;", "detail": "&lt;detail&gt;" } }</code><a href="#section-3.2.2.2-2.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.2.2-2.3.2.3">
+                    <p id="section-3.2.2.2-2.3.2.3.1">Error code: <code>badSignatureAlgorithm</code><a href="#section-3.2.2.2-2.3.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.2.2-2.3.2.4">
+                    <p id="section-3.2.2.2-2.3.2.4.1"></p><a href="#section-3.2.2.2-2.3.2.4" class="pilcrow">¶</a>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-3.2.2.2-2.4">
+                <p id="section-3.2.2.2-2.4.1">Status 404 - Unknown Operation ID<a href="#section-3.2.2.2-2.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.2.2-2.4.2.1">
+                    <p id="section-3.2.2.2-2.4.2.1.1">Error code: <code>operationNotFound</code><a href="#section-3.2.2.2-2.4.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.2.2-2.4.2.2">
+                    <p id="section-3.2.2.2-2.4.2.2.1">This can happen if the operation ID has expired and been deleted.<a href="#section-3.2.2.2-2.4.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+<p id="section-3.2.2.2-3">If an operation failed, then error details <span class="bcp14">SHOULD</span> be embedded as a JSON problem details object in the <code>"error"</code> field.<a href="#section-3.2.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.2.2-4">If an operation ID is invalid (i.e., it does not correspond to any submit operation), a service may return either a 404 or a <code>running</code> status.
+This is because differentiating between the two may not be possible in an eventually consistent system.<a href="#section-3.2.2.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="retrieve-signed-statement">
+<section id="section-3.2.3">
+          <h4 id="name-retrieve-signed-statement">
+<a href="#section-3.2.3" class="section-number selfRef">3.2.3. </a><a href="#name-retrieve-signed-statement" class="section-name selfRef">Retrieve Signed Statement</a>
+          </h4>
+<div id="request-4">
+<section id="section-3.2.3.1">
+            <h5 id="name-request-5">
+<a href="#section-3.2.3.1" class="section-number selfRef">3.2.3.1. </a><a href="#name-request-5" class="section-name selfRef">Request</a>
+            </h5>
+<div class="lang-http sourcecode" id="section-3.2.3.1-1">
+<pre>
+GET https://transparency.example/entries/{entry_id}
+</pre><a href="#section-3.2.3.1-1" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.3.1-2">Query parameters:<a href="#section-3.2.3.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.3.1-3.1">
+                <p id="section-3.2.3.1-3.1.1">(Optional) <code>embedReceipt=true</code><a href="#section-3.2.3.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-3.2.3.1-4">If the query parameter <code>embedReceipt=true</code> is provided, then the Signed Statement is returned with the corresponding Registration Receipt embedded in the COSE unprotected header.<a href="#section-3.2.3.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="response-3">
+<section id="section-3.2.3.2">
+            <h5 id="name-response-4">
+<a href="#section-3.2.3.2" class="section-number selfRef">3.2.3.2. </a><a href="#name-response-4" class="section-name selfRef">Response</a>
+            </h5>
+<p id="section-3.2.3.2-1">One of the following:<a href="#section-3.2.3.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.3.2-2.1">
+                <p id="section-3.2.3.2-2.1.1">Status 200.<a href="#section-3.2.3.2-2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.3.2-2.1.2.1">
+                    <p id="section-3.2.3.2-2.1.2.1.1">Header: <code>Content-Type: application/cose</code><a href="#section-3.2.3.2-2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.3.2-2.1.2.2">
+                    <p id="section-3.2.3.2-2.1.2.2.1">Body: COSE_Sign1<a href="#section-3.2.3.2-2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-3.2.3.2-2.2">
+                <p id="section-3.2.3.2-2.2.1">Status 404 - Entry not found.<a href="#section-3.2.3.2-2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.3.2-2.2.2.1">
+                    <p id="section-3.2.3.2-2.2.2.1.1">Error code: <code>entryNotFound</code><a href="#section-3.2.3.2-2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="retrieve-registration-receipt">
+<section id="section-3.2.4">
+          <h4 id="name-retrieve-registration-recei">
+<a href="#section-3.2.4" class="section-number selfRef">3.2.4. </a><a href="#name-retrieve-registration-recei" class="section-name selfRef">Retrieve Registration Receipt</a>
+          </h4>
+<div id="request-5">
+<section id="section-3.2.4.1">
+            <h5 id="name-request-6">
+<a href="#section-3.2.4.1" class="section-number selfRef">3.2.4.1. </a><a href="#name-request-6" class="section-name selfRef">Request</a>
+            </h5>
+<div class="lang-http sourcecode" id="section-3.2.4.1-1">
+<pre>
+GET https://transparency.example/entries/{entry_id}/receipt
+</pre><a href="#section-3.2.4.1-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="response-4">
+<section id="section-3.2.4.2">
+            <h5 id="name-response-5">
+<a href="#section-3.2.4.2" class="section-number selfRef">3.2.4.2. </a><a href="#name-response-5" class="section-name selfRef">Response</a>
+            </h5>
+<p id="section-3.2.4.2-1">One of the following:<a href="#section-3.2.4.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.4.2-2.1">
+                <p id="section-3.2.4.2-2.1.1">Status 200.<a href="#section-3.2.4.2-2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.4.2-2.1.2.1">
+                    <p id="section-3.2.4.2-2.1.2.1.1">Header: <code>Content-Type: application/cbor</code><a href="#section-3.2.4.2-2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                  <li class="normal" id="section-3.2.4.2-2.1.2.2">
+                    <p id="section-3.2.4.2-2.1.2.2.1">Body: SCITT_Receipt<a href="#section-3.2.4.2-2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+              <li class="normal" id="section-3.2.4.2-2.2">
+                <p id="section-3.2.4.2-2.2.1">Status 404 - Entry not found.<a href="#section-3.2.4.2-2.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.4.2-2.2.2.1">
+                    <p id="section-3.2.4.2-2.2.2.1.1">Error code: <code>entryNotFound</code><a href="#section-3.2.4.2-2.2.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+<p id="section-3.2.4.2-3">The retrieved Receipt may be embedded in the corresponding COSE_Sign1 document in the unprotected header.<a href="#section-3.2.4.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="privacy-considerations">
+<section id="section-4">
+      <h2 id="name-privacy-considerations">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
+      </h2>
+<p id="section-4-1">TODO<a href="#section-4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-5">
+      <h2 id="name-security-considerations">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-5-1">TODO<a href="#section-5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-6">
+      <h2 id="name-iana-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<div id="urn-sub-namespace-for-scitt-urnietfparamsscitt">
+<section id="section-6.1">
+        <h3 id="name-urn-sub-namespace-for-scitt">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-urn-sub-namespace-for-scitt" class="section-name selfRef">URN Sub-namespace for SCITT (urn:ietf:params:scitt)</a>
+        </h3>
+<p id="section-6.1-1">IANA is requested to register the URN sub-namespace <code>urn:ietf:params:scitt</code>
+in the "IETF URN Sub-namespace for Registered Protocol Parameter Identifiers"
+Registry <span>[<a href="#IANA.params" class="cite xref">IANA.params</a>]</span>, following the template in <span>[<a href="#RFC3553" class="cite xref">RFC3553</a>]</span>:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<div class="lang-output sourcecode" id="section-6.1-2">
+<pre>
+   Registry name:  scitt
+
+   Specification:  [RFCthis]
+
+   Repository:  http://www.iana.org/assignments/scitt
+
+   Index value:  No transformation needed.
+</pre><a href="#section-6.1-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="media-types">
+<section id="section-6.2">
+        <h3 id="name-media-types">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-media-types" class="section-name selfRef">Media Types</a>
+        </h3>
+<p id="section-6.2-1">TODO: Register them from here.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="well-known-uris">
+<section id="section-6.3">
+        <h3 id="name-well-known-uris">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-well-known-uris" class="section-name selfRef">Well Known URIs</a>
+        </h3>
+<p id="section-6.3-1">For discovering scitt configuration.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">TODO: Register them from here.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="media-type-registration">
+<section id="section-6.4">
+        <h3 id="name-media-type-registration">
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-media-type-registration" class="section-name selfRef">Media Type Registration</a>
+        </h3>
+<p id="section-6.4-1">This section requests registration of the "application/receipt+cose" media type <span>[<a href="#RFC2046" class="cite xref">RFC2046</a>]</span> in the "Media Types" registry in the manner described in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-2">TODO: Consider negotiation for receipt as "JSON" or "YAML".
+TODO: Consider impact of media type on "Data URIs" and QR Codes.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
+<p id="section-6.4-3">To indicate that the content is a SCITT Receipt:<a href="#section-6.4-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.4-4.1">
+            <p id="section-6.4-4.1.1">Type name: application<a href="#section-6.4-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.2">
+            <p id="section-6.4-4.2.1">Subtype name: receipt+cose<a href="#section-6.4-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.3">
+            <p id="section-6.4-4.3.1">Required parameters: n/a<a href="#section-6.4-4.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.4">
+            <p id="section-6.4-4.4.1">Optional parameters: n/a<a href="#section-6.4-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.5">
+            <p id="section-6.4-4.5.1">Encoding considerations: TODO<a href="#section-6.4-4.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.6">
+            <p id="section-6.4-4.6.1">Security considerations: TODO<a href="#section-6.4-4.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.7">
+            <p id="section-6.4-4.7.1">Interoperability considerations: n/a<a href="#section-6.4-4.7.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.8">
+            <p id="section-6.4-4.8.1">Published specification: this specification<a href="#section-6.4-4.8.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.9">
+            <p id="section-6.4-4.9.1">Applications that use this media type: TBD<a href="#section-6.4-4.9.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.10">
+            <p id="section-6.4-4.10.1">Fragment identifier considerations: n/a<a href="#section-6.4-4.10.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.11">
+            <p id="section-6.4-4.11.1">Additional information:<a href="#section-6.4-4.11.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.4-4.11.2.1">
+                <p id="section-6.4-4.11.2.1.1">Magic number(s): n/a<a href="#section-6.4-4.11.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.4-4.11.2.2">
+                <p id="section-6.4-4.11.2.2.1">File extension(s): n/a<a href="#section-6.4-4.11.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-6.4-4.11.2.3">
+                <p id="section-6.4-4.11.2.3.1">Macintosh file type code(s): n/a<a href="#section-6.4-4.11.2.3.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-6.4-4.12">
+            <p id="section-6.4-4.12.1">Person &amp; email address to contact for further information: TODO<a href="#section-6.4-4.12.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.13">
+            <p id="section-6.4-4.13.1">Intended usage: COMMON<a href="#section-6.4-4.13.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.14">
+            <p id="section-6.4-4.14.1">Restrictions on usage: none<a href="#section-6.4-4.14.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.15">
+            <p id="section-6.4-4.15.1">Author: TODO<a href="#section-6.4-4.15.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.16">
+            <p id="section-6.4-4.16.1">Change Controller: IESG<a href="#section-6.4-4.16.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-4.17">
+            <p id="section-6.4-4.17.1">Provisional registration?  No<a href="#section-6.4-4.17.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<section id="section-7">
+      <h2 id="name-references">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-7.1">
+        <h3 id="name-normative-references">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.draft-ietf-scitt-architecture">[I-D.draft-ietf-scitt-architecture]</dt>
+        <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-04</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-04">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-04</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA.params">[IANA.params]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Uniform Resource Name (URN) Namespace for IETF Use"</span>, <span>&lt;<a href="http://www.iana.org/assignments/params">http://www.iana.org/assignments/params</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3553">[RFC3553]</dt>
+        <dd>
+<span class="refAuthor">Mealling, M.</span>, <span class="refAuthor">Masinter, L.</span>, <span class="refAuthor">Hardie, T.</span>, and <span class="refAuthor">G. Klyne</span>, <span class="refTitle">"An IETF URN Sub-namespace for Registered Protocol Parameters"</span>, <span class="seriesInfo">BCP 73</span>, <span class="seriesInfo">RFC 3553</span>, <span class="seriesInfo">DOI 10.17487/RFC3553</span>, <time datetime="2003-06" class="refDate">June 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3553">https://www.rfc-editor.org/rfc/rfc3553</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7231">[RFC7231]</dt>
+        <dd>
+<span class="refAuthor">Fielding, R., Ed.</span> and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"</span>, <span class="seriesInfo">RFC 7231</span>, <span class="seriesInfo">DOI 10.17487/RFC7231</span>, <time datetime="2014-06" class="refDate">June 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7231">https://www.rfc-editor.org/rfc/rfc7231</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7807">[RFC7807]</dt>
+        <dd>
+<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">E. Wilde</span>, <span class="refTitle">"Problem Details for HTTP APIs"</span>, <span class="seriesInfo">RFC 7807</span>, <span class="seriesInfo">DOI 10.17487/RFC7807</span>, <time datetime="2016-03" class="refDate">March 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7807">https://www.rfc-editor.org/rfc/rfc7807</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-7.2">
+        <h3 id="name-informative-references">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC2046">[RFC2046]</dt>
+        <dd>
+<span class="refAuthor">Freed, N.</span> and <span class="refAuthor">N. Borenstein</span>, <span class="refTitle">"Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types"</span>, <span class="seriesInfo">RFC 2046</span>, <span class="seriesInfo">DOI 10.17487/RFC2046</span>, <time datetime="1996-11" class="refDate">November 1996</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2046">https://www.rfc-editor.org/rfc/rfc2046</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6838">[RFC6838]</dt>
+      <dd>
+<span class="refAuthor">Freed, N.</span>, <span class="refAuthor">Klensin, J.</span>, and <span class="refAuthor">T. Hansen</span>, <span class="refTitle">"Media Type Specifications and Registration Procedures"</span>, <span class="seriesInfo">BCP 13</span>, <span class="seriesInfo">RFC 6838</span>, <span class="seriesInfo">DOI 10.17487/RFC6838</span>, <time datetime="2013-01" class="refDate">January 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6838">https://www.rfc-editor.org/rfc/rfc6838</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+<div id="attic">
+<section id="appendix-A">
+      <h2 id="name-attic">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-attic" class="section-name selfRef">Attic</a>
+      </h2>
+<p id="appendix-A-1">Not ready to throw texts blocks here into the trash bin yet.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Henk Birkholz</span></div>
+<div dir="auto" class="left"><span class="org">Fraunhofer SIT</span></div>
+<div dir="auto" class="left"><span class="street-address">Rheinstrasse 75</span></div>
+<div dir="auto" class="left">
+<span class="postal-code">64295</span> <span class="locality">Darmstadt</span>
+</div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:henk.birkholz@sit.fraunhofer.de" class="email">henk.birkholz@sit.fraunhofer.de</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Orie Steele</span></div>
+<div dir="auto" class="left"><span class="org">Transmute</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:orie@transmute.industries" class="email">orie@transmute.industries</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Jon Geater</span></div>
+<div dir="auto" class="left"><span class="org">DataTrails Inc.</span></div>
+<div dir="auto" class="left"><span class="country-name">United States</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:jon.geater@datatrails.ai" class="email">jon.geater@datatrails.ai</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
