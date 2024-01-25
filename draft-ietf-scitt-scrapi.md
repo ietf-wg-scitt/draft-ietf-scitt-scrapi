@@ -1,7 +1,7 @@
 ---
 title: SCITT Reference APIs
 abbrev: SCRAPI
-docname: draft-birkholz-scitt-scrapi-latest
+docname: draft-ietf-scitt-scrapi-latest
 stand_alone: true
 ipr: trust200902
 area: Security
