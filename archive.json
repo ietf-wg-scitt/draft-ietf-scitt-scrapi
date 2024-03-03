@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-29T00:27:23.950854+00:00",
+  "timestamp": "2024-03-03T00:29:25.858661+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -50,5 +50,40 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOLJjbks5ofXEv",
+      "title": "Pre IETF 119 Update",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/1",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR updates SCRAPI to match the latest version of the architecture.",
+      "createdAt": "2024-03-02T19:19:50Z",
+      "updatedAt": "2024-03-02T19:50:24Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "9fc2fd4a794a53b8fc843bc5479e7a16cc03b13f",
+      "headRepository": "OR13/draft-ietf-scitt-scrapi",
+      "headRefName": "feat/pre-ietf-119-update",
+      "headRefOid": "ec80348cc27ff0394a20f8ce6e2156deee264a13",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "I tried pushing a revision to the datatracker from my fork... but it did not work... so unless this is published by some other author with write access before monday, we will be -00 for a solid IETF  with no updates : )",
+          "createdAt": "2024-03-02T19:50:22Z",
+          "updatedAt": "2024-03-02T19:50:22Z"
+        }
+      ],
+      "reviews": []
+    }
+  ]
 }
