@@ -46,131 +46,64 @@ author:
   country: United States
 
 normative:
-
+  RFC9052:
   RFC7807:
   RFC7231:
   RFC3553:
+  RFC5785:
 
   IANA.params:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
 
 informative:
-
+  I-D.draft-demarco-oauth-nonce-endpoint: Nonce-Endpoint
+  I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
   RFC2046:
   RFC6838:
 
 --- abstract
 
-This document defines the SCITT REST API,
-an http interface to transparency services,
-supporting the primary operations needed to implement the SCITT Architecture {{-SCITT-ARCH}}.
+This document describes a REST API that supports the normative requirements of the SCITT Architecture {{-SCITT-ARCH}}.
+Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Reposistories.
 
 --- middle
 
 # Introduction
 
-This API definition MAY be exposed externally as part of a suite of APIs,
-or be encapsulated internally and exposed indirectly via proprietary APIs.
+The SCITT Architecture {{-SCITT-ARCH}} defines the core operations necessary to support supply chain transparency using COSE (CBOR Object Signing and Encryption).
 
-## Requirements Notation
+- Issuance of Signed Statements
+- Verification of Signed Statements
+
+- Registration of Signed Statements
+
+- Issuance of Receipts
+- Verification of Receipts
+
+- Production of Transparent Statements
+- Verification of Transparent Statements
+
+In addition to defining concrete HTTP endpoints for these operations, this specification defines support for the following endpoints which support these operations:
+
+- Resolving Verification Keys for Issuers
+- Retrieving Receipts Asynchronously
+- Retrieving Signed Statements from an Artifact Repository
+- Retrieving Statements from an Artifact Repository
+
+## Terminology
 
 {::boilerplate bcp14-tagged}
 
-# Relation to Identity
+This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service", "Append-Only Log" and "Registration Policy" as defined in {{-SCITT-ARCH}}.
 
-The SCITT REST API is designed to support identifier systems that are currently relevant to supply chains, including DID, x509 and PGP.
+This specification uses "payload" as defined in {{RFC9052}}.
 
-In order to support these systems, the API must be aware of specific header parameters, in particular, `kid`, `x5u` and `x5c`.
+# Endpoints
 
-The API enables implementers to deploy interoperable URIs for disclosing information feeds related to supply chain actors, and artifacts accessible via transparency services.
+Authentication is out of scope for this document.
+If Authentication is not implemented, rate limiting or other denial of service mititations MUST be applied to enable anonymous access.
 
-## Authenticating Clients
-
-TBD (comments on OAuth / Client Attestation).
-
-## Discovering Federation
-
-TBD (comments on GAIN / OIDC).
-
-## Discovering Feeds
-
-TBD (comments on URLs / QR Codes).
-
-# SCITT Reference REST API
-
-## Key Binding Confirmation
-
-In cases where a signed statement is issued by one party and registered by another, there is a need to prove possession of key material and detect tampering while authenticating both parties.
-
-Typically a nonce would be chosen by the transparency service and the second party would sign over the nonce, when registering the first issuer's signed statement.
-
-In order to avoid interactivity and improve interoperability, document describes a non-exclusive, but mandatory to support, confirmation scheme
-
-In this scheme the verifier's challenge is a recent Unix timestamp, the presenting party need not request this information from the transparency service.
-
-Here is an example key binding token that can be paired with the confirmation claim in a signed statement:
-
-~~~json
-{
-  "iat": 1698077790,
-  "aud": "https://transparency.example",
-  "nonce": "1698077790"
-}
-~~~
-
-When applying registration policies to signed statements with confirmation, the transparency service acts as a verifier, and performs the following checks:
-
-1. verify the integrity of the issuer's signed statement
-1. confirm the verified content meets the registration policy for the transparency service.
-1. verify the key binding token, using the confirmation claim in the verified issuer signed statement
-1. ensure the key binding token has a nonce that is a string representation of a recent Unix timestamp
-
-The exact window of validity for proving possession is a configuration detail of the transparency service.
-Unix timestamps are used so that only a losely synchronised notion of time need be assumed and there is no requirement to account for timezones.
-
-If the confirmation key is stolen, the attacker can produce key binding tokens from that point forward in time.
-In an interactive confirmation schema, the transparency service can force the confirmation key holder to produce a signature over a nonce that is not guessable, and this prevents certain attacks related to the duration of access to a signing capability and other timing details.
-However, the cost of coordinating with the transparency service, coupled with the purpose of registering with a transparency service (to obtain a receipt, proving a signed statement was acceptable at a point in time) justify specifying the recent timestamp nonce as a mandatory to implement context binding.
-
-In the case that a SCITT transparency service wants to support challenges (nonces) that are context binding, the transparency service can expose a "challenge token endpoint".
-
-This endpoint can process request parameters, and issuer a challenge token, that future registrations can use to bind to the original request.
-This interaction model works well for scenarios where requirements for a given registration might change over time, but it is important for the registering party to commit to acceptable values at the time that a signed statement is registered. These endpoints are optional to implement.
-
-### Challenge Endpoint
-
-#### Request
-
-~~~http
-GET https://transparency.example/registration/challenge
-~~~
-
-#### Response
-
-- Header: `Content-Type: application/json`
-- (Optional) Header: `Retry-After: <seconds>`
-- Query: `?intention={todo}`
-- Body: `{ "token": "JWT | SD-JWT | base64url( CWT | SD-CWT )>" }`
-
-### Registration Endpoint
-
-#### Request
-
-~~~http
-POST https://transparency.example/registration
-~~~
-
-Headers:
-
-- `Content-Type: application/cose`
-
-Body: SCITT COSE_Sign1 message
-
-Note: that the challenge token MUST be present and integrity protected when submitting signed statements to this endpoint.
-Note: this endpoint is a duplicate of `POST https://transparency.example/entries`
-
-
-## Messages
+NOTE: '\' line wrapping per RFC 8792 in HTTP examples.
 
 All messages are sent as HTTP GET or POST requests.
 
@@ -201,123 +134,559 @@ Clients SHOULD treat 500 and 503 HTTP status code responses as transient failure
 Note that in the case of a 503 response, the Transparency Service MAY include a `Retry-After` header field per {{RFC7231}} in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.
 
-### Register Signed Statement
+## Mandatory
 
-#### Request
+The following HTTP endpoints are mandatory to implement to enable conformance to this specification.
 
-~~~http
-POST https://transparency.example/entries
+
+### Transparency Configuration
+
+Authentication SHOULD NOT be implemented for this endpoint.
+This endpoint is used to discovery the capabilites of a transparency service implementing this specification.
+
+Request:
+
+~~~ http-message
+
+GET /.well-known/transparency-configuration HTTP/1.1
+Host: transparency.example
+Accept: application/json
 ~~~
 
-Headers:
+Response:
 
-- `Content-Type: application/cose`
+~~~ http-message
+HTTP/1.1 200 Ok
+Content-Type: application/json
 
-Body: SCITT COSE_Sign1 message
+{
+  "issuer": "https://transparency.example",
+  "registration_endpoint": "https://transparency.example/entries",
+  "nonce_endpoint": "https://transparency.example/nonce",
 
-#### Response
+  "registration_policy": \
+"https://transparency.example\
+/statements/urn:ietf:params:scitt:statement\
+:sha-256:base64url:5i6UeRzg1...qnGmr1o",
+
+  "supported_signature_algorithms": ["ES256"],
+  "jwks": {
+    "keys": [
+      {
+        "kid": "urn:ietf:params:oauth:\
+jwk-thumbprint:sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
+        "alg": "ES256",
+        "use": "sig",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
+        "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
+      },
+      {
+        "kid": "urn:ietf:params:oauth:\
+jwk-thumbprint:sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
+        "alg": "HPKE-Base-P256-SHA256-AES128GCM",
+        "use": "enc",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
+        "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
+      }
+    ]
+  }
+}
+~~~
+
+Additional fields may be present.
+Fields that are not understood MUST be ignored.
+
+### Signed Statement Registration
+
+Authentication MUST be implemented for this endpoint.
+
+The following is a non-normative example of a HTTP request to register a Signed Statement:
+
+Request:
+
+~~~http
+POST /entries HTTP/1.1
+Host: transparency.example
+Accept: application/json
+Content-Type: application/cose
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+The Registration Policy for the Transparency Service MUST be applied to the payload bytes, before any additional processing is performed.
+
+If the `payload` is detached, the Transparency Service depends on the authentication context of the client in the Registration Policy.
+If the `payload` is attached, the Transparency Service depends on both the authentication context of the client, and the verification of the Signed Statement in the Registration Policy.
+The details of Registration Policy are out of scope for this document.
+
+If registration succeeds the following identifier MAY be used to refer to the Signed Statement that was accepted:
+
+`urn:ietf:params:scitt:signed-statement:sha-256:base64url:5i6UeRzg1...qnGmr1o`
+
+If the `payload` was attached, or otherwise communicated to the Transparency Service, the following identifier MAY be used to refer to the `payload` of the Signed Statement:
+
+`urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o`
+
+Response:
 
 One of the following:
 
-- Status 201 - Registration is successful.
-  - Header `Location: <Base URL>/entries/<Entry ID>`
-  - Header `Content-Type: application/json`
-  - Body `{ "entryId": "<Entry ID"> }`
+#### Status 201 - Registration is successful
 
-- Status 202 - Registration is running.
-  - Header `Location: <Base URL>/operations/<Operation ID>`
-  - Header `Content-Type: application/json`
-  - (Optional) Header: `Retry-After: <seconds>`
-  - Body `{ "operationId": "<Operation ID>", "status": "running" }`
+~~~ http-message
+HTTP/1.1 201 Ok
 
-- Status 400 - Registration was unsuccessful due to invalid input.
-  - Error code `badSignatureAlgorithm`
-  - TBD: more error codes to be defined
+Location: https://transparency.example/receipts\
+/urn:ietf:params:scitt:signed-statement\
+:sha-256:base64url:5i6UeRzg1...qnGmr1o
 
-If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Registration status using the Operation ID returned in the response.
-Clients should always obtain a Receipt as a proof that Registration has succeeded.
+Content-Type: application/cose
 
-### Retrieve Operation Status
+Payload (in CBOR diagnostic notation)
 
-#### Request
-
-~~~http
-GET https://transparency.example/operations/{operation_id}
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
 ~~~
 
-#### Response
+The response contains the Receipt for the Signed Statement.
+Fresh receipts may be requested through the resource identified in the Location header.
 
-One of the following:
+#### Status 202 - Registration is running
 
-- Status 200 - Registration is running
-  - Header: `Content-Type: application/json`
-  - (Optional) Header: `Retry-After: <seconds>`
-  - Body: `{ "operationId": "<Operation ID>", "status": "running" }`
+~~~ http-message
+HTTP/1.1 202 Ok
 
-- Status 200 - Registration was successful
-  - Header: `Location: <Base URL>/entries/<Entry ID>`
-  - Header: `Content-Type: application/json`
-  - Body: `{ "operationId": "<Operation ID>", "status": "succeeded", "entryId": "<Entry ID>" }`
+Location: https://transparency.example/receipts\
+/urn:ietf:params:scitt:signed-statement\
+:sha-256:base64url:5i6UeRzg1...qnGmr1o
 
-- Status 200 - Registration failed
-  - Header `Content-Type: application/json`
-  - Body: `{ "operationId": "<Operation ID>", "status": "failed", "error": { "type": "<type>", "detail": "<detail>" } }`
-  - Error code: `badSignatureAlgorithm`
-  - [TODO]: more error codes to be defined, see [#17](https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/17)
+Content-Type: application/json
+Retry-After: <seconds>
 
-- Status 404 - Unknown Operation ID
-  - Error code: `operationNotFound`
-  - This can happen if the operation ID has expired and been deleted.
+{
 
-If an operation failed, then error details SHOULD be embedded as a JSON problem details object in the `"error"` field.
+  "receipt": "urn:ietf:params:scitt:receipt\
+:sha-256:base64url:5i6UeRzg1...qnGmr1o",
 
-If an operation ID is invalid (i.e., it does not correspond to any submit operation), a service may return either a 404 or a `running` status.
-This is because differentiating between the two may not be possible in an eventually consistent system.
+}
 
-### Retrieve Signed Statement
-
-#### Request
-
-~~~http
-GET https://transparency.example/entries/{entry_id}
 ~~~
 
-Query parameters:
+The response contains a reference to the receipt which will eventually be available for the Signed Statement.
 
-- (Optional) `embedReceipt=true`
+If 202 is returned, then clients should wait until Registration succeeded or failed by polling the receipt endpoint using the receipt identifier returned in the response.
 
-If the query parameter `embedReceipt=true` is provided, then the Signed Statement is returned with the corresponding Registration Receipt embedded in the COSE unprotected header.
+#### Status 400 - Invalid Client Request
 
-#### Response
+One of the following errors:
 
-One of the following:
-
-- Status 200.
-  - Header: `Content-Type: application/cose`
-  - Body: COSE_Sign1
-
-- Status 404 - Entry not found.
-  - Error code: `entryNotFound`
-
-### Retrieve Registration Receipt
-
-#### Request
-
-~~~http
-GET https://transparency.example/entries/{entry_id}/receipt
+~~~
+{
+  "type": "urn:ietf:params:scitt:error\
+:signed-statement:algorithm-not-supported",
+  "detail": \
+"Signed Statement contained an algorithm that is not supported."
+}
 ~~~
 
-#### Response
+~~~
+{
+  "type": "urn:ietf:params:scitt:error\
+:signed-statement:payload-missing",
+  "detail": \
+"Signed Statement payload must be attached (must be present)"
+}
+~~~
 
-One of the following:
+~~~
+{
+  "type": "urn:ietf:params:scitt:error\
+:signed-statement:payload-forbidden",
+  "detail": \
+"Signed Statement payload must be detached (must not be present)"
+}
+~~~
 
-- Status 200.
-  - Header: `Content-Type: application/cbor`
-  - Body: SCITT_Receipt
-- Status 404 - Entry not found.
-  - Error code: `entryNotFound`
+~~~
+{
+  "type": "urn:ietf:params:scitt:error\
+:signed-statement:rejected-by-registration-policy",
+  "detail": \
+"Signed Statement was not accepted by the current Registration Policy"
+}
+~~~
 
-The retrieved Receipt may be embedded in the corresponding COSE_Sign1 document in the unprotected header.
+~~~
+{
+  "type": "urn:ietf:params:scitt:error\
+:signed-statement:confirmation-missing",
+  "detail": \
+"Signed Statement did not contain proof of possession"
+}
+~~~
+
+TODO: other error codes
+
+## Optional Endpoints
+
+The following HTTP endpoints are optional to implement.
+
+
+### Issue Statement
+
+Authentication MUST be implemented for this endpoint.
+
+This endpoint enables a Transparency Service to be an issuer of Signed Statements on behalf of authenticated clients.
+This supports cases where a client lacks the ability to perform complex cryptographic operations, but can be authenticated and report statements and measurements.
+
+Request:
+
+~~~http
+POST /signed-statements/issue HTTP/1.1
+Host: transparency.example
+Accept: application/json
+Content-Type: application/vc+ld+json
+Payload
+
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://www.w3.org/ns/credentials/examples/v2"
+  ],
+  "id": "https://transparency.example/credentials/1872",
+  "type": ["VerifiableCredential", "SensorCredential"],
+  "issuer": "https://transparency.example/device/1234",
+  "validFrom": "2010-01-01T19:23:24Z",
+  "credentialSubject": {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [125.6, 10.1]
+    },
+    "properties": {
+      "name": "Dinagat Islands"
+    }
+  }
+}
+~~~
+
+Response:
+
+~~~ http-message
+HTTP/1.1 200 Ok
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+### Resolve Statement
+
+Authentication SHOULD be implemented for this endpoint.
+
+This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve `payload` values directly, instead of indirectly through Receipts.
+
+Request:
+
+~~~ http-message
+GET /statements/urn...qnGmr1o HTTP/1.1
+Host: transparency.example
+Accept: application/pdf
+~~~
+
+Response:
+
+~~~ http-message
+HTTP/1.1 200 Ok
+Content-Type: application/pdf
+Payload (pdf bytes)
+~~~
+
+### Resolve Signed Statement
+
+Authentication SHOULD be implemented for this endpoint.
+
+This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.
+
+Request:
+
+~~~ http-message
+GET /signed-statements/urn...qnGmr1o HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+~~~
+
+Response:
+
+~~~ http-message
+HTTP/1.1 200 Ok
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+### Resolve Receipt
+
+Authentication SHOULD be implemented for this endpoint.
+
+Request:
+
+~~~ http-message
+GET /receipts/urn...qnGmr1o HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+~~~
+
+Response:
+
+If the Signed Statement requested is already included in the Append-Only Log:
+
+~~~ http-message
+HTTP/1.1 200 Ok
+Location: https://transparency.example/receipts/urn...qnGmr1o
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+If the Signed Statement requested is not yet included in the Append-Only Log:
+
+~~~ http-message
+HTTP/1.1 202 Ok
+Location: https://transparency.example/receipts/urn...qnGmr1o
+Content-Type: application/json
+Retry-After: <seconds>
+
+{
+  "receipt": "urn:ietf:params:scitt:receipt\
+    :sha-256:base64url:5i6UeRzg1...qnGmr1o",
+}
+~~~
+
+Additional eventually consistent operation details MAY be present.
+Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.
+
+### Resolve Issuer
+
+This endpoint is inspired by {{-SD-JWT-VC}}.
+Authentication SHOULD NOT be implemented for this endpoint.
+This endpoint is used to discover verification keys, which is the reason that authentication is not required.
+
+The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when `iss` is set to `https://transparency.example/tenant/1234`:
+
+Request:
+
+~~~ http-message
+
+GET /.well-known/issuer/tenant/1234 HTTP/1.1
+Host: transparency.example
+Accept: application/json
+~~~
+
+Response:
+
+~~~ http-message
+HTTP/1.1 200 Ok
+Content-Type: application/json
+
+{
+  "issuer": "https://transparency.example/tenant/1234",
+  "jwks": {
+    "keys": [
+      {
+        "kid": "urn:ietf:params:oauth\
+:jwk-thumbprint:sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
+        "alg": "ES256",
+        "use": "sig",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
+        "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
+      },
+      {
+        "kid": "urn:ietf:params:oauth\
+:jwk-thumbprint:sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
+        "alg": "HPKE-Base-P256-SHA256-AES128GCM",
+        "use": "enc",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
+        "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
+      }
+    ]
+  }
+}
+~~~
+
+### Request Nonce
+
+This endpoint in inspired by {{-Nonce-Endpoint}}.
+
+Authentication SHOULD NOT be implemented for this endpoint.
+This endpoint is used to demonstrate proof of posession, which is the reason that authentication is not required.
+Client holding signed statements that require demonstrating proof of possession MUST use this endpoint to obtain a nonce.
+
+Request:
+
+~~~ http-message
+
+GET /nonce HTTP/1.1
+Host: transparency.example
+Accept: application/json
+~~~
+
+Response:
+
+~~~ http-message
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
+}
+~~~
+
+### Resolve Issuer DID
+
+This endpoint enables the use of the DID Web Decentralized Identifier Method, as an alternative expression of the Issuer Metadata endpoint.
+
+This endpoint is DEPRECATED.
+
+The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when `iss` is set to `did:web:transparency.example:tenant:1234`:
+
+Request:
+
+~~~ http-message
+
+GET /tenant/1234/did.json HTTP/1.1
+Host: transparency.example
+Accept: application/did+ld+json
+~~~
+
+Response:
+
+~~~ http-message
+HTTP/1.1 200 Ok
+Content-Type: application/did+ld+json
+
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    {
+      "@vocab": "https://vocab.transparency.example#"
+    }
+  ],
+  "id": "did:web:transparency.example:tenant:1234",
+  "verificationMethod": [
+    {
+      "id": "did:web:transparency.example:tenant:1234\
+        #urn:ietf:params:oauth:jwk-thumbprint\
+        :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
+      "type": "JsonWebKey",
+      "controller": "did:web:transparency.example:tenant:1234",
+      "publicKeyJwk": {
+        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
+          :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
+        "alg": "ES256",
+        "use": "sig",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "9ptuW0PBHSTN7bVexWd7xM5kmSPGRaCu-K3SLtJyvNc",
+        "y": "l7NvF6QbovicSciZqu_W_xy4JTZwtnUbn2SNdMKoaAk"
+      }
+    },
+    {
+      "id": "did:web:transparency.example:tenant:1234\
+        #urn:ietf:params:oauth:jwk-thumbprint\
+        :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
+      "type": "JsonWebKey",
+      "controller": "did:web:transparency.example:tenant:1234",
+      "publicKeyJwk": {
+        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
+          :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
+        "alg": "ES256",
+        "use": "sig",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
+        "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
+      }
+    },
+    {
+      "id": "did:web:transparency.example:tenant:1234\
+        #urn:ietf:params:oauth:jwk-thumbprint\
+        :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
+      "type": "JsonWebKey",
+      "controller": "did:web:transparency.example:tenant:1234",
+      "publicKeyJwk": {
+        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
+          :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
+        "alg": "HPKE-Base-P256-SHA256-AES128GCM",
+        "use": "enc",
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
+        "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
+      }
+    }
+  ],
+  "assertionMethod": [
+    "did:web:transparency.example:tenant:1234\
+      #urn:ietf:params:oauth:jwk-thumbprint\
+      :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
+    "did:web:transparency.example:tenant:1234\
+      #urn:ietf:params:oauth:jwk-thumbprint\
+      :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
+  ],
+  "authentication": [
+    "did:web:transparency.example:tenant:1234\
+      #urn:ietf:params:oauth:jwk-thumbprint\
+      :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
+    "did:web:transparency.example:tenant:1234\
+      #urn:ietf:params:oauth:jwk-thumbprint\
+      :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
+  ],
+  "keyAgreement": [
+    "did:web:transparency.example:tenant:1234\
+      #urn:ietf:params:oauth:jwk-thumbprint\
+      :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE"
+  ]
+}
+~~~
 
 # Privacy Considerations
 
@@ -326,6 +695,9 @@ TODO
 # Security Considerations
 
 TODO
+
+TODO: Consider negotiation for receipt as "JSON" or "YAML".
+TODO: Consider impact of media type on "Data URIs" and QR Codes.
 
 # IANA Considerations
 
@@ -336,39 +708,41 @@ in the "IETF URN Sub-namespace for Registered Protocol Parameter Identifiers"
 Registry {{IANA.params}}, following the template in {{RFC3553}}:
 
 ~~~output
-
    Registry name:  scitt
-
    Specification:  [RFCthis]
-
    Repository:  http://www.iana.org/assignments/scitt
-
    Index value:  No transformation needed.
 ~~~
 
 
-## Media Types
+## Well-Known URI for Issuers
+
+The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC5785}}):
+
+URI suffix: issuer
+Change controller: IETF
+Specification document(s): RFCthis.
+Related information: N/A
+
+## Well-Known URI for Transparency Configuration
+
+The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC5785}}):
+
+URI suffix: transparency-configuration
+Change controller: IETF
+Specification document(s): RFCthis.
+Related information: N/A
 
 TODO: Register them from here.
-
-## Well Known URIs
-
-For discovering scitt configuration.
-
-TODO: Register them from here.
-
 
 ## Media Type Registration
 
-This section requests registration of the "application/receipt+cose" media type {{RFC2046}} in the "Media Types" registry in the manner described in {{RFC6838}}.
-
-TODO: Consider negotiation for receipt as "JSON" or "YAML".
-TODO: Consider impact of media type on "Data URIs" and QR Codes.
+This section requests registration of the "application/scitt.receipt+cose" media type {{RFC2046}} in the "Media Types" registry in the manner described in {{RFC6838}}.
 
 To indicate that the content is a SCITT Receipt:
 
 - Type name: application
-- Subtype name: receipt+cose
+- Subtype name: scitt.receipt+cose
 - Required parameters: n/a
 - Optional parameters: n/a
 - Encoding considerations: TODO
@@ -390,6 +764,3 @@ To indicate that the content is a SCITT Receipt:
 
 --- back
 
-# Attic
-
-Not ready to throw texts blocks here into the trash bin yet.
