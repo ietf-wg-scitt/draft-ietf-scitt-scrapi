@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-03T00:29:25.858661+00:00",
+  "timestamp": "2024-03-05T00:26:51.149721+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -56,34 +56,83 @@
       "id": "PR_kwDOLJjbks5ofXEv",
       "title": "Pre IETF 119 Update",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/1",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR updates SCRAPI to match the latest version of the architecture.",
       "createdAt": "2024-03-02T19:19:50Z",
-      "updatedAt": "2024-03-02T19:50:24Z",
+      "updatedAt": "2024-03-04T15:13:42Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "9fc2fd4a794a53b8fc843bc5479e7a16cc03b13f",
       "headRepository": "OR13/draft-ietf-scitt-scrapi",
       "headRefName": "feat/pre-ietf-119-update",
       "headRefOid": "ec80348cc27ff0394a20f8ce6e2156deee264a13",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-04T15:13:42Z",
+      "mergedAt": "2024-03-04T15:13:42Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "94b8e8d94e2f96ac2a76c28d7a6478d367cddff8"
+      },
       "comments": [
         {
           "author": "OR13",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "I tried pushing a revision to the datatracker from my fork... but it did not work... so unless this is published by some other author with write access before monday, we will be -00 for a solid IETF  with no updates : )",
           "createdAt": "2024-03-02T19:50:22Z",
           "updatedAt": "2024-03-02T19:50:22Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Merging based on requests to meet the draft cut off... assuming CI passes",
+          "createdAt": "2024-03-04T15:13:16Z",
+          "updatedAt": "2024-03-04T15:13:16Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks5yBoZk",
+          "commit": {
+            "abbreviatedOid": "ec80348"
+          },
+          "author": "mprorock",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "We should get this up ASAP before the cutoff and prior to hackathon",
+          "createdAt": "2024-03-03T15:42:03Z",
+          "updatedAt": "2024-03-03T15:42:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks5yBovs",
+          "commit": {
+            "abbreviatedOid": "ec80348"
+          },
+          "author": "brentzundel",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-03T15:49:33Z",
+          "updatedAt": "2024-03-03T15:49:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks5yHfez",
+          "commit": {
+            "abbreviatedOid": "ec80348"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": ":ship: it",
+          "createdAt": "2024-03-04T15:06:33Z",
+          "updatedAt": "2024-03-04T15:06:33Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
