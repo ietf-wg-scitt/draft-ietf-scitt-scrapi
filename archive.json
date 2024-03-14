@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-12T00:26:59.836542+00:00",
+  "timestamp": "2024-03-14T00:27:03.538982+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -63,6 +63,22 @@
       "body": "Would be great to be able to return an object in addition to or instead of a string for errors. Or allow for other properties which would be fully content-typeable to a custom response object within the error response on claim insert failure.\r\n\r\nLack of this prevents an automated conversation to resolve issues with claim insertion. Human readable strings are great, but ideally a human doesn't even get involved and machines can auto remediate issues due to detailed failure reasoning. This way the a human readable string might only be needed after a failed machine driven insert conversation (more than one call response).\r\n\r\n- References\r\n  - https://github.com/ietf-scitt/draft-birkholz-scitt-scrapi/issues/4\r\n    - https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/62",
       "createdAt": "2024-03-11T01:34:22Z",
       "updatedAt": "2024-03-11T01:34:49Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOLJjbks6CFgNv",
+      "title": "Add GS1 examples",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/3",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "see https://www.rfc-editor.org/rfc/rfc5134.html",
+      "createdAt": "2024-03-12T19:06:56Z",
+      "updatedAt": "2024-03-12T19:06:56Z",
       "closedAt": null,
       "comments": []
     }
