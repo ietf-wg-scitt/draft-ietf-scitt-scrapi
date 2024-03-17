@@ -694,7 +694,162 @@ TODO
 
 # Security Considerations
 
-TODO
+## General scope
+
+This document describes the interoperable API for client calls to, and
+implementations of, a Transparency Service as specified in
+[SCITT-ARCH]. As such the security considerations in this
+section are concerned only with security considerations that are
+relevant at that implementation layer. All questions of security of the
+related COSE formats, algorithm choices, cryptographic envelopes,
+verifiable data structures and the like are handled elsewhere and out
+of scope of this document.
+
+## Applicable Environment
+
+SCITT is concerned with issues of cross-boundary supply-chain-wide data
+integrity and as such must assume a very wide range of deployment
+environments. Thus, no assumptions can be made about the security of
+the computing environment in which any client implementation of this
+specification runs.
+
+## User-host authentication
+
+[SCITT ARCH] defines 2 distinct roles that require authentication:
+Issuers who sign Statements, and clients that submit API calls on
+behalf of Issuers. While Issuer authentication and signing of
+Statements is very important for the trustworthiness of systems
+implementing the SCITT building blocks, it is out of scope of this
+document. This document is only concerned with authentication of API
+clients.
+
+For those endpoints that require client authentication, Transparency
+Services MUST support at least one of the following options:
+ * HTTP Authorization header with a bearer JWT
+ * domain-bound API key
+ * TLS client authentication
+
+Transparency Services MUST provide a configuration surface that
+allows Issuers to specify which authorized clients can submit
+Statements on their behalf.
+
+Where authentication methods rely on long term secrets, both clients
+ad Transparency Services implementing this specification MUST allow
+for the revocation and rolling of authentication secrets.
+
+## Primary threats
+
+### In scope
+
+The most serious threats to implementations on Transparency Services
+are ones that would cause the failure of their main promises, to wit:
+ * Threats to strong identification, for example representing the
+   Statements from one issuer as those of another
+ * Threats to payload integrity, for example changing the contents of
+   a Signed Statement before making it transparent
+ * Threats to non-equivocation, for example attacks that would enable
+   the presentation or verification of divergent proofs for the same
+   Statement payload
+
+#### Denial of service attacks
+
+While denial of service attacks are very hard to defend against
+completely, and Transparency Services are unlikely to be in the
+critical path of any safety-liable operation, any attack which could
+cause the _silent_ failure of Signed Statement registration, for
+example, should be considered in scope.
+
+In principle DoS attacks are easily mitigated by the client
+checking that the Transparency Service has registered any
+submitted Signed Statement and returned a Receipt. Since
+verification of Receipts does not require the involvement of the
+Transparency Service DoS attacks are not a major issue.
+
+Clients to Transparency Services SHOULD ensure that Receipts are
+available for their registered Statements, either on a periodic
+or needs-must basis, depending on the use case.
+
+Beyond this, implementers of Transparency Services SHOULD implement
+general good practice around network attacks, flooding, rate
+limiting etc.
+
+#### Eavesdropping
+
+Since the purpose of this API is to ultimately put the message
+payloads on a Transparency Log there is limited risk to eavesdropping.
+Nonetheless transparency may mean 'within a limited community' rather
+than 'in full public', so implementers MUST add protections against
+man-in-the-middle and network eavesdropping, such as TLS.
+
+#### Message modification attacks
+
+While most relevant modification attacks are mitigated by the use of
+the Issuer signature on the Signed Statement, the `Issue Statement`
+endpoint presents an opportunity for manipulation of messages and
+misrepresentation of Issuer intent that could mislead later Verifiers.
+
+Transparency Services offering the `Issue Statement` endpoint MUST
+require authentication and transport-level security for that endpoint,
+MUST NOT modify anything in the message to be signed, and MUST take
+steps to ensure that the party calling the endpoint is authorized to
+register statements on behalf of the specified Issuer.
+
+#### Message insertion attacks
+
+While most relevant insertion attacks are mitigated by the use of
+the Issuer signature on the Signed Statement, the `Issue Statement`
+endpoint presents an opportunity for insertion of messages and
+misrepresentation of Issuer intent that could mislead later Verifiers.
+There are 2 most likely avenues to this attack:
+* Stolen client endpoint authentication credentials
+* Stolen or misused Issuer keys held in the Transparency Service on
+  behalf of clients
+
+Clients relying on the `Issue Statement` endpoint SHOULD take steps
+to ensure their endpoint authentication credentials are securely
+stored and can be rotated and/or revoked in the case of a breach.
+
+Transparency Services offering the `Issue Statement` endpoint MUST
+require authentication and transport-level security for that endpoint,
+and MUST enable the rotation and revocation of those credentials.
+
+Transparency Services offering the `Issue Statement` endpoint MUST
+take careful steps in both design and operation of their software
+stack to prevent the theft or inappropriate use of the Issuer keys
+they use to sign Statements on behalf of Issuers, such as HSMs for
+storage and least-privilege, regularly refreshed access controls for
+use.
+
+Transparency Services MAY also implement additional protections
+such as anomaly detection or rate limiting in order to mitigate
+the impact of any breach.
+
+### Out of scope
+
+#### Replay attacks
+
+Replay attacks are not particularly concerning for SCITT or SCRAPI:
+once a statement is made it is intended to be immutable and non-
+repudiable, so making it twice should not lead to any particular
+issues. There could be issues at the payload level (for instance,
+the statement "it is raining" may true when first submitted but not
+when replayed), but being payload-agnostic implementations of SCITT
+services cannot be required to worry about that.
+
+If the semantic content of the payload are time dependent and
+susceptible to replay attacks in this way then timestamps MAY be
+added to the payload signed by the Issuer.
+
+#### Message deletion attacks
+
+Once registered with a Transparency Service, Transparent Statements
+cannot be deleted. Thus, any message deletion attack must occur
+prior to registration else it is indistinguishable from a
+man-in-the-middle or denial-of-service attack on this interface.
+
+
+
+# TODO
 
 TODO: Consider negotiation for receipt as "JSON" or "YAML".
 TODO: Consider impact of media type on "Data URIs" and QR Codes.
