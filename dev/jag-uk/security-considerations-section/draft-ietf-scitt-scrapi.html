@@ -2020,11 +2020,11 @@ for the revocation and rolling of authentication secrets.<a href="#section-4.3-4
           </h4>
 <p id="section-4.4.1-1">The most serious threats to implementations on Transparency Services
 are ones that would cause the failure of their main promises, to wit:
- * Threats to strong identification, for example representing the
+ - Threats to strong identification, for example representing the
    Statements from one issuer as those of another
- * Threats to payload integrity, for example changing the contents of
+ - Threats to payload integrity, for example changing the contents of
    a Signed Statement before making it transparent
- * Threats to non-equivocation, for example attacks that would enable
+ - Threats to non-equivocation, for example attacks that would enable
    the presentation or verification of divergent proofs for the same
    Statement payload<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
 <div id="sec-denial-of-service-attacks">
@@ -2088,8 +2088,8 @@ the Issuer signature on the Signed Statement, the <code>Issue Statement</code>
 endpoint presents an opportunity for insertion of messages and
 misrepresentation of Issuer intent that could mislead later Verifiers.
 There are 2 most likely avenues to this attack:
-* Stolen client endpoint authentication credentials
-* Stolen or misused Issuer keys held in the Transparency Service on
+- Stolen client endpoint authentication credentials
+- Stolen or misused Issuer keys held in the Transparency Service on
   behalf of clients<a href="#section-4.4.1.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.1.4-2">Clients relying on the <code>Issue Statement</code> endpoint <span class="bcp14">SHOULD</span> take steps
 to ensure their endpoint authentication credentials are securely
@@ -2121,7 +2121,7 @@ the impact of any breach.<a href="#section-4.4.1.4-5" class="pilcrow">¶</a></p>
 <a href="#section-4.4.2.1" class="section-number selfRef">4.4.2.1. </a><a href="#name-replay-attacks" class="section-name selfRef">Replay attacks</a>
             </h5>
 <p id="section-4.4.2.1-1">Replay attacks are not particularly concerning for SCITT or SCRAPI:
-once a statement is made it is intended to be immutable and non-
+once a statement is made, it is intended to be immutable and non-
 repudiable, so making it twice should not lead to any particular
 issues. There could be issues at the payload level (for instance,
 the statement "it is raining" may true when first submitted but not
@@ -2137,7 +2137,7 @@ added to the payload signed by the Issuer.<a href="#section-4.4.2.1-2" class="pi
             <h5 id="name-message-deletion-attacks">
 <a href="#section-4.4.2.2" class="section-number selfRef">4.4.2.2. </a><a href="#name-message-deletion-attacks" class="section-name selfRef">Message deletion attacks</a>
             </h5>
-<p id="section-4.4.2.2-1">Once registered with a Transparency Service, Transparent Statements
+<p id="section-4.4.2.2-1">Once registered with a Transparency Service, Registered Signed Statements
 cannot be deleted. Thus, any message deletion attack must occur
 prior to registration else it is indistinguishable from a
 man-in-the-middle or denial-of-service attack on this interface.<a href="#section-4.4.2.2-1" class="pilcrow">¶</a></p>
