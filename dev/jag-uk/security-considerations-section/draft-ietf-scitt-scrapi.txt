@@ -847,7 +847,7 @@ Table of Contents
    endpoint presents an opportunity for insertion of messages and
    misrepresentation of Issuer intent that could mislead later
    Verifiers.  There are 2 most likely avenues to this attack: - Stolen
-   client endpoint authentication credentials * Stolen or misused Issuer
+   client endpoint authentication credentials - Stolen or misused Issuer
    keys held in the Transparency Service on behalf of clients
 
    Clients relying on the Issue Statement endpoint SHOULD take steps to
@@ -874,7 +874,7 @@ Table of Contents
 4.4.2.1.  Replay attacks
 
    Replay attacks are not particularly concerning for SCITT or SCRAPI:
-   once a statement is made it is intended to be immutable and non-
+   once a statement is made, it is intended to be immutable and non-
    repudiable, so making it twice should not lead to any particular
    issues.  There could be issues at the payload level (for instance,
    the statement "it is raining" may true when first submitted but not

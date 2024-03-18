@@ -2089,7 +2089,7 @@ endpoint presents an opportunity for insertion of messages and
 misrepresentation of Issuer intent that could mislead later Verifiers.
 There are 2 most likely avenues to this attack:
 - Stolen client endpoint authentication credentials
-* Stolen or misused Issuer keys held in the Transparency Service on
+- Stolen or misused Issuer keys held in the Transparency Service on
   behalf of clients<a href="#section-4.4.1.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.1.4-2">Clients relying on the <code>Issue Statement</code> endpoint <span class="bcp14">SHOULD</span> take steps
 to ensure their endpoint authentication credentials are securely
@@ -2121,7 +2121,7 @@ the impact of any breach.<a href="#section-4.4.1.4-5" class="pilcrow">¶</a></p>
 <a href="#section-4.4.2.1" class="section-number selfRef">4.4.2.1. </a><a href="#name-replay-attacks" class="section-name selfRef">Replay attacks</a>
             </h5>
 <p id="section-4.4.2.1-1">Replay attacks are not particularly concerning for SCITT or SCRAPI:
-once a statement is made it is intended to be immutable and non-
+once a statement is made, it is intended to be immutable and non-
 repudiable, so making it twice should not lead to any particular
 issues. There could be issues at the payload level (for instance,
 the statement "it is raining" may true when first submitted but not
