@@ -842,7 +842,7 @@ added to the payload signed by the Issuer.
 
 #### Message deletion attacks
 
-Once registered with a Transparency Service, Transparent Statements
+Once registered with a Transparency Service, Registered Signed Statements
 cannot be deleted. Thus, any message deletion attack must occur
 prior to registration else it is indistinguishable from a
 man-in-the-middle or denial-of-service attack on this interface.
