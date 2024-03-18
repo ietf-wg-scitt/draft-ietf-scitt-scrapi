@@ -829,7 +829,7 @@ the impact of any breach.
 #### Replay attacks
 
 Replay attacks are not particularly concerning for SCITT or SCRAPI:
-once a statement is made it is intended to be immutable and non-
+once a statement is made, it is intended to be immutable and non-
 repudiable, so making it twice should not lead to any particular
 issues. There could be issues at the payload level (for instance,
 the statement "it is raining" may true when first submitted but not
