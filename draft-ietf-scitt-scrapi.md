@@ -743,7 +743,7 @@ for the revocation and rolling of authentication secrets.
 
 The most serious threats to implementations on Transparency Services
 are ones that would cause the failure of their main promises, to wit:
- * Threats to strong identification, for example representing the
+ - Threats to strong identification, for example representing the
    Statements from one issuer as those of another
  * Threats to payload integrity, for example changing the contents of
    a Signed Statement before making it transparent
