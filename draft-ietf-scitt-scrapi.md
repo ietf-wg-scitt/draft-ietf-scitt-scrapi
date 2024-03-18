@@ -715,7 +715,7 @@ specification runs.
 
 ## User-host authentication
 
-[SCITT ARCH] defines 2 distinct roles that require authentication:
+[SCITT-ARCH] defines 2 distinct roles that require authentication:
 Issuers who sign Statements, and clients that submit API calls on
 behalf of Issuers. While Issuer authentication and signing of
 Statements is very important for the trustworthiness of systems
