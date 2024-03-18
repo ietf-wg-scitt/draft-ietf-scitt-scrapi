@@ -747,7 +747,7 @@ are ones that would cause the failure of their main promises, to wit:
    Statements from one issuer as those of another
  - Threats to payload integrity, for example changing the contents of
    a Signed Statement before making it transparent
- * Threats to non-equivocation, for example attacks that would enable
+ - Threats to non-equivocation, for example attacks that would enable
    the presentation or verification of divergent proofs for the same
    Statement payload
 
