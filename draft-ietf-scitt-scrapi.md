@@ -847,7 +847,6 @@ cannot be deleted. Thus, any message deletion attack must occur
 prior to registration else it is indistinguishable from a
 man-in-the-middle or denial-of-service attack on this interface.
 
-
 # TODO
 
 TODO: Consider negotiation for receipt as "JSON" or "YAML".
