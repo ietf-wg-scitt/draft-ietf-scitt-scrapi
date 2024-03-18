@@ -727,7 +727,7 @@ For those endpoints that require client authentication, Transparency
 Services MUST support at least one of the following options:
  - HTTP Authorization header with a bearer JWT
  - domain-bound API key
- * TLS client authentication
+ - TLS client authentication
 
 Transparency Services MUST provide a configuration surface that
 allows Issuers to specify which authorized clients can submit
