@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 18 September 2024                                     Transmute
+Expires: 19 September 2024                                     Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                           17 March 2024
+                                                           18 March 2024
 
 
                           SCITT Reference APIs
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 September 2024.
+   This Internet-Draft will expire on 19 September 2024.
 
 Copyright Notice
 
@@ -761,7 +761,7 @@ Table of Contents
 
 4.3.  User-host authentication
 
-   [SCITT ARCH] defines 2 distinct roles that require authentication:
+   [SCITT-ARCH] defines 2 distinct roles that require authentication:
    Issuers who sign Statements, and clients that submit API calls on
    behalf of Issuers.  While Issuer authentication and signing of
    Statements is very important for the trustworthiness of systems
