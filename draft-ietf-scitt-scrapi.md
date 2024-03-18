@@ -801,7 +801,7 @@ the Issuer signature on the Signed Statement, the `Issue Statement`
 endpoint presents an opportunity for insertion of messages and
 misrepresentation of Issuer intent that could mislead later Verifiers.
 There are 2 most likely avenues to this attack:
-* Stolen client endpoint authentication credentials
+- Stolen client endpoint authentication credentials
 * Stolen or misused Issuer keys held in the Transparency Service on
   behalf of clients
 
