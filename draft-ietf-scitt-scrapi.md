@@ -734,7 +734,7 @@ allows Issuers to specify which authorized clients can submit
 Statements on their behalf.
 
 Where authentication methods rely on long term secrets, both clients
-ad Transparency Services implementing this specification MUST allow
+and Transparency Services implementing this specification MUST allow
 for the revocation and rolling of authentication secrets.
 
 ## Primary threats
