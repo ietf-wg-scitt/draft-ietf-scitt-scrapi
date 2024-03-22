@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 5 September 2024                                      Transmute
+Expires: 23 September 2024                                     Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                            4 March 2024
+                                                           22 March 2024
 
 
                           SCITT Reference APIs
@@ -21,7 +21,7 @@ Abstract
    [I-D.draft-ietf-scitt-architecture].  Optional key discovery and
    query interfaces are provided to support interoperability issues with
    Decentralized Identifiers, X509 Certificates and Artifact
-   Reposistories.
+   Repositories.
 
 About This Document
 
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 September 2024.
+   This Internet-Draft will expire on 23 September 2024.
 
 Copyright Notice
 
@@ -148,7 +148,7 @@ Table of Contents
 
    Authentication is out of scope for this document.  If Authentication
    is not implemented, rate limiting or other denial of service
-   mititations MUST be applied to enable anonymous access.
+   mitigations MUST be applied to enable anonymous access.
 
    NOTE: '' line wrapping per RFC 8792 in HTTP examples.
 
@@ -204,7 +204,7 @@ Table of Contents
 2.1.1.  Transparency Configuration
 
    Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to discovery the capabilites of a transparency
+   endpoint is used to discovery the capabilities of a transparency
    service implementing this specification.
 
    Request:
@@ -601,7 +601,7 @@ Table of Contents
    [I-D.draft-demarco-oauth-nonce-endpoint].
 
    Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to demonstrate proof of posession, which is the
+   endpoint is used to demonstrate proof of possession, which is the
    reason that authentication is not required.  Client holding signed
    statements that require demonstrating proof of possession MUST use
    this endpoint to obtain a nonce.
@@ -826,9 +826,9 @@ Table of Contents
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-05, 9
-              February 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-scitt-architecture-05>.
+              Internet-Draft, draft-ietf-scitt-architecture-06, 4 March
+              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              scitt-architecture-06>.
 
    [IANA.params]
               IANA, "Uniform Resource Name (URN) Namespace for IETF
@@ -879,9 +879,9 @@ Table of Contents
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-02, 27 February
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-03, 4 March
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-02>.
+              oauth-sd-jwt-vc-03>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
