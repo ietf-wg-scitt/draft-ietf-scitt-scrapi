@@ -64,7 +64,7 @@ informative:
 --- abstract
 
 This document describes a REST API that supports the normative requirements of the SCITT Architecture {{-SCITT-ARCH}}.
-Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Reposistories.
+Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Repositories.
 
 --- middle
 
@@ -101,7 +101,7 @@ This specification uses "payload" as defined in {{RFC9052}}.
 # Endpoints
 
 Authentication is out of scope for this document.
-If Authentication is not implemented, rate limiting or other denial of service mititations MUST be applied to enable anonymous access.
+If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be applied to enable anonymous access.
 
 NOTE: '\' line wrapping per RFC 8792 in HTTP examples.
 
@@ -138,11 +138,10 @@ In the absence of this header field, this document does not specify a minimum.
 
 The following HTTP endpoints are mandatory to implement to enable conformance to this specification.
 
-
 ### Transparency Configuration
 
 Authentication SHOULD NOT be implemented for this endpoint.
-This endpoint is used to discovery the capabilites of a transparency service implementing this specification.
+This endpoint is used to discovery the capabilities of a transparency service implementing this specification.
 
 Request:
 
@@ -344,7 +343,6 @@ TODO: other error codes
 ## Optional Endpoints
 
 The following HTTP endpoints are optional to implement.
-
 
 ### Issue Statement
 
@@ -557,7 +555,7 @@ Content-Type: application/json
 This endpoint in inspired by {{-Nonce-Endpoint}}.
 
 Authentication SHOULD NOT be implemented for this endpoint.
-This endpoint is used to demonstrate proof of posession, which is the reason that authentication is not required.
+This endpoint is used to demonstrate proof of possession, which is the reason that authentication is not required.
 Client holding signed statements that require demonstrating proof of possession MUST use this endpoint to obtain a nonce.
 
 Request:
@@ -714,7 +712,6 @@ Registry {{IANA.params}}, following the template in {{RFC3553}}:
    Index value:  No transformation needed.
 ~~~
 
-
 ## Well-Known URI for Issuers
 
 The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC5785}}):
@@ -763,4 +760,3 @@ To indicate that the content is a SCITT Receipt:
 - Provisional registration?  No
 
 --- back
-
