@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-21T00:28:31.700117+00:00",
+  "timestamp": "2024-03-24T00:30:44.274618+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -67,7 +67,7 @@
       "comments": [
         {
           "author": "aj-stein-nist",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I do agree but it seems per the spec we are following [RFC7807](https://www.rfc-editor.org/rfc/rfc7807#page-7) and they have this to say about our desired change in this request.\r\n\r\n   Consumers SHOULD NOT parse the \"detail\" member for information;\r\n   extensions are more suitable and less error-prone ways to obtain such\r\n   information.\r\n\r\nI am looking more into these mysterious \"extensions\" mentioned in this spec. ",
           "createdAt": "2024-03-15T23:38:20Z",
           "updatedAt": "2024-03-15T23:38:20Z"
@@ -97,7 +97,7 @@
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/4",
       "state": "OPEN",
       "author": "aj-stein-nist",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I am not sure this is within the scope of the formal working group or better as an \"outside\" community effort, but with the relocation of this draft into the ietf-wg-scitt org and its upload to datatracker, have we considered having a test suite with sample artifacts, signed statements, and transparent statements that conform to the API spec here as a test harness of sorts? I have seen *some* IETF and other standard bodies groups making such test suites. I am opening this issue here to gauge interest and determine if making it \"inline in this repo\" is within scope or not.",
@@ -196,24 +196,26 @@
       "id": "PR_kwDOLJjbks5p2OWP",
       "title": "Add Security Considerations consistent with RFC 3552",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/5",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JAG-UK",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Hackathon entry for 119, fill in required elements from RFC 3552",
       "createdAt": "2024-03-17T00:26:38Z",
-      "updatedAt": "2024-03-18T09:24:00Z",
+      "updatedAt": "2024-03-22T06:20:54Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "94b8e8d94e2f96ac2a76c28d7a6478d367cddff8",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "dev/jag-uk/security-considerations-section",
       "headRefOid": "6a81982412e1eb8c87545f25def8311c8beee013",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-22T00:14:34Z",
+      "mergedAt": "2024-03-22T00:14:34Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "e53f9b56a9a3bdc93a313597196800ee019d0e7f"
+      },
       "comments": [
         {
           "author": "SteveLasker",
@@ -230,7 +232,7 @@
             "abbreviatedOid": "2726176"
           },
           "author": "aj-stein-nist",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-03-17T00:39:02Z",
@@ -250,7 +252,7 @@
             "abbreviatedOid": "2726176"
           },
           "author": "JAG-UK",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-03-17T00:42:09Z",
@@ -270,7 +272,7 @@
             "abbreviatedOid": "2726176"
           },
           "author": "aj-stein-nist",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-03-17T00:49:01Z",
@@ -290,7 +292,7 @@
             "abbreviatedOid": "2726176"
           },
           "author": "aj-stein-nist",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-03-17T00:51:00Z",
@@ -481,7 +483,7 @@
             "abbreviatedOid": "2726176"
           },
           "author": "JAG-UK",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-03-18T09:19:31Z",
@@ -501,7 +503,7 @@
             "abbreviatedOid": "2726176"
           },
           "author": "JAG-UK",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-03-18T09:23:21Z",
@@ -514,6 +516,19 @@
               "updatedAt": "2024-03-18T09:23:22Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks50c041",
+          "commit": {
+            "abbreviatedOid": "6a81982"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-22T00:14:17Z",
+          "updatedAt": "2024-03-22T00:14:17Z",
+          "comments": []
         }
       ]
     },
@@ -522,26 +537,42 @@
       "id": "PR_kwDOLJjbks5p5rBA",
       "title": "Spelling and Markdown Nits",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/6",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-03-18T07:40:56Z",
-      "updatedAt": "2024-03-18T07:40:56Z",
+      "updatedAt": "2024-03-22T06:21:44Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "94b8e8d94e2f96ac2a76c28d7a6478d367cddff8",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "steve/markdown-nits",
       "headRefOid": "eac6f2384f6e49d6b309aa9ad3dc29df5764a716",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-22T00:12:53Z",
+      "mergedAt": "2024-03-22T00:12:53Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "fb9c920208e1ba8645ce8b1b27abb9540d20b7d2"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks50c0ee",
+          "commit": {
+            "abbreviatedOid": "eac6f23"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-22T00:12:33Z",
+          "updatedAt": "2024-03-22T00:12:33Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
