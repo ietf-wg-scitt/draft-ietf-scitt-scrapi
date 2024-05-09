@@ -1,0 +1,578 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-05-09T00:28:46.679992+00:00",
+  "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOLJjbks6B0kV-",
+      "title": "using media types for errors",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/2",
+      "state": "OPEN",
+      "author": "pdxjohnny",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Would be great to be able to return an object in addition to or instead of a string for errors. Or allow for other properties which would be fully content-typeable to a custom response object within the error response on claim insert failure.\r\n\r\nLack of this prevents an automated conversation to resolve issues with claim insertion. Human readable strings are great, but ideally a human doesn't even get involved and machines can auto remediate issues due to detailed failure reasoning. This way the a human readable string might only be needed after a failed machine driven insert conversation (more than one call response).\r\n\r\n- References\r\n  - https://github.com/ietf-scitt/draft-birkholz-scitt-scrapi/issues/4\r\n    - https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/62",
+      "createdAt": "2024-03-11T01:34:22Z",
+      "updatedAt": "2024-03-15T23:38:21Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I do agree but it seems per the spec we are following [RFC7807](https://www.rfc-editor.org/rfc/rfc7807#page-7) and they have this to say about our desired change in this request.\r\n\r\n   Consumers SHOULD NOT parse the \"detail\" member for information;\r\n   extensions are more suitable and less error-prone ways to obtain such\r\n   information.\r\n\r\nI am looking more into these mysterious \"extensions\" mentioned in this spec. ",
+          "createdAt": "2024-03-15T23:38:20Z",
+          "updatedAt": "2024-03-15T23:38:20Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOLJjbks6CFgNv",
+      "title": "Add GS1 examples",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/3",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "see https://www.rfc-editor.org/rfc/rfc5134.html",
+      "createdAt": "2024-03-12T19:06:56Z",
+      "updatedAt": "2024-03-12T19:06:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOLJjbks6CguBZ",
+      "title": "Test suite",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/4",
+      "state": "OPEN",
+      "author": "aj-stein-nist",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I am not sure this is within the scope of the formal working group or better as an \"outside\" community effort, but with the relocation of this draft into the ietf-wg-scitt org and its upload to datatracker, have we considered having a test suite with sample artifacts, signed statements, and transparent statements that conform to the API spec here as a test harness of sorts? I have seen *some* IETF and other standard bodies groups making such test suites. I am opening this issue here to gauge interest and determine if making it \"inline in this repo\" is within scope or not.",
+      "createdAt": "2024-03-15T23:42:41Z",
+      "updatedAt": "2024-03-15T23:42:41Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOLJjbks5ofXEv",
+      "title": "Pre IETF 119 Update",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/1",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR updates SCRAPI to match the latest version of the architecture.",
+      "createdAt": "2024-03-02T19:19:50Z",
+      "updatedAt": "2024-03-04T15:13:42Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "9fc2fd4a794a53b8fc843bc5479e7a16cc03b13f",
+      "headRepository": "OR13/draft-ietf-scitt-scrapi",
+      "headRefName": "feat/pre-ietf-119-update",
+      "headRefOid": "ec80348cc27ff0394a20f8ce6e2156deee264a13",
+      "closedAt": "2024-03-04T15:13:42Z",
+      "mergedAt": "2024-03-04T15:13:42Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "94b8e8d94e2f96ac2a76c28d7a6478d367cddff8"
+      },
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I tried pushing a revision to the datatracker from my fork... but it did not work... so unless this is published by some other author with write access before monday, we will be -00 for a solid IETF  with no updates : )",
+          "createdAt": "2024-03-02T19:50:22Z",
+          "updatedAt": "2024-03-02T19:50:22Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Merging based on requests to meet the draft cut off... assuming CI passes",
+          "createdAt": "2024-03-04T15:13:16Z",
+          "updatedAt": "2024-03-04T15:13:16Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks5yBoZk",
+          "commit": {
+            "abbreviatedOid": "ec80348"
+          },
+          "author": "mprorock",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "We should get this up ASAP before the cutoff and prior to hackathon",
+          "createdAt": "2024-03-03T15:42:03Z",
+          "updatedAt": "2024-03-03T15:42:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks5yBovs",
+          "commit": {
+            "abbreviatedOid": "ec80348"
+          },
+          "author": "brentzundel",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-03T15:49:33Z",
+          "updatedAt": "2024-03-03T15:49:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks5yHfez",
+          "commit": {
+            "abbreviatedOid": "ec80348"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": ":ship: it",
+          "createdAt": "2024-03-04T15:06:33Z",
+          "updatedAt": "2024-03-04T15:06:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOLJjbks5p2OWP",
+      "title": "Add Security Considerations consistent with RFC 3552",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/5",
+      "state": "MERGED",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Hackathon entry for 119, fill in required elements from RFC 3552",
+      "createdAt": "2024-03-17T00:26:38Z",
+      "updatedAt": "2024-03-22T06:20:54Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "94b8e8d94e2f96ac2a76c28d7a6478d367cddff8",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "dev/jag-uk/security-considerations-section",
+      "headRefOid": "6a81982412e1eb8c87545f25def8311c8beee013",
+      "closedAt": "2024-03-22T00:14:34Z",
+      "mergedAt": "2024-03-22T00:14:34Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "e53f9b56a9a3bdc93a313597196800ee019d0e7f"
+      },
+      "comments": [
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I merged the markdown nits, but left the suggestions that should be reviewed by others.",
+          "createdAt": "2024-03-18T07:44:45Z",
+          "updatedAt": "2024-03-18T07:44:45Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks5ztrQh",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-17T00:39:02Z",
+          "updatedAt": "2024-03-17T00:39:06Z",
+          "comments": [
+            {
+              "originalPosition": 82,
+              "body": "What are those, does IETF actually specify any we can cite?",
+              "createdAt": "2024-03-17T00:39:02Z",
+              "updatedAt": "2024-03-17T00:39:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks5ztrVs",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-17T00:42:09Z",
+          "updatedAt": "2024-03-17T00:42:15Z",
+          "comments": [
+            {
+              "originalPosition": 82,
+              "body": "In a number of ways, yes, in section 4.6 of 3552. Happy to reference that.\r\nThe rat limited comes specifically from SCITT arch and is not in 3552 but I think that's also fixable",
+              "createdAt": "2024-03-17T00:42:09Z",
+              "updatedAt": "2024-03-17T00:42:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks5ztrde",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-17T00:49:01Z",
+          "updatedAt": "2024-03-17T00:49:01Z",
+          "comments": [
+            {
+              "originalPosition": 82,
+              "body": "Fair enough, I was looking for something like the I-D below but it seems expired anyway.\r\n\r\nhttps://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/",
+              "createdAt": "2024-03-17T00:49:01Z",
+              "updatedAt": "2024-03-17T00:49:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks5ztrgW",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-17T00:51:00Z",
+          "updatedAt": "2024-03-17T00:52:11Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "Minor nit\r\n\r\n```suggestion\r\n[SCITT-ARCH] defines 2 distinct roles that require authentication:\r\n```",
+              "createdAt": "2024-03-17T00:51:00Z",
+              "updatedAt": "2024-03-17T00:52:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks5zun1G",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-17T22:29:50Z",
+          "updatedAt": "2024-03-17T22:29:50Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks5zwQ9n",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-18T05:57:59Z",
+          "updatedAt": "2024-03-18T05:58:00Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "```suggestion\r\n - HTTP Authorization header with a bearer JWT\r\n```",
+              "createdAt": "2024-03-18T05:58:00Z",
+              "updatedAt": "2024-03-18T05:58:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks5zwRCU",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-18T05:58:10Z",
+          "updatedAt": "2024-03-18T05:58:10Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\n - domain-bound API key\r\n```",
+              "createdAt": "2024-03-18T05:58:10Z",
+              "updatedAt": "2024-03-18T05:58:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks5zwRFN",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-18T05:58:21Z",
+          "updatedAt": "2024-03-18T05:58:21Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\n - TLS client authentication\r\n```",
+              "createdAt": "2024-03-18T05:58:21Z",
+              "updatedAt": "2024-03-18T05:58:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks5zwRpC",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "A bunch of Markdown Nits, and some questions on the correlation between Issuer and RBAC, but happy to merge and iterate through additional PRs",
+          "createdAt": "2024-03-18T06:00:42Z",
+          "updatedAt": "2024-03-18T06:27:11Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "Should there be a direct correlation between Issuers and Client Auths?\r\nI'm trying to think through the scenarios where this would be required.\r\n",
+              "createdAt": "2024-03-18T06:00:42Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\r\nand Transparency Services implementing this specification MUST allow\r\n```",
+              "createdAt": "2024-03-18T06:01:43Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 54,
+              "body": "```suggestion\r\n - Threats to strong identification, for example representing the\r\n```",
+              "createdAt": "2024-03-18T06:02:17Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 56,
+              "body": "```suggestion\r\n - Threats to payload integrity, for example changing the contents of\r\n```",
+              "createdAt": "2024-03-18T06:02:25Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "```suggestion\r\n - Threats to non-equivocation, for example attacks that would enable\r\n```",
+              "createdAt": "2024-03-18T06:02:44Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 97,
+              "body": "Latest draft uses Relying Parties, over Verifiers\r\n```suggestion\r\nmisrepresentation of Issuer intent that could mislead later Relying Parties.\r\n```",
+              "createdAt": "2024-03-18T06:09:54Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 102,
+              "body": "Not sure the correlation between an authorized client and an Issuer. An authorized client may publish signed statements from many issuers, whether they're various software publishers or C2PA media issuers. \r\nI suppose a TS that wants to do something, could configure the correlation in their registration policy. But, wouldn't this be TS implementation specific?",
+              "createdAt": "2024-03-18T06:13:04Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 112,
+              "body": "```suggestion\r\n- Stolen client endpoint authentication credentials\r\n```",
+              "createdAt": "2024-03-18T06:13:48Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 113,
+              "body": "```suggestion\r\n- Stolen or misused Issuer keys held in the Transparency Service on\r\n```",
+              "createdAt": "2024-03-18T06:13:57Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 140,
+              "body": "```suggestion\r\nonce a statement is made, it is intended to be immutable and non-\r\n```",
+              "createdAt": "2024-03-18T06:15:21Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 141,
+              "body": "A reply attack could be done, that undoes an update:\r\n\r\n1. An issuer makes a statement, attesting to an artifact has met a set of compliance standards. `{\"compliance-2\": \"true\"}`\r\n2. The issuer discovers a vulnerability, making it no longer compliant with the standard: `{\"compliance-2\": \"false\"}`\r\n3. A reply attack is made, resetting the compliance: `{\"compliance-2\": \"true\"}`",
+              "createdAt": "2024-03-18T06:18:35Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 157,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-03-18T06:19:19Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 158,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-03-18T06:19:26Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            },
+            {
+              "originalPosition": 153,
+              "body": "The TS stores Signed Statements. When we started SCITT, I believe we had the position the TS would have Transparent Statements. \r\nAs of draft 06, a Transparent Statement is assembled on the client. \r\nTeasing out the highlight here, but should we add a term called Registered Signed Statement, which differentiates a Signed Statement that hasn't yet been registered, and a Signed Statement that has been registered, but isn't yet Transparent as the TS doesn't staple the receipt to the Signed Statement.\r\n\r\nSee [Should we add Registered Signed Statement to the terminology #221](https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/221)\r\n```suggestion\r\nOnce registered with a Transparency Service, Registered Signed Statements\r\n```",
+              "createdAt": "2024-03-18T06:19:49Z",
+              "updatedAt": "2024-03-18T06:27:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks5zxjzB",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-18T09:19:31Z",
+          "updatedAt": "2024-03-18T09:19:31Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "No, I think this should be left to the instance to decide what's right. It's totally legitimate for multiple apps to submit on behalf of the same Issuer, and for a single app to submit Statements signed by many Issuers.  ",
+              "createdAt": "2024-03-18T09:19:31Z",
+              "updatedAt": "2024-03-18T09:19:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks5zxmsy",
+          "commit": {
+            "abbreviatedOid": "2726176"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-18T09:23:21Z",
+          "updatedAt": "2024-03-18T09:23:22Z",
+          "comments": [
+            {
+              "originalPosition": 141,
+              "body": "I don't think accumulated state like this is a very good way to use a ledger. Payloads should be complete and make a full statement about whatever they're saying. In your example above the compliance statement should reference which version of the compliance standard was tested against, and what date the assessment was made.",
+              "createdAt": "2024-03-18T09:23:21Z",
+              "updatedAt": "2024-03-18T09:23:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks50c041",
+          "commit": {
+            "abbreviatedOid": "6a81982"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-22T00:14:17Z",
+          "updatedAt": "2024-03-22T00:14:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOLJjbks5p5rBA",
+      "title": "Spelling and Markdown Nits",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/6",
+      "state": "MERGED",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-03-18T07:40:56Z",
+      "updatedAt": "2024-03-22T06:21:44Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "94b8e8d94e2f96ac2a76c28d7a6478d367cddff8",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "steve/markdown-nits",
+      "headRefOid": "eac6f2384f6e49d6b309aa9ad3dc29df5764a716",
+      "closedAt": "2024-03-22T00:12:53Z",
+      "mergedAt": "2024-03-22T00:12:53Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "fb9c920208e1ba8645ce8b1b27abb9540d20b7d2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks50c0ee",
+          "commit": {
+            "abbreviatedOid": "eac6f23"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-22T00:12:33Z",
+          "updatedAt": "2024-03-22T00:12:33Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}
