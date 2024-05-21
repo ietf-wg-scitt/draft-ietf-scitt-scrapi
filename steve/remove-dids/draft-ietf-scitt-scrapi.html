@@ -10,20 +10,20 @@
 <meta content="Jon Geater" name="author">
 <meta content="
        This document describes a REST API that supports the normative requirements of the SCITT Architecture  .
-Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Reposistories. 
+Optional key discovery and query interfaces are provided to support interoperability issues with X509 Certificates and Artifact Repositories. 
     " name="description">
-<meta content="xml2rfc 3.20.0" name="generator">
+<meta content="xml2rfc 3.21.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-scitt-scrapi-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.20.0
-    Python 3.11.8
+  xml2rfc 3.21.0
+    Python 3.11.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 4.2.0
+    platformdirs 4.2.1
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
@@ -1028,11 +1028,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SCRAPI</td>
-<td class="right">March 2024</td>
+<td class="right">May 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 5 September 2024</td>
+<td class="center">Expires 22 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1045,12 +1045,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-03-04" class="published">4 March 2024</time>
+<time datetime="2024-05-21" class="published">21 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-09-05">5 September 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-22">22 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1072,7 +1072,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document describes a REST API that supports the normative requirements of the SCITT Architecture <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>.
-Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Reposistories.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+Optional key discovery and query interfaces are provided to support interoperability issues with X509 Certificates and Artifact Repositories.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1108,7 +1108,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1179,9 +1179,6 @@ Optional key discovery and query interfaces are provided to support interoperabi
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.6">
                     <p id="section-toc.1-1.2.2.2.2.6.1"><a href="#section-2.2.6" class="auto internal xref">2.2.6</a>.  <a href="#name-request-nonce" class="internal xref">Request Nonce</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.7">
-                    <p id="section-toc.1-1.2.2.2.2.7.1"><a href="#section-2.2.7" class="auto internal xref">2.2.7</a>.  <a href="#name-resolve-issuer-did" class="internal xref">Resolve Issuer DID</a></p>
 </li>
                 </ul>
 </li>
@@ -1805,115 +1802,6 @@ Content-Type: application/json
 </div>
 </section>
 </div>
-<div id="sec-resolve-issuer-did">
-<section id="section-2.2.7">
-          <h4 id="name-resolve-issuer-did">
-<a href="#section-2.2.7" class="section-number selfRef">2.2.7. </a><a href="#name-resolve-issuer-did" class="section-name selfRef">Resolve Issuer DID</a>
-          </h4>
-<p id="section-2.2.7-1">This endpoint enables the use of the DID Web Decentralized Identifier Method, as an alternative expression of the Issuer Metadata endpoint.<a href="#section-2.2.7-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.7-2">This endpoint is DEPRECATED.<a href="#section-2.2.7-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.7-3">The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when <code>iss</code> is set to <code>did:web:transparency.example:tenant:1234</code>:<a href="#section-2.2.7-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.7-4">Request:<a href="#section-2.2.7-4" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.7-5">
-<pre>
-GET /tenant/1234/did.json HTTP/1.1
-Host: transparency.example
-Accept: application/did+ld+json
-</pre><a href="#section-2.2.7-5" class="pilcrow">¶</a>
-</div>
-<p id="section-2.2.7-6">Response:<a href="#section-2.2.7-6" class="pilcrow">¶</a></p>
-<div class="breakable lang-http-message sourcecode" id="section-2.2.7-7">
-<pre>
-HTTP/1.1 200 Ok
-Content-Type: application/did+ld+json
-
-{
-  "@context": [
-    "https://www.w3.org/ns/did/v1",
-    {
-      "@vocab": "https://vocab.transparency.example#"
-    }
-  ],
-  "id": "did:web:transparency.example:tenant:1234",
-  "verificationMethod": [
-    {
-      "id": "did:web:transparency.example:tenant:1234\
-        #urn:ietf:params:oauth:jwk-thumbprint\
-        :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-      "type": "JsonWebKey",
-      "controller": "did:web:transparency.example:tenant:1234",
-      "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-          :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-        "alg": "ES256",
-        "use": "sig",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "9ptuW0PBHSTN7bVexWd7xM5kmSPGRaCu-K3SLtJyvNc",
-        "y": "l7NvF6QbovicSciZqu_W_xy4JTZwtnUbn2SNdMKoaAk"
-      }
-    },
-    {
-      "id": "did:web:transparency.example:tenant:1234\
-        #urn:ietf:params:oauth:jwk-thumbprint\
-        :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-      "type": "JsonWebKey",
-      "controller": "did:web:transparency.example:tenant:1234",
-      "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-          :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-        "alg": "ES256",
-        "use": "sig",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
-        "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
-      }
-    },
-    {
-      "id": "did:web:transparency.example:tenant:1234\
-        #urn:ietf:params:oauth:jwk-thumbprint\
-        :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-      "type": "JsonWebKey",
-      "controller": "did:web:transparency.example:tenant:1234",
-      "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-          :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-        "alg": "HPKE-Base-P256-SHA256-AES128GCM",
-        "use": "enc",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
-        "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
-      }
-    }
-  ],
-  "assertionMethod": [
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-  ],
-  "authentication": [
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-  ],
-  "keyAgreement": [
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE"
-  ]
-}
-</pre><a href="#section-2.2.7-7" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
 </section>
 </div>
 </section>
@@ -1923,7 +1811,7 @@ Content-Type: application/did+ld+json
       <h2 id="name-privacy-considerations">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
       </h2>
-<p id="section-3-1">TODO<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">TODO:<a href="#section-3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-security-considerations">
@@ -1931,9 +1819,8 @@ Content-Type: application/did+ld+json
       <h2 id="name-security-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-4-1">TODO<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">TODO: Consider negotiation for receipt as "JSON" or "YAML".
-TODO: Consider impact of media type on "Data URIs" and QR Codes.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-1">TODO: Consider negotiation for receipt as "JSON" or "YAML".
+TODO: Consider impact of media type on "Data URIs" and QR Codes.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-iana-considerations">
@@ -2071,7 +1958,7 @@ Related information: N/A<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <dl class="references">
 <dt id="I-D.draft-ietf-scitt-architecture">[I-D.draft-ietf-scitt-architecture]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-05</span>, <time datetime="2024-02-09" class="refDate">9 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-05">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-06</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-06">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.params">[IANA.params]</dt>
         <dd>
@@ -2120,7 +2007,7 @@ Related information: N/A<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="I-D.draft-ietf-oauth-sd-jwt-vc">[I-D.draft-ietf-oauth-sd-jwt-vc]</dt>
         <dd>
-<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-02</span>, <time datetime="2024-02-27" class="refDate">27 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-02">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-03</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-03">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2046">[RFC2046]</dt>
         <dd>
