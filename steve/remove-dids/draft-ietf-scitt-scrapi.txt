@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 19 September 2024                                     Transmute
+Expires: 22 November 2024                                      Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                           18 March 2024
+                                                             21 May 2024
 
 
                           SCITT Reference APIs
@@ -20,8 +20,7 @@ Abstract
    requirements of the SCITT Architecture
    [I-D.draft-ietf-scitt-architecture].  Optional key discovery and
    query interfaces are provided to support interoperability issues with
-   Decentralized Identifiers, X509 Certificates and Artifact
-   Repositories.
+   X509 Certificates and Artifact Repositories.
 
 About This Document
 
@@ -53,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 September 2024.
+   This Internet-Draft will expire on 22 November 2024.
 
 Copyright Notice
 
@@ -84,7 +83,6 @@ Table of Contents
        2.2.4.  Resolve Receipt
        2.2.5.  Resolve Issuer
        2.2.6.  Request Nonce
-       2.2.7.  Resolve Issuer DID
    3.  Privacy Considerations
    4.  Security Considerations
    5.  IANA Considerations
@@ -148,7 +146,7 @@ Table of Contents
 
    Authentication is out of scope for this document.  If Authentication
    is not implemented, rate limiting or other denial of service
-   mitigations MUST be applied to enable anonymous access.
+   mititations MUST be applied to enable anonymous access.
 
    NOTE: '' line wrapping per RFC 8792 in HTTP examples.
 
@@ -204,7 +202,7 @@ Table of Contents
 2.1.1.  Transparency Configuration
 
    Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to discovery the capabilities of a transparency
+   endpoint is used to discovery the capabilites of a transparency
    service implementing this specification.
 
    Request:
@@ -601,7 +599,7 @@ Table of Contents
    [I-D.draft-demarco-oauth-nonce-endpoint].
 
    Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to demonstrate proof of possession, which is the
+   endpoint is used to demonstrate proof of posession, which is the
    reason that authentication is not required.  Client holding signed
    statements that require demonstrating proof of possession MUST use
    this endpoint to obtain a nonce.
@@ -621,119 +619,11 @@ Table of Contents
      "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
    }
 
-2.2.7.  Resolve Issuer DID
-
-   This endpoint enables the use of the DID Web Decentralized Identifier
-   Method, as an alternative expression of the Issuer Metadata endpoint.
-
-   This endpoint is DEPRECATED.
-
-   The following is a non-normative example of a HTTP request for the
-   Issuer Metadata configuration when iss is set to
-   did:web:transparency.example:tenant:1234:
-
-   Request:
-
-   GET /tenant/1234/did.json HTTP/1.1
-   Host: transparency.example
-   Accept: application/did+ld+json
-
-   Response:
-
-   HTTP/1.1 200 Ok
-   Content-Type: application/did+ld+json
-
-   {
-     "@context": [
-       "https://www.w3.org/ns/did/v1",
-       {
-         "@vocab": "https://vocab.transparency.example#"
-       }
-     ],
-     "id": "did:web:transparency.example:tenant:1234",
-     "verificationMethod": [
-       {
-         "id": "did:web:transparency.example:tenant:1234\
-           #urn:ietf:params:oauth:jwk-thumbprint\
-           :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-         "type": "JsonWebKey",
-         "controller": "did:web:transparency.example:tenant:1234",
-         "publicKeyJwk": {
-           "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-             :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-           "alg": "ES256",
-           "use": "sig",
-           "kty": "EC",
-           "crv": "P-256",
-           "x": "9ptuW0PBHSTN7bVexWd7xM5kmSPGRaCu-K3SLtJyvNc",
-           "y": "l7NvF6QbovicSciZqu_W_xy4JTZwtnUbn2SNdMKoaAk"
-         }
-       },
-       {
-         "id": "did:web:transparency.example:tenant:1234\
-           #urn:ietf:params:oauth:jwk-thumbprint\
-           :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-         "type": "JsonWebKey",
-         "controller": "did:web:transparency.example:tenant:1234",
-         "publicKeyJwk": {
-           "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-             :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-           "alg": "ES256",
-           "use": "sig",
-           "kty": "EC",
-           "crv": "P-256",
-           "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
-           "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
-         }
-       },
-       {
-         "id": "did:web:transparency.example:tenant:1234\
-           #urn:ietf:params:oauth:jwk-thumbprint\
-           :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-         "type": "JsonWebKey",
-         "controller": "did:web:transparency.example:tenant:1234",
-         "publicKeyJwk": {
-           "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-             :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-           "alg": "HPKE-Base-P256-SHA256-AES128GCM",
-           "use": "enc",
-           "kty": "EC",
-           "crv": "P-256",
-           "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
-           "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
-         }
-       }
-     ],
-     "assertionMethod": [
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-     ],
-     "authentication": [
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-     ],
-     "keyAgreement": [
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE"
-     ]
-   }
-
 3.  Privacy Considerations
 
-   TODO
+   TODO:
 
 4.  Security Considerations
-
-   TODO
 
    TODO: Consider negotiation for receipt as "JSON" or "YAML".  TODO:
    Consider impact of media type on "Data URIs" and QR Codes.
