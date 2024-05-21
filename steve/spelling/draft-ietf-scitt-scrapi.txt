@@ -150,7 +150,7 @@ Table of Contents
    is not implemented, rate limiting or other denial of service
    mitigations MUST be applied to enable anonymous access.
 
-   NOTE: '' line wrapping per RFC 8792 in HTTP examples.
+   NOTE: '' line wrapping per [RFC8792] in HTTP examples.
 
    All messages are sent as HTTP GET or POST requests.
 
@@ -861,6 +861,11 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
+              "Handling Long Lines in Content of Internet-Drafts and
+              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
+              <https://www.rfc-editor.org/rfc/rfc8792>.
 
    [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Structures and Process", STD 96, RFC 9052,
