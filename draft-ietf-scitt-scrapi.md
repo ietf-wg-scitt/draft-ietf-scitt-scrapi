@@ -51,6 +51,7 @@ normative:
   RFC7231:
   RFC3553:
   RFC5785:
+  RFC8792:
 
   IANA.params:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
@@ -103,7 +104,7 @@ This specification uses "payload" as defined in {{RFC9052}}.
 Authentication is out of scope for this document.
 If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be applied to enable anonymous access.
 
-NOTE: '\' line wrapping per RFC 8792 in HTTP examples.
+NOTE: '\' line wrapping per {{RFC8792}} in HTTP examples.
 
 All messages are sent as HTTP GET or POST requests.
 
