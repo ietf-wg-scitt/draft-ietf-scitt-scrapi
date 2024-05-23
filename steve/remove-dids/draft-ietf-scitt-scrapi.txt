@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 22 November 2024                                      Transmute
+Expires: 24 November 2024                                      Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                             21 May 2024
+                                                             23 May 2024
 
 
                           SCITT Reference APIs
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 November 2024.
+   This Internet-Draft will expire on 24 November 2024.
 
 Copyright Notice
 
@@ -85,14 +85,21 @@ Table of Contents
        2.2.6.  Request Nonce
    3.  Privacy Considerations
    4.  Security Considerations
-   5.  IANA Considerations
-     5.1.  URN Sub-namespace for SCITT (urn:ietf:params:scitt)
-     5.2.  Well-Known URI for Issuers
-     5.3.  Well-Known URI for Transparency Configuration
-     5.4.  Media Type Registration
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
+     4.1.  General scope
+     4.2.  Applicable Environment
+     4.3.  User-host authentication
+     4.4.  Primary threats
+       4.4.1.  In scope
+       4.4.2.  Out of scope
+   5.   TODO
+   6.  IANA Considerations
+     6.1.  URN Sub-namespace for SCITT (urn:ietf:params:scitt)
+     6.2.  Well-Known URI for Issuers
+     6.3.  Well-Known URI for Transparency Configuration
+     6.4.  Media Type Registration
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -146,9 +153,9 @@ Table of Contents
 
    Authentication is out of scope for this document.  If Authentication
    is not implemented, rate limiting or other denial of service
-   mititations MUST be applied to enable anonymous access.
+   mitigations MUST be applied to enable anonymous access.
 
-   NOTE: '' line wrapping per RFC 8792 in HTTP examples.
+   NOTE: '' line wrapping per [RFC8792] in HTTP examples.
 
    All messages are sent as HTTP GET or POST requests.
 
@@ -202,7 +209,7 @@ Table of Contents
 2.1.1.  Transparency Configuration
 
    Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to discovery the capabilites of a transparency
+   endpoint is used to discovery the capabilities of a transparency
    service implementing this specification.
 
    Request:
@@ -599,7 +606,7 @@ Table of Contents
    [I-D.draft-demarco-oauth-nonce-endpoint].
 
    Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to demonstrate proof of posession, which is the
+   endpoint is used to demonstrate proof of possession, which is the
    reason that authentication is not required.  Client holding signed
    statements that require demonstrating proof of possession MUST use
    this endpoint to obtain a nonce.
@@ -625,12 +632,166 @@ Table of Contents
 
 4.  Security Considerations
 
+4.1.  General scope
+
+   This document describes the interoperable API for client calls to,
+   and implementations of, a Transparency Service as specified in
+   [SCITT-ARCH].  As such the security considerations in this section
+   are concerned only with security considerations that are relevant at
+   that implementation layer.  All questions of security of the related
+   COSE formats, algorithm choices, cryptographic envelopes, verifiable
+   data structures and the like are handled elsewhere and out of scope
+   of this document.
+
+4.2.  Applicable Environment
+
+   SCITT is concerned with issues of cross-boundary supply-chain-wide
+   data integrity and as such must assume a very wide range of
+   deployment environments.  Thus, no assumptions can be made about the
+   security of the computing environment in which any client
+   implementation of this specification runs.
+
+4.3.  User-host authentication
+
+   [SCITT-ARCH] defines 2 distinct roles that require authentication:
+   Issuers who sign Statements, and clients that submit API calls on
+   behalf of Issuers.  While Issuer authentication and signing of
+   Statements is very important for the trustworthiness of systems
+   implementing the SCITT building blocks, it is out of scope of this
+   document.  This document is only concerned with authentication of API
+   clients.
+
+   For those endpoints that require client authentication, Transparency
+   Services MUST support at least one of the following options: - HTTP
+   Authorization header with a bearer JWT - domain-bound API key - TLS
+   client authentication
+
+   Transparency Services MUST provide a configuration surface that
+   allows Issuers to specify which authorized clients can submit
+   Statements on their behalf.
+
+   Where authentication methods rely on long term secrets, both clients
+   and Transparency Services implementing this specification MUST allow
+   for the revocation and rolling of authentication secrets.
+
+4.4.  Primary threats
+
+4.4.1.  In scope
+
+   The most serious threats to implementations on Transparency Services
+   are ones that would cause the failure of their main promises, to wit:
+   - Threats to strong identification, for example representing the
+   Statements from one issuer as those of another - Threats to payload
+   integrity, for example changing the contents of a Signed Statement
+   before making it transparent - Threats to non-equivocation, for
+   example attacks that would enable the presentation or verification of
+   divergent proofs for the same Statement payload
+
+4.4.1.1.  Denial of service attacks
+
+   While denial of service attacks are very hard to defend against
+   completely, and Transparency Services are unlikely to be in the
+   critical path of any safety-liable operation, any attack which could
+   cause the _silent_ failure of Signed Statement registration, for
+   example, should be considered in scope.
+
+   In principle DoS attacks are easily mitigated by the client checking
+   that the Transparency Service has registered any submitted Signed
+   Statement and returned a Receipt.  Since verification of Receipts
+   does not require the involvement of the Transparency Service DoS
+   attacks are not a major issue.
+
+   Clients to Transparency Services SHOULD ensure that Receipts are
+   available for their registered Statements, either on a periodic or
+   needs-must basis, depending on the use case.
+
+   Beyond this, implementers of Transparency Services SHOULD implement
+   general good practice around network attacks, flooding, rate limiting
+   etc.
+
+4.4.1.2.  Eavesdropping
+
+   Since the purpose of this API is to ultimately put the message
+   payloads on a Transparency Log there is limited risk to
+   eavesdropping.  Nonetheless transparency may mean 'within a limited
+   community' rather than 'in full public', so implementers MUST add
+   protections against man-in-the-middle and network eavesdropping, such
+   as TLS.
+
+4.4.1.3.  Message modification attacks
+
+   While most relevant modification attacks are mitigated by the use of
+   the Issuer signature on the Signed Statement, the Issue Statement
+   endpoint presents an opportunity for manipulation of messages and
+   misrepresentation of Issuer intent that could mislead later
+   Verifiers.
+
+   Transparency Services offering the Issue Statement endpoint MUST
+   require authentication and transport-level security for that
+   endpoint, MUST NOT modify anything in the message to be signed, and
+   MUST take steps to ensure that the party calling the endpoint is
+   authorized to register statements on behalf of the specified Issuer.
+
+4.4.1.4.  Message insertion attacks
+
+   While most relevant insertion attacks are mitigated by the use of the
+   Issuer signature on the Signed Statement, the Issue Statement
+   endpoint presents an opportunity for insertion of messages and
+   misrepresentation of Issuer intent that could mislead later
+   Verifiers.  There are 2 most likely avenues to this attack: - Stolen
+   client endpoint authentication credentials - Stolen or misused Issuer
+   keys held in the Transparency Service on behalf of clients
+
+   Clients relying on the Issue Statement endpoint SHOULD take steps to
+   ensure their endpoint authentication credentials are securely stored
+   and can be rotated and/or revoked in the case of a breach.
+
+   Transparency Services offering the Issue Statement endpoint MUST
+   require authentication and transport-level security for that
+   endpoint, and MUST enable the rotation and revocation of those
+   credentials.
+
+   Transparency Services offering the Issue Statement endpoint MUST take
+   careful steps in both design and operation of their software stack to
+   prevent the theft or inappropriate use of the Issuer keys they use to
+   sign Statements on behalf of Issuers, such as HSMs for storage and
+   least-privilege, regularly refreshed access controls for use.
+
+   Transparency Services MAY also implement additional protections such
+   as anomaly detection or rate limiting in order to mitigate the impact
+   of any breach.
+
+4.4.2.  Out of scope
+
+4.4.2.1.  Replay attacks
+
+   Replay attacks are not particularly concerning for SCITT or SCRAPI:
+   once a statement is made, it is intended to be immutable and non-
+   repudiable, so making it twice should not lead to any particular
+   issues.  There could be issues at the payload level (for instance,
+   the statement "it is raining" may true when first submitted but not
+   when replayed), but being payload-agnostic implementations of SCITT
+   services cannot be required to worry about that.
+
+   If the semantic content of the payload are time dependent and
+   susceptible to replay attacks in this way then timestamps MAY be
+   added to the payload signed by the Issuer.
+
+4.4.2.2.  Message deletion attacks
+
+   Once registered with a Transparency Service, Registered Signed
+   Statements cannot be deleted.  Thus, any message deletion attack must
+   occur prior to registration else it is indistinguishable from a man-
+   in-the-middle or denial-of-service attack on this interface.
+
+5.   TODO
+
    TODO: Consider negotiation for receipt as "JSON" or "YAML".  TODO:
    Consider impact of media type on "Data URIs" and QR Codes.
 
-5.  IANA Considerations
+6.  IANA Considerations
 
-5.1.  URN Sub-namespace for SCITT (urn:ietf:params:scitt)
+6.1.  URN Sub-namespace for SCITT (urn:ietf:params:scitt)
 
    IANA is requested to register the URN sub-namespace
    urn:ietf:params:scitt in the "IETF URN Sub-namespace for Registered
@@ -642,7 +803,7 @@ Table of Contents
       Repository:  http://www.iana.org/assignments/scitt
       Index value:  No transformation needed.
 
-5.2.  Well-Known URI for Issuers
+6.2.  Well-Known URI for Issuers
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC5785]):
@@ -650,7 +811,7 @@ Table of Contents
    URI suffix: issuer Change controller: IETF Specification document(s):
    RFCthis.  Related information: N/A
 
-5.3.  Well-Known URI for Transparency Configuration
+6.3.  Well-Known URI for Transparency Configuration
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC5785]):
@@ -660,7 +821,7 @@ Table of Contents
 
    TODO: Register them from here.
 
-5.4.  Media Type Registration
+6.4.  Media Type Registration
 
    This section requests registration of the "application/
    scitt.receipt+cose" media type [RFC2046] in the "Media Types"
@@ -708,9 +869,9 @@ Table of Contents
 
    *  Provisional registration?  No
 
-6.  References
+7.  References
 
-6.1.  Normative References
+7.1.  Normative References
 
    [I-D.draft-ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
@@ -752,12 +913,17 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
+              "Handling Long Lines in Content of Internet-Drafts and
+              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
+              <https://www.rfc-editor.org/rfc/rfc8792>.
+
    [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
 
-6.2.  Informative References
+7.2.  Informative References
 
    [I-D.draft-demarco-oauth-nonce-endpoint]
               De Marco, G. and O. Steele, "OAuth 2.0 Nonce Endpoint",
