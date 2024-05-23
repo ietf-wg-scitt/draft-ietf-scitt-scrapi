@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-21T00:29:47.253222+00:00",
+  "timestamp": "2024-05-23T00:29:15.335367+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -103,6 +103,22 @@
       "body": "I am not sure this is within the scope of the formal working group or better as an \"outside\" community effort, but with the relocation of this draft into the ietf-wg-scitt org and its upload to datatracker, have we considered having a test suite with sample artifacts, signed statements, and transparent statements that conform to the API spec here as a test harness of sorts? I have seen *some* IETF and other standard bodies groups making such test suites. I am opening this issue here to gauge interest and determine if making it \"inline in this repo\" is within scope or not.",
       "createdAt": "2024-03-15T23:42:41Z",
       "updatedAt": "2024-03-15T23:42:41Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOLJjbks6JpIwT",
+      "title": "API for Collections of Statements",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/9",
+      "state": "OPEN",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "APIs which enables users to find a collection of signed statements based on protected, or unprotected header properties\r\n\r\nA client may send any known or custom header property, or combination\r\n\r\nTODO:\r\n- Better formated example\r\n- Add paging\r\n\r\nCollection of Signed Statement Header Properties\r\nREQUEST:\r\n```\r\nGET /findstatements?issuer=my-identity.me&subject=my-product-id HTTP/1.1\r\nHost: transparency.example\r\nAccept: application/json\r\n```\r\nRESPONSE:\r\na paged collection of references to Signed Statements, and the possible payload locations\r\n```json\r\n{\r\n   \"signed-statements\": [\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/abc123\",\r\n            \"detached-hash\": \"abc123...321cba\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime\"\r\n         }\r\n      },\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/spdx+json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/def456\",\r\n            \"detached-hash\": \"def246...642fed\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime+1\"\r\n         }\r\n      }\r\n   ]\r\n}\r\n```",
+      "createdAt": "2024-05-21T23:09:37Z",
+      "updatedAt": "2024-05-21T23:09:37Z",
       "closedAt": null,
       "comments": []
     }
@@ -570,6 +586,135 @@
           "body": "",
           "createdAt": "2024-03-22T00:12:33Z",
           "updatedAt": "2024-03-22T00:12:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOLJjbks5wIZ-l",
+      "title": "Remove deprecated reference to Decentralized Identifiers",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/7",
+      "state": "OPEN",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-21T21:56:40Z",
+      "updatedAt": "2024-05-22T18:07:09Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "e53f9b56a9a3bdc93a313597196800ee019d0e7f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "steve/remove-dids",
+      "headRefOid": "13e1716dd3eebe3757798032186cb938500b96bd",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks57YJtH",
+          "commit": {
+            "abbreviatedOid": "13e1716"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-22T01:08:31Z",
+          "updatedAt": "2024-05-22T01:09:53Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Has the code in the accompanying reference implementation from community project that supports DIDs actually been removed? It may not be required in the architecture spec (totally agree with that), but I thought SCRAPI should support it as an optional choice and this does not limit this API doesn't obsolete or prohibit that option?",
+              "createdAt": "2024-05-22T01:08:31Z",
+              "updatedAt": "2024-05-22T01:09:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks57frjg",
+          "commit": {
+            "abbreviatedOid": "13e1716"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-22T17:23:15Z",
+          "updatedAt": "2024-05-22T17:23:15Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Hmm, we can do additional interesting things in SCRAPI, and I wouldn't limit SCRAPI identities to the one (x.509) referenced in the architecture. That said, are we planning to do anything additional with DIDs, as authors or contributors?\r\nThinking we can pare this down. For reference implementations, are you referring to the [scitt emulator](https://github.com/scitt-community/scitt-api-emulator) which is now out of date and we don't seem to have folks looking to update that specific codebase. Mostly due to language choice, it seems? \r\n",
+              "createdAt": "2024-05-22T17:23:15Z",
+              "updatedAt": "2024-05-22T17:23:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks57gAo_",
+          "commit": {
+            "abbreviatedOid": "13e1716"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-22T18:07:09Z",
+          "updatedAt": "2024-05-22T18:07:09Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I think we are on the same page, but that means removing DIDs as one the optional identity document components for the architecture one *could* use in SCRAPI is inaccurate no?\r\n\r\nI know what the scitt-emulator is one thing and SCRAPI should converge to it, but I would say replacing it with only x.509 is not correct.",
+              "createdAt": "2024-05-22T18:07:09Z",
+              "updatedAt": "2024-05-22T18:07:09Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOLJjbks5wIavz",
+      "title": "Spelling errors and markdown nits",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/8",
+      "state": "MERGED",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-21T21:59:47Z",
+      "updatedAt": "2024-05-22T17:20:15Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "e53f9b56a9a3bdc93a313597196800ee019d0e7f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "steve/spelling",
+      "headRefOid": "711c9ab43b5388c62dbd2817254e42f72eba2be6",
+      "closedAt": "2024-05-22T17:20:15Z",
+      "mergedAt": "2024-05-22T17:20:15Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "1f93a5bffb2f26b42a71b024ecd4b4d3e42d284f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks57XVcl",
+          "commit": {
+            "abbreviatedOid": "711c9ab"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-21T22:12:15Z",
+          "updatedAt": "2024-05-21T22:12:15Z",
           "comments": []
         }
       ]
