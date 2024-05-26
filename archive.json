@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-23T00:29:15.335367+00:00",
+  "timestamp": "2024-05-26T00:32:40.497306+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -119,6 +119,22 @@
       "body": "APIs which enables users to find a collection of signed statements based on protected, or unprotected header properties\r\n\r\nA client may send any known or custom header property, or combination\r\n\r\nTODO:\r\n- Better formated example\r\n- Add paging\r\n\r\nCollection of Signed Statement Header Properties\r\nREQUEST:\r\n```\r\nGET /findstatements?issuer=my-identity.me&subject=my-product-id HTTP/1.1\r\nHost: transparency.example\r\nAccept: application/json\r\n```\r\nRESPONSE:\r\na paged collection of references to Signed Statements, and the possible payload locations\r\n```json\r\n{\r\n   \"signed-statements\": [\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/abc123\",\r\n            \"detached-hash\": \"abc123...321cba\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime\"\r\n         }\r\n      },\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/spdx+json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/def456\",\r\n            \"detached-hash\": \"def246...642fed\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime+1\"\r\n         }\r\n      }\r\n   ]\r\n}\r\n```",
       "createdAt": "2024-05-21T23:09:37Z",
       "updatedAt": "2024-05-21T23:09:37Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOLJjbks6J6Dgd",
+      "title": "Workflow and details for signed-statement/issue",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/10",
+      "state": "OPEN",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Opening this issue to explore:\r\n\r\n- Does [/signed-statements/issue](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-issue-statement) also register the newly signed statement, or return a signed statement to then be submitted via [2.1.2. ](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.1.2)[Signed Statement Registration](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-signed-statement-registrati)?\r\n- What are the properties of a Signed Statement, when signed by the Transparency Service? \r\n  - How does the TS represent it has signed on behalf of the service-authenticated user, meaning are we deferring the signing to be a root CA, where the service is maintaining identity documents for the user? Or, is there some on-behalf of flow?",
+      "createdAt": "2024-05-23T19:41:45Z",
+      "updatedAt": "2024-05-23T19:41:45Z",
       "closedAt": null,
       "comments": []
     }
@@ -602,13 +618,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-05-21T21:56:40Z",
-      "updatedAt": "2024-05-22T18:07:09Z",
+      "updatedAt": "2024-05-24T03:56:38Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
-      "baseRefOid": "e53f9b56a9a3bdc93a313597196800ee019d0e7f",
+      "baseRefOid": "1f93a5bffb2f26b42a71b024ecd4b4d3e42d284f",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "steve/remove-dids",
-      "headRefOid": "13e1716dd3eebe3757798032186cb938500b96bd",
+      "headRefOid": "0f751308c05f82d9bba4f30912b170265215ca1d",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -674,6 +690,59 @@
               "updatedAt": "2024-05-22T18:07:09Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks57q346",
+          "commit": {
+            "abbreviatedOid": "13e1716"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-23T19:29:36Z",
+          "updatedAt": "2024-05-23T19:29:36Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "1 is better than none, and 1 is still the first in a collection :) \r\nI do think it would be interesting to explore CWT as another alternative.\r\nHowever, there's no recent activity in this group promoting or supporting DIDs, so cleaning it out clears the path to what we're focusing upon. ",
+              "createdAt": "2024-05-23T19:29:36Z",
+              "updatedAt": "2024-05-23T19:29:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks57sgkE",
+          "commit": {
+            "abbreviatedOid": "13e1716"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-23T22:54:19Z",
+          "updatedAt": "2024-05-23T22:54:19Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "OK I will try to make my point more clear here with an edit. Sorry to make an editorial change on top of that that is not 100% related, but I have trouble not reading \"to support interoperability issues\" as problems from interoperability. We want to support improved interop, and I keep reading this to sound like we support increasing issues or problems with it. I doubt that is what is intended with this change.\r\n\r\n```suggestion\r\nOptional key discovery and query interfaces are provided to support interoperability between Artifact Repositories and X509 Certificates or alternatives.\r\n```",
+              "createdAt": "2024-05-23T22:54:19Z",
+              "updatedAt": "2024-05-23T22:54:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks57t4jY",
+          "commit": {
+            "abbreviatedOid": "0f75130"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-24T03:56:38Z",
+          "updatedAt": "2024-05-24T03:56:38Z",
+          "comments": []
         }
       ]
     },
@@ -715,6 +784,59 @@
           "body": "",
           "createdAt": "2024-05-21T22:12:15Z",
           "updatedAt": "2024-05-21T22:12:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOLJjbks5wX5Ml",
+      "title": "Update API Heading to Sign-Statement",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/11",
+      "state": "OPEN",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The current heading says: \"Issue Statement\", which would refer to a document the issuer is looking to create/issue. This is simply a heading change to reflect the service will Sign the Statement on their behalf, differentiating the statement as a payload. \r\n\r\nThe heading and even the API name are another discussion as the doc, as written, isn't clear if it simply returns a signed statement, the client must re-submit under `/entries`, or the `signed-statement/issue` would also register. Based on that discussion, we may want to also rename the API.\r\n\r\n- It's clear why the API would return the signed statement, for the client to hold and attach to a receipt. \r\n- It's not clear why a user would need to re-submit a signed statement, requiring multiple round trips (see #10)",
+      "createdAt": "2024-05-23T19:42:58Z",
+      "updatedAt": "2024-05-24T08:39:43Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "1f93a5bffb2f26b42a71b024ecd4b4d3e42d284f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "steve/issue-signed-statement",
+      "headRefOid": "01a3d305d2826714a8c9d3d701fdd49f22be5b6a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks57sfpT",
+          "commit": {
+            "abbreviatedOid": "01a3d30"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-23T22:50:07Z",
+          "updatedAt": "2024-05-23T22:50:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks57wQPC",
+          "commit": {
+            "abbreviatedOid": "01a3d30"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Clearer",
+          "createdAt": "2024-05-24T08:39:43Z",
+          "updatedAt": "2024-05-24T08:39:43Z",
           "comments": []
         }
       ]
