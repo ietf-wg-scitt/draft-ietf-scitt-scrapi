@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-28T00:29:49.513542+00:00",
+  "timestamp": "2024-05-30T00:29:58.628643+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -618,7 +618,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-05-21T21:56:40Z",
-      "updatedAt": "2024-05-24T03:56:38Z",
+      "updatedAt": "2024-05-28T14:18:49Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "1f93a5bffb2f26b42a71b024ecd4b4d3e42d284f",
@@ -629,7 +629,22 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Just a note that some folks may be required to support DIDs and removing this endpoint, leaves compliance to other documents / profiles.",
+          "createdAt": "2024-05-28T14:10:13Z",
+          "updatedAt": "2024-05-28T14:10:13Z"
+        },
+        {
+          "author": "mprorock",
+          "authorAssociation": "NONE",
+          "body": "I am fine with this due to the \"or alternatives\" line",
+          "createdAt": "2024-05-28T14:18:43Z",
+          "updatedAt": "2024-05-28T14:18:43Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLJjbks57YJtH",
@@ -743,6 +758,52 @@
           "createdAt": "2024-05-24T03:56:38Z",
           "updatedAt": "2024-05-24T03:56:38Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks58JqY2",
+          "commit": {
+            "abbreviatedOid": "0f75130"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-28T14:09:11Z",
+          "updatedAt": "2024-05-28T14:09:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks58J0Fp",
+          "commit": {
+            "abbreviatedOid": "0f75130"
+          },
+          "author": "mprorock",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-28T14:18:32Z",
+          "updatedAt": "2024-05-28T14:18:33Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nOptional key discovery and query interfaces are provided to support interoperability between Artifact Repositories and X509 Certificates or alternative methods commonly used to support public key discovery.\r\n```",
+              "createdAt": "2024-05-28T14:18:32Z",
+              "updatedAt": "2024-05-28T14:18:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks58J0Xy",
+          "commit": {
+            "abbreviatedOid": "0f75130"
+          },
+          "author": "mprorock",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-28T14:18:49Z",
+          "updatedAt": "2024-05-28T14:18:49Z",
+          "comments": []
         }
       ]
     },
@@ -800,7 +861,7 @@
       "labels": [],
       "body": "The current heading says: \"Issue Statement\", which would refer to a document the issuer is looking to create/issue. This is simply a heading change to reflect the service will Sign the Statement on their behalf, differentiating the statement as a payload. \r\n\r\nThe heading and even the API name are another discussion as the doc, as written, isn't clear if it simply returns a signed statement, the client must re-submit under `/entries`, or the `signed-statement/issue` would also register. Based on that discussion, we may want to also rename the API.\r\n\r\n- It's clear why the API would return the signed statement, for the client to hold and attach to a receipt. \r\n- It's not clear why a user would need to re-submit a signed statement, requiring multiple round trips (see #10)",
       "createdAt": "2024-05-23T19:42:58Z",
-      "updatedAt": "2024-05-24T08:39:43Z",
+      "updatedAt": "2024-05-28T14:08:17Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "1f93a5bffb2f26b42a71b024ecd4b4d3e42d284f",
@@ -837,6 +898,19 @@
           "body": "Clearer",
           "createdAt": "2024-05-24T08:39:43Z",
           "updatedAt": "2024-05-24T08:39:43Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks58JpxF",
+          "commit": {
+            "abbreviatedOid": "01a3d30"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-28T14:08:17Z",
+          "updatedAt": "2024-05-28T14:08:17Z",
           "comments": []
         }
       ]
