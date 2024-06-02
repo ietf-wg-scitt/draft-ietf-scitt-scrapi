@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-30T00:29:58.628643+00:00",
+  "timestamp": "2024-06-02T00:32:49.267399+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -118,9 +118,24 @@
       "labels": [],
       "body": "APIs which enables users to find a collection of signed statements based on protected, or unprotected header properties\r\n\r\nA client may send any known or custom header property, or combination\r\n\r\nTODO:\r\n- Better formated example\r\n- Add paging\r\n\r\nCollection of Signed Statement Header Properties\r\nREQUEST:\r\n```\r\nGET /findstatements?issuer=my-identity.me&subject=my-product-id HTTP/1.1\r\nHost: transparency.example\r\nAccept: application/json\r\n```\r\nRESPONSE:\r\na paged collection of references to Signed Statements, and the possible payload locations\r\n```json\r\n{\r\n   \"signed-statements\": [\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/abc123\",\r\n            \"detached-hash\": \"abc123...321cba\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime\"\r\n         }\r\n      },\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/spdx+json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/def456\",\r\n            \"detached-hash\": \"def246...642fed\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime+1\"\r\n         }\r\n      }\r\n   ]\r\n}\r\n```",
       "createdAt": "2024-05-21T23:09:37Z",
-      "updatedAt": "2024-05-21T23:09:37Z",
+      "updatedAt": "2024-06-01T21:54:48Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "howethomas",
+          "authorAssociation": "NONE",
+          "body": "So, for the integration with vCon example, subject=\"my-product-id\" could simply be the vcon uuid?  So, an audit trail of a particular vCon could be supplied by this API endpoint? ",
+          "createdAt": "2024-06-01T03:00:02Z",
+          "updatedAt": "2024-06-01T03:00:02Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yup, exactly. Any issuer that wants to make a statement about the vCon would use the identifie, enabling filtering on statements for the vCon, from different issuers, and even different content-types ",
+          "createdAt": "2024-06-01T21:54:46Z",
+          "updatedAt": "2024-06-01T21:54:46Z"
+        }
+      ]
     },
     {
       "number": 10,
