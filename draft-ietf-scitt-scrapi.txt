@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 23 November 2024                                      Transmute
+Expires: 13 December 2024                                      Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                             22 May 2024
+                                                            11 June 2024
 
 
                           SCITT Reference APIs
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 November 2024.
+   This Internet-Draft will expire on 13 December 2024.
 
 Copyright Notice
 
@@ -78,7 +78,7 @@ Table of Contents
        2.1.1.  Transparency Configuration
        2.1.2.  Signed Statement Registration
      2.2.  Optional Endpoints
-       2.2.1.  Issue Statement
+       2.2.1.  Issue Signed Statement
        2.2.2.  Resolve Statement
        2.2.3.  Resolve Signed Statement
        2.2.4.  Resolve Receipt
@@ -406,7 +406,7 @@ Table of Contents
 
    The following HTTP endpoints are optional to implement.
 
-2.2.1.  Issue Statement
+2.2.1.  Issue Signed Statement
 
    Authentication MUST be implemented for this endpoint.
 
