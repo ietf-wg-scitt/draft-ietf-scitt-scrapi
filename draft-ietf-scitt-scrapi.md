@@ -345,7 +345,7 @@ TODO: other error codes
 
 The following HTTP endpoints are optional to implement.
 
-### Issue Statement
+### Issue Signed Statement
 
 Authentication MUST be implemented for this endpoint.
 
