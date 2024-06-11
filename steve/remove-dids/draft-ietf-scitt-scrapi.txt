@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 25 November 2024                                      Transmute
+Expires: 13 December 2024                                      Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                             24 May 2024
+                                                            11 June 2024
 
 
                           SCITT Reference APIs
@@ -20,7 +20,8 @@ Abstract
    requirements of the SCITT Architecture
    [I-D.draft-ietf-scitt-architecture].  Optional key discovery and
    query interfaces are provided to support interoperability between
-   Artifact Repositories and X509 Certificates or alternatives.
+   Artifact Repositories and X509 Certificates or alternative methods
+   commonly used to support public key discovery.
 
 About This Document
 
@@ -52,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 November 2024.
+   This Internet-Draft will expire on 13 December 2024.
 
 Copyright Notice
 
