@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-11T00:30:36.513145+00:00",
+  "timestamp": "2024-06-13T00:30:31.681033+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "labels": [],
       "body": "Would be great to be able to return an object in addition to or instead of a string for errors. Or allow for other properties which would be fully content-typeable to a custom response object within the error response on claim insert failure.\r\n\r\nLack of this prevents an automated conversation to resolve issues with claim insertion. Human readable strings are great, but ideally a human doesn't even get involved and machines can auto remediate issues due to detailed failure reasoning. This way the a human readable string might only be needed after a failed machine driven insert conversation (more than one call response).\r\n\r\n- References\r\n  - https://github.com/ietf-scitt/draft-birkholz-scitt-scrapi/issues/4\r\n    - https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/62",
       "createdAt": "2024-03-11T01:34:22Z",
-      "updatedAt": "2024-03-15T23:38:21Z",
+      "updatedAt": "2024-06-11T14:30:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -71,6 +71,13 @@
           "body": "I do agree but it seems per the spec we are following [RFC7807](https://www.rfc-editor.org/rfc/rfc7807#page-7) and they have this to say about our desired change in this request.\r\n\r\n   Consumers SHOULD NOT parse the \"detail\" member for information;\r\n   extensions are more suitable and less error-prone ways to obtain such\r\n   information.\r\n\r\nI am looking more into these mysterious \"extensions\" mentioned in this spec. ",
           "createdAt": "2024-03-15T23:38:20Z",
           "updatedAt": "2024-03-15T23:38:20Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Editors call discussion: All errors should be returned with json object.\r\nReference the review: https://datatracker.ietf.org/doc/review-ietf-scitt-scrapi-01-httpdir-early-miller-2024-03-10/\r\nReady for PR",
+          "createdAt": "2024-06-11T14:30:06Z",
+          "updatedAt": "2024-06-11T14:30:06Z"
         }
       ]
     },
@@ -102,9 +109,17 @@
       "labels": [],
       "body": "I am not sure this is within the scope of the formal working group or better as an \"outside\" community effort, but with the relocation of this draft into the ietf-wg-scitt org and its upload to datatracker, have we considered having a test suite with sample artifacts, signed statements, and transparent statements that conform to the API spec here as a test harness of sorts? I have seen *some* IETF and other standard bodies groups making such test suites. I am opening this issue here to gauge interest and determine if making it \"inline in this repo\" is within scope or not.",
       "createdAt": "2024-03-15T23:42:41Z",
-      "updatedAt": "2024-03-15T23:42:41Z",
+      "updatedAt": "2024-06-11T14:32:47Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Good to have a test suite, but we haven't been maintaining the emulator. \r\nKeeping for further discussion.",
+          "createdAt": "2024-06-11T14:32:46Z",
+          "updatedAt": "2024-06-11T14:32:46Z"
+        }
+      ]
     },
     {
       "number": 9,
@@ -626,21 +641,21 @@
       "id": "PR_kwDOLJjbks5wIZ-l",
       "title": "Remove deprecated reference to Decentralized Identifiers",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-05-21T21:56:40Z",
-      "updatedAt": "2024-05-28T14:18:49Z",
+      "updatedAt": "2024-06-11T14:22:51Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "1f93a5bffb2f26b42a71b024ecd4b4d3e42d284f",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "steve/remove-dids",
-      "headRefOid": "0f751308c05f82d9bba4f30912b170265215ca1d",
-      "closedAt": null,
+      "headRefOid": "2b64f0f17e1c338b97ee2cb92dced28fcc9240ae",
+      "closedAt": "2024-06-11T14:22:50Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -658,6 +673,13 @@
           "body": "I am fine with this due to the \"or alternatives\" line",
           "createdAt": "2024-05-28T14:18:43Z",
           "updatedAt": "2024-05-28T14:18:43Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Based on the editors call, we're reluctant to signal a discouraged use of DIDs that are currently in use. \r\nClosing to discuss in a future date.",
+          "createdAt": "2024-06-11T14:22:50Z",
+          "updatedAt": "2024-06-11T14:22:50Z"
         }
       ],
       "reviews": [
@@ -869,24 +891,26 @@
       "id": "PR_kwDOLJjbks5wX5Ml",
       "title": "Update API Heading to Sign-Statement",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/11",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The current heading says: \"Issue Statement\", which would refer to a document the issuer is looking to create/issue. This is simply a heading change to reflect the service will Sign the Statement on their behalf, differentiating the statement as a payload. \r\n\r\nThe heading and even the API name are another discussion as the doc, as written, isn't clear if it simply returns a signed statement, the client must re-submit under `/entries`, or the `signed-statement/issue` would also register. Based on that discussion, we may want to also rename the API.\r\n\r\n- It's clear why the API would return the signed statement, for the client to hold and attach to a receipt. \r\n- It's not clear why a user would need to re-submit a signed statement, requiring multiple round trips (see #10)",
       "createdAt": "2024-05-23T19:42:58Z",
-      "updatedAt": "2024-05-28T14:08:17Z",
+      "updatedAt": "2024-06-11T14:23:41Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "1f93a5bffb2f26b42a71b024ecd4b4d3e42d284f",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "steve/issue-signed-statement",
       "headRefOid": "01a3d305d2826714a8c9d3d701fdd49f22be5b6a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-06-11T14:23:41Z",
+      "mergedAt": "2024-06-11T14:23:41Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "e2f23a9ce8621f3a4392608c2f97c85c2a32fcdf"
+      },
       "comments": [],
       "reviews": [
         {
