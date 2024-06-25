@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-23T00:33:29.592213+00:00",
+  "timestamp": "2024-06-25T00:30:22.840000+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -165,6 +165,54 @@
       "body": "Opening this issue to explore:\r\n\r\n- Does [/signed-statements/issue](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-issue-statement) also register the newly signed statement, or return a signed statement to then be submitted via [2.1.2. ](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.1.2)[Signed Statement Registration](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-signed-statement-registrati)?\r\n- What are the properties of a Signed Statement, when signed by the Transparency Service? \r\n  - How does the TS represent it has signed on behalf of the service-authenticated user, meaning are we deferring the signing to be a root CA, where the service is maintaining identity documents for the user? Or, is there some on-behalf of flow?",
       "createdAt": "2024-05-23T19:41:45Z",
       "updatedAt": "2024-05-23T19:41:45Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOLJjbks6NKviq",
+      "title": "async registration policy checking apears disallowed by 2.1.2",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/12",
+      "state": "OPEN",
+      "author": "robinbryce",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In [2.1.2. ](https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#section-2.1.2)[Signed Statement Registration](https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-signed-statement-registrati)\r\n\r\nWe have \"The Registration Policy for the Transparency Service MUST be applied to the payload bytes, before any additional processing is performed\"\r\n\r\nThis appears to rule out implementations which do async processing of registration statements.\r\n\r\nI understood that the combined effect, and intent, of\r\n\r\nhttps://www.ietf.org/archive/id/draft-ietf-scitt-architecture-06.html#name-registration 5. & 7. With the subsequent text\r\n\r\n\"A Transparency Service MUST ensure that a Signed Statement is registered before releasing its Receipt.\"\r\n\r\nWas to enable the implementation to defer application of registration policies until receipt issuance.\r\n\r\nI think, if that is consistent with the intent of the authors intent, a specific requirement along the lines of \"Registration policies MUST be applied before issuing a Receipt\" would be much clearer\r\n",
+      "createdAt": "2024-06-23T07:38:29Z",
+      "updatedAt": "2024-06-23T07:38:29Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 13,
+      "id": "I_kwDOLJjbks6NKxkq",
+      "title": "2.1.2.2 Status 202 requires the resolve receipts endpoint to do double duty",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/13",
+      "state": "OPEN",
+      "author": "robinbryce",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-status-202-registration-is-\r\n\r\n\"If 202 is returned, then clients should wait until Registration succeeded or failed by polling the receipt endpoint using the receipt identifier returned in the response.\"\r\n\r\nI understand that to mean \"poll the optional interface defined by 2.2.4 Resolve Receipt\". \r\n\r\nThere are some  issues with a request model that mixes \"poll for operation a (OP A) completion, with do operation b (OP B)\"\r\n\r\n1. It forces complexity and mixed state handling on the endpoint implementation. It has to both determine if OP A was extant and is now complete, then it has to follow on and do dependent OP B. Mixed state handling can require that  single instance has access to two differently provisioned and permissioned data stores.\r\n2. It forces the same authorization & authentication model on both OP A and OP B. (I will raise a seperate issue for another concerne regading the authentication SHOULD for Resolve Receipt)\r\n3. Implementors will likely want different rate limits for those actions. Checking if an extant operation is complete is light weight and can be designed for \"polling clients\". Producing a receipts, potentially finalising registration, could be a much heavier load. I would want the ability to seperately rate limit that request.\r\n\r\n\r\nI very much prefered the previous draft's approach of having a distinct endpoint on which to check for the completion of async registration",
+      "createdAt": "2024-06-23T07:55:30Z",
+      "updatedAt": "2024-06-23T07:55:30Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOLJjbks6NKyTp",
+      "title": "2.2.4 Resolve Receipt encourages authentication",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/14",
+      "state": "OPEN",
+      "author": "robinbryce",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-resolve-receipt\r\n\r\nI don't understand *why* this is desired:\r\n\r\n\"Authentication SHOULD be implemented for this endpoint\"\r\n\r\nIf the material in a receipt is, or can be, considered private to the issuer, then this should be a MUST.\r\n\r\nInstinctively I have always thought of receipts as essentially public documents. Whilst they are revealing, they are designed to be passed on to other parties.\r\n\r\nIf the intent is to permit implementations to provide for both public and private receipts, I think that model needs to be spelled out explicitly.\r\n\r\nIt would seem reasonable to me for Resolve Receipt to provide \"the defined public aspects of a receipt\" when the request was not authenticated. And the possibly sensitive parts otherwise\r\n\r\nIn practice, there are definitely usecases for obtaining a receipt for a statement issued by a different party. Its not clear at all to me how or if the authentication requirement here interacts with that.",
+      "createdAt": "2024-06-23T08:04:12Z",
+      "updatedAt": "2024-06-23T08:04:12Z",
       "closedAt": null,
       "comments": []
     }
