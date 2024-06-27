@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-25T00:30:22.840000+00:00",
+  "timestamp": "2024-06-27T00:30:49.439984+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -58,11 +58,13 @@
       "state": "OPEN",
       "author": "pdxjohnny",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "aj-stein-nist"
+      ],
       "labels": [],
       "body": "Would be great to be able to return an object in addition to or instead of a string for errors. Or allow for other properties which would be fully content-typeable to a custom response object within the error response on claim insert failure.\r\n\r\nLack of this prevents an automated conversation to resolve issues with claim insertion. Human readable strings are great, but ideally a human doesn't even get involved and machines can auto remediate issues due to detailed failure reasoning. This way the a human readable string might only be needed after a failed machine driven insert conversation (more than one call response).\r\n\r\n- References\r\n  - https://github.com/ietf-scitt/draft-birkholz-scitt-scrapi/issues/4\r\n    - https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/62",
       "createdAt": "2024-03-11T01:34:22Z",
-      "updatedAt": "2024-06-11T14:30:07Z",
+      "updatedAt": "2024-06-25T14:38:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -78,6 +80,13 @@
           "body": "Editors call discussion: All errors should be returned with json object.\r\nReference the review: https://datatracker.ietf.org/doc/review-ietf-scitt-scrapi-01-httpdir-early-miller-2024-03-10/\r\nReady for PR",
           "createdAt": "2024-06-11T14:30:06Z",
           "updatedAt": "2024-06-11T14:30:06Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "PR incoming for application/problem+json response from @aj-stein-nist ",
+          "createdAt": "2024-06-25T14:38:38Z",
+          "updatedAt": "2024-06-25T14:38:38Z"
         }
       ]
     },
@@ -102,15 +111,15 @@
       "id": "I_kwDOLJjbks6CguBZ",
       "title": "Test suite",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "aj-stein-nist",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I am not sure this is within the scope of the formal working group or better as an \"outside\" community effort, but with the relocation of this draft into the ietf-wg-scitt org and its upload to datatracker, have we considered having a test suite with sample artifacts, signed statements, and transparent statements that conform to the API spec here as a test harness of sorts? I have seen *some* IETF and other standard bodies groups making such test suites. I am opening this issue here to gauge interest and determine if making it \"inline in this repo\" is within scope or not.",
       "createdAt": "2024-03-15T23:42:41Z",
-      "updatedAt": "2024-06-11T14:32:47Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-25T14:51:52Z",
+      "closedAt": "2024-06-25T14:51:51Z",
       "comments": [
         {
           "author": "SteveLasker",
@@ -118,6 +127,13 @@
           "body": "Good to have a test suite, but we haven't been maintaining the emulator. \r\nKeeping for further discussion.",
           "createdAt": "2024-06-11T14:32:46Z",
           "updatedAt": "2024-06-11T14:32:46Z"
+        },
+        {
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Per discussion on an editors' call today, there was a good discussion around the scope of work around the reference implementation based on the SCRAPI specification. That would require layering on top of the specification, picking optional implementation choices for authentication, identities, and other decisions outside the scope of the architecture as well. Also picking statements about artifact and dealing with the opaqueness of it in a way is further beyond the scope of the IETF WG.\r\n\r\nOthers on the call would welcome such an effort as a community work item, but not to be maintained in this repo or GitHub organization. I will volunteer to pursue this work in the [SCITT Community](https://github.com/scitt-community/). I am closing this issue for now.",
+          "createdAt": "2024-06-25T14:51:52Z",
+          "updatedAt": "2024-06-25T14:51:52Z"
         }
       ]
     },
