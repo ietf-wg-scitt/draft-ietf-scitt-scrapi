@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-27T00:30:49.439984+00:00",
+  "timestamp": "2024-06-30T00:34:25.610130+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -64,7 +64,7 @@
       "labels": [],
       "body": "Would be great to be able to return an object in addition to or instead of a string for errors. Or allow for other properties which would be fully content-typeable to a custom response object within the error response on claim insert failure.\r\n\r\nLack of this prevents an automated conversation to resolve issues with claim insertion. Human readable strings are great, but ideally a human doesn't even get involved and machines can auto remediate issues due to detailed failure reasoning. This way the a human readable string might only be needed after a failed machine driven insert conversation (more than one call response).\r\n\r\n- References\r\n  - https://github.com/ietf-scitt/draft-birkholz-scitt-scrapi/issues/4\r\n    - https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/62",
       "createdAt": "2024-03-11T01:34:22Z",
-      "updatedAt": "2024-06-25T14:38:40Z",
+      "updatedAt": "2024-06-28T04:19:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -87,6 +87,13 @@
           "body": "PR incoming for application/problem+json response from @aj-stein-nist ",
           "createdAt": "2024-06-25T14:38:38Z",
           "updatedAt": "2024-06-25T14:38:38Z"
+        },
+        {
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I am going to work on the PR. I didn't realize the content type is properly set per the commits above in [`e2f23a9`](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/e2f23a9ce8621f3a4392608c2f97c85c2a32fcdf/draft-ietf-scitt-scrapi.md?plain=1#L118). So I will PR the follow on extension bit for custom fields in the PR. If there is no consensus, we can stick with `\"detail\": \"...\"` with the appropriate content type and close it out when rejecting the PR.",
+          "createdAt": "2024-06-28T04:19:19Z",
+          "updatedAt": "2024-06-28T04:19:19Z"
         }
       ]
     },
