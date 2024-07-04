@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-02T00:31:03.763581+00:00",
+  "timestamp": "2024-07-04T00:30:48.511114+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -64,7 +64,7 @@
       "labels": [],
       "body": "Would be great to be able to return an object in addition to or instead of a string for errors. Or allow for other properties which would be fully content-typeable to a custom response object within the error response on claim insert failure.\r\n\r\nLack of this prevents an automated conversation to resolve issues with claim insertion. Human readable strings are great, but ideally a human doesn't even get involved and machines can auto remediate issues due to detailed failure reasoning. This way the a human readable string might only be needed after a failed machine driven insert conversation (more than one call response).\r\n\r\n- References\r\n  - https://github.com/ietf-scitt/draft-birkholz-scitt-scrapi/issues/4\r\n    - https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/62",
       "createdAt": "2024-03-11T01:34:22Z",
-      "updatedAt": "2024-06-28T04:19:20Z",
+      "updatedAt": "2024-07-02T14:40:17Z",
       "closedAt": null,
       "comments": [
         {
@@ -94,6 +94,20 @@
           "body": "I am going to work on the PR. I didn't realize the content type is properly set per the commits above in [`e2f23a9`](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/e2f23a9ce8621f3a4392608c2f97c85c2a32fcdf/draft-ietf-scitt-scrapi.md?plain=1#L118). So I will PR the follow on extension bit for custom fields in the PR. If there is no consensus, we can stick with `\"detail\": \"...\"` with the appropriate content type and close it out when rejecting the PR.",
           "createdAt": "2024-06-28T04:19:19Z",
           "updatedAt": "2024-06-28T04:19:19Z"
+        },
+        {
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Per discussion on the editor's call, no one can see an immediate need for use of extension fields per the cited RFC for specific, structured data for error message for debugging or reporting.\r\n\r\nI am closing for now. We can revisit later as the need comes up. The content types for errors are already used today.",
+          "createdAt": "2024-07-02T14:39:16Z",
+          "updatedAt": "2024-07-02T14:39:16Z"
+        },
+        {
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@SteveLasker or other authors that own this repo, I cannot close this issue because I did not create this issues, apologies. I need one of you to close the issue for me.",
+          "createdAt": "2024-07-02T14:40:15Z",
+          "updatedAt": "2024-07-02T14:40:15Z"
         }
       ]
     },
@@ -102,16 +116,24 @@
       "id": "I_kwDOLJjbks6CFgNv",
       "title": "Add GS1 examples",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "see https://www.rfc-editor.org/rfc/rfc5134.html",
       "createdAt": "2024-03-12T19:06:56Z",
-      "updatedAt": "2024-03-12T19:06:56Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-07-02T14:34:51Z",
+      "closedAt": "2024-07-02T14:34:51Z",
+      "comments": [
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing per discussion w/@OR13",
+          "createdAt": "2024-07-02T14:34:51Z",
+          "updatedAt": "2024-07-02T14:34:51Z"
+        }
+      ]
     },
     {
       "number": 4,
@@ -156,7 +178,7 @@
       "labels": [],
       "body": "APIs which enables users to find a collection of signed statements based on protected, or unprotected header properties\r\n\r\nA client may send any known or custom header property, or combination\r\n\r\nTODO:\r\n- Better formated example\r\n- Add paging\r\n\r\nCollection of Signed Statement Header Properties\r\nREQUEST:\r\n```\r\nGET /findstatements?issuer=my-identity.me&subject=my-product-id HTTP/1.1\r\nHost: transparency.example\r\nAccept: application/json\r\n```\r\nRESPONSE:\r\na paged collection of references to Signed Statements, and the possible payload locations\r\n```json\r\n{\r\n   \"signed-statements\": [\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/abc123\",\r\n            \"detached-hash\": \"abc123...321cba\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime\"\r\n         }\r\n      },\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/spdx+json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/def456\",\r\n            \"detached-hash\": \"def246...642fed\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime+1\"\r\n         }\r\n      }\r\n   ]\r\n}\r\n```",
       "createdAt": "2024-05-21T23:09:37Z",
-      "updatedAt": "2024-06-01T21:54:48Z",
+      "updatedAt": "2024-07-02T15:12:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -172,6 +194,20 @@
           "body": "Yup, exactly. Any issuer that wants to make a statement about the vCon would use the identifie, enabling filtering on statements for the vCon, from different issuers, and even different content-types ",
           "createdAt": "2024-06-01T21:54:46Z",
           "updatedAt": "2024-06-01T21:54:46Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Lets look at COAP / CORE / OSCORE / ACE for examples of good CBOR APIs, and copy them.",
+          "createdAt": "2024-07-02T15:11:29Z",
+          "updatedAt": "2024-07-02T15:11:29Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "For some inspiration: https://datatracker.ietf.org/doc/html/draft-ietf-ace-revoked-token-notification-08#section-3.2.1",
+          "createdAt": "2024-07-02T15:12:41Z",
+          "updatedAt": "2024-07-02T15:12:41Z"
         }
       ]
     },
