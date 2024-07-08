@@ -386,12 +386,12 @@ Table of Contents
    "Signed Statement payload must be detached (must not be present)"
    }
 
-  {
-    "type": "urn:ietf:params:scitt:error\
-  :signed-statement:rejected-by-registration-policy",
-    "detail": \
-  "Signed Statement was not accepted by the current Registration Policy"
-  }
+   {
+     "type": "urn:ietf:params:scitt:error\
+   :signed-statement:rejected-by-registration-policy",
+     "detail": \
+   "Signed Statement not accepted by the current Registration Policy"
+   }
 
    {
      "type": "urn:ietf:params:scitt:error\
@@ -996,9 +996,9 @@ Table of Contents
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-06, 4 March
+              Internet-Draft, draft-ietf-scitt-architecture-07, 8 July
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-06>.
+              scitt-architecture-07>.
 
    [IANA.params]
               IANA, "Uniform Resource Name (URN) Namespace for IETF
