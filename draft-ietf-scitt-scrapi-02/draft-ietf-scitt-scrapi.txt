@@ -744,12 +744,12 @@ Table of Contents
 
    This document describes the interoperable API for client calls to,
    and implementations of, a Transparency Service as specified in
-   [I-D.draft-ietf-scitt-architecture].  As such the security
-   considerations in this section are concerned only with security
-   considerations that are relevant at that implementation layer.  All
-   questions of security of the related COSE formats, algorithm choices,
-   cryptographic envelopes,verifiable data structures and the like are
-   handled elsewhere and out of scope of this document.
+   [SCITT-ARCH].  As such the security considerations in this section
+   are concerned only with security considerations that are relevant at
+   that implementation layer.  All questions of security of the related
+   COSE formats, algorithm choices, cryptographic envelopes, verifiable
+   data structures and the like are handled elsewhere and out of scope
+   of this document.
 
 4.2.  Applicable Environment
 
@@ -761,22 +761,18 @@ Table of Contents
 
 4.3.  User-host authentication
 
-   [I-D.draft-ietf-scitt-architecture] defines 2 distinct roles that
-   require authentication: Issuers who sign Statements, and clients that
-   submit API calls on behalf of Issuers.  While Issuer authentication
-   and signing of Statements is very important for the trustworthiness
-   of systems implementing the SCITT building blocks, it is out of scope
-   of this document.  This document is only concerned with
-   authentication of API clients.
+   [SCITT-ARCH] defines 2 distinct roles that require authentication:
+   Issuers who sign Statements, and clients that submit API calls on
+   behalf of Issuers.  While Issuer authentication and signing of
+   Statements is very important for the trustworthiness of systems
+   implementing the SCITT building blocks, it is out of scope of this
+   document.  This document is only concerned with authentication of API
+   clients.
 
    For those endpoints that require client authentication, Transparency
-   Services MUST support at least one of the following options:
-
-   *  HTTP Authorization header with a bearer JWT
-
-   *  domain-bound API key
-
-   *  TLS client authentication
+   Services MUST support at least one of the following options: - HTTP
+   Authorization header with a bearer JWT - domain-bound API key - TLS
+   client authentication
 
    Transparency Services MUST provide a configuration surface that
    allows Issuers to specify which authorized clients can submit
@@ -792,16 +788,12 @@ Table of Contents
 
    The most serious threats to implementations on Transparency Services
    are ones that would cause the failure of their main promises, to wit:
-
-   *  Threats to strong identification, for example representing the
-      Statements from one issuer as those of another
-
-   *  Threats to payload integrity, for example changing the contents of
-      a Signed Statement before making it transparent
-
-   *  Threats to non-equivocation, for example attacks that would enable
-      the presentation or verification of divergent proofs for the same
-      Statement payload
+   - Threats to strong identification, for example representing the
+   Statements from one issuer as those of another - Threats to payload
+   integrity, for example changing the contents of a Signed Statement
+   before making it transparent - Threats to non-equivocation, for
+   example attacks that would enable the presentation or verification of
+   divergent proofs for the same Statement payload
 
 4.4.1.1.  Denial of service attacks
 
@@ -854,12 +846,9 @@ Table of Contents
    Issuer signature on the Signed Statement, the Issue Statement
    endpoint presents an opportunity for insertion of messages and
    misrepresentation of Issuer intent that could mislead later
-   Verifiers.  There are 2 most likely avenues to this attack:
-
-   *  Stolen client endpoint authentication credentials
-
-   *  Stolen or misused Issuer keys held in the Transparency Service on
-      behalf of clients
+   Verifiers.  There are 2 most likely avenues to this attack: - Stolen
+   client endpoint authentication credentials - Stolen or misused Issuer
+   keys held in the Transparency Service on behalf of clients
 
    Clients relying on the Issue Statement endpoint SHOULD take steps to
    ensure their endpoint authentication credentials are securely stored
@@ -996,9 +985,9 @@ Table of Contents
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-06, 4 March
+              Internet-Draft, draft-ietf-scitt-architecture-07, 8 July
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-06>.
+              scitt-architecture-07>.
 
    [IANA.params]
               IANA, "Uniform Resource Name (URN) Namespace for IETF
@@ -1054,9 +1043,9 @@ Table of Contents
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-03, 4 March
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-04, 8 July
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-03>.
+              oauth-sd-jwt-vc-04>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
