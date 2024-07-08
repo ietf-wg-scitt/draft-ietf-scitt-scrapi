@@ -64,7 +64,7 @@ informative:
 
 --- abstract
 
-This document describes a REST API that supports the normative requirements of the SCITT Architecture {{-SCITT-ARCH}}.
+This document describes a REST API that supports the normative requirements of the SCITT Architecture.
 Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Repositories.
 
 --- middle
