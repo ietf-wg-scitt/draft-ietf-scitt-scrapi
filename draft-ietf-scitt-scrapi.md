@@ -323,7 +323,7 @@ One of the following errors:
   "type": "urn:ietf:params:scitt:error\
 :signed-statement:rejected-by-registration-policy",
   "detail": \
-"Signed Statement was not accepted by the current Registration Policy"
+"Signed Statement not accepted by the current Registration Policy"
 }
 ~~~
 
