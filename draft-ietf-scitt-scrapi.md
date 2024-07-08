@@ -46,21 +46,20 @@ author:
   country: United States
 
 normative:
-  RFC9052:
-  RFC7807:
-  RFC7231:
-  RFC3553:
-  RFC5785:
-  RFC8792:
-
-  IANA.params:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
+  RFC3553:
+  RFC8615:
+  RFC9052:
+  RFC9110:
+  RFC9457:
+  IANA.params:
 
 informative:
   I-D.draft-demarco-oauth-nonce-endpoint: Nonce-Endpoint
   I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
   RFC2046:
   RFC6838:
+  RFC8792:
 
 --- abstract
 
@@ -105,7 +104,7 @@ NOTE: '\' line wrapping per {{RFC8792}} in HTTP examples.
 
 All messages are sent as HTTP GET or POST requests.
 
-If the Transparency Service cannot process a client's request, it MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a JSON problem details object ({{RFC7807}}) containing:
+If the Transparency Service cannot process a client's request, it MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a JSON problem details object ({{RFC9457}}) containing:
 
 - type: A URI reference identifying the problem.
 To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".
@@ -129,7 +128,7 @@ The one exception is the "malformed" error type, which indicates that the Transp
 - Error code: `malformed` (The request could not be parsed).
 
 Clients SHOULD treat 500 and 503 HTTP status code responses as transient failures and MAY retry the same request without modification at a later date.
-Note that in the case of a 503 response, the Transparency Service MAY include a `Retry-After` header field per {{RFC7231}} in order to request a minimum time for the client to wait before retrying the request.
+Note that in the case of a 503 response, the Transparency Service MAY include a `Retry-After` header field per {{RFC9110}} in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.
 
 ## Mandatory
@@ -801,7 +800,7 @@ IANA is requested to register the URN sub-namespace `urn:ietf:params:scitt` in t
 
 ## Well-Known URI for Issuers
 
-The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC5785}}):
+The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
 
 URI suffix: issuer
 Change controller: IETF
@@ -810,7 +809,7 @@ Related information: N/A
 
 ## Well-Known URI for Transparency Configuration
 
-The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC5785}}):
+The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
 
 URI suffix: transparency-configuration
 Change controller: IETF
