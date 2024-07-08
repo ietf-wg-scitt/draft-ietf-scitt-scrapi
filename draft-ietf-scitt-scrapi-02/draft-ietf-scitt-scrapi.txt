@@ -17,8 +17,7 @@ Expires: 9 January 2025                                        Transmute
 Abstract
 
    This document describes a REST API that supports the normative
-   requirements of the SCITT Architecture
-   [I-D.draft-ietf-scitt-architecture].  Optional key discovery and
+   requirements of the SCITT Architecture.  Optional key discovery and
    query interfaces are provided to support interoperability issues with
    Decentralized Identifiers, X509 Certificates and Artifact
    Repositories.
@@ -163,7 +162,7 @@ Table of Contents
 
    If the Transparency Service cannot process a client's request, it
    MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a
-   JSON problem details object ([RFC7807]) containing:
+   JSON problem details object ([RFC9457]) containing:
 
    *  type: A URI reference identifying the problem.  To facilitate
       automated response to errors, this document defines a set of
@@ -199,7 +198,7 @@ Table of Contents
    transient failures and MAY retry the same request without
    modification at a later date.  Note that in the case of a 503
    response, the Transparency Service MAY include a Retry-After header
-   field per [RFC7231] in order to request a minimum time for the client
+   field per [RFC9110] in order to request a minimum time for the client
    to wait before retrying the request.  In the absence of this header
    field, this document does not specify a minimum.
 
@@ -386,12 +385,12 @@ Table of Contents
    "Signed Statement payload must be detached (must not be present)"
    }
 
-  {
-    "type": "urn:ietf:params:scitt:error\
-  :signed-statement:rejected-by-registration-policy",
-    "detail": \
-  "Signed Statement was not accepted by the current Registration Policy"
-  }
+   {
+     "type": "urn:ietf:params:scitt:error\
+   :signed-statement:rejected-by-registration-policy",
+     "detail": \
+   "Signed Statement not accepted by the current Registration Policy"
+   }
 
    {
      "type": "urn:ietf:params:scitt:error\
@@ -744,12 +743,12 @@ Table of Contents
 
    This document describes the interoperable API for client calls to,
    and implementations of, a Transparency Service as specified in
-   [SCITT-ARCH].  As such the security considerations in this section
-   are concerned only with security considerations that are relevant at
-   that implementation layer.  All questions of security of the related
-   COSE formats, algorithm choices, cryptographic envelopes, verifiable
-   data structures and the like are handled elsewhere and out of scope
-   of this document.
+   [I-D.draft-ietf-scitt-architecture].  As such the security
+   considerations in this section are concerned only with security
+   considerations that are relevant at that implementation layer.  All
+   questions of security of the related COSE formats, algorithm choices,
+   cryptographic envelopes,verifiable data structures and the like are
+   handled elsewhere and out of scope of this document.
 
 4.2.  Applicable Environment
 
@@ -761,18 +760,22 @@ Table of Contents
 
 4.3.  User-host authentication
 
-   [SCITT-ARCH] defines 2 distinct roles that require authentication:
-   Issuers who sign Statements, and clients that submit API calls on
-   behalf of Issuers.  While Issuer authentication and signing of
-   Statements is very important for the trustworthiness of systems
-   implementing the SCITT building blocks, it is out of scope of this
-   document.  This document is only concerned with authentication of API
-   clients.
+   [I-D.draft-ietf-scitt-architecture] defines 2 distinct roles that
+   require authentication: Issuers who sign Statements, and clients that
+   submit API calls on behalf of Issuers.  While Issuer authentication
+   and signing of Statements is very important for the trustworthiness
+   of systems implementing the SCITT building blocks, it is out of scope
+   of this document.  This document is only concerned with
+   authentication of API clients.
 
    For those endpoints that require client authentication, Transparency
-   Services MUST support at least one of the following options: - HTTP
-   Authorization header with a bearer JWT - domain-bound API key - TLS
-   client authentication
+   Services MUST support at least one of the following options:
+
+   *  HTTP Authorization header with a bearer JWT
+
+   *  domain-bound API key
+
+   *  TLS client authentication
 
    Transparency Services MUST provide a configuration surface that
    allows Issuers to specify which authorized clients can submit
@@ -788,12 +791,16 @@ Table of Contents
 
    The most serious threats to implementations on Transparency Services
    are ones that would cause the failure of their main promises, to wit:
-   - Threats to strong identification, for example representing the
-   Statements from one issuer as those of another - Threats to payload
-   integrity, for example changing the contents of a Signed Statement
-   before making it transparent - Threats to non-equivocation, for
-   example attacks that would enable the presentation or verification of
-   divergent proofs for the same Statement payload
+
+   *  Threats to strong identification, for example representing the
+      Statements from one issuer as those of another
+
+   *  Threats to payload integrity, for example changing the contents of
+      a Signed Statement before making it transparent
+
+   *  Threats to non-equivocation, for example attacks that would enable
+      the presentation or verification of divergent proofs for the same
+      Statement payload
 
 4.4.1.1.  Denial of service attacks
 
@@ -846,9 +853,12 @@ Table of Contents
    Issuer signature on the Signed Statement, the Issue Statement
    endpoint presents an opportunity for insertion of messages and
    misrepresentation of Issuer intent that could mislead later
-   Verifiers.  There are 2 most likely avenues to this attack: - Stolen
-   client endpoint authentication credentials - Stolen or misused Issuer
-   keys held in the Transparency Service on behalf of clients
+   Verifiers.  There are 2 most likely avenues to this attack:
+
+   *  Stolen client endpoint authentication credentials
+
+   *  Stolen or misused Issuer keys held in the Transparency Service on
+      behalf of clients
 
    Clients relying on the Issue Statement endpoint SHOULD take steps to
    ensure their endpoint authentication credentials are securely stored
@@ -914,7 +924,7 @@ Table of Contents
 6.2.  Well-Known URI for Issuers
 
    The following value is requested to be registered in the "Well-Known
-   URIs" registry (using the template from [RFC5785]):
+   URIs" registry (using the template from [RFC8615]):
 
    URI suffix: issuer Change controller: IETF Specification document(s):
    RFCthis.  Related information: N/A
@@ -922,7 +932,7 @@ Table of Contents
 6.3.  Well-Known URI for Transparency Configuration
 
    The following value is requested to be registered in the "Well-Known
-   URIs" registry (using the template from [RFC5785]):
+   URIs" registry (using the template from [RFC8615]):
 
    URI suffix: transparency-configuration Change controller: IETF
    Specification document(s): RFCthis.  Related information: N/A
@@ -1003,33 +1013,27 @@ Table of Contents
               Parameters", BCP 73, RFC 3553, DOI 10.17487/RFC3553, June
               2003, <https://www.rfc-editor.org/rfc/rfc3553>.
 
-   [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
-              Uniform Resource Identifiers (URIs)", RFC 5785,
-              DOI 10.17487/RFC5785, April 2010,
-              <https://www.rfc-editor.org/rfc/rfc5785>.
-
-   [RFC7231]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
-              Protocol (HTTP/1.1): Semantics and Content", RFC 7231,
-              DOI 10.17487/RFC7231, June 2014,
-              <https://www.rfc-editor.org/rfc/rfc7231>.
-
-   [RFC7807]  Nottingham, M. and E. Wilde, "Problem Details for HTTP
-              APIs", RFC 7807, DOI 10.17487/RFC7807, March 2016,
-              <https://www.rfc-editor.org/rfc/rfc7807>.
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
-              "Handling Long Lines in Content of Internet-Drafts and
-              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
-              <https://www.rfc-editor.org/rfc/rfc8792>.
+   [RFC8615]  Nottingham, M., "Well-Known Uniform Resource Identifiers
+              (URIs)", RFC 8615, DOI 10.17487/RFC8615, May 2019,
+              <https://www.rfc-editor.org/rfc/rfc8615>.
 
    [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
+
+   [RFC9110]  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
+              Ed., "HTTP Semantics", STD 97, RFC 9110,
+              DOI 10.17487/RFC9110, June 2022,
+              <https://www.rfc-editor.org/rfc/rfc9110>.
+
+   [RFC9457]  Nottingham, M., Wilde, E., and S. Dalal, "Problem Details
+              for HTTP APIs", RFC 9457, DOI 10.17487/RFC9457, July 2023,
+              <https://www.rfc-editor.org/rfc/rfc9457>.
 
 7.2.  Informative References
 
@@ -1056,6 +1060,11 @@ Table of Contents
               Specifications and Registration Procedures", BCP 13,
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
               <https://www.rfc-editor.org/rfc/rfc6838>.
+
+   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
+              "Handling Long Lines in Content of Internet-Drafts and
+              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
+              <https://www.rfc-editor.org/rfc/rfc8792>.
 
 Authors' Addresses
 
