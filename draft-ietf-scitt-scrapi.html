@@ -9,7 +9,7 @@
 <meta content="Orie Steele" name="author">
 <meta content="Jon Geater" name="author">
 <meta content="
-       This document describes a REST API that supports the normative requirements of the SCITT Architecture  .
+       This document describes a REST API that supports the normative requirements of the SCITT Architecture.
 Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Repositories. 
     " name="description">
 <meta content="xml2rfc 3.22.0" name="generator">
@@ -1070,7 +1070,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">SCITT Reference APIs</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document describes a REST API that supports the normative requirements of the SCITT Architecture <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>.
+<p id="section-abstract-1">This document describes a REST API that supports the normative requirements of the SCITT Architecture.
 Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Repositories.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
@@ -1320,7 +1320,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 If Authentication is not implemented, rate limiting or other denial of service mitigations <span class="bcp14">MUST</span> be applied to enable anonymous access.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">NOTE: '' line wrapping per <span>[<a href="#RFC8792" class="cite xref">RFC8792</a>]</span> in HTTP examples.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">All messages are sent as HTTP GET or POST requests.<a href="#section-2-3" class="pilcrow">¶</a></p>
-<p id="section-2-4">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a JSON problem details object (<span>[<a href="#RFC7807" class="cite xref">RFC7807</a>]</span>) containing:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-4">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a JSON problem details object (<span>[<a href="#RFC9457" class="cite xref">RFC9457</a>]</span>) containing:<a href="#section-2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-5.1">
           <p id="section-2-5.1.1">type: A URI reference identifying the problem.
@@ -1348,7 +1348,7 @@ The one exception is the "malformed" error type, which indicates that the Transp
 </li>
       </ul>
 <p id="section-2-11">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.
-Note that in the case of a 503 response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
+Note that in the case of a 503 response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.<a href="#section-2-11" class="pilcrow">¶</a></p>
 <div id="sec-mandatory">
 <section id="section-2.1">
@@ -2140,7 +2140,7 @@ TODO: Consider impact of media type on "Data URIs" and QR Codes.<a href="#sectio
         <h3 id="name-well-known-uri-for-issuers">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-well-known-uri-for-issuers" class="section-name selfRef">Well-Known URI for Issuers</a>
         </h3>
-<p id="section-6.2-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC5785" class="cite xref">RFC5785</a>]</span>):<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>):<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">URI suffix: issuer
 Change controller: IETF
 Specification document(s): RFCthis.
@@ -2152,7 +2152,7 @@ Related information: N/A<a href="#section-6.2-2" class="pilcrow">¶</a></p>
         <h3 id="name-well-known-uri-for-transpar">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-well-known-uri-for-transpar" class="section-name selfRef">Well-Known URI for Transparency Configuration</a>
         </h3>
-<p id="section-6.3-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC5785" class="cite xref">RFC5785</a>]</span>):<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>):<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">URI suffix: transparency-configuration
 Change controller: IETF
 Specification document(s): RFCthis.
@@ -2261,29 +2261,25 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Mealling, M.</span>, <span class="refAuthor">Masinter, L.</span>, <span class="refAuthor">Hardie, T.</span>, and <span class="refAuthor">G. Klyne</span>, <span class="refTitle">"An IETF URN Sub-namespace for Registered Protocol Parameters"</span>, <span class="seriesInfo">BCP 73</span>, <span class="seriesInfo">RFC 3553</span>, <span class="seriesInfo">DOI 10.17487/RFC3553</span>, <time datetime="2003-06" class="refDate">June 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3553">https://www.rfc-editor.org/rfc/rfc3553</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC5785">[RFC5785]</dt>
-        <dd>
-<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">E. Hammer-Lahav</span>, <span class="refTitle">"Defining Well-Known Uniform Resource Identifiers (URIs)"</span>, <span class="seriesInfo">RFC 5785</span>, <span class="seriesInfo">DOI 10.17487/RFC5785</span>, <time datetime="2010-04" class="refDate">April 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5785">https://www.rfc-editor.org/rfc/rfc5785</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC7231">[RFC7231]</dt>
-        <dd>
-<span class="refAuthor">Fielding, R., Ed.</span> and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"</span>, <span class="seriesInfo">RFC 7231</span>, <span class="seriesInfo">DOI 10.17487/RFC7231</span>, <time datetime="2014-06" class="refDate">June 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7231">https://www.rfc-editor.org/rfc/rfc7231</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC7807">[RFC7807]</dt>
-        <dd>
-<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">E. Wilde</span>, <span class="refTitle">"Problem Details for HTTP APIs"</span>, <span class="seriesInfo">RFC 7807</span>, <span class="seriesInfo">DOI 10.17487/RFC7807</span>, <time datetime="2016-03" class="refDate">March 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7807">https://www.rfc-editor.org/rfc/rfc7807</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8792">[RFC8792]</dt>
+<dt id="RFC8615">[RFC8615]</dt>
         <dd>
-<span class="refAuthor">Watsen, K.</span>, <span class="refAuthor">Auerswald, E.</span>, <span class="refAuthor">Farrel, A.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Handling Long Lines in Content of Internet-Drafts and RFCs"</span>, <span class="seriesInfo">RFC 8792</span>, <span class="seriesInfo">DOI 10.17487/RFC8792</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8792">https://www.rfc-editor.org/rfc/rfc8792</a>&gt;</span>. </dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Well-Known Uniform Resource Identifiers (URIs)"</span>, <span class="seriesInfo">RFC 8615</span>, <span class="seriesInfo">DOI 10.17487/RFC8615</span>, <time datetime="2019-05" class="refDate">May 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8615">https://www.rfc-editor.org/rfc/rfc8615</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9052">[RFC9052]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9052">https://www.rfc-editor.org/rfc/rfc9052</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9110">[RFC9110]</dt>
+        <dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9457">[RFC9457]</dt>
+      <dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refAuthor">Wilde, E.</span>, and <span class="refAuthor">S. Dalal</span>, <span class="refTitle">"Problem Details for HTTP APIs"</span>, <span class="seriesInfo">RFC 9457</span>, <span class="seriesInfo">DOI 10.17487/RFC9457</span>, <time datetime="2023-07" class="refDate">July 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9457">https://www.rfc-editor.org/rfc/rfc9457</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2307,8 +2303,12 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <span class="refAuthor">Freed, N.</span> and <span class="refAuthor">N. Borenstein</span>, <span class="refTitle">"Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types"</span>, <span class="seriesInfo">RFC 2046</span>, <span class="seriesInfo">DOI 10.17487/RFC2046</span>, <time datetime="1996-11" class="refDate">November 1996</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2046">https://www.rfc-editor.org/rfc/rfc2046</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6838">[RFC6838]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Freed, N.</span>, <span class="refAuthor">Klensin, J.</span>, and <span class="refAuthor">T. Hansen</span>, <span class="refTitle">"Media Type Specifications and Registration Procedures"</span>, <span class="seriesInfo">BCP 13</span>, <span class="seriesInfo">RFC 6838</span>, <span class="seriesInfo">DOI 10.17487/RFC6838</span>, <time datetime="2013-01" class="refDate">January 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6838">https://www.rfc-editor.org/rfc/rfc6838</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8792">[RFC8792]</dt>
+      <dd>
+<span class="refAuthor">Watsen, K.</span>, <span class="refAuthor">Auerswald, E.</span>, <span class="refAuthor">Farrel, A.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Handling Long Lines in Content of Internet-Drafts and RFCs"</span>, <span class="seriesInfo">RFC 8792</span>, <span class="seriesInfo">DOI 10.17487/RFC8792</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8792">https://www.rfc-editor.org/rfc/rfc8792</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
