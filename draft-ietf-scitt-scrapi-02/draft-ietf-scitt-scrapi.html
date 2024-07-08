@@ -1960,14 +1960,9 @@ Content-Type: application/did+ld+json
         <h3 id="name-general-scope">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-general-scope" class="section-name selfRef">General scope</a>
         </h3>
-<p id="section-4.1-1">This document describes the interoperable API for client calls to, and
-implementations of, a Transparency Service as specified in
-[SCITT-ARCH]. As such the security considerations in this
-section are concerned only with security considerations that are
-relevant at that implementation layer. All questions of security of the
-related COSE formats, algorithm choices, cryptographic envelopes,
-verifiable data structures and the like are handled elsewhere and out
-of scope of this document.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">This document describes the interoperable API for client calls to, and implementations of, a Transparency Service as specified in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>.
+As such the security considerations in this section are concerned only with security considerations that are relevant at that implementation layer.
+All questions of security of the related COSE formats, algorithm choices, cryptographic envelopes,verifiable data structures and the like are handled elsewhere and out of scope of this document.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-applicable-environment">
@@ -1975,11 +1970,8 @@ of scope of this document.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
         <h3 id="name-applicable-environment">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-applicable-environment" class="section-name selfRef">Applicable Environment</a>
         </h3>
-<p id="section-4.2-1">SCITT is concerned with issues of cross-boundary supply-chain-wide data
-integrity and as such must assume a very wide range of deployment
-environments. Thus, no assumptions can be made about the security of
-the computing environment in which any client implementation of this
-specification runs.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">SCITT is concerned with issues of cross-boundary supply-chain-wide data integrity and as such must assume a very wide range of deployment environments.
+Thus, no assumptions can be made about the security of the computing environment in which any client implementation of this specification runs.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-user-host-authentication">
@@ -1987,24 +1979,24 @@ specification runs.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
         <h3 id="name-user-host-authentication">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-user-host-authentication" class="section-name selfRef">User-host authentication</a>
         </h3>
-<p id="section-4.3-1">[SCITT-ARCH] defines 2 distinct roles that require authentication:
-Issuers who sign Statements, and clients that submit API calls on
-behalf of Issuers. While Issuer authentication and signing of
-Statements is very important for the trustworthiness of systems
-implementing the SCITT building blocks, it is out of scope of this
-document. This document is only concerned with authentication of API
-clients.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">For those endpoints that require client authentication, Transparency
-Services <span class="bcp14">MUST</span> support at least one of the following options:
- - HTTP Authorization header with a bearer JWT
- - domain-bound API key
- - TLS client authentication<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3-3">Transparency Services <span class="bcp14">MUST</span> provide a configuration surface that
-allows Issuers to specify which authorized clients can submit
-Statements on their behalf.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
-<p id="section-4.3-4">Where authentication methods rely on long term secrets, both clients
-and Transparency Services implementing this specification <span class="bcp14">MUST</span> allow
-for the revocation and rolling of authentication secrets.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
+<p id="section-4.3-1"><span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> defines 2 distinct roles that require authentication:
+Issuers who sign Statements, and clients that submit API calls on behalf of Issuers.
+While Issuer authentication and signing of Statements is very important for the trustworthiness of systems implementing the SCITT building blocks, it is out of scope of this document.
+This document is only concerned with authentication of API clients.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">For those endpoints that require client authentication, Transparency Services <span class="bcp14">MUST</span> support at least one of the following options:<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-3.1">
+            <p id="section-4.3-3.1.1">HTTP Authorization header with a bearer JWT<a href="#section-4.3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-3.2">
+            <p id="section-4.3-3.2.1">domain-bound API key<a href="#section-4.3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-3.3">
+            <p id="section-4.3-3.3.1">TLS client authentication<a href="#section-4.3-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-4">Transparency Services <span class="bcp14">MUST</span> provide a configuration surface that allows Issuers to specify which authorized clients can submit Statements on their behalf.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
+<p id="section-4.3-5">Where authentication methods rely on long term secrets, both clients and Transparency Services implementing this specification <span class="bcp14">MUST</span> allow for the revocation and rolling of authentication secrets.<a href="#section-4.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-primary-threats">
@@ -2017,36 +2009,28 @@ for the revocation and rolling of authentication secrets.<a href="#section-4.3-4
           <h4 id="name-in-scope">
 <a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-in-scope" class="section-name selfRef">In scope</a>
           </h4>
-<p id="section-4.4.1-1">The most serious threats to implementations on Transparency Services
-are ones that would cause the failure of their main promises, to wit:
- - Threats to strong identification, for example representing the
-   Statements from one issuer as those of another
- - Threats to payload integrity, for example changing the contents of
-   a Signed Statement before making it transparent
- - Threats to non-equivocation, for example attacks that would enable
-   the presentation or verification of divergent proofs for the same
-   Statement payload<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.1-1">The most serious threats to implementations on Transparency Services are ones that would cause the failure of their main promises, to wit:<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.4.1-2.1">
+              <p id="section-4.4.1-2.1.1">Threats to strong identification, for example representing the Statements from one issuer as those of another<a href="#section-4.4.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4.4.1-2.2">
+              <p id="section-4.4.1-2.2.1">Threats to payload integrity, for example changing the contents of a Signed Statement before making it transparent<a href="#section-4.4.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4.4.1-2.3">
+              <p id="section-4.4.1-2.3.1">Threats to non-equivocation, for example attacks that would enable the presentation or verification of divergent proofs for the same Statement payload<a href="#section-4.4.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 <div id="sec-denial-of-service-attacks">
 <section id="section-4.4.1.1">
             <h5 id="name-denial-of-service-attacks">
 <a href="#section-4.4.1.1" class="section-number selfRef">4.4.1.1. </a><a href="#name-denial-of-service-attacks" class="section-name selfRef">Denial of service attacks</a>
             </h5>
-<p id="section-4.4.1.1-1">While denial of service attacks are very hard to defend against
-completely, and Transparency Services are unlikely to be in the
-critical path of any safety-liable operation, any attack which could
-cause the <em>silent</em> failure of Signed Statement registration, for
-example, should be considered in scope.<a href="#section-4.4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.1-2">In principle DoS attacks are easily mitigated by the client
-checking that the Transparency Service has registered any
-submitted Signed Statement and returned a Receipt. Since
-verification of Receipts does not require the involvement of the
-Transparency Service DoS attacks are not a major issue.<a href="#section-4.4.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.1-3">Clients to Transparency Services <span class="bcp14">SHOULD</span> ensure that Receipts are
-available for their registered Statements, either on a periodic
-or needs-must basis, depending on the use case.<a href="#section-4.4.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.1-4">Beyond this, implementers of Transparency Services <span class="bcp14">SHOULD</span> implement
-general good practice around network attacks, flooding, rate
-limiting etc.<a href="#section-4.4.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.1-1">While denial of service attacks are very hard to defend against completely, and Transparency Services are unlikely to be in the critical path of any safety-liable operation, any attack which could cause the <em>silent</em> failure of Signed Statement registration, for example, should be considered in scope.<a href="#section-4.4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.1-2">In principle DoS attacks are easily mitigated by the client checking that the Transparency Service has registered any submitted Signed Statement and returned a Receipt.
+Since verification of Receipts does not require the involvement of the Transparency Service DoS attacks are not a major issue.<a href="#section-4.4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.1-3">Clients to Transparency Services <span class="bcp14">SHOULD</span> ensure that Receipts are available for their registered Statements, either on a periodic or needs-must basis, depending on the use case.<a href="#section-4.4.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.1-4">Beyond this, implementers of Transparency Services <span class="bcp14">SHOULD</span> implement general good practice around network attacks, flooding, rate limiting etc.<a href="#section-4.4.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-eavesdropping">
@@ -2054,11 +2038,8 @@ limiting etc.<a href="#section-4.4.1.1-4" class="pilcrow">¶</a></p>
             <h5 id="name-eavesdropping">
 <a href="#section-4.4.1.2" class="section-number selfRef">4.4.1.2. </a><a href="#name-eavesdropping" class="section-name selfRef">Eavesdropping</a>
             </h5>
-<p id="section-4.4.1.2-1">Since the purpose of this API is to ultimately put the message
-payloads on a Transparency Log there is limited risk to eavesdropping.
-Nonetheless transparency may mean 'within a limited community' rather
-than 'in full public', so implementers <span class="bcp14">MUST</span> add protections against
-man-in-the-middle and network eavesdropping, such as TLS.<a href="#section-4.4.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.2-1">Since the purpose of this API is to ultimately put the message payloads on a Transparency Log there is limited risk to eavesdropping.
+Nonetheless transparency may mean 'within a limited community' rather than 'in full public', so implementers <span class="bcp14">MUST</span> add protections against man-in-the-middle and network eavesdropping, such as TLS.<a href="#section-4.4.1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-message-modification-attacks">
@@ -2066,15 +2047,8 @@ man-in-the-middle and network eavesdropping, such as TLS.<a href="#section-4.4.1
             <h5 id="name-message-modification-attack">
 <a href="#section-4.4.1.3" class="section-number selfRef">4.4.1.3. </a><a href="#name-message-modification-attack" class="section-name selfRef">Message modification attacks</a>
             </h5>
-<p id="section-4.4.1.3-1">While most relevant modification attacks are mitigated by the use of
-the Issuer signature on the Signed Statement, the <code>Issue Statement</code>
-endpoint presents an opportunity for manipulation of messages and
-misrepresentation of Issuer intent that could mislead later Verifiers.<a href="#section-4.4.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.3-2">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span>
-require authentication and transport-level security for that endpoint,
-<span class="bcp14">MUST NOT</span> modify anything in the message to be signed, and <span class="bcp14">MUST</span> take
-steps to ensure that the party calling the endpoint is authorized to
-register statements on behalf of the specified Issuer.<a href="#section-4.4.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.3-1">While most relevant modification attacks are mitigated by the use of the Issuer signature on the Signed Statement, the <code>Issue Statement</code> endpoint presents an opportunity for manipulation of messages and misrepresentation of Issuer intent that could mislead later Verifiers.<a href="#section-4.4.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.3-2">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span> require authentication and transport-level security for that endpoint, <span class="bcp14">MUST NOT</span> modify anything in the message to be signed, and <span class="bcp14">MUST</span> take steps to ensure that the party calling the endpoint is authorized to register statements on behalf of the specified Issuer.<a href="#section-4.4.1.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-message-insertion-attacks">
@@ -2082,29 +2056,20 @@ register statements on behalf of the specified Issuer.<a href="#section-4.4.1.3-
             <h5 id="name-message-insertion-attacks">
 <a href="#section-4.4.1.4" class="section-number selfRef">4.4.1.4. </a><a href="#name-message-insertion-attacks" class="section-name selfRef">Message insertion attacks</a>
             </h5>
-<p id="section-4.4.1.4-1">While most relevant insertion attacks are mitigated by the use of
-the Issuer signature on the Signed Statement, the <code>Issue Statement</code>
-endpoint presents an opportunity for insertion of messages and
-misrepresentation of Issuer intent that could mislead later Verifiers.
-There are 2 most likely avenues to this attack:
-- Stolen client endpoint authentication credentials
-- Stolen or misused Issuer keys held in the Transparency Service on
-  behalf of clients<a href="#section-4.4.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.4-2">Clients relying on the <code>Issue Statement</code> endpoint <span class="bcp14">SHOULD</span> take steps
-to ensure their endpoint authentication credentials are securely
-stored and can be rotated and/or revoked in the case of a breach.<a href="#section-4.4.1.4-2" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.4-3">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span>
-require authentication and transport-level security for that endpoint,
-and <span class="bcp14">MUST</span> enable the rotation and revocation of those credentials.<a href="#section-4.4.1.4-3" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.4-4">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span>
-take careful steps in both design and operation of their software
-stack to prevent the theft or inappropriate use of the Issuer keys
-they use to sign Statements on behalf of Issuers, such as HSMs for
-storage and least-privilege, regularly refreshed access controls for
-use.<a href="#section-4.4.1.4-4" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.4-5">Transparency Services <span class="bcp14">MAY</span> also implement additional protections
-such as anomaly detection or rate limiting in order to mitigate
-the impact of any breach.<a href="#section-4.4.1.4-5" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.4-1">While most relevant insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, the <code>Issue Statement</code> endpoint presents an opportunity for insertion of messages and misrepresentation of Issuer intent that could mislead later Verifiers.
+There are 2 most likely avenues to this attack:<a href="#section-4.4.1.4-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.4.1.4-2.1">
+                <p id="section-4.4.1.4-2.1.1">Stolen client endpoint authentication credentials<a href="#section-4.4.1.4-2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.4.1.4-2.2">
+                <p id="section-4.4.1.4-2.2.1">Stolen or misused Issuer keys held in the Transparency Service on behalf of clients<a href="#section-4.4.1.4-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-4.4.1.4-3">Clients relying on the <code>Issue Statement</code> endpoint <span class="bcp14">SHOULD</span> take steps to ensure their endpoint authentication credentials are securely stored and can be rotated and/or revoked in the case of a breach.<a href="#section-4.4.1.4-3" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.4-4">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span> require authentication and transport-level security for that endpoint, and <span class="bcp14">MUST</span> enable the rotation and revocation of those credentials.<a href="#section-4.4.1.4-4" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.4-5">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span> take careful steps in both design and operation of their software stack to prevent the theft or inappropriate use of the Issuer keys they use to sign Statements on behalf of Issuers, such as HSMs for storage and least-privilege, regularly refreshed access controls for use.<a href="#section-4.4.1.4-5" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.4-6">Transparency Services <span class="bcp14">MAY</span> also implement additional protections such as anomaly detection or rate limiting in order to mitigate the impact of any breach.<a href="#section-4.4.1.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2120,15 +2085,9 @@ the impact of any breach.<a href="#section-4.4.1.4-5" class="pilcrow">¶</a></p>
 <a href="#section-4.4.2.1" class="section-number selfRef">4.4.2.1. </a><a href="#name-replay-attacks" class="section-name selfRef">Replay attacks</a>
             </h5>
 <p id="section-4.4.2.1-1">Replay attacks are not particularly concerning for SCITT or SCRAPI:
-once a statement is made, it is intended to be immutable and non-
-repudiable, so making it twice should not lead to any particular
-issues. There could be issues at the payload level (for instance,
-the statement "it is raining" may true when first submitted but not
-when replayed), but being payload-agnostic implementations of SCITT
-services cannot be required to worry about that.<a href="#section-4.4.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.4.2.1-2">If the semantic content of the payload are time dependent and
-susceptible to replay attacks in this way then timestamps <span class="bcp14">MAY</span> be
-added to the payload signed by the Issuer.<a href="#section-4.4.2.1-2" class="pilcrow">¶</a></p>
+once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
+There could be issues at the payload level (for instance, the statement "it is raining" may true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.<a href="#section-4.4.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.2.1-2">If the semantic content of the payload are time dependent and susceptible to replay attacks in this way then timestamps <span class="bcp14">MAY</span> be added to the payload signed by the Issuer.<a href="#section-4.4.2.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-message-deletion-attacks">
@@ -2136,10 +2095,8 @@ added to the payload signed by the Issuer.<a href="#section-4.4.2.1-2" class="pi
             <h5 id="name-message-deletion-attacks">
 <a href="#section-4.4.2.2" class="section-number selfRef">4.4.2.2. </a><a href="#name-message-deletion-attacks" class="section-name selfRef">Message deletion attacks</a>
             </h5>
-<p id="section-4.4.2.2-1">Once registered with a Transparency Service, Registered Signed Statements
-cannot be deleted. Thus, any message deletion attack must occur
-prior to registration else it is indistinguishable from a
-man-in-the-middle or denial-of-service attack on this interface.<a href="#section-4.4.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.2.2-1">Once registered with a Transparency Service, Registered Signed Statements cannot be deleted.
+Thus, any message deletion attack must occur prior to registration else it is indistinguishable from a man-in-the-middle or denial-of-service attack on this interface.<a href="#section-4.4.2.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2167,9 +2124,7 @@ TODO: Consider impact of media type on "Data URIs" and QR Codes.<a href="#sectio
         <h3 id="name-urn-sub-namespace-for-scitt">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-urn-sub-namespace-for-scitt" class="section-name selfRef">URN Sub-namespace for SCITT (urn:ietf:params:scitt)</a>
         </h3>
-<p id="section-6.1-1">IANA is requested to register the URN sub-namespace <code>urn:ietf:params:scitt</code>
-in the "IETF URN Sub-namespace for Registered Protocol Parameter Identifiers"
-Registry <span>[<a href="#IANA.params" class="cite xref">IANA.params</a>]</span>, following the template in <span>[<a href="#RFC3553" class="cite xref">RFC3553</a>]</span>:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">IANA is requested to register the URN sub-namespace <code>urn:ietf:params:scitt</code> in the "IETF URN Sub-namespace for Registered Protocol Parameter Identifiers" Registry <span>[<a href="#IANA.params" class="cite xref">IANA.params</a>]</span>, following the template in <span>[<a href="#RFC3553" class="cite xref">RFC3553</a>]</span>:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <div class="lang-output sourcecode" id="section-6.1-2">
 <pre>
    Registry name:  scitt
