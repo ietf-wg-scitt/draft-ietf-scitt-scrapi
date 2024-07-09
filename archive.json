@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-04T00:30:48.511114+00:00",
+  "timestamp": "2024-07-09T00:31:22.365199+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1060,6 +1060,104 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOLJjbks50t85g",
+      "title": "reference and markdown fixes",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/15",
+      "state": "MERGED",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "PR triggered by reference fixes, with additional markdown formatting consistency\r\n\r\n- [Line 700](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/compare/steve/ref-fixes?expand=1#diff-44525cf8ba2e274f5663e0df19272962aed2b9a06e0fefee5b33bfd7ef23cdf7L700)\r\n- [Line 717](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/compare/steve/ref-fixes?expand=1#diff-44525cf8ba2e274f5663e0df19272962aed2b9a06e0fefee5b33bfd7ef23cdf7L717)",
+      "createdAt": "2024-07-08T16:20:52Z",
+      "updatedAt": "2024-07-08T16:23:59Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "e2f23a9ce8621f3a4392608c2f97c85c2a32fcdf",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "steve/ref-fixes",
+      "headRefOid": "d1efb4600dc61e735d0c35bcfa6818c874f392a2",
+      "closedAt": "2024-07-08T16:23:59Z",
+      "mergedAt": "2024-07-08T16:23:59Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "edfaae5daecd1f91220b1fa21ee8a7ae507b9673"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOLJjbks50usaM",
+      "title": "Shorten text for IETF tools/formatting",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/16",
+      "state": "MERGED",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-08T18:25:31Z",
+      "updatedAt": "2024-07-08T18:30:27Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "edfaae5daecd1f91220b1fa21ee8a7ae507b9673",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "steve/ietf-tool-fixes",
+      "headRefOid": "090490a29cf3618dd7381e456c8a67647270b336",
+      "closedAt": "2024-07-08T18:30:27Z",
+      "mergedAt": "2024-07-08T18:30:27Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "4af7833d502bb657c14b77954346a96ef532226d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6A_RtX",
+          "commit": {
+            "abbreviatedOid": "090490a"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-08T18:28:20Z",
+          "updatedAt": "2024-07-08T18:28:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOLJjbks50vDme",
+      "title": "Fixes for idnits",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/17",
+      "state": "MERGED",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "including:\r\n\r\n- Referencing a draft in the abstract\r\n- Obsoleted draft updates",
+      "createdAt": "2024-07-08T19:20:17Z",
+      "updatedAt": "2024-07-08T19:30:51Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "4af7833d502bb657c14b77954346a96ef532226d",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "steve/ietf-nits",
+      "headRefOid": "20e1c4a6217d0074653b1691555935544c488a6d",
+      "closedAt": "2024-07-08T19:30:51Z",
+      "mergedAt": "2024-07-08T19:30:51Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "780041a42669d8e5c6afee2d55dd507d69f26d28"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
