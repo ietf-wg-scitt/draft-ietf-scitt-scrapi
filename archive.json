@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-14T00:35:25.766107+00:00",
+  "timestamp": "2024-07-16T00:32:02.534385+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -272,6 +272,22 @@
       "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-resolve-receipt\r\n\r\nI don't understand *why* this is desired:\r\n\r\n\"Authentication SHOULD be implemented for this endpoint\"\r\n\r\nIf the material in a receipt is, or can be, considered private to the issuer, then this should be a MUST.\r\n\r\nInstinctively I have always thought of receipts as essentially public documents. Whilst they are revealing, they are designed to be passed on to other parties.\r\n\r\nIf the intent is to permit implementations to provide for both public and private receipts, I think that model needs to be spelled out explicitly.\r\n\r\nIt would seem reasonable to me for Resolve Receipt to provide \"the defined public aspects of a receipt\" when the request was not authenticated. And the possibly sensitive parts otherwise\r\n\r\nIn practice, there are definitely usecases for obtaining a receipt for a statement issued by a different party. Its not clear at all to me how or if the authentication requirement here interacts with that.",
       "createdAt": "2024-06-23T08:04:12Z",
       "updatedAt": "2024-06-23T08:04:12Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOLJjbks6PmMGP",
+      "title": "2.1.1 & 2.1.2 Missing intent statements.",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/18",
+      "state": "OPEN",
+      "author": "mkhraisha",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The optional API endpoints have intent statements that outline the goal of the Endpoints for example 2.2.1 (Issue Signed Statement Endpoint) has this intent statement:\r\n\r\n```\r\nThis endpoint enables a Transparency Service to be an issuer of Signed Statements on behalf of authenticated clients. This supports cases where a client lacks the ability to perform complex cryptographic operations, but can be authenticated and report statements and measurements.\r\n```\r\nSuch a statement is currently missing from both:\r\n2.1.1 (Transparency Configuration) and 2.1.2 (Signed Statement Registration).\r\n\r\n",
+      "createdAt": "2024-07-15T16:29:53Z",
+      "updatedAt": "2024-07-15T16:29:53Z",
       "closedAt": null,
       "comments": []
     }
