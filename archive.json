@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-21T00:35:20.257400+00:00",
+  "timestamp": "2024-07-23T00:32:18.875855+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -271,9 +271,17 @@
       "labels": [],
       "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-resolve-receipt\r\n\r\nI don't understand *why* this is desired:\r\n\r\n\"Authentication SHOULD be implemented for this endpoint\"\r\n\r\nIf the material in a receipt is, or can be, considered private to the issuer, then this should be a MUST.\r\n\r\nInstinctively I have always thought of receipts as essentially public documents. Whilst they are revealing, they are designed to be passed on to other parties.\r\n\r\nIf the intent is to permit implementations to provide for both public and private receipts, I think that model needs to be spelled out explicitly.\r\n\r\nIt would seem reasonable to me for Resolve Receipt to provide \"the defined public aspects of a receipt\" when the request was not authenticated. And the possibly sensitive parts otherwise\r\n\r\nIn practice, there are definitely usecases for obtaining a receipt for a statement issued by a different party. Its not clear at all to me how or if the authentication requirement here interacts with that.",
       "createdAt": "2024-06-23T08:04:12Z",
-      "updatedAt": "2024-06-23T08:04:12Z",
+      "updatedAt": "2024-07-21T09:09:28Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "body": "I'm led to understand this SHOULD is intended to \"solve\" the issues of rate limiting and fairness. I think SCITT should have an opinion on whether anonoymous access to receipts for any statement is required of implementations. But whether or not it does consider it required, it seems very transparency service specific how the implications of this are dealt with. An Authentication requirement like this on these is confusing to me either way.",
+          "createdAt": "2024-07-21T09:09:27Z",
+          "updatedAt": "2024-07-21T09:09:27Z"
+        }
+      ]
     },
     {
       "number": 18,
