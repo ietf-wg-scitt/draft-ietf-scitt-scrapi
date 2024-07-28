@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-25T00:31:57.048096+00:00",
+  "timestamp": "2024-07-28T00:35:45.294106+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -64,7 +64,7 @@
       "labels": [],
       "body": "Would be great to be able to return an object in addition to or instead of a string for errors. Or allow for other properties which would be fully content-typeable to a custom response object within the error response on claim insert failure.\r\n\r\nLack of this prevents an automated conversation to resolve issues with claim insertion. Human readable strings are great, but ideally a human doesn't even get involved and machines can auto remediate issues due to detailed failure reasoning. This way the a human readable string might only be needed after a failed machine driven insert conversation (more than one call response).\r\n\r\n- References\r\n  - https://github.com/ietf-scitt/draft-birkholz-scitt-scrapi/issues/4\r\n    - https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/62",
       "createdAt": "2024-03-11T01:34:22Z",
-      "updatedAt": "2024-07-02T14:40:17Z",
+      "updatedAt": "2024-07-26T00:56:37Z",
       "closedAt": null,
       "comments": [
         {
@@ -108,6 +108,20 @@
           "body": "@SteveLasker or other authors that own this repo, I cannot close this issue because I did not create this issues, apologies. I need one of you to close the issue for me.",
           "createdAt": "2024-07-02T14:40:15Z",
           "updatedAt": "2024-07-02T14:40:15Z"
+        },
+        {
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "body": "I like the guidance we are giving in this area, but we use an example to define the specific error to return.  \r\n\r\n    As an example, submitting a Signed Statement with an unsupported signature algorithm **would** return a 400 Bad Request status code and the following body:\r\n\r\nMust it be 400 or is that a suggestion?",
+          "createdAt": "2024-07-25T18:03:10Z",
+          "updatedAt": "2024-07-25T18:03:10Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Must it be 400 or is that a suggestion?\r\n\r\nhas to be a MAY or \"might\" or \"could\" or something. Surely.",
+          "createdAt": "2024-07-26T00:56:36Z",
+          "updatedAt": "2024-07-26T00:56:36Z"
         }
       ]
     },
@@ -223,9 +237,17 @@
       "labels": [],
       "body": "Opening this issue to explore:\r\n\r\n- Does [/signed-statements/issue](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-issue-statement) also register the newly signed statement, or return a signed statement to then be submitted via [2.1.2. ](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.1.2)[Signed Statement Registration](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-signed-statement-registrati)?\r\n- What are the properties of a Signed Statement, when signed by the Transparency Service? \r\n  - How does the TS represent it has signed on behalf of the service-authenticated user, meaning are we deferring the signing to be a root CA, where the service is maintaining identity documents for the user? Or, is there some on-behalf of flow?",
       "createdAt": "2024-05-23T19:41:45Z",
-      "updatedAt": "2024-05-23T19:41:45Z",
+      "updatedAt": "2024-07-26T00:55:08Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Currently the endpoint returns a Signed Statement, and then you have to send that along to the Register endpoint.\r\nWhile an all-in-one API seems attractive, it would also risk getting complex as parameters for each part of the operation are added and commingled. I'd suggest leaving it as it is for now.\r\n\r\n> How does the TS represent it has signed on behalf of the service-authenticated user,\r\n\r\nSuggest we not over-specify this. Too many options and this isn't special compared to any other signing service, or an internal security server farm, or whatever. So where do we draw the line on showing this? ",
+          "createdAt": "2024-07-26T00:55:07Z",
+          "updatedAt": "2024-07-26T00:55:07Z"
+        }
+      ]
     },
     {
       "number": 12,
@@ -239,9 +261,17 @@
       "labels": [],
       "body": "In [2.1.2. ](https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#section-2.1.2)[Signed Statement Registration](https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-signed-statement-registrati)\r\n\r\nWe have \"The Registration Policy for the Transparency Service MUST be applied to the payload bytes, before any additional processing is performed\"\r\n\r\nThis appears to rule out implementations which do async processing of registration statements.\r\n\r\nI understood that the combined effect, and intent, of\r\n\r\nhttps://www.ietf.org/archive/id/draft-ietf-scitt-architecture-06.html#name-registration 5. & 7. With the subsequent text\r\n\r\n\"A Transparency Service MUST ensure that a Signed Statement is registered before releasing its Receipt.\"\r\n\r\nWas to enable the implementation to defer application of registration policies until receipt issuance.\r\n\r\nI think, if that is consistent with the intent of the authors intent, a specific requirement along the lines of \"Registration policies MUST be applied before issuing a Receipt\" would be much clearer\r\n",
       "createdAt": "2024-06-23T07:38:29Z",
-      "updatedAt": "2024-06-23T07:38:29Z",
+      "updatedAt": "2024-07-26T00:50:18Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Does this wording actually belong in SCRAPI at all, or should it be removed because these semantics are specified in the architecture? I'm thinking delete.",
+          "createdAt": "2024-07-26T00:50:17Z",
+          "updatedAt": "2024-07-26T00:50:17Z"
+        }
+      ]
     },
     {
       "number": 13,
@@ -255,9 +285,17 @@
       "labels": [],
       "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-status-202-registration-is-\r\n\r\n\"If 202 is returned, then clients should wait until Registration succeeded or failed by polling the receipt endpoint using the receipt identifier returned in the response.\"\r\n\r\nI understand that to mean \"poll the optional interface defined by 2.2.4 Resolve Receipt\". \r\n\r\nThere are some  issues with a request model that mixes \"poll for operation a (OP A) completion, with do operation b (OP B)\"\r\n\r\n1. It forces complexity and mixed state handling on the endpoint implementation. It has to both determine if OP A was extant and is now complete, then it has to follow on and do dependent OP B. Mixed state handling can require that  single instance has access to two differently provisioned and permissioned data stores.\r\n2. It forces the same authorization & authentication model on both OP A and OP B. (I will raise a seperate issue for another concerne regading the authentication SHOULD for Resolve Receipt)\r\n3. Implementors will likely want different rate limits for those actions. Checking if an extant operation is complete is light weight and can be designed for \"polling clients\". Producing a receipts, potentially finalising registration, could be a much heavier load. I would want the ability to seperately rate limit that request.\r\n\r\n\r\nI very much prefered the previous draft's approach of having a distinct endpoint on which to check for the completion of async registration",
       "createdAt": "2024-06-23T07:55:30Z",
-      "updatedAt": "2024-06-23T07:55:30Z",
+      "updatedAt": "2024-07-26T00:48:42Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agreed, I think a distinct operation handler makes sense and works cleanly from implementation experience. I can put up a PR to reflect this for the group to comment on",
+          "createdAt": "2024-07-26T00:48:41Z",
+          "updatedAt": "2024-07-26T00:48:41Z"
+        }
+      ]
     },
     {
       "number": 14,
@@ -271,7 +309,7 @@
       "labels": [],
       "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-resolve-receipt\r\n\r\nI don't understand *why* this is desired:\r\n\r\n\"Authentication SHOULD be implemented for this endpoint\"\r\n\r\nIf the material in a receipt is, or can be, considered private to the issuer, then this should be a MUST.\r\n\r\nInstinctively I have always thought of receipts as essentially public documents. Whilst they are revealing, they are designed to be passed on to other parties.\r\n\r\nIf the intent is to permit implementations to provide for both public and private receipts, I think that model needs to be spelled out explicitly.\r\n\r\nIt would seem reasonable to me for Resolve Receipt to provide \"the defined public aspects of a receipt\" when the request was not authenticated. And the possibly sensitive parts otherwise\r\n\r\nIn practice, there are definitely usecases for obtaining a receipt for a statement issued by a different party. Its not clear at all to me how or if the authentication requirement here interacts with that.",
       "createdAt": "2024-06-23T08:04:12Z",
-      "updatedAt": "2024-07-21T09:09:28Z",
+      "updatedAt": "2024-07-25T18:00:17Z",
       "closedAt": null,
       "comments": [
         {
@@ -280,6 +318,13 @@
           "body": "I'm led to understand this SHOULD is intended to \"solve\" the issues of rate limiting and fairness. I think SCITT should have an opinion on whether anonoymous access to receipts for any statement is required of implementations. But whether or not it does consider it required, it seems very transparency service specific how the implications of this are dealt with. An Authentication requirement like this on these is confusing to me either way.",
           "createdAt": "2024-07-21T09:09:27Z",
           "updatedAt": "2024-07-21T09:09:27Z"
+        },
+        {
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "body": "This is a tricky section.  We recommend that rate limiting could be used, but not MUST or SHOULD.  Within a corporation's network this may be a non-issue.  It is a solution to solve a potential problem, but it is up to the operator.",
+          "createdAt": "2024-07-25T18:00:15Z",
+          "updatedAt": "2024-07-25T18:00:15Z"
         }
       ]
     },
@@ -298,6 +343,150 @@
       "updatedAt": "2024-07-15T16:29:53Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 19,
+      "id": "I_kwDOLJjbks6Q4Uq5",
+      "title": "2.1.2 Signed Statement Registration MUST implement authentication.",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/19",
+      "state": "OPEN",
+      "author": "roywill",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In the case of a government end point, why must client authentication be implemented.  The signature on the statement is the authentication for the content and is ultimately who is making a reputation statement.",
+      "createdAt": "2024-07-25T18:06:08Z",
+      "updatedAt": "2024-07-26T00:46:49Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agreed. In addition to this I think there are several places where we need to clean up seemingly helpful implementation comments which are actually harmful. For instance the mention of using auth for rate limiting is a fine thing to say but it's nothing to do with SCITT and will be done in other layers by any sensible implementation.",
+          "createdAt": "2024-07-26T00:46:48Z",
+          "updatedAt": "2024-07-26T00:46:48Z"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOLJjbks6Q4YdH",
+      "title": "2.1.2 The identifier definitions are not clearly describing what it is meant to solve.",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/20",
+      "state": "OPEN",
+      "author": "roywill",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "If registration succeeds the following identifier MAY be used to refer to the Signed Statement that was accepted\r\n\r\nFrom an outside space, the identifier of the receipt is important to be stable.  In the context of a ledger, the indexing into the append only log is not discussed to support any indexing other way.\r\n\r\nSo the identifier for a Signed Statement is interesting but what is the use case.\r\n\r\nThe Identifier for the payload is super unclear.  There can be multiple signed statements against the same payload, and in the case of a \"detached\" signatures it is unclear if this is referencing the simple HASH of the artifact or the document holding the HASH.",
+      "createdAt": "2024-07-25T18:12:09Z",
+      "updatedAt": "2024-07-26T00:45:05Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This is an important thing to solve. Note that I believe we can, nay _should_, have a different ID for 'operation is running' vs the long lived durable ID which is returned once reigstration succeeds, which leaves us more free to play with the sematics of the ID format.\r\n\r\nWe implemented something for the hackathon but it's very placeholder-y so I can put in a rough PR for this but it'll probably need a lot of discussion. In particular there are both benefits and drawbacks to deterministically deriving the identifier from the statement.",
+          "createdAt": "2024-07-26T00:45:04Z",
+          "updatedAt": "2024-07-26T00:45:04Z"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "I_kwDOLJjbks6Q4aE-",
+      "title": "2.1.2 Fresh receipts may be requested through the resource identified in the Location header.",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/21",
+      "state": "OPEN",
+      "author": "roywill",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Since this section is talking about registration, why is refresh paradigm left dangling at the end.  Is it thought to use this same method to ask for a refresh?  I can see getting a new receipt, but that may fail due to the time validity of the signed statement.  If you expect it to be based on previous data on the log, then it needs to be indexed based on the previous receipt.",
+      "createdAt": "2024-07-25T18:14:41Z",
+      "updatedAt": "2024-07-26T00:41:01Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Sounds sensible. Something like '/reissue?receiptid=xyzy\r\n\r\nWhere 'xyzy' is the durable ID of a receipts that is already included in the log (I'm being deliberately obtuse with the ID format since that's under question in a separate Issue).\r\n\r\nPlease submit a PR that matches your use case needs.",
+          "createdAt": "2024-07-26T00:41:00Z",
+          "updatedAt": "2024-07-26T00:41:00Z"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "I_kwDOLJjbks6Q4b5o",
+      "title": "2.1.2.2 Registration is running.",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/22",
+      "state": "OPEN",
+      "author": "roywill",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The key returned in the example is the identifier of the payload or the signed statement as they are the same HASH.  If it is the payload, this precludes simultaneously registering two signed statements simultaneously.  I suspect you really want to supply a transaction token not reference anything about the signed statement nor the payload.\r\n\r\nIf it is truly the receipt, then assuming the HASH can be computed of the final receipt seems a cart before horse statement.",
+      "createdAt": "2024-07-25T18:18:22Z",
+      "updatedAt": "2024-07-26T00:38:46Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agreed that name scheme doesn't work. There are a couple of different problems here:\r\n* the collision risk identified remains a problem for durable identifiers for Receipts or registered Signed Statements. We need to tackle that separately\r\n* for the identifier returned in a 'registration is running' case, we need to return an ID for the _operation_ against which the client polls. Attention should be given to properties of this ID such as surviving pod crashes.\r\n\r\nWe implemented this for the 120 hackathon, I'll put up a R and the group can comment. ",
+          "createdAt": "2024-07-26T00:38:45Z",
+          "updatedAt": "2024-07-26T00:38:45Z"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOLJjbks6Q4deq",
+      "title": "2.1.2 Registration is Running",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/23",
+      "state": "OPEN",
+      "author": "roywill",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "What is the API to poll for complete work?  Can the server then stipulate don't ask for a period of n seconds or not?",
+      "createdAt": "2024-07-25T18:21:28Z",
+      "updatedAt": "2024-07-26T00:33:20Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We implemented this for the 120 hackathon. I'll submit a PR with the shape we used and then the group can comment on it",
+          "createdAt": "2024-07-26T00:33:19Z",
+          "updatedAt": "2024-07-26T00:33:19Z"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOLJjbks6Q4e1x",
+      "title": "2.2.1 Issue Signed Statement.",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/24",
+      "state": "OPEN",
+      "author": "roywill",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Are we asserting that the authentication identity to the end point is the identity to sign the content with?  I think we need to clarify that this can be completely different.  I do question why we need to specify a validFrom date?",
+      "createdAt": "2024-07-25T18:24:34Z",
+      "updatedAt": "2024-07-26T00:32:35Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Are we asserting that the authentication identity to the end point is the identity to sign the content with?\r\n\r\nThis should be clarified/specified indeed.\r\n\r\nGiven the context of this endpoint being environments that can't sign their own Statements, the credential can't be 1:1 equivalent to an Issuer at a deep technical/cryptographic level. Therefore some logic has to be applied in the endpoint to convert the authenticated API client into a SCITT Issuer.\r\n\r\nGiven _that_, it seems reasonable to leave it fairly open, for example by adding: \r\n\r\n\"\r\n* The Transparency Service SHOULD use a different Issuer identity for each different API client\r\n* The Transparency Service SHOULD use the same Issuer identity for every call made by the same API client\r\n\"\r\n\r\nThis language is slightly sloppy but YKWIM.",
+          "createdAt": "2024-07-26T00:32:34Z",
+          "updatedAt": "2024-07-26T00:32:34Z"
+        }
+      ]
     }
   ],
   "pulls": [
