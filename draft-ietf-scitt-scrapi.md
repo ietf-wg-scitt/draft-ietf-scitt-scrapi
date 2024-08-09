@@ -138,7 +138,8 @@ The following HTTP endpoints are mandatory to implement to enable conformance to
 ### Transparency Configuration
 
 Authentication SHOULD NOT be implemented for this endpoint.
-This endpoint is used to discovery the capabilities of a transparency service implementing this specification.
+
+This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.
 
 Request:
 
@@ -199,6 +200,8 @@ Fields that are not understood MUST be ignored.
 ### Signed Statement Registration
 
 Authentication MUST be implemented for this endpoint.
+
+This endpoint is used to register a Signed Statement with a Transparency Service.
 
 The following is a non-normative example of a HTTP request to register a Signed Statement:
 
