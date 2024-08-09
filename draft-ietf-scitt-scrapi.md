@@ -196,9 +196,9 @@ jwk-thumbprint:sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
 Additional fields may be present.
 Fields that are not understood MUST be ignored.
 
-### Signed Statement Registration
+### Register Signed Statement
 
-Authentication MUST be implemented for this endpoint.
+Authentication MAY be implemented for this endpoint. See notes on detached payloads below.
 
 The following is a non-normative example of a HTTP request to register a Signed Statement:
 
@@ -222,7 +222,7 @@ Payload (in CBOR diagnostic notation)
 The Registration Policy for the Transparency Service MUST be applied to the payload bytes, before any additional processing is performed.
 
 If the `payload` is detached, the Transparency Service depends on the authentication context of the client in the Registration Policy.
-If the `payload` is attached, the Transparency Service depends on both the authentication context of the client, and the verification of the Signed Statement in the Registration Policy.
+If the `payload` is attached, the Transparency Service depends on both the authentication context of the client (if present), and the verification of the Signed Statement in the Registration Policy.
 The details of Registration Policy are out of scope for this document.
 
 If registration succeeds the following identifier MAY be used to refer to the Signed Statement that was accepted:
