@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-08T00:32:28.627674+00:00",
+  "timestamp": "2024-08-11T00:36:15.784260+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -333,7 +333,7 @@
       "labels": [],
       "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-resolve-receipt\r\n\r\nI don't understand *why* this is desired:\r\n\r\n\"Authentication SHOULD be implemented for this endpoint\"\r\n\r\nIf the material in a receipt is, or can be, considered private to the issuer, then this should be a MUST.\r\n\r\nInstinctively I have always thought of receipts as essentially public documents. Whilst they are revealing, they are designed to be passed on to other parties.\r\n\r\nIf the intent is to permit implementations to provide for both public and private receipts, I think that model needs to be spelled out explicitly.\r\n\r\nIt would seem reasonable to me for Resolve Receipt to provide \"the defined public aspects of a receipt\" when the request was not authenticated. And the possibly sensitive parts otherwise\r\n\r\nIn practice, there are definitely usecases for obtaining a receipt for a statement issued by a different party. Its not clear at all to me how or if the authentication requirement here interacts with that.",
       "createdAt": "2024-06-23T08:04:12Z",
-      "updatedAt": "2024-08-06T14:51:44Z",
+      "updatedAt": "2024-08-09T11:35:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -356,6 +356,13 @@
           "body": "This is related to things I'm working on already: I'll put up a PR later",
           "createdAt": "2024-08-06T14:51:43Z",
           "updatedAt": "2024-08-06T14:51:43Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "In PR #27 I have added an option for Transparency Services to return a 429 response, and have deliberately not included specific request detail in there so that the TS can choose any trigger (global or local) for this.\r\n\r\nLet's see if that's enough: I don't think rate limiting is a good reason to enforce authentication",
+          "createdAt": "2024-08-09T11:35:02Z",
+          "updatedAt": "2024-08-09T11:35:02Z"
         }
       ]
     },
@@ -475,7 +482,7 @@
       "labels": [],
       "body": "The key returned in the example is the identifier of the payload or the signed statement as they are the same HASH.  If it is the payload, this precludes simultaneously registering two signed statements simultaneously.  I suspect you really want to supply a transaction token not reference anything about the signed statement nor the payload.\r\n\r\nIf it is truly the receipt, then assuming the HASH can be computed of the final receipt seems a cart before horse statement.",
       "createdAt": "2024-07-25T18:18:22Z",
-      "updatedAt": "2024-08-06T14:50:05Z",
+      "updatedAt": "2024-08-09T11:24:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -484,6 +491,13 @@
           "body": "Agreed that name scheme doesn't work. There are a couple of different problems here:\r\n* the collision risk identified remains a problem for durable identifiers for Receipts or registered Signed Statements. We need to tackle that separately\r\n* for the identifier returned in a 'registration is running' case, we need to return an ID for the _operation_ against which the client polls. Attention should be given to properties of this ID such as surviving pod crashes.\r\n\r\nWe implemented this for the 120 hackathon, I'll put up a R and the group can comment. ",
           "createdAt": "2024-07-26T00:38:45Z",
           "updatedAt": "2024-07-26T00:38:45Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "In my PR for Issue #23 I changed 'receipt' to 'identifier' which opens the door to fixing this. Probably needs more explanation but don't want to change this until we've had the discussion on PR #27 ",
+          "createdAt": "2024-08-09T11:24:57Z",
+          "updatedAt": "2024-08-09T11:24:57Z"
         }
       ]
     },
@@ -1444,6 +1458,84 @@
       "mergeCommit": {
         "oid": "780041a42669d8e5c6afee2d55dd507d69f26d28"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOLJjbks537g88",
+      "title": "Clarify need (or not) for authentication on Regsiter Signed Statement",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/26",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Issue #19\r\n\r\nAlso harmonize title with other endpoints",
+      "createdAt": "2024-08-09T10:01:25Z",
+      "updatedAt": "2024-08-09T10:01:25Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "780041a42669d8e5c6afee2d55dd507d69f26d28",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "jag-uk/19-delineate-auth-from-identity",
+      "headRefOid": "90e9a0a9e2bb0f5fbc6e7671b554c9304cc8ff4c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOLJjbks537_ZF",
+      "title": "Extra detail on polling for in-progress receipts",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/27",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Issue #23\r\n\r\nExposes another issue with signed statement identifiers which is being fixed in a different PR.",
+      "createdAt": "2024-08-09T11:23:17Z",
+      "updatedAt": "2024-08-09T11:23:17Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "780041a42669d8e5c6afee2d55dd507d69f26d28",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "jag-uk/23-async-operation",
+      "headRefOid": "aa76dfcdd4ac3ddc31cf09b2e343d956287bda4a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOLJjbks538Bvs",
+      "title": "Clarify intent statements for mandatory endpoints",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/28",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Issue #19",
+      "createdAt": "2024-08-09T11:30:05Z",
+      "updatedAt": "2024-08-09T11:30:05Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "780041a42669d8e5c6afee2d55dd507d69f26d28",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "jag-uk/19-intent-statements",
+      "headRefOid": "e078cdca28be2ce248b07f861deaaad64926490e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
