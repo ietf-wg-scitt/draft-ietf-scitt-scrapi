@@ -358,28 +358,66 @@ Request:
 POST /signed-statements/issue HTTP/1.1
 Host: transparency.example
 Accept: application/json
-Content-Type: application/vc+ld+json
+Content-Type: application/spdx+json
 Payload
 
 {
-  "@context": [
-    "https://www.w3.org/ns/credentials/v2",
-    "https://www.w3.org/ns/credentials/examples/v2"
-  ],
-  "id": "https://transparency.example/credentials/1872",
-  "type": ["VerifiableCredential", "SensorCredential"],
-  "issuer": "https://transparency.example/device/1234",
-  "validFrom": "2010-01-01T19:23:24Z",
-  "credentialSubject": {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [125.6, 10.1]
-    },
-    "properties": {
-      "name": "Dinagat Islands"
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "cli-app 0.1.2",
+  "documentNamespace": "https://spdx.org/spdxdocs/sbom-tool-2.2.7-38f61e97-e53c-46ef-a37d-62.../cli-app/0.1.2/0d06adf8a36...",
+  "creationInfo": {
+    "created": "2024-08-16T21:44:54Z",
+    "creators": [
+      "Organization: contoso"
+    ]
+  },
+  "files": [
+    {
+      "name": "cli-app",
+      "SPDXID": "SPDXRef-RootPackage",
+      "downloadLocation": "NOASSERTION",
+      "packageVerificationCode": {
+        "packageVerificationCodeValue": "ecf0aae2a849cc51..."
+      },
+      "filesAnalyzed": true,
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoFromFiles": [
+        "NOASSERTION"
+      ],
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.2",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:swid/contoso/spdx.org/cli-app@0.1.2?tag_id=ac073d0f-0aa7-4d27-87fa-7f..."
+        }
+      ],
+      "supplier": "Organization: contoso",
+      "hasFiles": [
+        "SPDXRef-File--..."
+      ]
     }
-  }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-RootPackage",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-FF36801C1982452...",
+      "spdxElementId": "SPDXRef-RootPackage"
+    }
+  ],
+  "documentDescribes": [
+    "SPDXRef-RootPackage"
+  ],
+  "externalDocumentRefs": []
 }
 ~~~
 
