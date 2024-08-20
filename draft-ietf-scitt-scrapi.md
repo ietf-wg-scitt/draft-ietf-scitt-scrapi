@@ -264,7 +264,7 @@ Fresh receipts may be requested through the resource identified in the Location 
 #### Status 202 - Registration is running
 
 ~~~ http-message
-HTTP/1.1 202 Ok
+HTTP/1.1 202 Accepted
 
 Location: https://transparency.example/receipts\
 /urn:ietf:params:scitt:signed-statement\
@@ -275,7 +275,7 @@ Retry-After: <seconds>
 
 {
 
-  "receipt": "urn:ietf:params:scitt:receipt\
+  "identifier": "urn:ietf:params:scitt:receipt\
 :sha-256:base64url:5i6UeRzg1...qnGmr1o",
 
 }
@@ -284,7 +284,7 @@ Retry-After: <seconds>
 
 The response contains a reference to the receipt which will eventually be available for the Signed Statement.
 
-If 202 is returned, then clients should wait until Registration succeeded or failed by polling the receipt endpoint using the receipt identifier returned in the response.
+If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Resolve Receipt endpoint using the identifier returned in the response.
 
 #### Status 400 - Invalid Client Request
 
@@ -461,6 +461,8 @@ Accept: application/cose
 
 Response:
 
+#### Status 200
+
 If the Signed Statement requested is already included in the Append-Only Log:
 
 ~~~ http-message
@@ -478,7 +480,9 @@ Payload (in CBOR diagnostic notation)
 ])
 ~~~
 
-If the Signed Statement requested is not yet included in the Append-Only Log:
+#### Status 202
+
+If registration of the Signed Statement requested is in progress but not yet included in the Append-Only Log:
 
 ~~~ http-message
 HTTP/1.1 202 Ok
@@ -492,7 +496,42 @@ Retry-After: <seconds>
 }
 ~~~
 
-Additional eventually consistent operation details MAY be present.
+#### Status 404
+
+If the Signed Statement requested is neither registered in the log nor subject to an in-progress registration:
+
+~~~
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+  "type": "urn:ietf:params:scitt:error\
+    :receipt:not-found",
+  "detail": \
+    "Signed Statement not known to this Transparency Service."
+}
+~~~
+
+#### Status 429
+
+If a client is polling for an in-progress registration too frequently then the Transparency Service MAY, in addition to implementing rate-limiting, return a 429 response:
+
+~~~
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: <seconds>
+
+{
+  "type": "urn:ietf:params:scitt:error\
+    :receipt:too-many-requests",
+  "detail": \
+    "Too Many Requests. Only <number> requests per <period> are allowed."
+}
+~~~
+
+#### Eventual Consistency
+
+For all responses additional eventually consistent operation details MAY be present.
 Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.
 
 ### Resolve Issuer
