@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 9 January 2025                                        Transmute
+Expires: 21 February 2025                                      Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                             8 July 2024
+                                                          20 August 2024
 
 
                           SCITT Reference APIs
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2025.
+   This Internet-Draft will expire on 21 February 2025.
 
 Copyright Notice
 
@@ -337,7 +337,7 @@ Table of Contents
 
 2.1.2.2.  Status 202 - Registration is running
 
-   HTTP/1.1 202 Ok
+   HTTP/1.1 202 Accepted
 
    Location: https://transparency.example/receipts\
    /urn:ietf:params:scitt:signed-statement\
@@ -348,7 +348,7 @@ Table of Contents
 
    {
 
-     "receipt": "urn:ietf:params:scitt:receipt\
+     "identifier": "urn:ietf:params:scitt:receipt\
    :sha-256:base64url:5i6UeRzg1...qnGmr1o",
 
    }
@@ -357,7 +357,7 @@ Table of Contents
    eventually be available for the Signed Statement.
 
    If 202 is returned, then clients should wait until Registration
-   succeeded or failed by polling the receipt endpoint using the receipt
+   succeeded or failed by polling the Resolve Receipt endpoint using the
    identifier returned in the response.
 
 2.1.2.3.  Status 400 - Invalid Client Request
@@ -518,6 +518,8 @@ Table of Contents
 
    Response:
 
+2.2.4.1.  Status 200
+
    If the Signed Statement requested is already included in the Append-
    Only Log:
 
@@ -534,8 +536,10 @@ Table of Contents
      h'269cd68f4211dffc...0dcb29c' / Signature          /
    ])
 
-   If the Signed Statement requested is not yet included in the Append-
-   Only Log:
+2.2.4.2.  Status 202
+
+   If registration of the Signed Statement requested is in progress but
+   not yet included in the Append-Only Log:
 
    HTTP/1.1 202 Ok
    Location: https://transparency.example/receipts/urn...qnGmr1o
@@ -547,9 +551,43 @@ Table of Contents
        :sha-256:base64url:5i6UeRzg1...qnGmr1o",
    }
 
-   Additional eventually consistent operation details MAY be present.
-   Support for eventually consistent Receipts is implementation
-   specific, and out of scope for this specification.
+2.2.4.3.  Status 404
+
+   If the Signed Statement requested is neither registered in the log
+   nor subject to an in-progress registration:
+
+   HTTP/1.1 404 Not Found
+   Content-Type: application/json
+
+   {
+     "type": "urn:ietf:params:scitt:error\
+       :receipt:not-found",
+     "detail": \
+       "Signed Statement not known to this Transparency Service."
+   }
+
+2.2.4.4.  Status 429
+
+   If a client is polling for an in-progress registration too frequently
+   then the Transparency Service MAY, in addition to implementing rate-
+   limiting, return a 429 response:
+
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: <seconds>
+
+{
+  "type": "urn:ietf:params:scitt:error\
+    :receipt:too-many-requests",
+  "detail": \
+    "Too Many Requests. Only <number> requests per <period> are allowed."
+}
+
+2.2.4.5.  Eventual Consistency
+
+   For all responses additional eventually consistent operation details
+   MAY be present.  Support for eventually consistent Receipts is
+   implementation specific, and out of scope for this specification.
 
 2.2.5.  Resolve Issuer
 
@@ -995,13 +1033,13 @@ Table of Contents
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-07, 8 July
+              Internet-Draft, draft-ietf-scitt-architecture-08, 22 July
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-07>.
+              scitt-architecture-08>.
 
    [IANA.params]
               IANA, "Uniform Resource Name (URN) Namespace for IETF
-              Use", <http://www.iana.org/assignments/params>.
+              Use", <https://www.iana.org/assignments/params>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,

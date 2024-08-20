@@ -27,7 +27,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.32.3
-    setuptools 69.5.1
+    setuptools 70.3.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-scitt-scrapi.xml" rel="alternate" type="application/rfc+xml">
@@ -1027,11 +1027,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SCRAPI</td>
-<td class="right">July 2024</td>
+<td class="right">August 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 9 January 2025</td>
+<td class="center">Expires 21 February 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-08" class="published">8 July 2024</time>
+<time datetime="2024-08-20" class="published">20 August 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-01-09">9 January 2025</time></dd>
+<dd class="expires"><time datetime="2025-02-21">21 February 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1107,7 +1107,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1489,7 +1489,7 @@ Fresh receipts may be requested through the resource identified in the Location 
             </h5>
 <div class="lang-http-message sourcecode" id="section-2.1.2.2-1">
 <pre>
-HTTP/1.1 202 Ok
+HTTP/1.1 202 Accepted
 
 Location: https://transparency.example/receipts\
 /urn:ietf:params:scitt:signed-statement\
@@ -1500,7 +1500,7 @@ Retry-After: &lt;seconds&gt;
 
 {
 
-  "receipt": "urn:ietf:params:scitt:receipt\
+  "identifier": "urn:ietf:params:scitt:receipt\
 :sha-256:base64url:5i6UeRzg1...qnGmr1o",
 
 }
@@ -1508,7 +1508,7 @@ Retry-After: &lt;seconds&gt;
 </pre><a href="#section-2.1.2.2-1" class="pilcrow">¶</a>
 </div>
 <p id="section-2.1.2.2-2">The response contains a reference to the receipt which will eventually be available for the Signed Statement.<a href="#section-2.1.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.2.2-3">If 202 is returned, then clients should wait until Registration succeeded or failed by polling the receipt endpoint using the receipt identifier returned in the response.<a href="#section-2.1.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.2.2-3">If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Resolve Receipt endpoint using the identifier returned in the response.<a href="#section-2.1.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-status-400-invalid-client-request">
@@ -1710,8 +1710,13 @@ Accept: application/cose
 </pre><a href="#section-2.2.4-3" class="pilcrow">¶</a>
 </div>
 <p id="section-2.2.4-4">Response:<a href="#section-2.2.4-4" class="pilcrow">¶</a></p>
-<p id="section-2.2.4-5">If the Signed Statement requested is already included in the Append-Only Log:<a href="#section-2.2.4-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.4-6">
+<div id="sec-status-200">
+<section id="section-2.2.4.1">
+            <h5 id="name-status-200">
+<a href="#section-2.2.4.1" class="section-number selfRef">2.2.4.1. </a><a href="#name-status-200" class="section-name selfRef">Status 200</a>
+            </h5>
+<p id="section-2.2.4.1-1">If the Signed Statement requested is already included in the Append-Only Log:<a href="#section-2.2.4.1-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.4.1-2">
 <pre>
 HTTP/1.1 200 Ok
 Location: https://transparency.example/receipts/urn...qnGmr1o
@@ -1725,10 +1730,17 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.2.4-6" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.4.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.4-7">If the Signed Statement requested is not yet included in the Append-Only Log:<a href="#section-2.2.4-7" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.4-8">
+</section>
+</div>
+<div id="sec-status-202">
+<section id="section-2.2.4.2">
+            <h5 id="name-status-202">
+<a href="#section-2.2.4.2" class="section-number selfRef">2.2.4.2. </a><a href="#name-status-202" class="section-name selfRef">Status 202</a>
+            </h5>
+<p id="section-2.2.4.2-1">If registration of the Signed Statement requested is in progress but not yet included in the Append-Only Log:<a href="#section-2.2.4.2-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.4.2-2">
 <pre>
 HTTP/1.1 202 Ok
 Location: https://transparency.example/receipts/urn...qnGmr1o
@@ -1739,10 +1751,62 @@ Retry-After: &lt;seconds&gt;
   "receipt": "urn:ietf:params:scitt:receipt\
     :sha-256:base64url:5i6UeRzg1...qnGmr1o",
 }
-</pre><a href="#section-2.2.4-8" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.4.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.4-9">Additional eventually consistent operation details <span class="bcp14">MAY</span> be present.
-Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.<a href="#section-2.2.4-9" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-status-404">
+<section id="section-2.2.4.3">
+            <h5 id="name-status-404">
+<a href="#section-2.2.4.3" class="section-number selfRef">2.2.4.3. </a><a href="#name-status-404" class="section-name selfRef">Status 404</a>
+            </h5>
+<p id="section-2.2.4.3-1">If the Signed Statement requested is neither registered in the log nor subject to an in-progress registration:<a href="#section-2.2.4.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2.2.4.3-2">
+<pre>
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+  "type": "urn:ietf:params:scitt:error\
+    :receipt:not-found",
+  "detail": \
+    "Signed Statement not known to this Transparency Service."
+}
+</pre><a href="#section-2.2.4.3-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="sec-status-429">
+<section id="section-2.2.4.4">
+            <h5 id="name-status-429">
+<a href="#section-2.2.4.4" class="section-number selfRef">2.2.4.4. </a><a href="#name-status-429" class="section-name selfRef">Status 429</a>
+            </h5>
+<p id="section-2.2.4.4-1">If a client is polling for an in-progress registration too frequently then the Transparency Service <span class="bcp14">MAY</span>, in addition to implementing rate-limiting, return a 429 response:<a href="#section-2.2.4.4-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2.2.4.4-2">
+<pre>
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: &lt;seconds&gt;
+
+{
+  "type": "urn:ietf:params:scitt:error\
+    :receipt:too-many-requests",
+  "detail": \
+    "Too Many Requests. Only &lt;number&gt; requests per &lt;period&gt; are allowed."
+}
+</pre><a href="#section-2.2.4.4-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="sec-eventual-consistency">
+<section id="section-2.2.4.5">
+            <h5 id="name-eventual-consistency">
+<a href="#section-2.2.4.5" class="section-number selfRef">2.2.4.5. </a><a href="#name-eventual-consistency" class="section-name selfRef">Eventual Consistency</a>
+            </h5>
+<p id="section-2.2.4.5-1">For all responses additional eventually consistent operation details <span class="bcp14">MAY</span> be present.
+Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.<a href="#section-2.2.4.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-resolve-issuer">
@@ -2235,6 +2299,7 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
+<div id="sec-combined-references">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -2247,11 +2312,11 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <dl class="references">
 <dt id="I-D.draft-ietf-scitt-architecture">[I-D.draft-ietf-scitt-architecture]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-07</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-07">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-08</span>, <time datetime="2024-07-22" class="refDate">22 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-08">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.params">[IANA.params]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Uniform Resource Name (URN) Namespace for IETF Use"</span>, <span>&lt;<a href="http://www.iana.org/assignments/params">http://www.iana.org/assignments/params</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Uniform Resource Name (URN) Namespace for IETF Use"</span>, <span>&lt;<a href="https://www.iana.org/assignments/params">https://www.iana.org/assignments/params</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -2314,6 +2379,7 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
+</div>
 <div id="authors-addresses">
 <section id="appendix-A">
       <h2 id="name-authors-addresses">
