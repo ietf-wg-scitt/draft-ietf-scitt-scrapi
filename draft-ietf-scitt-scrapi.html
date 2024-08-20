@@ -1154,7 +1154,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
                     <p id="section-toc.1-1.2.2.1.2.1.1" class="keepWithNext"><a href="#section-2.1.1" class="auto internal xref">2.1.1</a>.  <a href="#name-transparency-configuration" class="internal xref">Transparency Configuration</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.2">
-                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-signed-statement-registrati" class="internal xref">Signed Statement Registration</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-register-signed-statement" class="internal xref">Register Signed Statement</a></p>
 </li>
                 </ul>
 </li>
@@ -1419,12 +1419,13 @@ jwk-thumbprint:sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
 Fields that are not understood <span class="bcp14">MUST</span> be ignored.<a href="#section-2.1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="sec-signed-statement-registration">
+<div id="sec-register-signed-statement">
 <section id="section-2.1.2">
-          <h4 id="name-signed-statement-registrati">
-<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-signed-statement-registrati" class="section-name selfRef">Signed Statement Registration</a>
+          <h4 id="name-register-signed-statement">
+<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-register-signed-statement" class="section-name selfRef">Register Signed Statement</a>
           </h4>
-<p id="section-2.1.2-1">Authentication <span class="bcp14">MUST</span> be implemented for this endpoint.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-1">Authentication <span class="bcp14">MAY</span> be implemented for this endpoint.
+See notes on detached payloads below.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-2">The following is a non-normative example of a HTTP request to register a Signed Statement:<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-3">Request:<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
 <div class="lang-http sourcecode" id="section-2.1.2-4">
@@ -1445,7 +1446,7 @@ Payload (in CBOR diagnostic notation)
 </div>
 <p id="section-2.1.2-5">The Registration Policy for the Transparency Service <span class="bcp14">MUST</span> be applied to the payload bytes, before any additional processing is performed.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-6">If the <code>payload</code> is detached, the Transparency Service depends on the authentication context of the client in the Registration Policy.
-If the <code>payload</code> is attached, the Transparency Service depends on both the authentication context of the client, and the verification of the Signed Statement in the Registration Policy.
+If the <code>payload</code> is attached, the Transparency Service depends on both the authentication context of the client (if present), and the verification of the Signed Statement in the Registration Policy.
 The details of Registration Policy are out of scope for this document.<a href="#section-2.1.2-6" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-7">If registration succeeds the following identifier <span class="bcp14">MAY</span> be used to refer to the Signed Statement that was accepted:<a href="#section-2.1.2-7" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-8"><code>urn:ietf:params:scitt:signed-statement:sha-256:base64url:5i6UeRzg1...qnGmr1o</code><a href="#section-2.1.2-8" class="pilcrow">¶</a></p>

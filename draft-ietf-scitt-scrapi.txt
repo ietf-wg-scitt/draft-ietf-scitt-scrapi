@@ -75,7 +75,7 @@ Table of Contents
    2.  Endpoints
      2.1.  Mandatory
        2.1.1.  Transparency Configuration
-       2.1.2.  Signed Statement Registration
+       2.1.2.  Register Signed Statement
      2.2.  Optional Endpoints
        2.2.1.  Issue Signed Statement
        2.2.2.  Resolve Statement
@@ -264,9 +264,10 @@ Table of Contents
    Additional fields may be present.  Fields that are not understood
    MUST be ignored.
 
-2.1.2.  Signed Statement Registration
+2.1.2.  Register Signed Statement
 
-   Authentication MUST be implemented for this endpoint.
+   Authentication MAY be implemented for this endpoint.  See notes on
+   detached payloads below.
 
    The following is a non-normative example of a HTTP request to
    register a Signed Statement:
@@ -292,9 +293,9 @@ Table of Contents
    If the payload is detached, the Transparency Service depends on the
    authentication context of the client in the Registration Policy.  If
    the payload is attached, the Transparency Service depends on both the
-   authentication context of the client, and the verification of the
-   Signed Statement in the Registration Policy.  The details of
-   Registration Policy are out of scope for this document.
+   authentication context of the client (if present), and the
+   verification of the Signed Statement in the Registration Policy.  The
+   details of Registration Policy are out of scope for this document.
 
    If registration succeeds the following identifier MAY be used to
    refer to the Signed Statement that was accepted:
