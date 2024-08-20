@@ -198,7 +198,8 @@ Fields that are not understood MUST be ignored.
 
 ### Register Signed Statement
 
-Authentication MAY be implemented for this endpoint. See notes on detached payloads below.
+Authentication MAY be implemented for this endpoint.
+See notes on detached payloads below.
 
 The following is a non-normative example of a HTTP request to register a Signed Statement:
 
