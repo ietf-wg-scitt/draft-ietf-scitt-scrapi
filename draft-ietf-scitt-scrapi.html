@@ -1361,18 +1361,18 @@ In the absence of this header field, this document does not specify a minimum.<a
           <h4 id="name-transparency-configuration">
 <a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-transparency-configuration" class="section-name selfRef">Transparency Configuration</a>
           </h4>
-<p id="section-2.1.1-1">Authentication <span class="bcp14">SHOULD NOT</span> be implemented for this endpoint.
-This endpoint is used to discovery the capabilities of a transparency service implementing this specification.<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.1-2">Request:<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.1.1-3">
+<p id="section-2.1.1-1">Authentication <span class="bcp14">SHOULD NOT</span> be implemented for this endpoint.<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.1-2">This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.1-3">Request:<a href="#section-2.1.1-3" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.1-4">
 <pre>
 GET /.well-known/transparency-configuration HTTP/1.1
 Host: transparency.example
 Accept: application/json
-</pre><a href="#section-2.1.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.1-4" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1.1-4">Response:<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.1.1-5">
+<p id="section-2.1.1-5">Response:<a href="#section-2.1.1-5" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.1-6">
 <pre>
 HTTP/1.1 200 Ok
 Content-Type: application/json
@@ -1413,10 +1413,10 @@ jwk-thumbprint:sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
     ]
   }
 }
-</pre><a href="#section-2.1.1-5" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1.1-6">Additional fields may be present.
-Fields that are not understood <span class="bcp14">MUST</span> be ignored.<a href="#section-2.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-2.1.1-7">Additional fields may be present.
+Fields that are not understood <span class="bcp14">MUST</span> be ignored.<a href="#section-2.1.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-register-signed-statement">
@@ -1426,9 +1426,10 @@ Fields that are not understood <span class="bcp14">MUST</span> be ignored.<a hre
           </h4>
 <p id="section-2.1.2-1">Authentication <span class="bcp14">MAY</span> be implemented for this endpoint.
 See notes on detached payloads below.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-2">The following is a non-normative example of a HTTP request to register a Signed Statement:<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-3">Request:<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
-<div class="lang-http sourcecode" id="section-2.1.2-4">
+<p id="section-2.1.2-2">This endpoint is used to register a Signed Statement with a Transparency Service.<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-3">The following is a non-normative example of a HTTP request to register a Signed Statement:<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-4">Request:<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
+<div class="lang-http sourcecode" id="section-2.1.2-5">
 <pre>
 POST /entries HTTP/1.1
 Host: transparency.example
@@ -1442,18 +1443,18 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.1.2-4" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.2-5" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1.2-5">The Registration Policy for the Transparency Service <span class="bcp14">MUST</span> be applied to the payload bytes, before any additional processing is performed.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-6">If the <code>payload</code> is detached, the Transparency Service depends on the authentication context of the client in the Registration Policy.
+<p id="section-2.1.2-6">The Registration Policy for the Transparency Service <span class="bcp14">MUST</span> be applied to the payload bytes, before any additional processing is performed.<a href="#section-2.1.2-6" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-7">If the <code>payload</code> is detached, the Transparency Service depends on the authentication context of the client in the Registration Policy.
 If the <code>payload</code> is attached, the Transparency Service depends on both the authentication context of the client (if present), and the verification of the Signed Statement in the Registration Policy.
-The details of Registration Policy are out of scope for this document.<a href="#section-2.1.2-6" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-7">If registration succeeds the following identifier <span class="bcp14">MAY</span> be used to refer to the Signed Statement that was accepted:<a href="#section-2.1.2-7" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-8"><code>urn:ietf:params:scitt:signed-statement:sha-256:base64url:5i6UeRzg1...qnGmr1o</code><a href="#section-2.1.2-8" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-9">If the <code>payload</code> was attached, or otherwise communicated to the Transparency Service, the following identifier <span class="bcp14">MAY</span> be used to refer to the <code>payload</code> of the Signed Statement:<a href="#section-2.1.2-9" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-10"><code>urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o</code><a href="#section-2.1.2-10" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-11">Response:<a href="#section-2.1.2-11" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-12">One of the following:<a href="#section-2.1.2-12" class="pilcrow">¶</a></p>
+The details of Registration Policy are out of scope for this document.<a href="#section-2.1.2-7" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-8">If registration succeeds the following identifier <span class="bcp14">MAY</span> be used to refer to the Signed Statement that was accepted:<a href="#section-2.1.2-8" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-9"><code>urn:ietf:params:scitt:signed-statement:sha-256:base64url:5i6UeRzg1...qnGmr1o</code><a href="#section-2.1.2-9" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-10">If the <code>payload</code> was attached, or otherwise communicated to the Transparency Service, the following identifier <span class="bcp14">MAY</span> be used to refer to the <code>payload</code> of the Signed Statement:<a href="#section-2.1.2-10" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-11"><code>urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o</code><a href="#section-2.1.2-11" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-12">Response:<a href="#section-2.1.2-12" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-13">One of the following:<a href="#section-2.1.2-13" class="pilcrow">¶</a></p>
 <div id="sec-status-201-registration-is-successful">
 <section id="section-2.1.2.1">
             <h5 id="name-status-201-registration-is-">

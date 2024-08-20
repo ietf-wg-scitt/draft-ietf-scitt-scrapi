@@ -209,9 +209,11 @@ Table of Contents
 
 2.1.1.  Transparency Configuration
 
-   Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to discovery the capabilities of a transparency
-   service implementing this specification.
+   Authentication SHOULD NOT be implemented for this endpoint.
+
+   This endpoint is used to discover the capabilities and current
+   configuration of a transparency service implementing this
+   specification.
 
    Request:
 
@@ -268,6 +270,9 @@ Table of Contents
 
    Authentication MAY be implemented for this endpoint.  See notes on
    detached payloads below.
+
+   This endpoint is used to register a Signed Statement with a
+   Transparency Service.
 
    The following is a non-normative example of a HTTP request to
    register a Signed Statement:
