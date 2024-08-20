@@ -538,6 +538,45 @@ Retry-After: <seconds>
 For all responses additional eventually consistent operation details MAY be present.
 Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.
 
+### Exchange Receipt
+
+This endpoint is used to exchange old or expiring receipts for fresh ones.
+
+The `iat`, `exp` and `kid` claims can change each time a receipt is exchanged.
+
+This means that fresh receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
+
+Authentication SHOULD be implemented for this endpoint.
+
+Request:
+
+~~~ http-message
+POST /exchange/receipt HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+Content-Type: application/cose
+~~~
+
+#### Status 200
+
+A new receipt:
+
+~~~ http-message
+HTTP/1.1 200 Ok
+Location: https://transparency.example/receipts/urn...qnGmr1o
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+
 ### Resolve Issuer
 
 This endpoint is inspired by {{-SD-JWT-VC}}.
