@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-20T00:32:37.064424+00:00",
+  "timestamp": "2024-08-22T00:32:45.815472+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -397,7 +397,7 @@
       "id": "I_kwDOLJjbks6Q4Uq5",
       "title": "2.1.2 Signed Statement Registration MUST implement authentication.",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "roywill",
       "authorAssociation": "NONE",
       "assignees": [
@@ -406,8 +406,8 @@
       "labels": [],
       "body": "In the case of a government end point, why must client authentication be implemented.  The signature on the statement is the authentication for the content and is ultimately who is making a reputation statement.",
       "createdAt": "2024-07-25T18:06:08Z",
-      "updatedAt": "2024-08-06T14:50:05Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-20T14:31:14Z",
+      "closedAt": "2024-08-20T14:31:14Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -415,6 +415,13 @@
           "body": "Agreed. In addition to this I think there are several places where we need to clean up seemingly helpful implementation comments which are actually harmful. For instance the mention of using auth for rate limiting is a fine thing to say but it's nothing to do with SCITT and will be done in other layers by any sensible implementation.",
           "createdAt": "2024-07-26T00:46:48Z",
           "updatedAt": "2024-07-26T00:46:48Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Resolved by #28 ",
+          "createdAt": "2024-08-20T14:31:14Z",
+          "updatedAt": "2024-08-20T14:31:14Z"
         }
       ]
     },
@@ -515,7 +522,7 @@
       "labels": [],
       "body": "What is the API to poll for complete work?  Can the server then stipulate don't ask for a period of n seconds or not?",
       "createdAt": "2024-07-25T18:21:28Z",
-      "updatedAt": "2024-08-06T14:50:05Z",
+      "updatedAt": "2024-08-20T14:41:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -524,6 +531,13 @@
           "body": "We implemented this for the 120 hackathon. I'll submit a PR with the shape we used and then the group can comment on it",
           "createdAt": "2024-07-26T00:33:19Z",
           "updatedAt": "2024-07-26T00:33:19Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "todo: add an async status api",
+          "createdAt": "2024-08-20T14:41:12Z",
+          "updatedAt": "2024-08-20T14:41:12Z"
         }
       ]
     },
@@ -541,7 +555,7 @@
       "labels": [],
       "body": "Are we asserting that the authentication identity to the end point is the identity to sign the content with?  I think we need to clarify that this can be completely different.  I do question why we need to specify a validFrom date?",
       "createdAt": "2024-07-25T18:24:34Z",
-      "updatedAt": "2024-08-06T14:50:06Z",
+      "updatedAt": "2024-08-20T14:40:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -550,6 +564,13 @@
           "body": "> Are we asserting that the authentication identity to the end point is the identity to sign the content with?\r\n\r\nThis should be clarified/specified indeed.\r\n\r\nGiven the context of this endpoint being environments that can't sign their own Statements, the credential can't be 1:1 equivalent to an Issuer at a deep technical/cryptographic level. Therefore some logic has to be applied in the endpoint to convert the authenticated API client into a SCITT Issuer.\r\n\r\nGiven _that_, it seems reasonable to leave it fairly open, for example by adding: \r\n\r\n\"\r\n* The Transparency Service SHOULD use a different Issuer identity for each different API client\r\n* The Transparency Service SHOULD use the same Issuer identity for every call made by the same API client\r\n\"\r\n\r\nThis language is slightly sloppy but YKWIM.",
           "createdAt": "2024-07-26T00:32:34Z",
           "updatedAt": "2024-07-26T00:32:34Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The example in https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.2.1 should be updated to not be a W3C credential",
+          "createdAt": "2024-08-20T14:40:45Z",
+          "updatedAt": "2024-08-20T14:40:45Z"
         }
       ]
     },
@@ -561,11 +582,13 @@
       "state": "OPEN",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "aj-stein-nist"
+      ],
       "labels": [],
       "body": "              I like the guidance we are giving in this area, but we use an example to define the specific error to return.  \r\n\r\n    As an example, submitting a Signed Statement with an unsupported signature algorithm **would** return a 400 Bad Request status code and the following body:\r\n\r\nMust it be 400 or is that a suggestion?\r\n\r\n_Originally posted by @roywill in https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/2#issuecomment-2251099959_\r\n            ",
       "createdAt": "2024-08-06T14:53:52Z",
-      "updatedAt": "2024-08-06T14:54:44Z",
+      "updatedAt": "2024-08-20T14:35:11Z",
       "closedAt": null,
       "comments": [
         {
@@ -576,6 +599,22 @@
           "updatedAt": "2024-08-06T14:54:43Z"
         }
       ]
+    },
+    {
+      "number": 32,
+      "id": "I_kwDOLJjbks6TmFp5",
+      "title": "Replace all encoded protected headers with better examples",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/32",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "For example:\r\n\r\n```\r\n<<{\r\n/ alg / 1: -7, / ES256 /\r\n/ VDS / 395: 1,  / SHA-256 Binary Merkle Tree /\r\n/ CWT Claims / 15: { \r\n  / issuer   / 1: \"https://iss.example\", \r\n  / subject / 2: \"https://sub.example\" \r\n}}>>\r\n```",
+      "createdAt": "2024-08-20T18:06:09Z",
+      "updatedAt": "2024-08-20T18:08:05Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -1466,72 +1505,311 @@
       "id": "PR_kwDOLJjbks537g88",
       "title": "Clarify need (or not) for authentication on Regsiter Signed Statement",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/26",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Issue #19\r\n\r\nAlso harmonize title with other endpoints",
       "createdAt": "2024-08-09T10:01:25Z",
-      "updatedAt": "2024-08-09T10:01:25Z",
+      "updatedAt": "2024-08-20T14:30:47Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "780041a42669d8e5c6afee2d55dd507d69f26d28",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/19-delineate-auth-from-identity",
-      "headRefOid": "90e9a0a9e2bb0f5fbc6e7671b554c9304cc8ff4c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "4c98cf338e6be5e5e45aa7398559f51001bf4954",
+      "closedAt": "2024-08-20T14:30:47Z",
+      "mergedAt": "2024-08-20T14:30:47Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "0b9c75364f1ee96596c39c9edd9d0eea97759145"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6F_9pZ",
+          "commit": {
+            "abbreviatedOid": "90e9a0a"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-20T14:12:33Z",
+          "updatedAt": "2024-08-20T14:12:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6GAHYk",
+          "commit": {
+            "abbreviatedOid": "90e9a0a"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-08-20T14:26:32Z",
+          "updatedAt": "2024-08-20T14:26:32Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6GAHmi",
+          "commit": {
+            "abbreviatedOid": "90e9a0a"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-20T14:26:50Z",
+          "updatedAt": "2024-08-20T14:26:51Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nAuthentication MAY be implemented for this endpoint.\r\nSee notes on detached payloads below.\r\n```",
+              "createdAt": "2024-08-20T14:26:50Z",
+              "updatedAt": "2024-08-20T14:26:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6GAIZo",
+          "commit": {
+            "abbreviatedOid": "4c98cf3"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "On internal or truly public instances this could be MAY",
+          "createdAt": "2024-08-20T14:28:00Z",
+          "updatedAt": "2024-08-20T14:28:00Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 27,
       "id": "PR_kwDOLJjbks537_ZF",
       "title": "Extra detail on polling for in-progress receipts",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/27",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Issue #23\r\n\r\nExposes another issue with signed statement identifiers which is being fixed in a different PR.",
       "createdAt": "2024-08-09T11:23:17Z",
-      "updatedAt": "2024-08-09T11:23:17Z",
+      "updatedAt": "2024-08-20T14:25:32Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "780041a42669d8e5c6afee2d55dd507d69f26d28",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/23-async-operation",
       "headRefOid": "aa76dfcdd4ac3ddc31cf09b2e343d956287bda4a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-08-20T14:25:32Z",
+      "mergedAt": "2024-08-20T14:25:32Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "542e2bd0f871512fd02977ab667dc0ae8aa05661"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6F_9A4",
+          "commit": {
+            "abbreviatedOid": "aa76dfc"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-20T14:11:53Z",
+          "updatedAt": "2024-08-20T14:11:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6GAGS9",
+          "commit": {
+            "abbreviatedOid": "aa76dfc"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-08-20T14:24:58Z",
+          "updatedAt": "2024-08-20T14:24:58Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 28,
       "id": "PR_kwDOLJjbks538Bvs",
       "title": "Clarify intent statements for mandatory endpoints",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/28",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Issue #19",
       "createdAt": "2024-08-09T11:30:05Z",
-      "updatedAt": "2024-08-09T11:30:05Z",
+      "updatedAt": "2024-08-20T14:34:30Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "780041a42669d8e5c6afee2d55dd507d69f26d28",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/19-intent-statements",
       "headRefOid": "e078cdca28be2ce248b07f861deaaad64926490e",
+      "closedAt": "2024-08-20T14:34:24Z",
+      "mergedAt": "2024-08-20T14:34:24Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "888fcfba5e5d1f785043645b47f71d64a90a5b31"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6F_9Sx",
+          "commit": {
+            "abbreviatedOid": "e078cdc"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-20T14:12:09Z",
+          "updatedAt": "2024-08-20T14:12:09Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6GAMyb",
+          "commit": {
+            "abbreviatedOid": "e078cdc"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-08-20T14:34:08Z",
+          "updatedAt": "2024-08-20T14:34:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6GAMzX",
+          "commit": {
+            "abbreviatedOid": "e078cdc"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-20T14:34:10Z",
+          "updatedAt": "2024-08-20T14:34:10Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOLJjbks544mJf",
+      "title": "Remove DID Resolution Resource",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/29",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-20T17:08:39Z",
+      "updatedAt": "2024-08-20T17:22:07Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "888fcfba5e5d1f785043645b47f71d64a90a5b31",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "remove-did",
+      "headRefOid": "6e94761efd4762ee5ea5370f510a93b98215a8a9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6GBx7W",
+          "commit": {
+            "abbreviatedOid": "6e94761"
+          },
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-20T17:22:07Z",
+          "updatedAt": "2024-08-20T17:22:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDOLJjbks544qfu",
+      "title": "Change signed statement example",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/30",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-20T17:19:47Z",
+      "updatedAt": "2024-08-20T17:52:15Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "888fcfba5e5d1f785043645b47f71d64a90a5b31",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "fix-example-data",
+      "headRefOid": "4d32d824fca92fbb78abd9918206b00f88525177",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6GB_eb",
+          "commit": {
+            "abbreviatedOid": "4d32d82"
+          },
+          "author": "aj-stein-nist",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "I did a double-take on this one until I read the surrounding content, but looks good to me.",
+          "createdAt": "2024-08-20T17:52:15Z",
+          "updatedAt": "2024-08-20T17:52:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOLJjbks544tmJ",
+      "title": "Add exchange receipt",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/31",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-20T17:28:29Z",
+      "updatedAt": "2024-08-20T17:28:29Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "888fcfba5e5d1f785043645b47f71d64a90a5b31",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "exchange-receipt",
+      "headRefOid": "8be86a94c81c5bb63b7cdaffab8e46cc72bdd98c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
