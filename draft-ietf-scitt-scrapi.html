@@ -1179,9 +1179,6 @@ Optional key discovery and query interfaces are provided to support interoperabi
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.6">
                     <p id="section-toc.1-1.2.2.2.2.6.1"><a href="#section-2.2.6" class="auto internal xref">2.2.6</a>.  <a href="#name-request-nonce" class="internal xref">Request Nonce</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.7">
-                    <p id="section-toc.1-1.2.2.2.2.7.1"><a href="#section-2.2.7" class="auto internal xref">2.2.7</a>.  <a href="#name-resolve-issuer-did" class="internal xref">Resolve Issuer DID</a></p>
-</li>
                 </ul>
 </li>
             </ul>
@@ -1930,115 +1927,6 @@ Content-Type: application/json
   "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
 }
 </pre><a href="#section-2.2.6-6" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-<div id="sec-resolve-issuer-did">
-<section id="section-2.2.7">
-          <h4 id="name-resolve-issuer-did">
-<a href="#section-2.2.7" class="section-number selfRef">2.2.7. </a><a href="#name-resolve-issuer-did" class="section-name selfRef">Resolve Issuer DID</a>
-          </h4>
-<p id="section-2.2.7-1">This endpoint enables the use of the DID Web Decentralized Identifier Method, as an alternative expression of the Issuer Metadata endpoint.<a href="#section-2.2.7-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.7-2">This endpoint is DEPRECATED.<a href="#section-2.2.7-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.7-3">The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when <code>iss</code> is set to <code>did:web:transparency.example:tenant:1234</code>:<a href="#section-2.2.7-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.7-4">Request:<a href="#section-2.2.7-4" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.7-5">
-<pre>
-GET /tenant/1234/did.json HTTP/1.1
-Host: transparency.example
-Accept: application/did+ld+json
-</pre><a href="#section-2.2.7-5" class="pilcrow">¶</a>
-</div>
-<p id="section-2.2.7-6">Response:<a href="#section-2.2.7-6" class="pilcrow">¶</a></p>
-<div class="breakable lang-http-message sourcecode" id="section-2.2.7-7">
-<pre>
-HTTP/1.1 200 Ok
-Content-Type: application/did+ld+json
-
-{
-  "@context": [
-    "https://www.w3.org/ns/did/v1",
-    {
-      "@vocab": "https://vocab.transparency.example#"
-    }
-  ],
-  "id": "did:web:transparency.example:tenant:1234",
-  "verificationMethod": [
-    {
-      "id": "did:web:transparency.example:tenant:1234\
-        #urn:ietf:params:oauth:jwk-thumbprint\
-        :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-      "type": "JsonWebKey",
-      "controller": "did:web:transparency.example:tenant:1234",
-      "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-          :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-        "alg": "ES256",
-        "use": "sig",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "9ptuW0PBHSTN7bVexWd7xM5kmSPGRaCu-K3SLtJyvNc",
-        "y": "l7NvF6QbovicSciZqu_W_xy4JTZwtnUbn2SNdMKoaAk"
-      }
-    },
-    {
-      "id": "did:web:transparency.example:tenant:1234\
-        #urn:ietf:params:oauth:jwk-thumbprint\
-        :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-      "type": "JsonWebKey",
-      "controller": "did:web:transparency.example:tenant:1234",
-      "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-          :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-        "alg": "ES256",
-        "use": "sig",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
-        "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
-      }
-    },
-    {
-      "id": "did:web:transparency.example:tenant:1234\
-        #urn:ietf:params:oauth:jwk-thumbprint\
-        :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-      "type": "JsonWebKey",
-      "controller": "did:web:transparency.example:tenant:1234",
-      "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-          :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-        "alg": "HPKE-Base-P256-SHA256-AES128GCM",
-        "use": "enc",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
-        "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
-      }
-    }
-  ],
-  "assertionMethod": [
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-  ],
-  "authentication": [
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-  ],
-  "keyAgreement": [
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE"
-  ]
-}
-</pre><a href="#section-2.2.7-7" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
