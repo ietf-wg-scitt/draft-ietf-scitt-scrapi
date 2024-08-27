@@ -12,11 +12,11 @@
        This document describes a REST API that supports the normative requirements of the SCITT Architecture.
 Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Repositories. 
     " name="description">
-<meta content="xml2rfc 3.22.0" name="generator">
+<meta content="xml2rfc 3.23.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-scitt-scrapi-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.22.0
+  xml2rfc 3.23.0
     Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
@@ -1031,7 +1031,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 21 February 2025</td>
+<td class="center">Expires 28 February 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-08-20" class="published">20 August 2024</time>
+<time datetime="2024-08-27" class="published">27 August 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-02-21">21 February 2025</time></dd>
+<dd class="expires"><time datetime="2025-02-28">28 February 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1107,7 +1107,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1591,33 +1591,71 @@ Retry-After: &lt;seconds&gt;
 <p id="section-2.2.1-2">This endpoint enables a Transparency Service to be an issuer of Signed Statements on behalf of authenticated clients.
 This supports cases where a client lacks the ability to perform complex cryptographic operations, but can be authenticated and report statements and measurements.<a href="#section-2.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-2.2.1-3">Request:<a href="#section-2.2.1-3" class="pilcrow">¶</a></p>
-<div class="lang-http sourcecode" id="section-2.2.1-4">
+<div class="breakable lang-http sourcecode" id="section-2.2.1-4">
 <pre>
 POST /signed-statements/issue HTTP/1.1
 Host: transparency.example
 Accept: application/json
-Content-Type: application/vc+ld+json
+Content-Type: application/spdx+json
 Payload
 
 {
-  "@context": [
-    "https://www.w3.org/ns/credentials/v2",
-    "https://www.w3.org/ns/credentials/examples/v2"
-  ],
-  "id": "https://transparency.example/credentials/1872",
-  "type": ["VerifiableCredential", "SensorCredential"],
-  "issuer": "https://transparency.example/device/1234",
-  "validFrom": "2010-01-01T19:23:24Z",
-  "credentialSubject": {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [125.6, 10.1]
-    },
-    "properties": {
-      "name": "Dinagat Islands"
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "cli-app 0.1.2",
+  "documentNamespace": "https://spdx.org/spdxdocs/sbom-tool-2.2.7-38f61e97-e53c-46ef-a37d-62.../cli-app/0.1.2/0d06adf8a36...",
+  "creationInfo": {
+    "created": "2024-08-16T21:44:54Z",
+    "creators": [
+      "Organization: contoso"
+    ]
+  },
+  "files": [
+    {
+      "name": "cli-app",
+      "SPDXID": "SPDXRef-RootPackage",
+      "downloadLocation": "NOASSERTION",
+      "packageVerificationCode": {
+        "packageVerificationCodeValue": "ecf0aae2a849cc51..."
+      },
+      "filesAnalyzed": true,
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoFromFiles": [
+        "NOASSERTION"
+      ],
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.2",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:swid/contoso/spdx.org/cli-app@0.1.2?tag_id=ac073d0f-0aa7-4d27-87fa-7f..."
+        }
+      ],
+      "supplier": "Organization: contoso",
+      "hasFiles": [
+        "SPDXRef-File--..."
+      ]
     }
-  }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-RootPackage",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-FF36801C1982452...",
+      "spdxElementId": "SPDXRef-RootPackage"
+    }
+  ],
+  "documentDescribes": [
+    "SPDXRef-RootPackage"
+  ],
+  "externalDocumentRefs": []
 }
 </pre><a href="#section-2.2.1-4" class="pilcrow">¶</a>
 </div>
