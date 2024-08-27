@@ -584,7 +584,6 @@ Payload (in CBOR diagnostic notation)
 ])
 ~~~
 
-
 ### Resolve Issuer
 
 This endpoint is inspired by {{-SD-JWT-VC}}.
