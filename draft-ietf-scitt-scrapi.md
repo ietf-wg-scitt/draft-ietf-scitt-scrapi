@@ -555,6 +555,14 @@ POST /exchange/receipt HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 Content-Type: application/cose
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
 ~~~
 
 #### Status 200
