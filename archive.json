@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-27T00:33:32.271597+00:00",
+  "timestamp": "2024-08-29T00:33:53.560870+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -276,12 +276,13 @@
       "author": "robinbryce",
       "authorAssociation": "NONE",
       "assignees": [
+        "SteveLasker",
         "JAG-UK"
       ],
       "labels": [],
       "body": "In [2.1.2. ](https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#section-2.1.2)[Signed Statement Registration](https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-signed-statement-registrati)\r\n\r\nWe have \"The Registration Policy for the Transparency Service MUST be applied to the payload bytes, before any additional processing is performed\"\r\n\r\nThis appears to rule out implementations which do async processing of registration statements.\r\n\r\nI understood that the combined effect, and intent, of\r\n\r\nhttps://www.ietf.org/archive/id/draft-ietf-scitt-architecture-06.html#name-registration 5. & 7. With the subsequent text\r\n\r\n\"A Transparency Service MUST ensure that a Signed Statement is registered before releasing its Receipt.\"\r\n\r\nWas to enable the implementation to defer application of registration policies until receipt issuance.\r\n\r\nI think, if that is consistent with the intent of the authors intent, a specific requirement along the lines of \"Registration policies MUST be applied before issuing a Receipt\" would be much clearer\r\n",
       "createdAt": "2024-06-23T07:38:29Z",
-      "updatedAt": "2024-08-06T14:50:03Z",
+      "updatedAt": "2024-08-27T14:39:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -459,11 +460,13 @@
       "state": "OPEN",
       "author": "roywill",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "roywill"
+      ],
       "labels": [],
       "body": "Since this section is talking about registration, why is refresh paradigm left dangling at the end.  Is it thought to use this same method to ask for a refresh?  I can see getting a new receipt, but that may fail due to the time validity of the signed statement.  If you expect it to be based on previous data on the log, then it needs to be indexed based on the previous receipt.",
       "createdAt": "2024-07-25T18:14:41Z",
-      "updatedAt": "2024-07-26T00:41:01Z",
+      "updatedAt": "2024-08-27T14:36:17Z",
       "closedAt": null,
       "comments": [
         {
@@ -588,7 +591,7 @@
       "labels": [],
       "body": "              I like the guidance we are giving in this area, but we use an example to define the specific error to return.  \r\n\r\n    As an example, submitting a Signed Statement with an unsupported signature algorithm **would** return a 400 Bad Request status code and the following body:\r\n\r\nMust it be 400 or is that a suggestion?\r\n\r\n_Originally posted by @roywill in https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/2#issuecomment-2251099959_\r\n            ",
       "createdAt": "2024-08-06T14:53:52Z",
-      "updatedAt": "2024-08-20T14:35:11Z",
+      "updatedAt": "2024-08-27T14:35:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -597,6 +600,13 @@
           "body": "I can pick this one up per discussion in an editors' meeting.",
           "createdAt": "2024-08-06T14:54:43Z",
           "updatedAt": "2024-08-06T14:54:43Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "ping @aj-stein-nist for some \ud83d\udc40",
+          "createdAt": "2024-08-27T14:35:25Z",
+          "updatedAt": "2024-08-27T14:35:25Z"
         }
       ]
     },
@@ -608,11 +618,45 @@
       "state": "OPEN",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "henkbirkholz"
+      ],
       "labels": [],
       "body": "For example:\r\n\r\n```\r\n<<{\r\n/ alg / 1: -7, / ES256 /\r\n/ VDS / 395: 1,  / SHA-256 Binary Merkle Tree /\r\n/ CWT Claims / 15: { \r\n  / issuer   / 1: \"https://iss.example\", \r\n  / subject / 2: \"https://sub.example\" \r\n}}>>\r\n```",
       "createdAt": "2024-08-20T18:06:09Z",
-      "updatedAt": "2024-08-20T18:08:05Z",
+      "updatedAt": "2024-08-27T14:37:55Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 33,
+      "id": "I_kwDOLJjbks6UZNnj",
+      "title": "Add support for multiple notaries",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/33",
+      "state": "OPEN",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "On the register statement API, a TS could be a front end to multiple Transparency Services. It may be hashed by country or industry. \r\nThe question is whether the API should add a parameter for which Notary to use, or it may be inferred by other parameters, or the identity of the client.",
+      "createdAt": "2024-08-27T14:58:49Z",
+      "updatedAt": "2024-08-27T14:58:49Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 34,
+      "id": "I_kwDOLJjbks6UZN_A",
+      "title": "Capture a set of requirements that have must, should",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/34",
+      "state": "OPEN",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-27T14:59:24Z",
+      "updatedAt": "2024-08-27T14:59:24Z",
       "closedAt": null,
       "comments": []
     }
@@ -1716,24 +1760,26 @@
       "id": "PR_kwDOLJjbks544mJf",
       "title": "Remove DID Resolution Resource",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/29",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-08-20T17:08:39Z",
-      "updatedAt": "2024-08-20T17:22:07Z",
+      "updatedAt": "2024-08-27T14:27:52Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "888fcfba5e5d1f785043645b47f71d64a90a5b31",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "remove-did",
       "headRefOid": "6e94761efd4762ee5ea5370f510a93b98215a8a9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-08-27T14:27:52Z",
+      "mergedAt": "2024-08-27T14:27:52Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "9a6e48c1e7ba19f319f3f24f13f2e92fdf26d536"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1748,6 +1794,45 @@
           "createdAt": "2024-08-20T17:22:07Z",
           "updatedAt": "2024-08-20T17:22:07Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6G6zOg",
+          "commit": {
+            "abbreviatedOid": "6e94761"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T14:27:03Z",
+          "updatedAt": "2024-08-27T14:27:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6G6zhP",
+          "commit": {
+            "abbreviatedOid": "6e94761"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T14:27:23Z",
+          "updatedAt": "2024-08-27T14:27:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6G6znd",
+          "commit": {
+            "abbreviatedOid": "6e94761"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T14:27:30Z",
+          "updatedAt": "2024-08-27T14:27:30Z",
+          "comments": []
         }
       ]
     },
@@ -1756,24 +1841,26 @@
       "id": "PR_kwDOLJjbks544qfu",
       "title": "Change signed statement example",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/30",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-08-20T17:19:47Z",
-      "updatedAt": "2024-08-20T17:52:15Z",
+      "updatedAt": "2024-08-27T14:26:31Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "888fcfba5e5d1f785043645b47f71d64a90a5b31",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "fix-example-data",
       "headRefOid": "4d32d824fca92fbb78abd9918206b00f88525177",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-08-27T14:26:31Z",
+      "mergedAt": "2024-08-27T14:26:31Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "ee2f2ec2874d80559fd4b7daefbac948201a6ad7"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1787,6 +1874,32 @@
           "body": "I did a double-take on this one until I read the surrounding content, but looks good to me.",
           "createdAt": "2024-08-20T17:52:15Z",
           "updatedAt": "2024-08-20T17:52:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6G6xrI",
+          "commit": {
+            "abbreviatedOid": "4d32d82"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T14:25:12Z",
+          "updatedAt": "2024-08-27T14:25:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6G6ycx",
+          "commit": {
+            "abbreviatedOid": "4d32d82"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T14:26:09Z",
+          "updatedAt": "2024-08-27T14:26:09Z",
           "comments": []
         }
       ]
@@ -1803,19 +1916,99 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-08-20T17:28:29Z",
-      "updatedAt": "2024-08-20T17:28:29Z",
+      "updatedAt": "2024-08-27T14:35:06Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "888fcfba5e5d1f785043645b47f71d64a90a5b31",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "exchange-receipt",
-      "headRefOid": "8be86a94c81c5bb63b7cdaffab8e46cc72bdd98c",
+      "headRefOid": "12360aba15a89ae193dc5c300b5ce8d8ae533a04",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6G62Qw",
+          "commit": {
+            "abbreviatedOid": "8be86a9"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-27T14:30:50Z",
+          "updatedAt": "2024-08-27T14:30:50Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nContent-Type: application/cose\r\nPayload (in CBOR diagnostic notation)\r\n\r\n18([                            / COSE Sign1         /\r\n  h'a1013822',                  / Protected Header   /\r\n  {},                           / Unprotected Header /\r\n  null,                         / Detached Payload   /\r\n  h'269cd68f4211dffc...0dcb29c' / Signature          /\r\n])\r\n```",
+              "createdAt": "2024-08-27T14:30:50Z",
+              "updatedAt": "2024-08-27T14:30:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6G63Hr",
+          "commit": {
+            "abbreviatedOid": "8be86a9"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T14:31:59Z",
+          "updatedAt": "2024-08-27T14:31:59Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6G63N1",
+          "commit": {
+            "abbreviatedOid": "6c2da56"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-27T14:32:07Z",
+          "updatedAt": "2024-08-27T14:32:07Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-08-27T14:32:07Z",
+              "updatedAt": "2024-08-27T14:32:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6G631w",
+          "commit": {
+            "abbreviatedOid": "12360ab"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T14:32:57Z",
+          "updatedAt": "2024-08-27T14:32:57Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6G65VP",
+          "commit": {
+            "abbreviatedOid": "12360ab"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T14:35:06Z",
+          "updatedAt": "2024-08-27T14:35:06Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
