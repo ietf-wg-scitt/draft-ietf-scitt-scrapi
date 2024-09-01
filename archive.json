@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-29T00:33:53.560870+00:00",
+  "timestamp": "2024-09-01T00:41:17.972884+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -624,9 +624,24 @@
       "labels": [],
       "body": "For example:\r\n\r\n```\r\n<<{\r\n/ alg / 1: -7, / ES256 /\r\n/ VDS / 395: 1,  / SHA-256 Binary Merkle Tree /\r\n/ CWT Claims / 15: { \r\n  / issuer   / 1: \"https://iss.example\", \r\n  / subject / 2: \"https://sub.example\" \r\n}}>>\r\n```",
       "createdAt": "2024-08-20T18:06:09Z",
-      "updatedAt": "2024-08-27T14:37:55Z",
+      "updatedAt": "2024-08-29T11:26:27Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Just checking back on this one: why all of them? What benefit do we gleam from adding such noise?",
+          "createdAt": "2024-08-29T11:21:54Z",
+          "updatedAt": "2024-08-29T11:26:27Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "We could do ellipses like h'dead\u2026beef', paint proper EDN, and expand occasionally?",
+          "createdAt": "2024-08-29T11:25:15Z",
+          "updatedAt": "2024-08-29T11:25:15Z"
+        }
+      ]
     },
     {
       "number": 33,
