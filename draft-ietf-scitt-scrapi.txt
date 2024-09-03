@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 28 February 2025                                      Transmute
+Expires: 7 March 2025                                          Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                          27 August 2024
+                                                        3 September 2024
 
 
                           SCITT Reference APIs
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 February 2025.
+   This Internet-Draft will expire on 7 March 2025.
 
 Copyright Notice
 
@@ -81,8 +81,9 @@ Table of Contents
        2.2.2.  Resolve Statement
        2.2.3.  Resolve Signed Statement
        2.2.4.  Resolve Receipt
-       2.2.5.  Resolve Issuer
-       2.2.6.  Request Nonce
+       2.2.5.  Exchange Receipt
+       2.2.6.  Resolve Issuer
+       2.2.7.  Request Nonce
    3.  Privacy Considerations
    4.  Security Considerations
      4.1.  General scope
@@ -632,7 +633,53 @@ Retry-After: <seconds>
    MAY be present.  Support for eventually consistent Receipts is
    implementation specific, and out of scope for this specification.
 
-2.2.5.  Resolve Issuer
+2.2.5.  Exchange Receipt
+
+   This endpoint is used to exchange old or expiring receipts for fresh
+   ones.
+
+   The iat, exp and kid claims can change each time a receipt is
+   exchanged.
+
+   This means that fresh receipts can have more recent issued at times,
+   further in the future expiration times, and be signed with new
+   signature algorithms.
+
+   Authentication SHOULD be implemented for this endpoint.
+
+   Request:
+
+   POST /exchange/receipt HTTP/1.1
+   Host: transparency.example
+   Accept: application/cose
+   Content-Type: application/cose
+   Payload (in CBOR diagnostic notation)
+
+   18([                            / COSE Sign1         /
+     h'a1013822',                  / Protected Header   /
+     {},                           / Unprotected Header /
+     null,                         / Detached Payload   /
+     h'269cd68f4211dffc...0dcb29c' / Signature          /
+   ])
+
+2.2.5.1.  Status 200
+
+   A new receipt:
+
+   HTTP/1.1 200 Ok
+   Location: https://transparency.example/receipts/urn...qnGmr1o
+   Content-Type: application/cose
+
+   Payload (in CBOR diagnostic notation)
+
+   18([                            / COSE Sign1         /
+     h'a1013822',                  / Protected Header   /
+     {},                           / Unprotected Header /
+     null,                         / Detached Payload   /
+     h'269cd68f4211dffc...0dcb29c' / Signature          /
+   ])
+
+2.2.6.  Resolve Issuer
 
    This endpoint is inspired by [I-D.draft-ietf-oauth-sd-jwt-vc].
    Authentication SHOULD NOT be implemented for this endpoint.  This
@@ -682,7 +729,7 @@ Retry-After: <seconds>
      }
    }
 
-2.2.6.  Request Nonce
+2.2.7.  Request Nonce
 
    This endpoint in inspired by
    [I-D.draft-demarco-oauth-nonce-endpoint].
