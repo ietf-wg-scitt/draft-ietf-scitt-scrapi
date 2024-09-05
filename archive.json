@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-03T00:33:56.919776+00:00",
+  "timestamp": "2024-09-05T00:34:30.295507+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1924,24 +1924,26 @@
       "id": "PR_kwDOLJjbks544tmJ",
       "title": "Add exchange receipt",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/31",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-08-20T17:28:29Z",
-      "updatedAt": "2024-08-27T14:35:06Z",
+      "updatedAt": "2024-09-03T14:26:49Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "888fcfba5e5d1f785043645b47f71d64a90a5b31",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "exchange-receipt",
       "headRefOid": "12360aba15a89ae193dc5c300b5ce8d8ae533a04",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-03T14:26:49Z",
+      "mergedAt": "2024-09-03T14:26:49Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "27c70197883f1b208b611306551f2a0a8fd31143"
+      },
       "comments": [],
       "reviews": [
         {
