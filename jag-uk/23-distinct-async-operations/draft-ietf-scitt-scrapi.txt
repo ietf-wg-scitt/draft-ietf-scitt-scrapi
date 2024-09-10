@@ -464,15 +464,7 @@ Table of Contents
    /urn:ietf:params:scitt:lro\
    :sha-256:base64url:5i6UeRzg1...qnGmr1o
 
-   Content-Type: application/json
    Retry-After: <seconds>
-
-   {
-
-     "identifier": "urn:ietf:params:scitt:lro\
-   :sha-256:base64url:5i6UeRzg1...qnGmr1o",
-
-   }
 
    The response contains a reference to the running operation which will
    eventually be available for the Signed Statement.
