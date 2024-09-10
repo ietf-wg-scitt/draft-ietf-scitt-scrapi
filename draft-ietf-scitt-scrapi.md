@@ -270,8 +270,8 @@ Fresh receipts may be requested through the resource identified in the Location 
 ~~~ http-message
 HTTP/1.1 202 Accepted
 
-Location: https://transparency.example/receipts\
-/urn:ietf:params:scitt:signed-statement\
+Location: https://transparency.example/operations\
+/urn:ietf:params:scitt:lro\
 :sha-256:base64url:5i6UeRzg1...qnGmr1o
 
 Content-Type: application/json
@@ -279,16 +279,16 @@ Retry-After: <seconds>
 
 {
 
-  "identifier": "urn:ietf:params:scitt:receipt\
+  "identifier": "urn:ietf:params:scitt:lro\
 :sha-256:base64url:5i6UeRzg1...qnGmr1o",
 
 }
 
 ~~~
 
-The response contains a reference to the receipt which will eventually be available for the Signed Statement.
+The response contains a reference to the running operation which will eventually be available for the Signed Statement.
 
-If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Resolve Receipt endpoint using the identifier returned in the response.
+If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Check Operation endpoint using the identifier returned in the response.
 
 #### Status 400 - Invalid Client Request
 
@@ -340,6 +340,92 @@ One of the following errors:
 ~~~
 
 TODO: other error codes
+
+### Check Registration
+
+Authentication MAY be implemented for this endpoint.
+
+This endpoint is used to check on the progress of a long-running registration.
+
+The following is a non-normative example of a HTTP request the status of a running registration:
+
+Request:
+
+~~~http
+GET /operations/urn:ietf:params:scitt:lro:sha-256:base64url:5i6UeRzg1...qnGmr1o", HTTP/1.1
+Host: transparency.example
+Accept: application/json
+~~~
+
+Response:
+
+One of the following:
+
+#### Status 201 - Registration is successful
+
+~~~ http-message
+HTTP/1.1 201 Ok
+
+Location: https://transparency.example/receipts\
+/urn:ietf:params:scitt:signed-statement\
+:sha-256:base64url:5i6UeRzg1...qnGmr1o
+
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+The response contains the Receipt for the Signed Statement.
+Fresh receipts may be requested through the resource identified in the Location header.
+
+The Transparency Service MUST maintain a record of every operation until at least one client has fetched the completed receipt.
+
+The Transparency Service MAY maintain a record of the operation beyond the first successful fetch of the completed receipt.
+
+#### Status 202 - Registration is (still) running
+
+~~~ http-message
+HTTP/1.1 202 Accepted
+
+Location: https://transparency.example/operations\
+/urn:ietf:params:scitt:lro\
+:sha-256:base64url:5i6UeRzg1...qnGmr1o
+
+Content-Type: application/json
+Retry-After: <seconds>
+
+{
+
+  "identifier": "urn:ietf:params:scitt:lro\
+:sha-256:base64url:5i6UeRzg1...qnGmr1o",
+
+}
+
+~~~
+
+The response contains a reference to the running operation which will eventually be available for the Signed Statement.
+
+If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Check Operation endpoint using the identifier returned in the response.
+
+#### Status 404 - Operation not found
+
+~~~
+{
+  "type": "urn:ietf:params:scitt:error\
+:lro:not-found",
+  "detail": \
+"A registration operation with this identifier was not found."
+}
+~~~
+
+No additional reason codes will be given. The identifier may have been valid at a point in time but since redeemed and forgotten; or it may have never existed on this transparency service.
 
 ## Optional Endpoints
 
