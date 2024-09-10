@@ -398,15 +398,7 @@ Location: https://transparency.example/operations\
 /urn:ietf:params:scitt:lro\
 :sha-256:base64url:5i6UeRzg1...qnGmr1o
 
-Content-Type: application/json
 Retry-After: <seconds>
-
-{
-
-  "identifier": "urn:ietf:params:scitt:lro\
-:sha-256:base64url:5i6UeRzg1...qnGmr1o",
-
-}
 
 ~~~
 
