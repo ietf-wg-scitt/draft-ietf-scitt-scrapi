@@ -425,7 +425,8 @@ If 202 is returned, then clients should wait until Registration succeeded or fai
 }
 ~~~
 
-No additional reason codes will be given. The identifier may have been valid at a point in time but since redeemed and forgotten; or it may have never existed on this transparency service.
+No additional reason codes will be given.
+The identifier may have been valid at a point in time but since redeemed and forgotten; or it may have never existed on this Transparency Service.
 
 ## Optional Endpoints
 
