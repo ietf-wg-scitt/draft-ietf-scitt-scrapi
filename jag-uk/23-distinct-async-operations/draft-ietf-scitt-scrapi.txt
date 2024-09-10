@@ -492,7 +492,7 @@ Table of Contents
 
    No additional reason codes will be given.  The identifier may have
    been valid at a point in time but since redeemed and forgotten; or it
-   may have never existed on this transparency service.
+   may have never existed on this Transparency Service.
 
 2.2.  Optional Endpoints
 
