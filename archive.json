@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-10T00:35:13.974664+00:00",
+  "timestamp": "2024-09-12T00:35:03.767265+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2024,6 +2024,121 @@
           "createdAt": "2024-08-27T14:35:06Z",
           "updatedAt": "2024-08-27T14:35:06Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOLJjbks56_Uhd",
+      "title": "Add 'chck operation' endpoint",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/35",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #23",
+      "createdAt": "2024-09-10T13:58:57Z",
+      "updatedAt": "2024-09-10T14:56:35Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "jag-uk/23-distinct-async-operations",
+      "headRefOid": "ac9af8226c057b38fdeefba712350afeca45f023",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Editors meeting suggestion: add a correlation id for the registration to coordinate on long-running operation requests. ",
+          "createdAt": "2024-09-10T14:52:59Z",
+          "updatedAt": "2024-09-10T14:52:59Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6IqEoS",
+          "commit": {
+            "abbreviatedOid": "885132f"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-10T14:35:13Z",
+          "updatedAt": "2024-09-10T14:35:13Z",
+          "comments": [
+            {
+              "originalPosition": 100,
+              "body": "```suggestion\r\nRetry-After: <seconds>\r\n```",
+              "createdAt": "2024-09-10T14:35:13Z",
+              "updatedAt": "2024-09-10T14:35:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6IqGMF",
+          "commit": {
+            "abbreviatedOid": "885132f"
+          },
+          "author": "ad-l",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-10T14:37:25Z",
+          "updatedAt": "2024-09-10T14:37:25Z",
+          "comments": [
+            {
+              "originalPosition": 100,
+              "body": "Agree with this",
+              "createdAt": "2024-09-10T14:37:25Z",
+              "updatedAt": "2024-09-10T14:37:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6IqGUT",
+          "commit": {
+            "abbreviatedOid": "885132f"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-10T14:37:36Z",
+          "updatedAt": "2024-09-10T14:37:37Z",
+          "comments": [
+            {
+              "originalPosition": 119,
+              "body": "```suggestion\r\nNo additional reason codes will be given.\r\nThe identifier may have been valid at a point in time but since redeemed and forgotten; or it may have never existed on this Transparency Service.\r\n```",
+              "createdAt": "2024-09-10T14:37:36Z",
+              "updatedAt": "2024-09-10T14:37:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6IqTI1",
+          "commit": {
+            "abbreviatedOid": "ac9af82"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-10T14:56:34Z",
+          "updatedAt": "2024-09-10T14:56:35Z",
+          "comments": [
+            {
+              "originalPosition": 98,
+              "body": "Concern for a failed registration returning not found, as the client will not know if it failed due to registration policy, or failed due to a network connection and continues to try.",
+              "createdAt": "2024-09-10T14:56:35Z",
+              "updatedAt": "2024-09-10T14:56:35Z"
+            }
+          ]
         }
       ]
     }
