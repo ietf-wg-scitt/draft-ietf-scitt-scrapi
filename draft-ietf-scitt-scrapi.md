@@ -217,7 +217,7 @@ Payload (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
+  {'request_id': '0123abcd'},   / Unprotected Header /
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
@@ -228,6 +228,8 @@ The Registration Policy for the Transparency Service MUST be applied to the payl
 If the `payload` is detached, the Transparency Service depends on the authentication context of the client in the Registration Policy.
 If the `payload` is attached, the Transparency Service depends on both the authentication context of the client (if present), and the verification of the Signed Statement in the Registration Policy.
 The details of Registration Policy are out of scope for this document.
+
+The `Unprotected Header` may contain a `request_id` which, if provided, is used for querying long running registrations later.
 
 If registration succeeds the following identifier MAY be used to refer to the Signed Statement that was accepted:
 
@@ -256,7 +258,7 @@ Payload (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
+  {"request_id": "0123abcd"},   / Unprotected Header /
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
@@ -270,23 +272,21 @@ Fresh receipts may be requested through the resource identified in the Location 
 ~~~ http-message
 HTTP/1.1 202 Accepted
 
-Location: https://transparency.example/operations\
-/urn:ietf:params:scitt:lro\
-:sha-256:base64url:5i6UeRzg1...qnGmr1o
+Location: https://transparency.example/operations/0123abcd
 
 Content-Type: application/json
 Retry-After: <seconds>
 
 {
-
-  "identifier": "urn:ietf:params:scitt:lro\
-:sha-256:base64url:5i6UeRzg1...qnGmr1o",
-
+  "request_id": "0123abcd",
 }
 
 ~~~
 
 The response contains a reference to the running operation which will eventually be available for the Signed Statement.
+
+If the client supplied a `request_id` then the Transparency Service MUST return the same request_id in the response.
+If the client did not supply a `request_id` then the Transparency Service MUST return a locally unique request_id which can be used in subsequent calls to the Check Registration endpoint.
 
 If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Check Operation endpoint using the identifier returned in the response.
 
@@ -339,8 +339,6 @@ One of the following errors:
 }
 ~~~
 
-TODO: other error codes
-
 ### Check Registration
 
 Authentication MAY be implemented for this endpoint.
@@ -352,7 +350,7 @@ The following is a non-normative example of a HTTP request the status of a runni
 Request:
 
 ~~~http
-GET /operations/urn:ietf:params:scitt:lro:sha-256:base64url:5i6UeRzg1...qnGmr1o", HTTP/1.1
+GET /operations/0123abcd, HTTP/1.1
 Host: transparency.example
 Accept: application/json
 ~~~
@@ -376,7 +374,7 @@ Payload (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
+  {"request_id": "0123abcd"},   / Unprotected Header /
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
@@ -394,9 +392,7 @@ The Transparency Service MAY maintain a record of the operation beyond the first
 ~~~ http-message
 HTTP/1.1 202 Accepted
 
-Location: https://transparency.example/operations\
-/urn:ietf:params:scitt:lro\
-:sha-256:base64url:5i6UeRzg1...qnGmr1o
+Location: https://transparency.example/operations/0123abcd
 
 Retry-After: <seconds>
 
@@ -635,7 +631,7 @@ Content-Type: application/json
 
 #### Status 429
 
-If a client is polling for an in-progress registration too frequently then the Transparency Service MAY, in addition to implementing rate-limiting, return a 429 response:
+If a client is asking for receipts too frequently then the Transparency Service MAY, in addition to implementing rate-limiting, return a 429 response:
 
 ~~~
 HTTP/1.1 429 Too Many Requests
