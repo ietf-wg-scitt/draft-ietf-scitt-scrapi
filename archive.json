@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-17T00:29:20.421682+00:00",
+  "timestamp": "2024-09-19T00:35:38.830563+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2039,13 +2039,13 @@
       "labels": [],
       "body": "Fixes #23",
       "createdAt": "2024-09-10T13:58:57Z",
-      "updatedAt": "2024-09-10T14:56:35Z",
+      "updatedAt": "2024-09-18T13:33:15Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/23-distinct-async-operations",
-      "headRefOid": "ac9af8226c057b38fdeefba712350afeca45f023",
+      "headRefOid": "5b74d67ef22c39d59b5bb0c35537cf69d79feee3",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2057,6 +2057,20 @@
           "body": "Editors meeting suggestion: add a correlation id for the registration to coordinate on long-running operation requests. ",
           "createdAt": "2024-09-10T14:52:59Z",
           "updatedAt": "2024-09-10T14:52:59Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Question from the editor's call: Was the request ID also meant to be the `operationId`, or was it intended to be a tuple where the client can submit a unique ID that needs to be validated? However, can the server return a guaranteed unique ID? The client submitting a unique ID is part of the idempotent design pattern.\r\n\r\nSome background on idempotent patterns\r\n- [IETF Draft: The Idempotency-Key HTTP Header Field](https://ietf-wg-httpapi.github.io/idempotency/draft-ietf-httpapi-idempotency-key-header.html)\r\n- [Life beyond Distributed Transactions](https://queue.acm.org/detail.cfm?id=3025012)\r\n- [Reducing client complexity with idempotent API design](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)\r\n- [Idempotent REST API](https://restfulapi.net/idempotent-rest-apis/)\r\n\r\nDo we need a request ID (`Idempotency-Key`)?\r\n1. If the client makes a registration request and fails to get a response, the client is unsure if the registration was received, the response failed, or the request was never received.\r\n1. The client would try again, which could generate multiple registrations\r\n\r\nIn an idempotent world, the server would check if the request was previously made and, if so, return the same response.\r\nThe issue is that a client could be intentionally making a secondary registration because the registration policy may have changed or the client needs a new registration for a new point in time.\r\n\r\n- Do we need to support multiple registrations of the same signed statement from the same issuer? \r\n  - Yes, as client may be registering, knowing a new registration policy has been set, or they simply need a new registered timestamp.  If the client wishes to register the same signed statement multiple times, they would generate a unique `Idempotency-Key`\r\n- Can the server specify a window of time (which is implementation-specific) by which it treats them as idempotent? \r\n  - Yes, and [Section 2.3. Idempotency Key Validity and Expiry](https://ietf-wg-httpapi.github.io/idempotency/draft-ietf-httpapi-idempotency-key-header.html#name-idempotency-key-validity-an) supports the scenario. If the client submits a second registration, and the server purged the `Idempotency-Key`, the \"duplicate request\" would generate a duplicate entry\r\n- How short should validity window be?\r\n  - This is likely a new issue, with a SHOULD that would hopefully represent weeks or months, if not years. \r\n\r\nSeparately, a discussion to support success/failure response codes for failed registration vs. \"not found\" is needed. ",
+          "createdAt": "2024-09-18T00:34:36Z",
+          "updatedAt": "2024-09-18T00:34:36Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Question from the editor's call: Was the request ID also meant to be the `operationId`, or was it intended to be a tuple where the client can submit a unique ID that needs to be validated? However, can the server return a guaranteed unique ID? The client submitting a unique ID is part of the idempotent design pattern.\r\n\r\nThe addition of the `request_id` in Commit 4 came out of the discussion in the prior editors' call where a couple of people asked for some kind of a correlation ID that the client could use to keep its own track of the LROs it was checking and receiving. Various use cases were mooted all along the lines that contexts may be confused (in the case of connection pooling or similar at the client end) or lost (in the case of one end or other crashing).\r\n\r\nThis seemed reasonable to try to accommodate and I did it to show how it might look, but actually I don't like how it's turned out and would gladly revert. Reasons:\r\n - Having the operation ID and request/correlation ID was redundant...unless we also enabled LIST on /operations which doesn't seem terribly sensible. That's why I removed the server-generated ID from the resource path.\r\n - Inserting the optional request ID into the POST required us to throw it in the unprotected header, which feels grotty\r\n\r\n> In an idempotent world, the server would check if the request was previously made and, if so, return the same response. The issue is that a client could be intentionally making a secondary registration because the registration policy may have changed or the client needs a new registration for a new point in time.\r\n\r\nI like the idempotency key stuff and we should look into it but I think it's a reasonable and coherent v1 to just say that EVERY POST is a new registration and starts a new registration operation for a new receipt. We can't legislate for software bugs or try to guess the intention of the client.\r\n\r\n> Separately, a discussion to support success/failure response codes for failed registration vs. \"not found\" is needed.\r\n\r\nAgreed. That's already on the list.",
+          "createdAt": "2024-09-18T13:33:13Z",
+          "updatedAt": "2024-09-18T13:33:13Z"
         }
       ],
       "reviews": [
@@ -2139,6 +2153,19 @@
               "updatedAt": "2024-09-10T14:56:35Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6JsAyO",
+          "commit": {
+            "abbreviatedOid": "5b74d67"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Can we show some error states for cases where the server rejects the operation id the client chose?",
+          "createdAt": "2024-09-17T14:54:05Z",
+          "updatedAt": "2024-09-17T14:54:05Z",
+          "comments": []
         }
       ]
     }
