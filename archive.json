@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-24T00:36:51.833820+00:00",
+  "timestamp": "2024-09-26T00:36:17.319274+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2039,13 +2039,13 @@
       "labels": [],
       "body": "Fixes #23",
       "createdAt": "2024-09-10T13:58:57Z",
-      "updatedAt": "2024-09-19T14:29:27Z",
+      "updatedAt": "2024-09-24T13:07:24Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/23-distinct-async-operations",
-      "headRefOid": "5b74d67ef22c39d59b5bb0c35537cf69d79feee3",
+      "headRefOid": "9ea4f0783945f703898320239fcb9abe642a98a2",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
