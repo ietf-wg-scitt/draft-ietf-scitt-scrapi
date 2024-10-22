@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 28 February 2025                                      Transmute
+Expires: 25 April 2025                                         Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                          27 August 2024
+                                                         22 October 2024
 
 
                           SCITT Reference APIs
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 February 2025.
+   This Internet-Draft will expire on 25 April 2025.
 
 Copyright Notice
 
@@ -84,7 +84,6 @@ Table of Contents
        2.2.5.  Exchange Receipt
        2.2.6.  Resolve Issuer
        2.2.7.  Request Nonce
-       2.2.8.  Resolve Issuer DID
    3.  Privacy Considerations
    4.  Security Considerations
      4.1.  General scope
@@ -427,28 +426,66 @@ Table of Contents
    POST /signed-statements/issue HTTP/1.1
    Host: transparency.example
    Accept: application/json
-   Content-Type: application/vc+ld+json
+   Content-Type: application/spdx+json
    Payload
 
    {
-     "@context": [
-       "https://www.w3.org/ns/credentials/v2",
-       "https://www.w3.org/ns/credentials/examples/v2"
-     ],
-     "id": "https://transparency.example/credentials/1872",
-     "type": ["VerifiableCredential", "SensorCredential"],
-     "issuer": "https://transparency.example/device/1234",
-     "validFrom": "2010-01-01T19:23:24Z",
-     "credentialSubject": {
-       "type": "Feature",
-       "geometry": {
-         "type": "Point",
-         "coordinates": [125.6, 10.1]
-       },
-       "properties": {
-         "name": "Dinagat Islands"
+     "spdxVersion": "SPDX-2.2",
+     "dataLicense": "CC0-1.0",
+     "SPDXID": "SPDXRef-DOCUMENT",
+     "name": "cli-app 0.1.2",
+     "documentNamespace": "https://spdx.org/spdxdocs/sbom-tool-2.2.7-38f61e97-e53c-46ef-a37d-62.../cli-app/0.1.2/0d06adf8a36...",
+     "creationInfo": {
+       "created": "2024-08-16T21:44:54Z",
+       "creators": [
+         "Organization: contoso"
+       ]
+     },
+     "files": [
+       {
+         "name": "cli-app",
+         "SPDXID": "SPDXRef-RootPackage",
+         "downloadLocation": "NOASSERTION",
+         "packageVerificationCode": {
+           "packageVerificationCodeValue": "ecf0aae2a849cc51..."
+         },
+         "filesAnalyzed": true,
+         "licenseConcluded": "NOASSERTION",
+         "licenseInfoFromFiles": [
+           "NOASSERTION"
+         ],
+         "licenseDeclared": "NOASSERTION",
+         "copyrightText": "NOASSERTION",
+         "versionInfo": "0.1.2",
+         "externalRefs": [
+           {
+             "referenceCategory": "PACKAGE-MANAGER",
+             "referenceType": "purl",
+             "referenceLocator": "pkg:swid/contoso/spdx.org/cli-app@0.1.2?tag_id=ac073d0f-0aa7-4d27-87fa-7f..."
+           }
+         ],
+         "supplier": "Organization: contoso",
+         "hasFiles": [
+           "SPDXRef-File--..."
+         ]
        }
-     }
+     ],
+     "relationships": [
+       {
+         "relationshipType": "DESCRIBES",
+         "relatedSpdxElement": "SPDXRef-RootPackage",
+         "spdxElementId": "SPDXRef-DOCUMENT"
+       },
+       {
+         "relationshipType": "DEPENDS_ON",
+         "relatedSpdxElement": "SPDXRef-Package-FF36801C1982452...",
+         "spdxElementId": "SPDXRef-RootPackage"
+       }
+     ],
+     "documentDescribes": [
+       "SPDXRef-RootPackage"
+     ],
+     "externalDocumentRefs": []
    }
 
    Response:
@@ -718,112 +755,6 @@ Retry-After: <seconds>
      "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
    }
 
-2.2.8.  Resolve Issuer DID
-
-   This endpoint enables the use of the DID Web Decentralized Identifier
-   Method, as an alternative expression of the Issuer Metadata endpoint.
-
-   This endpoint is DEPRECATED.
-
-   The following is a non-normative example of a HTTP request for the
-   Issuer Metadata configuration when iss is set to
-   did:web:transparency.example:tenant:1234:
-
-   Request:
-
-   GET /tenant/1234/did.json HTTP/1.1
-   Host: transparency.example
-   Accept: application/did+ld+json
-
-   Response:
-
-   HTTP/1.1 200 Ok
-   Content-Type: application/did+ld+json
-
-   {
-     "@context": [
-       "https://www.w3.org/ns/did/v1",
-       {
-         "@vocab": "https://vocab.transparency.example#"
-       }
-     ],
-     "id": "did:web:transparency.example:tenant:1234",
-     "verificationMethod": [
-       {
-         "id": "did:web:transparency.example:tenant:1234\
-           #urn:ietf:params:oauth:jwk-thumbprint\
-           :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-         "type": "JsonWebKey",
-         "controller": "did:web:transparency.example:tenant:1234",
-         "publicKeyJwk": {
-           "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-             :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-           "alg": "ES256",
-           "use": "sig",
-           "kty": "EC",
-           "crv": "P-256",
-           "x": "9ptuW0PBHSTN7bVexWd7xM5kmSPGRaCu-K3SLtJyvNc",
-           "y": "l7NvF6QbovicSciZqu_W_xy4JTZwtnUbn2SNdMKoaAk"
-         }
-       },
-       {
-         "id": "did:web:transparency.example:tenant:1234\
-           #urn:ietf:params:oauth:jwk-thumbprint\
-           :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-         "type": "JsonWebKey",
-         "controller": "did:web:transparency.example:tenant:1234",
-         "publicKeyJwk": {
-           "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-             :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-           "alg": "ES256",
-           "use": "sig",
-           "kty": "EC",
-           "crv": "P-256",
-           "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
-           "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
-         }
-       },
-       {
-         "id": "did:web:transparency.example:tenant:1234\
-           #urn:ietf:params:oauth:jwk-thumbprint\
-           :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-         "type": "JsonWebKey",
-         "controller": "did:web:transparency.example:tenant:1234",
-         "publicKeyJwk": {
-           "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-             :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-           "alg": "HPKE-Base-P256-SHA256-AES128GCM",
-           "use": "enc",
-           "kty": "EC",
-           "crv": "P-256",
-           "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
-           "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
-         }
-       }
-     ],
-     "assertionMethod": [
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-     ],
-     "authentication": [
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-     ],
-     "keyAgreement": [
-       "did:web:transparency.example:tenant:1234\
-         #urn:ietf:params:oauth:jwk-thumbprint\
-         :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE"
-     ]
-   }
-
 3.  Privacy Considerations
 
    TODO
@@ -1086,9 +1017,9 @@ Retry-After: <seconds>
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-08, 22 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-08>.
+              Internet-Draft, draft-ietf-scitt-architecture-09, 15
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-scitt-architecture-09>.
 
    [IANA.params]
               IANA, "Uniform Resource Name (URN) Namespace for IETF
@@ -1138,9 +1069,9 @@ Retry-After: <seconds>
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-04, 8 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-04>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-05, 18
+              September 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-oauth-sd-jwt-vc-05>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
