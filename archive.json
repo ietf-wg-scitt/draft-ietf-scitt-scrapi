@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-22T00:37:45.390000+00:00",
+  "timestamp": "2024-10-24T00:37:09.393201+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -61,7 +61,7 @@
       "title": "using media types for errors",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/2",
       "state": "CLOSED",
-      "author": "pdxjohnny",
+      "author": "johnandersen777",
       "authorAssociation": "NONE",
       "assignees": [
         "aj-stein-nist"
