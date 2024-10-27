@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-24T00:37:09.393201+00:00",
+  "timestamp": "2024-10-27T00:40:44.806929+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -674,6 +674,44 @@
       "updatedAt": "2024-08-27T14:59:24Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 36,
+      "id": "I_kwDOLJjbks6boex3",
+      "title": "Mixed JSON and CBOR is annoying for clients",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/36",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In trying to build a new ground-up Python implementation of SCRAPI I am finding it quite difficult to cope with commands that might return JSON or might return CBOR depending on things like operation or error state. It makes response and error handling code messy and harder to review.\r\n\r\nFollowing discussion in the editors' meeting I propose to make the whole thing COSE/CBOR. This is much more aligned with the architecture and the IETF mission in general.",
+      "createdAt": "2024-10-24T10:02:22Z",
+      "updatedAt": "2024-10-26T04:48:58Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "No objections from my side. Would EDN play a role in \"make the whole thing COSE/CBOR\"?",
+          "createdAt": "2024-10-24T18:18:29Z",
+          "updatedAt": "2024-10-24T18:18:29Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Would EDN play a role in \"make the whole thing COSE/CBOR\"?\r\n\r\nIt certainly could! How would you like to see the Problem Details object represented, for example, if we did  this way?\r\n\r\nNote SCRAPI is not a CoAP API so I din't really want to use RFC 9290. I want to take advantage of the 'Other Formats' provision of Appendix C of RFC 9457 and return `Content-Type: application/problem+cbor`\r\n\r\nSo the original JSON is:\r\n\r\n~~~json\r\n{\r\n  \"type\": \"urn:ietf:params:scitt:error:badSignatureAlgorithm\",\r\n  \"detail\": \"Signing algorithm 'WalnutDSA' not supported.\"\r\n}\r\n~~~\r\n\r\nAnd I think we'd want to see something like this but in much nicer EDN:\r\n\r\n~~~cbor\r\na4                                      # map(4)\r\n   0x64                                 # text(4)\r\n      0x74797065                        # \"type\"\r\n   0x78 28                              # text(40)\r\n      0x68747470733a2f2f6578616d706c652e636f6d2f6572726f722f76616c69646174696f6e2d6572726f72\r\n                                         # \"urn:ietf:params:scitt:error:badSignatureAlgorithm\"\r\n   0x66                                 # text(6)\r\n      0x64657461696c                    # \"detail\"\r\n   0x78 20                              # text(32)\r\n      0x4d697373696e67207265717569726564206669656c642027757365726e616d65272e\r\n                                         # \"Missing required field 'username'.\"\r\n~~~",
+          "createdAt": "2024-10-25T12:54:14Z",
+          "updatedAt": "2024-10-25T12:54:14Z"
+        },
+        {
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "body": "> Following discussion in the editors' meeting I propose to make the whole thing COSE/CBOR. This is much more aligned with the architecture and the IETF mission in general.\r\n\r\nI support this change as well, like Henk.\r\n\r\n",
+          "createdAt": "2024-10-26T04:48:57Z",
+          "updatedAt": "2024-10-26T04:48:57Z"
+        }
+      ]
     }
   ],
   "pulls": [
