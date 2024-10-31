@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-29T00:38:20.869502+00:00",
+  "timestamp": "2024-10-31T00:37:52.329560+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2070,21 +2070,21 @@
       "id": "PR_kwDOLJjbks56_Uhd",
       "title": "Add 'chck operation' endpoint",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/35",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #23",
       "createdAt": "2024-09-10T13:58:57Z",
-      "updatedAt": "2024-09-24T13:07:24Z",
+      "updatedAt": "2024-10-29T14:06:36Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/23-distinct-async-operations",
       "headRefOid": "9ea4f0783945f703898320239fcb9abe642a98a2",
-      "closedAt": null,
+      "closedAt": "2024-10-29T14:06:35Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -2123,6 +2123,13 @@
           "body": "@JAG-UK here are my proposed changed to resolve this\r\n\r\nhttps://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/compare/jag-uk/23-distinct-async-operations...ad-l:draft-ietf-scitt-scrapi:jag-uk/23-distinct-async-operations",
           "createdAt": "2024-09-19T14:29:25Z",
           "updatedAt": "2024-09-19T14:29:25Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Meeting notes:\r\nThis PR dealt with several aspects, making it a bit harder to merge. \r\nJon will create separate PRs, based on work for 121 hackathon.",
+          "createdAt": "2024-10-29T14:06:35Z",
+          "updatedAt": "2024-10-29T14:06:35Z"
         }
       ],
       "reviews": [
@@ -2217,6 +2224,19 @@
           "body": "Can we show some error states for cases where the server rejects the operation id the client chose?",
           "createdAt": "2024-09-17T14:54:05Z",
           "updatedAt": "2024-09-17T14:54:05Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6PK_l0",
+          "commit": {
+            "abbreviatedOid": "9ea4f07"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-29T14:06:16Z",
+          "updatedAt": "2024-10-29T14:06:16Z",
           "comments": []
         }
       ]
