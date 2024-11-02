@@ -113,7 +113,7 @@ To facilitate automated response to errors, this document defines a set of stand
 
 Error responses SHOULD be sent with the `Content-Type: application/problem+json` HTTP header.
 
-As an example, submitting a Signed Statement with an unsupported signature algorithm would return a `400 Bad Request` status code and the following body:
+As an example, submitting a Signed Statement with an unsupported signature algorithm MUST return a `400 Bad Request` status code and the following body:
 
 ~~~json
 {
