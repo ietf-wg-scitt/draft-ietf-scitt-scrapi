@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-31T00:37:52.329560+00:00",
+  "timestamp": "2024-11-03T00:40:51.749653+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -655,9 +655,17 @@
       "labels": [],
       "body": "On the register statement API, a TS could be a front end to multiple Transparency Services. It may be hashed by country or industry. \r\nThe question is whether the API should add a parameter for which Notary to use, or it may be inferred by other parameters, or the identity of the client.",
       "createdAt": "2024-08-27T14:58:49Z",
-      "updatedAt": "2024-08-27T14:58:49Z",
+      "updatedAt": "2024-11-02T14:28:44Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "body": "> On the register statement API, a TS could be a front end to multiple Transparency Services. It may be hashed by country or industry. The question is whether the API should add a parameter for which Notary to use, or it may be inferred by other parameters, or the identity of the client.\r\n\r\nSince no one else has commented, I will chime in: I think that is a concern for client software to handle without adding API surface to part of the reference API for TS implementations. I would prefer to not have this addition.\r\n",
+          "createdAt": "2024-11-02T14:28:43Z",
+          "updatedAt": "2024-11-02T14:28:43Z"
+        }
+      ]
     },
     {
       "number": 34,
@@ -687,7 +695,7 @@
       "labels": [],
       "body": "In trying to build a new ground-up Python implementation of SCRAPI I am finding it quite difficult to cope with commands that might return JSON or might return CBOR depending on things like operation or error state. It makes response and error handling code messy and harder to review.\r\n\r\nFollowing discussion in the editors' meeting I propose to make the whole thing COSE/CBOR. This is much more aligned with the architecture and the IETF mission in general.",
       "createdAt": "2024-10-24T10:02:22Z",
-      "updatedAt": "2024-10-26T04:48:58Z",
+      "updatedAt": "2024-11-02T16:04:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -710,6 +718,48 @@
           "body": "> Following discussion in the editors' meeting I propose to make the whole thing COSE/CBOR. This is much more aligned with the architecture and the IETF mission in general.\r\n\r\nI support this change as well, like Henk.\r\n\r\n",
           "createdAt": "2024-10-26T04:48:57Z",
           "updatedAt": "2024-10-26T04:48:57Z"
+        },
+        {
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "body": "How would error code and and HTTP response information work in light of this proposed change, @JAG-UK?",
+          "createdAt": "2024-11-02T13:06:53Z",
+          "updatedAt": "2024-11-02T13:06:53Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> How would error code and and HTTP response information work in light of this proposed change, @JAG-UK?\r\n\r\nI'll be putting up a PR for the -121 Hackathon showing this. Essentially:\r\n\r\nError responses MUST be sent with the `Content-Type: application/problem+cbor` HTTP header.\r\n\r\nAs an example, submitting a Signed Statement with an unsupported signature algorithm would return a `400 Bad Request` status code and an RFC 9290 Concise Problem Details object as the body:\r\n\r\n~~~\r\nHTTP/1.1 400 Bad Request\r\nContent-Type: application/problem+cbor\r\n\r\n{\r\n  / title /         -1: \"Bad Signature Algorithm\",\r\n  / detail /        -2: \"Signed Statement contained an algorithm that is not supported\",\r\n  / instance /      -3: \"urn:ietf:params:scitt:error:badSignatureAlgorithm\",\r\n  / response-code / -4: 400,\r\n}\r\n~~~\r\n\r\n",
+          "createdAt": "2024-11-02T14:03:23Z",
+          "updatedAt": "2024-11-02T14:03:23Z"
+        },
+        {
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "body": "> Error responses MUST be sent with the `Content-Type: application/problem+cbor` HTTP header.\r\n\r\nPartly serious, partly in jest, sounds like we may have a need for a RFC for CBOR-based HTTP APIs. :laughing: \r\n \r\n> ```\r\n> HTTP/1.1 400 Bad Request\r\n> Content-Type: application/problem+cbor\r\n> \r\n> {\r\n>   / title /         -1: \"Bad Signature Algorithm\",\r\n>   / detail /        -2: \"Signed Statement contained an algorithm that is not supported\",\r\n>   / instance /      -3: \"urn:ietf:params:scitt:error:badSignatureAlgorithm\",\r\n>   / response-code / -4: 400,\r\n> }\r\n> ```\r\n\r\nIs there a reason we are deviating from [RFC9457](https://www.rfc-editor.org/rfc/rfc9457.html#name-members-of-a-problem-detail) ever so slightly?",
+          "createdAt": "2024-11-02T14:15:37Z",
+          "updatedAt": "2024-11-02T14:15:37Z"
+        },
+        {
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "body": "And to be clear, I would think `response-code` over `type` implies a possible layering concern by bringing HTTP error codes \"down into\" the API surface of CBOR-based payloads for SCITT, no?",
+          "createdAt": "2024-11-02T14:16:36Z",
+          "updatedAt": "2024-11-02T14:16:36Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Is there a reason we are deviating from [RFC9457](https://www.rfc-editor.org/rfc/rfc9457.html#name-members-of-a-problem-detail) ever so slightly?\r\n\r\nYes. We're following RFC 9290 and that deviated. Note that 9290 is ordinally between 7807 and 9457 so maybe there's an update that needs to happen there.\r\n\r\nThere are 2 legit options and I think both have their own unique charm. One is to follow 9290, which I showed above. The other would be to exploit Appendix C of 9457.\r\n\r\nI considered the latter and it's easy enough to do, I was just trying to favour the documents from the CBOR stable. \r\nThe slightly grotty thing about the 9457 route is that we can't use any of the defined CBOR tags so it ends up just being what Pythonistas would call 'derisory dictionary programming' with uncompressed string keys. But we're not CoAP so who cares?\r\n\r\nGiven the explanation, any strong opinion on those routes?",
+          "createdAt": "2024-11-02T16:02:34Z",
+          "updatedAt": "2024-11-02T16:02:34Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> And to be clear, I would think `response-code` over `type` implies a possible layering concern by bringing HTTP error codes \"down into\" the API surface of CBOR-based payloads for SCITT, no?\r\n\r\nYeah I really flip-flopped on that one. I spoke to one of the CBOR authors and they include the status code in the object is for extra later clues to errors (poring over log files for example) but I agree it's a bit of a violation. It would be very easy to convince me to remove that",
+          "createdAt": "2024-11-02T16:04:39Z",
+          "updatedAt": "2024-11-02T16:04:39Z"
         }
       ]
     }
@@ -2237,6 +2287,46 @@
           "body": "",
           "createdAt": "2024-10-29T14:06:16Z",
           "updatedAt": "2024-10-29T14:06:16Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOLJjbks6Ashrf",
+      "title": "Use normative language for error code per #25",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/37",
+      "state": "OPEN",
+      "author": "aj-stein",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-02T12:58:08Z",
+      "updatedAt": "2024-11-02T14:04:07Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
+      "headRepository": "aj-stein/draft-ietf-scitt-scrapi",
+      "headRefName": "25-error-code-normative",
+      "headRefOid": "e7747a48e9bea280e8f027f9f567e18df7399285",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6PuNpv",
+          "commit": {
+            "abbreviatedOid": "e7747a4"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "I had decided to make this change locally on my live branch too :-)",
+          "createdAt": "2024-11-02T14:04:07Z",
+          "updatedAt": "2024-11-02T14:04:07Z",
           "comments": []
         }
       ]
