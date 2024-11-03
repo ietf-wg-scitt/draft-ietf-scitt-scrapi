@@ -12,22 +12,22 @@
        This document describes a REST API that supports the normative requirements of the SCITT Architecture.
 Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Repositories. 
     " name="description">
-<meta content="xml2rfc 3.22.0" name="generator">
+<meta content="xml2rfc 3.24.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-scitt-scrapi-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.22.0
-    Python 3.12.3
+  xml2rfc 3.24.0
+    Python 3.12.7
     ConfigArgParse 1.7
-    google-i18n-address 3.1.0
+    google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.4
-    lxml 4.9.4
-    platformdirs 4.2.2
+    lxml 5.3.0
+    platformdirs 4.3.6
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.32.3
-    setuptools 69.5.1
+    setuptools 70.3.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-scitt-scrapi.xml" rel="alternate" type="application/rfc+xml">
@@ -164,31 +164,6 @@ Optional key discovery and query interfaces are provided to support interoperabi
 }
 
 @font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
-}
-@font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
   font-family: 'Oxygen Mono';
   font-style: normal;
   font-weight: 400;
@@ -205,6 +180,77 @@ Optional key discovery and query interfaces are provided to support interoperabi
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   color-scheme: light dark;
   --background-color: #fff;
@@ -217,6 +263,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
   --pilcrow-strong: #bbb;
   --small-font-size: 14.5px;
   --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
   scrollbar-color: #bbb #eee;
 }
 body {
@@ -235,8 +282,8 @@ body {
 
 /* headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Cabin Condensed", sans-serif;
-  font-weight: 600;
+  font-family: var(--font-title);
+  font-weight: 680;
   margin: 0.8em 0 0.3em;
   font-size-adjust: 0.5;
   color: var(--title-color);
@@ -644,6 +691,12 @@ sub, sup {
   padding: 0.75em 0 2em 0;
   margin-bottom: 1em;
 }
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+  }
+}
 #toc nav ul {
   margin: 0 0.5em 0 0;
   padding: 0;
@@ -1027,11 +1080,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SCRAPI</td>
-<td class="right">August 2024</td>
+<td class="right">November 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 10 February 2025</td>
+<td class="center">Expires 7 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1097,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-08-09" class="published">9 August 2024</time>
+<time datetime="2024-11-03" class="published">3 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-02-10">10 February 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-07">7 May 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1107,7 +1160,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 10 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1154,7 +1207,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
                     <p id="section-toc.1-1.2.2.1.2.1.1" class="keepWithNext"><a href="#section-2.1.1" class="auto internal xref">2.1.1</a>.  <a href="#name-transparency-configuration" class="internal xref">Transparency Configuration</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.2">
-                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-signed-statement-registrati" class="internal xref">Signed Statement Registration</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-register-signed-statement" class="internal xref">Register Signed Statement</a></p>
 </li>
                 </ul>
 </li>
@@ -1165,22 +1218,19 @@ Optional key discovery and query interfaces are provided to support interoperabi
                     <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="auto internal xref">2.2.1</a>.  <a href="#name-issue-signed-statement" class="internal xref">Issue Signed Statement</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.2">
-                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="auto internal xref">2.2.2</a>.  <a href="#name-resolve-statement" class="internal xref">Resolve Statement</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="auto internal xref">2.2.2</a>.  <a href="#name-resolve-signed-statement" class="internal xref">Resolve Signed Statement</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.3">
-                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="auto internal xref">2.2.3</a>.  <a href="#name-resolve-signed-statement" class="internal xref">Resolve Signed Statement</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="auto internal xref">2.2.3</a>.  <a href="#name-resolve-receipt" class="internal xref">Resolve Receipt</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.4">
-                    <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="auto internal xref">2.2.4</a>.  <a href="#name-resolve-receipt" class="internal xref">Resolve Receipt</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="auto internal xref">2.2.4</a>.  <a href="#name-exchange-receipt" class="internal xref">Exchange Receipt</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.5">
                     <p id="section-toc.1-1.2.2.2.2.5.1"><a href="#section-2.2.5" class="auto internal xref">2.2.5</a>.  <a href="#name-resolve-issuer" class="internal xref">Resolve Issuer</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.6">
                     <p id="section-toc.1-1.2.2.2.2.6.1"><a href="#section-2.2.6" class="auto internal xref">2.2.6</a>.  <a href="#name-request-nonce" class="internal xref">Request Nonce</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.7">
-                    <p id="section-toc.1-1.2.2.2.2.7.1"><a href="#section-2.2.7" class="auto internal xref">2.2.7</a>.  <a href="#name-resolve-issuer-did" class="internal xref">Resolve Issuer DID</a></p>
 </li>
                 </ul>
 </li>
@@ -1320,36 +1370,45 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 If Authentication is not implemented, rate limiting or other denial of service mitigations <span class="bcp14">MUST</span> be applied to enable anonymous access.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">NOTE: '' line wrapping per <span>[<a href="#RFC8792" class="cite xref">RFC8792</a>]</span> in HTTP examples.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">All messages are sent as HTTP GET or POST requests.<a href="#section-2-3" class="pilcrow">¶</a></p>
-<p id="section-2-4">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a JSON problem details object (<span>[<a href="#RFC9457" class="cite xref">RFC9457</a>]</span>) containing:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-4">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a Concise Problem Details object (<span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span>) containing:<a href="#section-2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-5.1">
-          <p id="section-2-5.1.1">type: A URI reference identifying the problem.
-To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.1.1">title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-5.2">
-          <p id="section-2-5.2.1">detail: A human-readable string describing the error that prevented the Transparency Service from processing the request, ideally with sufficient detail to enable the error to be rectified.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.2.1">detail: A human-readable string describing the error in more depth, ideally with sufficient detail to enable the error to be rectified.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-5.3">
+          <p id="section-2-5.3.1">instance: A URN reference identifying the problem.
+To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-5.4">
+          <p id="section-2-5.4.1">response-code: The HTTP error response code relating to this error.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-6">Error responses <span class="bcp14">SHOULD</span> be sent with the <code>Content-Type: application/problem+json</code> HTTP header.<a href="#section-2-6" class="pilcrow">¶</a></p>
-<p id="section-2-7">As an example, submitting a Signed Statement with an unsupported signature algorithm would return a <code>400 Bad Request</code> status code and the following body:<a href="#section-2-7" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-2-8">
+<p id="section-2-6">Error responses <span class="bcp14">SHOULD</span> be sent with the <code>Content-Type: application/problem+cbor</code> HTTP header.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-7">NOTE: SCRAPI is not a CoAP API. Nonetheless Constrained Problem Details objects (<span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span>) provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.<a href="#section-2-7" class="pilcrow">¶</a></p>
+<p id="section-2-8">As an example, submitting a Signed Statement with an unsupported signature algorithm would return a <code>400 Bad Request</code> status code and the following body:<a href="#section-2-8" class="pilcrow">¶</a></p>
+<div class="lang-cddl sourcecode" id="section-2-9">
 <pre>
 {
-  "type": "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-  "detail": "Signing algorithm not support"
+  / title /         -1: "Bad Signature Algorithm",
+  / detail /        -2: "Signing algorithm 'WalnutDSA' not supported.",
+  / instance /      -3: "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+  / response-code / -4: 400,
 }
-</pre><a href="#section-2-8" class="pilcrow">¶</a>
+</pre><a href="#section-2-9" class="pilcrow">¶</a>
 </div>
-<p id="section-2-9">Most error types are specific to the type of request and are defined in the respective subsections below.
-The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-2-9" class="pilcrow">¶</a></p>
+<p id="section-2-10">Most error types are specific to the type of request and are defined in the respective subsections below.
+The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-2-10" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-10.1">
-          <p id="section-2-10.1.1">Error code: <code>malformed</code> (The request could not be parsed).<a href="#section-2-10.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2-11.1">
+          <p id="section-2-11.1.1">Error code: <code>malformed</code> (The request could not be parsed).<a href="#section-2-11.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-11">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.
-Note that in the case of a 503 response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
-In the absence of this header field, this document does not specify a minimum.<a href="#section-2-11" class="pilcrow">¶</a></p>
+<p id="section-2-12">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-12" class="pilcrow">¶</a></p>
+<p id="section-2-13">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
+In the absence of this header field, this document does not specify a minimum.<a href="#section-2-13" class="pilcrow">¶</a></p>
 <div id="sec-mandatory">
 <section id="section-2.1">
         <h3 id="name-mandatory">
@@ -1368,63 +1427,29 @@ In the absence of this header field, this document does not specify a minimum.<a
 <pre>
 GET /.well-known/transparency-configuration HTTP/1.1
 Host: transparency.example
-Accept: application/json
+Accept: application/cose
 </pre><a href="#section-2.1.1-4" class="pilcrow">¶</a>
 </div>
 <p id="section-2.1.1-5">Response:<a href="#section-2.1.1-5" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.1.1-6">
 <pre>
 HTTP/1.1 200 Ok
-Content-Type: application/json
+Content-Type: application/cose
 
-{
-  "issuer": "https://transparency.example",
-  "registration_endpoint": "https://transparency.example/entries",
-  "nonce_endpoint": "https://transparency.example/nonce",
-
-  "registration_policy": \
-"https://transparency.example\
-/statements/urn:ietf:params:scitt:statement\
-:sha-256:base64url:5i6UeRzg1...qnGmr1o",
-
-  "supported_signature_algorithms": ["ES256"],
-  "jwks": {
-    "keys": [
-      {
-        "kid": "urn:ietf:params:oauth:\
-jwk-thumbprint:sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-        "alg": "ES256",
-        "use": "sig",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
-        "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
-      },
-      {
-        "kid": "urn:ietf:params:oauth:\
-jwk-thumbprint:sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-        "alg": "HPKE-Base-P256-SHA256-AES128GCM",
-        "use": "enc",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
-        "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
-      }
-    ]
-  }
-}
+&lt;Binary payload&gt;
 </pre><a href="#section-2.1.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1.1-7">Additional fields may be present.
+<p id="section-2.1.1-7">Responses to this message are vendor-specific.
 Fields that are not understood <span class="bcp14">MUST</span> be ignored.<a href="#section-2.1.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="sec-signed-statement-registration">
+<div id="sec-register-signed-statement">
 <section id="section-2.1.2">
-          <h4 id="name-signed-statement-registrati">
-<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-signed-statement-registrati" class="section-name selfRef">Signed Statement Registration</a>
+          <h4 id="name-register-signed-statement">
+<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-register-signed-statement" class="section-name selfRef">Register Signed Statement</a>
           </h4>
-<p id="section-2.1.2-1">Authentication <span class="bcp14">MUST</span> be implemented for this endpoint.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-1">Authentication <span class="bcp14">MAY</span> be implemented for this endpoint.
+See notes on detached payloads below.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-2">This endpoint is used to register a Signed Statement with a Transparency Service.<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-3">The following is a non-normative example of a HTTP request to register a Signed Statement:<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-4">Request:<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
@@ -1446,7 +1471,7 @@ Payload (in CBOR diagnostic notation)
 </div>
 <p id="section-2.1.2-6">The Registration Policy for the Transparency Service <span class="bcp14">MUST</span> be applied to the payload bytes, before any additional processing is performed.<a href="#section-2.1.2-6" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-7">If the <code>payload</code> is detached, the Transparency Service depends on the authentication context of the client in the Registration Policy.
-If the <code>payload</code> is attached, the Transparency Service depends on both the authentication context of the client, and the verification of the Signed Statement in the Registration Policy.
+If the <code>payload</code> is attached, the Transparency Service depends on both the authentication context of the client (if present), and the verification of the Signed Statement in the Registration Policy.
 The details of Registration Policy are out of scope for this document.<a href="#section-2.1.2-7" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-8">If registration succeeds the following identifier <span class="bcp14">MAY</span> be used to refer to the Signed Statement that was accepted:<a href="#section-2.1.2-8" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-9"><code>urn:ietf:params:scitt:signed-statement:sha-256:base64url:5i6UeRzg1...qnGmr1o</code><a href="#section-2.1.2-9" class="pilcrow">¶</a></p>
@@ -1490,18 +1515,18 @@ Fresh receipts may be requested through the resource identified in the Location 
             </h5>
 <div class="lang-http-message sourcecode" id="section-2.1.2.2-1">
 <pre>
-HTTP/1.1 202 Ok
+HTTP/1.1 202 Accepted
 
 Location: https://transparency.example/receipts\
 /urn:ietf:params:scitt:signed-statement\
 :sha-256:base64url:5i6UeRzg1...qnGmr1o
 
-Content-Type: application/json
+Content-Type: application/cbor
 Retry-After: &lt;seconds&gt;
 
 {
 
-  "receipt": "urn:ietf:params:scitt:receipt\
+  "identifier": "urn:ietf:params:scitt:receipt\
 :sha-256:base64url:5i6UeRzg1...qnGmr1o",
 
 }
@@ -1509,7 +1534,7 @@ Retry-After: &lt;seconds&gt;
 </pre><a href="#section-2.1.2.2-1" class="pilcrow">¶</a>
 </div>
 <p id="section-2.1.2.2-2">The response contains a reference to the receipt which will eventually be available for the Signed Statement.<a href="#section-2.1.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.2.2-3">If 202 is returned, then clients should wait until Registration succeeded or failed by polling the receipt endpoint using the receipt identifier returned in the response.<a href="#section-2.1.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.2.2-3">If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Resolve Receipt endpoint using the identifier returned in the response.<a href="#section-2.1.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-status-400-invalid-client-request">
@@ -1517,58 +1542,72 @@ Retry-After: &lt;seconds&gt;
             <h5 id="name-status-400-invalid-client-r">
 <a href="#section-2.1.2.3" class="section-number selfRef">2.1.2.3. </a><a href="#name-status-400-invalid-client-r" class="section-name selfRef">Status 400 - Invalid Client Request</a>
             </h5>
-<p id="section-2.1.2.3-1">One of the following errors:<a href="#section-2.1.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.2.3-1">The following expected errors are defined. Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.1.2.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-2.1.2.3-2">
 <pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:algorithm-not-supported",
-  "detail": \
-"Signed Statement contained an algorithm that is not supported."
+  / title /         -1: "Bad Signature Algorithm",
+  / detail /        -2: "Signed Statement contained an algorithm that is not supported",
+  / instance /      -3: "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+  / response-code / -4: 400,
 }
 </pre><a href="#section-2.1.2.3-2" class="pilcrow">¶</a>
 </div>
 <div class="alignLeft art-text artwork" id="section-2.1.2.3-3">
 <pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:payload-missing",
-  "detail": \
-"Signed Statement payload must be attached (must be present)"
+  / title /         -1: "Confirmation Missing",
+  / detail /        -2: "Signed Statement did not contain proof of possession",
+  / instance /      -3: "urn:ietf:params:scitt:error:signed-statement:confirmation-missing",
+  / response-code / -4: 400,
 }
 </pre><a href="#section-2.1.2.3-3" class="pilcrow">¶</a>
 </div>
 <div class="alignLeft art-text artwork" id="section-2.1.2.3-4">
 <pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:payload-forbidden",
-  "detail": \
-"Signed Statement payload must be detached (must not be present)"
+  / title /         -1: "Payload Missing",
+  / detail /        -2: "Signed Statement payload must be must be attached (must be present)",
+  / instance /      -3: "urn:ietf:params:scitt:error:signed-statement:payload-missing",
+  / response-code / -4: 400,
 }
 </pre><a href="#section-2.1.2.3-4" class="pilcrow">¶</a>
 </div>
 <div class="alignLeft art-text artwork" id="section-2.1.2.3-5">
 <pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:rejected-by-registration-policy",
-  "detail": \
-"Signed Statement not accepted by the current Registration Policy"
+  / title /         -1: "Payload Forbidden",
+  / detail /        -2: "Signed Statement payload must be detached (must not be present)",
+  / instance /      -3: "urn:ietf:params:scitt:error:signed-statement:payload-forbidden",
+  / response-code / -4: 400,
 }
 </pre><a href="#section-2.1.2.3-5" class="pilcrow">¶</a>
 </div>
 <div class="alignLeft art-text artwork" id="section-2.1.2.3-6">
 <pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:confirmation-missing",
-  "detail": \
-"Signed Statement did not contain proof of possession"
+  / title /         -1: "Rejected",
+  / detail /        -2: "Signed Statement not accepted by the current Registration Policy",
+  / instance /      -3: "urn:ietf:params:scitt:error:signed-statement:rejected-by-registration-policy",
+  / response-code / -4: 400,
 }
 </pre><a href="#section-2.1.2.3-6" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1.2.3-7">TODO: other error codes<a href="#section-2.1.2.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1590,33 +1629,71 @@ Retry-After: &lt;seconds&gt;
 <p id="section-2.2.1-2">This endpoint enables a Transparency Service to be an issuer of Signed Statements on behalf of authenticated clients.
 This supports cases where a client lacks the ability to perform complex cryptographic operations, but can be authenticated and report statements and measurements.<a href="#section-2.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-2.2.1-3">Request:<a href="#section-2.2.1-3" class="pilcrow">¶</a></p>
-<div class="lang-http sourcecode" id="section-2.2.1-4">
+<div class="breakable lang-http sourcecode" id="section-2.2.1-4">
 <pre>
 POST /signed-statements/issue HTTP/1.1
 Host: transparency.example
 Accept: application/json
-Content-Type: application/vc+ld+json
+Content-Type: application/spdx+json
 Payload
 
 {
-  "@context": [
-    "https://www.w3.org/ns/credentials/v2",
-    "https://www.w3.org/ns/credentials/examples/v2"
-  ],
-  "id": "https://transparency.example/credentials/1872",
-  "type": ["VerifiableCredential", "SensorCredential"],
-  "issuer": "https://transparency.example/device/1234",
-  "validFrom": "2010-01-01T19:23:24Z",
-  "credentialSubject": {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [125.6, 10.1]
-    },
-    "properties": {
-      "name": "Dinagat Islands"
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "cli-app 0.1.2",
+  "documentNamespace": "https://spdx.org/spdxdocs/sbom-tool-2.2.7-38f61e97-e53c-46ef-a37d-62.../cli-app/0.1.2/0d06adf8a36...",
+  "creationInfo": {
+    "created": "2024-08-16T21:44:54Z",
+    "creators": [
+      "Organization: contoso"
+    ]
+  },
+  "files": [
+    {
+      "name": "cli-app",
+      "SPDXID": "SPDXRef-RootPackage",
+      "downloadLocation": "NOASSERTION",
+      "packageVerificationCode": {
+        "packageVerificationCodeValue": "ecf0aae2a849cc51..."
+      },
+      "filesAnalyzed": true,
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoFromFiles": [
+        "NOASSERTION"
+      ],
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.2",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:swid/contoso/spdx.org/cli-app@0.1.2?tag_id=ac073d0f-0aa7-4d27-87fa-7f..."
+        }
+      ],
+      "supplier": "Organization: contoso",
+      "hasFiles": [
+        "SPDXRef-File--..."
+      ]
     }
-  }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-RootPackage",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-FF36801C1982452...",
+      "spdxElementId": "SPDXRef-RootPackage"
+    }
+  ],
+  "documentDescribes": [
+    "SPDXRef-RootPackage"
+  ],
+  "externalDocumentRefs": []
 }
 </pre><a href="#section-2.2.1-4" class="pilcrow">¶</a>
 </div>
@@ -1638,48 +1715,29 @@ Payload (in CBOR diagnostic notation)
 </div>
 </section>
 </div>
-<div id="sec-resolve-statement">
+<div id="sec-resolve-signed-statement">
 <section id="section-2.2.2">
-          <h4 id="name-resolve-statement">
-<a href="#section-2.2.2" class="section-number selfRef">2.2.2. </a><a href="#name-resolve-statement" class="section-name selfRef">Resolve Statement</a>
+          <h4 id="name-resolve-signed-statement">
+<a href="#section-2.2.2" class="section-number selfRef">2.2.2. </a><a href="#name-resolve-signed-statement" class="section-name selfRef">Resolve Signed Statement</a>
           </h4>
 <p id="section-2.2.2-1">Authentication <span class="bcp14">SHOULD</span> be implemented for this endpoint.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-2">This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve <code>payload</code> values directly, instead of indirectly through Receipts.<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-2">This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.2.2-3">Request:<a href="#section-2.2.2-3" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.2.2-4">
-<pre>
-GET /statements/urn...qnGmr1o HTTP/1.1
-Host: transparency.example
-Accept: application/pdf
-</pre><a href="#section-2.2.2-4" class="pilcrow">¶</a>
-</div>
-<p id="section-2.2.2-5">Response:<a href="#section-2.2.2-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.2-6">
-<pre>
-HTTP/1.1 200 Ok
-Content-Type: application/pdf
-Payload (pdf bytes)
-</pre><a href="#section-2.2.2-6" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-<div id="sec-resolve-signed-statement">
-<section id="section-2.2.3">
-          <h4 id="name-resolve-signed-statement">
-<a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-resolve-signed-statement" class="section-name selfRef">Resolve Signed Statement</a>
-          </h4>
-<p id="section-2.2.3-1">Authentication <span class="bcp14">SHOULD</span> be implemented for this endpoint.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-2">This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-3">Request:<a href="#section-2.2.3-3" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.3-4">
 <pre>
 GET /signed-statements/urn...qnGmr1o HTTP/1.1
 Host: transparency.example
 Accept: application/cose
-</pre><a href="#section-2.2.3-4" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.2-4" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.3-5">Response:<a href="#section-2.2.3-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.3-6">
+<p id="section-2.2.2-5">Response:<a href="#section-2.2.2-5" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-6">One of the following:<a href="#section-2.2.2-6" class="pilcrow">¶</a></p>
+<div id="sec-status-200-success">
+<section id="section-2.2.2.1">
+            <h5 id="name-status-200-success">
+<a href="#section-2.2.2.1" class="section-number selfRef">2.2.2.1. </a><a href="#name-status-200-success" class="section-name selfRef">Status 200 - Success</a>
+            </h5>
+<div class="lang-http-message sourcecode" id="section-2.2.2.1-1">
 <pre>
 HTTP/1.1 200 Ok
 Content-Type: application/cose
@@ -1692,27 +1750,55 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.2.3-6" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.2.1-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="sec-status-404-not-found">
+<section id="section-2.2.2.2">
+            <h5 id="name-status-404-not-found">
+<a href="#section-2.2.2.2" class="section-number selfRef">2.2.2.2. </a><a href="#name-status-404-not-found" class="section-name selfRef">Status 404 - Not Found</a>
+            </h5>
+<p id="section-2.2.2.2-1">The following expected errors are defined. Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2.2.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2.2.2.2-2">
+<pre>
+HTTP/1.1 404 Not Found
+Content-Type: application/problem+cbor
+
+{
+  / title /         -1: "Not Found",
+  / detail /        -2: "No Signed Statement found with the specified ID",
+  / instance /      -3: "urn:ietf:params:scitt:error:notFound",
+  / response-code / -4: 404,
+}
+</pre><a href="#section-2.2.2.2-2" class="pilcrow">¶</a>
+</div>
+</section>
 </div>
 </section>
 </div>
 <div id="sec-resolve-receipt">
-<section id="section-2.2.4">
+<section id="section-2.2.3">
           <h4 id="name-resolve-receipt">
-<a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-resolve-receipt" class="section-name selfRef">Resolve Receipt</a>
+<a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-resolve-receipt" class="section-name selfRef">Resolve Receipt</a>
           </h4>
-<p id="section-2.2.4-1">Authentication <span class="bcp14">SHOULD</span> be implemented for this endpoint.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.4-2">Request:<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.4-3">
+<p id="section-2.2.3-1">Authentication <span class="bcp14">SHOULD</span> be implemented for this endpoint.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.3-2">Request:<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.3-3">
 <pre>
 GET /receipts/urn...qnGmr1o HTTP/1.1
 Host: transparency.example
 Accept: application/cose
-</pre><a href="#section-2.2.4-3" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.3-3" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.4-4">Response:<a href="#section-2.2.4-4" class="pilcrow">¶</a></p>
-<p id="section-2.2.4-5">If the Signed Statement requested is already included in the Append-Only Log:<a href="#section-2.2.4-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.4-6">
+<p id="section-2.2.3-4">Response:<a href="#section-2.2.3-4" class="pilcrow">¶</a></p>
+<div id="sec-status-200">
+<section id="section-2.2.3.1">
+            <h5 id="name-status-200">
+<a href="#section-2.2.3.1" class="section-number selfRef">2.2.3.1. </a><a href="#name-status-200" class="section-name selfRef">Status 200</a>
+            </h5>
+<p id="section-2.2.3.1-1">If the Signed Statement requested is already included in the Append-Only Log:<a href="#section-2.2.3.1-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.3.1-2">
 <pre>
 HTTP/1.1 200 Ok
 Location: https://transparency.example/receipts/urn...qnGmr1o
@@ -1726,10 +1812,17 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.2.4-6" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.3.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.4-7">If the Signed Statement requested is not yet included in the Append-Only Log:<a href="#section-2.2.4-7" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.4-8">
+</section>
+</div>
+<div id="sec-status-202">
+<section id="section-2.2.3.2">
+            <h5 id="name-status-202">
+<a href="#section-2.2.3.2" class="section-number selfRef">2.2.3.2. </a><a href="#name-status-202" class="section-name selfRef">Status 202</a>
+            </h5>
+<p id="section-2.2.3.2-1">If registration of the Signed Statement requested is in progress but not yet included in the Append-Only Log:<a href="#section-2.2.3.2-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.3.2-2">
 <pre>
 HTTP/1.1 202 Ok
 Location: https://transparency.example/receipts/urn...qnGmr1o
@@ -1740,10 +1833,114 @@ Retry-After: &lt;seconds&gt;
   "receipt": "urn:ietf:params:scitt:receipt\
     :sha-256:base64url:5i6UeRzg1...qnGmr1o",
 }
-</pre><a href="#section-2.2.4-8" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.3.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.4-9">Additional eventually consistent operation details <span class="bcp14">MAY</span> be present.
-Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.<a href="#section-2.2.4-9" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-status-404">
+<section id="section-2.2.3.3">
+            <h5 id="name-status-404">
+<a href="#section-2.2.3.3" class="section-number selfRef">2.2.3.3. </a><a href="#name-status-404" class="section-name selfRef">Status 404</a>
+            </h5>
+<p id="section-2.2.3.3-1">If the Signed Statement requested is neither registered in the log nor subject to an in-progress registration:<a href="#section-2.2.3.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2.2.3.3-2">
+<pre>
+HTTP/1.1 404 Not Found
+Content-Type: application/problem+cbor
+
+{
+  / title /         -1: "Not Found",
+  / detail /        -2: "Signed Statement not known to this Transparency Service",
+  / instance /      -3: "urn:ietf:params:scitt:error:receipt:not-found",
+  / response-code / -4: 400,
+}
+</pre><a href="#section-2.2.3.3-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="sec-status-429">
+<section id="section-2.2.3.4">
+            <h5 id="name-status-429">
+<a href="#section-2.2.3.4" class="section-number selfRef">2.2.3.4. </a><a href="#name-status-429" class="section-name selfRef">Status 429</a>
+            </h5>
+<p id="section-2.2.3.4-1">If a client is polling for an in-progress registration too frequently then the Transparency Service <span class="bcp14">MAY</span>, in addition to implementing rate-limiting, return a 429 response:<a href="#section-2.2.3.4-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2.2.3.4-2">
+<pre>
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: &lt;seconds&gt;
+
+{
+  "type": "urn:ietf:params:scitt:error\
+    :receipt:too-many-requests",
+  "detail": \
+    "Too Many Requests. Only &lt;number&gt; requests per &lt;period&gt; are allowed."
+}
+</pre><a href="#section-2.2.3.4-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="sec-eventual-consistency">
+<section id="section-2.2.3.5">
+            <h5 id="name-eventual-consistency">
+<a href="#section-2.2.3.5" class="section-number selfRef">2.2.3.5. </a><a href="#name-eventual-consistency" class="section-name selfRef">Eventual Consistency</a>
+            </h5>
+<p id="section-2.2.3.5-1">For all responses additional eventually consistent operation details <span class="bcp14">MAY</span> be present.
+Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.<a href="#section-2.2.3.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="sec-exchange-receipt">
+<section id="section-2.2.4">
+          <h4 id="name-exchange-receipt">
+<a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-exchange-receipt" class="section-name selfRef">Exchange Receipt</a>
+          </h4>
+<p id="section-2.2.4-1">This endpoint is used to exchange old or expiring receipts for fresh ones.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.4-2">The <code>iat</code>, <code>exp</code> and <code>kid</code> claims can change each time a receipt is exchanged.<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
+<p id="section-2.2.4-3">This means that fresh receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.<a href="#section-2.2.4-3" class="pilcrow">¶</a></p>
+<p id="section-2.2.4-4">Authentication <span class="bcp14">SHOULD</span> be implemented for this endpoint.<a href="#section-2.2.4-4" class="pilcrow">¶</a></p>
+<p id="section-2.2.4-5">Request:<a href="#section-2.2.4-5" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.4-6">
+<pre>
+POST /exchange/receipt HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+Content-Type: application/cose
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+</pre><a href="#section-2.2.4-6" class="pilcrow">¶</a>
+</div>
+<div id="sec-status-200-1">
+<section id="section-2.2.4.1">
+            <h5 id="name-status-200-2">
+<a href="#section-2.2.4.1" class="section-number selfRef">2.2.4.1. </a><a href="#name-status-200-2" class="section-name selfRef">Status 200</a>
+            </h5>
+<p id="section-2.2.4.1-1">A new receipt:<a href="#section-2.2.4.1-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.4.1-2">
+<pre>
+HTTP/1.1 200 Ok
+Location: https://transparency.example/receipts/urn...qnGmr1o
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+</pre><a href="#section-2.2.4.1-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-resolve-issuer">
@@ -1827,115 +2024,6 @@ Content-Type: application/json
   "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
 }
 </pre><a href="#section-2.2.6-6" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-<div id="sec-resolve-issuer-did">
-<section id="section-2.2.7">
-          <h4 id="name-resolve-issuer-did">
-<a href="#section-2.2.7" class="section-number selfRef">2.2.7. </a><a href="#name-resolve-issuer-did" class="section-name selfRef">Resolve Issuer DID</a>
-          </h4>
-<p id="section-2.2.7-1">This endpoint enables the use of the DID Web Decentralized Identifier Method, as an alternative expression of the Issuer Metadata endpoint.<a href="#section-2.2.7-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.7-2">This endpoint is DEPRECATED.<a href="#section-2.2.7-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.7-3">The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when <code>iss</code> is set to <code>did:web:transparency.example:tenant:1234</code>:<a href="#section-2.2.7-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.7-4">Request:<a href="#section-2.2.7-4" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.7-5">
-<pre>
-GET /tenant/1234/did.json HTTP/1.1
-Host: transparency.example
-Accept: application/did+ld+json
-</pre><a href="#section-2.2.7-5" class="pilcrow">¶</a>
-</div>
-<p id="section-2.2.7-6">Response:<a href="#section-2.2.7-6" class="pilcrow">¶</a></p>
-<div class="breakable lang-http-message sourcecode" id="section-2.2.7-7">
-<pre>
-HTTP/1.1 200 Ok
-Content-Type: application/did+ld+json
-
-{
-  "@context": [
-    "https://www.w3.org/ns/did/v1",
-    {
-      "@vocab": "https://vocab.transparency.example#"
-    }
-  ],
-  "id": "did:web:transparency.example:tenant:1234",
-  "verificationMethod": [
-    {
-      "id": "did:web:transparency.example:tenant:1234\
-        #urn:ietf:params:oauth:jwk-thumbprint\
-        :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-      "type": "JsonWebKey",
-      "controller": "did:web:transparency.example:tenant:1234",
-      "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-          :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-        "alg": "ES256",
-        "use": "sig",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "9ptuW0PBHSTN7bVexWd7xM5kmSPGRaCu-K3SLtJyvNc",
-        "y": "l7NvF6QbovicSciZqu_W_xy4JTZwtnUbn2SNdMKoaAk"
-      }
-    },
-    {
-      "id": "did:web:transparency.example:tenant:1234\
-        #urn:ietf:params:oauth:jwk-thumbprint\
-        :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-      "type": "JsonWebKey",
-      "controller": "did:web:transparency.example:tenant:1234",
-      "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-          :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-        "alg": "ES256",
-        "use": "sig",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
-        "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
-      }
-    },
-    {
-      "id": "did:web:transparency.example:tenant:1234\
-        #urn:ietf:params:oauth:jwk-thumbprint\
-        :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-      "type": "JsonWebKey",
-      "controller": "did:web:transparency.example:tenant:1234",
-      "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint\
-          :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-        "alg": "HPKE-Base-P256-SHA256-AES128GCM",
-        "use": "enc",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
-        "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
-      }
-    }
-  ],
-  "assertionMethod": [
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-  ],
-  "authentication": [
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:5b30k1hBWBMcggA9GIJImUqj4pXqrJ9EOWV6MDdcstA",
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo"
-  ],
-  "keyAgreement": [
-    "did:web:transparency.example:tenant:1234\
-      #urn:ietf:params:oauth:jwk-thumbprint\
-      :sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE"
-  ]
-}
-</pre><a href="#section-2.2.7-7" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2249,7 +2337,7 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <dl class="references">
 <dt id="I-D.draft-ietf-scitt-architecture">[I-D.draft-ietf-scitt-architecture]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-08</span>, <time datetime="2024-07-22" class="refDate">22 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-08">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-09</span>, <time datetime="2024-10-15" class="refDate">15 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-09">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.params">[IANA.params]</dt>
         <dd>
@@ -2279,6 +2367,10 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9290">[RFC9290]</dt>
+        <dd>
+<span class="refAuthor">Fossati, T.</span> and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Problem Details for Constrained Application Protocol (CoAP) APIs"</span>, <span class="seriesInfo">RFC 9290</span>, <span class="seriesInfo">DOI 10.17487/RFC9290</span>, <time datetime="2022-10" class="refDate">October 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9290">https://www.rfc-editor.org/rfc/rfc9290</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9457">[RFC9457]</dt>
       <dd>
 <span class="refAuthor">Nottingham, M.</span>, <span class="refAuthor">Wilde, E.</span>, and <span class="refAuthor">S. Dalal</span>, <span class="refTitle">"Problem Details for HTTP APIs"</span>, <span class="seriesInfo">RFC 9457</span>, <span class="seriesInfo">DOI 10.17487/RFC9457</span>, <time datetime="2023-07" class="refDate">July 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9457">https://www.rfc-editor.org/rfc/rfc9457</a>&gt;</span>. </dd>
@@ -2298,7 +2390,7 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="I-D.draft-ietf-oauth-sd-jwt-vc">[I-D.draft-ietf-oauth-sd-jwt-vc]</dt>
         <dd>
-<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-04</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-04">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-05</span>, <time datetime="2024-09-18" class="refDate">18 September 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-05">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2046">[RFC2046]</dt>
         <dd>
