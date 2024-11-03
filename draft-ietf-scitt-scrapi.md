@@ -51,6 +51,7 @@ normative:
   RFC8615:
   RFC9052:
   RFC9110:
+  RFC9290:
   RFC9457:
   IANA.params:
 
