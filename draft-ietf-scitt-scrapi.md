@@ -52,7 +52,6 @@ normative:
   RFC9052:
   RFC9110:
   RFC9290:
-  RFC9457:
   IANA.params:
 
 informative:
@@ -99,7 +98,7 @@ This specification uses "payload" as defined in {{RFC9052}}.
 # Endpoints
 
 Authentication is out of scope for this document.
-If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be applied to enable anonymous access.
+If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be applied to enable anonymous access.
 
 NOTE: '\' line wrapping per {{RFC8792}} in HTTP examples.
 
@@ -151,6 +150,8 @@ Authentication SHOULD NOT be implemented for this endpoint.
 
 This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.
 
+The Transparency Service responds with a signed dictionary of configuration elements. These elements are Transparency-Service specific.
+
 Request:
 
 ~~~ http-message
@@ -166,7 +167,20 @@ Response:
 HTTP/1.1 200 Ok
 Content-Type: application/cose
 
-<Binary payload>
+Payload (in CBOR diagnostic notation)
+
+18([                   ; COSE_Sign1 structure with tag 18
+    h'44A123BEEFFACE', ; Protected header (example bytes)
+    {},                ; Unprotected header
+    {                  ; Payload - CBOR dict
+        "issuer": "https://transparency.example",
+        "base_url": "https://transparency.example/v1/scrapi",
+        "oidc_auth_endpoint": "https://transparency.example/auth",
+        "registration_policy": "https://transparency.example/statements/\
+urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
+    },
+    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature placeholder
+])
 ~~~
 
 Responses to this message are vendor-specific.
