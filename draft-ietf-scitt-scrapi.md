@@ -116,7 +116,7 @@ To facilitate automated response to errors, this document defines a set of stand
 
 - response-code: The HTTP error response code relating to this error.
 
-Error responses SHOULD be sent with the `Content-Type: application/problem+cbor` HTTP header.
+application/concise-problem-details+cbor
 
 NOTE: SCRAPI is not a CoAP API. Nonetheless Constrained Problem Details objects ({{RFC9290}}) provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.
 
