@@ -465,7 +465,7 @@ The following expected errors are defined. Implementations MAY return other erro
 
 ~~~
 HTTP/1.1 404 Not Found
-Content-Type: application/problem+cbor
+application/concise-problem-details+cbor
 
 {
   / title /         -1: "Not Found",
