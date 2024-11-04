@@ -153,7 +153,7 @@ Table of Contents
 
    Authentication is out of scope for this document.  If Authentication
    is not implemented, rate limiting or other denial of service
-   mitigations MUST be applied to enable anonymous access.
+   mitigation MUST be applied to enable anonymous access.
 
    NOTE: '' line wrapping per [RFC8792] in HTTP examples.
 
@@ -228,6 +228,10 @@ Table of Contents
    configuration of a transparency service implementing this
    specification.
 
+   The Transparency Service responds with a signed dictionary of
+   configuration elements.  These elements are Transparency-Service
+   specific.
+
    Request:
 
    GET /.well-known/transparency-configuration HTTP/1.1
@@ -239,7 +243,20 @@ Table of Contents
    HTTP/1.1 200 Ok
    Content-Type: application/cose
 
-   <Binary payload>
+   Payload (in CBOR diagnostic notation)
+
+   18([                   ; COSE_Sign1 structure with tag 18
+       h'44A123BEEFFACE', ; Protected header (example bytes)
+       {},                ; Unprotected header
+       {                  ; Payload - CBOR dict
+           "issuer": "https://transparency.example",
+           "base_url": "https://transparency.example/v1/scrapi",
+           "oidc_auth_endpoint": "https://transparency.example/auth",
+           "registration_policy": "https://transparency.example/statements/\
+   urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
+       },
+       h'ABCDEF1234567890ABCDEF1234567890'  ; Signature placeholder
+   ])
 
    Responses to this message are vendor-specific.  Fields that are not
    understood MUST be ignored.
@@ -1048,10 +1065,6 @@ Retry-After: <seconds>
               Constrained Application Protocol (CoAP) APIs", RFC 9290,
               DOI 10.17487/RFC9290, October 2022,
               <https://www.rfc-editor.org/rfc/rfc9290>.
-
-   [RFC9457]  Nottingham, M., Wilde, E., and S. Dalal, "Problem Details
-              for HTTP APIs", RFC 9457, DOI 10.17487/RFC9457, July 2023,
-              <https://www.rfc-editor.org/rfc/rfc9457>.
 
 7.2.  Informative References
 

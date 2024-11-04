@@ -1367,7 +1367,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-endpoints" class="section-name selfRef">Endpoints</a>
       </h2>
 <p id="section-2-1">Authentication is out of scope for this document.
-If Authentication is not implemented, rate limiting or other denial of service mitigations <span class="bcp14">MUST</span> be applied to enable anonymous access.<a href="#section-2-1" class="pilcrow">¶</a></p>
+If Authentication is not implemented, rate limiting or other denial of service mitigation <span class="bcp14">MUST</span> be applied to enable anonymous access.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">NOTE: '' line wrapping per <span>[<a href="#RFC8792" class="cite xref">RFC8792</a>]</span> in HTTP examples.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">All messages are sent as HTTP GET or POST requests.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a Concise Problem Details object (<span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span>) containing:<a href="#section-2-4" class="pilcrow">¶</a></p>
@@ -1422,25 +1422,39 @@ In the absence of this header field, this document does not specify a minimum.<a
           </h4>
 <p id="section-2.1.1-1">Authentication <span class="bcp14">SHOULD NOT</span> be implemented for this endpoint.<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-2">This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.1-3">Request:<a href="#section-2.1.1-3" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.1.1-4">
+<p id="section-2.1.1-3">The Transparency Service responds with a signed dictionary of configuration elements. These elements are Transparency-Service specific.<a href="#section-2.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.1-4">Request:<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.1-5">
 <pre>
 GET /.well-known/transparency-configuration HTTP/1.1
 Host: transparency.example
 Accept: application/cose
-</pre><a href="#section-2.1.1-4" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.1-5" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1.1-5">Response:<a href="#section-2.1.1-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.1.1-6">
+<p id="section-2.1.1-6">Response:<a href="#section-2.1.1-6" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.1-7">
 <pre>
 HTTP/1.1 200 Ok
 Content-Type: application/cose
 
-&lt;Binary payload&gt;
-</pre><a href="#section-2.1.1-6" class="pilcrow">¶</a>
+Payload (in CBOR diagnostic notation)
+
+18([                   ; COSE_Sign1 structure with tag 18
+    h'44A123BEEFFACE', ; Protected header (example bytes)
+    {},                ; Unprotected header
+    {                  ; Payload - CBOR dict
+        "issuer": "https://transparency.example",
+        "base_url": "https://transparency.example/v1/scrapi",
+        "oidc_auth_endpoint": "https://transparency.example/auth",
+        "registration_policy": "https://transparency.example/statements/\
+urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
+    },
+    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature placeholder
+])
+</pre><a href="#section-2.1.1-7" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1.1-7">Responses to this message are vendor-specific.
-Fields that are not understood <span class="bcp14">MUST</span> be ignored.<a href="#section-2.1.1-7" class="pilcrow">¶</a></p>
+<p id="section-2.1.1-8">Responses to this message are vendor-specific.
+Fields that are not understood <span class="bcp14">MUST</span> be ignored.<a href="#section-2.1.1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-register-signed-statement">
@@ -2368,12 +2382,8 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9290">[RFC9290]</dt>
-        <dd>
-<span class="refAuthor">Fossati, T.</span> and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Problem Details for Constrained Application Protocol (CoAP) APIs"</span>, <span class="seriesInfo">RFC 9290</span>, <span class="seriesInfo">DOI 10.17487/RFC9290</span>, <time datetime="2022-10" class="refDate">October 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9290">https://www.rfc-editor.org/rfc/rfc9290</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9457">[RFC9457]</dt>
       <dd>
-<span class="refAuthor">Nottingham, M.</span>, <span class="refAuthor">Wilde, E.</span>, and <span class="refAuthor">S. Dalal</span>, <span class="refTitle">"Problem Details for HTTP APIs"</span>, <span class="seriesInfo">RFC 9457</span>, <span class="seriesInfo">DOI 10.17487/RFC9457</span>, <time datetime="2023-07" class="refDate">July 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9457">https://www.rfc-editor.org/rfc/rfc9457</a>&gt;</span>. </dd>
+<span class="refAuthor">Fossati, T.</span> and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Problem Details for Constrained Application Protocol (CoAP) APIs"</span>, <span class="seriesInfo">RFC 9290</span>, <span class="seriesInfo">DOI 10.17487/RFC9290</span>, <time datetime="2022-10" class="refDate">October 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9290">https://www.rfc-editor.org/rfc/rfc9290</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
