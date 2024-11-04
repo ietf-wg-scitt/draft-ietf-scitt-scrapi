@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 7 May 2025                                            Transmute
+Expires: 8 May 2025                                            Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                         3 November 2024
+                                                         4 November 2024
 
 
                           SCITT Reference APIs
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 May 2025.
+   This Internet-Draft will expire on 8 May 2025.
 
 Copyright Notice
 
@@ -179,8 +179,7 @@ Table of Contents
    *  response-code: The HTTP error response code relating to this
       error.
 
-   Error responses SHOULD be sent with the Content-Type: application/
-   problem+cbor HTTP header.
+   application/concise-problem-details+cbor
 
    NOTE: SCRAPI is not a CoAP API.  Nonetheless Constrained Problem
    Details objects ([RFC9290]) provide a useful CBOR encoding for
