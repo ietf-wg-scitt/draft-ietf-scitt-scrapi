@@ -530,7 +530,7 @@ If the Signed Statement requested is neither registered in the log nor subject t
 
 ~~~
 HTTP/1.1 404 Not Found
-Content-Type: application/problem+cbor
+application/concise-problem-details+cbor
 
 {
   / title /         -1: "Not Found",
