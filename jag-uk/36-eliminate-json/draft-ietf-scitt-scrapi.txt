@@ -532,7 +532,7 @@ application/concise-problem-details+cbor
    return other errors, so long as they are valid [RFC9290] objects.
 
 HTTP/1.1 404 Not Found
-Content-Type: application/problem+cbor
+application/concise-problem-details+cbor
 
 {
   / title /         -1: "Not Found",
