@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-03T00:40:51.749653+00:00",
+  "timestamp": "2024-11-05T00:36:45.485457+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -760,6 +760,149 @@
           "body": "> And to be clear, I would think `response-code` over `type` implies a possible layering concern by bringing HTTP error codes \"down into\" the API surface of CBOR-based payloads for SCITT, no?\r\n\r\nYeah I really flip-flopped on that one. I spoke to one of the CBOR authors and they include the status code in the object is for extra later clues to errors (poring over log files for example) but I agree it's a bit of a violation. It would be very easy to convince me to remove that",
           "createdAt": "2024-11-02T16:04:39Z",
           "updatedAt": "2024-11-02T16:04:39Z"
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "id": "I_kwDOLJjbks6c0_NL",
+      "title": "Introduction and body are inconsistent about what is mandatory and what is optional",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/39",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Need to be made consistent",
+      "createdAt": "2024-11-03T11:03:29Z",
+      "updatedAt": "2024-11-03T11:03:29Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 40,
+      "id": "I_kwDOLJjbks6c0_Ul",
+      "title": "Keys in configuration example have no stated purpose",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/40",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Showing keys without saying what they're for is unhelpful\r\n\r\nCedric suggests it might be even better to remove the specifics and just include a standard key discovery locator (which also helps avoid format/types arguments in this doc)",
+      "createdAt": "2024-11-03T11:04:42Z",
+      "updatedAt": "2024-11-04T18:28:40Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I have attempted to resolve this by removing it in the translation to CBOR in PR #38 - will this suffice?",
+          "createdAt": "2024-11-04T18:28:39Z",
+          "updatedAt": "2024-11-04T18:28:39Z"
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "id": "I_kwDOLJjbks6c0_wy",
+      "title": "Nothing to hold TS to account",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/41",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Would be good to have an API that allows checking or proving consistency of the log.\r\nWe understand that not every log supports consistency proofs but in the cases where they do, there should be standard way to get them",
+      "createdAt": "2024-11-03T11:09:28Z",
+      "updatedAt": "2024-11-03T11:09:28Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 42,
+      "id": "I_kwDOLJjbks6c1AIl",
+      "title": "Clarify CLIENT AuthZ/AuthN early in doc",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/42",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It would be useful to clarify that \"Authentication\" in SCRAPI is referring to the application client connection separate to the Issuer sig etc. A short section on this (then not having to repeat it a lot throughout the doc) would be helpful",
+      "createdAt": "2024-11-03T11:13:25Z",
+      "updatedAt": "2024-11-03T11:13:25Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 43,
+      "id": "I_kwDOLJjbks6c1AbS",
+      "title": "Problems with example register signed statement ",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/43",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "3 issues:\r\n * detached payload doesn't make sense - we have hash envelope now\r\n * also the word 'payload' is used for both COSE payload and HTTP Boy. Should be clear and use Body for the HTTP message\r\n * the statement on Reg Policy wrt attached/detached payload is unclear. Needs wordsmithing",
+      "createdAt": "2024-11-03T11:16:42Z",
+      "updatedAt": "2024-11-03T11:16:42Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 44,
+      "id": "I_kwDOLJjbks6c1AoQ",
+      "title": "Remove 'ResolveStatement' and associated IDs/references",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/44",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It's sufficient/better to just ResolveSignedStatement (meaning you get back what was put in) and then the client can pull the Statement out if they want it. Reduces complexity for no loss of functionality",
+      "createdAt": "2024-11-03T11:19:07Z",
+      "updatedAt": "2024-11-04T04:30:57Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "body": "> It's sufficient/better to just ResolveSignedStatement (meaning you get back what was put in) and then the client can pull the Statement out if they want it. Reduces complexity for no loss of functionality\r\n\r\nSo no separate endpoint, you mean?",
+          "createdAt": "2024-11-04T04:30:57Z",
+          "updatedAt": "2024-11-04T04:30:57Z"
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "id": "I_kwDOLJjbks6c3jzE",
+      "title": "Minimally viable `/.well-known/transparency-configuration` CDDL for TS configruation?",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/45",
+      "state": "OPEN",
+      "author": "aj-stein",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Since we are talking about #36, does this mean we must refactor this API endpoint's response with minimally viable CBOR and a CDDL spec in place of JSON?",
+      "createdAt": "2024-11-04T04:33:58Z",
+      "updatedAt": "2024-11-04T18:26:58Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yes. Discussed at the hackathon and will make a proposal as part of https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/38 ",
+          "createdAt": "2024-11-04T09:15:12Z",
+          "updatedAt": "2024-11-04T09:15:12Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Added to PR #38 - LMK if you like it",
+          "createdAt": "2024-11-04T18:26:57Z",
+          "updatedAt": "2024-11-04T18:26:57Z"
         }
       ]
     }
@@ -2303,7 +2446,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-11-02T12:58:08Z",
-      "updatedAt": "2024-11-02T14:04:07Z",
+      "updatedAt": "2024-11-03T14:05:40Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
@@ -2328,6 +2471,108 @@
           "createdAt": "2024-11-02T14:04:07Z",
           "updatedAt": "2024-11-02T14:04:07Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Pwhxc",
+          "commit": {
+            "abbreviatedOid": "e7747a4"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-11-03T14:05:40Z",
+          "updatedAt": "2024-11-03T14:05:40Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOLJjbks6AuIec",
+      "title": "First tranche of CBOR All The Things",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/38",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updated error returns to be CBOR, and a couple of other things. Still more to do",
+      "createdAt": "2024-11-03T10:00:41Z",
+      "updatedAt": "2024-11-04T18:25:57Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "jag-uk/36-eliminate-json",
+      "headRefOid": "393feea5b965dd6fc62f62bb4516e06dc222c022",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6Pz87u",
+          "commit": {
+            "abbreviatedOid": "be74955"
+          },
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-04T10:58:09Z",
+          "updatedAt": "2024-11-04T11:02:25Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "Early early review, should it no be [the registered RFC9290 MIME type](https://www.iana.org/assignments/media-types/application/concise-problem-details+cbor)?\r\n\r\n```suggestion\r\napplication/concise-problem-details+cbor\r\n```",
+              "createdAt": "2024-11-04T10:58:09Z",
+              "updatedAt": "2024-11-04T11:02:26Z"
+            },
+            {
+              "originalPosition": 132,
+              "body": "Ditto\r\n\r\n```suggestion\r\napplication/concise-problem-details+cbor\r\n```",
+              "createdAt": "2024-11-04T10:58:32Z",
+              "updatedAt": "2024-11-04T11:02:26Z"
+            },
+            {
+              "originalPosition": 148,
+              "body": "Ditto\r\n\r\n```suggestion\r\napplication/concise-problem-details+cbor\r\n```",
+              "createdAt": "2024-11-04T11:00:20Z",
+              "updatedAt": "2024-11-04T11:02:26Z"
+            },
+            {
+              "originalPosition": 180,
+              "body": "Ditto\r\n\r\nDitto\r\n\r\n```suggestion\r\napplication/concise-problem-details+cbor\r\n```",
+              "createdAt": "2024-11-04T11:00:32Z",
+              "updatedAt": "2024-11-04T11:02:26Z"
+            },
+            {
+              "originalPosition": 196,
+              "body": "Ditto\r\n\r\n```suggestion\r\napplication/concise-problem-details+cbor\r\n```",
+              "createdAt": "2024-11-04T11:00:40Z",
+              "updatedAt": "2024-11-04T11:02:26Z"
+            },
+            {
+              "originalPosition": 283,
+              "body": "Ditto\r\n\r\n```suggestion\r\napplication/concise-problem-details+cbor\r\n```",
+              "createdAt": "2024-11-04T11:01:02Z",
+              "updatedAt": "2024-11-04T11:02:26Z"
+            },
+            {
+              "originalPosition": 164,
+              "body": "Ditto\r\n\r\n```suggestion\r\napplication/concise-problem-details+cbor\r\n```",
+              "createdAt": "2024-11-04T11:01:23Z",
+              "updatedAt": "2024-11-04T11:02:26Z"
+            },
+            {
+              "originalPosition": 265,
+              "body": "Ditto\r\n\r\n```suggestion\r\napplication/concise-problem-details+cbor\r\n```",
+              "createdAt": "2024-11-04T11:02:05Z",
+              "updatedAt": "2024-11-04T11:02:26Z"
+            }
+          ]
         }
       ]
     }
