@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 8 May 2025                                            Transmute
+Expires: 9 May 2025                                            Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                         4 November 2024
+                                                         5 November 2024
 
 
                           SCITT Reference APIs
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 May 2025.
+   This Internet-Draft will expire on 9 May 2025.
 
 Copyright Notice
 
@@ -231,6 +231,8 @@ Table of Contents
    The Transparency Service responds with a signed dictionary of
    configuration elements.  These elements are Transparency-Service
    specific.
+
+   Contents of bodies are informative examples only.
 
    Request:
 
@@ -801,19 +803,15 @@ Retry-After: <seconds>
    For those endpoints that require client authentication, Transparency
    Services MUST support at least one of the following options:
 
-   *  HTTP Authorization header with a bearer JWT
+   *  HTTP Authorization header with a JWT
 
    *  domain-bound API key
 
    *  TLS client authentication
 
-   Transparency Services MUST provide a configuration surface that
-   allows Issuers to specify which authorized clients can submit
-   Statements on their behalf.
-
    Where authentication methods rely on long term secrets, both clients
-   and Transparency Services implementing this specification MUST allow
-   for the revocation and rolling of authentication secrets.
+   and Transparency Services implementing this specification SHOULD
+   allow for the revocation and rolling of authentication secrets.
 
 4.4.  Primary threats
 
@@ -923,7 +921,7 @@ Retry-After: <seconds>
 
    If the semantic content of the payload are time dependent and
    susceptible to replay attacks in this way then timestamps MAY be
-   added to the payload signed by the Issuer.
+   added to the protected header signed by the Issuer.
 
 4.4.2.2.  Message deletion attacks
 
