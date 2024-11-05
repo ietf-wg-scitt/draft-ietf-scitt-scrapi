@@ -152,6 +152,8 @@ This endpoint is used to discover the capabilities and current configuration of 
 
 The Transparency Service responds with a signed dictionary of configuration elements. These elements are Transparency-Service specific.
 
+Contents of bodies are informative examples only.
+
 Request:
 
 ~~~ http-message
@@ -728,13 +730,11 @@ This document is only concerned with authentication of API clients.
 
 For those endpoints that require client authentication, Transparency Services MUST support at least one of the following options:
 
-- HTTP Authorization header with a bearer JWT
+- HTTP Authorization header with a JWT
 - domain-bound API key
 - TLS client authentication
 
-Transparency Services MUST provide a configuration surface that allows Issuers to specify which authorized clients can submit Statements on their behalf.
-
-Where authentication methods rely on long term secrets, both clients and Transparency Services implementing this specification MUST allow for the revocation and rolling of authentication secrets.
+Where authentication methods rely on long term secrets, both clients and Transparency Services implementing this specification SHOULD allow for the revocation and rolling of authentication secrets.
 
 ## Primary threats
 
@@ -792,7 +792,7 @@ Replay attacks are not particularly concerning for SCITT or SCRAPI:
 once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
 There could be issues at the payload level (for instance, the statement "it is raining" may true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
 
-If the semantic content of the payload are time dependent and susceptible to replay attacks in this way then timestamps MAY be added to the payload signed by the Issuer.
+If the semantic content of the payload are time dependent and susceptible to replay attacks in this way then timestamps MAY be added to the protected header signed by the Issuer.
 
 #### Message deletion attacks
 
