@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-05T00:36:45.485457+00:00",
+  "timestamp": "2024-11-07T00:36:50.573334+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -887,7 +887,7 @@
       "labels": [],
       "body": "Since we are talking about #36, does this mean we must refactor this API endpoint's response with minimally viable CBOR and a CDDL spec in place of JSON?",
       "createdAt": "2024-11-04T04:33:58Z",
-      "updatedAt": "2024-11-04T18:26:58Z",
+      "updatedAt": "2024-11-05T11:26:08Z",
       "closedAt": null,
       "comments": [
         {
@@ -903,8 +903,55 @@
           "body": "Added to PR #38 - LMK if you like it",
           "createdAt": "2024-11-04T18:26:57Z",
           "updatedAt": "2024-11-04T18:26:57Z"
+        },
+        {
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "body": "I will have to experiment with it more, but so far I like it. You can link this issue to close it once you merge #39. Thanks.",
+          "createdAt": "2024-11-05T11:26:07Z",
+          "updatedAt": "2024-11-05T11:26:07Z"
         }
       ]
+    },
+    {
+      "number": 46,
+      "id": "I_kwDOLJjbks6dGYXL",
+      "title": "Clarify scope of Resolve Issuer",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/46",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The intent statement currently says:\r\n\r\n`This endpoint is used to discover verification keys, which is the reason that authentication is not required.`\r\n\r\nIn use cases where this endpoint is useful, it's often the case that you want more metadata/supporting evidence than purely keys.\r\n\r\nA suggestion from the field: `return supporting evidence enabling the client to verify the issuer signature at the time of registration`",
+      "createdAt": "2024-11-05T14:55:01Z",
+      "updatedAt": "2024-11-05T14:57:51Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Additionally there's a na\u00efve notion that this information should be returned with no auth.\r\nThis is great from a global verifiability point of view but it needs a balancing statement that allows/encourages auth for things that might contain PII, for example.",
+          "createdAt": "2024-11-05T14:57:50Z",
+          "updatedAt": "2024-11-05T14:57:50Z"
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "id": "I_kwDOLJjbks6dGcQk",
+      "title": "Do we really need 2.2.7 Request Nonce?",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/47",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It's not clear why this would be needed, and it doesn't reflect any patterns in the Architecture. Remove?",
+      "createdAt": "2024-11-05T15:00:44Z",
+      "updatedAt": "2024-11-05T15:00:44Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -2446,7 +2493,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-11-02T12:58:08Z",
-      "updatedAt": "2024-11-03T14:05:40Z",
+      "updatedAt": "2024-11-05T16:08:09Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
@@ -2484,6 +2531,19 @@
           "createdAt": "2024-11-03T14:05:40Z",
           "updatedAt": "2024-11-03T14:05:40Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6QAn7d",
+          "commit": {
+            "abbreviatedOid": "e7747a4"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-05T16:08:09Z",
+          "updatedAt": "2024-11-05T16:08:09Z",
+          "comments": []
         }
       ]
     },
@@ -2499,13 +2559,13 @@
       "labels": [],
       "body": "Updated error returns to be CBOR, and a couple of other things. Still more to do",
       "createdAt": "2024-11-03T10:00:41Z",
-      "updatedAt": "2024-11-04T18:25:57Z",
+      "updatedAt": "2024-11-06T10:06:53Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/36-eliminate-json",
-      "headRefOid": "393feea5b965dd6fc62f62bb4516e06dc222c022",
+      "headRefOid": "e3632589bde544b2cfc712be2ef575645ceb20c9",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2571,6 +2631,146 @@
               "body": "Ditto\r\n\r\n```suggestion\r\napplication/concise-problem-details+cbor\r\n```",
               "createdAt": "2024-11-04T11:02:05Z",
               "updatedAt": "2024-11-04T11:02:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6QAcCB",
+          "commit": {
+            "abbreviatedOid": "e363258"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-05T15:50:15Z",
+          "updatedAt": "2024-11-05T15:50:15Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "Is this normative, or can the policy be at a different URL?",
+              "createdAt": "2024-11-05T15:50:15Z",
+              "updatedAt": "2024-11-05T15:50:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6QAev0",
+          "commit": {
+            "abbreviatedOid": "e363258"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-05T15:53:54Z",
+          "updatedAt": "2024-11-05T15:53:54Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "Why does it have to be signed? Doesn't the transport provide integrity protection?",
+              "createdAt": "2024-11-05T15:53:54Z",
+              "updatedAt": "2024-11-05T15:53:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6QAgIj",
+          "commit": {
+            "abbreviatedOid": "e363258"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-05T15:56:02Z",
+          "updatedAt": "2024-11-05T15:56:02Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "Is that the traditional OIDC endpoint, in JSON also? Or a CBOR variant too?",
+              "createdAt": "2024-11-05T15:56:02Z",
+              "updatedAt": "2024-11-05T15:56:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6QAnr9",
+          "commit": {
+            "abbreviatedOid": "e363258"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-05T16:07:44Z",
+          "updatedAt": "2024-11-05T16:07:44Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "All examples are non-normative and contents of the config are TS specific. I\u2019ll make that clearer",
+              "createdAt": "2024-11-05T16:07:44Z",
+              "updatedAt": "2024-11-05T16:07:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6QAo-q",
+          "commit": {
+            "abbreviatedOid": "e363258"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-05T16:09:50Z",
+          "updatedAt": "2024-11-05T16:09:50Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "Good question. The original author of the endpoint specification suggested this shouldn\u2019t require client authentication but of course it could still be using TLS. So sure I guess it could be unsigned. \r\n\r\nAnyone else have thoughts on this?",
+              "createdAt": "2024-11-05T16:09:50Z",
+              "updatedAt": "2024-11-05T16:09:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6QBCzP",
+          "commit": {
+            "abbreviatedOid": "e363258"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-05T16:51:37Z",
+          "updatedAt": "2024-11-05T16:51:38Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "If we think that we want to propose an alternative authentication mechanism for implementations that do not use TLS, I think it would be more in keeping with the spirit of transparency to provide a receipt over the contents of the configuration, rather than a one-off signature.\r\nThat said, I suspect most implementations and clients will prefer TLS.",
+              "createdAt": "2024-11-05T16:51:37Z",
+              "updatedAt": "2024-11-05T16:51:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6QHDOE",
+          "commit": {
+            "abbreviatedOid": "e363258"
+          },
+          "author": "fournet",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-06T10:03:59Z",
+          "updatedAt": "2024-11-06T10:06:53Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "I would also cut \"signed\". ",
+              "createdAt": "2024-11-06T10:03:59Z",
+              "updatedAt": "2024-11-06T10:06:53Z"
             }
           ]
         }
