@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-10T00:39:32.165088+00:00",
+  "timestamp": "2024-11-12T00:36:27.680650+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2493,7 +2493,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-11-02T12:58:08Z",
-      "updatedAt": "2024-11-05T16:08:09Z",
+      "updatedAt": "2024-11-10T22:55:30Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
@@ -2504,7 +2504,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "body": "I know the PR change was ostensibly made locally by @JAG-UK, but if possible if you _will_ use this I would like to hold off for now. I am sure we have plenty of time. Thanks for the consideration!",
+          "createdAt": "2024-11-10T22:55:29Z",
+          "updatedAt": "2024-11-10T22:55:29Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLJjbks6PuNpv",
@@ -2559,7 +2567,7 @@
       "labels": [],
       "body": "Updated error returns to be CBOR, and a couple of other things. Still more to do",
       "createdAt": "2024-11-03T10:00:41Z",
-      "updatedAt": "2024-11-06T10:06:53Z",
+      "updatedAt": "2024-11-10T21:27:47Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
@@ -2773,6 +2781,59 @@
               "updatedAt": "2024-11-06T10:06:53Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Ql57m",
+          "commit": {
+            "abbreviatedOid": "e363258"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-10T21:27:47Z",
+          "updatedAt": "2024-11-10T21:27:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOLJjbks6BcG0n",
+      "title": "change roles",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/48",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-10T21:26:50Z",
+      "updatedAt": "2024-11-10T23:01:53Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "make-room-for-new-authors",
+      "headRefOid": "435f229da7e668fd9398c34c23260605536b03cf",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6QmARn",
+          "commit": {
+            "abbreviatedOid": "435f229"
+          },
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-10T23:01:53Z",
+          "updatedAt": "2024-11-10T23:01:53Z",
+          "comments": []
         }
       ]
     }
