@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 9 May 2025                                            Transmute
+Expires: 16 May 2025                                           Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                         5 November 2024
+                                                        12 November 2024
 
 
                           SCITT Reference APIs
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2025.
+   This Internet-Draft will expire on 16 May 2025.
 
 Copyright Notice
 
@@ -228,9 +228,8 @@ Table of Contents
    configuration of a transparency service implementing this
    specification.
 
-   The Transparency Service responds with a signed dictionary of
-   configuration elements.  These elements are Transparency-Service
-   specific.
+   The Transparency Service responds with a dictionary of configuration
+   elements.  These elements are Transparency-Service specific.
 
    Contents of bodies are informative examples only.
 
