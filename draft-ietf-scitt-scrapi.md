@@ -34,16 +34,21 @@ author:
   code: '64295'
   city: Darmstadt
   country: Germany
-- ins: O. Steele
-  name: Orie Steele
-  organization: Transmute
-  email: orie@transmute.industries
 - ins: J. Geater
   name: Jon Geater
   organization: DataTrails Inc.
   email: jon.geater@datatrails.ai
   country: UK
   country: United States
+
+contributor:
+  - ins: O. Steele
+    name: Orie Steele
+    organization: Transmute
+    email: orie@transmute.industries
+    country: United States
+    contribution: >
+      Orie contributed examples, text, and URN structure to early version of this draft.
 
 normative:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
