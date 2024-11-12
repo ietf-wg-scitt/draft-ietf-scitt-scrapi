@@ -4,11 +4,9 @@
 
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
-Intended status: Standards Track                               O. Steele
-Expires: 7 March 2025                                          Transmute
-                                                               J. Geater
-                                                         DataTrails Inc.
-                                                        3 September 2024
+Intended status: Standards Track                               J. Geater
+Expires: 16 May 2025                                     DataTrails Inc.
+                                                        12 November 2024
 
 
                           SCITT Reference APIs
@@ -52,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 March 2025.
+   This Internet-Draft will expire on 16 May 2025.
 
 Copyright Notice
 
@@ -101,6 +99,7 @@ Table of Contents
    7.  References
      7.1.  Normative References
      7.2.  Informative References
+   Contributors
    Authors' Addresses
 
 1.  Introduction
@@ -1017,9 +1016,9 @@ Retry-After: <seconds>
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-08, 22 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-08>.
+              Internet-Draft, draft-ietf-scitt-architecture-09, 15
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-scitt-architecture-09>.
 
    [IANA.params]
               IANA, "Uniform Resource Name (URN) Namespace for IETF
@@ -1069,9 +1068,9 @@ Retry-After: <seconds>
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-04, 8 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-04>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-05, 18
+              September 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-oauth-sd-jwt-vc-05>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
@@ -1088,6 +1087,17 @@ Retry-After: <seconds>
               RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
               <https://www.rfc-editor.org/rfc/rfc8792>.
 
+Contributors
+
+   Orie Steele
+   Transmute
+   United States
+   Email: orie@transmute.industries
+
+
+   Orie contributed examples, text, and URN structure to early version
+   of this draft.
+
 Authors' Addresses
 
    Henk Birkholz
@@ -1096,11 +1106,6 @@ Authors' Addresses
    64295 Darmstadt
    Germany
    Email: henk.birkholz@sit.fraunhofer.de
-
-
-   Orie Steele
-   Transmute
-   Email: orie@transmute.industries
 
 
    Jon Geater
