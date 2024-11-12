@@ -150,7 +150,7 @@ Authentication SHOULD NOT be implemented for this endpoint.
 
 This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.
 
-The Transparency Service responds with a signed dictionary of configuration elements. These elements are Transparency-Service specific.
+The Transparency Service responds with a dictionary of configuration elements. These elements are Transparency-Service specific.
 
 Contents of bodies are informative examples only.
 
