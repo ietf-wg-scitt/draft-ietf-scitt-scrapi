@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-12T00:36:27.680650+00:00",
+  "timestamp": "2024-11-14T00:37:18.001067+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2567,13 +2567,13 @@
       "labels": [],
       "body": "Updated error returns to be CBOR, and a couple of other things. Still more to do",
       "createdAt": "2024-11-03T10:00:41Z",
-      "updatedAt": "2024-11-10T21:27:47Z",
+      "updatedAt": "2024-11-12T21:05:26Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/36-eliminate-json",
-      "headRefOid": "e3632589bde544b2cfc712be2ef575645ceb20c9",
+      "headRefOid": "54545f64f39b63a6168fb54b4c5046c9d4a44070",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2794,6 +2794,26 @@
           "createdAt": "2024-11-10T21:27:47Z",
           "updatedAt": "2024-11-10T21:27:47Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Q1sHF",
+          "commit": {
+            "abbreviatedOid": "e363258"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-12T15:48:48Z",
+          "updatedAt": "2024-11-12T15:48:49Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "```suggestion\r\nThe Transparency Service responds with a dictionary of configuration elements. These elements are Transparency-Service specific.\r\n```",
+              "createdAt": "2024-11-12T15:48:49Z",
+              "updatedAt": "2024-11-12T15:48:49Z"
+            }
+          ]
         }
       ]
     },
@@ -2802,24 +2822,26 @@
       "id": "PR_kwDOLJjbks6BcG0n",
       "title": "change roles",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/48",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-11-10T21:26:50Z",
-      "updatedAt": "2024-11-10T23:01:53Z",
+      "updatedAt": "2024-11-12T15:10:26Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "make-room-for-new-authors",
       "headRefOid": "435f229da7e668fd9398c34c23260605536b03cf",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-12T15:10:26Z",
+      "mergedAt": "2024-11-12T15:10:26Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "ab4f09a5c3dd389e717f85148171395af8660749"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2833,6 +2855,32 @@
           "body": "",
           "createdAt": "2024-11-10T23:01:53Z",
           "updatedAt": "2024-11-10T23:01:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Q1Qr7",
+          "commit": {
+            "abbreviatedOid": "435f229"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM. Thanks Orie for all your work",
+          "createdAt": "2024-11-12T15:08:39Z",
+          "updatedAt": "2024-11-12T15:08:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Q1Ro0",
+          "commit": {
+            "abbreviatedOid": "435f229"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-11-12T15:10:02Z",
+          "updatedAt": "2024-11-12T15:10:02Z",
           "comments": []
         }
       ]
