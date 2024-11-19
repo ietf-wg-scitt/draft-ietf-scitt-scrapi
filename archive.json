@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-17T00:42:09.171270+00:00",
+  "timestamp": "2024-11-19T00:39:26.061491+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2567,7 +2567,7 @@
       "labels": [],
       "body": "Updated error returns to be CBOR, and a couple of other things. Still more to do",
       "createdAt": "2024-11-03T10:00:41Z",
-      "updatedAt": "2024-11-12T21:05:26Z",
+      "updatedAt": "2024-11-18T14:25:58Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
@@ -2814,6 +2814,99 @@
               "updatedAt": "2024-11-12T15:48:49Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6RkrrW",
+          "commit": {
+            "abbreviatedOid": "54545f6"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-18T11:05:37Z",
+          "updatedAt": "2024-11-18T11:05:37Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "I would expect it to be a regular RFC 6749 OIDC with JSON. Note that this isn't REQUIRED, it's just an option. I've heard of one implementation that's planning to use mutual TLS and wouldn't need OIDC flows at all.",
+              "createdAt": "2024-11-18T11:05:37Z",
+              "updatedAt": "2024-11-18T11:05:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Rk_ML",
+          "commit": {
+            "abbreviatedOid": "54545f6"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-18T11:44:32Z",
+          "updatedAt": "2024-11-18T11:44:33Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "I am really confused about what is being specified here then, perhaps because it is an example and the schema is missing. Is the intention to say: \"all transparency services have a CBOR endpoint, which may or may not be COSE, and which may or may not contain a pointer to an OIDC auth endpoint with the keys used to sign the receipts\"?",
+              "createdAt": "2024-11-18T11:44:33Z",
+              "updatedAt": "2024-11-18T11:44:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6RmUMC",
+          "commit": {
+            "abbreviatedOid": "54545f6"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-18T14:10:56Z",
+          "updatedAt": "2024-11-18T14:11:02Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "The intention is for all payloads going in and out of the SCRAPI interface to be CBOR (or COSE if they are signed). The specification is written on line 153: it's a dictionary of elements that are TS specific. Over time we might find common elements that are worth standardising (such as the countersigning public key) but right now I don't think we've landed on any.\r\n\r\nThe auth endpoint just seemed like a good idea (and not uncommon to be a different base URL in SaaS where the auth is usually platform-bound and endpoints are service-bound) but it was just intended as an illustrative example. It could be removed if it's confusing.\r\n\r\nOn CBOR vs COSE, Cedric made a similar point. It shouldn't need to be signed so I'll change it to just be the CBOR dictionary, and integrity protection will be (assumed to be) protected by the channel.",
+              "createdAt": "2024-11-18T14:10:56Z",
+              "updatedAt": "2024-11-18T14:11:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6RmcpM",
+          "commit": {
+            "abbreviatedOid": "54545f6"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-18T14:24:09Z",
+          "updatedAt": "2024-11-18T14:24:09Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "Ok, thank you for the clarification, I had mistakenly read more into this than was intended. I understand now that the purpose is for this to be deliberately open-ended.",
+              "createdAt": "2024-11-18T14:24:09Z",
+              "updatedAt": "2024-11-18T14:24:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Rmd2R",
+          "commit": {
+            "abbreviatedOid": "54545f6"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-18T14:25:58Z",
+          "updatedAt": "2024-11-18T14:25:58Z",
+          "comments": []
         }
       ]
     },
