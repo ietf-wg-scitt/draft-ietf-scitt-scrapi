@@ -121,7 +121,7 @@ NOTE: SCRAPI is not a CoAP API. Nonetheless Constrained Problem Details objects 
 
 As an example, submitting a Signed Statement with an unsupported signature algorithm would return a `400 Bad Request` status code and the following body:
 
-~~~cddl
+~~~cbor-diag
 {
   / title /         -1: "Bad Signature Algorithm",
   / detail /        -2: "Signing algorithm 'WalnutDSA' not supported.",
