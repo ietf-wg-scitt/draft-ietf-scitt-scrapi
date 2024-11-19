@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               O. Steele
-Expires: 16 May 2025                                           Transmute
+Expires: 23 May 2025                                           Transmute
                                                                J. Geater
                                                          DataTrails Inc.
-                                                        12 November 2024
+                                                        19 November 2024
 
 
                           SCITT Reference APIs
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 May 2025.
+   This Internet-Draft will expire on 23 May 2025.
 
 Copyright Notice
 
@@ -1022,9 +1022,9 @@ Retry-After: <seconds>
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-09, 15
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-scitt-architecture-09>.
+              Internet-Draft, draft-ietf-scitt-architecture-10, 13
+              November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-scitt-architecture-10>.
 
    [IANA.params]
               IANA, "Uniform Resource Name (URN) Namespace for IETF
@@ -1075,9 +1075,9 @@ Retry-After: <seconds>
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-05, 18
-              September 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-oauth-sd-jwt-vc-05>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-06, 13 November
+              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              oauth-sd-jwt-vc-06>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
