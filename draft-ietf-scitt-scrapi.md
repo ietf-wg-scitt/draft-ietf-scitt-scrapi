@@ -56,7 +56,7 @@ normative:
   RFC8615:
   RFC9052:
   RFC9110:
-  RFC9457:
+  RFC9290:
   IANA.params:
 
 informative:
@@ -103,27 +103,35 @@ This specification uses "payload" as defined in {{RFC9052}}.
 # Endpoints
 
 Authentication is out of scope for this document.
-If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be applied to enable anonymous access.
+If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be applied to enable anonymous access.
 
 NOTE: '\' line wrapping per {{RFC8792}} in HTTP examples.
 
 All messages are sent as HTTP GET or POST requests.
 
-If the Transparency Service cannot process a client's request, it MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a JSON problem details object ({{RFC9457}}) containing:
+If the Transparency Service cannot process a client's request, it MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise Problem Details object ({{RFC9290}}) containing:
 
-- type: A URI reference identifying the problem.
+- title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
+
+- detail: A human-readable string describing the error in more depth, ideally with sufficient detail to enable the error to be rectified.
+
+- instance: A URN reference identifying the problem.
 To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".
 
-- detail: A human-readable string describing the error that prevented the Transparency Service from processing the request, ideally with sufficient detail to enable the error to be rectified.
+- response-code: The HTTP error response code relating to this error.
 
-Error responses SHOULD be sent with the `Content-Type: application/problem+json` HTTP header.
+application/concise-problem-details+cbor
+
+NOTE: SCRAPI is not a CoAP API. Nonetheless Constrained Problem Details objects ({{RFC9290}}) provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.
 
 As an example, submitting a Signed Statement with an unsupported signature algorithm would return a `400 Bad Request` status code and the following body:
 
-~~~json
+~~~cbor-diag
 {
-  "type": "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-  "detail": "Signing algorithm not support"
+  / title /         -1: "Bad Signature Algorithm",
+  / detail /        -2: "Signing algorithm 'WalnutDSA' not supported.",
+  / instance /      -3: "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+  / response-code / -4: 400,
 }
 ~~~
 
@@ -133,7 +141,8 @@ The one exception is the "malformed" error type, which indicates that the Transp
 - Error code: `malformed` (The request could not be parsed).
 
 Clients SHOULD treat 500 and 503 HTTP status code responses as transient failures and MAY retry the same request without modification at a later date.
-Note that in the case of a 503 response, the Transparency Service MAY include a `Retry-After` header field per {{RFC9110}} in order to request a minimum time for the client to wait before retrying the request.
+
+Note that in the case of any error response, the Transparency Service MAY include a `Retry-After` header field per {{RFC9110}} in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.
 
 ## Mandatory
@@ -146,60 +155,42 @@ Authentication SHOULD NOT be implemented for this endpoint.
 
 This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.
 
+The Transparency Service responds with a dictionary of configuration elements. These elements are Transparency-Service specific.
+
+Contents of bodies are informative examples only.
+
 Request:
 
 ~~~ http-message
 
 GET /.well-known/transparency-configuration HTTP/1.1
 Host: transparency.example
-Accept: application/json
+Accept: application/cose
 ~~~
 
 Response:
 
 ~~~ http-message
 HTTP/1.1 200 Ok
-Content-Type: application/json
+Content-Type: application/cose
 
-{
-  "issuer": "https://transparency.example",
-  "registration_endpoint": "https://transparency.example/entries",
-  "nonce_endpoint": "https://transparency.example/nonce",
+Payload (in CBOR diagnostic notation)
 
-  "registration_policy": \
-"https://transparency.example\
-/statements/urn:ietf:params:scitt:statement\
-:sha-256:base64url:5i6UeRzg1...qnGmr1o",
-
-  "supported_signature_algorithms": ["ES256"],
-  "jwks": {
-    "keys": [
-      {
-        "kid": "urn:ietf:params:oauth:\
-jwk-thumbprint:sha-256:DgyowWs04gfVRim5i1WlQ-HFFFKI6Ltqulj1rXPagRo",
-        "alg": "ES256",
-        "use": "sig",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
-        "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
-      },
-      {
-        "kid": "urn:ietf:params:oauth:\
-jwk-thumbprint:sha-256:4Fzx5HO1W0ob9CZNc3RJx28Ixpgy9JAFM8jyXKW0ClE",
-        "alg": "HPKE-Base-P256-SHA256-AES128GCM",
-        "use": "enc",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
-        "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
-      }
-    ]
-  }
-}
+18([                   ; COSE_Sign1 structure with tag 18
+    h'44A123BEEFFACE', ; Protected header (example bytes)
+    {},                ; Unprotected header
+    {                  ; Payload - CBOR dict
+        "issuer": "https://transparency.example",
+        "base_url": "https://transparency.example/v1/scrapi",
+        "oidc_auth_endpoint": "https://transparency.example/auth",
+        "registration_policy": "https://transparency.example/statements/\
+urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
+    },
+    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature placeholder
+])
 ~~~
 
-Additional fields may be present.
+Responses to this message are vendor-specific.
 Fields that are not understood MUST be ignored.
 
 ### Register Signed Statement
@@ -279,7 +270,7 @@ Location: https://transparency.example/receipts\
 /urn:ietf:params:scitt:signed-statement\
 :sha-256:base64url:5i6UeRzg1...qnGmr1o
 
-Content-Type: application/json
+Content-Type: application/cbor
 Retry-After: <seconds>
 
 {
@@ -297,54 +288,67 @@ If 202 is returned, then clients should wait until Registration succeeded or fai
 
 #### Status 400 - Invalid Client Request
 
-One of the following errors:
+The following expected errors are defined. Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
 
 ~~~
+HTTP/1.1 400 Bad Request
+application/concise-problem-details+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:algorithm-not-supported",
-  "detail": \
-"Signed Statement contained an algorithm that is not supported."
+  / title /         -1: "Bad Signature Algorithm",
+  / detail /        -2: "Signed Statement contained an algorithm that is not supported",
+  / instance /      -3: "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+  / response-code / -4: 400,
 }
 ~~~
 
 ~~~
+HTTP/1.1 400 Bad Request
+application/concise-problem-details+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:payload-missing",
-  "detail": \
-"Signed Statement payload must be attached (must be present)"
+  / title /         -1: "Confirmation Missing",
+  / detail /        -2: "Signed Statement did not contain proof of possession",
+  / instance /      -3: "urn:ietf:params:scitt:error:signed-statement:confirmation-missing",
+  / response-code / -4: 400,
 }
 ~~~
 
 ~~~
+HTTP/1.1 400 Bad Request
+application/concise-problem-details+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:payload-forbidden",
-  "detail": \
-"Signed Statement payload must be detached (must not be present)"
+  / title /         -1: "Payload Missing",
+  / detail /        -2: "Signed Statement payload must be must be attached (must be present)",
+  / instance /      -3: "urn:ietf:params:scitt:error:signed-statement:payload-missing",
+  / response-code / -4: 400,
 }
 ~~~
 
 ~~~
+HTTP/1.1 400 Bad Request
+application/concise-problem-details+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:rejected-by-registration-policy",
-  "detail": \
-"Signed Statement not accepted by the current Registration Policy"
+  / title /         -1: "Payload Forbidden",
+  / detail /        -2: "Signed Statement payload must be detached (must not be present)",
+  / instance /      -3: "urn:ietf:params:scitt:error:signed-statement:payload-forbidden",
+  / response-code / -4: 400,
 }
 ~~~
 
 ~~~
+HTTP/1.1 400 Bad Request
+application/concise-problem-details+cbor
+
 {
-  "type": "urn:ietf:params:scitt:error\
-:signed-statement:confirmation-missing",
-  "detail": \
-"Signed Statement did not contain proof of possession"
+  / title /         -1: "Rejected",
+  / detail /        -2: "Signed Statement not accepted by the current Registration Policy",
+  / instance /      -3: "urn:ietf:params:scitt:error:signed-statement:rejected-by-registration-policy",
+  / response-code / -4: 400,
 }
 ~~~
-
-TODO: other error codes
 
 ## Optional Endpoints
 
@@ -442,28 +446,6 @@ Payload (in CBOR diagnostic notation)
 ])
 ~~~
 
-### Resolve Statement
-
-Authentication SHOULD be implemented for this endpoint.
-
-This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve `payload` values directly, instead of indirectly through Receipts.
-
-Request:
-
-~~~ http-message
-GET /statements/urn...qnGmr1o HTTP/1.1
-Host: transparency.example
-Accept: application/pdf
-~~~
-
-Response:
-
-~~~ http-message
-HTTP/1.1 200 Ok
-Content-Type: application/pdf
-Payload (pdf bytes)
-~~~
-
 ### Resolve Signed Statement
 
 Authentication SHOULD be implemented for this endpoint.
@@ -480,6 +462,10 @@ Accept: application/cose
 
 Response:
 
+One of the following:
+
+#### Status 200 - Success
+
 ~~~ http-message
 HTTP/1.1 200 Ok
 Content-Type: application/cose
@@ -492,6 +478,22 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
+~~~
+
+#### Status 404 - Not Found
+
+The following expected errors are defined. Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+
+~~~
+HTTP/1.1 404 Not Found
+application/concise-problem-details+cbor
+
+{
+  / title /         -1: "Not Found",
+  / detail /        -2: "No Signed Statement found with the specified ID",
+  / instance /      -3: "urn:ietf:params:scitt:error:notFound",
+  / response-code / -4: 404,
+}
 ~~~
 
 ### Resolve Receipt
@@ -549,13 +551,13 @@ If the Signed Statement requested is neither registered in the log nor subject t
 
 ~~~
 HTTP/1.1 404 Not Found
-Content-Type: application/json
+application/concise-problem-details+cbor
 
 {
-  "type": "urn:ietf:params:scitt:error\
-    :receipt:not-found",
-  "detail": \
-    "Signed Statement not known to this Transparency Service."
+  / title /         -1: "Not Found",
+  / detail /        -2: "Signed Statement not known to this Transparency Service",
+  / instance /      -3: "urn:ietf:params:scitt:error:receipt:not-found",
+  / response-code / -4: 400,
 }
 ~~~
 
@@ -733,13 +735,11 @@ This document is only concerned with authentication of API clients.
 
 For those endpoints that require client authentication, Transparency Services MUST support at least one of the following options:
 
-- HTTP Authorization header with a bearer JWT
+- HTTP Authorization header with a JWT
 - domain-bound API key
 - TLS client authentication
 
-Transparency Services MUST provide a configuration surface that allows Issuers to specify which authorized clients can submit Statements on their behalf.
-
-Where authentication methods rely on long term secrets, both clients and Transparency Services implementing this specification MUST allow for the revocation and rolling of authentication secrets.
+Where authentication methods rely on long term secrets, both clients and Transparency Services implementing this specification SHOULD allow for the revocation and rolling of authentication secrets.
 
 ## Primary threats
 
@@ -797,7 +797,7 @@ Replay attacks are not particularly concerning for SCITT or SCRAPI:
 once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
 There could be issues at the payload level (for instance, the statement "it is raining" may true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
 
-If the semantic content of the payload are time dependent and susceptible to replay attacks in this way then timestamps MAY be added to the payload signed by the Issuer.
+If the semantic content of the payload are time dependent and susceptible to replay attacks in this way then timestamps MAY be added to the protected header signed by the Issuer.
 
 #### Message deletion attacks
 
