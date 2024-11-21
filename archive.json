@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-19T00:39:26.061491+00:00",
+  "timestamp": "2024-11-21T00:39:10.630320+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2493,13 +2493,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-11-02T12:58:08Z",
-      "updatedAt": "2024-11-10T22:55:30Z",
+      "updatedAt": "2024-11-19T20:46:09Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
       "headRepository": "aj-stein/draft-ietf-scitt-scrapi",
       "headRefName": "25-error-code-normative",
-      "headRefOid": "e7747a48e9bea280e8f027f9f567e18df7399285",
+      "headRefOid": "d11376eedd2bd783e3b78e582c506cb337b59e80",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2511,6 +2511,13 @@
           "body": "I know the PR change was ostensibly made locally by @JAG-UK, but if possible if you _will_ use this I would like to hold off for now. I am sure we have plenty of time. Thanks for the consideration!",
           "createdAt": "2024-11-10T22:55:29Z",
           "updatedAt": "2024-11-10T22:55:29Z"
+        },
+        {
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "body": "Apologies for the delay @SteveLasker. I have moved it from draft status to ready to go.",
+          "createdAt": "2024-11-19T19:48:57Z",
+          "updatedAt": "2024-11-19T19:48:57Z"
         }
       ],
       "reviews": [
@@ -2552,6 +2559,39 @@
           "createdAt": "2024-11-05T16:08:09Z",
           "updatedAt": "2024-11-05T16:08:09Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Rx_o3",
+          "commit": {
+            "abbreviatedOid": "e7747a4"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-19T15:19:53Z",
+          "updatedAt": "2024-11-19T15:19:54Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nExamples of errors may include:\r\n```",
+              "createdAt": "2024-11-19T15:19:53Z",
+              "updatedAt": "2024-11-19T15:19:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6RyBrq",
+          "commit": {
+            "abbreviatedOid": "d11376e"
+          },
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-19T15:22:40Z",
+          "updatedAt": "2024-11-19T15:22:40Z",
+          "comments": []
         }
       ]
     },
@@ -2560,24 +2600,26 @@
       "id": "PR_kwDOLJjbks6AuIec",
       "title": "First tranche of CBOR All The Things",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/38",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Updated error returns to be CBOR, and a couple of other things. Still more to do",
       "createdAt": "2024-11-03T10:00:41Z",
-      "updatedAt": "2024-11-18T14:25:58Z",
+      "updatedAt": "2024-11-19T15:15:30Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/36-eliminate-json",
-      "headRefOid": "54545f64f39b63a6168fb54b4c5046c9d4a44070",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "3742cc441ef6099ce5f15fadb03514d336184289",
+      "closedAt": "2024-11-19T15:15:30Z",
+      "mergedAt": "2024-11-19T15:15:29Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "35274ef0fa3b2b3baa07a88a3dfe59cfa108abe9"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2906,6 +2948,52 @@
           "body": "",
           "createdAt": "2024-11-18T14:25:58Z",
           "updatedAt": "2024-11-18T14:25:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Rx2wo",
+          "commit": {
+            "abbreviatedOid": "54545f6"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-19T15:08:04Z",
+          "updatedAt": "2024-11-19T15:08:04Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "```suggestion\r\n~~~cbor-diag\r\n```",
+              "createdAt": "2024-11-19T15:08:04Z",
+              "updatedAt": "2024-11-19T15:08:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Rx6_l",
+          "commit": {
+            "abbreviatedOid": "54545f6"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-19T15:14:04Z",
+          "updatedAt": "2024-11-19T15:14:04Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Rx7Mv",
+          "commit": {
+            "abbreviatedOid": "3742cc4"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-11-19T15:14:20Z",
+          "updatedAt": "2024-11-19T15:14:20Z",
           "comments": []
         }
       ]
