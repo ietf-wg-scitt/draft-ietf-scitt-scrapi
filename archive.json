@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-24T00:43:17.009235+00:00",
+  "timestamp": "2024-11-26T00:39:31.059590+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -925,7 +925,7 @@
       "labels": [],
       "body": "The intent statement currently says:\r\n\r\n`This endpoint is used to discover verification keys, which is the reason that authentication is not required.`\r\n\r\nIn use cases where this endpoint is useful, it's often the case that you want more metadata/supporting evidence than purely keys.\r\n\r\nA suggestion from the field: `return supporting evidence enabling the client to verify the issuer signature at the time of registration`",
       "createdAt": "2024-11-05T14:55:01Z",
-      "updatedAt": "2024-11-05T14:57:51Z",
+      "updatedAt": "2024-11-25T10:09:26Z",
       "closedAt": null,
       "comments": [
         {
@@ -934,6 +934,13 @@
           "body": "Additionally there's a na\u00efve notion that this information should be returned with no auth.\r\nThis is great from a global verifiability point of view but it needs a balancing statement that allows/encourages auth for things that might contain PII, for example.",
           "createdAt": "2024-11-05T14:57:50Z",
           "updatedAt": "2024-11-05T14:57:50Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "body": "+1 for removing the authentication restriction, while some transparency services like CT are scoped to the internet at large, others may be scoped to a group or an organisation.\r\n\r\n> In use cases where this endpoint is useful, it's often the case that you want more metadata/supporting evidence than purely keys.\r\n\r\nCan you elaborate on this? Although I see the case for additional key-related metadata (e.g. validity ranges in the ledger, cross-endorsement), I am curious about other metadata and to what extent it's worth bundling together/splitting.",
+          "createdAt": "2024-11-25T10:09:24Z",
+          "updatedAt": "2024-11-25T10:09:24Z"
         }
       ]
     },
@@ -949,9 +956,17 @@
       "labels": [],
       "body": "It's not clear why this would be needed, and it doesn't reflect any patterns in the Architecture. Remove?",
       "createdAt": "2024-11-05T15:00:44Z",
-      "updatedAt": "2024-11-05T15:00:44Z",
+      "updatedAt": "2024-11-25T10:02:06Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "body": "@JAG-UK there's a reference to \"proof of possession\", so my guess it that this is meant to enable a flow where the client requests a nonce, includes it in the signed statement (protected header or payload) before signing and submission, to \"prove\" that they held the key at the time of submission, if it is substantially different from the time of signing.\r\n\r\nI agree that this should be removed because:\r\n\r\n1. It's poorly specified for its stated purpose, without mandatory transport-level security, it's possible to effectively DoS a client by using the nonce they requested quicker than they can. Without authentication, a malicious client can also spam the service for fresh nonce values, causing legitimate ones to fall out of the expiry window before they can be used.\r\n3. There is no mention of a scenario where this is helpful or necessary.\r\n4. If such a scenario emerges, where an issuer signs or has signed indiscriminately in advance, and it is desirable to be stricter about what can be made transparent, there are two easier mechanisms the registration policy can use that don't require an awkward stateful API extension such as this:\r\n  - `iat` in the signed statement\r\n  - a counter-signature with a submission control key (which may or may not be the same as one of the issuer keys)\r\nNeither requires additional API surface, nor creates additional DoS opportunities.\r\n\r\nOpened #49",
+          "createdAt": "2024-11-25T10:02:04Z",
+          "updatedAt": "2024-11-25T10:02:04Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -3062,6 +3077,46 @@
           "body": "LGTM",
           "createdAt": "2024-11-12T15:10:02Z",
           "updatedAt": "2024-11-12T15:10:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "id": "PR_kwDOLJjbks6DAlWE",
+      "title": "Remove unnecessary 2.2.7",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/49",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #47",
+      "createdAt": "2024-11-25T09:55:19Z",
+      "updatedAt": "2024-11-25T11:34:39Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "35274ef0fa3b2b3baa07a88a3dfe59cfa108abe9",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "patch-1",
+      "headRefOid": "3dd407e6641fcff537c87ed96c26645d768ca1ec",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6ShMug",
+          "commit": {
+            "abbreviatedOid": "3dd407e"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Agree I don't believe this endpoint is necessary",
+          "createdAt": "2024-11-25T11:34:39Z",
+          "updatedAt": "2024-11-25T11:34:39Z",
           "comments": []
         }
       ]
