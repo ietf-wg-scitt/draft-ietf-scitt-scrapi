@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-26T00:39:31.059590+00:00",
+  "timestamp": "2024-11-28T00:40:29.992042+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -655,7 +655,7 @@
       "labels": [],
       "body": "On the register statement API, a TS could be a front end to multiple Transparency Services. It may be hashed by country or industry. \r\nThe question is whether the API should add a parameter for which Notary to use, or it may be inferred by other parameters, or the identity of the client.",
       "createdAt": "2024-08-27T14:58:49Z",
-      "updatedAt": "2024-11-02T14:28:44Z",
+      "updatedAt": "2024-11-27T09:27:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -664,6 +664,34 @@
           "body": "> On the register statement API, a TS could be a front end to multiple Transparency Services. It may be hashed by country or industry. The question is whether the API should add a parameter for which Notary to use, or it may be inferred by other parameters, or the identity of the client.\r\n\r\nSince no one else has commented, I will chime in: I think that is a concern for client software to handle without adding API surface to part of the reference API for TS implementations. I would prefer to not have this addition.\r\n",
           "createdAt": "2024-11-02T14:28:43Z",
           "updatedAt": "2024-11-02T14:28:43Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "body": "+1 for keeping the API simple, and not adding this. Deployments that need this functionality should be able to deploy a separate service out in front that redirects/load balances as desired.\r\n\r\nIt seems likely that the regional instances would be different issuers (perhaps subdomains), and so trying to present a unified endpoint also means working out how to present a unified transparency configuration also, adding complexity there too.",
+          "createdAt": "2024-11-27T08:57:05Z",
+          "updatedAt": "2024-11-27T08:57:05Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The way the reference implementation is shaping up in scitt-community it would be easy for the client to establish multiple connections and send multiple copies if it knows that it needs to. This is nice and clean and I support the comments here to not muddy the API with such things.\r\n\r\nI've heard talk of use casses where the client might not know it needs to do tat, or that there is benefit in having one single request result in multiple receipts, but I don't think the advantages are clear enough to try to build an API for right now. Even in these cases nothing stops the TS from registering in multiple places.",
+          "createdAt": "2024-11-27T09:01:06Z",
+          "updatedAt": "2024-11-27T09:01:06Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "body": "I think that's resolved to some extent by the client using a statement API, because the first service can turn around and submit to one or more other TS, who will append their receipts to the statement. The first TS can then return the statement to the client who needs no special handling.\r\n\r\nSomething like:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS0: Signed Statement\r\n    TS0->>TS0: Add Receipt[0] to Signed Statement<br>.a.k.a Transparent Statement\r\n    TS0->>+TS1: Register Transparent Statement with Receipt[0]\r\n    TS1->>-TS0: Transparent Statement with Receipt[0, 1]\r\n    TS0->>-Client: Transparent Statement with Receipt[0, 1]\r\n```\r\n\r\nOr:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS0: Signed Statement\r\n    TS0->>TS0: Add Receipt[0] to Signed Statement<br>.a.k.a Transparent Statement\r\n    TS0->>+TS1: Register Transparent Statement with Receipt[0]\r\n    TS1->>-TS0: Fetch Receipt[1]\r\n    TS0->>TS0: Add Receipt[0, 1] to Signed Statement\r\n    TS0->>-Client: Transparent Statement with Receipt[0, 1]\r\n```\r\n\r\nThis may be a registration policy that TS0 applies to statements that meet certain criteria. \"if conditions are met, get receipts from the other two regions before returning a statement with all three receipts to the caller\".",
+          "createdAt": "2024-11-27T09:25:13Z",
+          "updatedAt": "2024-11-27T09:25:13Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "body": "Which I think is a very long way of saying that we don't need special API support, it can either be done by the client of course, or even by the TS, with today's API. @SteveLasker what do you think?",
+          "createdAt": "2024-11-27T09:27:17Z",
+          "updatedAt": "2024-11-27T09:27:17Z"
         }
       ]
     },
@@ -3093,7 +3121,7 @@
       "labels": [],
       "body": "Closes #47",
       "createdAt": "2024-11-25T09:55:19Z",
-      "updatedAt": "2024-11-25T11:34:39Z",
+      "updatedAt": "2024-11-26T10:49:41Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "35274ef0fa3b2b3baa07a88a3dfe59cfa108abe9",
@@ -3117,6 +3145,19 @@
           "body": "Agree I don't believe this endpoint is necessary",
           "createdAt": "2024-11-25T11:34:39Z",
           "updatedAt": "2024-11-25T11:34:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6SsWsM",
+          "commit": {
+            "abbreviatedOid": "3dd407e"
+          },
+          "author": "aj-stein",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-26T10:49:41Z",
+          "updatedAt": "2024-11-26T10:49:41Z",
           "comments": []
         }
       ]
