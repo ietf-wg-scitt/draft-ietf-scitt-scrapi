@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-28T00:40:29.992042+00:00",
+  "timestamp": "2024-12-01T00:49:30.707216+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -334,7 +334,7 @@
       "labels": [],
       "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-resolve-receipt\r\n\r\nI don't understand *why* this is desired:\r\n\r\n\"Authentication SHOULD be implemented for this endpoint\"\r\n\r\nIf the material in a receipt is, or can be, considered private to the issuer, then this should be a MUST.\r\n\r\nInstinctively I have always thought of receipts as essentially public documents. Whilst they are revealing, they are designed to be passed on to other parties.\r\n\r\nIf the intent is to permit implementations to provide for both public and private receipts, I think that model needs to be spelled out explicitly.\r\n\r\nIt would seem reasonable to me for Resolve Receipt to provide \"the defined public aspects of a receipt\" when the request was not authenticated. And the possibly sensitive parts otherwise\r\n\r\nIn practice, there are definitely usecases for obtaining a receipt for a statement issued by a different party. Its not clear at all to me how or if the authentication requirement here interacts with that.",
       "createdAt": "2024-06-23T08:04:12Z",
-      "updatedAt": "2024-08-09T11:35:03Z",
+      "updatedAt": "2024-11-28T10:48:29Z",
       "closedAt": null,
       "comments": [
         {
@@ -364,6 +364,13 @@
           "body": "In PR #27 I have added an option for Transparency Services to return a 429 response, and have deliberately not included specific request detail in there so that the TS can choose any trigger (global or local) for this.\r\n\r\nLet's see if that's enough: I don't think rate limiting is a good reason to enforce authentication",
           "createdAt": "2024-08-09T11:35:02Z",
           "updatedAt": "2024-08-09T11:35:02Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "NONE",
+          "body": "The stance on authentication is inconsistent in the current document:\r\n\r\n- [Register Signed Statement](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md#register-signed-statement): \"Authentication MAY be implemented\"\r\n- [Resolve Signed Statement](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md#resolve-signed-statement): \"Authentication SHOULD be implemented\"\r\n\r\nSurely we don't mean to place a higher authentication requirement on fetching transparent statements than on creating them? (same for Resolve Receipt)\r\n\r\nLikewise, I think the fact that Authentication \"SHOULD NOT\" be implemented for [Resolve Issuer](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md#resolve-issuer), nor for [Transparency Configuration](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md#transparency-configuration) is a mistake, as @JAG-UK rightly pointed out in #46.\r\n\r\nIt seems to me that the only endpoint that MUST have authentication is Issue Statement (which in my opinion also does not belong in SCRAPI, it's a weird way to add signing to a transparency service, and I do not understand why it was shoehorned in).\r\nEvery other endpoint MAY implement authentication, because:\r\n\r\n1. Not all transparency use cases are public. Transparency inside an organisation is a valid use case, and may legitimately require authentication, even on configuration and issuer endpoints.\r\n2. It's a very practical way to implementing rate limiting or QoS for all use cases, public or otherwise.\r\n\r\nDoes that make sense to everyone? Did I miss something?",
+          "createdAt": "2024-11-28T10:48:28Z",
+          "updatedAt": "2024-11-28T10:48:28Z"
         }
       ]
     },
