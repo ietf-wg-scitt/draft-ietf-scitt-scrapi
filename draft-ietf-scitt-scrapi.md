@@ -126,7 +126,7 @@ NOTE: SCRAPI is not a CoAP API. Nonetheless Constrained Problem Details objects 
 
 As an example, submitting a Signed Statement with an unsupported signature algorithm would return a `400 Bad Request` status code and the following body:
 
-~~~cbor-diag
+~~~ cbor-diag
 {
   / title /         -1: "Bad Signature Algorithm",
   / detail /        -2: "Signing algorithm 'WalnutDSA' not supported.",
@@ -198,16 +198,22 @@ Fields that are not understood MUST be ignored.
 Authentication MAY be implemented for this endpoint.
 See notes on detached payloads below.
 
-This endpoint is used to register a Signed Statement with a Transparency Service.
+This endpoint is used to instruct a Transparency Service to register a
+Signed Statement on its log. Since typical log implementations take
+many seconds or even longer to reach finality this API has an
+asynchronous mode which returns a locator which can be used to check
+the status of the registration asynchronously.
 
-The following is a non-normative example of a HTTP request to register a Signed Statement:
+The following is a non-normative example of a HTTP request to register
+a Signed Statement:
 
 Request:
 
 ~~~http
 POST /entries HTTP/1.1
 Host: transparency.example
-Accept: application/json
+Accept: application/cbor
+Accept: application/cose
 Content-Type: application/cose
 Payload (in CBOR diagnostic notation)
 
@@ -219,19 +225,15 @@ Payload (in CBOR diagnostic notation)
 ])
 ~~~
 
-The Registration Policy for the Transparency Service MUST be applied to the payload bytes, before any additional processing is performed.
+The Registration Policy for the Transparency Service MUST be applied
+before any additional processing is performed.
 
-If the `payload` is detached, the Transparency Service depends on the authentication context of the client in the Registration Policy.
-If the `payload` is attached, the Transparency Service depends on both the authentication context of the client (if present), and the verification of the Signed Statement in the Registration Policy.
+If the `payload` is detached, the Transparency Service depends on the
+authentication context of the client in the Registration Policy.
+If the `payload` is attached, the Transparency Service depends on both
+the authentication context of the client (if present), and the
+verification of the Signed Statement in the Registration Policy.
 The details of Registration Policy are out of scope for this document.
-
-If registration succeeds the following identifier MAY be used to refer to the Signed Statement that was accepted:
-
-`urn:ietf:params:scitt:signed-statement:sha-256:base64url:5i6UeRzg1...qnGmr1o`
-
-If the `payload` was attached, or otherwise communicated to the Transparency Service, the following identifier MAY be used to refer to the `payload` of the Signed Statement:
-
-`urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o`
 
 Response:
 
@@ -239,12 +241,18 @@ One of the following:
 
 #### Status 201 - Registration is successful
 
-~~~ http-message
-HTTP/1.1 201 Ok
+In cases where the Transparency Service is able to mint receipts in a
+reasonable time, it may return the receipt directly.
 
-Location: https://transparency.example/receipts\
-/urn:ietf:params:scitt:signed-statement\
-:sha-256:base64url:5i6UeRzg1...qnGmr1o
+Along with the receipt the Transparency Service MAY return a locator
+in the HTTP response `Location` header, provided the locator is a valid
+URL.
+
+~~~ http-message
+HTTP/1.1 201 Created
+
+Location: https://transparency.example/entries\
+/67ed41f1de6a...cfc158694ed0befe
 
 Content-Type: application/cose
 
@@ -259,32 +267,66 @@ Payload (in CBOR diagnostic notation)
 ~~~
 
 The response contains the Receipt for the Signed Statement.
-Fresh receipts may be requested through the resource identified in the Location header.
+Fresh Receipts may be requested through the resource identified in the Location header.
 
 #### Status 202 - Registration is running
+
+In cases where the registration request is accepted but the
+Transparency Service is not able to mint Receipts in a reasonable time,
+it returns a locator for the registration operation and a status code
+indicating the status of the operation, as in this non-normative
+example:
+
+~~~ cbor-diag
+{
+  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
+  / status /  "Status": "running",
+}
+~~~
+
+`Status` must be one of the following:
+* "running" - the operation is still in progress
+* "succeeded" - the operation succeeded and the Receipt is ready
+
+`OperationID` is Transparency Service specific and MUST not be used for
+querying status in any Transparency Service other than the one that
+returned it.
+
+If the `OperationID` is a valid URL, it MAY be included as a `Location`
+header in the HTTP response.
+
+Transparency Services MAY clean up old operation records to manage
+practical implementation concerns. The length of validity of the
+`OperationID` is Transparency Service specific but at minimum
+the Transparency Service MUST maintain a record of every running or
+succeeded operation until at least one client has fetched the completed
+Receipt.
+
+The Transparency Service MAY include a `Retry-After` header in the HTTP
+response to help with polling.
 
 ~~~ http-message
 HTTP/1.1 202 Accepted
 
-Location: https://transparency.example/receipts\
-/urn:ietf:params:scitt:signed-statement\
-:sha-256:base64url:5i6UeRzg1...qnGmr1o
+Location: https://transparency.example/operations\
+/67f89d5f0042e3ad42...35a1f190
 
 Content-Type: application/cbor
 Retry-After: <seconds>
 
 {
-
-  "identifier": "urn:ietf:params:scitt:receipt\
-:sha-256:base64url:5i6UeRzg1...qnGmr1o",
-
+  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
+  / status /  "Status": "running",
 }
 
 ~~~
 
-The response contains a reference to the receipt which will eventually be available for the Signed Statement.
+The response contains a reference to the running operation which is
+attempting to Register the Signed Statement.
 
-If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Resolve Receipt endpoint using the identifier returned in the response.
+If 202 is returned, then clients should wait until Registration
+succeeded or failed by polling the Check Operation endpoint using the
+`OperationID` returned in the response.
 
 #### Status 400 - Invalid Client Request
 
@@ -347,6 +389,196 @@ application/concise-problem-details+cbor
   / detail /        -2: "Signed Statement not accepted by the current Registration Policy",
   / instance /      -3: "urn:ietf:params:scitt:error:signed-statement:rejected-by-registration-policy",
   / response-code / -4: 400,
+}
+~~~
+
+### Check Registration
+
+Authentication MAY be implemented for this endpoint.
+
+This endpoint is used to check the progress of a long-running registration.
+
+The following is a non-normative example of a HTTP request the status of a
+running registration:
+
+Request:
+
+~~~ http-message
+GET /operations/67f89d5f0042e3ad42...35a1f190, HTTP/1.1
+Host: transparency.example
+Accept: application/cbor
+~~~
+
+Response:
+
+One of the following:
+
+#### Status 200 - Operation complete
+
+_Success case_
+
+If the operation is complete and it _succeeded_, the Transparency
+Service returns a `status` of "succeeded" along with a locator which
+can be used to fetch the Receipt.
+
+`EntryID` is Transparency Service specific and MUST not be used for
+fetching Receipts in any Transparency Service other than the one that
+returned it.
+
+If the `EntryID` is a valid URL, it MAY be included as a `Location`
+header in the HTTP response.
+
+~~~ http-message
+HTTP/1.1 200 Ok
+
+Location: https://transparency.example/entries\
+/67ed41f1de6a...cfc158694ed0befe
+
+Content-Type: application/cbor
+
+{
+  / locator / "EntryID": "67f89d5f0042e3ad42...35a1f190",
+  / status /  "Status": "succeeded",
+}
+~~~
+
+_Failure case_
+
+If the operation is complete and it _failed_, the Transparency Service
+returns a `status` of "failed" and an optional {{RFC9290}} Concise
+Problem Details object to explain the failure.
+
+~~~ http-message
+HTTP/1.1 200 Ok
+
+Content-Type: application/cbor
+
+{
+  / status / "Status": "failed",
+  / error /  "Error": {
+    / title /         -1: "Bad Signature Algorithm",
+    / detail /        -2: "Signed Statement contained an algorithm that is not supported",
+    / instance /      -3: "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+  }
+}
+~~~
+
+#### Status 202 - Registration is (still) running
+
+~~~ http-message
+HTTP/1.1 202 Accepted
+
+Location: https://transparency.example/operations\
+/67f89d5f0042e3ad42...35a1f190
+
+Retry-After: <seconds>
+
+~~~
+
+If 202 is returned, then clients should continue polling the Check
+Operation endpoint using the operation identifier.
+
+#### Status 400 - Invalid Client Request
+
+The following expected errors are defined. Implementations MAY return
+other errors, so long as they are valid {{RFC9290}} objects.
+
+~~~
+HTTP/1.1 400 Bad Request
+application/concise-problem-details+cbor
+
+{
+  / title /         -1: "Invalid locator",
+  / detail /        -2: "Operation locator is not in a valid form",
+  / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest",
+  / response-code / -4: 400,
+}
+~~~
+
+#### Status 404 - Operation Not Found
+
+If no record of the specified running operation is found, the
+Transparency Service returns a 404 response.
+
+~~~
+HTTP/1.1 404 Not Found
+application/concise-problem-details+cbor
+
+{
+  / title /         -1: "Operation Not Found",
+  / detail /        -2: "No running operation was found matching the requested ID",
+  / instance /      -3: "urn:ietf:params:scitt:error:notFound",
+  / response-code / -4: 404,
+}
+~~~
+
+#### Status 429
+
+If a client is polling for an in-progress registration too frequently
+then the Transparency Service MAY, in addition to implementing rate
+limiting, return a 429 response:
+
+~~~
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/concise-problem-details+cbor
+Retry-After: <seconds>
+
+{
+  / title /         -1: "Too Many Requests",
+  / detail /        -2: "Only <number> requests per <period> are allowed.",
+  / instance /      -3: "urn:ietf:params:scitt:error:tooManyRequests",
+  / response-code / -4: 429,
+}
+~~~
+
+### Resolve Receipt
+
+Authentication SHOULD be implemented for this endpoint.
+
+Request:
+
+~~~ http-message
+GET entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+~~~
+
+Response:
+
+#### Status 200
+
+If the Receipt is found:
+
+~~~ http-message
+HTTP/1.1 200 Ok
+Location: https://transparency.example/entries\
+/67ed41f1de6a...cfc158694ed0befe
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+#### Status 404
+
+If there is no Receipt found for the specified `EntryID` the
+Transparency Service returns a 404 response:
+
+~~~
+HTTP/1.1 404 Not Found
+application/concise-problem-details+cbor
+
+{
+  / title /         -1: "Not Found",
+  / detail /        -2: "Receipt with entry ID <id> not known to this Transparency Service",
+  / instance /      -3: "urn:ietf:params:scitt:error:receipt:not-found",
+  / response-code / -4: 404,
 }
 ~~~
 
@@ -455,7 +687,7 @@ This endpoint enables Transparency Service APIs to act like Artifact Repositorie
 Request:
 
 ~~~ http-message
-GET /signed-statements/urn...qnGmr1o HTTP/1.1
+GET /signed-statements/9e4f5206fe4bf...ba742bd688a HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 ~~~
@@ -496,88 +728,6 @@ application/concise-problem-details+cbor
 }
 ~~~
 
-### Resolve Receipt
-
-Authentication SHOULD be implemented for this endpoint.
-
-Request:
-
-~~~ http-message
-GET /receipts/urn...qnGmr1o HTTP/1.1
-Host: transparency.example
-Accept: application/cose
-~~~
-
-Response:
-
-#### Status 200
-
-If the Signed Statement requested is already included in the Append-Only Log:
-
-~~~ http-message
-HTTP/1.1 200 Ok
-Location: https://transparency.example/receipts/urn...qnGmr1o
-Content-Type: application/cose
-
-Payload (in CBOR diagnostic notation)
-
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
-])
-~~~
-
-#### Status 202
-
-If registration of the Signed Statement requested is in progress but not yet included in the Append-Only Log:
-
-~~~ http-message
-HTTP/1.1 202 Ok
-Location: https://transparency.example/receipts/urn...qnGmr1o
-Content-Type: application/json
-Retry-After: <seconds>
-
-{
-  "receipt": "urn:ietf:params:scitt:receipt\
-    :sha-256:base64url:5i6UeRzg1...qnGmr1o",
-}
-~~~
-
-#### Status 404
-
-If the Signed Statement requested is neither registered in the log nor subject to an in-progress registration:
-
-~~~
-HTTP/1.1 404 Not Found
-application/concise-problem-details+cbor
-
-{
-  / title /         -1: "Not Found",
-  / detail /        -2: "Signed Statement not known to this Transparency Service",
-  / instance /      -3: "urn:ietf:params:scitt:error:receipt:not-found",
-  / response-code / -4: 400,
-}
-~~~
-
-#### Status 429
-
-If a client is polling for an in-progress registration too frequently then the Transparency Service MAY, in addition to implementing rate-limiting, return a 429 response:
-
-~~~
-HTTP/1.1 429 Too Many Requests
-Content-Type: application/json
-Retry-After: <seconds>
-
-{
-  "type": "urn:ietf:params:scitt:error\
-    :receipt:too-many-requests",
-  "detail": \
-    "Too Many Requests. Only <number> requests per <period> are allowed."
-}
-~~~
-
 #### Eventual Consistency
 
 For all responses additional eventually consistent operation details MAY be present.
@@ -585,11 +735,11 @@ Support for eventually consistent Receipts is implementation specific, and out o
 
 ### Exchange Receipt
 
-This endpoint is used to exchange old or expiring receipts for fresh ones.
+This endpoint is used to exchange old or expiring Receipts for fresh ones.
 
-The `iat`, `exp` and `kid` claims can change each time a receipt is exchanged.
+The `iat`, `exp` and `kid` claims can change each time a Receipt is exchanged.
 
-This means that fresh receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
+This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
 
 Authentication SHOULD be implemented for this endpoint.
 
@@ -612,11 +762,13 @@ Payload (in CBOR diagnostic notation)
 
 #### Status 200
 
-A new receipt:
+A new Receipt:
 
 ~~~ http-message
 HTTP/1.1 200 Ok
-Location: https://transparency.example/receipts/urn...qnGmr1o
+Location: https://transparency.example/entries\
+/67ed41f1de6a...cfc158694ed0befe
+
 Content-Type: application/cose
 
 Payload (in CBOR diagnostic notation)
@@ -806,7 +958,7 @@ Thus, any message deletion attack must occur prior to registration else it is in
 
 # TODO
 
-TODO: Consider negotiation for receipt as "JSON" or "YAML".
+TODO: Consider negotiation for Receipt as "JSON" or "YAML".
 TODO: Consider impact of media type on "Data URIs" and QR Codes.
 
 # IANA Considerations
