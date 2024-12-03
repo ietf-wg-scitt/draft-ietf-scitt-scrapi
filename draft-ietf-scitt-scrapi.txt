@@ -184,9 +184,7 @@ Table of Contents
    problem details and avoids the need for mixing CBOR and JSON in
    endpoint implementations.
 
-   As an example, submitting a Signed Statement with an unsupported
-   signature algorithm would return a 400 Bad Request status code and
-   the following body:
+   Examples of errors may include:
 
    {
      / title /         -1: "Bad Signature Algorithm",
