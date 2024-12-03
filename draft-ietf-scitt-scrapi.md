@@ -123,7 +123,7 @@ application/concise-problem-details+cbor
 
 NOTE: SCRAPI is not a CoAP API. Nonetheless Constrained Problem Details objects ({{RFC9290}}) provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.
 
-As an example, submitting a Signed Statement with an unsupported signature algorithm would return a `400 Bad Request` status code and the following body:
+Examples of errors may include:
 
 ~~~cbor-diag
 {
