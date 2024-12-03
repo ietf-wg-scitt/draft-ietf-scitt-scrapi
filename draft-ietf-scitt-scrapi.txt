@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 23 May 2025                                     DataTrails Inc.
-                                                        19 November 2024
+Expires: 6 June 2025                                     DataTrails Inc.
+                                                         3 December 2024
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 May 2025.
+   This Internet-Draft will expire on 6 June 2025.
 
 Copyright Notice
 
@@ -80,7 +80,6 @@ Table of Contents
        2.2.3.  Resolve Receipt
        2.2.4.  Exchange Receipt
        2.2.5.  Resolve Issuer
-       2.2.6.  Request Nonce
    3.  Privacy Considerations
    4.  Security Considerations
      4.1.  General scope
@@ -737,32 +736,6 @@ Retry-After: <seconds>
      }
    }
 
-2.2.6.  Request Nonce
-
-   This endpoint in inspired by
-   [I-D.draft-demarco-oauth-nonce-endpoint].
-
-   Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to demonstrate proof of possession, which is the
-   reason that authentication is not required.  Client holding signed
-   statements that require demonstrating proof of possession MUST use
-   this endpoint to obtain a nonce.
-
-   Request:
-
-   GET /nonce HTTP/1.1
-   Host: transparency.example
-   Accept: application/json
-
-   Response:
-
-   HTTP/1.1 200 OK
-   Content-Type: application/json
-
-   {
-     "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
-   }
-
 3.  Privacy Considerations
 
    TODO
@@ -1064,19 +1037,12 @@ Retry-After: <seconds>
 
 7.2.  Informative References
 
-   [I-D.draft-demarco-oauth-nonce-endpoint]
-              De Marco, G. and O. Steele, "OAuth 2.0 Nonce Endpoint",
-              Work in Progress, Internet-Draft, draft-demarco-oauth-
-              nonce-endpoint-00, 6 February 2024,
-              <https://datatracker.ietf.org/doc/html/draft-demarco-
-              oauth-nonce-endpoint-00>.
-
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-06, 13 November
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-08, 3 December
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-06>.
+              oauth-sd-jwt-vc-08>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
