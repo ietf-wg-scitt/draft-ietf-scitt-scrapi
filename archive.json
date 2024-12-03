@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-01T00:49:30.707216+00:00",
+  "timestamp": "2024-12-03T00:41:39.963865+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -991,7 +991,7 @@
       "labels": [],
       "body": "It's not clear why this would be needed, and it doesn't reflect any patterns in the Architecture. Remove?",
       "createdAt": "2024-11-05T15:00:44Z",
-      "updatedAt": "2024-11-25T10:02:06Z",
+      "updatedAt": "2024-12-01T13:32:19Z",
       "closedAt": null,
       "comments": [
         {
@@ -1000,6 +1000,13 @@
           "body": "@JAG-UK there's a reference to \"proof of possession\", so my guess it that this is meant to enable a flow where the client requests a nonce, includes it in the signed statement (protected header or payload) before signing and submission, to \"prove\" that they held the key at the time of submission, if it is substantially different from the time of signing.\r\n\r\nI agree that this should be removed because:\r\n\r\n1. It's poorly specified for its stated purpose, without mandatory transport-level security, it's possible to effectively DoS a client by using the nonce they requested quicker than they can. Without authentication, a malicious client can also spam the service for fresh nonce values, causing legitimate ones to fall out of the expiry window before they can be used.\r\n3. There is no mention of a scenario where this is helpful or necessary.\r\n4. If such a scenario emerges, where an issuer signs or has signed indiscriminately in advance, and it is desirable to be stricter about what can be made transparent, there are two easier mechanisms the registration policy can use that don't require an awkward stateful API extension such as this:\r\n  - `iat` in the signed statement\r\n  - a counter-signature with a submission control key (which may or may not be the same as one of the issuer keys)\r\nNeither requires additional API surface, nor creates additional DoS opportunities.\r\n\r\nOpened #49",
           "createdAt": "2024-11-25T10:02:04Z",
           "updatedAt": "2024-11-25T10:02:04Z"
+        },
+        {
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "body": "agree  to remove. I believe the intent for including that was the cnf claim in a cwt. But per https://www.rfc-editor.org/rfc/rfc8747.html#name-specifics-intentionally-not it is for the protocol to define *if* and how a nonce should be used.  Removing this does not preclude the use of cnf. And, at the same time, avoids under (or over) specifying in the wrong place.",
+          "createdAt": "2024-12-01T13:32:01Z",
+          "updatedAt": "2024-12-01T13:32:19Z"
         }
       ]
     }
