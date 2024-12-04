@@ -101,7 +101,8 @@ This specification uses "payload" as defined in {{RFC9052}}.
 
 # Endpoints
 
-Authentication is out of scope for this document. Implementations MAY authenticate clients, for example for authorization or to prevent denial of service.
+Authentication is out of scope for this document.
+Implementations MAY authenticate clients, for example for authorization or to prevent denial of service.
 If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be applied to enable anonymous access.
 
 NOTE: '\' line wrapping per {{RFC8792}} in HTTP examples.
