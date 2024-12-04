@@ -101,7 +101,7 @@ This specification uses "payload" as defined in {{RFC9052}}.
 
 # Endpoints
 
-Authentication is out of scope for this document.
+Authentication is out of scope for this document. Implementations MAY authenticate clients, for example for authorization or to prevent denial of service.
 If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be applied to enable anonymous access.
 
 NOTE: '\' line wrapping per {{RFC8792}} in HTTP examples.
@@ -150,8 +150,6 @@ The following HTTP endpoints are mandatory to implement to enable conformance to
 
 ### Transparency Configuration
 
-Authentication SHOULD NOT be implemented for this endpoint.
-
 This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.
 
 The Transparency Service responds with a dictionary of configuration elements. These elements are Transparency-Service specific.
@@ -194,7 +192,6 @@ Fields that are not understood MUST be ignored.
 
 ### Register Signed Statement
 
-Authentication MAY be implemented for this endpoint.
 See notes on detached payloads below.
 
 This endpoint is used to register a Signed Statement with a Transparency Service.
@@ -447,8 +444,6 @@ Payload (in CBOR diagnostic notation)
 
 ### Resolve Signed Statement
 
-Authentication SHOULD be implemented for this endpoint.
-
 This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.
 
 Request:
@@ -496,8 +491,6 @@ application/concise-problem-details+cbor
 ~~~
 
 ### Resolve Receipt
-
-Authentication SHOULD be implemented for this endpoint.
 
 Request:
 
@@ -590,8 +583,6 @@ The `iat`, `exp` and `kid` claims can change each time a receipt is exchanged.
 
 This means that fresh receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
 
-Authentication SHOULD be implemented for this endpoint.
-
 Request:
 
 ~~~ http-message
@@ -631,8 +622,6 @@ Payload (in CBOR diagnostic notation)
 ### Resolve Issuer
 
 This endpoint is inspired by {{-SD-JWT-VC}}.
-Authentication SHOULD NOT be implemented for this endpoint.
-This endpoint is used to discover verification keys, which is the reason that authentication is not required.
 
 The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when `iss` is set to `https://transparency.example/tenant/1234`:
 
