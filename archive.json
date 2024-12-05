@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-03T00:41:39.963865+00:00",
+  "timestamp": "2024-12-05T00:41:08.099801+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -329,12 +329,13 @@
       "author": "robinbryce",
       "authorAssociation": "NONE",
       "assignees": [
+        "achamayou",
         "JAG-UK"
       ],
       "labels": [],
       "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-resolve-receipt\r\n\r\nI don't understand *why* this is desired:\r\n\r\n\"Authentication SHOULD be implemented for this endpoint\"\r\n\r\nIf the material in a receipt is, or can be, considered private to the issuer, then this should be a MUST.\r\n\r\nInstinctively I have always thought of receipts as essentially public documents. Whilst they are revealing, they are designed to be passed on to other parties.\r\n\r\nIf the intent is to permit implementations to provide for both public and private receipts, I think that model needs to be spelled out explicitly.\r\n\r\nIt would seem reasonable to me for Resolve Receipt to provide \"the defined public aspects of a receipt\" when the request was not authenticated. And the possibly sensitive parts otherwise\r\n\r\nIn practice, there are definitely usecases for obtaining a receipt for a statement issued by a different party. Its not clear at all to me how or if the authentication requirement here interacts with that.",
       "createdAt": "2024-06-23T08:04:12Z",
-      "updatedAt": "2024-11-28T10:48:29Z",
+      "updatedAt": "2024-12-03T15:25:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -367,7 +368,7 @@
         },
         {
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "The stance on authentication is inconsistent in the current document:\r\n\r\n- [Register Signed Statement](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md#register-signed-statement): \"Authentication MAY be implemented\"\r\n- [Resolve Signed Statement](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md#resolve-signed-statement): \"Authentication SHOULD be implemented\"\r\n\r\nSurely we don't mean to place a higher authentication requirement on fetching transparent statements than on creating them? (same for Resolve Receipt)\r\n\r\nLikewise, I think the fact that Authentication \"SHOULD NOT\" be implemented for [Resolve Issuer](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md#resolve-issuer), nor for [Transparency Configuration](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md#transparency-configuration) is a mistake, as @JAG-UK rightly pointed out in #46.\r\n\r\nIt seems to me that the only endpoint that MUST have authentication is Issue Statement (which in my opinion also does not belong in SCRAPI, it's a weird way to add signing to a transparency service, and I do not understand why it was shoehorned in).\r\nEvery other endpoint MAY implement authentication, because:\r\n\r\n1. Not all transparency use cases are public. Transparency inside an organisation is a valid use case, and may legitimately require authentication, even on configuration and issuer endpoints.\r\n2. It's a very practical way to implementing rate limiting or QoS for all use cases, public or otherwise.\r\n\r\nDoes that make sense to everyone? Did I miss something?",
           "createdAt": "2024-11-28T10:48:28Z",
           "updatedAt": "2024-11-28T10:48:28Z"
@@ -379,7 +380,7 @@
       "id": "I_kwDOLJjbks6PmMGP",
       "title": "2.1.1 & 2.1.2 Missing intent statements.",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/18",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mkhraisha",
       "authorAssociation": "NONE",
       "assignees": [
@@ -388,8 +389,8 @@
       "labels": [],
       "body": "The optional API endpoints have intent statements that outline the goal of the Endpoints for example 2.2.1 (Issue Signed Statement Endpoint) has this intent statement:\r\n\r\n```\r\nThis endpoint enables a Transparency Service to be an issuer of Signed Statements on behalf of authenticated clients. This supports cases where a client lacks the ability to perform complex cryptographic operations, but can be authenticated and report statements and measurements.\r\n```\r\nSuch a statement is currently missing from both:\r\n2.1.1 (Transparency Configuration) and 2.1.2 (Signed Statement Registration).\r\n\r\n",
       "createdAt": "2024-07-15T16:29:53Z",
-      "updatedAt": "2024-08-06T14:50:58Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-03T09:58:53Z",
+      "closedAt": "2024-12-03T09:58:53Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -397,6 +398,13 @@
           "body": "I'll take this one and put a PR up with consistency for all the endpoints",
           "createdAt": "2024-08-06T14:50:57Z",
           "updatedAt": "2024-08-06T14:50:57Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This was fixed in #28 ",
+          "createdAt": "2024-12-03T09:58:53Z",
+          "updatedAt": "2024-12-03T09:58:53Z"
         }
       ]
     },
@@ -667,14 +675,14 @@
       "comments": [
         {
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> On the register statement API, a TS could be a front end to multiple Transparency Services. It may be hashed by country or industry. The question is whether the API should add a parameter for which Notary to use, or it may be inferred by other parameters, or the identity of the client.\r\n\r\nSince no one else has commented, I will chime in: I think that is a concern for client software to handle without adding API surface to part of the reference API for TS implementations. I would prefer to not have this addition.\r\n",
           "createdAt": "2024-11-02T14:28:43Z",
           "updatedAt": "2024-11-02T14:28:43Z"
         },
         {
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "+1 for keeping the API simple, and not adding this. Deployments that need this functionality should be able to deploy a separate service out in front that redirects/load balances as desired.\r\n\r\nIt seems likely that the regional instances would be different issuers (perhaps subdomains), and so trying to present a unified endpoint also means working out how to present a unified transparency configuration also, adding complexity there too.",
           "createdAt": "2024-11-27T08:57:05Z",
           "updatedAt": "2024-11-27T08:57:05Z"
@@ -688,14 +696,14 @@
         },
         {
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I think that's resolved to some extent by the client using a statement API, because the first service can turn around and submit to one or more other TS, who will append their receipts to the statement. The first TS can then return the statement to the client who needs no special handling.\r\n\r\nSomething like:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS0: Signed Statement\r\n    TS0->>TS0: Add Receipt[0] to Signed Statement<br>.a.k.a Transparent Statement\r\n    TS0->>+TS1: Register Transparent Statement with Receipt[0]\r\n    TS1->>-TS0: Transparent Statement with Receipt[0, 1]\r\n    TS0->>-Client: Transparent Statement with Receipt[0, 1]\r\n```\r\n\r\nOr:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS0: Signed Statement\r\n    TS0->>TS0: Add Receipt[0] to Signed Statement<br>.a.k.a Transparent Statement\r\n    TS0->>+TS1: Register Transparent Statement with Receipt[0]\r\n    TS1->>-TS0: Fetch Receipt[1]\r\n    TS0->>TS0: Add Receipt[0, 1] to Signed Statement\r\n    TS0->>-Client: Transparent Statement with Receipt[0, 1]\r\n```\r\n\r\nThis may be a registration policy that TS0 applies to statements that meet certain criteria. \"if conditions are met, get receipts from the other two regions before returning a statement with all three receipts to the caller\".",
           "createdAt": "2024-11-27T09:25:13Z",
           "updatedAt": "2024-11-27T09:25:13Z"
         },
         {
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Which I think is a very long way of saying that we don't need special API support, it can either be done by the client of course, or even by the TS, with today's API. @SteveLasker what do you think?",
           "createdAt": "2024-11-27T09:27:17Z",
           "updatedAt": "2024-11-27T09:27:17Z"
@@ -726,11 +734,13 @@
       "state": "OPEN",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "JAG-UK"
+      ],
       "labels": [],
       "body": "In trying to build a new ground-up Python implementation of SCRAPI I am finding it quite difficult to cope with commands that might return JSON or might return CBOR depending on things like operation or error state. It makes response and error handling code messy and harder to review.\r\n\r\nFollowing discussion in the editors' meeting I propose to make the whole thing COSE/CBOR. This is much more aligned with the architecture and the IETF mission in general.",
       "createdAt": "2024-10-24T10:02:22Z",
-      "updatedAt": "2024-11-02T16:04:40Z",
+      "updatedAt": "2024-12-03T15:56:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -749,14 +759,14 @@
         },
         {
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> Following discussion in the editors' meeting I propose to make the whole thing COSE/CBOR. This is much more aligned with the architecture and the IETF mission in general.\r\n\r\nI support this change as well, like Henk.\r\n\r\n",
           "createdAt": "2024-10-26T04:48:57Z",
           "updatedAt": "2024-10-26T04:48:57Z"
         },
         {
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "How would error code and and HTTP response information work in light of this proposed change, @JAG-UK?",
           "createdAt": "2024-11-02T13:06:53Z",
           "updatedAt": "2024-11-02T13:06:53Z"
@@ -770,14 +780,14 @@
         },
         {
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> Error responses MUST be sent with the `Content-Type: application/problem+cbor` HTTP header.\r\n\r\nPartly serious, partly in jest, sounds like we may have a need for a RFC for CBOR-based HTTP APIs. :laughing: \r\n \r\n> ```\r\n> HTTP/1.1 400 Bad Request\r\n> Content-Type: application/problem+cbor\r\n> \r\n> {\r\n>   / title /         -1: \"Bad Signature Algorithm\",\r\n>   / detail /        -2: \"Signed Statement contained an algorithm that is not supported\",\r\n>   / instance /      -3: \"urn:ietf:params:scitt:error:badSignatureAlgorithm\",\r\n>   / response-code / -4: 400,\r\n> }\r\n> ```\r\n\r\nIs there a reason we are deviating from [RFC9457](https://www.rfc-editor.org/rfc/rfc9457.html#name-members-of-a-problem-detail) ever so slightly?",
           "createdAt": "2024-11-02T14:15:37Z",
           "updatedAt": "2024-11-02T14:15:37Z"
         },
         {
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "And to be clear, I would think `response-code` over `type` implies a possible layering concern by bringing HTTP error codes \"down into\" the API surface of CBOR-based payloads for SCITT, no?",
           "createdAt": "2024-11-02T14:16:36Z",
           "updatedAt": "2024-11-02T14:16:36Z"
@@ -795,6 +805,13 @@
           "body": "> And to be clear, I would think `response-code` over `type` implies a possible layering concern by bringing HTTP error codes \"down into\" the API surface of CBOR-based payloads for SCITT, no?\r\n\r\nYeah I really flip-flopped on that one. I spoke to one of the CBOR authors and they include the status code in the object is for extra later clues to errors (poring over log files for example) but I agree it's a bit of a violation. It would be very easy to convince me to remove that",
           "createdAt": "2024-11-02T16:04:39Z",
           "updatedAt": "2024-11-02T16:04:39Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "From IETF 121, there's a Everything CBOR motion in flight.",
+          "createdAt": "2024-12-03T15:56:42Z",
+          "updatedAt": "2024-12-03T15:56:42Z"
         }
       ]
     },
@@ -810,24 +827,32 @@
       "labels": [],
       "body": "Need to be made consistent",
       "createdAt": "2024-11-03T11:03:29Z",
-      "updatedAt": "2024-11-03T11:03:29Z",
+      "updatedAt": "2024-12-03T15:56:00Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Similar to #46 which @achamayou will create a PR. \r\nWill re-evaluate once 46 is completed. ",
+          "createdAt": "2024-12-03T15:55:59Z",
+          "updatedAt": "2024-12-03T15:55:59Z"
+        }
+      ]
     },
     {
       "number": 40,
       "id": "I_kwDOLJjbks6c0_Ul",
       "title": "Keys in configuration example have no stated purpose",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/40",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Showing keys without saying what they're for is unhelpful\r\n\r\nCedric suggests it might be even better to remove the specifics and just include a standard key discovery locator (which also helps avoid format/types arguments in this doc)",
       "createdAt": "2024-11-03T11:04:42Z",
-      "updatedAt": "2024-11-04T18:28:40Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-03T09:54:23Z",
+      "closedAt": "2024-12-03T09:54:23Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -835,6 +860,13 @@
           "body": "I have attempted to resolve this by removing it in the translation to CBOR in PR #38 - will this suffice?",
           "createdAt": "2024-11-04T18:28:39Z",
           "updatedAt": "2024-11-04T18:28:39Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Reviewed and addressed in #38 ",
+          "createdAt": "2024-12-03T09:54:23Z",
+          "updatedAt": "2024-12-03T09:54:23Z"
         }
       ]
     },
@@ -850,9 +882,31 @@
       "labels": [],
       "body": "Would be good to have an API that allows checking or proving consistency of the log.\r\nWe understand that not every log supports consistency proofs but in the cases where they do, there should be standard way to get them",
       "createdAt": "2024-11-03T11:09:28Z",
-      "updatedAt": "2024-11-03T11:09:28Z",
+      "updatedAt": "2024-12-03T18:10:17Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Discussed with @SteveLasker and @OR13, the most useful step in that direction would be to specify a stand-alone consistency proof format, at which point it would make sense to have an API allowing a client to request a consistency proof from a point to another point in a ledger history.",
+          "createdAt": "2024-12-03T15:52:15Z",
+          "updatedAt": "2024-12-03T15:52:15Z"
+        },
+        {
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "body": "@achamayou / @JAG-UK  would an api which responded with the VDS appropriate proof type work ? https://github.com/cose-wg/draft-ietf-cose-merkle-tree-proofs sais \"COSE Receipts\" but it actually allows a VDS to define any proof format that it deems relevant.\r\n\r\nTwo tricky aspects I see:\r\n1. The requested proof, consistency in this case, may be \"not ready yet\". Its not as clear how to deal with that as for proofs of inclusion.\r\n2. Depending on the VDS (transparency service choice) different parameters may be required for the request. That suggests the API itself needs to allow for VDS specific parameterization",
+          "createdAt": "2024-12-03T17:42:08Z",
+          "updatedAt": "2024-12-03T17:42:08Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> @achamayou / @JAG-UK would an api which responded with the VDS appropriate proof type work ?\r\n\r\nI think it would?\r\n\r\n> 1. The requested proof, consistency in this case, may be \"not ready yet\". Its not as clear how to deal with that as for proofs of inclusion.\r\n\r\nThat sounds similar to the situation for proofs of inclusion, which may also be behind an async API because the ledger needs to do something that takes a bit of time first (replicate across N nodes etc).\r\n\r\n> 2. Depending on the VDS (transparency service choice) different parameters may be required for the request. That suggests the API itself needs to allow for VDS specific parameterization\r\n\r\nYes, that seems like the main obstacle to me. I don't know if this could be resolved by defining an (ordered, but opaque) transaction ID, and if `from` and `to` would be enough here, or if more is needed.\r\n\r\n",
+          "createdAt": "2024-12-03T18:09:59Z",
+          "updatedAt": "2024-12-03T18:10:17Z"
+        }
+      ]
     },
     {
       "number": 42,
@@ -866,7 +920,7 @@
       "labels": [],
       "body": "It would be useful to clarify that \"Authentication\" in SCRAPI is referring to the application client connection separate to the Issuer sig etc. A short section on this (then not having to repeat it a lot throughout the doc) would be helpful",
       "createdAt": "2024-11-03T11:13:25Z",
-      "updatedAt": "2024-11-03T11:13:25Z",
+      "updatedAt": "2024-12-03T15:41:55Z",
       "closedAt": null,
       "comments": []
     },
@@ -880,9 +934,9 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
-      "body": "3 issues:\r\n * detached payload doesn't make sense - we have hash envelope now\r\n * also the word 'payload' is used for both COSE payload and HTTP Boy. Should be clear and use Body for the HTTP message\r\n * the statement on Reg Policy wrt attached/detached payload is unclear. Needs wordsmithing",
+      "body": "3 issues:\r\n * detached payload doesn't make sense - we have hash envelope now\r\n * also the word 'payload' is used for both COSE payload and HTTP Body. Should be clear and use Body for the HTTP message\r\n * the statement on Reg Policy wrt attached/detached payload is unclear. Needs wordsmithing",
       "createdAt": "2024-11-03T11:16:42Z",
-      "updatedAt": "2024-11-03T11:16:42Z",
+      "updatedAt": "2024-12-03T15:41:29Z",
       "closedAt": null,
       "comments": []
     },
@@ -891,22 +945,29 @@
       "id": "I_kwDOLJjbks6c1AoQ",
       "title": "Remove 'ResolveStatement' and associated IDs/references",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/44",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "It's sufficient/better to just ResolveSignedStatement (meaning you get back what was put in) and then the client can pull the Statement out if they want it. Reduces complexity for no loss of functionality",
       "createdAt": "2024-11-03T11:19:07Z",
-      "updatedAt": "2024-11-04T04:30:57Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-03T09:48:20Z",
+      "closedAt": "2024-12-03T09:48:19Z",
       "comments": [
         {
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> It's sufficient/better to just ResolveSignedStatement (meaning you get back what was put in) and then the client can pull the Statement out if they want it. Reduces complexity for no loss of functionality\r\n\r\nSo no separate endpoint, you mean?",
           "createdAt": "2024-11-04T04:30:57Z",
           "updatedAt": "2024-11-04T04:30:57Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Reviewed and merged in #38 ",
+          "createdAt": "2024-12-03T09:48:19Z",
+          "updatedAt": "2024-12-03T09:48:19Z"
         }
       ]
     },
@@ -915,15 +976,15 @@
       "id": "I_kwDOLJjbks6c3jzE",
       "title": "Minimally viable `/.well-known/transparency-configuration` CDDL for TS configruation?",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/45",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "aj-stein",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Since we are talking about #36, does this mean we must refactor this API endpoint's response with minimally viable CBOR and a CDDL spec in place of JSON?",
       "createdAt": "2024-11-04T04:33:58Z",
-      "updatedAt": "2024-11-05T11:26:08Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-03T09:46:24Z",
+      "closedAt": "2024-12-03T09:46:24Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -941,10 +1002,17 @@
         },
         {
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I will have to experiment with it more, but so far I like it. You can link this issue to close it once you merge #39. Thanks.",
           "createdAt": "2024-11-05T11:26:07Z",
           "updatedAt": "2024-11-05T11:26:07Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Merged.",
+          "createdAt": "2024-12-03T09:46:22Z",
+          "updatedAt": "2024-12-03T09:46:22Z"
         }
       ]
     },
@@ -956,11 +1024,13 @@
       "state": "OPEN",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "achamayou"
+      ],
       "labels": [],
       "body": "The intent statement currently says:\r\n\r\n`This endpoint is used to discover verification keys, which is the reason that authentication is not required.`\r\n\r\nIn use cases where this endpoint is useful, it's often the case that you want more metadata/supporting evidence than purely keys.\r\n\r\nA suggestion from the field: `return supporting evidence enabling the client to verify the issuer signature at the time of registration`",
       "createdAt": "2024-11-05T14:55:01Z",
-      "updatedAt": "2024-11-25T10:09:26Z",
+      "updatedAt": "2024-12-03T15:26:21Z",
       "closedAt": null,
       "comments": [
         {
@@ -972,7 +1042,7 @@
         },
         {
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "+1 for removing the authentication restriction, while some transparency services like CT are scoped to the internet at large, others may be scoped to a group or an organisation.\r\n\r\n> In use cases where this endpoint is useful, it's often the case that you want more metadata/supporting evidence than purely keys.\r\n\r\nCan you elaborate on this? Although I see the case for additional key-related metadata (e.g. validity ranges in the ledger, cross-endorsement), I am curious about other metadata and to what extent it's worth bundling together/splitting.",
           "createdAt": "2024-11-25T10:09:24Z",
           "updatedAt": "2024-11-25T10:09:24Z"
@@ -984,19 +1054,19 @@
       "id": "I_kwDOLJjbks6dGcQk",
       "title": "Do we really need 2.2.7 Request Nonce?",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/47",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "It's not clear why this would be needed, and it doesn't reflect any patterns in the Architecture. Remove?",
       "createdAt": "2024-11-05T15:00:44Z",
-      "updatedAt": "2024-12-01T13:32:19Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-03T15:15:42Z",
+      "closedAt": "2024-12-03T15:15:42Z",
       "comments": [
         {
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "@JAG-UK there's a reference to \"proof of possession\", so my guess it that this is meant to enable a flow where the client requests a nonce, includes it in the signed statement (protected header or payload) before signing and submission, to \"prove\" that they held the key at the time of submission, if it is substantially different from the time of signing.\r\n\r\nI agree that this should be removed because:\r\n\r\n1. It's poorly specified for its stated purpose, without mandatory transport-level security, it's possible to effectively DoS a client by using the nonce they requested quicker than they can. Without authentication, a malicious client can also spam the service for fresh nonce values, causing legitimate ones to fall out of the expiry window before they can be used.\r\n3. There is no mention of a scenario where this is helpful or necessary.\r\n4. If such a scenario emerges, where an issuer signs or has signed indiscriminately in advance, and it is desirable to be stricter about what can be made transparent, there are two easier mechanisms the registration policy can use that don't require an awkward stateful API extension such as this:\r\n  - `iat` in the signed statement\r\n  - a counter-signature with a submission control key (which may or may not be the same as one of the issuer keys)\r\nNeither requires additional API surface, nor creates additional DoS opportunities.\r\n\r\nOpened #49",
           "createdAt": "2024-11-25T10:02:04Z",
           "updatedAt": "2024-11-25T10:02:04Z"
@@ -1009,6 +1079,22 @@
           "updatedAt": "2024-12-01T13:32:19Z"
         }
       ]
+    },
+    {
+      "number": 50,
+      "id": "I_kwDOLJjbks6h2eKB",
+      "title": "Use of URNs in SCRAPI",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/50",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/scitt/u0HJWX7gPVIQ_Ix05iOk4vVT3FA/\r\n\r\nTLDR; Remove all the URNs from the examples, and follow modern Open API Specification guidance for resource identifiers.",
+      "createdAt": "2024-12-03T15:59:26Z",
+      "updatedAt": "2024-12-03T15:59:26Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -2138,7 +2224,7 @@
             "abbreviatedOid": "6e94761"
           },
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-08-20T17:22:07Z",
@@ -2543,35 +2629,37 @@
       "id": "PR_kwDOLJjbks6Ashrf",
       "title": "Use normative language for error code per #25",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/37",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "aj-stein",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-11-02T12:58:08Z",
-      "updatedAt": "2024-11-19T20:46:09Z",
+      "updatedAt": "2024-12-03T15:16:26Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "27c70197883f1b208b611306551f2a0a8fd31143",
       "headRepository": "aj-stein/draft-ietf-scitt-scrapi",
       "headRefName": "25-error-code-normative",
       "headRefOid": "d11376eedd2bd783e3b78e582c506cb337b59e80",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-03T15:16:26Z",
+      "mergedAt": "2024-12-03T15:16:25Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "e7751b5ed12e9a310632e616a9a505adfdadff41"
+      },
       "comments": [
         {
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I know the PR change was ostensibly made locally by @JAG-UK, but if possible if you _will_ use this I would like to hold off for now. I am sure we have plenty of time. Thanks for the consideration!",
           "createdAt": "2024-11-10T22:55:29Z",
           "updatedAt": "2024-11-10T22:55:29Z"
         },
         {
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Apologies for the delay @SteveLasker. I have moved it from draft status to ready to go.",
           "createdAt": "2024-11-19T19:48:57Z",
           "updatedAt": "2024-11-19T19:48:57Z"
@@ -2610,7 +2698,7 @@
             "abbreviatedOid": "e7747a4"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-11-05T16:08:09Z",
@@ -2643,7 +2731,7 @@
             "abbreviatedOid": "d11376e"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-11-19T15:22:40Z",
@@ -2685,7 +2773,7 @@
             "abbreviatedOid": "be74955"
           },
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-04T10:58:09Z",
@@ -2747,7 +2835,7 @@
             "abbreviatedOid": "e363258"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-05T15:50:15Z",
@@ -2767,7 +2855,7 @@
             "abbreviatedOid": "e363258"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-05T15:53:54Z",
@@ -2787,7 +2875,7 @@
             "abbreviatedOid": "e363258"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-05T15:56:02Z",
@@ -2847,7 +2935,7 @@
             "abbreviatedOid": "e363258"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-05T16:51:37Z",
@@ -2900,7 +2988,7 @@
             "abbreviatedOid": "e363258"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-12T15:48:48Z",
@@ -2940,7 +3028,7 @@
             "abbreviatedOid": "54545f6"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-18T11:44:32Z",
@@ -2980,7 +3068,7 @@
             "abbreviatedOid": "54545f6"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-18T14:24:09Z",
@@ -3000,7 +3088,7 @@
             "abbreviatedOid": "54545f6"
           },
           "author": "achamayou",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-11-18T14:25:58Z",
@@ -3088,7 +3176,7 @@
             "abbreviatedOid": "435f229"
           },
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-11-10T23:01:53Z",
@@ -3128,24 +3216,26 @@
       "id": "PR_kwDOLJjbks6DAlWE",
       "title": "Remove unnecessary 2.2.7",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/49",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #47",
       "createdAt": "2024-11-25T09:55:19Z",
-      "updatedAt": "2024-11-26T10:49:41Z",
+      "updatedAt": "2024-12-03T15:15:41Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "35274ef0fa3b2b3baa07a88a3dfe59cfa108abe9",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "patch-1",
       "headRefOid": "3dd407e6641fcff537c87ed96c26645d768ca1ec",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-03T15:15:41Z",
+      "mergedAt": "2024-12-03T15:15:41Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "39a098845d2de1dc90bdd012cfd1752f0291f2bd"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3167,11 +3257,340 @@
             "abbreviatedOid": "3dd407e"
           },
           "author": "aj-stein",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-11-26T10:49:41Z",
           "updatedAt": "2024-11-26T10:49:41Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6TlMZM",
+          "commit": {
+            "abbreviatedOid": "3dd407e"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-12-03T15:14:28Z",
+          "updatedAt": "2024-12-03T15:14:28Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6TlNHd",
+          "commit": {
+            "abbreviatedOid": "3dd407e"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-03T15:15:33Z",
+          "updatedAt": "2024-12-03T15:15:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "id": "PR_kwDOLJjbks6D6qCz",
+      "title": "Refactor all the RegisterSignedStatement workflows",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/51",
+      "state": "OPEN",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses #10 , #12 , #13 ,  #14 , #20 and #22 \r\n\r\nCleans up async workflow\r\nCleans up async error reporting\r\nCleans up locators\r\nMore defined/single responsibilities for endpoint calls and returns",
+      "createdAt": "2024-12-03T16:20:49Z",
+      "updatedAt": "2024-12-04T16:34:24Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "jag-uk/23-async-operations-locators",
+      "headRefOid": "7e934bdee644f4952bd897bb14bd74c2a88cd6a6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "body": "We now seem to have about 3 different status values to deal with\r\n\r\nstatus: \"running\" in the content in various apis\r\n\r\nthe http status\r\n\r\nthe response code in the problem details.\r\n\r\nIs it possible to remove status: \"running\" | \"success\" in favour of just relying on the http status codes ?",
+          "createdAt": "2024-12-03T19:16:31Z",
+          "updatedAt": "2024-12-03T19:16:31Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6TnaXR",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-03T19:14:29Z",
+          "updatedAt": "2024-12-03T19:14:29Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "Do we really need status if we have 201 vs 202 ? Is there any other value other than \"running\" ?",
+              "createdAt": "2024-12-03T19:14:29Z",
+              "updatedAt": "2024-12-03T19:14:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Tnc_L",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-03T19:20:30Z",
+          "updatedAt": "2024-12-03T19:20:30Z",
+          "comments": [
+            {
+              "originalPosition": 223,
+              "body": "oh eww, I understand. but eew. Is considered \"bad\" to treat the status for the specific http request to pertain to the overall async action ?",
+              "createdAt": "2024-12-03T19:20:30Z",
+              "updatedAt": "2024-12-03T19:20:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Tnm2t",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-03T20:01:35Z",
+          "updatedAt": "2024-12-03T20:01:35Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "201 returns the finished Receipt. 202 returns an in-progress indicator.",
+              "createdAt": "2024-12-03T20:01:35Z",
+              "updatedAt": "2024-12-03T20:01:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Tnq03",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-03T20:09:38Z",
+          "updatedAt": "2024-12-03T20:09:38Z",
+          "comments": [
+            {
+              "originalPosition": 223,
+              "body": "Yes, it was discussed a lot and came down fairly heavily on the 'the response is to the request, which succeeded'. It successfully tells you the lro has failed.\r\n\r\nIt's far from necessary to stick a whole problem details in there. It could just be a reason code and a string? Open to ideas.",
+              "createdAt": "2024-12-03T20:09:38Z",
+              "updatedAt": "2024-12-03T20:09:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Tu4t9",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T13:07:46Z",
+          "updatedAt": "2024-12-04T13:07:46Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "I see the need for status now I understand what is going on with the async operations better",
+              "createdAt": "2024-12-04T13:07:46Z",
+              "updatedAt": "2024-12-04T13:07:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Tu6Yk",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T13:10:20Z",
+          "updatedAt": "2024-12-04T13:10:20Z",
+          "comments": [
+            {
+              "originalPosition": 223,
+              "body": "Ah fine. Ok. having just taken a pass on an early implementation, I like that there consistently be a problem details for any error condition - even where the error is for an async and, as in this case, the request to check is itself OK.objection withdrawn.",
+              "createdAt": "2024-12-04T13:10:20Z",
+              "updatedAt": "2024-12-04T13:11:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Tu68T",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T13:11:18Z",
+          "updatedAt": "2024-12-04T13:11:18Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "objection withdrawn",
+              "createdAt": "2024-12-04T13:11:18Z",
+              "updatedAt": "2024-12-04T13:11:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Txwce",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T16:34:24Z",
+          "updatedAt": "2024-12-04T16:34:24Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Would it make sense to move this sentence after the following two that clarify the dependency on authentication and verification where applicable? This may help avoid confusion about whether the registration policy can use the authentication context as input (which I assume is uncontroversial).",
+              "createdAt": "2024-12-04T16:34:24Z",
+              "updatedAt": "2024-12-04T16:34:24Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOLJjbks6EBy_M",
+      "title": "Make authentication stance consistent in the document",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/52",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Proposed resolution for #14 and #46, as discussed with @SteveLasker, @OR13 and @henkbirkholz.\r\n\r\nWill PR the removal of issue statement (the sole endpoint demanding authentication) separately.",
+      "createdAt": "2024-12-04T12:02:47Z",
+      "updatedAt": "2024-12-04T16:40:46Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "patch-2",
+      "headRefOid": "0cad3fa0010cbf5dce6de1b808123c9919a71a0b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@OR13 to your point about interoperability, the document is normative to a limited extent about [authentication](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md#user-host-authentication) where present.",
+          "createdAt": "2024-12-04T13:18:11Z",
+          "updatedAt": "2024-12-04T13:18:11Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "If we have a lot of \"MAY be authenticated\" we can consolidate it into a single paragraph, and improve the reading experience for each resource.",
+          "createdAt": "2024-12-04T13:20:27Z",
+          "updatedAt": "2024-12-04T13:20:27Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> If we have a lot of \"MAY be authenticated\" we can consolidate it into a single paragraph, and improve the reading experience for each resource.\r\n\r\nThat's what this PR does, I believe, but happy to fix anything I have missed. ",
+          "createdAt": "2024-12-04T13:23:02Z",
+          "updatedAt": "2024-12-04T13:23:02Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6Tu7k_",
+          "commit": {
+            "abbreviatedOid": "cb44b99"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-04T13:11:56Z",
+          "updatedAt": "2024-12-04T13:11:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6TvG10",
+          "commit": {
+            "abbreviatedOid": "cb44b99"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-12-04T13:26:36Z",
+          "updatedAt": "2024-12-04T13:26:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Txy3B",
+          "commit": {
+            "abbreviatedOid": "cb44b99"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T16:38:14Z",
+          "updatedAt": "2024-12-04T16:38:15Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nAuthentication is out of scope for this document.\r\nImplementations MAY authenticate clients, for example for authorization or to prevent denial of service.\r\n```",
+              "createdAt": "2024-12-04T16:38:14Z",
+              "updatedAt": "2024-12-04T16:38:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6TxzqS",
+          "commit": {
+            "abbreviatedOid": "0cad3fa"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, thanks @achamayou ",
+          "createdAt": "2024-12-04T16:39:32Z",
+          "updatedAt": "2024-12-04T16:39:32Z",
           "comments": []
         }
       ]
