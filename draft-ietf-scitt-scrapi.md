@@ -353,98 +353,6 @@ application/concise-problem-details+cbor
 
 The following HTTP endpoints are optional to implement.
 
-### Issue Signed Statement
-
-Authentication MUST be implemented for this endpoint.
-
-This endpoint enables a Transparency Service to be an issuer of Signed Statements on behalf of authenticated clients.
-This supports cases where a client lacks the ability to perform complex cryptographic operations, but can be authenticated and report statements and measurements.
-
-Request:
-
-~~~http
-POST /signed-statements/issue HTTP/1.1
-Host: transparency.example
-Accept: application/json
-Content-Type: application/spdx+json
-Payload
-
-{
-  "spdxVersion": "SPDX-2.2",
-  "dataLicense": "CC0-1.0",
-  "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "cli-app 0.1.2",
-  "documentNamespace": "https://spdx.org/spdxdocs/sbom-tool-2.2.7-38f61e97-e53c-46ef-a37d-62.../cli-app/0.1.2/0d06adf8a36...",
-  "creationInfo": {
-    "created": "2024-08-16T21:44:54Z",
-    "creators": [
-      "Organization: contoso"
-    ]
-  },
-  "files": [
-    {
-      "name": "cli-app",
-      "SPDXID": "SPDXRef-RootPackage",
-      "downloadLocation": "NOASSERTION",
-      "packageVerificationCode": {
-        "packageVerificationCodeValue": "ecf0aae2a849cc51..."
-      },
-      "filesAnalyzed": true,
-      "licenseConcluded": "NOASSERTION",
-      "licenseInfoFromFiles": [
-        "NOASSERTION"
-      ],
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "versionInfo": "0.1.2",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:swid/contoso/spdx.org/cli-app@0.1.2?tag_id=ac073d0f-0aa7-4d27-87fa-7f..."
-        }
-      ],
-      "supplier": "Organization: contoso",
-      "hasFiles": [
-        "SPDXRef-File--..."
-      ]
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "DESCRIBES",
-      "relatedSpdxElement": "SPDXRef-RootPackage",
-      "spdxElementId": "SPDXRef-DOCUMENT"
-    },
-    {
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-FF36801C1982452...",
-      "spdxElementId": "SPDXRef-RootPackage"
-    }
-  ],
-  "documentDescribes": [
-    "SPDXRef-RootPackage"
-  ],
-  "externalDocumentRefs": []
-}
-~~~
-
-Response:
-
-~~~ http-message
-HTTP/1.1 200 Ok
-Content-Type: application/cose
-
-Payload (in CBOR diagnostic notation)
-
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
-])
-~~~
-
 ### Resolve Signed Statement
 
 Authentication SHOULD be implemented for this endpoint.
@@ -740,23 +648,11 @@ Nonetheless transparency may mean 'within a limited community' rather than 'in f
 
 #### Message modification attacks
 
-While most relevant modification attacks are mitigated by the use of the Issuer signature on the Signed Statement, the `Issue Statement` endpoint presents an opportunity for manipulation of messages and misrepresentation of Issuer intent that could mislead later Verifiers.
-
-Transparency Services offering the `Issue Statement` endpoint MUST require authentication and transport-level security for that endpoint, MUST NOT modify anything in the message to be signed, and MUST take steps to ensure that the party calling the endpoint is authorized to register statements on behalf of the specified Issuer.
+Nodification attacks are mitigated by the use of the Issuer signature on the Signed Statement.
 
 #### Message insertion attacks
 
-While most relevant insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, the `Issue Statement` endpoint presents an opportunity for insertion of messages and misrepresentation of Issuer intent that could mislead later Verifiers.
-There are 2 most likely avenues to this attack:
-
-- Stolen client endpoint authentication credentials
-- Stolen or misused Issuer keys held in the Transparency Service on behalf of clients
-
-Clients relying on the `Issue Statement` endpoint SHOULD take steps to ensure their endpoint authentication credentials are securely stored and can be rotated and/or revoked in the case of a breach.
-
-Transparency Services offering the `Issue Statement` endpoint MUST require authentication and transport-level security for that endpoint, and MUST enable the rotation and revocation of those credentials.
-
-Transparency Services offering the `Issue Statement` endpoint MUST take careful steps in both design and operation of their software stack to prevent the theft or inappropriate use of the Issuer keys they use to sign Statements on behalf of Issuers, such as HSMs for storage and least-privilege, regularly refreshed access controls for use.
+Insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement.
 
 Transparency Services MAY also implement additional protections such as anomaly detection or rate limiting in order to mitigate the impact of any breach.
 
