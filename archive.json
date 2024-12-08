@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-05T00:41:08.099801+00:00",
+  "timestamp": "2024-12-08T00:44:33.589842+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -573,7 +573,7 @@
       "labels": [],
       "body": "Are we asserting that the authentication identity to the end point is the identity to sign the content with?  I think we need to clarify that this can be completely different.  I do question why we need to specify a validFrom date?",
       "createdAt": "2024-07-25T18:24:34Z",
-      "updatedAt": "2024-08-20T14:40:46Z",
+      "updatedAt": "2024-12-06T14:33:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -589,6 +589,13 @@
           "body": "The example in https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.2.1 should be updated to not be a W3C credential",
           "createdAt": "2024-08-20T14:40:45Z",
           "updatedAt": "2024-08-20T14:40:45Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I have proposed in #53 that we drop this endpoint altogether, and stay focused on interoperability of the Transparency Service itself, which can be composed with any number of signing mechanisms, local or remote.",
+          "createdAt": "2024-12-06T14:33:40Z",
+          "updatedAt": "2024-12-06T14:33:40Z"
         }
       ]
     },
@@ -1092,9 +1099,24 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/scitt/u0HJWX7gPVIQ_Ix05iOk4vVT3FA/\r\n\r\nTLDR; Remove all the URNs from the examples, and follow modern Open API Specification guidance for resource identifiers.",
       "createdAt": "2024-12-03T15:59:26Z",
-      "updatedAt": "2024-12-03T15:59:26Z",
+      "updatedAt": "2024-12-05T09:28:47Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Grand, so boiling down the Open API guidance for us that seems to be human readable resource names and uuids for specific locators.\r\n\r\nI guess in principle since they only need to be unique for a given TS, some of the identifiers could be simple numeric counters (as was the case for 'entries' in Maik's old emulator) but that just seems fragile and uuids are cheap.",
+          "createdAt": "2024-12-05T08:59:06Z",
+          "updatedAt": "2024-12-05T08:59:06Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Would this also apply to the `instance` in the Concise Problem Details? For instance:\r\n\r\n```\r\n{\r\n  / title /         -1: \"Not Found\",\r\n  / detail /        -2: \"No Signed Statement found with the specified ID\",\r\n  / instance /      -3: \"urn:ietf:params:scitt:error:notFound\",\r\n  / response-code / -4: 404,\r\n}\r\n```\r\n\r\nThis is the only serious place where URNs are left",
+          "createdAt": "2024-12-05T09:28:28Z",
+          "updatedAt": "2024-12-05T09:28:47Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -3304,7 +3326,7 @@
       "labels": [],
       "body": "Addresses #10 , #12 , #13 ,  #14 , #20 and #22 \r\n\r\nCleans up async workflow\r\nCleans up async error reporting\r\nCleans up locators\r\nMore defined/single responsibilities for endpoint calls and returns",
       "createdAt": "2024-12-03T16:20:49Z",
-      "updatedAt": "2024-12-04T16:34:24Z",
+      "updatedAt": "2024-12-06T10:12:48Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
@@ -3484,6 +3506,119 @@
               "updatedAt": "2024-12-04T16:34:24Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6T5BWU",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-05T10:17:59Z",
+          "updatedAt": "2024-12-05T10:17:59Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Yes I already toyed with that during my drafting and only didn't do it to keep the PR small. So I'm convinced, I'll push an update shortly\r\n",
+              "createdAt": "2024-12-05T10:17:59Z",
+              "updatedAt": "2024-12-05T10:17:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6T7BMY",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-05T13:36:38Z",
+          "updatedAt": "2024-12-05T13:36:39Z",
+          "comments": [
+            {
+              "originalPosition": 168,
+              "body": "```suggestion\r\n```\r\n\r\nAs per #52, there is mostly consensus around specifying this once in the document rather than per endpoint.",
+              "createdAt": "2024-12-05T13:36:38Z",
+              "updatedAt": "2024-12-05T13:36:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6T7CBl",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-05T13:38:03Z",
+          "updatedAt": "2024-12-05T13:38:04Z",
+          "comments": [
+            {
+              "originalPosition": 307,
+              "body": "```suggestion\r\n```\r\n\r\nSame remark as above.",
+              "createdAt": "2024-12-05T13:38:03Z",
+              "updatedAt": "2024-12-05T13:38:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6T7CZz",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-05T13:38:43Z",
+          "updatedAt": "2024-12-05T13:38:43Z",
+          "comments": [
+            {
+              "originalPosition": 307,
+              "body": "But I realise now that this moved/updated, not new text, so the comment may be irrelevant depending on the merge ordering.",
+              "createdAt": "2024-12-05T13:38:43Z",
+              "updatedAt": "2024-12-05T13:38:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6T7Hvr",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-05T13:44:47Z",
+          "updatedAt": "2024-12-05T13:44:47Z",
+          "comments": [
+            {
+              "originalPosition": 352,
+              "body": "I feel that this was maybe explained and I missed it, but I am wondering if there is more redundancy here than necessary?\r\nAre the response code doing something more than the HTTP response codes? Are we making implementers have to deal with potentially inconsistent responses?\r\nWhy do we have title/detail/instance? I can see the point in short/long forms, but it's not clear what role the third value plays here.",
+              "createdAt": "2024-12-05T13:44:47Z",
+              "updatedAt": "2024-12-05T13:44:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6UEvwS",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-06T10:12:48Z",
+          "updatedAt": "2024-12-06T10:12:48Z",
+          "comments": []
         }
       ]
     },
@@ -3499,7 +3634,7 @@
       "labels": [],
       "body": "Proposed resolution for #14 and #46, as discussed with @SteveLasker, @OR13 and @henkbirkholz.\r\n\r\nWill PR the removal of issue statement (the sole endpoint demanding authentication) separately.",
       "createdAt": "2024-12-04T12:02:47Z",
-      "updatedAt": "2024-12-04T16:40:46Z",
+      "updatedAt": "2024-12-06T14:25:18Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
@@ -3531,6 +3666,13 @@
           "body": "> If we have a lot of \"MAY be authenticated\" we can consolidate it into a single paragraph, and improve the reading experience for each resource.\r\n\r\nThat's what this PR does, I believe, but happy to fix anything I have missed. ",
           "createdAt": "2024-12-04T13:23:02Z",
           "updatedAt": "2024-12-04T13:23:02Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Will PR the removal of issue statement (the sole endpoint demanding authentication) separately.\r\n\r\n#53",
+          "createdAt": "2024-12-06T14:25:17Z",
+          "updatedAt": "2024-12-06T14:25:17Z"
         }
       ],
       "reviews": [
@@ -3594,6 +3736,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 53,
+      "id": "PR_kwDOLJjbks6EVX5X",
+      "title": "Drop 'Issue Statement' endpoint and related considerations",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/53",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "An 'Issue Statement' endpoint is not necessary, nor helpful to implement a transparency service, and it is unclear why it has been added as an optional endpoint.\r\n\r\nSCITT services should be able to compose with arbitrary signing services that produce signed statements in the correct format.\r\n\r\nAside from separating concerns and making the document more concise, this helps make the authentication posture consistent (see #52).",
+      "createdAt": "2024-12-06T14:24:31Z",
+      "updatedAt": "2024-12-06T14:24:31Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "patch-3",
+      "headRefOid": "1b751f9e390ed24836f720fc96ab1ec59f5ec093",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
