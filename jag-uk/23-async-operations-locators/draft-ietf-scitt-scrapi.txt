@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 6 June 2025                                     DataTrails Inc.
-                                                         3 December 2024
+Expires: 13 June 2025                                    DataTrails Inc.
+                                                        10 December 2024
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 June 2025.
+   This Internet-Draft will expire on 13 June 2025.
 
 Copyright Notice
 
@@ -292,15 +292,15 @@ Table of Contents
      h'269cd68f4211dffc...0dcb29c' / Signature          /
    ])
 
-   The Registration Policy for the Transparency Service MUST be applied
-   before any additional processing is performed.
-
    If the payload is detached, the Transparency Service depends on the
    authentication context of the client in the Registration Policy.  If
    the payload is attached, the Transparency Service depends on both the
    authentication context of the client (if present), and the
    verification of the Signed Statement in the Registration Policy.  The
    details of Registration Policy are out of scope for this document.
+
+   The Registration Policy for the Transparency Service MUST be applied
+   before any additional processing is performed.
 
    Response:
 
