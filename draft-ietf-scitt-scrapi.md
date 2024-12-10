@@ -225,15 +225,15 @@ Payload (in CBOR diagnostic notation)
 ])
 ~~~
 
-The Registration Policy for the Transparency Service MUST be applied
-before any additional processing is performed.
-
 If the `payload` is detached, the Transparency Service depends on the
 authentication context of the client in the Registration Policy.
 If the `payload` is attached, the Transparency Service depends on both
 the authentication context of the client (if present), and the
 verification of the Signed Statement in the Registration Policy.
 The details of Registration Policy are out of scope for this document.
+
+The Registration Policy for the Transparency Service MUST be applied
+before any additional processing is performed.
 
 Response:
 
