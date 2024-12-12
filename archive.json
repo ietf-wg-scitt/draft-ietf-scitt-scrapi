@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-10T00:41:44.950960+00:00",
+  "timestamp": "2024-12-12T00:40:56.956817+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -3326,13 +3326,13 @@
       "labels": [],
       "body": "Addresses #10 , #12 , #13 ,  #14 , #20 and #22 \r\n\r\nCleans up async workflow\r\nCleans up async error reporting\r\nCleans up locators\r\nMore defined/single responsibilities for endpoint calls and returns",
       "createdAt": "2024-12-03T16:20:49Z",
-      "updatedAt": "2024-12-06T10:12:48Z",
+      "updatedAt": "2024-12-10T15:24:16Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/23-async-operations-locators",
-      "headRefOid": "7e934bdee644f4952bd897bb14bd74c2a88cd6a6",
+      "headRefOid": "166bbbeecc166e573cc6e2eecb5355a968f742b2",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3619,6 +3619,86 @@
           "createdAt": "2024-12-06T10:12:48Z",
           "updatedAt": "2024-12-06T10:12:48Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6UkxnO",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-10T15:16:19Z",
+          "updatedAt": "2024-12-10T15:16:19Z",
+          "comments": [
+            {
+              "originalPosition": 307,
+              "body": "Yes I'm expecting to merge this first, then yours, and the authentication statements will magically evaporate :-)\r\n",
+              "createdAt": "2024-12-10T15:16:19Z",
+              "updatedAt": "2024-12-10T15:16:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6UkzDT",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-10T15:18:08Z",
+          "updatedAt": "2024-12-10T15:18:09Z",
+          "comments": [
+            {
+              "originalPosition": 307,
+              "body": "Sounds great, let's merge?",
+              "createdAt": "2024-12-10T15:18:08Z",
+              "updatedAt": "2024-12-10T15:18:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Ukz5C",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-10T15:19:03Z",
+          "updatedAt": "2024-12-10T15:19:03Z",
+          "comments": [
+            {
+              "originalPosition": 352,
+              "body": "There's certainly a whiff of redundancy. I kept the `response-code` in because (unfortunately, but perhaps to some advantage) CoAP codes are slightly different to HTTP codes. \r\n\r\nI like `instance` because it offers a chance for richer machine-driven interpretation of errors, which feels useful given that our early implementers seem to be using things like no-code builders and GitHub actions for their environment.  ",
+              "createdAt": "2024-12-10T15:19:03Z",
+              "updatedAt": "2024-12-10T15:19:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Uk32N",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-10T15:24:16Z",
+          "updatedAt": "2024-12-10T15:24:16Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Update pushed",
+              "createdAt": "2024-12-10T15:24:16Z",
+              "updatedAt": "2024-12-10T15:24:16Z"
+            }
+          ]
         }
       ]
     },
