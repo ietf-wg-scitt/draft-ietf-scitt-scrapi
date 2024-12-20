@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 6 June 2025                                     DataTrails Inc.
-                                                         3 December 2024
+Expires: 23 June 2025                                    DataTrails Inc.
+                                                        20 December 2024
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 June 2025.
+   This Internet-Draft will expire on 23 June 2025.
 
 Copyright Notice
 
@@ -149,9 +149,11 @@ Table of Contents
 
 2.  Endpoints
 
-   Authentication is out of scope for this document.  If Authentication
-   is not implemented, rate limiting or other denial of service
-   mitigation MUST be applied to enable anonymous access.
+   Authentication is out of scope for this document.  Implementations
+   MAY authenticate clients, for example for authorization or to prevent
+   denial of service.  If Authentication is not implemented, rate
+   limiting or other denial of service mitigation MUST be applied to
+   enable anonymous access.
 
    NOTE: '' line wrapping per [RFC8792] in HTTP examples.
 
@@ -218,8 +220,6 @@ Table of Contents
 
 2.1.1.  Transparency Configuration
 
-   Authentication SHOULD NOT be implemented for this endpoint.
-
    This endpoint is used to discover the capabilities and current
    configuration of a transparency service implementing this
    specification.
@@ -260,8 +260,7 @@ Table of Contents
 
 2.1.2.  Register Signed Statement
 
-   Authentication MAY be implemented for this endpoint.  See notes on
-   detached payloads below.
+   See notes on detached payloads below.
 
    This endpoint is used to register a Signed Statement with a
    Transparency Service.
@@ -510,8 +509,6 @@ application/concise-problem-details+cbor
 
 2.2.2.  Resolve Signed Statement
 
-   Authentication SHOULD be implemented for this endpoint.
-
    This endpoint enables Transparency Service APIs to act like Artifact
    Repositories, and serve Signed Statements directly, instead of
    indirectly through Receipts.
@@ -556,8 +553,6 @@ application/concise-problem-details+cbor
 }
 
 2.2.3.  Resolve Receipt
-
-   Authentication SHOULD be implemented for this endpoint.
 
    Request:
 
@@ -650,8 +645,6 @@ Retry-After: <seconds>
    further in the future expiration times, and be signed with new
    signature algorithms.
 
-   Authentication SHOULD be implemented for this endpoint.
-
    Request:
 
    POST /exchange/receipt HTTP/1.1
@@ -687,9 +680,6 @@ Retry-After: <seconds>
 2.2.5.  Resolve Issuer
 
    This endpoint is inspired by [I-D.draft-ietf-oauth-sd-jwt-vc].
-   Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to discover verification keys, which is the reason
-   that authentication is not required.
 
    The following is a non-normative example of a HTTP request for the
    Issuer Metadata configuration when iss is set to
