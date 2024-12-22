@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-19T00:39:45.336576+00:00",
+  "timestamp": "2024-12-22T00:41:13.575050+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -920,15 +920,15 @@
       "id": "I_kwDOLJjbks6c1AIl",
       "title": "Clarify CLIENT AuthZ/AuthN early in doc",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/42",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "It would be useful to clarify that \"Authentication\" in SCRAPI is referring to the application client connection separate to the Issuer sig etc. A short section on this (then not having to repeat it a lot throughout the doc) would be helpful",
       "createdAt": "2024-11-03T11:13:25Z",
-      "updatedAt": "2024-12-03T15:41:55Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-20T17:46:37Z",
+      "closedAt": "2024-12-20T17:46:36Z",
       "comments": []
     },
     {
@@ -3707,24 +3707,26 @@
       "id": "PR_kwDOLJjbks6EBy_M",
       "title": "Make authentication stance consistent in the document",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/52",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Proposed resolution for #14 and #46, as discussed with @SteveLasker, @OR13 and @henkbirkholz.\r\n\r\nWill PR the removal of issue statement (the sole endpoint demanding authentication) separately.",
       "createdAt": "2024-12-04T12:02:47Z",
-      "updatedAt": "2024-12-06T14:25:18Z",
+      "updatedAt": "2024-12-20T17:46:35Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "patch-2",
       "headRefOid": "0cad3fa0010cbf5dce6de1b808123c9919a71a0b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-20T17:46:35Z",
+      "mergedAt": "2024-12-20T17:46:35Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "e1ece4c08af65e768e7f45a589785b5e8d732c1c"
+      },
       "comments": [
         {
           "author": "achamayou",
