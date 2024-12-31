@@ -308,7 +308,7 @@ Table of Contents
 
 2.1.2.1.  Status 201 - Registration is successful
 
-   In cases where the Transparency Service is able to mint receipts in a
+   If the Transparency Service is able to mint receipts within a
    reasonable time, it may return the receipt directly.
 
    Along with the receipt the Transparency Service MAY return a locator
