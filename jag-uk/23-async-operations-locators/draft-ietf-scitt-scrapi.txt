@@ -267,11 +267,11 @@ Table of Contents
    Authentication MAY be implemented for this endpoint.  See notes on
    detached payloads below.
 
-   This endpoint is used to instruct a Transparency Service to register
-   a Signed Statement on its log.  Since typical log implementations
-   take many seconds or even longer to reach finality this API has an
-   asynchronous mode which returns a locator which can be used to check
-   the status of the registration asynchronously.
+   This endpoint instructs a Transparency Service to register a Signed
+   Statement on its log.  Since log implementations may take many
+   seconds or longer to reach finality, this API provides an
+   asynchronous mode that returns a locator that can be used to check
+   the registration's status asynchronously.
 
    The following is a non-normative example of an HTTP request to
    register a Signed Statement:

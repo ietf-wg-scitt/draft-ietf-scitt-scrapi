@@ -1433,11 +1433,8 @@ Fields that are not understood <span class="bcp14">MUST</span> be ignored.<a hre
           </h4>
 <p id="section-2.1.2-1">Authentication <span class="bcp14">MAY</span> be implemented for this endpoint.
 See notes on detached payloads below.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-2">This endpoint is used to instruct a Transparency Service to register a
-Signed Statement on its log. Since typical log implementations take
-many seconds or even longer to reach finality this API has an
-asynchronous mode which returns a locator which can be used to check
-the status of the registration asynchronously.<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-2">This endpoint instructs a Transparency Service to register a Signed Statement on its log.
+Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator that can be used to check the registration's status asynchronously.<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-3">The following is a non-normative example of an HTTP request to register a Signed Statement:<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-4">Request:<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
 <div class="lang-http sourcecode" id="section-2.1.2-5">
