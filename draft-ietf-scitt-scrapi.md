@@ -224,11 +224,8 @@ Payload (in CBOR diagnostic notation)
 ])
 ~~~
 
-If the `payload` is detached, the Transparency Service depends on the
-authentication context of the client in the Registration Policy.
-If the `payload` is attached, the Transparency Service depends on both
-the authentication context of the client (if present), and the
-verification of the Signed Statement in the Registration Policy.
+If the `payload` is detached, the Transparency Service depends on the client's authentication context in the Registration Policy.
+If the `payload` is attached, the Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.
 The details of Registration Policy are out of scope for this document.
 
 The Registration Policy for the Transparency Service MUST be applied
