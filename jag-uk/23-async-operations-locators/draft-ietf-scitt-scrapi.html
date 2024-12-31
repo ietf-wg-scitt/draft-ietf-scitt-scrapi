@@ -1457,11 +1457,8 @@ Payload (in CBOR diagnostic notation)
 ])
 </pre><a href="#section-2.1.2-5" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1.2-6">If the <code>payload</code> is detached, the Transparency Service depends on the
-authentication context of the client in the Registration Policy.
-If the <code>payload</code> is attached, the Transparency Service depends on both
-the authentication context of the client (if present), and the
-verification of the Signed Statement in the Registration Policy.
+<p id="section-2.1.2-6">If the <code>payload</code> is detached, the Transparency Service depends on the client's authentication context in the Registration Policy.
+If the <code>payload</code> is attached, the Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.
 The details of Registration Policy are out of scope for this document.<a href="#section-2.1.2-6" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-7">The Registration Policy for the Transparency Service <span class="bcp14">MUST</span> be applied
 before any additional processing is performed.<a href="#section-2.1.2-7" class="pilcrow">¶</a></p>
