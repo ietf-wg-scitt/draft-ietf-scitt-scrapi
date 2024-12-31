@@ -303,12 +303,9 @@ Retry-After: <seconds>
 }
 ~~~
 
-The response contains a reference to the running operation which is
-attempting to Register the Signed Statement.
+The response contains a reference to the running operation which is attempting to Register the Signed Statement.
 
-If 202 is returned, then clients should wait until Registration
-succeeded or failed by polling the Check Operation endpoint using the
-`OperationID` returned in the response.
+If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Check Operation endpoint using the `OperationID` returned in the response.
 
 #### Status 400 - Invalid Client Request
 
@@ -495,8 +492,7 @@ application/concise-problem-details+cbor
 
 #### Status 404 - Operation Not Found
 
-If no record of the specified running operation is found, the
-Transparency Service returns a 404 response.
+If no record of the specified running operation is found, the Transparency Service returns a 404 response.
 
 ~~~ http-message
 HTTP/1.1 404 Not Found
@@ -569,8 +565,7 @@ Payload (in CBOR diagnostic notation)
 
 #### Status 404
 
-If there is no Receipt found for the specified `EntryID` the
-Transparency Service returns a 404 response:
+If there is no Receipt found for the specified `EntryID` the Transparency Service returns a 404 response:
 
 ~~~ http-message
 HTTP/1.1 404 Not Found
