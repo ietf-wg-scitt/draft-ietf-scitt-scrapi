@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 13 June 2025                                    DataTrails Inc.
-                                                        10 December 2024
+Expires: 4 July 2025                                     DataTrails Inc.
+                                                        31 December 2024
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 June 2025.
+   This Internet-Draft will expire on 4 July 2025.
 
 Copyright Notice
 
@@ -273,7 +273,7 @@ Table of Contents
    asynchronous mode which returns a locator which can be used to check
    the status of the registration asynchronously.
 
-   The following is a non-normative example of a HTTP request to
+   The following is a non-normative example of an HTTP request to
    register a Signed Statement:
 
    Request:
