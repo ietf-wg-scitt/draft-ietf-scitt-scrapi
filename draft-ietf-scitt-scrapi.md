@@ -277,9 +277,7 @@ In cases where the registration request is accepted but the Transparency Service
 - "running" - the operation is still in progress
 - "succeeded" - the operation succeeded and the Receipt is ready
 
-`OperationID` is Transparency Service specific and MUST not be used for
-querying status in any Transparency Service other than the one that
-returned it.
+`OperationID` is Transparency Service-specific and MUST not be used for querying status in any Transparency Service other than the one that returned it.
 
 If the `OperationID` is a valid URL, it MAY be included as a `Location` header in the HTTP response.
 
