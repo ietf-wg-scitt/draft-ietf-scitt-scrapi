@@ -291,8 +291,7 @@ The Transparency Service MAY include a `Retry-After` header in the HTTP response
 ~~~ http-message
 HTTP/1.1 202 Accepted
 
-Location: https://transparency.example/operations\
-/67f89d5f0042e3ad42...35a1f190
+Location: https://transparency.example/operations/67f8...f190
 
 Content-Type: application/cbor
 Retry-After: <seconds>
