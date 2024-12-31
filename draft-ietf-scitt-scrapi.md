@@ -281,8 +281,7 @@ example:
 querying status in any Transparency Service other than the one that
 returned it.
 
-If the `OperationID` is a valid URL, it MAY be included as a `Location`
-header in the HTTP response.
+If the `OperationID` is a valid URL, it MAY be included as a `Location` header in the HTTP response.
 
 Transparency Services MAY clean up old operation records to manage
 practical implementation concerns. The length of validity of the
