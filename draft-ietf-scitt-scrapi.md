@@ -233,12 +233,9 @@ One of the following:
 
 #### Status 201 - Registration is successful
 
-In cases where the Transparency Service is able to mint receipts in a
-reasonable time, it may return the receipt directly.
+If the Transparency Service is able to mint receipts within a reasonable time, it may return the receipt directly.
 
-Along with the receipt the Transparency Service MAY return a locator
-in the HTTP response `Location` header, provided the locator is a valid
-URL.
+Along with the receipt the Transparency Service MAY return a locator in the HTTP response `Location` header, provided the locator is a valid URL.
 
 ~~~ http-message
 HTTP/1.1 201 Created
