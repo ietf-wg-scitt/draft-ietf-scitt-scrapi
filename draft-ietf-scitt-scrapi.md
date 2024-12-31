@@ -283,15 +283,10 @@ returned it.
 
 If the `OperationID` is a valid URL, it MAY be included as a `Location` header in the HTTP response.
 
-Transparency Services MAY clean up old operation records to manage
-practical implementation concerns. The length of validity of the
-`OperationID` is Transparency Service specific but at minimum
-the Transparency Service MUST maintain a record of every running or
-succeeded operation until at least one client has fetched the completed
-Receipt.
+Transparency Services MAY clean up old operation records to manage practical implementation concerns.
+The length of validity of the `OperationID` is Transparency Service specific but at minimum, the Transparency Service MUST maintain a record of every running or successful operation until at least one client has fetched the completed Receipt.
 
-The Transparency Service MAY include a `Retry-After` header in the HTTP
-response to help with polling.
+The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
 ~~~ http-message
 HTTP/1.1 202 Accepted
