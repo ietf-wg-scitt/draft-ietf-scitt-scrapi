@@ -357,7 +357,7 @@ Table of Contents
 
    *  "succeeded" - the operation succeeded and the Receipt is ready
 
-   OperationID is Transparency Service specific and MUST not be used for
+   OperationID is Transparency Service-specific and MUST not be used for
    querying status in any Transparency Service other than the one that
    returned it.
 
