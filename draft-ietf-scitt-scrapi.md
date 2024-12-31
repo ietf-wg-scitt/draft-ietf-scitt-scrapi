@@ -204,8 +204,7 @@ many seconds or even longer to reach finality this API has an
 asynchronous mode which returns a locator which can be used to check
 the status of the registration asynchronously.
 
-The following is a non-normative example of a HTTP request to register
-a Signed Statement:
+The following is a non-normative example of an HTTP request to register a Signed Statement:
 
 Request:
 
