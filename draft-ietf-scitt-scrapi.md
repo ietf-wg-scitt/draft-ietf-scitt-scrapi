@@ -198,7 +198,7 @@ Payload (in CBOR diagnostic notation)
         "registration_policy": "https://transparency.example/statements/\
 urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
     },
-    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature placeholder
+    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature
 ])
 ~~~
 
