@@ -299,7 +299,8 @@ Table of Contents
    the Signed Statement in the Registration Policy.
 
    The Registration Policy for the Transparency Service MUST be applied
-   before any additional processing is performed.
+   before any additional processing.  The details of Registration
+   Policies are out of scope for this document.
 
    Response:
 
