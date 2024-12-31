@@ -1540,11 +1540,8 @@ Retry-After: &lt;seconds&gt;
 }
 </pre><a href="#section-2.1.2.2-9" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1.2.2-10">The response contains a reference to the running operation which is
-attempting to Register the Signed Statement.<a href="#section-2.1.2.2-10" class="pilcrow">¶</a></p>
-<p id="section-2.1.2.2-11">If 202 is returned, then clients should wait until Registration
-succeeded or failed by polling the Check Operation endpoint using the
-<code>OperationID</code> returned in the response.<a href="#section-2.1.2.2-11" class="pilcrow">¶</a></p>
+<p id="section-2.1.2.2-10">The response contains a reference to the running operation which is attempting to Register the Signed Statement.<a href="#section-2.1.2.2-10" class="pilcrow">¶</a></p>
+<p id="section-2.1.2.2-11">If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Check Operation endpoint using the <code>OperationID</code> returned in the response.<a href="#section-2.1.2.2-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-status-400-invalid-client-request">
@@ -1755,8 +1752,7 @@ application/concise-problem-details+cbor
             <h5 id="name-status-404-operation-not-fo">
 <a href="#section-2.1.3.4" class="section-number selfRef">2.1.3.4. </a><a href="#name-status-404-operation-not-fo" class="section-name selfRef">Status 404 - Operation Not Found</a>
             </h5>
-<p id="section-2.1.3.4-1">If no record of the specified running operation is found, the
-Transparency Service returns a 404 response.<a href="#section-2.1.3.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.3.4-1">If no record of the specified running operation is found, the Transparency Service returns a 404 response.<a href="#section-2.1.3.4-1" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.1.3.4-2">
 <pre>
 HTTP/1.1 404 Not Found
@@ -1847,8 +1843,7 @@ Payload (in CBOR diagnostic notation)
             <h5 id="name-status-404">
 <a href="#section-2.1.4.2" class="section-number selfRef">2.1.4.2. </a><a href="#name-status-404" class="section-name selfRef">Status 404</a>
             </h5>
-<p id="section-2.1.4.2-1">If there is no Receipt found for the specified <code>EntryID</code> the
-Transparency Service returns a 404 response:<a href="#section-2.1.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.4.2-1">If there is no Receipt found for the specified <code>EntryID</code> the Transparency Service returns a 404 response:<a href="#section-2.1.4.2-1" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.1.4.2-2">
 <pre>
 HTTP/1.1 404 Not Found
