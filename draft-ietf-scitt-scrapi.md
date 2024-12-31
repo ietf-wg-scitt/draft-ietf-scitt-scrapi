@@ -260,8 +260,7 @@ Fresh Receipts may be requested through the resource identified in the Location 
 
 #### Status 202 - Registration is running
 
-In cases where the registration request is accepted but the Transparency Service is not able to mint Receipts in a reasonable time, it returns a locator for the registration operation and a status code indicating the status of the operation, as in this non-normative
-example:
+In cases where the registration request is accepted but the Transparency Service is not able to mint Receipts in a reasonable time, it returns a locator for the registration operation and a status code indicating the status of the operation, as in this non-normative example:
 
 ~~~ cbor-diag
 {
