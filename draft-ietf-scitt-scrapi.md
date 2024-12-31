@@ -424,8 +424,7 @@ If the `EntryID` is a valid URL, it MAY be included as a `Location` header in th
 ~~~ http-message
 HTTP/1.1 200 Ok
 
-Location: https://transparency.example/entries\
-/67ed41f1de6a...cfc158694ed0befe
+Location: https://transparency.example/entries/67ed...befe
 
 Content-Type: application/cbor
 
@@ -462,8 +461,7 @@ Content-Type: application/cbor
 ~~~ http-message
 HTTP/1.1 202 Accepted
 
-Location: https://transparency.example/operations\
-/67f89d5f0042e3ad42...35a1f190
+Location: https://transparency.example/operations/67f8...f190
 
 Retry-After: <seconds>
 ~~~
@@ -546,8 +544,7 @@ If the Receipt is found:
 
 ~~~ http-message
 HTTP/1.1 200 Ok
-Location: https://transparency.example/entries\
-/67ed41f1de6a...cfc158694ed0befe
+Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 
 Payload (in CBOR diagnostic notation)
@@ -688,7 +685,7 @@ This endpoint enables Transparency Service APIs to act like Artifact Repositorie
 Request:
 
 ~~~ http-message
-GET /signed-statements/9e4f5206fe4bf...ba742bd688a HTTP/1.1
+GET /signed-statements/9e4f...688a HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 ~~~
@@ -771,8 +768,7 @@ A new Receipt:
 
 ~~~ http-message
 HTTP/1.1 200 Ok
-Location: https://transparency.example/entries\
-/67ed41f1de6a...cfc158694ed0befe
+Location: https://transparency.example/entries/67ed...befe
 
 Content-Type: application/cose
 
