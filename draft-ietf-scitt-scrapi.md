@@ -68,7 +68,7 @@ informative:
 --- abstract
 
 This document describes a REST API that supports the normative requirements of the SCITT Architecture.
-Optional key discovery and query interfaces are provided to support interoperability with X509 Certificates, alternative methods commonly used to support public key discovery and Artifact Repositories.
+Optional key discovery and query interfaces are provided to support interoperability with X.509 Certificates, alternative methods commonly used to support public key discovery and Artifact Repositories.
 
 --- middle
 
