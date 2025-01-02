@@ -300,7 +300,7 @@ Retry-After: <seconds>
 }
 ~~~
 
-The response contains a reference to the running operation which is attempting to Register the Signed Statement.
+The response contains an ID referencing the running operation for Signed Statement Registration.
 
 If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Check Operation endpoint using the `OperationID` returned in the response.
 
