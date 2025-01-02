@@ -751,7 +751,7 @@ While most relevant modification attacks are mitigated by the use of the Issuer 
 
 Transparency Services offering the `Issue Statement` endpoint MUST require authentication and transport-level security for that endpoint, MUST NOT modify anything in the message to be signed, and MUST take steps to ensure that the party calling the endpoint is authorized to register statements on behalf of the specified Issuer.
 
-#### Message insertion Attacks
+#### Message Insertion Attacks
 
 While most relevant insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, the `Issue Statement` endpoint presents an opportunity for insertion of messages and misrepresentation of Issuer intent that could mislead later Verifiers.
 There are 2 most likely avenues to this attack:
