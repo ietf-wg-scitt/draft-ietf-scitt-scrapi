@@ -289,9 +289,10 @@ In cases where the registration request is accepted but the Transparency Service
 
 If the `OperationID` is a valid URL, it MAY be included as a `Location` header in the HTTP response.
 
-Transparency Services do not guarantee retention of operation IDs for a period of time or the entirety of its lifecycle.
-A Transparency MAY delete operation records and some operation IDs lookups MAY return error XYZ at one time even though they were valid in the past.
-The length of validity of the `OperationID` is Transparency Service specific, but at a minimum, the Transparency Service MUST maintain a record of every running or successful operation until at least one client has fetched the completed Receipt.
+Transparency Services do not guarantee the retention of operation IDs for the entirety of their lifecycle.
+A Transparency MAY delete operation records, and some operation ID lookups MAY return error 404, even though they were valid in the past.
+The length of validity of the `OperationID` is Transparency Service specific.
+Still, the Transparency Service MUST maintain a record of every running or successful operation until at least one client has fetched the completed Receipt.
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
