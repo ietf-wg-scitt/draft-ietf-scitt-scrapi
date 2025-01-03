@@ -60,6 +60,7 @@ normative:
   IANA.params:
 
 informative:
+  I-D.draft-demarco-oauth-nonce-endpoint: Nonce-Endpoint
   I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
   RFC2046:
   RFC6838:
@@ -732,24 +733,6 @@ application/concise-problem-details+cbor
   / instance /      -3: \
           "urn:ietf:params:scitt:error:notFound",
   / response-code / -4: 404,
-~~~
-
-#### Status 429
-
-If a client is polling for an in-progress registration too frequently then the Transparency Service MAY, in addition to implementing rate-limiting, return a 429 response:
-
-~~~
-HTTP/1.1 429 Too Many Requests
-Content-Type: application/json
-Retry-After: <seconds>
-
-{
-  "type": "urn:ietf:params:scitt:error\
-    :receipt:too-many-requests",
-  "detail": \
-  "Too Many Requests.\
-  Only <number> requests per <period> are allowed."
-}
 ~~~
 
 #### Eventual Consistency
