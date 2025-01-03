@@ -1408,7 +1408,7 @@ In the absence of this header field, this document does not specify a minimum.<a
 <a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-transparency-configuration" class="section-name selfRef">Transparency Configuration</a>
           </h4>
 <p id="section-2.1.1-1">This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.1-2">The Transparency Service responds with a dictionary of configuration elements.
+<p id="section-2.1.1-2">The Transparency Service responds with a CBOR map of configuration elements.
 These elements are Transparency-Service specific.<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-3">Contents of bodies are informative examples only.<a href="#section-2.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-4">Request:<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
@@ -1430,7 +1430,7 @@ Payload (in CBOR diagnostic notation)
 18([                   ; COSE_Sign1 structure with tag 18
     h'44A123BEEFFACE', ; Protected header (example bytes)
     {},                ; Unprotected header
-    {                  ; Payload - CBOR dict
+    {                  ; Payload - CBOR map
         "issuer": "https://transparency.example",
         "base_url": "https://transparency.example/v1/scrapi",
         "oidc_auth_endpoint": "https://transparency.example/auth",
