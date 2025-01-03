@@ -9,7 +9,7 @@
 <meta content="Jon Geater" name="author">
 <meta content="
        This document describes a REST API that supports the normative requirements of the SCITT Architecture.
-Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Repositories. 
+Optional key discovery and query interfaces are provided to support interoperability with X.509 Certificates, alternative methods commonly used to support public key discovery and Artifact Repositories. 
     " name="description">
 <meta content="xml2rfc 3.25.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -20,7 +20,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.4
+    Jinja2 3.1.5
     lxml 5.3.0
     platformdirs 4.3.6
     pycountry 24.6.1
@@ -1046,11 +1046,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SCRAPI</td>
-<td class="right">December 2024</td>
+<td class="right">January 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz &amp; Geater</td>
-<td class="center">Expires 23 June 2025</td>
+<td class="center">Expires 7 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-20" class="published">20 December 2024</time>
+<time datetime="2025-01-03" class="published">3 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-23">23 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-07">7 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1086,7 +1086,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document describes a REST API that supports the normative requirements of the SCITT Architecture.
-Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Repositories.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+Optional key discovery and query interfaces are provided to support interoperability with X.509 Certificates, alternative methods commonly used to support public key discovery and Artifact Repositories.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1122,7 +1122,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1131,7 +1131,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
+            Copyright (c) 2025 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1202,22 +1202,22 @@ Optional key discovery and query interfaces are provided to support interoperabi
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-general-scope" class="internal xref">General scope</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-general-scope" class="internal xref">General Scope</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-applicable-environment" class="internal xref">Applicable Environment</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-user-host-authentication" class="internal xref">User-host authentication</a></p>
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-user-host-authentication" class="internal xref">User-host Authentication</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-primary-threats" class="internal xref">Primary threats</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-primary-threats" class="internal xref">Primary Threats</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.1">
-                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="auto internal xref">4.4.1</a>.  <a href="#name-in-scope" class="internal xref">In scope</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="auto internal xref">4.4.1</a>.  <a href="#name-in-scope" class="internal xref">In Scope</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.2">
-                    <p id="section-toc.1-1.4.2.4.2.2.1"><a href="#section-4.4.2" class="auto internal xref">4.4.2</a>.  <a href="#name-out-of-scope" class="internal xref">Out of scope</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.2.1"><a href="#section-4.4.2" class="auto internal xref">4.4.2</a>.  <a href="#name-out-of-scope" class="internal xref">Out of Scope</a></p>
 </li>
                 </ul>
 </li>
@@ -1269,43 +1269,58 @@ Optional key discovery and query interfaces are provided to support interoperabi
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The SCITT Architecture <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> defines the core operations necessary to support supply chain transparency using COSE (CBOR Object Signing and Encryption).<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">The SCITT Architecture <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> defines the core objects, identifiers and workflows necessary to interact with a SCITT Transparency Service:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-2.1">
-          <p id="section-1-2.1.1">Issuance of Signed Statements<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.1.1">Signed Statements<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-2.2">
-          <p id="section-1-2.2.1">Verification of Signed Statements<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.2.1">Receipts<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-2.3">
-          <p id="section-1-2.3.1">Registration of Signed Statements<a href="#section-1-2.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.3.1">Transparent Statements<a href="#section-1-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-2.4">
-          <p id="section-1-2.4.1">Issuance of Receipts<a href="#section-1-2.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-2.5">
-          <p id="section-1-2.5.1">Verification of Receipts<a href="#section-1-2.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-2.6">
-          <p id="section-1-2.6.1">Production of Transparent Statements<a href="#section-1-2.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-2.7">
-          <p id="section-1-2.7.1">Verification of Transparent Statements<a href="#section-1-2.7.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.4.1">Registration Policies<a href="#section-1-2.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-3">In addition to defining concrete HTTP endpoints for these operations, this specification defines support for the following endpoints which support these operations:<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-3">SCRAPI defines the operations necessary to support supply chain transparency using COSE <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-4.1">
-          <p id="section-1-4.1.1">Resolving Verification Keys for Issuers<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.1.1">Issuances of Signed Statements<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.2">
-          <p id="section-1-4.2.1">Retrieving Receipts Asynchronously<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.2.1">Registration of Signed Statements<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.3">
-          <p id="section-1-4.3.1">Retrieving Signed Statements from an Artifact Repository<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.3.1">Verification of Signed Statements<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.4">
-          <p id="section-1-4.4.1">Retrieving Statements from an Artifact Repository<a href="#section-1-4.4.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.4.1">Issuance of Receipts<a href="#section-1-4.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.5">
+          <p id="section-1-4.5.1">Verification of Receipts<a href="#section-1-4.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.6">
+          <p id="section-1-4.6.1">Production of Transparent Statements<a href="#section-1-4.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.7">
+          <p id="section-1-4.7.1">Verification of Transparent Statements<a href="#section-1-4.7.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-1-5">In addition to these operational HTTP endpoints, this specification defines supporting endpoints:<a href="#section-1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1-6.1">
+          <p id="section-1-6.1.1">Resolving Verification Keys for Issuers<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-6.2">
+          <p id="section-1-6.2.1">Retrieving Receipts Asynchronously<a href="#section-1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-6.3">
+          <p id="section-1-6.3.1">Retrieving Signed Statements from an Artifact Repository<a href="#section-1-6.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-6.4">
+          <p id="section-1-6.4.1">Retrieving Statements from an Artifact Repository<a href="#section-1-6.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="sec-terminology">
@@ -1329,49 +1344,52 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-endpoints" class="section-name selfRef">Endpoints</a>
       </h2>
 <p id="section-2-1">Authentication is out of scope for this document.
-Implementations <span class="bcp14">MAY</span> authenticate clients, for example for authorization or to prevent denial of service.
-If Authentication is not implemented, rate limiting or other denial of service mitigation <span class="bcp14">MUST</span> be applied to enable anonymous access.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">NOTE: '' line wrapping per <span>[<a href="#RFC8792" class="cite xref">RFC8792</a>]</span> in HTTP examples.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">All messages are sent as HTTP GET or POST requests.<a href="#section-2-3" class="pilcrow">¶</a></p>
-<p id="section-2-4">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a Concise Problem Details object (<span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span>) containing:<a href="#section-2-4" class="pilcrow">¶</a></p>
+Implementations <span class="bcp14">MAY</span> authenticate clients, for example authorization or preventing denial of service attacks.
+If Authentication is not implemented, rate limiting or other denial of service mitigation <span class="bcp14">MUST</span> be implemented.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">All messages are sent as HTTP GET or POST requests.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a Concise Problem Details object <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> containing:<a href="#section-2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-5.1">
-          <p id="section-2-5.1.1">title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2-4.1">
+          <p id="section-2-4.1.1">title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.<a href="#section-2-4.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-5.2">
-          <p id="section-2-5.2.1">detail: A human-readable string describing the error in more depth, ideally with sufficient detail to enable the error to be rectified.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-4.2">
+          <p id="section-2-4.2.1">detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-5.3">
-          <p id="section-2-5.3.1">instance: A URN reference identifying the problem.
-To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-4.3">
+          <p id="section-2-4.3.1">instance: A URN reference identifying the problem.
+To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".<a href="#section-2-4.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-5.4">
-          <p id="section-2-5.4.1">response-code: The HTTP error response code relating to this error.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-4.4">
+          <p id="section-2-4.4.1">response-code: The HTTP error response code relating to this error.<a href="#section-2-4.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
+<p id="section-2-5">TODO: RESOLVE this dangling media-type<a href="#section-2-5" class="pilcrow">¶</a></p>
 <p id="section-2-6">application/concise-problem-details+cbor<a href="#section-2-6" class="pilcrow">¶</a></p>
-<p id="section-2-7">NOTE: SCRAPI is not a CoAP API. Nonetheless Constrained Problem Details objects (<span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span>) provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.<a href="#section-2-7" class="pilcrow">¶</a></p>
-<p id="section-2-8">Examples of errors may include:<a href="#section-2-8" class="pilcrow">¶</a></p>
-<div class="lang-cbor-diag sourcecode" id="section-2-9">
+<p id="section-2-7">NOTE: SCRAPI is not a CoAP API.
+Nonetheless Constrained Problem Details objects <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.<a href="#section-2-7" class="pilcrow">¶</a></p>
+<p id="section-2-8">NOTE: Examples use '\' line wrapping per <span>[<a href="#RFC8792" class="cite xref">RFC8792</a>]</span><a href="#section-2-8" class="pilcrow">¶</a></p>
+<p id="section-2-9">Examples of errors may include:<a href="#section-2-9" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-2-10">
 <pre>
 {
-  / title /         -1: "Bad Signature Algorithm",
-  / detail /        -2: "Signing algorithm 'WalnutDSA' not supported.",
-  / instance /      -3: "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+  / title /         -1: \
+            "Bad Signature Algorithm",
+  / detail /        -2: \
+            "Signing algorithm 'WalnutDSA' not supported",
+  / instance /      -3: \
+            "urn:ietf:params:scitt:error:badSignatureAlgorithm",
   / response-code / -4: 400,
 }
-</pre><a href="#section-2-9" class="pilcrow">¶</a>
+</pre><a href="#section-2-10" class="pilcrow">¶</a>
 </div>
-<p id="section-2-10">Most error types are specific to the type of request and are defined in the respective subsections below.
-The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-2-10" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-2-11.1">
-          <p id="section-2-11.1.1">Error code: <code>malformed</code> (The request could not be parsed).<a href="#section-2-11.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-2-12">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-12" class="pilcrow">¶</a></p>
-<p id="section-2-13">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
-In the absence of this header field, this document does not specify a minimum.<a href="#section-2-13" class="pilcrow">¶</a></p>
+<p id="section-2-11">Most error types are specific to the type of request and are defined in the respective subsections below.
+The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-2-11" class="pilcrow">¶</a></p>
+<p id="section-2-12"><code>
+Error code: `malformed` (The request could not be parsed)
+</code><a href="#section-2-12" class="pilcrow">¶</a></p>
+<p id="section-2-13">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-13" class="pilcrow">¶</a></p>
+<p id="section-2-14">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
+In the absence of this header field, this document does not specify a minimum.<a href="#section-2-14" class="pilcrow">¶</a></p>
 <div id="sec-mandatory">
 <section id="section-2.1">
         <h3 id="name-mandatory">
@@ -1384,7 +1402,8 @@ In the absence of this header field, this document does not specify a minimum.<a
 <a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-transparency-configuration" class="section-name selfRef">Transparency Configuration</a>
           </h4>
 <p id="section-2.1.1-1">This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.1-2">The Transparency Service responds with a dictionary of configuration elements. These elements are Transparency-Service specific.<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.1-2">The Transparency Service responds with a dictionary of configuration elements.
+These elements are Transparency-Service specific.<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-3">Contents of bodies are informative examples only.<a href="#section-2.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-4">Request:<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.1.1-5">
@@ -1412,7 +1431,7 @@ Payload (in CBOR diagnostic notation)
         "registration_policy": "https://transparency.example/statements/\
 urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
     },
-    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature placeholder
+    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature
 ])
 </pre><a href="#section-2.1.1-7" class="pilcrow">¶</a>
 </div>
@@ -1518,7 +1537,8 @@ Retry-After: &lt;seconds&gt;
             <h5 id="name-status-400-invalid-client-r">
 <a href="#section-2.1.2.3" class="section-number selfRef">2.1.2.3. </a><a href="#name-status-400-invalid-client-r" class="section-name selfRef">Status 400 - Invalid Client Request</a>
             </h5>
-<p id="section-2.1.2.3-1">The following expected errors are defined. Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.1.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.2.3-1">The following expected errors are defined.
+Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.1.2.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-2.1.2.3-2">
 <pre>
 HTTP/1.1 400 Bad Request
@@ -1734,7 +1754,8 @@ Payload (in CBOR diagnostic notation)
             <h5 id="name-status-404-not-found">
 <a href="#section-2.2.2.2" class="section-number selfRef">2.2.2.2. </a><a href="#name-status-404-not-found" class="section-name selfRef">Status 404 - Not Found</a>
             </h5>
-<p id="section-2.2.2.2-1">The following expected errors are defined. Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.2.2-1">The following expected errors are defined.
+Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2.2.2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-2.2.2.2-2">
 <pre>
 HTTP/1.1 404 Not Found
@@ -1848,7 +1869,8 @@ Retry-After: &lt;seconds&gt;
   "type": "urn:ietf:params:scitt:error\
     :receipt:too-many-requests",
   "detail": \
-    "Too Many Requests. Only &lt;number&gt; requests per &lt;period&gt; are allowed."
+  "Too Many Requests.\
+  Only &lt;number&gt; requests per &lt;period&gt; are allowed."
 }
 </pre><a href="#section-2.2.3.4-2" class="pilcrow">¶</a>
 </div>
@@ -1988,7 +2010,7 @@ Content-Type: application/json
 <div id="sec-general-scope">
 <section id="section-4.1">
         <h3 id="name-general-scope">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-general-scope" class="section-name selfRef">General scope</a>
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-general-scope" class="section-name selfRef">General Scope</a>
         </h3>
 <p id="section-4.1-1">This document describes the interoperable API for client calls to, and implementations of, a Transparency Service as specified in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>.
 As such the security considerations in this section are concerned only with security considerations that are relevant at that implementation layer.
@@ -2007,7 +2029,7 @@ Thus, no assumptions can be made about the security of the computing environment
 <div id="sec-user-host-authentication">
 <section id="section-4.3">
         <h3 id="name-user-host-authentication">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-user-host-authentication" class="section-name selfRef">User-host authentication</a>
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-user-host-authentication" class="section-name selfRef">User-host Authentication</a>
         </h3>
 <p id="section-4.3-1"><span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> defines 2 distinct roles that require authentication:
 Issuers who sign Statements, and clients that submit API calls on behalf of Issuers.
@@ -2031,12 +2053,12 @@ This document is only concerned with authentication of API clients.<a href="#sec
 <div id="sec-primary-threats">
 <section id="section-4.4">
         <h3 id="name-primary-threats">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-primary-threats" class="section-name selfRef">Primary threats</a>
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-primary-threats" class="section-name selfRef">Primary Threats</a>
         </h3>
 <div id="sec-in-scope">
 <section id="section-4.4.1">
           <h4 id="name-in-scope">
-<a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-in-scope" class="section-name selfRef">In scope</a>
+<a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-in-scope" class="section-name selfRef">In Scope</a>
           </h4>
 <p id="section-4.4.1-1">The most serious threats to implementations on Transparency Services are ones that would cause the failure of their main promises, to wit:<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2053,7 +2075,7 @@ This document is only concerned with authentication of API clients.<a href="#sec
 <div id="sec-denial-of-service-attacks">
 <section id="section-4.4.1.1">
             <h5 id="name-denial-of-service-attacks">
-<a href="#section-4.4.1.1" class="section-number selfRef">4.4.1.1. </a><a href="#name-denial-of-service-attacks" class="section-name selfRef">Denial of service attacks</a>
+<a href="#section-4.4.1.1" class="section-number selfRef">4.4.1.1. </a><a href="#name-denial-of-service-attacks" class="section-name selfRef">Denial of Service Attacks</a>
             </h5>
 <p id="section-4.4.1.1-1">While denial of service attacks are very hard to defend against completely, and Transparency Services are unlikely to be in the critical path of any safety-liable operation, any attack which could cause the <em>silent</em> failure of Signed Statement registration, for example, should be considered in scope.<a href="#section-4.4.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.1.1-2">In principle DoS attacks are easily mitigated by the client checking that the Transparency Service has registered any submitted Signed Statement and returned a Receipt.
@@ -2074,7 +2096,7 @@ Nonetheless transparency may mean 'within a limited community' rather than 'in f
 <div id="sec-message-modification-attacks">
 <section id="section-4.4.1.3">
             <h5 id="name-message-modification-attack">
-<a href="#section-4.4.1.3" class="section-number selfRef">4.4.1.3. </a><a href="#name-message-modification-attack" class="section-name selfRef">Message modification attacks</a>
+<a href="#section-4.4.1.3" class="section-number selfRef">4.4.1.3. </a><a href="#name-message-modification-attack" class="section-name selfRef">Message Modification Attacks</a>
             </h5>
 <p id="section-4.4.1.3-1">While most relevant modification attacks are mitigated by the use of the Issuer signature on the Signed Statement, the <code>Issue Statement</code> endpoint presents an opportunity for manipulation of messages and misrepresentation of Issuer intent that could mislead later Verifiers.<a href="#section-4.4.1.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.1.3-2">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span> require authentication and transport-level security for that endpoint, <span class="bcp14">MUST NOT</span> modify anything in the message to be signed, and <span class="bcp14">MUST</span> take steps to ensure that the party calling the endpoint is authorized to register statements on behalf of the specified Issuer.<a href="#section-4.4.1.3-2" class="pilcrow">¶</a></p>
@@ -2083,7 +2105,7 @@ Nonetheless transparency may mean 'within a limited community' rather than 'in f
 <div id="sec-message-insertion-attacks">
 <section id="section-4.4.1.4">
             <h5 id="name-message-insertion-attacks">
-<a href="#section-4.4.1.4" class="section-number selfRef">4.4.1.4. </a><a href="#name-message-insertion-attacks" class="section-name selfRef">Message insertion attacks</a>
+<a href="#section-4.4.1.4" class="section-number selfRef">4.4.1.4. </a><a href="#name-message-insertion-attacks" class="section-name selfRef">Message Insertion Attacks</a>
             </h5>
 <p id="section-4.4.1.4-1">While most relevant insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, the <code>Issue Statement</code> endpoint presents an opportunity for insertion of messages and misrepresentation of Issuer intent that could mislead later Verifiers.
 There are 2 most likely avenues to this attack:<a href="#section-4.4.1.4-1" class="pilcrow">¶</a></p>
@@ -2106,12 +2128,12 @@ There are 2 most likely avenues to this attack:<a href="#section-4.4.1.4-1" clas
 <div id="sec-out-of-scope">
 <section id="section-4.4.2">
           <h4 id="name-out-of-scope">
-<a href="#section-4.4.2" class="section-number selfRef">4.4.2. </a><a href="#name-out-of-scope" class="section-name selfRef">Out of scope</a>
+<a href="#section-4.4.2" class="section-number selfRef">4.4.2. </a><a href="#name-out-of-scope" class="section-name selfRef">Out of Scope</a>
           </h4>
 <div id="sec-replay-attacks">
 <section id="section-4.4.2.1">
             <h5 id="name-replay-attacks">
-<a href="#section-4.4.2.1" class="section-number selfRef">4.4.2.1. </a><a href="#name-replay-attacks" class="section-name selfRef">Replay attacks</a>
+<a href="#section-4.4.2.1" class="section-number selfRef">4.4.2.1. </a><a href="#name-replay-attacks" class="section-name selfRef">Replay Attacks</a>
             </h5>
 <p id="section-4.4.2.1-1">Replay attacks are not particularly concerning for SCITT or SCRAPI:
 once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
@@ -2122,7 +2144,7 @@ There could be issues at the payload level (for instance, the statement "it is r
 <div id="sec-message-deletion-attacks">
 <section id="section-4.4.2.2">
             <h5 id="name-message-deletion-attacks">
-<a href="#section-4.4.2.2" class="section-number selfRef">4.4.2.2. </a><a href="#name-message-deletion-attacks" class="section-name selfRef">Message deletion attacks</a>
+<a href="#section-4.4.2.2" class="section-number selfRef">4.4.2.2. </a><a href="#name-message-deletion-attacks" class="section-name selfRef">Message Deletion Attacks</a>
             </h5>
 <p id="section-4.4.2.2-1">Once registered with a Transparency Service, Registered Signed Statements cannot be deleted.
 Thus, any message deletion attack must occur prior to registration else it is indistinguishable from a man-in-the-middle or denial-of-service attack on this interface.<a href="#section-4.4.2.2-1" class="pilcrow">¶</a></p>

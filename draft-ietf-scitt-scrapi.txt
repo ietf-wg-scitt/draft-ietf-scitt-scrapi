@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 23 June 2025                                    DataTrails Inc.
-                                                        20 December 2024
+Expires: 7 July 2025                                     DataTrails Inc.
+                                                          3 January 2025
 
 
                           SCITT Reference APIs
@@ -16,9 +16,9 @@ Abstract
 
    This document describes a REST API that supports the normative
    requirements of the SCITT Architecture.  Optional key discovery and
-   query interfaces are provided to support interoperability issues with
-   Decentralized Identifiers, X509 Certificates and Artifact
-   Repositories.
+   query interfaces are provided to support interoperability with X.509
+   Certificates, alternative methods commonly used to support public key
+   discovery and Artifact Repositories.
 
 About This Document
 
@@ -50,11 +50,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 June 2025.
+   This Internet-Draft will expire on 7 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -82,12 +82,12 @@ Table of Contents
        2.2.5.  Resolve Issuer
    3.  Privacy Considerations
    4.  Security Considerations
-     4.1.  General scope
+     4.1.  General Scope
      4.2.  Applicable Environment
-     4.3.  User-host authentication
-     4.4.  Primary threats
-       4.4.1.  In scope
-       4.4.2.  Out of scope
+     4.3.  User-host Authentication
+     4.4.  Primary Threats
+       4.4.1.  In Scope
+       4.4.2.  Out of Scope
    5.   TODO
    6.  IANA Considerations
      6.1.  URN Sub-namespace for SCITT (urn:ietf:params:scitt)
@@ -103,14 +103,25 @@ Table of Contents
 1.  Introduction
 
    The SCITT Architecture [I-D.draft-ietf-scitt-architecture] defines
-   the core operations necessary to support supply chain transparency
-   using COSE (CBOR Object Signing and Encryption).
+   the core objects, identifiers and workflows necessary to interact
+   with a SCITT Transparency Service:
 
-   *  Issuance of Signed Statements
+   *  Signed Statements
 
-   *  Verification of Signed Statements
+   *  Receipts
+
+   *  Transparent Statements
+
+   *  Registration Policies
+
+   SCRAPI defines the operations necessary to support supply chain
+   transparency using COSE [RFC9052]:
+
+   *  Issuances of Signed Statements
 
    *  Registration of Signed Statements
+
+   *  Verification of Signed Statements
 
    *  Issuance of Receipts
 
@@ -120,9 +131,8 @@ Table of Contents
 
    *  Verification of Transparent Statements
 
-   In addition to defining concrete HTTP endpoints for these operations,
-   this specification defines support for the following endpoints which
-   support these operations:
+   In addition to these operational HTTP endpoints, this specification
+   defines supporting endpoints:
 
    *  Resolving Verification Keys for Issuers
 
@@ -150,25 +160,23 @@ Table of Contents
 2.  Endpoints
 
    Authentication is out of scope for this document.  Implementations
-   MAY authenticate clients, for example for authorization or to prevent
-   denial of service.  If Authentication is not implemented, rate
-   limiting or other denial of service mitigation MUST be applied to
-   enable anonymous access.
-
-   NOTE: '' line wrapping per [RFC8792] in HTTP examples.
+   MAY authenticate clients, for example authorization or preventing
+   denial of service attacks.  If Authentication is not implemented,
+   rate limiting or other denial of service mitigation MUST be
+   implemented.
 
    All messages are sent as HTTP GET or POST requests.
 
    If the Transparency Service cannot process a client's request, it
    MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a
-   Concise Problem Details object ([RFC9290]) containing:
+   Concise Problem Details object [RFC9290] containing:
 
    *  title: A human-readable string identifying the error that
       prevented the Transparency Service from processing the request,
       ideally short and suitable for inclusion in log messages.
 
    *  detail: A human-readable string describing the error in more
-      depth, ideally with sufficient detail to enable the error to be
+      depth, ideally with sufficient detail enabling the error to be
       rectified.
 
    *  instance: A URN reference identifying the problem.  To facilitate
@@ -179,19 +187,26 @@ Table of Contents
    *  response-code: The HTTP error response code relating to this
       error.
 
+   TODO: RESOLVE this dangling media-type
+
    application/concise-problem-details+cbor
 
    NOTE: SCRAPI is not a CoAP API.  Nonetheless Constrained Problem
-   Details objects ([RFC9290]) provide a useful CBOR encoding for
-   problem details and avoids the need for mixing CBOR and JSON in
-   endpoint implementations.
+   Details objects [RFC9290] provide a useful CBOR encoding for problem
+   details and avoids the need for mixing CBOR and JSON in endpoint
+   implementations.
+
+   NOTE: Examples use '\' line wrapping per [RFC8792]
 
    Examples of errors may include:
 
    {
-     / title /         -1: "Bad Signature Algorithm",
-     / detail /        -2: "Signing algorithm 'WalnutDSA' not supported.",
-     / instance /      -3: "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+     / title /         -1: \
+               "Bad Signature Algorithm",
+     / detail /        -2: \
+               "Signing algorithm 'WalnutDSA' not supported",
+     / instance /      -3: \
+               "urn:ietf:params:scitt:error:badSignatureAlgorithm",
      / response-code / -4: 400,
    }
 
@@ -201,7 +216,7 @@ Table of Contents
    could not parse the client's request because it did not comply with
    this document:
 
-   *  Error code: malformed (The request could not be parsed).
+   Error code: `malformed` (The request could not be parsed)
 
    Clients SHOULD treat 500 and 503 HTTP status code responses as
    transient failures and MAY retry the same request without
@@ -252,7 +267,7 @@ Table of Contents
            "registration_policy": "https://transparency.example/statements/\
    urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
        },
-       h'ABCDEF1234567890ABCDEF1234567890'  ; Signature placeholder
+       h'ABCDEF1234567890ABCDEF1234567890'  ; Signature
    ])
 
    Responses to this message are vendor-specific.  Fields that are not
@@ -616,16 +631,17 @@ application/concise-problem-details+cbor
    then the Transparency Service MAY, in addition to implementing rate-
    limiting, return a 429 response:
 
-HTTP/1.1 429 Too Many Requests
-Content-Type: application/json
-Retry-After: <seconds>
+   HTTP/1.1 429 Too Many Requests
+   Content-Type: application/json
+   Retry-After: <seconds>
 
-{
-  "type": "urn:ietf:params:scitt:error\
-    :receipt:too-many-requests",
-  "detail": \
-    "Too Many Requests. Only <number> requests per <period> are allowed."
-}
+   {
+     "type": "urn:ietf:params:scitt:error\
+       :receipt:too-many-requests",
+     "detail": \
+     "Too Many Requests.\
+     Only <number> requests per <period> are allowed."
+   }
 
 2.2.3.5.  Eventual Consistency
 
@@ -730,7 +746,7 @@ Retry-After: <seconds>
 
 4.  Security Considerations
 
-4.1.  General scope
+4.1.  General Scope
 
    This document describes the interoperable API for client calls to,
    and implementations of, a Transparency Service as specified in
@@ -749,7 +765,7 @@ Retry-After: <seconds>
    security of the computing environment in which any client
    implementation of this specification runs.
 
-4.3.  User-host authentication
+4.3.  User-host Authentication
 
    [I-D.draft-ietf-scitt-architecture] defines 2 distinct roles that
    require authentication: Issuers who sign Statements, and clients that
@@ -772,9 +788,9 @@ Retry-After: <seconds>
    and Transparency Services implementing this specification SHOULD
    allow for the revocation and rolling of authentication secrets.
 
-4.4.  Primary threats
+4.4.  Primary Threats
 
-4.4.1.  In scope
+4.4.1.  In Scope
 
    The most serious threats to implementations on Transparency Services
    are ones that would cause the failure of their main promises, to wit:
@@ -789,7 +805,7 @@ Retry-After: <seconds>
       the presentation or verification of divergent proofs for the same
       Statement payload
 
-4.4.1.1.  Denial of service attacks
+4.4.1.1.  Denial of Service Attacks
 
    While denial of service attacks are very hard to defend against
    completely, and Transparency Services are unlikely to be in the
@@ -820,7 +836,7 @@ Retry-After: <seconds>
    protections against man-in-the-middle and network eavesdropping, such
    as TLS.
 
-4.4.1.3.  Message modification attacks
+4.4.1.3.  Message Modification Attacks
 
    While most relevant modification attacks are mitigated by the use of
    the Issuer signature on the Signed Statement, the Issue Statement
@@ -834,7 +850,7 @@ Retry-After: <seconds>
    MUST take steps to ensure that the party calling the endpoint is
    authorized to register statements on behalf of the specified Issuer.
 
-4.4.1.4.  Message insertion attacks
+4.4.1.4.  Message Insertion Attacks
 
    While most relevant insertion attacks are mitigated by the use of the
    Issuer signature on the Signed Statement, the Issue Statement
@@ -866,9 +882,9 @@ Retry-After: <seconds>
    as anomaly detection or rate limiting in order to mitigate the impact
    of any breach.
 
-4.4.2.  Out of scope
+4.4.2.  Out of Scope
 
-4.4.2.1.  Replay attacks
+4.4.2.1.  Replay Attacks
 
    Replay attacks are not particularly concerning for SCITT or SCRAPI:
    once a statement is made, it is intended to be immutable and non-
@@ -882,7 +898,7 @@ Retry-After: <seconds>
    susceptible to replay attacks in this way then timestamps MAY be
    added to the protected header signed by the Issuer.
 
-4.4.2.2.  Message deletion attacks
+4.4.2.2.  Message Deletion Attacks
 
    Once registered with a Transparency Service, Registered Signed
    Statements cannot be deleted.  Thus, any message deletion attack must
