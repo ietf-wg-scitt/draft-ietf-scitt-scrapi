@@ -68,23 +68,30 @@ informative:
 --- abstract
 
 This document describes a REST API that supports the normative requirements of the SCITT Architecture.
-Optional key discovery and query interfaces are provided to support interoperability issues with Decentralized Identifiers, X509 Certificates and Artifact Repositories.
+Optional key discovery and query interfaces are provided to support interoperability with X.509 Certificates, alternative methods commonly used to support public key discovery and Artifact Repositories.
 
 --- middle
 
 # Introduction
 
-The SCITT Architecture {{-SCITT-ARCH}} defines the core operations necessary to support supply chain transparency using COSE (CBOR Object Signing and Encryption).
+The SCITT Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and workflows necessary to interact with a SCITT Transparency Service:
 
-- Issuance of Signed Statements
-- Verification of Signed Statements
+- Signed Statements
+- Receipts
+- Transparent Statements
+- Registration Policies
+
+SCRAPI defines the operations necessary to support supply chain transparency using COSE {{RFC9052}}:
+
+- Issuances of Signed Statements
 - Registration of Signed Statements
+- Verification of Signed Statements
 - Issuance of Receipts
 - Verification of Receipts
 - Production of Transparent Statements
 - Verification of Transparent Statements
 
-In addition to defining concrete HTTP endpoints for these operations, this specification defines support for the following endpoints which support these operations:
+In addition to these operational HTTP endpoints, this specification defines supporting endpoints:
 
 - Resolving Verification Keys for Issuers
 - Retrieving Receipts Asynchronously
@@ -102,35 +109,39 @@ This specification uses "payload" as defined in {{RFC9052}}.
 # Endpoints
 
 Authentication is out of scope for this document.
-Implementations MAY authenticate clients, for example for authorization or to prevent denial of service.
-If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be applied to enable anonymous access.
-
-NOTE: '\' line wrapping per {{RFC8792}} in HTTP examples.
+Implementations MAY authenticate clients, for example authorization or preventing denial of service attacks.
+If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be implemented.
 
 All messages are sent as HTTP GET or POST requests.
 
-If the Transparency Service cannot process a client's request, it MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise Problem Details object ({{RFC9290}}) containing:
+If the Transparency Service cannot process a client's request, it MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise Problem Details object {{RFC9290}} containing:
 
 - title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
-
-- detail: A human-readable string describing the error in more depth, ideally with sufficient detail to enable the error to be rectified.
-
+- detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
 - instance: A URN reference identifying the problem.
 To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".
 
 - response-code: The HTTP error response code relating to this error.
 
+TODO: RESOLVE this dangling media-type
+
 application/concise-problem-details+cbor
 
-NOTE: SCRAPI is not a CoAP API. Nonetheless Constrained Problem Details objects ({{RFC9290}}) provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.
+NOTE: SCRAPI is not a CoAP API.
+Nonetheless Constrained Problem Details objects {{RFC9290}} provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.
+
+NOTE: Examples use '\\' line wrapping per {{RFC8792}}
 
 Examples of errors may include:
 
 ~~~cbor-diag
 {
-  / title /         -1: "Bad Signature Algorithm",
-  / detail /        -2: "Signing algorithm 'WalnutDSA' not supported.",
-  / instance /      -3: "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+  / title /         -1: \
+            "Bad Signature Algorithm",
+  / detail /        -2: \
+            "Signing algorithm 'WalnutDSA' not supported",
+  / instance /      -3: \
+            "urn:ietf:params:scitt:error:badSignatureAlgorithm",
   / response-code / -4: 400,
 }
 ~~~
@@ -138,7 +149,9 @@ Examples of errors may include:
 Most error types are specific to the type of request and are defined in the respective subsections below.
 The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:
 
-- Error code: `malformed` (The request could not be parsed).
+```
+Error code: `malformed` (The request could not be parsed)
+```
 
 Clients SHOULD treat 500 and 503 HTTP status code responses as transient failures and MAY retry the same request without modification at a later date.
 
@@ -153,7 +166,8 @@ The following HTTP endpoints are mandatory to implement to enable conformance to
 
 This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.
 
-The Transparency Service responds with a dictionary of configuration elements. These elements are Transparency-Service specific.
+The Transparency Service responds with a dictionary of configuration elements.
+These elements are Transparency-Service specific.
 
 Contents of bodies are informative examples only.
 
@@ -184,7 +198,7 @@ Payload (in CBOR diagnostic notation)
         "registration_policy": "https://transparency.example/statements/\
 urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
     },
-    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature placeholder
+    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature
 ])
 ~~~
 
@@ -285,7 +299,8 @@ If 202 is returned, then clients should wait until Registration succeeded or fai
 
 #### Status 400 - Invalid Client Request
 
-The following expected errors are defined. Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+The following expected errors are defined.
+Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
 
 ~~~
 HTTP/1.1 400 Bad Request
@@ -477,7 +492,8 @@ Payload (in CBOR diagnostic notation)
 
 #### Status 404 - Not Found
 
-The following expected errors are defined. Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+The following expected errors are defined.
+Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
 
 ~~~
 HTTP/1.1 404 Not Found
@@ -567,7 +583,8 @@ Retry-After: <seconds>
   "type": "urn:ietf:params:scitt:error\
     :receipt:too-many-requests",
   "detail": \
-    "Too Many Requests. Only <number> requests per <period> are allowed."
+  "Too Many Requests.\
+  Only <number> requests per <period> are allowed."
 }
 ~~~
 
@@ -676,7 +693,7 @@ TODO
 
 # Security Considerations
 
-## General scope
+## General Scope
 
 This document describes the interoperable API for client calls to, and implementations of, a Transparency Service as specified in {{-SCITT-ARCH}}.
 As such the security considerations in this section are concerned only with security considerations that are relevant at that implementation layer.
@@ -687,7 +704,7 @@ All questions of security of the related COSE formats, algorithm choices, crypto
 SCITT is concerned with issues of cross-boundary supply-chain-wide data integrity and as such must assume a very wide range of deployment environments.
 Thus, no assumptions can be made about the security of the computing environment in which any client implementation of this specification runs.
 
-## User-host authentication
+## User-host Authentication
 
 {{-SCITT-ARCH}} defines 2 distinct roles that require authentication:
 Issuers who sign Statements, and clients that submit API calls on behalf of Issuers.
@@ -702,9 +719,9 @@ For those endpoints that require client authentication, Transparency Services MU
 
 Where authentication methods rely on long term secrets, both clients and Transparency Services implementing this specification SHOULD allow for the revocation and rolling of authentication secrets.
 
-## Primary threats
+## Primary Threats
 
-### In scope
+### In Scope
 
 The most serious threats to implementations on Transparency Services are ones that would cause the failure of their main promises, to wit:
 
@@ -712,7 +729,7 @@ The most serious threats to implementations on Transparency Services are ones th
 - Threats to payload integrity, for example changing the contents of a Signed Statement before making it transparent
 - Threats to non-equivocation, for example attacks that would enable the presentation or verification of divergent proofs for the same Statement payload
 
-#### Denial of service attacks
+#### Denial of Service Attacks
 
 While denial of service attacks are very hard to defend against completely, and Transparency Services are unlikely to be in the critical path of any safety-liable operation, any attack which could cause the _silent_ failure of Signed Statement registration, for example, should be considered in scope.
 
@@ -728,13 +745,13 @@ Beyond this, implementers of Transparency Services SHOULD implement general good
 Since the purpose of this API is to ultimately put the message payloads on a Transparency Log there is limited risk to eavesdropping.
 Nonetheless transparency may mean 'within a limited community' rather than 'in full public', so implementers MUST add protections against man-in-the-middle and network eavesdropping, such as TLS.
 
-#### Message modification attacks
+#### Message Modification Attacks
 
 While most relevant modification attacks are mitigated by the use of the Issuer signature on the Signed Statement, the `Issue Statement` endpoint presents an opportunity for manipulation of messages and misrepresentation of Issuer intent that could mislead later Verifiers.
 
 Transparency Services offering the `Issue Statement` endpoint MUST require authentication and transport-level security for that endpoint, MUST NOT modify anything in the message to be signed, and MUST take steps to ensure that the party calling the endpoint is authorized to register statements on behalf of the specified Issuer.
 
-#### Message insertion attacks
+#### Message Insertion Attacks
 
 While most relevant insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, the `Issue Statement` endpoint presents an opportunity for insertion of messages and misrepresentation of Issuer intent that could mislead later Verifiers.
 There are 2 most likely avenues to this attack:
@@ -750,9 +767,9 @@ Transparency Services offering the `Issue Statement` endpoint MUST take careful 
 
 Transparency Services MAY also implement additional protections such as anomaly detection or rate limiting in order to mitigate the impact of any breach.
 
-### Out of scope
+### Out of Scope
 
-#### Replay attacks
+#### Replay Attacks
 
 Replay attacks are not particularly concerning for SCITT or SCRAPI:
 once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
@@ -760,7 +777,7 @@ There could be issues at the payload level (for instance, the statement "it is r
 
 If the semantic content of the payload are time dependent and susceptible to replay attacks in this way then timestamps MAY be added to the protected header signed by the Issuer.
 
-#### Message deletion attacks
+#### Message Deletion Attacks
 
 Once registered with a Transparency Service, Registered Signed Statements cannot be deleted.
 Thus, any message deletion attack must occur prior to registration else it is indistinguishable from a man-in-the-middle or denial-of-service attack on this interface.
