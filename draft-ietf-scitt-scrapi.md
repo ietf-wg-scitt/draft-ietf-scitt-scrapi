@@ -167,7 +167,7 @@ The following HTTP endpoints are mandatory to implement to enable conformance to
 
 This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.
 
-The Transparency Service responds with a dictionary of configuration elements.
+The Transparency Service responds with a CBOR map of configuration elements.
 These elements are Transparency-Service specific.
 
 Contents of bodies are informative examples only.
@@ -191,7 +191,7 @@ Payload (in CBOR diagnostic notation)
 18([                   ; COSE_Sign1 structure with tag 18
     h'44A123BEEFFACE', ; Protected header (example bytes)
     {},                ; Unprotected header
-    {                  ; Payload - CBOR dict
+    {                  ; Payload - CBOR map
         "issuer": "https://transparency.example",
         "base_url": "https://transparency.example/v1/scrapi",
         "oidc_auth_endpoint": "https://transparency.example/auth",
