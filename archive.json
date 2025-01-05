@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-02T00:37:08.020302+00:00",
+  "timestamp": "2025-01-05T00:41:21.437557+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1121,7 +1121,7 @@
       "labels": [],
       "body": "The intent statement currently says:\r\n\r\n`This endpoint is used to discover verification keys, which is the reason that authentication is not required.`\r\n\r\nIn use cases where this endpoint is useful, it's often the case that you want more metadata/supporting evidence than purely keys.\r\n\r\nA suggestion from the field: `return supporting evidence enabling the client to verify the issuer signature at the time of registration`",
       "createdAt": "2024-11-05T14:55:01Z",
-      "updatedAt": "2024-12-03T15:26:21Z",
+      "updatedAt": "2025-01-02T18:20:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -1234,7 +1234,23 @@
       "labels": [],
       "body": "To add in the usability of signing statements, the doc added [Issue Signed Statement](https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-02.html#name-issue-signed-statement), which is great, except it defeats the purpose of the TS being a witness to previously signed statements.\r\n\r\nSuggesting we add:\r\nIssue Signed Statement should be implemented by remote signing services, and SHOULD NOT be used with the same Transparency Service the signed statement will be registered upon.\r\n",
       "createdAt": "2024-12-31T20:28:08Z",
-      "updatedAt": "2024-12-31T20:28:08Z",
+      "updatedAt": "2025-01-02T18:20:05Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 57,
+      "id": "I_kwDOLJjbks6k49aT",
+      "title": "Support redirects, returning `301 Moved Permanently` ",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/57",
+      "state": "OPEN",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "              This sounds like it excludes the possibility of redirects, it seems to me that a service could legitimately return a `301 Moved Permanently` for example?\r\n\r\n_Originally posted by @achamayou in https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/54#discussion_r1900733602_\r\n            ",
+      "createdAt": "2025-01-02T17:34:24Z",
+      "updatedAt": "2025-01-02T18:19:53Z",
       "closedAt": null,
       "comments": []
     }
@@ -3446,13 +3462,13 @@
       "labels": [],
       "body": "Addresses #10 , #12 , #13 ,  #14 , #20 and #22 \r\n\r\nCleans up async workflow\r\nCleans up async error reporting\r\nCleans up locators\r\nMore defined/single responsibilities for endpoint calls and returns",
       "createdAt": "2024-12-03T16:20:49Z",
-      "updatedAt": "2025-01-01T23:58:36Z",
+      "updatedAt": "2025-01-03T18:14:35Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
-      "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
+      "baseRefOid": "2e8a76494b6aa740f3b1f552f82857ac21d20037",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/23-async-operations-locators",
-      "headRefOid": "391c954860c4d4922664b08ff41c04e1eb9b11af",
+      "headRefOid": "9c8fd24422e0b45b1c64197259f0accfb589f194",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3471,6 +3487,20 @@
           "body": "Note: I pushed a few IDNITS and MD formatting changes (https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/51/commits/ed298406b55edd8f9632592af007c04f62672be3, https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/51/commits/22d46685dba74e8b770caf84cd4048a601f2c29b, https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/51/commits/2f97c5834b4e32bfbbabb3405e114c15b57314c9) to bring focus to the API changes.",
           "createdAt": "2024-12-31T19:49:53Z",
           "updatedAt": "2024-12-31T19:49:53Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you, we're getting closer...",
+          "createdAt": "2025-01-02T18:16:45Z",
+          "updatedAt": "2025-01-02T18:16:45Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "almost there...\r\nHere's the delta from changes @JAG-UK proposed with the recent changes: https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/compare/166bbbeecc166e573cc6e2eecb5355a968f742b2...9c8fd24422e0b45b1c64197259f0accfb589f194",
+          "createdAt": "2025-01-03T17:47:58Z",
+          "updatedAt": "2025-01-03T18:13:35Z"
         }
       ],
       "reviews": [
@@ -4214,6 +4244,392 @@
               "updatedAt": "2025-01-01T23:58:36Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wo1x5",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T09:54:00Z",
+          "updatedAt": "2025-01-02T09:54:00Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "I think that implies \"the response of/the behaviour of the TS\", and it is trying to say that if the payload is detached (and therefore unavailable to the service), the TS does not (cannot!) use it as an input in its decision/state change, instead it solely considers the client authentication context.\r\n\r\nThinking about it, and going back to the earlier discussion about unprotected headers, I think I have changed my mind about detached payloads from \"weird, but why not\" to \"oh no\", because the lack of verification means that _even the protected headers_ are unauthenticated in this case.\r\n\r\nWhich opens two cans of worms:\r\n\r\n1. All the same issues as unprotected headers, but worse, because now dependent on whether the payload is detached or not.\r\n2. Registration policy needs to be carefully written to take into account whether the payload was detached or not, and must consider, if at all, the protected headers quite differently in that case.",
+              "createdAt": "2025-01-02T09:54:00Z",
+              "updatedAt": "2025-01-02T09:54:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wo5uh",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T10:05:55Z",
+          "updatedAt": "2025-01-02T10:05:55Z",
+          "comments": [
+            {
+              "originalPosition": 352,
+              "body": "> when I did our implementation, having a response-code was useful in the aysnc operation status check. So that the request to check could have a 200/OK status, but the response content could be a problem details that indicated \"still running\" (aka 202/accepted).\r\n\r\nI am probably missing something obvious here, but the 202/200 distinction is enough for our implementation, I do not know what we would with an additional field.\r\nAdding lots of redundant fields is at best a cost, and at worst a source of brittleness because it increases the chance that some won't be populated and/or read.",
+              "createdAt": "2025-01-02T10:05:55Z",
+              "updatedAt": "2025-01-02T10:05:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WpDkG",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T10:36:05Z",
+          "updatedAt": "2025-01-02T10:36:05Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "I understood authentication context to mean the authorization obtained by the submiter of the statement (which is often not going to be the issuer).\r\n\r\nThese lines just acknowlege that the minimal cryptographic verification of a statement with a detached payload is not possible on registration. While this is an issue for the scitt arch registration section's position on minimal registration checks, I am totally fine with this being so. It is very clear to me what it means for registration time checks.\r\n\r\nA concrete example of registering a statement that has a detached payload and interesting verification would be registration of a signed statement that was a [COSE Receipt](https://cose-wg.github.io/draft-ietf-cose-merkle-tree-proofs/draft-ietf-cose-merkle-tree-proofs.html). Why would I want to do this ? To record the receipt I relied on from some other decision and which had to be *stripped* from its logical home in the unprotected headers of a Transparent Statement.\r\n\r\nIn this case:\r\n* The payload is detached\r\n* The proof material that is used to re-produce the payload is contained in the un protected headers and so can not be registered (unless we do the nested statement thing)\r\n\r\nHowever, verification is rigorously defined via profiles. *Any* proof that recreates the payload bytes is valid and should result in a positive verification result. \r\n\r\nThat the payload is detached is a security enforcing property. The payload, however it is obtained is always \"just bytes\". The transparent statement unprotected headers case was particularly hard because the headers were *not* opaque, and could not reliably be handled as \"just bytes\".\r\n\r\n",
+              "createdAt": "2025-01-02T10:36:05Z",
+              "updatedAt": "2025-01-02T10:36:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WpOm5",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T11:08:00Z",
+          "updatedAt": "2025-01-02T11:08:00Z",
+          "comments": [
+            {
+              "originalPosition": 352,
+              "body": "Ah, I think this has changed ? It was logical to me that \"Resolve Receipt\" should return 202 for \"still running\", but at the time I last looked I swear there were \"strong opinions\" that it was an abuse to use the status code like this (the request to check the status of the receipt has striclty speaking succeeded so should be 200). If that has been resolved, I don't think I would mis response-code and it would have made our implementation simpler (by a lot) to not have to deal with it.",
+              "createdAt": "2025-01-02T11:08:00Z",
+              "updatedAt": "2025-01-02T11:08:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wpix_",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T12:12:17Z",
+          "updatedAt": "2025-01-02T12:12:18Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "@robinbryce as you point out, this is not the only way to make a receipt transparent (and does not work if you are trying to make transparent a set of receipts). Making it (or them) part of the payload avoids this special case, and preserves the rest of the context.\r\n\r\n> The proof material that is used to re-produce the payload is contained in the un protected headers and so can not be registered (unless we do the nested statement thing)\r\n\r\nThat does not prevent verification of the signed statement by the TS though? We explicitly allow x5chain in the unprotected header, which may be necessary to verify Signed Statements with a payload. The unprotected evidence is not included in the ledger/counter-signed, but the protected header _is_ authenticated.\r\n\r\nThe current wording says that a TS accepting a statement with a detached payload _does not_ authenticate it, and so does not authenticate the protected header. Am I getting this wrong?",
+              "createdAt": "2025-01-02T12:12:17Z",
+              "updatedAt": "2025-01-02T12:12:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WpxN3",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T12:59:41Z",
+          "updatedAt": "2025-01-02T12:59:41Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "So first please note I just refer to receipts here because they are a handy concrete example for a real use of detached payloads.  I am not looking for \"special treatment\" for registration of statements that happen to be receipts and I'm not looking to have the tail wag the dog. \r\n\r\n> That does not prevent verification of the signed statement by the TS though?\r\n\r\nI think it does. Having the proof material is the only way to produce the detatched payload. To verify the cose signature, the detached payload must first be \"re attached\".\r\n\r\n> The current wording says that a TS accepting a statement with a detached payload does not authenticate it, and so does not authenticate the protected header. Am I getting this wrong?\r\n\r\nI think that is correct, and in the case of a receipt is also fine. A receipt is always in reference to *some other* signed statement. It can only verify inclusion of something in a log it can't be \"wrong\" in that sense, and its issuer is the log itself. A receipts presence in another log says *nothing* about the validity or verification status of that receipt. In the specific case of receipts (which have well defined verification semantics) the whole notion of registration time checks seems redundant, and - for some proof types - actively un helpful. \r\n\r\n\r\nThe problem here is with the arch: specifically the hard fought and long discussed minimal registration checks\r\n\r\nhttps://ietf-wg-scitt.github.io/draft-ietf-scitt-architecture/draft-ietf-scitt-architecture.html#name-registration-of-signed-stat\r\n\r\nParticularly \"TS Signed Statement Verification and Validation: The Transparency Service MUST perform signature verification per\"\r\n\r\nAnd I *think* that means what we say in 227 & 228 can't actually be allowed by the current arc ?\r\n\r\nI think the TL;DR of the prevailing opinion is that statements are meaningless to relying parties and auditors and so on, unless some kind of minimal registration checks are always performed.\r\n\r\nI have always disagreed with that opinion. Those that want strong enforcement are free to do so with what ever registration policies they define, including one that matches the current minimal requirements. The challenge with that was that then the arch depends for its trust model on something that is explicitly out of scope. I understood those objections. I just didn't aree with them :-). Where we landed was the very watered down minimal registration requirements we have today. I'm not sure that anyone was actually \"happy\" with that outcome. I can believe that some TS implementations will have very rigorous registration requirements indeed. Ours is at the opposite end of the spectrum.\r\n\r\nIn the case of registering a statement with a detached payload, a receipt is, in my opinion, an example of a signed statement that does not benefit from registration time checks at all - beyond the authorization of the *submitter* to call RegisterSignedStatement",
+              "createdAt": "2025-01-02T12:59:41Z",
+              "updatedAt": "2025-01-02T12:59:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wrb-5",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T17:42:04Z",
+          "updatedAt": "2025-01-02T17:42:04Z",
+          "comments": [
+            {
+              "originalPosition": 352,
+              "body": "Tagging @henkbirkholz, as I believe CoAP was his request \u2b06\ufe0f  ",
+              "createdAt": "2025-01-02T17:42:04Z",
+              "updatedAt": "2025-01-02T17:42:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wrdhv",
+          "commit": {
+            "abbreviatedOid": "2f97c58"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T17:47:19Z",
+          "updatedAt": "2025-01-02T17:47:20Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Are we agreeing to use Map, as that's the primary term in [RFC8949](https://www.rfc-editor.org/rfc/rfc8949.html#section-3.1-2.12), and just noting dictionary is not conceptually wrong, just not precise? \r\n\r\nSearching https://www.google.com/search?q=cbor+dict brings up github bugs, while \r\nSearching https://www.google.com/search?q=cbor+map brings up cbor.io and other ietf references in the top hits.",
+              "createdAt": "2025-01-02T17:47:19Z",
+              "updatedAt": "2025-01-02T17:47:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wrfyl",
+          "commit": {
+            "abbreviatedOid": "7824536"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T17:54:55Z",
+          "updatedAt": "2025-01-02T17:54:55Z",
+          "comments": [
+            {
+              "originalPosition": 159,
+              "body": "I've committed @aj-stein's change, with some additional tweaks. \r\n```suggestion\r\nTransparency Services do not guarantee the retention of operation IDs for the entirety of their lifecycle.\r\nA Transparency MAY delete operation records, and some operation ID lookups MAY return error 404, even though they were valid in the past.\r\nThe length of validity of the `OperationID` is Transparency Service specific.\r\nStill, the Transparency Service MUST maintain a record of every running or successful operation until at least one client has fetched the completed Receipt.\r\n```",
+              "createdAt": "2025-01-02T17:54:55Z",
+              "updatedAt": "2025-01-02T17:55:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wrl1n",
+          "commit": {
+            "abbreviatedOid": "2987f70"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T18:09:00Z",
+          "updatedAt": "2025-01-02T18:09:00Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "I struggled with these lines as well, and created #55, as I'm struggling to see great examples where detached signed statements really add much value, as you any verification requires fetching the payload. However, using https://datatracker.ietf.org/doc/draft-ietf-cose-hash-envelope/ provides a means to keep the payload small, while still providing verification.\r\nI'd suggest we remove these two lines, and use #55 to replace the examples and recommendations to use cose hash envelope.\r\n```suggestion\r\n```",
+              "createdAt": "2025-01-02T18:09:00Z",
+              "updatedAt": "2025-01-02T18:09:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WroJu",
+          "commit": {
+            "abbreviatedOid": "2987f70"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T18:14:37Z",
+          "updatedAt": "2025-01-02T18:14:38Z",
+          "comments": [
+            {
+              "originalPosition": 147,
+              "body": "locator is more generic, which can include an ID, while an ID isn't _necessarily_ a locator.\r\nIt's the fun topic of [Separating Identity from Location](https://stevelasker.blog/2021/09/24/separating-identity-from-location/) and [Decoupling Location from Identity - Is this in the scope of purl?](https://github.com/package-url/purl-spec/issues/127#top)\r\n\r\nSuggesting we keep locator",
+              "createdAt": "2025-01-02T18:14:37Z",
+              "updatedAt": "2025-01-02T18:14:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WrwQb",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T18:41:29Z",
+          "updatedAt": "2025-01-02T18:41:30Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "Yep, cose hash envelope is going to be the right answer for all cases where the desire to detach is driven by payload size. I agree with this change. Additionally, I would like to avoid \"banning\" registering statements with detached payloads.",
+              "createdAt": "2025-01-02T18:41:30Z",
+              "updatedAt": "2025-01-02T18:41:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wryd4",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T18:49:19Z",
+          "updatedAt": "2025-01-02T18:49:19Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "> Additionally, I would like to avoid \"banning\" registering statements with detached payloads.\r\n\r\nFair, since COSE supports detached, I don't think we need to explicitly ban/block. \r\nDo we want to delete these two lines, and move forward with #55 as the default for copy/paste simplicity of implementors?",
+              "createdAt": "2025-01-02T18:49:19Z",
+              "updatedAt": "2025-01-02T18:49:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WsDdC",
+          "commit": {
+            "abbreviatedOid": "2f97c58"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T19:47:44Z",
+          "updatedAt": "2025-01-02T19:47:45Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Sorry, I was quoting from the link in your first comment, but I agree that using CBOR map consistently throughout the document is clearly preferable.",
+              "createdAt": "2025-01-02T19:47:45Z",
+              "updatedAt": "2025-01-02T19:47:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WsD7_",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T19:49:36Z",
+          "updatedAt": "2025-01-02T19:49:36Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "> Do we want to delete these two lines, and move forward with https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/55 as the default for copy/paste simplicity of implementors?\r\n\r\nThat sounds good to me.",
+              "createdAt": "2025-01-02T19:49:36Z",
+              "updatedAt": "2025-01-02T19:49:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WsElf",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T19:51:58Z",
+          "updatedAt": "2025-01-02T19:51:58Z",
+          "comments": [
+            {
+              "originalPosition": 147,
+              "body": "> Suggesting we keep locator\r\n\r\n+1",
+              "createdAt": "2025-01-02T19:51:58Z",
+              "updatedAt": "2025-01-02T19:51:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Ww043",
+          "commit": {
+            "abbreviatedOid": "bf5801a"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-03T16:34:47Z",
+          "updatedAt": "2025-01-03T16:34:47Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WxURX",
+          "commit": {
+            "abbreviatedOid": "391c954"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-03T18:07:06Z",
+          "updatedAt": "2025-01-03T18:07:06Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "We can either delete these lines here, or resolve in #55 if we want to finish up this PR.\r\nDeferring to folks in the next Editors Meeting as I'll be on vacation.",
+              "createdAt": "2025-01-03T18:07:06Z",
+              "updatedAt": "2025-01-03T18:07:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WxUmU",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-03T18:08:12Z",
+          "updatedAt": "2025-01-03T18:08:12Z",
+          "comments": [
+            {
+              "originalPosition": 352,
+              "body": "If there's no quick resolution, I suggest deferring this to a separate issue to unblock merging this PR.",
+              "createdAt": "2025-01-03T18:08:12Z",
+              "updatedAt": "2025-01-03T18:08:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WxWZh",
+          "commit": {
+            "abbreviatedOid": "9c8fd24"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM for https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/compare/main...9c8fd24422e0b45b1c64197259f0accfb589f194\r\n\r\nThe remaining open issues could be resolved with subsequent PRs",
+          "createdAt": "2025-01-03T18:14:35Z",
+          "updatedAt": "2025-01-03T18:14:35Z",
+          "comments": []
         }
       ]
     },
@@ -4346,7 +4762,7 @@
       "labels": [],
       "body": "An 'Issue Statement' endpoint is not necessary, nor helpful to implement a transparency service, and it is unclear why it has been added as an optional endpoint.\r\n\r\nSCITT services should be able to compose with arbitrary signing services that produce signed statements in the correct format.\r\n\r\nAside from separating concerns and making the document more concise, this helps make the authentication posture consistent (see #52).",
       "createdAt": "2024-12-06T14:24:31Z",
-      "updatedAt": "2025-01-01T16:20:08Z",
+      "updatedAt": "2025-01-03T16:22:27Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
@@ -4371,6 +4787,13 @@
           "body": "> Being able to create a signed statement is an important security and usability workflow to SCITT. I do agree a single transparency service should not sign their own statements prior to registration. However, another remote signing service could implement the API, which issue #56 covers.\r\n\r\nI am confused by this, my sense so far was that SCRAPI was \"the API of a TS\". As an implementer, or as a user, a TS is \"a service that implements SCRAPI\".\r\n\r\nIf I understand correctly, #56 says \"SCRAPI is actually the set of all APIs that might be useful in the context of SCITT, likely (hopefully even) implemented by multiple services\". Is that right?\r\n\r\nAssuming I have got this right, I don't know that the current signing endpoint is a good thing to have, because:\r\n\r\n1. If the bar for having an endpoint is all important workflows, then surely there ought to be a verification endpoint?\r\n2. The specification doesn't say much more than \"there is a way to get a COSE Sign1 over unspecified payloads\". Is the issuer the same as for Transparent Statements? Is key discovery the same too? I struggle to see what interoperability value this endpoint provides.\r\n\r\nI think it would be more coherent to specify only endpoints that we expect a TS to implement and where the specification provides interoperability value (i.e. format definitions, field semantics etc).",
           "createdAt": "2025-01-01T16:20:07Z",
           "updatedAt": "2025-01-01T16:20:07Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is a good point, as while it is important to ease and standardize a means to create signed statements, it may be beyond the scope of SCRAPI. \r\nLet's discuss this in the next meeting. ",
+          "createdAt": "2025-01-02T17:38:53Z",
+          "updatedAt": "2025-01-02T17:38:53Z"
         }
       ],
       "reviews": [
@@ -4393,6 +4816,19 @@
               "updatedAt": "2024-12-31T23:24:43Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wwvwi",
+          "commit": {
+            "abbreviatedOid": "1b751f9"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-03T16:22:27Z",
+          "updatedAt": "2025-01-03T16:22:27Z",
+          "comments": []
         }
       ]
     },
@@ -4401,24 +4837,26 @@
       "id": "PR_kwDOLJjbks6GgcJD",
       "title": "Editorial updates",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/54",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-12-31T18:31:38Z",
-      "updatedAt": "2025-01-01T16:26:53Z",
+      "updatedAt": "2025-01-03T17:11:12Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "e1ece4c08af65e768e7f45a589785b5e8d732c1c",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "steve/editorial-updates",
-      "headRefOid": "049e1dbdcd67840c49eea82446e128b8ee1d4c39",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "80538ce512dece5591561ce79d8b156c89cf1b0f",
+      "closedAt": "2025-01-03T17:11:07Z",
+      "mergedAt": "2025-01-03T17:11:07Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "2e8a76494b6aa740f3b1f552f82857ac21d20037"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4440,6 +4878,172 @@
               "updatedAt": "2024-12-31T21:16:08Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wo6oo",
+          "commit": {
+            "abbreviatedOid": "049e1db"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T10:08:40Z",
+          "updatedAt": "2025-01-02T10:08:40Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nOptional key discovery and query interfaces are provided to support interoperability with X.509 Certificates, alternative methods commonly used to support public key discovery and Artifact Repositories.\r\n```\r\n\r\nSource: https://www.itu.int/rec/T-REC-X.509",
+              "createdAt": "2025-01-02T10:08:40Z",
+              "updatedAt": "2025-01-02T10:08:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6Wo9et",
+          "commit": {
+            "abbreviatedOid": "049e1db"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T10:17:22Z",
+          "updatedAt": "2025-01-02T10:17:22Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "As discussed in https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/53#issuecomment-2567067582, my preference is to have SCRAPI strictly define the API of a TS, and not attempt to define APIs for signature and verification.\r\nI think we will get a clearer, faster result that way than if we try to define REST APIs for all possible operations connected with Transparency in general.",
+              "createdAt": "2025-01-02T10:17:22Z",
+              "updatedAt": "2025-01-02T10:17:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WpAz-",
+          "commit": {
+            "abbreviatedOid": "049e1db"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T10:27:26Z",
+          "updatedAt": "2025-01-02T10:27:27Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "This sounds like it excludes the possibility of redirects, it seems to me that a service could legitimately return a `301 Moved Permanently` for example?",
+              "createdAt": "2025-01-02T10:27:27Z",
+              "updatedAt": "2025-01-02T11:55:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WpeNN",
+          "commit": {
+            "abbreviatedOid": "049e1db"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T11:56:36Z",
+          "updatedAt": "2025-01-02T11:56:37Z",
+          "comments": [
+            {
+              "originalPosition": 199,
+              "body": "```suggestion\r\n#### Message Insertion Attacks\r\n```\r\nprobably?",
+              "createdAt": "2025-01-02T11:56:36Z",
+              "updatedAt": "2025-01-02T11:56:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WrX5f",
+          "commit": {
+            "abbreviatedOid": "80538ce"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T17:28:38Z",
+          "updatedAt": "2025-01-02T17:28:38Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Can we cover that topic in #53?  I was hoping to keep this limited to more editorial formatting and flow. ",
+              "createdAt": "2025-01-02T17:28:38Z",
+              "updatedAt": "2025-01-02T17:28:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WraCW",
+          "commit": {
+            "abbreviatedOid": "80538ce"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T17:35:47Z",
+          "updatedAt": "2025-01-02T17:35:47Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "It's a great question, and I've added #57 to track this, as this change simply removed the ()'s as references already have []'s\r\n",
+              "createdAt": "2025-01-02T17:35:47Z",
+              "updatedAt": "2025-01-02T17:35:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WsChK",
+          "commit": {
+            "abbreviatedOid": "049e1db"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-02T19:44:17Z",
+          "updatedAt": "2025-01-02T19:44:17Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Yes, absolutely.",
+              "createdAt": "2025-01-02T19:44:17Z",
+              "updatedAt": "2025-01-02T19:44:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WsCq2",
+          "commit": {
+            "abbreviatedOid": "80538ce"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-02T19:44:49Z",
+          "updatedAt": "2025-01-02T19:44:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6WwvkG",
+          "commit": {
+            "abbreviatedOid": "80538ce"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-03T16:21:53Z",
+          "updatedAt": "2025-01-03T16:21:53Z",
+          "comments": []
         }
       ]
     }
