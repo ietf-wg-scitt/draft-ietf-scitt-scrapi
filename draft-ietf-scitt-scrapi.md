@@ -828,7 +828,7 @@ Nonetheless transparency may mean 'within a limited community' rather than 'in f
 
 #### Message Modification Attacks
 
-Nodification attacks are mitigated by the use of the Issuer signature on the Signed Statement.
+Modification attacks are mitigated by the use of the Issuer signature on the Signed Statement.
 
 #### Message Insertion Attacks
 
