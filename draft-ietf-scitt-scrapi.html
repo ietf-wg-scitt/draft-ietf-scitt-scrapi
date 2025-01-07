@@ -1183,19 +1183,16 @@ Optional key discovery and query interfaces are provided to support interoperabi
                 <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-optional-endpoints" class="internal xref">Optional Endpoints</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.1">
-                    <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="auto internal xref">2.2.1</a>.  <a href="#name-issue-signed-statement" class="internal xref">Issue Signed Statement</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="auto internal xref">2.2.1</a>.  <a href="#name-resolve-signed-statement" class="internal xref">Resolve Signed Statement</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.2">
-                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="auto internal xref">2.2.2</a>.  <a href="#name-resolve-signed-statement" class="internal xref">Resolve Signed Statement</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="auto internal xref">2.2.2</a>.  <a href="#name-exchange-receipt" class="internal xref">Exchange Receipt</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.3">
-                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="auto internal xref">2.2.3</a>.  <a href="#name-exchange-receipt" class="internal xref">Exchange Receipt</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="auto internal xref">2.2.3</a>.  <a href="#name-resolve-issuer" class="internal xref">Resolve Issuer</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.4">
-                    <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="auto internal xref">2.2.4</a>.  <a href="#name-resolve-issuer" class="internal xref">Resolve Issuer</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.5">
-                    <p id="section-toc.1-1.2.2.2.2.5.1"><a href="#section-2.2.5" class="auto internal xref">2.2.5</a>.  <a href="#name-request-nonce" class="internal xref">Request Nonce</a></p>
+                    <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="auto internal xref">2.2.4</a>.  <a href="#name-request-nonce" class="internal xref">Request Nonce</a></p>
 </li>
                 </ul>
 </li>
@@ -1883,126 +1880,28 @@ application/concise-problem-details+cbor
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-optional-endpoints" class="section-name selfRef">Optional Endpoints</a>
         </h3>
 <p id="section-2.2-1">The following HTTP endpoints are optional to implement.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<div id="sec-issue-signed-statement">
-<section id="section-2.2.1">
-          <h4 id="name-issue-signed-statement">
-<a href="#section-2.2.1" class="section-number selfRef">2.2.1. </a><a href="#name-issue-signed-statement" class="section-name selfRef">Issue Signed Statement</a>
-          </h4>
-<p id="section-2.2.1-1">Authentication <span class="bcp14">MUST</span> be implemented for this endpoint.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-2">This endpoint enables a Transparency Service to be an issuer of Signed Statements on behalf of authenticated clients.
-This supports cases where a client lacks the ability to perform complex cryptographic operations, but can be authenticated and report statements and measurements.<a href="#section-2.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-3">Request:<a href="#section-2.2.1-3" class="pilcrow">¶</a></p>
-<div class="breakable lang-http-message sourcecode" id="section-2.2.1-4">
-<pre>
-POST /signed-statements/issue HTTP/1.1
-Host: transparency.example
-Accept: application/json
-Content-Type: application/spdx+json
-Payload
-
-{
-  "spdxVersion": "SPDX-2.2",
-  "dataLicense": "CC0-1.0",
-  "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "cli-app 0.1.2",
-  "documentNamespace": \
-    "https://spdx.org/spdxdocs/\
-    sbom-tool-2.2.7-38f6.../cli-app/0.1.2/0d06...",
-  "creationInfo": {
-    "created": "2024-08-16T21:44:54Z",
-    "creators": [
-      "Organization: acme"
-    ]
-  },
-  "files": [
-    {
-      "name": "cli-app",
-      "SPDXID": "SPDXRef-RootPackage",
-      "downloadLocation": "NOASSERTION",
-      "packageVerificationCode": {
-        "packageVerificationCodeValue": "ecf0aae2a849cc51..."
-      },
-      "filesAnalyzed": true,
-      "licenseConcluded": "NOASSERTION",
-      "licenseInfoFromFiles": [
-        "NOASSERTION"
-      ],
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "versionInfo": "0.1.2",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": \
-            "pkg:swid/acme/spdx.org/cli-app@0.1.2?tag_id=ac07..."
-        }
-      ],
-      "supplier": "Organization: acme",
-      "hasFiles": [
-        "SPDXRef-File--..."
-      ]
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "DESCRIBES",
-      "relatedSpdxElement": "SPDXRef-RootPackage",
-      "spdxElementId": "SPDXRef-DOCUMENT"
-    },
-    {
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-FF36801C1982452...",
-      "spdxElementId": "SPDXRef-RootPackage"
-    }
-  ],
-  "documentDescribes": [
-    "SPDXRef-RootPackage"
-  ],
-  "externalDocumentRefs": []
-}
-</pre><a href="#section-2.2.1-4" class="pilcrow">¶</a>
-</div>
-<p id="section-2.2.1-5">Response:<a href="#section-2.2.1-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.1-6">
-<pre>
-HTTP/1.1 200 Ok
-Content-Type: application/cose
-
-Payload (in CBOR diagnostic notation)
-
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
-])
-</pre><a href="#section-2.2.1-6" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
 <div id="sec-resolve-signed-statement">
-<section id="section-2.2.2">
+<section id="section-2.2.1">
           <h4 id="name-resolve-signed-statement">
-<a href="#section-2.2.2" class="section-number selfRef">2.2.2. </a><a href="#name-resolve-signed-statement" class="section-name selfRef">Resolve Signed Statement</a>
+<a href="#section-2.2.1" class="section-number selfRef">2.2.1. </a><a href="#name-resolve-signed-statement" class="section-name selfRef">Resolve Signed Statement</a>
           </h4>
-<p id="section-2.2.2-1">This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-2">Request:<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.2-3">
+<p id="section-2.2.1-1">This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.1-2">Request:<a href="#section-2.2.1-2" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.1-3">
 <pre>
 GET /signed-statements/9e4f...688a HTTP/1.1
 Host: transparency.example
 Accept: application/cose
-</pre><a href="#section-2.2.2-3" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.2-4">Response:<a href="#section-2.2.2-4" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-5">One of the following:<a href="#section-2.2.2-5" class="pilcrow">¶</a></p>
+<p id="section-2.2.1-4">Response:<a href="#section-2.2.1-4" class="pilcrow">¶</a></p>
+<p id="section-2.2.1-5">One of the following:<a href="#section-2.2.1-5" class="pilcrow">¶</a></p>
 <div id="sec-status-200-success">
-<section id="section-2.2.2.1">
+<section id="section-2.2.1.1">
             <h5 id="name-status-200-success">
-<a href="#section-2.2.2.1" class="section-number selfRef">2.2.2.1. </a><a href="#name-status-200-success" class="section-name selfRef">Status 200 - Success</a>
+<a href="#section-2.2.1.1" class="section-number selfRef">2.2.1.1. </a><a href="#name-status-200-success" class="section-name selfRef">Status 200 - Success</a>
             </h5>
-<div class="lang-http-message sourcecode" id="section-2.2.2.1-1">
+<div class="lang-http-message sourcecode" id="section-2.2.1.1-1">
 <pre>
 HTTP/1.1 200 Ok
 Content-Type: application/cose
@@ -2015,18 +1914,18 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.2.2.1-1" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.1.1-1" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-status-404-not-found">
-<section id="section-2.2.2.2">
+<section id="section-2.2.1.2">
             <h5 id="name-status-404-not-found">
-<a href="#section-2.2.2.2" class="section-number selfRef">2.2.2.2. </a><a href="#name-status-404-not-found" class="section-name selfRef">Status 404 - Not Found</a>
+<a href="#section-2.2.1.2" class="section-number selfRef">2.2.1.2. </a><a href="#name-status-404-not-found" class="section-name selfRef">Status 404 - Not Found</a>
             </h5>
-<p id="section-2.2.2.2-1">The following expected errors are defined.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2.2.2-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.2.2-2">
+<p id="section-2.2.1.2-1">The following expected errors are defined.
+Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2.1.2-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.1.2-2">
 <pre>
 HTTP/1.1 404 Not Found
 application/concise-problem-details+cbor
@@ -2039,31 +1938,31 @@ application/concise-problem-details+cbor
   / instance /      -3: \
           "urn:ietf:params:scitt:error:notFound",
   / response-code / -4: 404,
-</pre><a href="#section-2.2.2.2-2" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.1.2-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-eventual-consistency">
-<section id="section-2.2.2.3">
+<section id="section-2.2.1.3">
             <h5 id="name-eventual-consistency">
-<a href="#section-2.2.2.3" class="section-number selfRef">2.2.2.3. </a><a href="#name-eventual-consistency" class="section-name selfRef">Eventual Consistency</a>
+<a href="#section-2.2.1.3" class="section-number selfRef">2.2.1.3. </a><a href="#name-eventual-consistency" class="section-name selfRef">Eventual Consistency</a>
             </h5>
-<p id="section-2.2.2.3-1">For all responses additional eventually consistent operation details <span class="bcp14">MAY</span> be present.
-Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.<a href="#section-2.2.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.1.3-1">For all responses additional eventually consistent operation details <span class="bcp14">MAY</span> be present.
+Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.<a href="#section-2.2.1.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="sec-exchange-receipt">
-<section id="section-2.2.3">
+<section id="section-2.2.2">
           <h4 id="name-exchange-receipt">
-<a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-exchange-receipt" class="section-name selfRef">Exchange Receipt</a>
+<a href="#section-2.2.2" class="section-number selfRef">2.2.2. </a><a href="#name-exchange-receipt" class="section-name selfRef">Exchange Receipt</a>
           </h4>
-<p id="section-2.2.3-1">This endpoint is used to exchange old or expiring Receipts for fresh ones.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-2">The <code>iat</code>, <code>exp</code> and <code>kid</code> claims can change each time a Receipt is exchanged.<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-3">This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.<a href="#section-2.2.3-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-4">Request:<a href="#section-2.2.3-4" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.3-5">
+<p id="section-2.2.2-1">This endpoint is used to exchange old or expiring Receipts for fresh ones.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-2">The <code>iat</code>, <code>exp</code> and <code>kid</code> claims can change each time a Receipt is exchanged.<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-3">This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.<a href="#section-2.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-4">Request:<a href="#section-2.2.2-4" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.2-5">
 <pre>
 POST /exchange/receipt HTTP/1.1
 Host: transparency.example
@@ -2077,15 +1976,15 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.2.3-5" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.2-5" class="pilcrow">¶</a>
 </div>
 <div id="sec-status-200-1">
-<section id="section-2.2.3.1">
+<section id="section-2.2.2.1">
             <h5 id="name-status-200-2">
-<a href="#section-2.2.3.1" class="section-number selfRef">2.2.3.1. </a><a href="#name-status-200-2" class="section-name selfRef">Status 200</a>
+<a href="#section-2.2.2.1" class="section-number selfRef">2.2.2.1. </a><a href="#name-status-200-2" class="section-name selfRef">Status 200</a>
             </h5>
-<p id="section-2.2.3.1-1">A new Receipt:<a href="#section-2.2.3.1-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.3.1-2">
+<p id="section-2.2.2.1-1">A new Receipt:<a href="#section-2.2.2.1-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.2.1-2">
 <pre>
 HTTP/1.1 200 Ok
 Location: https://transparency.example/entries/67ed...befe
@@ -2100,29 +1999,29 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.2.3.1-2" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.2.1-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 </section>
 </div>
 <div id="sec-resolve-issuer">
-<section id="section-2.2.4">
+<section id="section-2.2.3">
           <h4 id="name-resolve-issuer">
-<a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-resolve-issuer" class="section-name selfRef">Resolve Issuer</a>
+<a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-resolve-issuer" class="section-name selfRef">Resolve Issuer</a>
           </h4>
-<p id="section-2.2.4-1">This endpoint is inspired by <span>[<a href="#I-D.draft-ietf-oauth-sd-jwt-vc" class="cite xref">I-D.draft-ietf-oauth-sd-jwt-vc</a>]</span>.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.4-2">The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when <code>iss</code> is set to <code>https://transparency.example/tenant/1234</code>:<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.4-3">Request:<a href="#section-2.2.4-3" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.4-4">
+<p id="section-2.2.3-1">This endpoint is inspired by <span>[<a href="#I-D.draft-ietf-oauth-sd-jwt-vc" class="cite xref">I-D.draft-ietf-oauth-sd-jwt-vc</a>]</span>.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.3-2">The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when <code>iss</code> is set to <code>https://transparency.example/tenant/1234</code>:<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.2.3-3">Request:<a href="#section-2.2.3-3" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.3-4">
 <pre>
 GET /.well-known/issuer/tenant/1234 HTTP/1.1
 Host: transparency.example
 Accept: application/json
-</pre><a href="#section-2.2.4-4" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.3-4" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.4-5">Response:<a href="#section-2.2.4-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.4-6">
+<p id="section-2.2.3-5">Response:<a href="#section-2.2.3-5" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.3-6">
 <pre>
 HTTP/1.1 200 Ok
 Content-Type: application/json
@@ -2154,29 +2053,29 @@ Content-Type: application/json
     ]
   }
 }
-</pre><a href="#section-2.2.4-6" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.3-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-request-nonce">
-<section id="section-2.2.5">
+<section id="section-2.2.4">
           <h4 id="name-request-nonce">
-<a href="#section-2.2.5" class="section-number selfRef">2.2.5. </a><a href="#name-request-nonce" class="section-name selfRef">Request Nonce</a>
+<a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-request-nonce" class="section-name selfRef">Request Nonce</a>
           </h4>
-<p id="section-2.2.5-1">This endpoint in inspired by <span>[<a href="#I-D.draft-demarco-oauth-nonce-endpoint" class="cite xref">I-D.draft-demarco-oauth-nonce-endpoint</a>]</span>.<a href="#section-2.2.5-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.5-2">Authentication <span class="bcp14">SHOULD NOT</span> be implemented for this endpoint.
+<p id="section-2.2.4-1">This endpoint in inspired by <span>[<a href="#I-D.draft-demarco-oauth-nonce-endpoint" class="cite xref">I-D.draft-demarco-oauth-nonce-endpoint</a>]</span>.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.4-2">Authentication <span class="bcp14">SHOULD NOT</span> be implemented for this endpoint.
 This endpoint is used to demonstrate proof of possession, which is the reason that authentication is not required.
-Client holding signed statements that require demonstrating proof of possession <span class="bcp14">MUST</span> use this endpoint to obtain a nonce.<a href="#section-2.2.5-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.5-3">Request:<a href="#section-2.2.5-3" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.5-4">
+Client holding signed statements that require demonstrating proof of possession <span class="bcp14">MUST</span> use this endpoint to obtain a nonce.<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
+<p id="section-2.2.4-3">Request:<a href="#section-2.2.4-3" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.4-4">
 <pre>
 GET /nonce HTTP/1.1
 Host: transparency.example
 Accept: application/json
-</pre><a href="#section-2.2.5-4" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.4-4" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.5-5">Response:<a href="#section-2.2.5-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.5-6">
+<p id="section-2.2.4-5">Response:<a href="#section-2.2.4-5" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2.4-6">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -2184,7 +2083,7 @@ Content-Type: application/json
 {
   "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
 }
-</pre><a href="#section-2.2.5-6" class="pilcrow">¶</a>
+</pre><a href="#section-2.2.4-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2296,8 +2195,7 @@ Nonetheless transparency may mean 'within a limited community' rather than 'in f
             <h5 id="name-message-modification-attack">
 <a href="#section-4.4.1.3" class="section-number selfRef">4.4.1.3. </a><a href="#name-message-modification-attack" class="section-name selfRef">Message Modification Attacks</a>
             </h5>
-<p id="section-4.4.1.3-1">While most relevant modification attacks are mitigated by the use of the Issuer signature on the Signed Statement, the <code>Issue Statement</code> endpoint presents an opportunity for manipulation of messages and misrepresentation of Issuer intent that could mislead later Verifiers.<a href="#section-4.4.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.3-2">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span> require authentication and transport-level security for that endpoint, <span class="bcp14">MUST NOT</span> modify anything in the message to be signed, and <span class="bcp14">MUST</span> take steps to ensure that the party calling the endpoint is authorized to register statements on behalf of the specified Issuer.<a href="#section-4.4.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.3-1">Modification attacks are mitigated by the use of the Issuer signature on the Signed Statement.<a href="#section-4.4.1.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-message-insertion-attacks">
@@ -2305,20 +2203,8 @@ Nonetheless transparency may mean 'within a limited community' rather than 'in f
             <h5 id="name-message-insertion-attacks">
 <a href="#section-4.4.1.4" class="section-number selfRef">4.4.1.4. </a><a href="#name-message-insertion-attacks" class="section-name selfRef">Message Insertion Attacks</a>
             </h5>
-<p id="section-4.4.1.4-1">While most relevant insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, the <code>Issue Statement</code> endpoint presents an opportunity for insertion of messages and misrepresentation of Issuer intent that could mislead later Verifiers.
-There are 2 most likely avenues to this attack:<a href="#section-4.4.1.4-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.4.1.4-2.1">
-                <p id="section-4.4.1.4-2.1.1">Stolen client endpoint authentication credentials<a href="#section-4.4.1.4-2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-4.4.1.4-2.2">
-                <p id="section-4.4.1.4-2.2.1">Stolen or misused Issuer keys held in the Transparency Service on behalf of clients<a href="#section-4.4.1.4-2.2.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
-<p id="section-4.4.1.4-3">Clients relying on the <code>Issue Statement</code> endpoint <span class="bcp14">SHOULD</span> take steps to ensure their endpoint authentication credentials are securely stored and can be rotated and/or revoked in the case of a breach.<a href="#section-4.4.1.4-3" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.4-4">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span> require authentication and transport-level security for that endpoint, and <span class="bcp14">MUST</span> enable the rotation and revocation of those credentials.<a href="#section-4.4.1.4-4" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.4-5">Transparency Services offering the <code>Issue Statement</code> endpoint <span class="bcp14">MUST</span> take careful steps in both design and operation of their software stack to prevent the theft or inappropriate use of the Issuer keys they use to sign Statements on behalf of Issuers, such as HSMs for storage and least-privilege, regularly refreshed access controls for use.<a href="#section-4.4.1.4-5" class="pilcrow">¶</a></p>
-<p id="section-4.4.1.4-6">Transparency Services <span class="bcp14">MAY</span> also implement additional protections such as anomaly detection or rate limiting in order to mitigate the impact of any breach.<a href="#section-4.4.1.4-6" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.4-1">Insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, therefore care must be taken in the protection of Issuer keys and credentials to avoid theft Issuer and impersonation.<a href="#section-4.4.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.1.4-2">Transparency Services <span class="bcp14">MAY</span> also implement additional protections such as anomaly detection or rate limiting in order to mitigate the impact of any breach.<a href="#section-4.4.1.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
