@@ -832,7 +832,7 @@ Modification attacks are mitigated by the use of the Issuer signature on the Sig
 
 #### Message Insertion Attacks
 
-Insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement.
+Insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, therefore care must be taken in the protection of Issuer keys and credentials to avoid theft Issuer and impersonation.
 
 Transparency Services MAY also implement additional protections such as anomaly detection or rate limiting in order to mitigate the impact of any breach.
 
