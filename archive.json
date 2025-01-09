@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-07T00:38:09.247881+00:00",
+  "timestamp": "2025-01-09T00:37:49.771694+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -266,7 +266,7 @@
       "id": "I_kwDOLJjbks6J6Dgd",
       "title": "Workflow and details for signed-statement/issue",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -277,8 +277,8 @@
       ],
       "body": "Opening this issue to explore:\r\n\r\n- Does [/signed-statements/issue](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-issue-statement) also register the newly signed statement, or return a signed statement to then be submitted via [2.1.2. ](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.1.2)[Signed Statement Registration](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-signed-statement-registrati)?\r\n- What are the properties of a Signed Statement, when signed by the Transparency Service? \r\n  - How does the TS represent it has signed on behalf of the service-authenticated user, meaning are we deferring the signing to be a root CA, where the service is maintaining identity documents for the user? Or, is there some on-behalf of flow?",
       "createdAt": "2024-05-23T19:41:45Z",
-      "updatedAt": "2024-12-31T23:40:09Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-07T15:35:28Z",
+      "closedAt": "2025-01-07T15:35:28Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -294,7 +294,7 @@
       "id": "I_kwDOLJjbks6NKviq",
       "title": "async registration policy checking apears disallowed by 2.1.2",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/12",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "robinbryce",
       "authorAssociation": "NONE",
       "assignees": [
@@ -306,8 +306,8 @@
       ],
       "body": "In [2.1.2. ](https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#section-2.1.2)[Signed Statement Registration](https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-signed-statement-registrati)\r\n\r\nWe have \"The Registration Policy for the Transparency Service MUST be applied to the payload bytes, before any additional processing is performed\"\r\n\r\nThis appears to rule out implementations which do async processing of registration statements.\r\n\r\nI understood that the combined effect, and intent, of\r\n\r\nhttps://www.ietf.org/archive/id/draft-ietf-scitt-architecture-06.html#name-registration 5. & 7. With the subsequent text\r\n\r\n\"A Transparency Service MUST ensure that a Signed Statement is registered before releasing its Receipt.\"\r\n\r\nWas to enable the implementation to defer application of registration policies until receipt issuance.\r\n\r\nI think, if that is consistent with the intent of the authors intent, a specific requirement along the lines of \"Registration policies MUST be applied before issuing a Receipt\" would be much clearer\r\n",
       "createdAt": "2024-06-23T07:38:29Z",
-      "updatedAt": "2024-12-31T23:40:16Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-07T15:35:29Z",
+      "closedAt": "2025-01-07T15:35:29Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -323,7 +323,7 @@
       "id": "I_kwDOLJjbks6NKxkq",
       "title": "2.1.2.2 Status 202 requires the resolve receipts endpoint to do double duty",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/13",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "robinbryce",
       "authorAssociation": "NONE",
       "assignees": [
@@ -334,8 +334,8 @@
       ],
       "body": "https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-01.html#name-status-202-registration-is-\r\n\r\n\"If 202 is returned, then clients should wait until Registration succeeded or failed by polling the receipt endpoint using the receipt identifier returned in the response.\"\r\n\r\nI understand that to mean \"poll the optional interface defined by 2.2.4 Resolve Receipt\". \r\n\r\nThere are some  issues with a request model that mixes \"poll for operation a (OP A) completion, with do operation b (OP B)\"\r\n\r\n1. It forces complexity and mixed state handling on the endpoint implementation. It has to both determine if OP A was extant and is now complete, then it has to follow on and do dependent OP B. Mixed state handling can require that  single instance has access to two differently provisioned and permissioned data stores.\r\n2. It forces the same authorization & authentication model on both OP A and OP B. (I will raise a seperate issue for another concerne regading the authentication SHOULD for Resolve Receipt)\r\n3. Implementors will likely want different rate limits for those actions. Checking if an extant operation is complete is light weight and can be designed for \"polling clients\". Producing a receipts, potentially finalising registration, could be a much heavier load. I would want the ability to seperately rate limit that request.\r\n\r\n\r\nI very much prefered the previous draft's approach of having a distinct endpoint on which to check for the completion of async registration",
       "createdAt": "2024-06-23T07:55:30Z",
-      "updatedAt": "2024-12-31T23:40:23Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-07T15:35:30Z",
+      "closedAt": "2025-01-07T15:35:29Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -479,7 +479,7 @@
       "id": "I_kwDOLJjbks6Q4YdH",
       "title": "2.1.2 The identifier definitions are not clearly describing what it is meant to solve.",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/20",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "roywill",
       "authorAssociation": "NONE",
       "assignees": [
@@ -490,8 +490,8 @@
       ],
       "body": "From: [2.1.2. ](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.1.2)[Signed Statement Registration](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-signed-statement-registrati)\r\n\r\n> If registration succeeds the following identifier MAY be used to refer to the Signed Statement that was accepted\r\n\r\nFrom an outside space, the identifier of the receipt is important to be stable.  In the context of a ledger, the indexing into the append only log is not discussed to support any indexing other way.\r\n\r\nSo the identifier for a Signed Statement is interesting but what is the use case.\r\n\r\nThe Identifier for the payload is super unclear.  There can be multiple signed statements against the same payload, and in the case of a \"detached\" signatures it is unclear if this is referencing the simple HASH of the artifact or the document holding the HASH.",
       "createdAt": "2024-07-25T18:12:09Z",
-      "updatedAt": "2024-12-31T23:40:34Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-07T15:35:30Z",
+      "closedAt": "2025-01-07T15:35:30Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -533,7 +533,7 @@
       "id": "I_kwDOLJjbks6Q4b5o",
       "title": "2.1.2.2 Registration is running.",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/22",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "roywill",
       "authorAssociation": "NONE",
       "assignees": [
@@ -544,8 +544,8 @@
       ],
       "body": "The key returned in the example is the identifier of the payload or the signed statement as they are the same HASH.  If it is the payload, this precludes simultaneously registering two signed statements simultaneously.  I suspect you really want to supply a transaction token not reference anything about the signed statement nor the payload.\r\n\r\nIf it is truly the receipt, then assuming the HASH can be computed of the final receipt seems a cart before horse statement.",
       "createdAt": "2024-07-25T18:18:22Z",
-      "updatedAt": "2024-12-31T23:40:45Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-07T15:35:31Z",
+      "closedAt": "2025-01-07T15:35:30Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -3455,24 +3455,26 @@
       "id": "PR_kwDOLJjbks6D6qCz",
       "title": "Refactor all the RegisterSignedStatement workflows",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/51",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses #10 , #12 , #13 ,  #14 , #20 and #22 \r\n\r\nCleans up async workflow\r\nCleans up async error reporting\r\nCleans up locators\r\nMore defined/single responsibilities for endpoint calls and returns",
       "createdAt": "2024-12-03T16:20:49Z",
-      "updatedAt": "2025-01-03T18:14:35Z",
+      "updatedAt": "2025-01-07T15:35:27Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "2e8a76494b6aa740f3b1f552f82857ac21d20037",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "jag-uk/23-async-operations-locators",
       "headRefOid": "9c8fd24422e0b45b1c64197259f0accfb589f194",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-07T15:35:27Z",
+      "mergedAt": "2025-01-07T15:35:27Z",
+      "mergedBy": "JAG-UK",
+      "mergeCommit": {
+        "oid": "f3a590cfe8043d1fc0f5c07451d7cd7963ce4be1"
+      },
       "comments": [
         {
           "author": "robinbryce",
@@ -4630,6 +4632,79 @@
           "createdAt": "2025-01-03T18:14:35Z",
           "updatedAt": "2025-01-03T18:14:35Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6XE3tu",
+          "commit": {
+            "abbreviatedOid": "7e934bd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-07T15:29:03Z",
+          "updatedAt": "2025-01-07T15:29:03Z",
+          "comments": [
+            {
+              "originalPosition": 352,
+              "body": "Agree that this is a separate issue and should not block this PR.",
+              "createdAt": "2025-01-07T15:29:03Z",
+              "updatedAt": "2025-01-07T15:29:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6XE5Wo",
+          "commit": {
+            "abbreviatedOid": "9c8fd24"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-07T15:31:00Z",
+          "updatedAt": "2025-01-07T15:31:00Z",
+          "comments": [
+            {
+              "originalPosition": 147,
+              "body": "so an URL is more generic than an URI?\r\n\r\n*ducks*",
+              "createdAt": "2025-01-07T15:31:00Z",
+              "updatedAt": "2025-01-07T15:31:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6XE8wN",
+          "commit": {
+            "abbreviatedOid": "9c8fd24"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-07T15:34:22Z",
+          "updatedAt": "2025-01-07T15:34:23Z",
+          "comments": [
+            {
+              "originalPosition": 352,
+              "body": "yes, coap in different PR please",
+              "createdAt": "2025-01-07T15:34:22Z",
+              "updatedAt": "2025-01-07T15:34:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6XE85i",
+          "commit": {
+            "abbreviatedOid": "9c8fd24"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-07T15:34:27Z",
+          "updatedAt": "2025-01-07T15:34:27Z",
+          "comments": []
         }
       ]
     },
@@ -4755,24 +4830,26 @@
       "id": "PR_kwDOLJjbks6EVX5X",
       "title": "Drop 'Issue Statement' endpoint and related considerations",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/53",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "An 'Issue Statement' endpoint is not necessary, nor helpful to implement a transparency service, and it is unclear why it has been added as an optional endpoint.\r\n\r\nSCITT services should be able to compose with arbitrary signing services that produce signed statements in the correct format.\r\n\r\nAside from separating concerns and making the document more concise, this helps make the authentication posture consistent (see #52).",
       "createdAt": "2024-12-06T14:24:31Z",
-      "updatedAt": "2025-01-03T16:22:27Z",
+      "updatedAt": "2025-01-07T15:50:28Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
-      "baseRefOid": "e7751b5ed12e9a310632e616a9a505adfdadff41",
+      "baseRefOid": "f3a590cfe8043d1fc0f5c07451d7cd7963ce4be1",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "patch-3",
-      "headRefOid": "1b751f9e390ed24836f720fc96ab1ec59f5ec093",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "ed7ea550a7eae88421ed9a483ee307234e56b768",
+      "closedAt": "2025-01-07T15:50:27Z",
+      "mergedAt": "2025-01-07T15:50:27Z",
+      "mergedBy": "JAG-UK",
+      "mergeCommit": {
+        "oid": "d5ad6f8efe7595a579a5915ad70abf33b224528c"
+      },
       "comments": [
         {
           "author": "SteveLasker",
@@ -4828,6 +4905,91 @@
           "body": "",
           "createdAt": "2025-01-03T16:22:27Z",
           "updatedAt": "2025-01-03T16:22:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6XFASy",
+          "commit": {
+            "abbreviatedOid": "1b751f9"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-01-07T15:39:35Z",
+          "updatedAt": "2025-01-07T15:46:27Z",
+          "comments": [
+            {
+              "originalPosition": 106,
+              "body": "```suggestion\r\nModification attacks are mitigated by the use of the Issuer signature on the Signed Statement.\r\n```",
+              "createdAt": "2025-01-07T15:39:36Z",
+              "updatedAt": "2025-01-07T15:46:27Z"
+            },
+            {
+              "originalPosition": 121,
+              "body": "```suggestion\r\nInsertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, therefore care must be taken in the protection of Issuer keys and credentials to avoid theft Issuer and impersonation.\r\n```",
+              "createdAt": "2025-01-07T15:41:36Z",
+              "updatedAt": "2025-01-07T15:46:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6XFE_7",
+          "commit": {
+            "abbreviatedOid": "ed7ea55"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-07T15:47:25Z",
+          "updatedAt": "2025-01-07T15:47:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6XFGgN",
+          "commit": {
+            "abbreviatedOid": "1b751f9"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-07T15:49:56Z",
+          "updatedAt": "2025-01-07T15:49:57Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "We have discussed this in the editors meeting - we like the idea of standardised signing interfaces but this is not the way to achieve that. We'll do it in future work.",
+              "createdAt": "2025-01-07T15:49:57Z",
+              "updatedAt": "2025-01-07T15:49:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6XFGvc",
+          "commit": {
+            "abbreviatedOid": "ed7ea55"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-07T15:50:22Z",
+          "updatedAt": "2025-01-07T15:50:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6XFGwe",
+          "commit": {
+            "abbreviatedOid": "a2152d8"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-07T15:50:23Z",
+          "updatedAt": "2025-01-07T15:50:23Z",
           "comments": []
         }
       ]
