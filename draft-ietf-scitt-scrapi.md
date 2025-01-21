@@ -269,50 +269,35 @@ Payload (in CBOR diagnostic notation)
 The response contains the Receipt for the Signed Statement.
 Fresh Receipts may be requested through the resource identified in the Location header.
 
-#### Status 202 - Registration is running
+#### Status 303 - Registration is running
 
-In cases where the registration request is accepted but the Transparency Service is not able to mint Receipts in a reasonable time, it returns a locator for the registration operation and a status code indicating the status of the operation, as in this non-normative example:
+In cases where the registration request is accepted but the Transparency Service is not able to mint Receipts in a reasonable time, it returns a locator for the registration operation, as in this non-normative example:
 
-~~~ cbor-diag
-{
-  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
-  / status /  "Status": "running",
-}
+~~~ http
+HTTP/1.1 303 See Other
+
+Location: https://transparency.example/entries/67ed...befe
+Content-Type: application/cose
+Content-Length: 0
+Retry-After: <seconds>
 ~~~
 
-`Status` must be one of the following:
+#### Status 302 - Registration is running
 
-- "running" - the operation is still in progress
-- "succeeded" - the operation succeeded and the Receipt is ready
+Registration requests MAY fail, in which case the Location MAY return an error when queried. The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
-`OperationID` is Transparency Service-specific and MUST not be used for querying status in any Transparency Service other than the one that returned it.
-
-If the `OperationID` is a valid URL, it MAY be included as a `Location` header in the HTTP response.
-
-Transparency Services do not guarantee the retention of operation IDs for the entirety of their lifecycle.
-A Transparency MAY delete operation records, and some operation ID lookups MAY return error 404, even though they were valid in the past.
-The length of validity of the `OperationID` is Transparency Service specific.
-Still, the Transparency Service MUST maintain a record of every running or successful operation until at least one client has fetched the completed Receipt.
-
-The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
+If the client requests (GET) the location when the registration is still in progress, the TS MAY return a 302 Found, as in this non-normative example:
 
 ~~~ http-message
-HTTP/1.1 202 Accepted
+HTTP/1.1 302 Found
 
-Location: https://transparency.example/operations/67f8...f190
-
-Content-Type: application/cbor
+Location: https://transparency.example/entries/67ed...befe
+Content-Type: application/cose
+Content-Length: 0
 Retry-After: <seconds>
-
-{
-  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
-  / status /  "Status": "running",
-}
 ~~~
 
-The response contains an ID referencing the running operation for Signed Statement Registration.
-
-If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Check Operation endpoint using the `OperationID` returned in the response.
+The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
 #### Status 400 - Invalid Client Request
 
@@ -401,83 +386,6 @@ application/concise-problem-details+cbor
 }
 ~~~
 
-### Check Registration
-
-Authentication MAY be implemented for this endpoint.
-
-This endpoint is used to check the progress of a long-running registration.
-
-The following is a non-normative example of an HTTP request for the status of a running registration:
-
-Request:
-
-~~~ http-message
-GET /operations/67f89d5f0042e3ad42...35a1f190, HTTP/1.1
-Host: transparency.example
-Accept: application/cbor
-~~~
-
-Response:
-
-One of the following:
-
-#### Status 200 - Operation complete
-
-_Success case_
-
-If the operation is complete and it _succeeded_, the Transparency Service returns a `status` of "succeeded" along with a locator that can fetch the Receipt.
-
-`EntryID` is Transparency Service specific and MUST not be used for fetching Receipts in any Transparency Service other than the one that returned it.
-
-If the `EntryID` is a valid URL, it MAY be included as a `Location` header in the HTTP response.
-
-~~~ http-message
-HTTP/1.1 200 Ok
-
-Location: https://transparency.example/entries/67ed...befe
-
-Content-Type: application/cbor
-
-{
-  / locator / "EntryID": "67f89d5f0042e3ad42...35a1f190",
-  / status /  "Status": "succeeded",
-}
-~~~
-
-_Failure case_
-
-If the operation is complete and it _failed_, the Transparency Service returns a `status` of "failed" and an optional {{RFC9290}} Concise Problem Details object to explain the failure.
-
-~~~ http-message
-HTTP/1.1 200 Ok
-
-Content-Type: application/cbor
-
-{
-  / status / "Status": "failed",
-  / error /  "Error": {
-    / title /         -1: \
-            "Bad Signature Algorithm",
-    / detail /        -2: \
-            "Signed Statement contained a non supported algorithm",
-    / instance /      -3: \
-            "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-  }
-}
-~~~
-
-#### Status 202 - Registration is (still) running
-
-~~~ http-message
-HTTP/1.1 202 Accepted
-
-Location: https://transparency.example/operations/67f8...f190
-
-Retry-After: <seconds>
-~~~
-
-If 202 is returned, then clients should continue polling the Check Operation endpoint using the operation identifier.
-
 #### Status 400 - Invalid Client Request
 
 The following expected errors are defined.
@@ -514,7 +422,7 @@ application/concise-problem-details+cbor
 }
 ~~~
 
-#### Status 429
+#### Status 429 - Too Many Requests
 
 If a client is polling for an in-progress registration too frequently then the Transparency Service MAY, in addition to implementing rate limiting, return a 429 response:
 
@@ -548,7 +456,7 @@ Accept: application/cose
 
 Response:
 
-#### Status 200
+#### Status 200 - OK
 
 If the Receipt is found:
 
@@ -567,7 +475,7 @@ Payload (in CBOR diagnostic notation)
 ])
 ~~~
 
-#### Status 404
+#### Status 404 - Not Found
 
 If there is no Receipt found for the specified `EntryID` the Transparency Service returns a 404 response:
 
