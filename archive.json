@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-19T00:39:49.443082+00:00",
+  "timestamp": "2025-01-21T00:36:29.045040+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -513,10 +513,12 @@
       "assignees": [
         "roywill"
       ],
-      "labels": [],
+      "labels": [
+        "pending-close"
+      ],
       "body": "Since this section is talking about registration, why is refresh paradigm left dangling at the end.  Is it thought to use this same method to ask for a refresh?  I can see getting a new receipt, but that may fail due to the time validity of the signed statement.  If you expect it to be based on previous data on the log, then it needs to be indexed based on the previous receipt.",
       "createdAt": "2024-07-25T18:14:41Z",
-      "updatedAt": "2024-08-27T14:36:17Z",
+      "updatedAt": "2025-01-20T17:29:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -568,7 +570,7 @@
       "id": "I_kwDOLJjbks6Q4deq",
       "title": "2.1.2 Registration is Running",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/23",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "roywill",
       "authorAssociation": "NONE",
       "assignees": [
@@ -579,8 +581,8 @@
       ],
       "body": "What is the API to poll for complete work?  Can the server then stipulate don't ask for a period of n seconds or not?",
       "createdAt": "2024-07-25T18:21:28Z",
-      "updatedAt": "2024-12-31T23:40:55Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-20T17:29:04Z",
+      "closedAt": "2025-01-20T17:29:04Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -610,7 +612,7 @@
       "id": "I_kwDOLJjbks6Q4e1x",
       "title": "2.2.1 Issue Signed Statement.",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/24",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "roywill",
       "authorAssociation": "NONE",
       "assignees": [
@@ -619,8 +621,8 @@
       "labels": [],
       "body": "Are we asserting that the authentication identity to the end point is the identity to sign the content with?  I think we need to clarify that this can be completely different.  I do question why we need to specify a validFrom date?",
       "createdAt": "2024-07-25T18:24:34Z",
-      "updatedAt": "2024-12-06T14:33:41Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-20T17:30:40Z",
+      "closedAt": "2025-01-20T17:30:39Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -642,6 +644,13 @@
           "body": "I have proposed in #53 that we drop this endpoint altogether, and stay focused on interoperability of the Transparency Service itself, which can be composed with any number of signing mechanisms, local or remote.",
           "createdAt": "2024-12-06T14:33:40Z",
           "updatedAt": "2024-12-06T14:33:40Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Covering this topic with #56 ",
+          "createdAt": "2025-01-20T17:30:39Z",
+          "updatedAt": "2025-01-20T17:30:39Z"
         }
       ]
     },
@@ -802,7 +811,7 @@
       "id": "I_kwDOLJjbks6boex3",
       "title": "Mixed JSON and CBOR is annoying for clients",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/36",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -813,8 +822,8 @@
       ],
       "body": "In trying to build a new ground-up Python implementation of SCRAPI I am finding it quite difficult to cope with commands that might return JSON or might return CBOR depending on things like operation or error state. It makes response and error handling code messy and harder to review.\r\n\r\nFollowing discussion in the editors' meeting I propose to make the whole thing COSE/CBOR. This is much more aligned with the architecture and the IETF mission in general.",
       "createdAt": "2024-10-24T10:02:22Z",
-      "updatedAt": "2024-12-31T23:30:33Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-20T17:31:02Z",
+      "closedAt": "2025-01-20T17:31:02Z",
       "comments": [
         {
           "author": "henkbirkholz",
