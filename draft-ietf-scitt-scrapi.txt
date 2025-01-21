@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 11 July 2025                                    DataTrails Inc.
-                                                          7 January 2025
+Expires: 25 July 2025                                    DataTrails Inc.
+                                                         21 January 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 July 2025.
+   This Internet-Draft will expire on 25 July 2025.
 
 Copyright Notice
 
@@ -169,8 +169,14 @@ Table of Contents
    All messages are sent as HTTP GET or POST requests.
 
    If the Transparency Service cannot process a client's request, it
-   MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a
-   Concise Problem Details object [RFC9290] containing:
+   MUST return either:
+
+   1.  an HTTP 3xx code, indicating to the client additional action they
+       must take to complete the request, such as follow a redirection,
+       or
+
+   2.  an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise
+       Problem Details object [RFC9290] containing:
 
    *  title: A human-readable string identifying the error that
       prevented the Transparency Service from processing the request,

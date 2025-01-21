@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz &amp; Geater</td>
-<td class="center">Expires 11 July 2025</td>
+<td class="center">Expires 25 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-07" class="published">7 January 2025</time>
+<time datetime="2025-01-21" class="published">21 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-11">11 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-25">25 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1122,7 +1122,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1350,29 +1350,37 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 Implementations <span class="bcp14">MAY</span> authenticate clients, for example authorization or preventing denial of service attacks.
 If Authentication is not implemented, rate limiting or other denial of service mitigation <span class="bcp14">MUST</span> be implemented.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">All messages are sent as HTTP GET or POST requests.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a Concise Problem Details object <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> containing:<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-3">If the Transparency Service cannot process a client's request, it <span class="bcp14">MUST</span> return either:<a href="#section-2-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2-4">
+<li id="section-2-4.1">
+          <p id="section-2-4.1.1">an HTTP 3xx code, indicating to the client additional action they must take to complete the request, such as follow a redirection, or<a href="#section-2-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-2-4.2">
+          <p id="section-2-4.2.1">an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a Concise Problem Details object <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> containing:<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
 <ul class="normal">
-<li class="normal" id="section-2-4.1">
-          <p id="section-2-4.1.1">title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.<a href="#section-2-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2-5.1">
+          <p id="section-2-5.1.1">title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-4.2">
-          <p id="section-2-4.2.1">detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-5.2">
+          <p id="section-2-5.2.1">detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-4.3">
-          <p id="section-2-4.3.1">instance: A URN reference identifying the problem.
-To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".<a href="#section-2-4.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-5.3">
+          <p id="section-2-5.3.1">instance: A URN reference identifying the problem.
+To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-4.4">
-          <p id="section-2-4.4.1">response-code: The HTTP error response code relating to this error.<a href="#section-2-4.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-5.4">
+          <p id="section-2-5.4.1">response-code: The HTTP error response code relating to this error.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-5">TODO: RESOLVE this dangling media-type<a href="#section-2-5" class="pilcrow">¶</a></p>
-<p id="section-2-6">application/concise-problem-details+cbor<a href="#section-2-6" class="pilcrow">¶</a></p>
-<p id="section-2-7">NOTE: SCRAPI is not a CoAP API.
-Nonetheless Constrained Problem Details objects <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.<a href="#section-2-7" class="pilcrow">¶</a></p>
-<p id="section-2-8">NOTE: Examples use '\' line wrapping per <span>[<a href="#RFC8792" class="cite xref">RFC8792</a>]</span><a href="#section-2-8" class="pilcrow">¶</a></p>
-<p id="section-2-9">Examples of errors may include:<a href="#section-2-9" class="pilcrow">¶</a></p>
-<div class="lang-cbor-diag sourcecode" id="section-2-10">
+<p id="section-2-6">TODO: RESOLVE this dangling media-type<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-7">application/concise-problem-details+cbor<a href="#section-2-7" class="pilcrow">¶</a></p>
+<p id="section-2-8">NOTE: SCRAPI is not a CoAP API.
+Nonetheless Constrained Problem Details objects <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.<a href="#section-2-8" class="pilcrow">¶</a></p>
+<p id="section-2-9">NOTE: Examples use '\' line wrapping per <span>[<a href="#RFC8792" class="cite xref">RFC8792</a>]</span><a href="#section-2-9" class="pilcrow">¶</a></p>
+<p id="section-2-10">Examples of errors may include:<a href="#section-2-10" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-2-11">
 <pre>
 {
   / title /         -1: \
@@ -1383,16 +1391,16 @@ Nonetheless Constrained Problem Details objects <span>[<a href="#RFC9290" class=
             "urn:ietf:params:scitt:error:badSignatureAlgorithm",
   / response-code / -4: 400,
 }
-</pre><a href="#section-2-10" class="pilcrow">¶</a>
+</pre><a href="#section-2-11" class="pilcrow">¶</a>
 </div>
-<p id="section-2-11">Most error types are specific to the type of request and are defined in the respective subsections below.
-The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-2-11" class="pilcrow">¶</a></p>
-<p id="section-2-12"><code>
+<p id="section-2-12">Most error types are specific to the type of request and are defined in the respective subsections below.
+The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-2-12" class="pilcrow">¶</a></p>
+<p id="section-2-13"><code>
 Error code: `malformed` (The request could not be parsed)
-</code><a href="#section-2-12" class="pilcrow">¶</a></p>
-<p id="section-2-13">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-13" class="pilcrow">¶</a></p>
-<p id="section-2-14">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
-In the absence of this header field, this document does not specify a minimum.<a href="#section-2-14" class="pilcrow">¶</a></p>
+</code><a href="#section-2-13" class="pilcrow">¶</a></p>
+<p id="section-2-14">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-14" class="pilcrow">¶</a></p>
+<p id="section-2-15">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
+In the absence of this header field, this document does not specify a minimum.<a href="#section-2-15" class="pilcrow">¶</a></p>
 <div id="sec-mandatory">
 <section id="section-2.1">
         <h3 id="name-mandatory">
