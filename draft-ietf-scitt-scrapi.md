@@ -125,8 +125,6 @@ If the Transparency Service cannot process a client's request, it MUST return ei
 - instance: A URN reference identifying the problem.
 To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".
 
-- response-code: The HTTP error response code relating to this error.
-
 TODO: RESOLVE this dangling media-type
 
 application/concise-problem-details+cbor
@@ -145,8 +143,7 @@ Examples of errors may include:
   / detail /        -2: \
             "Signing algorithm 'WalnutDSA' not supported",
   / instance /      -3: \
-            "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-  / response-code / -4: 400,
+            "urn:ietf:params:scitt:error:badSignatureAlgorithm"
 }
 ~~~
 
@@ -332,8 +329,7 @@ application/concise-problem-details+cbor
   / detail /        -2: \
           "Signed Statement contained a non supported algorithm",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-  / response-code / -4: 400,
+          "urn:ietf:params:scitt:error:badSignatureAlgorithm"
 }
 ~~~
 
@@ -348,8 +344,7 @@ application/concise-problem-details+cbor
           "Signed Statement did not contain proof of possession",
   / instance /      -3: \
           "urn:ietf:params:scitt:error:signed-statement:\
-          confirmation-missing",
-  / response-code / -4: 400,
+          confirmation-missing"
 }
 ~~~
 
@@ -365,8 +360,7 @@ application/concise-problem-details+cbor
           (must be present)",
   / instance /      -3: \
           "urn:ietf:params:scitt:error:signed-statement:\
-          payload-missing",
-  / response-code / -4: 400,
+          payload-missing"
 }
 ~~~
 
@@ -382,8 +376,7 @@ application/concise-problem-details+cbor
           (must not be present)",
   / instance /      -3: \
           "urn:ietf:params:scitt:error:signed-statement:\
-          payload-forbidden",
-  / response-code / -4: 400,
+          payload-forbidden"
 }
 ~~~
 
@@ -399,8 +392,7 @@ application/concise-problem-details+cbor
           Registration Policy",
   / instance /      -3: \
           "urn:ietf:params:scitt:error:signed-statement:\
-          rejected-by-registration-policy",
-  / response-code / -4: 400,
+          rejected-by-registration-policy"
 }
 ~~~
 
@@ -493,8 +485,7 @@ application/concise-problem-details+cbor
 {
   / title /         -1: "Invalid locator",
   / detail /        -2: "Operation locator is not in a valid form",
-  / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest",
-  / response-code / -4: 400,
+  / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest"
 }
 ~~~
 
@@ -512,8 +503,7 @@ application/concise-problem-details+cbor
   / detail /        -2: \
           "No running operation was found matching the requested ID",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:notFound",
-  / response-code / -4: 404,
+          "urn:ietf:params:scitt:error:notFound"
 }
 ~~~
 
@@ -532,8 +522,7 @@ Retry-After: <seconds>
   / detail /        -2: \
           "Only <number> requests per <period> are allowed.",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:tooManyRequests",
-  / response-code / -4: 429,
+          "urn:ietf:params:scitt:error:tooManyRequests"
 }
 ~~~
 
@@ -585,8 +574,7 @@ application/concise-problem-details+cbor
           "Receipt with entry ID <id> not known \
           to this Transparency Service",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:receipt:not-found",
-  / response-code / -4: 404,
+          "urn:ietf:params:scitt:error:receipt:not-found"
 }
 ~~~
 
@@ -641,8 +629,7 @@ application/concise-problem-details+cbor
   / detail /        -2: \
           "No Signed Statement found with the specified ID",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:notFound",
-  / response-code / -4: 404,
+          "urn:ietf:params:scitt:error:notFound"
 ~~~
 
 #### Eventual Consistency
