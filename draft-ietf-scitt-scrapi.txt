@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 25 July 2025                                    DataTrails Inc.
-                                                         21 January 2025
+Expires: 1 August 2025                                   DataTrails Inc.
+                                                         28 January 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 July 2025.
+   This Internet-Draft will expire on 1 August 2025.
 
 Copyright Notice
 
@@ -191,9 +191,6 @@ Table of Contents
       standard tokens for use in the type field within the URN namespace
       of: "urn:ietf:params:scitt:error:".
 
-   *  response-code: The HTTP error response code relating to this
-      error.
-
    TODO: RESOLVE this dangling media-type
 
    application/concise-problem-details+cbor
@@ -213,8 +210,7 @@ Table of Contents
      / detail /        -2: \
                "Signing algorithm 'WalnutDSA' not supported",
      / instance /      -3: \
-               "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-     / response-code / -4: 400,
+               "urn:ietf:params:scitt:error:badSignatureAlgorithm"
    }
 
    Most error types are specific to the type of request and are defined
@@ -423,8 +419,7 @@ Table of Contents
      / detail /        -2: \
              "Signed Statement contained a non supported algorithm",
      / instance /      -3: \
-             "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-     / response-code / -4: 400,
+             "urn:ietf:params:scitt:error:badSignatureAlgorithm"
    }
 
    HTTP/1.1 400 Bad Request
@@ -437,8 +432,7 @@ Table of Contents
              "Signed Statement did not contain proof of possession",
      / instance /      -3: \
              "urn:ietf:params:scitt:error:signed-statement:\
-             confirmation-missing",
-     / response-code / -4: 400,
+             confirmation-missing"
    }
 
    HTTP/1.1 400 Bad Request
@@ -452,8 +446,7 @@ Table of Contents
              (must be present)",
      / instance /      -3: \
              "urn:ietf:params:scitt:error:signed-statement:\
-             payload-missing",
-     / response-code / -4: 400,
+             payload-missing"
    }
 
    HTTP/1.1 400 Bad Request
@@ -467,8 +460,7 @@ Table of Contents
              (must not be present)",
      / instance /      -3: \
              "urn:ietf:params:scitt:error:signed-statement:\
-             payload-forbidden",
-     / response-code / -4: 400,
+             payload-forbidden"
    }
 
    HTTP/1.1 400 Bad Request
@@ -482,8 +474,7 @@ Table of Contents
              Registration Policy",
      / instance /      -3: \
              "urn:ietf:params:scitt:error:signed-statement:\
-             rejected-by-registration-policy",
-     / response-code / -4: 400,
+             rejected-by-registration-policy"
    }
 
 2.1.3.  Check Registration
@@ -576,8 +567,7 @@ Table of Contents
    {
      / title /         -1: "Invalid locator",
      / detail /        -2: "Operation locator is not in a valid form",
-     / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest",
-     / response-code / -4: 400,
+     / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest"
    }
 
 2.1.3.4.  Status 404 - Operation Not Found
@@ -594,8 +584,7 @@ Table of Contents
      / detail /        -2: \
              "No running operation was found matching the requested ID",
      / instance /      -3: \
-             "urn:ietf:params:scitt:error:notFound",
-     / response-code / -4: 404,
+             "urn:ietf:params:scitt:error:notFound"
    }
 
 2.1.3.5.  Status 429
@@ -614,8 +603,7 @@ Table of Contents
      / detail /        -2: \
              "Only <number> requests per <period> are allowed.",
      / instance /      -3: \
-             "urn:ietf:params:scitt:error:tooManyRequests",
-     / response-code / -4: 429,
+             "urn:ietf:params:scitt:error:tooManyRequests"
    }
 
 2.1.4.  Resolve Receipt
@@ -662,8 +650,7 @@ Table of Contents
              "Receipt with entry ID <id> not known \
              to this Transparency Service",
      / instance /      -3: \
-             "urn:ietf:params:scitt:error:receipt:not-found",
-     / response-code / -4: 404,
+             "urn:ietf:params:scitt:error:receipt:not-found"
    }
 
 2.2.  Optional Endpoints
@@ -714,8 +701,7 @@ Table of Contents
      / detail /        -2: \
              "No Signed Statement found with the specified ID",
      / instance /      -3: \
-             "urn:ietf:params:scitt:error:notFound",
-     / response-code / -4: 404,
+             "urn:ietf:params:scitt:error:notFound"
 
 2.2.1.3.  Eventual Consistency
 

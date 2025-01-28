@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz &amp; Geater</td>
-<td class="center">Expires 25 July 2025</td>
+<td class="center">Expires 1 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-21" class="published">21 January 2025</time>
+<time datetime="2025-01-28" class="published">28 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-25">25 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-01">1 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1122,7 +1122,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1370,9 +1370,6 @@ If Authentication is not implemented, rate limiting or other denial of service m
           <p id="section-2-5.3.1">instance: A URN reference identifying the problem.
 To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-5.4">
-          <p id="section-2-5.4.1">response-code: The HTTP error response code relating to this error.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
-</li>
       </ul>
 <p id="section-2-6">TODO: RESOLVE this dangling media-type<a href="#section-2-6" class="pilcrow">¶</a></p>
 <p id="section-2-7">application/concise-problem-details+cbor<a href="#section-2-7" class="pilcrow">¶</a></p>
@@ -1388,8 +1385,7 @@ Nonetheless Constrained Problem Details objects <span>[<a href="#RFC9290" class=
   / detail /        -2: \
             "Signing algorithm 'WalnutDSA' not supported",
   / instance /      -3: \
-            "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-  / response-code / -4: 400,
+            "urn:ietf:params:scitt:error:badSignatureAlgorithm"
 }
 </pre><a href="#section-2-11" class="pilcrow">¶</a>
 </div>
@@ -1580,8 +1576,7 @@ application/concise-problem-details+cbor
   / detail /        -2: \
           "Signed Statement contained a non supported algorithm",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-  / response-code / -4: 400,
+          "urn:ietf:params:scitt:error:badSignatureAlgorithm"
 }
 </pre><a href="#section-2.1.2.3-2" class="pilcrow">¶</a>
 </div>
@@ -1597,8 +1592,7 @@ application/concise-problem-details+cbor
           "Signed Statement did not contain proof of possession",
   / instance /      -3: \
           "urn:ietf:params:scitt:error:signed-statement:\
-          confirmation-missing",
-  / response-code / -4: 400,
+          confirmation-missing"
 }
 </pre><a href="#section-2.1.2.3-3" class="pilcrow">¶</a>
 </div>
@@ -1615,8 +1609,7 @@ application/concise-problem-details+cbor
           (must be present)",
   / instance /      -3: \
           "urn:ietf:params:scitt:error:signed-statement:\
-          payload-missing",
-  / response-code / -4: 400,
+          payload-missing"
 }
 </pre><a href="#section-2.1.2.3-4" class="pilcrow">¶</a>
 </div>
@@ -1633,8 +1626,7 @@ application/concise-problem-details+cbor
           (must not be present)",
   / instance /      -3: \
           "urn:ietf:params:scitt:error:signed-statement:\
-          payload-forbidden",
-  / response-code / -4: 400,
+          payload-forbidden"
 }
 </pre><a href="#section-2.1.2.3-5" class="pilcrow">¶</a>
 </div>
@@ -1651,8 +1643,7 @@ application/concise-problem-details+cbor
           Registration Policy",
   / instance /      -3: \
           "urn:ietf:params:scitt:error:signed-statement:\
-          rejected-by-registration-policy",
-  / response-code / -4: 400,
+          rejected-by-registration-policy"
 }
 </pre><a href="#section-2.1.2.3-6" class="pilcrow">¶</a>
 </div>
@@ -1756,8 +1747,7 @@ application/concise-problem-details+cbor
 {
   / title /         -1: "Invalid locator",
   / detail /        -2: "Operation locator is not in a valid form",
-  / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest",
-  / response-code / -4: 400,
+  / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest"
 }
 </pre><a href="#section-2.1.3.3-2" class="pilcrow">¶</a>
 </div>
@@ -1780,8 +1770,7 @@ application/concise-problem-details+cbor
   / detail /        -2: \
           "No running operation was found matching the requested ID",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:notFound",
-  / response-code / -4: 404,
+          "urn:ietf:params:scitt:error:notFound"
 }
 </pre><a href="#section-2.1.3.4-2" class="pilcrow">¶</a>
 </div>
@@ -1805,8 +1794,7 @@ Retry-After: &lt;seconds&gt;
   / detail /        -2: \
           "Only &lt;number&gt; requests per &lt;period&gt; are allowed.",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:tooManyRequests",
-  / response-code / -4: 429,
+          "urn:ietf:params:scitt:error:tooManyRequests"
 }
 </pre><a href="#section-2.1.3.5-2" class="pilcrow">¶</a>
 </div>
@@ -1871,8 +1859,7 @@ application/concise-problem-details+cbor
           "Receipt with entry ID &lt;id&gt; not known \
           to this Transparency Service",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:receipt:not-found",
-  / response-code / -4: 404,
+          "urn:ietf:params:scitt:error:receipt:not-found"
 }
 </pre><a href="#section-2.1.4.2-2" class="pilcrow">¶</a>
 </div>
@@ -1944,8 +1931,7 @@ application/concise-problem-details+cbor
   / detail /        -2: \
           "No Signed Statement found with the specified ID",
   / instance /      -3: \
-          "urn:ietf:params:scitt:error:notFound",
-  / response-code / -4: 404,
+          "urn:ietf:params:scitt:error:notFound"
 </pre><a href="#section-2.2.1.2-2" class="pilcrow">¶</a>
 </div>
 </section>
