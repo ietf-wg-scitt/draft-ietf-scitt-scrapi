@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-28T00:37:15.407245+00:00",
+  "timestamp": "2025-01-30T00:36:08.594218+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1037,13 +1037,15 @@
       "state": "OPEN",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "SteveLasker"
+      ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "3 issues:\r\n * detached payload doesn't make sense - we have hash envelope now\r\n * also the word 'payload' is used for both COSE payload and HTTP Body. Should be clear and use Body for the HTTP message\r\n * the statement on Reg Policy wrt attached/detached payload is unclear. Needs wordsmithing",
       "createdAt": "2024-11-03T11:16:42Z",
-      "updatedAt": "2024-12-31T23:32:30Z",
+      "updatedAt": "2025-01-28T15:38:35Z",
       "closedAt": null,
       "comments": []
     },
@@ -1195,13 +1197,15 @@
       "state": "OPEN",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "achamayou"
+      ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "https://mailarchive.ietf.org/arch/msg/scitt/u0HJWX7gPVIQ_Ix05iOk4vVT3FA/\r\n\r\nTLDR; Remove all the URNs from the examples, and follow modern Open API Specification guidance for resource identifiers.",
       "createdAt": "2024-12-03T15:59:26Z",
-      "updatedAt": "2025-01-21T13:18:20Z",
+      "updatedAt": "2025-01-28T15:21:32Z",
       "closedAt": null,
       "comments": [
         {
@@ -1224,6 +1228,20 @@
           "body": "I scanned the doc for the list of errors, to try and understand where and to what extent the error URNs add actionable detail to the HTTP return code. Actionable as in \"an automated client would plausibly use this URN to take action that it could not take based on the HTTP return code alone\". This is separate from human clients, who would rely on the more detailed and helpful text description.\n\n|Error URN | HTTP Return Code | Note|\n| --- | --- | --- |\n| urn:ietf:params:scitt:error:badSignatureAlgorithm | 400 | Useful to express in detail message, but not automatically actionable, at least not without specifying what's supported instead. |\n| urn:ietf:params:scitt:error:signed-statement:confirmation-missing | 400 | I am not sure what this one means, @JAG-UK could you clarify the intent? |\n| urn:ietf:params:scitt:error:signed-statement:payload-missing | 400 | Useful to express in detail message, but not automatically actionable. Not clear to what extent detached payloads are acceptable (https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/333) |\n| urn:ietf:params:scitt:error:signed-statement:rejected-by-registration-policy | 400 | Useful to express in detail message, but not reasonably actionable unless the specific rejection is exposed too. Makes me think we may want a field to expose a message coming from the policy and explaining the failure. |\n| urn:ietf:params:scitt:error:invalidRequest | 400 | I am not sure what this one means, it looks like an additional catch-all @JAG-UK? Does not seem automatically actionable. |\n| urn:ietf:params:scitt:error:notFound | 404 | Adds no information that return code does not contain |\n| urn:ietf:params:scitt:error:tooManyRequests | 429 | Adds no information that return code does not contain |\n| urn:ietf:params:scitt:error:receipt:not-found | 404 | Adds no information, the client knows they are asking for a receipt, it's explicit in the URL |\n\nMy sense is that the URNs are either redundant, or express nuances that will be captured in the error message and offer no benefit to an automated client.",
           "createdAt": "2025-01-21T13:18:19Z",
           "updatedAt": "2025-01-21T13:18:19Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Since we get to start fresh, lets agree to use kebab case and not camel case for all URN names.",
+          "createdAt": "2025-01-28T14:50:09Z",
+          "updatedAt": "2025-01-28T14:50:21Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Discussion to remove section [6.1](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-6.1)\nand update the examples that use urns",
+          "createdAt": "2025-01-28T15:20:59Z",
+          "updatedAt": "2025-01-28T15:20:59Z"
         }
       ]
     },
@@ -1283,6 +1301,24 @@
       "createdAt": "2025-01-02T17:34:24Z",
       "updatedAt": "2025-01-21T15:12:16Z",
       "closedAt": "2025-01-21T15:12:15Z",
+      "comments": []
+    },
+    {
+      "number": 61,
+      "id": "I_kwDOLJjbks6n2ML2",
+      "title": "Update 2.11 Transparency Configuration to reflect CBOR",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/61",
+      "state": "OPEN",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou"
+      ],
+      "labels": [],
+      "body": "[2.1.1. ](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.1.1)[Transparency Configuration](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-transparency-configuration)\n\nhttps://github.com/microsoft/scitt-ccf-ledger/blob/46b772052016aa24e6b62b8818d63125f14b07bd/app/src/service_endpoints.h#L240",
+      "createdAt": "2025-01-28T15:20:33Z",
+      "updatedAt": "2025-01-28T15:20:37Z",
+      "closedAt": null,
       "comments": []
     }
   ],
@@ -5333,24 +5369,26 @@
       "id": "PR_kwDOLJjbks6Ifqjv",
       "title": "Remove redundant response code",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/59",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "`response-code` exists in RFC9290 for CoAP-specific purposes that do not apply here. Accordingly, it is [optional](https://www.rfc-editor.org/rfc/rfc9290.html#name-basic-problem-details). In SCITT, it adds no value that the HTTP return code does not provide, and creates difficulty for clients who need to decide what to do if the values differ.",
       "createdAt": "2025-01-21T13:29:12Z",
-      "updatedAt": "2025-01-21T15:17:32Z",
+      "updatedAt": "2025-01-28T15:06:26Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "d5ad6f8efe7595a579a5915ad70abf33b224528c",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "remove_redundant_response_code",
       "headRefOid": "105cc010500c541a14a86af9bd42b6431ba250cd",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-28T15:06:26Z",
+      "mergedAt": "2025-01-28T15:06:26Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "9a3e33417e71cdcceaf2ea14c63b734ba4c8cabe"
+      },
       "comments": [
         {
           "author": "SteveLasker",
@@ -5373,6 +5411,32 @@
           "createdAt": "2025-01-21T15:17:28Z",
           "updatedAt": "2025-01-21T15:17:28Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6ZsM3W",
+          "commit": {
+            "abbreviatedOid": "105cc01"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-28T14:49:02Z",
+          "updatedAt": "2025-01-28T14:49:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6ZsYxx",
+          "commit": {
+            "abbreviatedOid": "105cc01"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-01-28T15:02:51Z",
+          "updatedAt": "2025-01-28T15:02:51Z",
+          "comments": []
         }
       ]
     },
@@ -5384,11 +5448,13 @@
       "state": "OPEN",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "achamayou"
+      ],
       "labels": [],
       "body": "I think we can simplify the asynchronous submission flow substantially by:\r\n\r\n1. Using appropriate HTTP return codes\r\n2. Using Location\r\n\r\nAs far as I can tell, [303 is intended for that purpose](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303).\r\n\r\nImplementations that can allocate a permanent `Location` early can avoid dealing with temporary `OperationID` and the potential race between expiry and the client coming back in time, and implementations that do not can still use a `308` once they have allocated a final `Location`.",
       "createdAt": "2025-01-21T14:11:43Z",
-      "updatedAt": "2025-01-22T08:42:14Z",
+      "updatedAt": "2025-01-28T15:32:31Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "d5ad6f8efe7595a579a5915ad70abf33b224528c",
@@ -5420,6 +5486,13 @@
           "body": "Not sure. It's not clear to me we retain the ability to convey async registration issues clearly to the client. And async registration is not a \"corner case\" in my view. IMO: the more people want to do with registratio policies the more likely the async registration will be the norm\r\n\r\nThat said, I do like the effort to make better use of existing aspects of the HTTP spec",
           "createdAt": "2025-01-22T08:41:22Z",
           "updatedAt": "2025-01-22T08:42:14Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Discussion to remove the temporary Operation ID flows, returning a Permanent ID.",
+          "createdAt": "2025-01-28T15:32:30Z",
+          "updatedAt": "2025-01-28T15:32:30Z"
         }
       ],
       "reviews": [
