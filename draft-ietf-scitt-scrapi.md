@@ -139,7 +139,7 @@ Examples of errors may include:
   / title /         -1: \
             "Bad Signature Algorithm",
   / detail /        -2: \
-            "Signing algorithm 'WalnutDSA' not supported",
+            "Signing algorithm 'WalnutDSA' not supported"
 }
 ~~~
 
