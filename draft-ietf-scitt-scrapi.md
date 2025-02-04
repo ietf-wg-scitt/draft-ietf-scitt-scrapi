@@ -172,27 +172,21 @@ Request:
 ~~~ http-message
 GET /.well-known/transparency-configuration HTTP/1.1
 Host: transparency.example
-Accept: application/cose
+Accept: application/cbor
 ~~~
 
 Response:
 
 ~~~ http-message
 HTTP/1.1 200 Ok
-Content-Type: application/cose
+Content-Type: application/cbor
 
 Payload (in CBOR diagnostic notation)
 
-18([                   ; COSE_Sign1 structure with tag 18
-    h'44A123BEEFFACE', ; Protected header (example bytes)
-    {},                ; Unprotected header
-    {                  ; Payload - CBOR map
-        "issuer": "https://transparency.example",
-        "base_url": "https://transparency.example/v1/scrapi"
-        "oidc_auth_endpoint": "https://transparency.example/auth"
-    },
-    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature
-])
+{
+  "issuer": "https://transparency.example",
+  "jwks_uri": "https://transparency.example/jwks"
+}
 ~~~
 
 Responses to this message are vendor-specific.
