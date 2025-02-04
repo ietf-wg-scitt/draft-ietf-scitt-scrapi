@@ -90,10 +90,9 @@ Table of Contents
        4.4.2.  Out of Scope
    5.   TODO
    6.  IANA Considerations
-     6.1.  URN Sub-namespace for SCITT (urn:ietf:params:scitt)
-     6.2.  Well-Known URI for Issuers
-     6.3.  Well-Known URI for Transparency Configuration
-     6.4.  Media Type Registration
+     6.1.  Well-Known URI for Issuers
+     6.2.  Well-Known URI for Transparency Configuration
+     6.3.  Media Type Registration
    7.  References
      7.1.  Normative References
      7.2.  Informative References
@@ -185,11 +184,6 @@ Table of Contents
       depth, ideally with sufficient detail enabling the error to be
       rectified.
 
-   *  instance: A URN reference identifying the problem.  To facilitate
-      automated response to errors, this document defines a set of
-      standard tokens for use in the type field within the URN namespace
-      of: "urn:ietf:params:scitt:error:".
-
    TODO: RESOLVE this dangling media-type
 
    application/concise-problem-details+cbor
@@ -207,9 +201,7 @@ Table of Contents
      / title /         -1: \
                "Bad Signature Algorithm",
      / detail /        -2: \
-               "Signing algorithm 'WalnutDSA' not supported",
-     / instance /      -3: \
-               "urn:ietf:params:scitt:error:badSignatureAlgorithm"
+               "Signing algorithm 'WalnutDSA' not supported"
    }
 
    Most error types are specific to the type of request and are defined
@@ -264,10 +256,8 @@ Table of Contents
        {},                ; Unprotected header
        {                  ; Payload - CBOR map
            "issuer": "https://transparency.example",
-           "base_url": "https://transparency.example/v1/scrapi",
-           "oidc_auth_endpoint": "https://transparency.example/auth",
-           "registration_policy": "https://transparency.example/statements/\
-   urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
+           "base_url": "https://transparency.example/v1/scrapi"
+           "oidc_auth_endpoint": "https://transparency.example/auth"
        },
        h'ABCDEF1234567890ABCDEF1234567890'  ; Signature
    ])
@@ -393,8 +383,8 @@ Table of Contents
    Retry-After: <seconds>
 
    {
-     / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
-     / status /  "Status": "running",
+     / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190"
+     / status /  "Status": "running"
    }
 
    The response contains an ID referencing the running operation for
@@ -416,9 +406,7 @@ Table of Contents
      / title /         -1: \
              "Bad Signature Algorithm",
      / detail /        -2: \
-             "Signed Statement contained a non supported algorithm",
-     / instance /      -3: \
-             "urn:ietf:params:scitt:error:badSignatureAlgorithm"
+             "Signed Statement contained a non supported algorithm"
    }
 
    HTTP/1.1 400 Bad Request
@@ -428,10 +416,7 @@ Table of Contents
      / title /         -1: "\
              Confirmation Missing",
      / detail /        -2: \
-             "Signed Statement did not contain proof of possession",
-     / instance /      -3: \
-             "urn:ietf:params:scitt:error:signed-statement:\
-             confirmation-missing"
+             "Signed Statement did not contain proof of possession"
    }
 
    HTTP/1.1 400 Bad Request
@@ -442,10 +427,7 @@ Table of Contents
              "Payload Missing",
      / detail /        -2: \
              "Signed Statement payload must be attached \
-             (must be present)",
-     / instance /      -3: \
-             "urn:ietf:params:scitt:error:signed-statement:\
-             payload-missing"
+             (must be present)"
    }
 
    HTTP/1.1 400 Bad Request
@@ -456,10 +438,7 @@ Table of Contents
              "Payload Forbidden",
      / detail /        -2: \
              "Signed Statement payload must be detached \
-             (must not be present)",
-     / instance /      -3: \
-             "urn:ietf:params:scitt:error:signed-statement:\
-             payload-forbidden"
+             (must not be present)"
    }
 
    HTTP/1.1 400 Bad Request
@@ -470,10 +449,7 @@ Table of Contents
              "Rejected",
      / detail /        -2: \
              "Signed Statement not accepted by the current\
-             Registration Policy",
-     / instance /      -3: \
-             "urn:ietf:params:scitt:error:signed-statement:\
-             rejected-by-registration-policy"
+             Registration Policy"
    }
 
 2.1.3.  Check Registration
@@ -538,9 +514,7 @@ Table of Contents
        / title /         -1: \
                "Bad Signature Algorithm",
        / detail /        -2: \
-               "Signed Statement contained a non supported algorithm",
-       / instance /      -3: \
-               "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+               "Signed Statement contained a non supported algorithm"
      }
    }
 
@@ -565,8 +539,7 @@ Table of Contents
 
    {
      / title /         -1: "Invalid locator",
-     / detail /        -2: "Operation locator is not in a valid form",
-     / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest"
+     / detail /        -2: "Operation locator is not in a valid form"
    }
 
 2.1.3.4.  Status 404 - Operation Not Found
@@ -581,9 +554,7 @@ Table of Contents
      / title /         -1: \
              "Operation Not Found",
      / detail /        -2: \
-             "No running operation was found matching the requested ID",
-     / instance /      -3: \
-             "urn:ietf:params:scitt:error:notFound"
+             "No running operation was found matching the requested ID"
    }
 
 2.1.3.5.  Status 429
@@ -600,9 +571,7 @@ Table of Contents
      / title /         -1: \
              "Too Many Requests",
      / detail /        -2: \
-             "Only <number> requests per <period> are allowed.",
-     / instance /      -3: \
-             "urn:ietf:params:scitt:error:tooManyRequests"
+             "Only <number> requests per <period> are allowed."
    }
 
 2.1.4.  Resolve Receipt
@@ -647,9 +616,7 @@ Table of Contents
              "Not Found",
      / detail /        -2: \
              "Receipt with entry ID <id> not known \
-             to this Transparency Service",
-     / instance /      -3: \
-             "urn:ietf:params:scitt:error:receipt:not-found"
+             to this Transparency Service"
    }
 
 2.2.  Optional Endpoints
@@ -698,9 +665,7 @@ Table of Contents
      / title /         -1: \
              "Not Found",
      / detail /        -2: \
-             "No Signed Statement found with the specified ID",
-     / instance /      -3: \
-             "urn:ietf:params:scitt:error:notFound"
+             "No Signed Statement found with the specified ID"
 
 2.2.1.3.  Eventual Consistency
 
@@ -942,19 +907,7 @@ Table of Contents
 
 6.  IANA Considerations
 
-6.1.  URN Sub-namespace for SCITT (urn:ietf:params:scitt)
-
-   IANA is requested to register the URN sub-namespace
-   urn:ietf:params:scitt in the "IETF URN Sub-namespace for Registered
-   Protocol Parameter Identifiers" Registry [IANA.params], following the
-   template in [RFC3553]:
-
-      Registry name:  scitt
-      Specification:  [RFCthis]
-      Repository:  http://www.iana.org/assignments/scitt
-      Index value:  No transformation needed.
-
-6.2.  Well-Known URI for Issuers
+6.1.  Well-Known URI for Issuers
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
@@ -962,7 +915,7 @@ Table of Contents
    URI suffix: issuer Change controller: IETF Specification document(s):
    RFCthis.  Related information: N/A
 
-6.3.  Well-Known URI for Transparency Configuration
+6.2.  Well-Known URI for Transparency Configuration
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
@@ -972,7 +925,7 @@ Table of Contents
 
    TODO: Register them from here.
 
-6.4.  Media Type Registration
+6.3.  Media Type Registration
 
    This section requests registration of the "application/
    scitt.receipt+cose" media type [RFC2046] in the "Media Types"
