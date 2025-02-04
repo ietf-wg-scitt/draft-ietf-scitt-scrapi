@@ -189,7 +189,7 @@ Content-Type: application/cbor
 Payload (in CBOR diagnostic notation)
 
 {
-  "issuer": "transparency.example",
+  "issuer": "https://transparency.example",
   "jwksUri": "https://transparency.example/jwks"
 }
 ~~~
