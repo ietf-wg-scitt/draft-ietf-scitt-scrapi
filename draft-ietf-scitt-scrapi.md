@@ -60,7 +60,6 @@ normative:
   IANA.params:
 
 informative:
-  I-D.draft-demarco-oauth-nonce-endpoint: Nonce-Endpoint
   I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
   RFC2046:
   RFC6838:
@@ -728,33 +727,6 @@ Content-Type: application/json
       }
     ]
   }
-}
-~~~
-
-### Request Nonce
-
-This endpoint in inspired by {{-Nonce-Endpoint}}.
-
-Authentication SHOULD NOT be implemented for this endpoint.
-This endpoint is used to demonstrate proof of possession, which is the reason that authentication is not required.
-Client holding signed statements that require demonstrating proof of possession MUST use this endpoint to obtain a nonce.
-
-Request:
-
-~~~ http-message
-GET /nonce HTTP/1.1
-Host: transparency.example
-Accept: application/json
-~~~
-
-Response:
-
-~~~ http-message
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
 }
 ~~~
 
