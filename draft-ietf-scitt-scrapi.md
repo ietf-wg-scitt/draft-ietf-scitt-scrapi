@@ -121,8 +121,6 @@ If the Transparency Service cannot process a client's request, it MUST return ei
 
 - title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
 - detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
-- instance: A URN reference identifying the problem.
-To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".
 
 TODO: RESOLVE this dangling media-type
 
@@ -140,9 +138,7 @@ Examples of errors may include:
   / title /         -1: \
             "Bad Signature Algorithm",
   / detail /        -2: \
-            "Signing algorithm 'WalnutDSA' not supported",
-  / instance /      -3: \
-            "urn:ietf:params:scitt:error:badSignatureAlgorithm"
+            "Signing algorithm 'WalnutDSA' not supported"
 }
 ~~~
 
@@ -192,10 +188,8 @@ Payload (in CBOR diagnostic notation)
     {},                ; Unprotected header
     {                  ; Payload - CBOR map
         "issuer": "https://transparency.example",
-        "base_url": "https://transparency.example/v1/scrapi",
-        "oidc_auth_endpoint": "https://transparency.example/auth",
-        "registration_policy": "https://transparency.example/statements/\
-urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
+        "base_url": "https://transparency.example/v1/scrapi"
+        "oidc_auth_endpoint": "https://transparency.example/auth"
     },
     h'ABCDEF1234567890ABCDEF1234567890'  ; Signature
 ])
@@ -304,8 +298,8 @@ Content-Type: application/cbor
 Retry-After: <seconds>
 
 {
-  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
-  / status /  "Status": "running",
+  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190"
+  / status /  "Status": "running"
 }
 ~~~
 
@@ -326,9 +320,7 @@ application/concise-problem-details+cbor
   / title /         -1: \
           "Bad Signature Algorithm",
   / detail /        -2: \
-          "Signed Statement contained a non supported algorithm",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:badSignatureAlgorithm"
+          "Signed Statement contained a non supported algorithm"
 }
 ~~~
 
@@ -340,10 +332,7 @@ application/concise-problem-details+cbor
   / title /         -1: "\
           Confirmation Missing",
   / detail /        -2: \
-          "Signed Statement did not contain proof of possession",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:signed-statement:\
-          confirmation-missing"
+          "Signed Statement did not contain proof of possession"
 }
 ~~~
 
@@ -356,10 +345,7 @@ application/concise-problem-details+cbor
           "Payload Missing",
   / detail /        -2: \
           "Signed Statement payload must be attached \
-          (must be present)",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:signed-statement:\
-          payload-missing"
+          (must be present)"
 }
 ~~~
 
@@ -372,10 +358,7 @@ application/concise-problem-details+cbor
           "Payload Forbidden",
   / detail /        -2: \
           "Signed Statement payload must be detached \
-          (must not be present)",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:signed-statement:\
-          payload-forbidden"
+          (must not be present)"
 }
 ~~~
 
@@ -388,10 +371,7 @@ application/concise-problem-details+cbor
           "Rejected",
   / detail /        -2: \
           "Signed Statement not accepted by the current\
-          Registration Policy",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:signed-statement:\
-          rejected-by-registration-policy"
+          Registration Policy"
 }
 ~~~
 
@@ -453,9 +433,7 @@ Content-Type: application/cbor
     / title /         -1: \
             "Bad Signature Algorithm",
     / detail /        -2: \
-            "Signed Statement contained a non supported algorithm",
-    / instance /      -3: \
-            "urn:ietf:params:scitt:error:badSignatureAlgorithm",
+            "Signed Statement contained a non supported algorithm"
   }
 }
 ~~~
@@ -483,8 +461,7 @@ application/concise-problem-details+cbor
 
 {
   / title /         -1: "Invalid locator",
-  / detail /        -2: "Operation locator is not in a valid form",
-  / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest"
+  / detail /        -2: "Operation locator is not in a valid form"
 }
 ~~~
 
@@ -500,9 +477,7 @@ application/concise-problem-details+cbor
   / title /         -1: \
           "Operation Not Found",
   / detail /        -2: \
-          "No running operation was found matching the requested ID",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:notFound"
+          "No running operation was found matching the requested ID"
 }
 ~~~
 
@@ -519,9 +494,7 @@ Retry-After: <seconds>
   / title /         -1: \
           "Too Many Requests",
   / detail /        -2: \
-          "Only <number> requests per <period> are allowed.",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:tooManyRequests"
+          "Only <number> requests per <period> are allowed."
 }
 ~~~
 
@@ -571,9 +544,7 @@ application/concise-problem-details+cbor
           "Not Found",
   / detail /        -2: \
           "Receipt with entry ID <id> not known \
-          to this Transparency Service",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:receipt:not-found"
+          to this Transparency Service"
 }
 ~~~
 
@@ -626,9 +597,7 @@ application/concise-problem-details+cbor
   / title /         -1: \
           "Not Found",
   / detail /        -2: \
-          "No Signed Statement found with the specified ID",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:notFound"
+          "No Signed Statement found with the specified ID"
 ~~~
 
 #### Eventual Consistency
@@ -819,17 +788,6 @@ TODO: Consider negotiation for Receipt as "JSON" or "YAML".
 TODO: Consider impact of media type on "Data URIs" and QR Codes.
 
 # IANA Considerations
-
-## URN Sub-namespace for SCITT (urn:ietf:params:scitt)
-
-IANA is requested to register the URN sub-namespace `urn:ietf:params:scitt` in the "IETF URN Sub-namespace for Registered Protocol Parameter Identifiers" Registry {{IANA.params}}, following the template in {{RFC3553}}:
-
-~~~ output
-   Registry name:  scitt
-   Specification:  [RFCthis]
-   Repository:  http://www.iana.org/assignments/scitt
-   Index value:  No transformation needed.
-~~~
 
 ## Well-Known URI for Issuers
 
