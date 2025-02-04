@@ -735,8 +735,6 @@ Content-Type: application/json
 
 This endpoint in inspired by {{-Nonce-Endpoint}}.
 
-Authentication SHOULD NOT be implemented for this endpoint.
-This endpoint is used to demonstrate proof of possession, which is the reason that authentication is not required.
 Client holding signed statements that require demonstrating proof of possession MUST use this endpoint to obtain a nonce.
 
 Request:
