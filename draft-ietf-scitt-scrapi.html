@@ -1191,9 +1191,6 @@ Optional key discovery and query interfaces are provided to support interoperabi
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.3">
                     <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="auto internal xref">2.2.3</a>.  <a href="#name-resolve-issuer" class="internal xref">Resolve Issuer</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.4">
-                    <p id="section-toc.1-1.2.2.2.2.4.1"><a href="#section-2.2.4" class="auto internal xref">2.2.4</a>.  <a href="#name-request-nonce" class="internal xref">Request Nonce</a></p>
-</li>
                 </ul>
 </li>
             </ul>
@@ -2051,36 +2048,6 @@ Content-Type: application/json
 </div>
 </section>
 </div>
-<div id="sec-request-nonce">
-<section id="section-2.2.4">
-          <h4 id="name-request-nonce">
-<a href="#section-2.2.4" class="section-number selfRef">2.2.4. </a><a href="#name-request-nonce" class="section-name selfRef">Request Nonce</a>
-          </h4>
-<p id="section-2.2.4-1">This endpoint in inspired by <span>[<a href="#I-D.draft-demarco-oauth-nonce-endpoint" class="cite xref">I-D.draft-demarco-oauth-nonce-endpoint</a>]</span>.<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.4-2">Authentication <span class="bcp14">SHOULD NOT</span> be implemented for this endpoint.
-This endpoint is used to demonstrate proof of possession, which is the reason that authentication is not required.
-Client holding signed statements that require demonstrating proof of possession <span class="bcp14">MUST</span> use this endpoint to obtain a nonce.<a href="#section-2.2.4-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.4-3">Request:<a href="#section-2.2.4-3" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.4-4">
-<pre>
-GET /nonce HTTP/1.1
-Host: transparency.example
-Accept: application/json
-</pre><a href="#section-2.2.4-4" class="pilcrow">¶</a>
-</div>
-<p id="section-2.2.4-5">Response:<a href="#section-2.2.4-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.4-6">
-<pre>
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
-}
-</pre><a href="#section-2.2.4-6" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
 </section>
 </div>
 </section>
@@ -2420,10 +2387,6 @@ Related information: N/A<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="I-D.draft-demarco-oauth-nonce-endpoint">[I-D.draft-demarco-oauth-nonce-endpoint]</dt>
-        <dd>
-<span class="refAuthor">De Marco, G.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"OAuth 2.0 Nonce Endpoint"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-demarco-oauth-nonce-endpoint-00</span>, <time datetime="2024-02-06" class="refDate">6 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-demarco-oauth-nonce-endpoint-00">https://datatracker.ietf.org/doc/html/draft-demarco-oauth-nonce-endpoint-00</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.draft-ietf-oauth-sd-jwt-vc">[I-D.draft-ietf-oauth-sd-jwt-vc]</dt>
         <dd>
 <span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-08</span>, <time datetime="2024-12-03" class="refDate">3 December 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-08">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-08</a>&gt;</span>. </dd>

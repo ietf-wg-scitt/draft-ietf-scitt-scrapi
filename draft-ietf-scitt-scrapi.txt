@@ -80,7 +80,6 @@ Table of Contents
        2.2.1.  Resolve Signed Statement
        2.2.2.  Exchange Receipt
        2.2.3.  Resolve Issuer
-       2.2.4.  Request Nonce
    3.  Privacy Considerations
    4.  Security Considerations
      4.1.  General Scope
@@ -801,32 +800,6 @@ Table of Contents
      }
    }
 
-2.2.4.  Request Nonce
-
-   This endpoint in inspired by
-   [I-D.draft-demarco-oauth-nonce-endpoint].
-
-   Authentication SHOULD NOT be implemented for this endpoint.  This
-   endpoint is used to demonstrate proof of possession, which is the
-   reason that authentication is not required.  Client holding signed
-   statements that require demonstrating proof of possession MUST use
-   this endpoint to obtain a nonce.
-
-   Request:
-
-   GET /nonce HTTP/1.1
-   Host: transparency.example
-   Accept: application/json
-
-   Response:
-
-   HTTP/1.1 200 OK
-   Content-Type: application/json
-
-   {
-     "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
-   }
-
 3.  Privacy Considerations
 
    TODO
@@ -1097,13 +1070,6 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc9290>.
 
 7.2.  Informative References
-
-   [I-D.draft-demarco-oauth-nonce-endpoint]
-              De Marco, G. and O. Steele, "OAuth 2.0 Nonce Endpoint",
-              Work in Progress, Internet-Draft, draft-demarco-oauth-
-              nonce-endpoint-00, 6 February 2024,
-              <https://datatracker.ietf.org/doc/html/draft-demarco-
-              oauth-nonce-endpoint-00>.
 
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
