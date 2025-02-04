@@ -189,7 +189,7 @@ Payload (in CBOR diagnostic notation)
     {},                ; Unprotected header
     {                  ; Payload - CBOR map
         "issuer": "https://transparency.example",
-        "base_url": "https://transparency.example/v1/scrapi",
+        "base_url": "https://transparency.example/v1/scrapi"
         "oidc_auth_endpoint": "https://transparency.example/auth"
     },
     h'ABCDEF1234567890ABCDEF1234567890'  ; Signature
