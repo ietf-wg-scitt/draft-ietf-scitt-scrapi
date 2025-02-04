@@ -299,7 +299,7 @@ Content-Type: application/cbor
 Retry-After: <seconds>
 
 {
-  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
+  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190"
   / status /  "Status": "running"
 }
 ~~~
