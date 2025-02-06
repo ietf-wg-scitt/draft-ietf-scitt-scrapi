@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:36:08.594218+00:00",
+  "timestamp": "2025-02-06T00:37:46.513128+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -511,6 +511,7 @@
       "author": "roywill",
       "authorAssociation": "NONE",
       "assignees": [
+        "achamayou",
         "roywill"
       ],
       "labels": [
@@ -980,15 +981,15 @@
       "id": "I_kwDOLJjbks6c0_wy",
       "title": "Nothing to hold TS to account",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/41",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Would be good to have an API that allows checking or proving consistency of the log.\r\nWe understand that not every log supports consistency proofs but in the cases where they do, there should be standard way to get them",
       "createdAt": "2024-11-03T11:09:28Z",
-      "updatedAt": "2024-12-03T18:10:17Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-04T15:51:56Z",
+      "closedAt": "2025-02-04T15:51:56Z",
       "comments": [
         {
           "author": "achamayou",
@@ -1010,6 +1011,13 @@
           "body": "> @achamayou / @JAG-UK would an api which responded with the VDS appropriate proof type work ?\r\n\r\nI think it would?\r\n\r\n> 1. The requested proof, consistency in this case, may be \"not ready yet\". Its not as clear how to deal with that as for proofs of inclusion.\r\n\r\nThat sounds similar to the situation for proofs of inclusion, which may also be behind an async API because the ledger needs to do something that takes a bit of time first (replicate across N nodes etc).\r\n\r\n> 2. Depending on the VDS (transparency service choice) different parameters may be required for the request. That suggests the API itself needs to allow for VDS specific parameterization\r\n\r\nYes, that seems like the main obstacle to me. I don't know if this could be resolved by defining an (ordered, but opaque) transaction ID, and if `from` and `to` would be enough here, or if more is needed.\r\n\r\n",
           "createdAt": "2024-12-03T18:09:59Z",
           "updatedAt": "2024-12-03T18:10:17Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agreement to close",
+          "createdAt": "2025-02-04T15:51:54Z",
+          "updatedAt": "2025-02-04T15:51:54Z"
         }
       ]
     },
@@ -1130,7 +1138,7 @@
       "id": "I_kwDOLJjbks6dGYXL",
       "title": "Clarify scope of Resolve Issuer",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/46",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1139,8 +1147,8 @@
       "labels": [],
       "body": "The intent statement currently says:\r\n\r\n`This endpoint is used to discover verification keys, which is the reason that authentication is not required.`\r\n\r\nIn use cases where this endpoint is useful, it's often the case that you want more metadata/supporting evidence than purely keys.\r\n\r\nA suggestion from the field: `return supporting evidence enabling the client to verify the issuer signature at the time of registration`",
       "createdAt": "2024-11-05T14:55:01Z",
-      "updatedAt": "2025-01-02T18:20:18Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-04T15:16:02Z",
+      "closedAt": "2025-02-04T15:16:01Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -1155,6 +1163,13 @@
           "body": "+1 for removing the authentication restriction, while some transparency services like CT are scoped to the internet at large, others may be scoped to a group or an organisation.\r\n\r\n> In use cases where this endpoint is useful, it's often the case that you want more metadata/supporting evidence than purely keys.\r\n\r\nCan you elaborate on this? Although I see the case for additional key-related metadata (e.g. validity ranges in the ledger, cross-endorsement), I am curious about other metadata and to what extent it's worth bundling together/splitting.",
           "createdAt": "2024-11-25T10:09:24Z",
           "updatedAt": "2024-11-25T10:09:24Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@JAG-UK this particular issue has been resolved by #52, but a similar sentence remains for the Nonce endpoint: https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/main/draft-ietf-scitt-scrapi.md?plain=1#L739\n\nI am going to PR its removal under the rationale used in #52: authentication may be applied as a DoS prevention measure, there is no interoperability value to this exception.",
+          "createdAt": "2025-02-04T14:20:02Z",
+          "updatedAt": "2025-02-04T14:20:02Z"
         }
       ]
     },
@@ -1194,7 +1209,7 @@
       "id": "I_kwDOLJjbks6h2eKB",
       "title": "Use of URNs in SCRAPI",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/50",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1205,8 +1220,8 @@
       ],
       "body": "https://mailarchive.ietf.org/arch/msg/scitt/u0HJWX7gPVIQ_Ix05iOk4vVT3FA/\r\n\r\nTLDR; Remove all the URNs from the examples, and follow modern Open API Specification guidance for resource identifiers.",
       "createdAt": "2024-12-03T15:59:26Z",
-      "updatedAt": "2025-01-28T15:21:32Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-04T15:18:07Z",
+      "closedAt": "2025-02-04T15:18:06Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -1253,15 +1268,26 @@
       "state": "OPEN",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "SteveLasker",
+        "henkbirkholz"
+      ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "What default should we include in the samples.\r\nIn practicality, we're seeing most content be signed as hashed content, driving the https://datatracker.ietf.org/doc/draft-ietf-cose-hash-envelope/ draft. \r\nSuggesting we change the examples to use hash envelope, instead of inline content.",
       "createdAt": "2024-12-31T20:24:12Z",
-      "updatedAt": "2024-12-31T23:41:49Z",
+      "updatedAt": "2025-02-04T15:47:24Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@henkbirkholz to help with pre-allocation https://github.com/cose-wg/draft-ietf-cose-hash-envelope/issues/31",
+          "createdAt": "2025-02-04T15:47:23Z",
+          "updatedAt": "2025-02-04T15:47:23Z"
+        }
+      ]
     },
     {
       "number": 56,
@@ -1308,7 +1334,7 @@
       "id": "I_kwDOLJjbks6n2ML2",
       "title": "Update 2.11 Transparency Configuration to reflect CBOR",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/61",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1317,8 +1343,8 @@
       "labels": [],
       "body": "[2.1.1. ](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.1.1)[Transparency Configuration](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-transparency-configuration)\n\nhttps://github.com/microsoft/scitt-ccf-ledger/blob/46b772052016aa24e6b62b8818d63125f14b07bd/app/src/service_endpoints.h#L240",
       "createdAt": "2025-01-28T15:20:33Z",
-      "updatedAt": "2025-01-28T15:20:37Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-04T15:43:13Z",
+      "closedAt": "2025-02-04T15:43:13Z",
       "comments": []
     }
   ],
@@ -5454,7 +5480,7 @@
       "labels": [],
       "body": "I think we can simplify the asynchronous submission flow substantially by:\r\n\r\n1. Using appropriate HTTP return codes\r\n2. Using Location\r\n\r\nAs far as I can tell, [303 is intended for that purpose](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303).\r\n\r\nImplementations that can allocate a permanent `Location` early can avoid dealing with temporary `OperationID` and the potential race between expiry and the client coming back in time, and implementations that do not can still use a `308` once they have allocated a final `Location`.",
       "createdAt": "2025-01-21T14:11:43Z",
-      "updatedAt": "2025-01-28T15:32:31Z",
+      "updatedAt": "2025-02-04T15:38:59Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "d5ad6f8efe7595a579a5915ad70abf33b224528c",
@@ -5493,6 +5519,34 @@
           "body": "Discussion to remove the temporary Operation ID flows, returning a Permanent ID.",
           "createdAt": "2025-01-28T15:32:30Z",
           "updatedAt": "2025-01-28T15:32:30Z"
+        },
+        {
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "body": "> Discussion to remove the temporary Operation ID flows, returning a Permanent ID.\r\n\r\nI belive this forces the transparency service to pre commit to an identifier before the entry is added to the imutable ledger. I think that is un helpful.\r\n\r\nHigh throughput ledgers that offer \"at least once\" semantics will have duplicates on content that are unique based on there commitment to the VDS. \r\n\r\nEither the ledger works counter factualy (the identity can be computed from the content) or it must store the look up permanently. Both can be done, but I don't understand why OperationID is so problematic.\r\n\r\n",
+          "createdAt": "2025-02-03T13:34:34Z",
+          "updatedAt": "2025-02-03T13:40:46Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@robinbryce I need to/have agreed to rewrite this more clearly, I will try to do that tomorrow. The goal was not to force anything, but to _allow_ implementations that could provide the identifier synchronously to do so.\r\n\r\nI think this can be done without the identifier being content-derived, it can be a tentative position in the ledger that is reserved, and to which the VDS is guaranteed to be bound if the registration succeeds. If the commit fails, the error can still be returned all the same.\r\n\r\nIn terms of location, I think something like:\r\n\r\n1. `POST ...` -> `303` `Location: Somewhere Temporary`\r\n2. `GET Somewhere Temporary` -> `302` `Location: Somewhere Temporary`\r\n3. `GET Somewhere Temporary` -> `308` `Location: Somewhere Permanent`\r\n4. `GET Somewhere Permanent` -> `200` `Content`\r\n\r\nIt seemed like we could skip 2. in cases where the eventual location is decided early, but it sounds like maybe not?",
+          "createdAt": "2025-02-03T15:06:01Z",
+          "updatedAt": "2025-02-03T15:06:01Z"
+        },
+        {
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "body": "> @robinbryce I need to/have agreed to rewrite this more clearly, I will try to do that tomorrow. The goal was not to force anything, but to _allow_ implementations that could provide the identifier synchronously to do so.\r\n\r\nOh, that sounds very reasonable.\r\n\r\n> \r\n> I think this can be done without the identifier being content-derived, it can be a tentative position in the ledger that is reserved, and to which the VDS is guaranteed to be bound if the registration succeeds. If the commit fails, the error can still be returned all the same.\r\n\r\nSome ledgers may be able to work that way, ours does not. At the time we accept the request we have no way of knowing exactly which position it will get in the ledger. A reservation would require significant limits on throughput I think. \r\n\r\nBut if this is a requirement on *synchronous* registration that is fine. We could implement a synchronous path that returned the actual ledger id in the order of < 1 second - heavily dependeing on registration check requirements. It's just for high throughput, we definitely want the option of \"comming back later\" to get the result. And we most certainly want async registration to continue to be possible\r\n\r\n> \r\n> In terms of location, I think something like:\r\n> \r\n>     1. `POST ...` -> `303` `Location: Somewhere Temporary`\r\n> \r\n>     2. `GET Somewhere Temporary` -> `302` `Location: Somewhere Temporary`\r\n> \r\n>     3. `GET Somewhere Temporary` -> `308` `Location: Somewhere Permanent`\r\n> \r\n>     4. `GET Somewhere Permanent` -> `200` `Content`\r\n> \r\n> \r\n> It seemed like we could skip 2. in cases where the eventual location is decided early, but it sounds like maybe not?\r\n\r\nNot sure, but I do *like* the use of 303, 302 and 308 for sure, even if all of the requests are necessary\r\n\r\n",
+          "createdAt": "2025-02-04T15:25:15Z",
+          "updatedAt": "2025-02-04T15:25:15Z"
+        },
+        {
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "body": "> > @robinbryce I need to/have agreed to rewrite this more clearly, I will try to do that tomorrow. The goal was not to force anything, but to _allow_ implementations that could provide the identifier synchronously to do so.\r\n> \r\n> Oh, that sounds very reasonable.\r\n> \r\n> > I think this can be done without the identifier being content-derived, it can be a tentative position in the ledger that is reserved, and to which the VDS is guaranteed to be bound if the registration succeeds. If the commit fails, the error can still be returned all the same.\r\n> \r\n> Some ledgers may be able to work that way, ours does not. At the time we accept the request we have no way of knowing exactly which position it will get in the ledger. A reservation would require significant limits on throughput I think.\r\n> \r\n> But if this is a requirement on _synchronous_ registration that is fine. We could implement a synchronous path that returned the actual ledger id in the order of < 1 second - heavily dependeing on registration check requirements. It's just for high throughput, we definitely want the option of \"comming back later\" to get the result. And we most certainly want async registration to continue to be possible\r\n> \r\n> > In terms of location, I think something like:\r\n> > ```\r\n> > 1. `POST ...` -> `303` `Location: Somewhere Temporary`\r\n> > \r\n> > 2. `GET Somewhere Temporary` -> `302` `Location: Somewhere Temporary`\r\n> > \r\n> > 3. `GET Somewhere Temporary` -> `308` `Location: Somewhere Permanent`\r\n> > \r\n> > 4. `GET Somewhere Permanent` -> `200` `Content`\r\n> > ```\r\n> > \r\n> > \r\n> >     \r\n> >       \r\n> >     \r\n> > \r\n> >       \r\n> >     \r\n> > \r\n> >     \r\n> >   \r\n> > It seemed like we could skip 2. in cases where the eventual location is decided early, but it sounds like maybe not?\r\n> \r\n> Not sure, but I do _like_ the use of 303, 302 and 308 for sure, even if all of the requests are necessary\r\n\r\nMaybe The POST can respond imediately with 308//301 in the case where the permanent location is known ?\r\n\r\nTo be super super clear, I support the use of a location that is intially temporary and is ultimately permanent as indicated by the above HTTP response codes. And of course for ledgers that can go straight to permanent this \"just works\"",
+          "createdAt": "2025-02-04T15:35:16Z",
+          "updatedAt": "2025-02-04T15:38:59Z"
         }
       ],
       "reviews": [
@@ -5535,6 +5589,435 @@
               "updatedAt": "2025-01-22T08:39:11Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "id": "PR_kwDOLJjbks6KAGPa",
+      "title": "Remove URNs",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/62",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #50, also see https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/pull/343",
+      "createdAt": "2025-02-04T13:51:11Z",
+      "updatedAt": "2025-02-04T15:18:05Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "9a3e33417e71cdcceaf2ea14c63b734ba4c8cabe",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "remove_urns",
+      "headRefOid": "e2f3443c61e2c728924dff4431e0e4b5cf743efe",
+      "closedAt": "2025-02-04T15:18:05Z",
+      "mergedAt": "2025-02-04T15:18:05Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "da7f7a72f9d4cfd1599deec080c6ae670883b1fa"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6akHFo",
+          "commit": {
+            "abbreviatedOid": "c18e440"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-04T15:02:41Z",
+          "updatedAt": "2025-02-04T15:02:41Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\n            \"Signing algorithm 'WalnutDSA' not supported\"\r\n```",
+              "createdAt": "2025-02-04T15:02:41Z",
+              "updatedAt": "2025-02-04T15:02:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akHX0",
+          "commit": {
+            "abbreviatedOid": "c18e440"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-04T15:03:04Z",
+          "updatedAt": "2025-02-04T15:03:05Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\n        \"base_url\": \"https://transparency.example/v1/scrapi\"\r\n```",
+              "createdAt": "2025-02-04T15:03:05Z",
+              "updatedAt": "2025-02-04T15:03:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akI00",
+          "commit": {
+            "abbreviatedOid": "c18e440"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-04T15:05:06Z",
+          "updatedAt": "2025-02-04T15:05:06Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "```suggestion\r\n  / locator / \"OperationID\": \"67f89d5f0042e3ad42...35a1f190\"\r\n```",
+              "createdAt": "2025-02-04T15:05:06Z",
+              "updatedAt": "2025-02-04T15:05:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akRka",
+          "commit": {
+            "abbreviatedOid": "a64114e"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-04T15:17:04Z",
+          "updatedAt": "2025-02-04T15:17:04Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akR5c",
+          "commit": {
+            "abbreviatedOid": "e2f3443"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-04T15:17:31Z",
+          "updatedAt": "2025-02-04T15:17:31Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akR8n",
+          "commit": {
+            "abbreviatedOid": "e2f3443"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-02-04T15:17:36Z",
+          "updatedAt": "2025-02-04T15:17:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 63,
+      "id": "PR_kwDOLJjbks6KASFd",
+      "title": "Update GitHub actions to unblock CI",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/63",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes CI job that blocks https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/62",
+      "createdAt": "2025-02-04T14:10:59Z",
+      "updatedAt": "2025-02-04T15:02:04Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "9a3e33417e71cdcceaf2ea14c63b734ba4c8cabe",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "update_github_actions",
+      "headRefOid": "ffb89a5dffbf880a92e36f7df27d898a7a9c2cb5",
+      "closedAt": "2025-02-04T15:02:04Z",
+      "mergedAt": "2025-02-04T15:02:04Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "11143a0c454a5c9980551db304a707dc589afc8a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6ajrIy",
+          "commit": {
+            "abbreviatedOid": "ffb89a5"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-04T14:29:37Z",
+          "updatedAt": "2025-02-04T14:29:37Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akGdH",
+          "commit": {
+            "abbreviatedOid": "ffb89a5"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-02-04T15:01:49Z",
+          "updatedAt": "2025-02-04T15:01:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 64,
+      "id": "PR_kwDOLJjbks6KAX3b",
+      "title": "Remove noauth requirement on nonce request endpoint",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/64",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #46",
+      "createdAt": "2025-02-04T14:21:05Z",
+      "updatedAt": "2025-02-04T14:55:33Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "9a3e33417e71cdcceaf2ea14c63b734ba4c8cabe",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "remove_noauth_requirement_on_nonce_endpoint",
+      "headRefOid": "73b2d5f5509420c4865ac0bd25a4b041ad1c4b8c",
+      "closedAt": "2025-02-04T14:55:33Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@JAG-UK ah, let me do that instead then.",
+          "createdAt": "2025-02-04T14:51:35Z",
+          "updatedAt": "2025-02-04T14:51:35Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closed in favour of #66.",
+          "createdAt": "2025-02-04T14:55:33Z",
+          "updatedAt": "2025-02-04T14:55:33Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6ajqc4",
+          "commit": {
+            "abbreviatedOid": "73b2d5f"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Happy with this, although I actually thought we were going to remove the nonce endpoint altogether",
+          "createdAt": "2025-02-04T14:28:40Z",
+          "updatedAt": "2025-02-04T14:28:40Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 65,
+      "id": "PR_kwDOLJjbks6KAqJ5",
+      "title": "Update transparency-config with current sample produced by scitt-ccf-ledger implementation",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/65",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #61, @robinbryce can we get a sample from the datatrails implementation as well?",
+      "createdAt": "2025-02-04T14:50:50Z",
+      "updatedAt": "2025-02-04T15:43:12Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "da7f7a72f9d4cfd1599deec080c6ae670883b1fa",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "update_transparency_config_with_scitt_ccf_sample",
+      "headRefOid": "4fafe531c21a3d1241934330bb771f82c64e0827",
+      "closedAt": "2025-02-04T15:43:12Z",
+      "mergedAt": "2025-02-04T15:43:12Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "d4e8fe6fe3226ca29c69cc9d908efdc7d18c09b0"
+      },
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-08#section-5\r\n\r\n```\r\n{\r\n   \"issuer\":\"https://example.com\",\r\n   \"jwks\":{\r\n      \"keys\":[\r\n         {\r\n            \"kid\":\"doc-signer-05-25-2022\",\r\n            \"e\":\"AQAB\",\r\n            \"n\":\"nj3YJwsLUFl9BmpAbkOswCNVx17Eh9wMO-_AReZwBqfaWFcfG\r\n   HrZXsIV2VMCNVNU8Tpb4obUaSXcRcQ-VMsfQPJm9IzgtRdAY8NN8Xb7PEcYyk\r\n   lBjvTtuPbpzIaqyiUepzUXNDFuAOOkrIol3WmflPUUgMKULBN0EUd1fpOD70p\r\n   RM0rlp_gg_WNUKoW1V-3keYUJoXH9NztEDm_D2MQXj9eGOJJ8yPgGL8PAZMLe\r\n   2R7jb9TxOCPDED7tY_TU4nFPlxptw59A42mldEmViXsKQt60s1SLboazxFKve\r\n   qXC_jpLUt22OC6GUG63p-REw-ZOr3r845z50wMuzifQrMI9bQ\",\r\n            \"kty\":\"RSA\"\r\n         }\r\n      ]\r\n   }\r\n}\r\n```\r\n\r\n```\r\n{\r\n   \"issuer\":\"https://example.com\",\r\n   \"jwks_uri\":\"https://jwt-vc-issuer.example.org/my_public_keys.jwks\"\r\n}\r\n```\r\n\r\n^ Suggest aligning with this",
+          "createdAt": "2025-02-04T15:25:45Z",
+          "updatedAt": "2025-02-04T15:25:45Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@OR13 done.",
+          "createdAt": "2025-02-04T15:43:08Z",
+          "updatedAt": "2025-02-04T15:43:08Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6akTrq",
+          "commit": {
+            "abbreviatedOid": "41a2b00"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-04T15:20:03Z",
+          "updatedAt": "2025-02-04T15:20:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akYFU",
+          "commit": {
+            "abbreviatedOid": "41a2b00"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-04T15:26:19Z",
+          "updatedAt": "2025-02-04T15:26:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akj5b",
+          "commit": {
+            "abbreviatedOid": "41a2b00"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-04T15:42:12Z",
+          "updatedAt": "2025-02-04T15:42:13Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\n  \"issuer\": \"https://transparency.example\",\r\n```",
+              "createdAt": "2025-02-04T15:42:12Z",
+              "updatedAt": "2025-02-04T15:42:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akj_P",
+          "commit": {
+            "abbreviatedOid": "41a2b00"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-04T15:42:20Z",
+          "updatedAt": "2025-02-04T15:42:21Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "```suggestion\r\n  \"jwks_uri\": \"https://transparency.example/jwks\"\r\n```",
+              "createdAt": "2025-02-04T15:42:20Z",
+              "updatedAt": "2025-02-04T15:42:21Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 66,
+      "id": "PR_kwDOLJjbks6KAs3O",
+      "title": "Remove Nonce endpoint",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/66",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Replaces #64, closes #46.",
+      "createdAt": "2025-02-04T14:55:21Z",
+      "updatedAt": "2025-02-04T15:16:01Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "9a3e33417e71cdcceaf2ea14c63b734ba4c8cabe",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "remove_nonce_endpoint",
+      "headRefOid": "24730537246d3c0e61283a188ceb75cc3e9e90d7",
+      "closedAt": "2025-02-04T15:16:00Z",
+      "mergedAt": "2025-02-04T15:16:00Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "a162c0a987144471c104290cd42710897ef8b28b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6akCFq",
+          "commit": {
+            "abbreviatedOid": "2473053"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Removed as discussed. LGTM thanks",
+          "createdAt": "2025-02-04T14:56:11Z",
+          "updatedAt": "2025-02-04T14:56:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akO9_",
+          "commit": {
+            "abbreviatedOid": "2473053"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-04T15:13:22Z",
+          "updatedAt": "2025-02-04T15:13:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akPZy",
+          "commit": {
+            "abbreviatedOid": "2473053"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-02-04T15:14:02Z",
+          "updatedAt": "2025-02-04T15:14:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6akPxR",
+          "commit": {
+            "abbreviatedOid": "2473053"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-04T15:14:34Z",
+          "updatedAt": "2025-02-04T15:14:34Z",
+          "comments": []
         }
       ]
     }
