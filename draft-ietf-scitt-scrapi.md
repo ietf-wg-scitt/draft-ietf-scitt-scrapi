@@ -60,7 +60,6 @@ normative:
   IANA.params:
 
 informative:
-  I-D.draft-demarco-oauth-nonce-endpoint: Nonce-Endpoint
   I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
   RFC2046:
   RFC6838:
@@ -115,14 +114,13 @@ If Authentication is not implemented, rate limiting or other denial of service m
 
 All messages are sent as HTTP GET or POST requests.
 
-If the Transparency Service cannot process a client's request, it MUST return an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise Problem Details object {{RFC9290}} containing:
+If the Transparency Service cannot process a client's request, it MUST return either:
+
+1. an HTTP 3xx code, indicating to the client additional action they must take to complete the request, such as follow a redirection, or
+1. an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise Problem Details object {{RFC9290}} containing:
 
 - title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
 - detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
-- instance: A URN reference identifying the problem.
-To facilitate automated response to errors, this document defines a set of standard tokens for use in the type field within the URN namespace of: "urn:ietf:params:scitt:error:".
-
-- response-code: The HTTP error response code relating to this error.
 
 TODO: RESOLVE this dangling media-type
 
@@ -140,10 +138,7 @@ Examples of errors may include:
   / title /         -1: \
             "Bad Signature Algorithm",
   / detail /        -2: \
-            "Signing algorithm 'WalnutDSA' not supported",
-  / instance /      -3: \
-            "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-  / response-code / -4: 400,
+            "Signing algorithm 'WalnutDSA' not supported"
 }
 ~~~
 
@@ -177,29 +172,21 @@ Request:
 ~~~ http-message
 GET /.well-known/transparency-configuration HTTP/1.1
 Host: transparency.example
-Accept: application/cose
+Accept: application/cbor
 ~~~
 
 Response:
 
 ~~~ http-message
 HTTP/1.1 200 Ok
-Content-Type: application/cose
+Content-Type: application/cbor
 
 Payload (in CBOR diagnostic notation)
 
-18([                   ; COSE_Sign1 structure with tag 18
-    h'44A123BEEFFACE', ; Protected header (example bytes)
-    {},                ; Unprotected header
-    {                  ; Payload - CBOR map
-        "issuer": "https://transparency.example",
-        "base_url": "https://transparency.example/v1/scrapi",
-        "oidc_auth_endpoint": "https://transparency.example/auth",
-        "registration_policy": "https://transparency.example/statements/\
-urn:ietf:params:scitt:statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
-    },
-    h'ABCDEF1234567890ABCDEF1234567890'  ; Signature
-])
+{
+  "issuer": "https://transparency.example",
+  "jwks_uri": "https://transparency.example/jwks"
+}
 ~~~
 
 Responses to this message are vendor-specific.
@@ -313,10 +300,7 @@ application/concise-problem-details+cbor
   / title /         -1: \
           "Bad Signature Algorithm",
   / detail /        -2: \
-          "Signed Statement contained a non supported algorithm",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:badSignatureAlgorithm",
-  / response-code / -4: 400,
+          "Signed Statement contained a non supported algorithm"
 }
 ~~~
 
@@ -328,11 +312,7 @@ application/concise-problem-details+cbor
   / title /         -1: "\
           Confirmation Missing",
   / detail /        -2: \
-          "Signed Statement did not contain proof of possession",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:signed-statement:\
-          confirmation-missing",
-  / response-code / -4: 400,
+          "Signed Statement did not contain proof of possession"
 }
 ~~~
 
@@ -345,11 +325,7 @@ application/concise-problem-details+cbor
           "Payload Missing",
   / detail /        -2: \
           "Signed Statement payload must be attached \
-          (must be present)",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:signed-statement:\
-          payload-missing",
-  / response-code / -4: 400,
+          (must be present)"
 }
 ~~~
 
@@ -362,11 +338,7 @@ application/concise-problem-details+cbor
           "Payload Forbidden",
   / detail /        -2: \
           "Signed Statement payload must be detached \
-          (must not be present)",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:signed-statement:\
-          payload-forbidden",
-  / response-code / -4: 400,
+          (must not be present)"
 }
 ~~~
 
@@ -379,11 +351,7 @@ application/concise-problem-details+cbor
           "Rejected",
   / detail /        -2: \
           "Signed Statement not accepted by the current\
-          Registration Policy",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:signed-statement:\
-          rejected-by-registration-policy",
-  / response-code / -4: 400,
+          Registration Policy"
 }
 ~~~
 
@@ -398,9 +366,7 @@ application/concise-problem-details+cbor
 
 {
   / title /         -1: "Invalid locator",
-  / detail /        -2: "Operation locator is not in a valid form",
-  / instance /      -3: "urn:ietf:params:scitt:error:invalidRequest",
-  / response-code / -4: 400,
+  / detail /        -2: "Operation locator is not in a valid form"
 }
 ~~~
 
@@ -416,10 +382,7 @@ application/concise-problem-details+cbor
   / title /         -1: \
           "Operation Not Found",
   / detail /        -2: \
-          "No running operation was found matching the requested ID",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:notFound",
-  / response-code / -4: 404,
+          "No running operation was found matching the requested ID"
 }
 ~~~
 
@@ -436,10 +399,7 @@ Retry-After: <seconds>
   / title /         -1: \
           "Too Many Requests",
   / detail /        -2: \
-          "Only <number> requests per <period> are allowed.",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:tooManyRequests",
-  / response-code / -4: 429,
+          "Only <number> requests per <period> are allowed."
 }
 ~~~
 
@@ -489,10 +449,7 @@ application/concise-problem-details+cbor
           "Not Found",
   / detail /        -2: \
           "Receipt with entry ID <id> not known \
-          to this Transparency Service",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:receipt:not-found",
-  / response-code / -4: 404,
+          to this Transparency Service"
 }
 ~~~
 
@@ -545,10 +502,7 @@ application/concise-problem-details+cbor
   / title /         -1: \
           "Not Found",
   / detail /        -2: \
-          "No Signed Statement found with the specified ID",
-  / instance /      -3: \
-          "urn:ietf:params:scitt:error:notFound",
-  / response-code / -4: 404,
+          "No Signed Statement found with the specified ID"
 ~~~
 
 #### Eventual Consistency
@@ -650,33 +604,6 @@ Content-Type: application/json
 }
 ~~~
 
-### Request Nonce
-
-This endpoint in inspired by {{-Nonce-Endpoint}}.
-
-Authentication SHOULD NOT be implemented for this endpoint.
-This endpoint is used to demonstrate proof of possession, which is the reason that authentication is not required.
-Client holding signed statements that require demonstrating proof of possession MUST use this endpoint to obtain a nonce.
-
-Request:
-
-~~~ http-message
-GET /nonce HTTP/1.1
-Host: transparency.example
-Accept: application/json
-~~~
-
-Response:
-
-~~~ http-message
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "nonce": "d2JhY2NhbG91cmVqdWFuZGFt"
-}
-~~~
-
 # Privacy Considerations
 
 TODO
@@ -766,17 +693,6 @@ TODO: Consider negotiation for Receipt as "JSON" or "YAML".
 TODO: Consider impact of media type on "Data URIs" and QR Codes.
 
 # IANA Considerations
-
-## URN Sub-namespace for SCITT (urn:ietf:params:scitt)
-
-IANA is requested to register the URN sub-namespace `urn:ietf:params:scitt` in the "IETF URN Sub-namespace for Registered Protocol Parameter Identifiers" Registry {{IANA.params}}, following the template in {{RFC3553}}:
-
-~~~ output
-   Registry name:  scitt
-   Specification:  [RFCthis]
-   Repository:  http://www.iana.org/assignments/scitt
-   Index value:  No transformation needed.
-~~~
 
 ## Well-Known URI for Issuers
 
