@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-20T00:38:26.660361+00:00",
+  "timestamp": "2025-02-23T00:41:09.652173+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -5480,13 +5480,13 @@
       "labels": [],
       "body": "I think we can simplify the asynchronous submission flow substantially by:\r\n\r\n1. Using appropriate HTTP return codes\r\n2. Using Location\r\n\r\nAs far as I can tell, [303 is intended for that purpose](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303).\r\n\r\nImplementations that can allocate a permanent `Location` early can avoid dealing with temporary `OperationID` and the potential race between expiry and the client coming back in time, and implementations that do not can still use a `308` once they have allocated a final `Location`.",
       "createdAt": "2025-01-21T14:11:43Z",
-      "updatedAt": "2025-02-04T15:38:59Z",
+      "updatedAt": "2025-02-20T22:54:23Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
-      "baseRefOid": "d5ad6f8efe7595a579a5915ad70abf33b224528c",
+      "baseRefOid": "d4e8fe6fe3226ca29c69cc9d908efdc7d18c09b0",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "simplify_async_flow",
-      "headRefOid": "c37b6cc5429524d0aa6f280bb8ff7ea78ce36f10",
+      "headRefOid": "2bb268f31027aecb97d705f823ee15c42babb53c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -5547,6 +5547,13 @@
           "body": "> > @robinbryce I need to/have agreed to rewrite this more clearly, I will try to do that tomorrow. The goal was not to force anything, but to _allow_ implementations that could provide the identifier synchronously to do so.\r\n> \r\n> Oh, that sounds very reasonable.\r\n> \r\n> > I think this can be done without the identifier being content-derived, it can be a tentative position in the ledger that is reserved, and to which the VDS is guaranteed to be bound if the registration succeeds. If the commit fails, the error can still be returned all the same.\r\n> \r\n> Some ledgers may be able to work that way, ours does not. At the time we accept the request we have no way of knowing exactly which position it will get in the ledger. A reservation would require significant limits on throughput I think.\r\n> \r\n> But if this is a requirement on _synchronous_ registration that is fine. We could implement a synchronous path that returned the actual ledger id in the order of < 1 second - heavily dependeing on registration check requirements. It's just for high throughput, we definitely want the option of \"comming back later\" to get the result. And we most certainly want async registration to continue to be possible\r\n> \r\n> > In terms of location, I think something like:\r\n> > ```\r\n> > 1. `POST ...` -> `303` `Location: Somewhere Temporary`\r\n> > \r\n> > 2. `GET Somewhere Temporary` -> `302` `Location: Somewhere Temporary`\r\n> > \r\n> > 3. `GET Somewhere Temporary` -> `308` `Location: Somewhere Permanent`\r\n> > \r\n> > 4. `GET Somewhere Permanent` -> `200` `Content`\r\n> > ```\r\n> > \r\n> > \r\n> >     \r\n> >       \r\n> >     \r\n> > \r\n> >       \r\n> >     \r\n> > \r\n> >     \r\n> >   \r\n> > It seemed like we could skip 2. in cases where the eventual location is decided early, but it sounds like maybe not?\r\n> \r\n> Not sure, but I do _like_ the use of 303, 302 and 308 for sure, even if all of the requests are necessary\r\n\r\nMaybe The POST can respond imediately with 308//301 in the case where the permanent location is known ?\r\n\r\nTo be super super clear, I support the use of a location that is intially temporary and is ultimately permanent as indicated by the above HTTP response codes. And of course for ledgers that can go straight to permanent this \"just works\"",
           "createdAt": "2025-02-04T15:35:16Z",
           "updatedAt": "2025-02-04T15:38:59Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "ping @achamayou, @robinbryce, @JAG-UK for \ud83d\udc40  ",
+          "createdAt": "2025-02-20T22:54:22Z",
+          "updatedAt": "2025-02-20T22:54:22Z"
         }
       ],
       "reviews": [
@@ -5587,6 +5594,66 @@
               "body": "So this simplification seems to remove the ability to specify a \"check status\" api ? How does the 303/302 model convey async registration problems to the client ?",
               "createdAt": "2025-01-22T08:39:10Z",
               "updatedAt": "2025-01-22T08:39:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6c12pA",
+          "commit": {
+            "abbreviatedOid": "c37b6cc"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-20T22:47:54Z",
+          "updatedAt": "2025-02-20T22:47:54Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "@achamayou \u2b06\ufe0f ?",
+              "createdAt": "2025-02-20T22:47:54Z",
+              "updatedAt": "2025-02-20T22:47:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6c124b",
+          "commit": {
+            "abbreviatedOid": "c37b6cc"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-20T22:48:43Z",
+          "updatedAt": "2025-02-20T22:48:43Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\nRegistration requests MAY fail, in which case the Location MAY return an error when queried.\r\nThe Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.\r\n```",
+              "createdAt": "2025-02-20T22:48:43Z",
+              "updatedAt": "2025-02-20T22:48:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6c13f9",
+          "commit": {
+            "abbreviatedOid": "f6406fc"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-20T22:49:48Z",
+          "updatedAt": "2025-02-20T22:49:48Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "Would it poll the `location`?",
+              "createdAt": "2025-02-20T22:49:48Z",
+              "updatedAt": "2025-02-20T22:49:48Z"
             }
           ]
         }
