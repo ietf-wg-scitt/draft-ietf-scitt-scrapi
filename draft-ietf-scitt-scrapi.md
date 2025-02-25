@@ -231,7 +231,7 @@ One of the following:
 
 #### Status 201 - Registration is successful
 
-If the Transparency Service is able to mint receipts within a reasonable time, it may return the receipt directly.
+If the Transparency Service is able to produce a Receipt within a reasonable time, it MAY return it directly.
 
 Along with the receipt the Transparency Service MAY return a locator in the HTTP response `Location` header, provided the locator is a valid URL.
 
@@ -258,7 +258,7 @@ Fresh Receipts may be requested through the resource identified in the Location 
 
 #### Status 303 - Registration is running
 
-In cases where the registration request is accepted but the Transparency Service is not able to mint Receipts in a reasonable time, it returns a locator for the registration operation, as in this non-normative example:
+In cases where the registration request is accepted but the Transparency Service is not able to produce a Receipt in a reasonable time, it MAY return a locator for the registration operation, as in this non-normative example:
 
 ~~~ http
 HTTP/1.1 303 See Other
@@ -268,6 +268,26 @@ Content-Type: application/cose
 Content-Length: 0
 Retry-After: <seconds>
 ~~~
+
+The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
+
+### Query Registration Status
+
+This endpoint lets a client query a Transparency Service for the registration status of a payload they have submitted earlier, and for which they have received a 303 - Registration is running response.
+
+Request:
+
+~~~http
+GET /entries/67ed...befe HTTP/1.1
+Host: transparency.example
+Accept: application/cbor
+Accept: application/cose
+Content-Type: application/cose
+~~~
+
+Response:
+
+One of the following:
 
 #### Status 302 - Registration is running
 
