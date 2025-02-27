@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T00:39:19.204471+00:00",
+  "timestamp": "2025-02-27T00:38:31.912572+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -5478,15 +5478,15 @@
         "achamayou"
       ],
       "labels": [],
-      "body": "I think we can simplify the asynchronous submission flow substantially by:\r\n\r\n1. Using appropriate HTTP return codes\r\n2. Using Location\r\n\r\nAs far as I can tell, [303 is intended for that purpose](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303).\r\n\r\nImplementations that can allocate a permanent `Location` early can avoid dealing with temporary `OperationID` and the potential race between expiry and the client coming back in time, and implementations that do not can still use a `308` once they have allocated a final `Location`.",
+      "body": "I think we can simplify the asynchronous submission flow substantially by:\r\n\r\n1. Using appropriate HTTP return codes\r\n2. Using Location\r\n\r\nAs far as I can tell, [303 is intended for that purpose](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303).\r\n\r\n# Proposed flow\r\n\r\nAll line numbers are post-diff:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries (:207)\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234 (:259)\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234 (:549)\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234 (:292)\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234 (:549)\r\n    TS->>-Client: 200 Location: /entry/final-1234 (Missing, we only have 201)\r\n```\r\n\r\nThis allows:\r\n\r\n1. Delayed decision about the result and location\r\n2. As few as 2 requests when the service is quick\r\n\r\n# FAQ\r\n\r\n## Why [303 - See Other](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303) at first?\r\n\r\nBecause it allows the `POST` -> `GET` switch.\r\n\r\n> The HTTP 303 See Other [redirection response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages) status code indicates that the browser should redirect to the URL in the [Location](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location) header instead of rendering the requested resource.\r\n\r\n> This response code is often sent back as a result of [PUT](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) or [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) methods so the client may retrieve a confirmation, or view a representation of a real-world object (see [HTTP range-14](https://en.wikipedia.org/wiki/HTTPRange-14)). The method to retrieve the redirected resource is always [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET).\r\n\r\n## Why [302 Found](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302) next?\r\n\r\n> The HTTP 302 Found [redirection response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages) status code indicates that the requested resource has been temporarily moved to the URL in the [Location](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location) header.\r\n\r\n## Is it ok to set a Retry-After on a 302?\r\n\r\n[Yes](https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after)\r\n\r\n## Would [307](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307) also work here? \r\n\r\nYes.\r\n\r\n> 307 and 302 responses are identical when the request method is [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET).\r\n\r\n## It is worth using 308 when the permanent location is decided, rather than stay with 302 the whole time?\r\n\r\nI don't think so, that seems like an unnecessary complication. 302 does not mandate that the Location must change.\r\n\r\nOn failure:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries (:207)\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234 (:259)\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234 (:549)\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234 (:292)\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234 (:549)\r\n    TS->>-Client: 400 Registration Failure (CBOR body with details) (Various locations)\r\n```",
       "createdAt": "2025-01-21T14:11:43Z",
-      "updatedAt": "2025-02-20T22:54:23Z",
+      "updatedAt": "2025-02-26T15:41:51Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "d4e8fe6fe3226ca29c69cc9d908efdc7d18c09b0",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "simplify_async_flow",
-      "headRefOid": "2bb268f31027aecb97d705f823ee15c42babb53c",
+      "headRefOid": "d14f6c46a763af613f063c24c39cfbfebd46ab83",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -5502,9 +5502,9 @@
         {
           "author": "achamayou",
           "authorAssociation": "COLLABORATOR",
-          "body": "Capturing so I don't forget:\r\n\r\n- [ ] add detail about temporary vs permanent location and use of `308`\r\n- [ ] add reminder that temporary locations may not be kept forever by the implementation",
+          "body": "Capturing so I don't forget:\r\n\r\n- [x] add detail about temporary vs permanent location and use of `308`\r\n- [x] add reminder that temporary locations may not be kept forever by the implementation",
           "createdAt": "2025-01-21T15:45:46Z",
-          "updatedAt": "2025-01-21T15:45:46Z"
+          "updatedAt": "2025-02-26T15:22:25Z"
         },
         {
           "author": "robinbryce",
@@ -5554,6 +5554,20 @@
           "body": "ping @achamayou, @robinbryce, @JAG-UK for \ud83d\udc40  ",
           "createdAt": "2025-02-20T22:54:22Z",
           "updatedAt": "2025-02-20T22:54:22Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My goal here is to use as much HTTP as possible, reduce/remove the custom CBOR messages we create and the need for clients to write specific logic to handle them. My sense is that this is achievable, there's more than enough freedom with `Location`, `303/302/301/308` to get there.\r\n\r\nI think we have the following questions/degrees of freedom:\r\n\r\n1. On final success (immediate or eventual), do we ever allow returning the Transparent Statement directly, or do we think we must always return a Location, and have the caller fetch from there?\r\n\r\nIf not, clients have to perform one more `GET` in any flow, which seems unfortunate. A solution would be to return a `200` with content _and_ a `Location` which is the final URL, but may differ from the URL called by the client. I am not sure this is allowed/widespread.\r\n\r\n3. On initial registration, do we provide a mechanism for implementations to signal that a final Location is already known, and needs to be polled?\r\n\r\nIf not, client must go through one more request to first go to a temp location, and then to an final location.\r\n\r\nThe most general flow looks like this I think:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries\r\n    TS->>-Client: 303 Location: /entry/temp-1234\r\n    loop \r\n    Client->>+TS: GET /entry/temp-1234\r\n    TS->>-Client: 302 Location: /entry/temp-1234\r\n    end\r\n    Client->>+TS: GET /entry/temp-1234\r\n    TS->>-Client: 301 Location: /entry/final-1234\r\n    Client->>+TS: GET /entry/final-1234\r\n    TS->>-Client: 200 Transparent Statement\r\n```\r\n\r\nBut that's at least 4(!) requests to get there. I think it's unreasonable to demand all implementations do this. An error with that flow looks like:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries\r\n    TS->>-Client: 303 Location: /entry/temp-1234\r\n    loop \r\n    Client->>+TS: GET /entry/temp-1234\r\n    TS->>-Client: 302 Location: /entry/temp-1234\r\n    end\r\n    Client->>+TS: GET /entry/temp-1234\r\n    TS->>-Client: 400 Registration Failure (CBOR body with details)\r\n```\r\n\r\nI wonder if we can have this:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234\r\n    TS->>-Client: 200 Location: /entry/final-1234\r\n```\r\n\r\nThis allows:\r\n\r\n1. Delayed decision about the result and location\r\n2. As little as 2 requests when the service is quick\r\n\r\nOn failure:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234\r\n    TS->>-Client: 400 Registration Failure (CBOR body with details)\r\n```",
+          "createdAt": "2025-02-25T11:40:36Z",
+          "updatedAt": "2025-02-25T11:40:36Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "#Proposed flow\r\n\r\nAll line numbers are post-diff:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries (:207)\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234 (:259)\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234 (:549)\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234 (:292)\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234 (:549)\r\n    TS->>-Client: 200 Location: /entry/final-1234 (Missing, we only have 201)\r\n```\r\n\r\nThis allows:\r\n\r\n1. Delayed decision about the result and location\r\n2. As few as 2 requests when the service is quick\r\n\r\nWhy [303](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303)?\r\n\r\n> The HTTP 303 See Other [redirection response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages) status code indicates that the browser should redirect to the URL in the [Location](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location) header instead of rendering the requested resource.\r\n\r\n> This response code is often sent back as a result of [PUT](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) or [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) methods so the client may retrieve a confirmation, or view a representation of a real-world object (see [HTTP range-14](https://en.wikipedia.org/wiki/HTTPRange-14)). The method to retrieve the redirected resource is always [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET).\r\n\r\nWhy [302](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302)?\r\n\r\n> The HTTP 302 Found [redirection response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages) status code indicates that the requested resource has been temporarily moved to the URL in the [Location](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location) header.\r\n\r\nWould [307](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307) also work here? \r\n\r\nYes.\r\n\r\n> 307 and 302 responses are identical when the request method is [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET).\r\n\r\nIt is worth using 308 when the permanent location is decided, rather than stay with 302 the whole time?\r\n\r\nI don't think so, that seems like an unnecessary complication. 302 does not mandate that the Location must change.\r\n\r\nIs it legal to set a Retry-After on a 302?\r\n\r\n[Yes](https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after)\r\n\r\nOn failure:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries (:207)\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234 (:259)\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234 (:549)\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234 (:292)\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234 (:549)\r\n    TS->>-Client: 400 Registration Failure (CBOR body with details) (Various locations)\r\n```",
+          "createdAt": "2025-02-26T15:26:32Z",
+          "updatedAt": "2025-02-26T15:38:27Z"
         }
       ],
       "reviews": [
@@ -5654,6 +5668,66 @@
               "body": "Would it poll the `location`?",
               "createdAt": "2025-02-20T22:49:48Z",
               "updatedAt": "2025-02-20T22:49:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6dZRLf",
+          "commit": {
+            "abbreviatedOid": "2bb268f"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-25T11:07:09Z",
+          "updatedAt": "2025-02-25T11:07:09Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "The client would `GET` `Location`, and receive an error message.\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries\r\n    TS->>-Client: 303 Location: /entry/temp-1234\r\n    loop \r\n    Client->>+TS: GET /entry/temp-1234\r\n    TS->>-Client: 302 Location: /entry/temp-1234\r\n    end\r\n    Client->>+TS: GET /entry/temp-1234\r\n    TS->>-Client: 400 Registration Failed\r\n```",
+              "createdAt": "2025-02-25T11:07:09Z",
+              "updatedAt": "2025-02-25T11:15:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6dZV7M",
+          "commit": {
+            "abbreviatedOid": "2bb268f"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-25T11:15:40Z",
+          "updatedAt": "2025-02-25T11:15:40Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "The intention in this case was to have it be the final URI for the registration result:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries\r\n    TS->>-Client: 201 Location: /entry/1234\r\n    Client->>+TS: GET /entry/1234\r\n    TS->>-Client: 200 Transparent Statement\r\n```\r\n\r\n",
+              "createdAt": "2025-02-25T11:15:40Z",
+              "updatedAt": "2025-02-25T11:15:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6dZW4Y",
+          "commit": {
+            "abbreviatedOid": "2bb268f"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-25T11:17:20Z",
+          "updatedAt": "2025-02-25T11:17:21Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "Success could look like this:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries\r\n    TS->>-Client: 303 Location: /entry/temp-1234\r\n    loop \r\n    Client->>+TS: GET /entry/temp-1234\r\n    TS->>-Client: 302 Location: /entry/temp-1234\r\n    end\r\n    Client->>+TS: GET /entry/temp-1234\r\n    TS->>-Client: 301 Location: /entry/final-1234\r\n    Client->>+TS: GET /entry/final-1234\r\n    TS->>-Client: 200 Transparent Statement\r\n```",
+              "createdAt": "2025-02-25T11:17:20Z",
+              "updatedAt": "2025-02-25T11:17:35Z"
             }
           ]
         }
