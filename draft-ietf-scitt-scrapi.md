@@ -275,7 +275,7 @@ The Transparency Service MAY include a `Retry-After` header in the HTTP response
 
 ### Query Registration Status
 
-This endpoint lets a client query a Transparency Service for the registration status of a payload they have submitted earlier, and for which they have received a 303 - Registration is running response.
+This endpoint lets a client query a Transparency Service for the registration status of a payload they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
 
 Request:
 
