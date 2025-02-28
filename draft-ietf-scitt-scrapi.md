@@ -102,7 +102,7 @@ In addition to these operational HTTP endpoints, this specification defines supp
 
 {::boilerplate bcp14-tagged}
 
-This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service", "Append-Only Log" and "Registration Policy" as defined in {{-SCITT-ARCH}}.
+This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service" and "Registration Policy" as defined in {{-SCITT-ARCH}}.
 
 This specification uses "payload" as defined in {{RFC9052}}.
 
@@ -231,7 +231,7 @@ One of the following:
 
 #### Status 201 - Registration is successful
 
-If the Transparency Service is able to mint receipts within a reasonable time, it may return the receipt directly.
+If the Transparency Service is able to produce a Receipt within a reasonable time, it MAY return it directly.
 
 Along with the receipt the Transparency Service MAY return a locator in the HTTP response `Location` header, provided the locator is a valid URL.
 
@@ -256,50 +256,105 @@ Payload (in CBOR diagnostic notation)
 The response contains the Receipt for the Signed Statement.
 Fresh Receipts may be requested through the resource identified in the Location header.
 
-#### Status 202 - Registration is running
+#### Status 303 - Registration is running
 
-In cases where the registration request is accepted but the Transparency Service is not able to mint Receipts in a reasonable time, it returns a locator for the registration operation and a status code indicating the status of the operation, as in this non-normative example:
+In cases where the registration request is accepted but the Transparency Service is not able to produce a Receipt in a reasonable time, it MAY return a locator for the registration operation, as in this non-normative example:
 
-~~~ cbor-diag
-{
-  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
-  / status /  "Status": "running",
-}
+~~~ http
+HTTP/1.1 303 See Other
+
+Location: https://transparency.example/entries/67ed...befe
+Content-Type: application/cose
+Content-Length: 0
+Retry-After: <seconds>
 ~~~
 
-`Status` must be one of the following:
-
-- "running" - the operation is still in progress
-- "succeeded" - the operation succeeded and the Receipt is ready
-
-`OperationID` is Transparency Service-specific and MUST not be used for querying status in any Transparency Service other than the one that returned it.
-
-If the `OperationID` is a valid URL, it MAY be included as a `Location` header in the HTTP response.
-
-Transparency Services do not guarantee the retention of operation IDs for the entirety of their lifecycle.
-A Transparency MAY delete operation records, and some operation ID lookups MAY return error 404, even though they were valid in the past.
-The length of validity of the `OperationID` is Transparency Service specific.
-Still, the Transparency Service MUST maintain a record of every running or successful operation until at least one client has fetched the completed Receipt.
+The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
-~~~ http-message
-HTTP/1.1 202 Accepted
+### Query Registration Status
 
-Location: https://transparency.example/operations/67f8...f190
+This endpoint lets a client query a Transparency Service for the registration status of a payload they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
 
-Content-Type: application/cbor
-Retry-After: <seconds>
+Request:
 
-{
-  / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190"
-  / status /  "Status": "running"
-}
+~~~http
+GET /entries/67ed...befe HTTP/1.1
+Host: transparency.example
+Accept: application/cbor
+Accept: application/cose
+Content-Type: application/cose
 ~~~
 
-The response contains an ID referencing the running operation for Signed Statement Registration.
+Response:
 
-If 202 is returned, then clients should wait until Registration succeeded or failed by polling the Check Operation endpoint using the `OperationID` returned in the response.
+One of the following:
+
+#### Status 302 - Registration is running
+
+Registration requests MAY fail, in which case the Location MAY return an error when queried.
+
+If the client requests (GET) the location when the registration is still in progress, the TS MAY return a 302 Found, as in this non-normative example:
+
+~~~ http-message
+HTTP/1.1 302 Found
+
+Location: https://transparency.example/entries/67ed...befe
+Content-Type: application/cose
+Content-Length: 0
+Retry-After: <seconds>
+~~~
+
+The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
+
+The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
+
+#### Status 200 - Asynchronous registration is successful
+
+Along with the receipt the Transparency Service MAY return a locator in the HTTP response `Location` header, provided the locator is a valid URL.
+
+~~~ http-message
+HTTP/1.1 200 OK
+
+Location: https://transparency.example/entries\
+/67ed41f1de6a...cfc158694ed0befe
+
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+The response contains the Receipt for the Signed Statement.
+Fresh Receipts may be requested through the resource identified in the Location header.
+
+As an example, a successful asynchronous follows the following sequence:
+
+~~~
+Initial exchange:
+
+Client --- POST /entries (Signed Statement) --> TS
+Client <-- 303 Location: .../entries/tmp123 --- TS
+
+May happen zero or more times:
+
+Client --- GET .../entries/tmp123           --> TS
+Client <-- 302 Location: .../entries/tmp123 --- TS
+
+Finally:
+
+Client --- GET .../entries/tmp123           --> TS
+Client <-- 200 (Transparent Statement)      --- TS
+           Location: .../entries/final123
+~~~
+
 
 #### Status 400 - Invalid Client Request
 
@@ -369,81 +424,6 @@ application/concise-problem-details+cbor
 }
 ~~~
 
-### Check Registration
-
-Authentication MAY be implemented for this endpoint.
-
-This endpoint is used to check the progress of a long-running registration.
-
-The following is a non-normative example of an HTTP request for the status of a running registration:
-
-Request:
-
-~~~ http-message
-GET /operations/67f89d5f0042e3ad42...35a1f190, HTTP/1.1
-Host: transparency.example
-Accept: application/cbor
-~~~
-
-Response:
-
-One of the following:
-
-#### Status 200 - Operation complete
-
-_Success case_
-
-If the operation is complete and it _succeeded_, the Transparency Service returns a `status` of "succeeded" along with a locator that can fetch the Receipt.
-
-`EntryID` is Transparency Service specific and MUST not be used for fetching Receipts in any Transparency Service other than the one that returned it.
-
-If the `EntryID` is a valid URL, it MAY be included as a `Location` header in the HTTP response.
-
-~~~ http-message
-HTTP/1.1 200 Ok
-
-Location: https://transparency.example/entries/67ed...befe
-
-Content-Type: application/cbor
-
-{
-  / locator / "EntryID": "67f89d5f0042e3ad42...35a1f190",
-  / status /  "Status": "succeeded",
-}
-~~~
-
-_Failure case_
-
-If the operation is complete and it _failed_, the Transparency Service returns a `status` of "failed" and an optional {{RFC9290}} Concise Problem Details object to explain the failure.
-
-~~~ http-message
-HTTP/1.1 200 Ok
-
-Content-Type: application/cbor
-
-{
-  / status / "Status": "failed",
-  / error /  "Error": {
-    / title /         -1: \
-            "Bad Signature Algorithm",
-    / detail /        -2: \
-            "Signed Statement contained a non supported algorithm"
-  }
-}
-~~~
-
-#### Status 202 - Registration is (still) running
-
-~~~ http-message
-HTTP/1.1 202 Accepted
-
-Location: https://transparency.example/operations/67f8...f190
-
-Retry-After: <seconds>
-~~~
-
-If 202 is returned, then clients should continue polling the Check Operation endpoint using the operation identifier.
-
 #### Status 400 - Invalid Client Request
 
 The following expected errors are defined.
@@ -475,7 +455,7 @@ application/concise-problem-details+cbor
 }
 ~~~
 
-#### Status 429
+#### Status 429 - Too Many Requests
 
 If a client is polling for an in-progress registration too frequently then the Transparency Service MAY, in addition to implementing rate limiting, return a 429 response:
 
@@ -506,7 +486,7 @@ Accept: application/cose
 
 Response:
 
-#### Status 200
+#### Status 200 - OK
 
 If the Receipt is found:
 
@@ -525,7 +505,7 @@ Payload (in CBOR diagnostic notation)
 ])
 ~~~
 
-#### Status 404
+#### Status 404 - Not Found
 
 If there is no Receipt found for the specified `EntryID` the Transparency Service returns a 404 response:
 
