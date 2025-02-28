@@ -306,7 +306,6 @@ Content-Length: 0
 Retry-After: <seconds>
 ~~~
 
-
 The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
@@ -335,6 +334,27 @@ Payload (in CBOR diagnostic notation)
 
 The response contains the Receipt for the Signed Statement.
 Fresh Receipts may be requested through the resource identified in the Location header.
+
+As an example, a successful asynchronous follows the following sequence:
+
+~~~
+Initial exchange:
+
+Client --- POST /entries (Signed Statement) --> TS
+Client <-- 303 Location: .../entries/tmp123 --- TS
+
+May happen zero or more times:
+
+Client --- GET .../entries/tmp123           --> TS
+Client <-- 302 Location: .../entries/tmp123 --- TS
+
+Finally:
+
+Client --- GET .../entries/tmp123           --> TS
+Client <-- 200 (Transparent Statement)      --- TS
+           Location: .../entries/final123
+~~~
+
 
 #### Status 400 - Invalid Client Request
 
