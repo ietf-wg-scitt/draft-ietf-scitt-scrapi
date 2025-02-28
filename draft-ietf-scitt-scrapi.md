@@ -102,7 +102,7 @@ In addition to these operational HTTP endpoints, this specification defines supp
 
 {::boilerplate bcp14-tagged}
 
-This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service", "Append-Only Log" and "Registration Policy" as defined in {{-SCITT-ARCH}}.
+This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service" and "Registration Policy" as defined in {{-SCITT-ARCH}}.
 
 This specification uses "payload" as defined in {{RFC9052}}.
 
