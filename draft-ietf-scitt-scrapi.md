@@ -271,6 +271,8 @@ Retry-After: <seconds>
 
 The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
 
+The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
+
 ### Query Registration Status
 
 This endpoint lets a client query a Transparency Service for the registration status of a payload they have submitted earlier, and for which they have received a 303 - Registration is running response.
@@ -292,7 +294,6 @@ One of the following:
 #### Status 302 - Registration is running
 
 Registration requests MAY fail, in which case the Location MAY return an error when queried.
-The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
 If the client requests (GET) the location when the registration is still in progress, the TS MAY return a 302 Found, as in this non-normative example:
 
@@ -304,6 +305,9 @@ Content-Type: application/cose
 Content-Length: 0
 Retry-After: <seconds>
 ~~~
+
+
+The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
