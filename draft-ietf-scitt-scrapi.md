@@ -307,6 +307,31 @@ Retry-After: <seconds>
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
+#### Status 200 - Asynchronous registration is successful
+
+Along with the receipt the Transparency Service MAY return a locator in the HTTP response `Location` header, provided the locator is a valid URL.
+
+~~~ http-message
+HTTP/1.1 200 OK
+
+Location: https://transparency.example/entries\
+/67ed41f1de6a...cfc158694ed0befe
+
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+The response contains the Receipt for the Signed Statement.
+Fresh Receipts may be requested through the resource identified in the Location header.
+
 #### Status 400 - Invalid Client Request
 
 The following expected errors are defined.
