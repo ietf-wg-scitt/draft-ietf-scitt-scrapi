@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-27T00:38:31.912572+00:00",
+  "timestamp": "2025-03-02T00:41:50.694135+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -5471,7 +5471,7 @@
       "id": "PR_kwDOLJjbks6IgB98",
       "title": "Proposal: simplify asynchronous submission flow",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/60",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -5480,17 +5480,19 @@
       "labels": [],
       "body": "I think we can simplify the asynchronous submission flow substantially by:\r\n\r\n1. Using appropriate HTTP return codes\r\n2. Using Location\r\n\r\nAs far as I can tell, [303 is intended for that purpose](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303).\r\n\r\n# Proposed flow\r\n\r\nAll line numbers are post-diff:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries (:207)\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234 (:259)\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234 (:549)\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234 (:292)\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234 (:549)\r\n    TS->>-Client: 200 Location: /entry/final-1234 (Missing, we only have 201)\r\n```\r\n\r\nThis allows:\r\n\r\n1. Delayed decision about the result and location\r\n2. As few as 2 requests when the service is quick\r\n\r\n# FAQ\r\n\r\n## Why [303 - See Other](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303) at first?\r\n\r\nBecause it allows the `POST` -> `GET` switch.\r\n\r\n> The HTTP 303 See Other [redirection response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages) status code indicates that the browser should redirect to the URL in the [Location](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location) header instead of rendering the requested resource.\r\n\r\n> This response code is often sent back as a result of [PUT](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) or [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) methods so the client may retrieve a confirmation, or view a representation of a real-world object (see [HTTP range-14](https://en.wikipedia.org/wiki/HTTPRange-14)). The method to retrieve the redirected resource is always [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET).\r\n\r\n## Why [302 Found](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302) next?\r\n\r\n> The HTTP 302 Found [redirection response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages) status code indicates that the requested resource has been temporarily moved to the URL in the [Location](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location) header.\r\n\r\n## Is it ok to set a Retry-After on a 302?\r\n\r\n[Yes](https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after)\r\n\r\n## Would [307](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307) also work here? \r\n\r\nYes.\r\n\r\n> 307 and 302 responses are identical when the request method is [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET).\r\n\r\n## It is worth using 308 when the permanent location is decided, rather than stay with 302 the whole time?\r\n\r\nI don't think so, that seems like an unnecessary complication. 302 does not mandate that the Location must change.\r\n\r\nOn failure:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries (:207)\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234 (:259)\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234 (:549)\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234 (:292)\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234 (:549)\r\n    TS->>-Client: 400 Registration Failure (CBOR body with details) (Various locations)\r\n```",
       "createdAt": "2025-01-21T14:11:43Z",
-      "updatedAt": "2025-02-26T15:41:51Z",
+      "updatedAt": "2025-02-28T16:52:37Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "d4e8fe6fe3226ca29c69cc9d908efdc7d18c09b0",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "simplify_async_flow",
-      "headRefOid": "d14f6c46a763af613f063c24c39cfbfebd46ab83",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "da76b5ca3eb5d6b98e2d5376f7377e59ec28f4c5",
+      "closedAt": "2025-02-28T16:52:37Z",
+      "mergedAt": "2025-02-28T16:52:37Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "b80e720dd6de1a8a5135e956cb5092dfecc3a501"
+      },
       "comments": [
         {
           "author": "SteveLasker",
@@ -5505,13 +5507,6 @@
           "body": "Capturing so I don't forget:\r\n\r\n- [x] add detail about temporary vs permanent location and use of `308`\r\n- [x] add reminder that temporary locations may not be kept forever by the implementation",
           "createdAt": "2025-01-21T15:45:46Z",
           "updatedAt": "2025-02-26T15:22:25Z"
-        },
-        {
-          "author": "robinbryce",
-          "authorAssociation": "NONE",
-          "body": "Not sure. It's not clear to me we retain the ability to convey async registration issues clearly to the client. And async registration is not a \"corner case\" in my view. IMO: the more people want to do with registratio policies the more likely the async registration will be the norm\r\n\r\nThat said, I do like the effort to make better use of existing aspects of the HTTP spec",
-          "createdAt": "2025-01-22T08:41:22Z",
-          "updatedAt": "2025-01-22T08:42:14Z"
         },
         {
           "author": "SteveLasker",
@@ -5568,6 +5563,41 @@
           "body": "#Proposed flow\r\n\r\nAll line numbers are post-diff:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries (:207)\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234 (:259)\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234 (:549)\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234 (:292)\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234 (:549)\r\n    TS->>-Client: 200 Location: /entry/final-1234 (Missing, we only have 201)\r\n```\r\n\r\nThis allows:\r\n\r\n1. Delayed decision about the result and location\r\n2. As few as 2 requests when the service is quick\r\n\r\nWhy [303](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303)?\r\n\r\n> The HTTP 303 See Other [redirection response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages) status code indicates that the browser should redirect to the URL in the [Location](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location) header instead of rendering the requested resource.\r\n\r\n> This response code is often sent back as a result of [PUT](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) or [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) methods so the client may retrieve a confirmation, or view a representation of a real-world object (see [HTTP range-14](https://en.wikipedia.org/wiki/HTTPRange-14)). The method to retrieve the redirected resource is always [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET).\r\n\r\nWhy [302](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302)?\r\n\r\n> The HTTP 302 Found [redirection response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages) status code indicates that the requested resource has been temporarily moved to the URL in the [Location](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location) header.\r\n\r\nWould [307](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307) also work here? \r\n\r\nYes.\r\n\r\n> 307 and 302 responses are identical when the request method is [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET).\r\n\r\nIt is worth using 308 when the permanent location is decided, rather than stay with 302 the whole time?\r\n\r\nI don't think so, that seems like an unnecessary complication. 302 does not mandate that the Location must change.\r\n\r\nIs it legal to set a Retry-After on a 302?\r\n\r\n[Yes](https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after)\r\n\r\nOn failure:\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    Client->>+TS: POST Signed Statement /entries (:207)\r\n    TS->>-Client: 303 Location: /entry/(final or temp)-1234 (:259)\r\n    loop \r\n    Client->>+TS: GET /entry/final-1234 (:549)\r\n    TS->>-Client: 302 Location: /entry/(final or temp)-1234 (:292)\r\n    end\r\n    Client->>+TS: GET /entry/(final or temp)-1234 (:549)\r\n    TS->>-Client: 400 Registration Failure (CBOR body with details) (Various locations)\r\n```",
           "createdAt": "2025-02-26T15:26:32Z",
           "updatedAt": "2025-02-26T15:38:27Z"
+        },
+        {
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "body": "I think the crux of this is allowing 200 with a location *other* than the GET requested, so that we can eliminate redundant requests?\r\n\r\nSpecifically, a \r\nGET /entry/temp-1234 \r\n200 Location: /entry/final-1234\r\n\r\nper\r\n> On final success (immediate or eventual), do we ever allow returning the Transparent Statement directly, or do we think we must always return a Location, and have the caller fetch from there?\r\n\r\nI like and support this.\r\n\r\nClarifying question, is the status of the *first* response always required to be 303 even where the TS has the final id imediately available ?\r\n\r\nI don't mind if so. I just want to know if we gave up on\r\n\r\n> On initial registration, do we provide a mechanism for implementations to signal that a final Location is already known, and needs to be polled?\r\n\r\nOr if we are saying clients would somehow know that 303 Location: /entry/final-1234  was indeed the \"final\" location ?\r\n",
+          "createdAt": "2025-02-28T13:04:22Z",
+          "updatedAt": "2025-02-28T13:04:22Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I think the crux of this is allowing 200 with a location other than the GET requested, so that we can eliminate redundant requests?\r\n\r\nYes, I am doing a small touch-up now to clarify that.\r\n\r\n> Clarifying question, is the status of the first response always required to be 303 even where the TS has the final id imediately available ?\r\n\r\nI believe so, yes. I have re-read the docs, and I think that is what specifically tells the client \"you did a POST, and now you need to do a GET to obtain the resource\". If we gave back a 302, we would be telling the client \"try your POST again, but at this new Location\". I don't think we want to do that and unnecessarily re-transmit the Signed Statement.\r\n\r\n> Or if we are saying clients would somehow know that 303 Location: /entry/final-1234 was indeed the \"final\" location ?\r\n\r\nThe clients cannot know, they must accept the 303 Location as potentially temporary, only the Location: on 200/201 is permanent. Inasmuch as anything is ever permanent in a web service, which... But because we do not use 301, none of the 3xx guarantee permanence of location, only 2xx does. And even then, just internet permanence :)",
+          "createdAt": "2025-02-28T13:39:26Z",
+          "updatedAt": "2025-02-28T13:39:26Z"
+        },
+        {
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "body": "That is crystal clear to me now thanks. I support this change",
+          "createdAt": "2025-02-28T13:56:17Z",
+          "updatedAt": "2025-02-28T13:56:17Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> That is crystal clear to me now thanks. I support this change\r\n\r\nI also support this change, it's come out quite elegant. I would note that the error case outlined isn't complete (in that there are a bunch of other potential errors beyond Invalid Request that could happen) but I view the discussion and elucidation above as architecture and protocol, not exhaustive optionality. \r\n\r\nSince error returns are examples, and the document specifies that TS MAY return additional error, this is not a problem for the PR",
+          "createdAt": "2025-02-28T15:35:26Z",
+          "updatedAt": "2025-02-28T15:39:58Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@JAG-UK yes, it is an illustrative failure case, not exhaustive by any means. Many bad things can happen!",
+          "createdAt": "2025-02-28T15:39:36Z",
+          "updatedAt": "2025-02-28T15:39:36Z"
         }
       ],
       "reviews": [
@@ -5730,6 +5760,78 @@
               "updatedAt": "2025-02-25T11:17:35Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6eAAx9",
+          "commit": {
+            "abbreviatedOid": "2e71bbc"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-28T13:49:26Z",
+          "updatedAt": "2025-02-28T13:49:27Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Drive-by change. Not at all the goal of the PR, but timely.",
+              "createdAt": "2025-02-28T13:49:26Z",
+              "updatedAt": "2025-02-28T13:49:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6eBOhO",
+          "commit": {
+            "abbreviatedOid": "da76b5c"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "After much discussion...LGTM!",
+          "createdAt": "2025-02-28T15:41:56Z",
+          "updatedAt": "2025-02-28T15:41:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6eB3of",
+          "commit": {
+            "abbreviatedOid": "da76b5c"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, thank you for all the great discussions",
+          "createdAt": "2025-02-28T16:51:47Z",
+          "updatedAt": "2025-02-28T16:51:47Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6eB3wI",
+          "commit": {
+            "abbreviatedOid": "da76b5c"
+          },
+          "author": "robinbryce",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-02-28T16:52:01Z",
+          "updatedAt": "2025-02-28T16:52:01Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6eB351",
+          "commit": {
+            "abbreviatedOid": "da76b5c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-28T16:52:18Z",
+          "updatedAt": "2025-02-28T16:52:18Z",
+          "comments": []
         }
       ]
     },
