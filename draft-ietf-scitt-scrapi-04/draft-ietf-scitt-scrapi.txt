@@ -947,23 +947,14 @@ Table of Contents
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-10, 13
-              November 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-scitt-architecture-10>.
-
-   [IANA.params]
-              IANA, "Uniform Resource Name (URN) Namespace for IETF
-              Use", <https://www.iana.org/assignments/params>.
+              Internet-Draft, draft-ietf-scitt-architecture-11, 3 March
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              scitt-architecture-11>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC3553]  Mealling, M., Masinter, L., Hardie, T., and G. Klyne, "An
-              IETF URN Sub-namespace for Registered Protocol
-              Parameters", BCP 73, RFC 3553, DOI 10.17487/RFC3553, June
-              2003, <https://www.rfc-editor.org/rfc/rfc3553>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
