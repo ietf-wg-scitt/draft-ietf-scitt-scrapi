@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 1 September 2025                                DataTrails Inc.
-                                                        28 February 2025
+Expires: 4 September 2025                                DataTrails Inc.
+                                                            3 March 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 September 2025.
+   This Internet-Draft will expire on 4 September 2025.
 
 Copyright Notice
 
@@ -951,19 +951,10 @@ Table of Contents
               November 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-scitt-architecture-10>.
 
-   [IANA.params]
-              IANA, "Uniform Resource Name (URN) Namespace for IETF
-              Use", <https://www.iana.org/assignments/params>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC3553]  Mealling, M., Masinter, L., Hardie, T., and G. Klyne, "An
-              IETF URN Sub-namespace for Registered Protocol
-              Parameters", BCP 73, RFC 3553, DOI 10.17487/RFC3553, June
-              2003, <https://www.rfc-editor.org/rfc/rfc3553>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
