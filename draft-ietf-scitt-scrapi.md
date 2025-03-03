@@ -52,12 +52,10 @@ contributor:
 
 normative:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
-  RFC3553:
   RFC8615:
   RFC9052:
   RFC9110:
   RFC9290:
-  IANA.params:
 
 informative:
   I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
