@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-02T00:41:50.694135+00:00",
+  "timestamp": "2025-03-04T00:39:28.031782+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -6263,6 +6263,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 67,
+      "id": "PR_kwDOLJjbks6NNuHk",
+      "title": "fix references",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/67",
+      "state": "MERGED",
+      "author": "SteveLasker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-03T21:50:26Z",
+      "updatedAt": "2025-03-03T21:50:38Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "b80e720dd6de1a8a5135e956cb5092dfecc3a501",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "steve/draft-04-fixes",
+      "headRefOid": "8ba979f0ea29fca48b39a29cdda4a9a6ad5812d1",
+      "closedAt": "2025-03-03T21:50:34Z",
+      "mergedAt": "2025-03-03T21:50:34Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "8e710a2b3fa94ab353eea21cb42b212d61549d4e"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
