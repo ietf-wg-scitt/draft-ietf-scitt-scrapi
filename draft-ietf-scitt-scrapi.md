@@ -537,7 +537,7 @@ Payload (in CBOR diagnostic notation)
   / protected   / <<{
     / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
     / algorithm / 1 : -7,  # ES256
-    / vds           / 395 : 1, # RFC9162 SHA-256
+    / vds        / 395 : 1, # RFC9162 SHA-256
     / claims / 15 : {
       / issuer  / 1 : "https://blue.example",
       / subject / 2 : "https://green.example/cli@v1.2.3",
