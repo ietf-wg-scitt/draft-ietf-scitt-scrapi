@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 4 September 2025                                DataTrails Inc.
-                                                            3 March 2025
+Expires: 12 September 2025                               DataTrails Inc.
+                                                           11 March 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2025.
+   This Internet-Draft will expire on 12 September 2025.
 
 Copyright Notice
 
@@ -562,11 +562,29 @@ Table of Contents
 
    Payload (in CBOR diagnostic notation)
 
-   18([                            / COSE Sign1         /
-     h'a1013822',                  / Protected Header   /
-     {},                           / Unprotected Header /
-     null,                         / Detached Payload   /
-     h'269cd68f4211dffc...0dcb29c' / Signature          /
+   / cose-sign1 / 18([
+     / protected   / <<{
+       / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+       / algorithm / 1 : -7,  # ES256
+       / vds       / 395 : 1, # RFC9162 SHA-256
+       / claims / 15 : {
+         / issuer  / 1 : "https://blue.notary.example",
+         / subject / 2 : "https://green.software.example/cli@v1.2.3",
+       },
+     }>>,
+     / unprotected / {
+       / proofs / 396 : {
+         / inclusion / -1 : [
+           <<[
+             / size / 9, / leaf / 8,
+             / inclusion path /
+             h'7558a95f...e02e35d6'
+           ]>>
+         ],
+       },
+     },
+     / payload     / null,
+     / signature   / h'02d227ed...ccd3774f'
    ])
 
 2.1.4.2.  Status 404 - Not Found
@@ -947,9 +965,9 @@ Table of Contents
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-10, 13
-              November 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-scitt-architecture-10>.
+              Internet-Draft, draft-ietf-scitt-architecture-11, 3 March
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              scitt-architecture-11>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
