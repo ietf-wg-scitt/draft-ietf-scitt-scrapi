@@ -1819,6 +1819,33 @@ application/concise-problem-details+cbor
 POST receipt-exchange HTTP/1.1
 Host: transparency.example
 Accept: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+/ cose-sign1 / 18([
+  / protected   / &lt;&lt;{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds           / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.example",
+      / subject / 2 : "https://green.example/cli@v1.2.3",
+    },
+  }&gt;&gt;,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        &lt;&lt;[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]&gt;&gt;
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'02d227ed...ccd3774f'
+])
 </pre><a href="#section-2.1.5-3" class="pilcrow">¶</a>
 </div>
 <p id="section-2.1.5-4">Response:<a href="#section-2.1.5-4" class="pilcrow">¶</a></p>
