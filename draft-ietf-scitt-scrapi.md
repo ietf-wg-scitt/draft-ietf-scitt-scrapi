@@ -574,7 +574,7 @@ Payload (in CBOR diagnostic notation)
 / cose-sign1 / 18([
   / protected   / <<{
     / key / 4 : "0vx7agoebGc...9nndrQmbX",
-    / algorithm / 1 : -7,  # ES256
+    / algorithm / 1 : -35,  # ES384
     / vds           / 395 : 1, # RFC9162 SHA-256
     / claims / 15 : {
       / issuer  / 1 : "https://blue.example",
