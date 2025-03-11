@@ -573,7 +573,7 @@ Payload (in CBOR diagnostic notation)
 
 / cose-sign1 / 18([
   / protected   / <<{
-    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / key / 4 : "0vx7agoebGc...9nndrQmbX",
     / algorithm / 1 : -7,  # ES256
     / vds           / 395 : 1, # RFC9162 SHA-256
     / claims / 15 : {
