@@ -1180,19 +1180,14 @@ Optional key discovery and query interfaces are provided to support interoperabi
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.5">
                     <p id="section-toc.1-1.2.2.1.2.5.1"><a href="#section-2.1.5" class="auto internal xref">2.1.5</a>.  <a href="#name-exchange-receipt" class="internal xref">Exchange Receipt</a></p>
 </li>
-                </ul>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.6">
+                    <p id="section-toc.1-1.2.2.1.2.6.1"><a href="#section-2.1.6" class="auto internal xref">2.1.6</a>.  <a href="#name-resolve-signed-statement" class="internal xref">Resolve Signed Statement</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-optional-endpoints" class="internal xref">Optional Endpoints</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.1">
-                    <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="auto internal xref">2.2.1</a>.  <a href="#name-resolve-signed-statement" class="internal xref">Resolve Signed Statement</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.7">
+                    <p id="section-toc.1-1.2.2.1.2.7.1"><a href="#section-2.1.7" class="auto internal xref">2.1.7</a>.  <a href="#name-exchange-receipt-2" class="internal xref">Exchange Receipt</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.2">
-                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="auto internal xref">2.2.2</a>.  <a href="#name-exchange-receipt-2" class="internal xref">Exchange Receipt</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.3">
-                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="auto internal xref">2.2.3</a>.  <a href="#name-resolve-issuer" class="internal xref">Resolve Issuer</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.8">
+                    <p id="section-toc.1-1.2.2.1.2.8.1"><a href="#section-2.1.8" class="auto internal xref">2.1.8</a>.  <a href="#name-resolve-issuer" class="internal xref">Resolve Issuer</a></p>
 </li>
                 </ul>
 </li>
@@ -1888,40 +1883,35 @@ Payload (in CBOR diagnostic notation)
 ])
 </pre><a href="#section-2.1.5.1-2" class="pilcrow">¶</a>
 </div>
+<p id="section-2.1.5.1-3">A TS may limit how often a new receipt can be issued, and respond with a 503 if a client requests new receipts too frequently.
+## Optional Endpoints<a href="#section-2.1.5.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.5.1-4">The following HTTP endpoints are optional to implement.<a href="#section-2.1.5.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-</section>
-</div>
-<div id="sec-optional-endpoints">
-<section id="section-2.2">
-        <h3 id="name-optional-endpoints">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-optional-endpoints" class="section-name selfRef">Optional Endpoints</a>
-        </h3>
-<p id="section-2.2-1">The following HTTP endpoints are optional to implement.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <div id="sec-resolve-signed-statement">
-<section id="section-2.2.1">
+<section id="section-2.1.6">
           <h4 id="name-resolve-signed-statement">
-<a href="#section-2.2.1" class="section-number selfRef">2.2.1. </a><a href="#name-resolve-signed-statement" class="section-name selfRef">Resolve Signed Statement</a>
+<a href="#section-2.1.6" class="section-number selfRef">2.1.6. </a><a href="#name-resolve-signed-statement" class="section-name selfRef">Resolve Signed Statement</a>
           </h4>
-<p id="section-2.2.1-1">This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-2">Request:<a href="#section-2.2.1-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.1-3">
+<p id="section-2.1.6-1">This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.<a href="#section-2.1.6-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.6-2">Request:<a href="#section-2.1.6-2" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.6-3">
 <pre>
 GET /signed-statements/9e4f...688a HTTP/1.1
 Host: transparency.example
 Accept: application/cose
-</pre><a href="#section-2.2.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.6-3" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.1-4">Response:<a href="#section-2.2.1-4" class="pilcrow">¶</a></p>
-<p id="section-2.2.1-5">One of the following:<a href="#section-2.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-2.1.6-4">Response:<a href="#section-2.1.6-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.6-5">One of the following:<a href="#section-2.1.6-5" class="pilcrow">¶</a></p>
 <div id="sec-status-200-success">
-<section id="section-2.2.1.1">
+<section id="section-2.1.6.1">
             <h5 id="name-status-200-success">
-<a href="#section-2.2.1.1" class="section-number selfRef">2.2.1.1. </a><a href="#name-status-200-success" class="section-name selfRef">Status 200 - Success</a>
+<a href="#section-2.1.6.1" class="section-number selfRef">2.1.6.1. </a><a href="#name-status-200-success" class="section-name selfRef">Status 200 - Success</a>
             </h5>
-<div class="lang-http-message sourcecode" id="section-2.2.1.1-1">
+<div class="lang-http-message sourcecode" id="section-2.1.6.1-1">
 <pre>
 HTTP/1.1 200 Ok
 Content-Type: application/cose
@@ -1934,18 +1924,18 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.2.1.1-1" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.6.1-1" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-status-404-not-found-1">
-<section id="section-2.2.1.2">
+<section id="section-2.1.6.2">
             <h5 id="name-status-404-not-found-2">
-<a href="#section-2.2.1.2" class="section-number selfRef">2.2.1.2. </a><a href="#name-status-404-not-found-2" class="section-name selfRef">Status 404 - Not Found</a>
+<a href="#section-2.1.6.2" class="section-number selfRef">2.1.6.2. </a><a href="#name-status-404-not-found-2" class="section-name selfRef">Status 404 - Not Found</a>
             </h5>
-<p id="section-2.2.1.2-1">The following expected errors are defined.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2.1.2-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.1.2-2">
+<p id="section-2.1.6.2-1">The following expected errors are defined.
+Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.1.6.2-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.6.2-2">
 <pre>
 HTTP/1.1 404 Not Found
 application/concise-problem-details+cbor
@@ -1955,31 +1945,31 @@ application/concise-problem-details+cbor
           "Not Found",
   / detail /        -2: \
           "No Signed Statement found with the specified ID"
-</pre><a href="#section-2.2.1.2-2" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.6.2-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-eventual-consistency">
-<section id="section-2.2.1.3">
+<section id="section-2.1.6.3">
             <h5 id="name-eventual-consistency">
-<a href="#section-2.2.1.3" class="section-number selfRef">2.2.1.3. </a><a href="#name-eventual-consistency" class="section-name selfRef">Eventual Consistency</a>
+<a href="#section-2.1.6.3" class="section-number selfRef">2.1.6.3. </a><a href="#name-eventual-consistency" class="section-name selfRef">Eventual Consistency</a>
             </h5>
-<p id="section-2.2.1.3-1">For all responses additional eventually consistent operation details <span class="bcp14">MAY</span> be present.
-Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.<a href="#section-2.2.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.6.3-1">For all responses additional eventually consistent operation details <span class="bcp14">MAY</span> be present.
+Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.<a href="#section-2.1.6.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="sec-exchange-receipt-1">
-<section id="section-2.2.2">
+<section id="section-2.1.7">
           <h4 id="name-exchange-receipt-2">
-<a href="#section-2.2.2" class="section-number selfRef">2.2.2. </a><a href="#name-exchange-receipt-2" class="section-name selfRef">Exchange Receipt</a>
+<a href="#section-2.1.7" class="section-number selfRef">2.1.7. </a><a href="#name-exchange-receipt-2" class="section-name selfRef">Exchange Receipt</a>
           </h4>
-<p id="section-2.2.2-1">This endpoint is used to exchange old or expiring Receipts for fresh ones.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-2">The <code>iat</code>, <code>exp</code> and <code>kid</code> claims can change each time a Receipt is exchanged.<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-3">This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.<a href="#section-2.2.2-3" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-4">Request:<a href="#section-2.2.2-4" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.2-5">
+<p id="section-2.1.7-1">This endpoint is used to exchange old or expiring Receipts for fresh ones.<a href="#section-2.1.7-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.7-2">The <code>iat</code>, <code>exp</code> and <code>kid</code> claims can change each time a Receipt is exchanged.<a href="#section-2.1.7-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.7-3">This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.<a href="#section-2.1.7-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.7-4">Request:<a href="#section-2.1.7-4" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.7-5">
 <pre>
 POST /exchange/receipt HTTP/1.1
 Host: transparency.example
@@ -1993,15 +1983,15 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.2.2-5" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.7-5" class="pilcrow">¶</a>
 </div>
 <div id="sec-status-200">
-<section id="section-2.2.2.1">
+<section id="section-2.1.7.1">
             <h5 id="name-status-200">
-<a href="#section-2.2.2.1" class="section-number selfRef">2.2.2.1. </a><a href="#name-status-200" class="section-name selfRef">Status 200</a>
+<a href="#section-2.1.7.1" class="section-number selfRef">2.1.7.1. </a><a href="#name-status-200" class="section-name selfRef">Status 200</a>
             </h5>
-<p id="section-2.2.2.1-1">A new Receipt:<a href="#section-2.2.2.1-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.2.1-2">
+<p id="section-2.1.7.1-1">A new Receipt:<a href="#section-2.1.7.1-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.7.1-2">
 <pre>
 HTTP/1.1 200 Ok
 Location: https://transparency.example/entries/67ed...befe
@@ -2016,29 +2006,29 @@ Payload (in CBOR diagnostic notation)
   null,                         / Detached Payload   /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
-</pre><a href="#section-2.2.2.1-2" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.7.1-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 </section>
 </div>
 <div id="sec-resolve-issuer">
-<section id="section-2.2.3">
+<section id="section-2.1.8">
           <h4 id="name-resolve-issuer">
-<a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-resolve-issuer" class="section-name selfRef">Resolve Issuer</a>
+<a href="#section-2.1.8" class="section-number selfRef">2.1.8. </a><a href="#name-resolve-issuer" class="section-name selfRef">Resolve Issuer</a>
           </h4>
-<p id="section-2.2.3-1">This endpoint is inspired by <span>[<a href="#I-D.draft-ietf-oauth-sd-jwt-vc" class="cite xref">I-D.draft-ietf-oauth-sd-jwt-vc</a>]</span>.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-2">The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when <code>iss</code> is set to <code>https://transparency.example/tenant/1234</code>:<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-3">Request:<a href="#section-2.2.3-3" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.3-4">
+<p id="section-2.1.8-1">This endpoint is inspired by <span>[<a href="#I-D.draft-ietf-oauth-sd-jwt-vc" class="cite xref">I-D.draft-ietf-oauth-sd-jwt-vc</a>]</span>.<a href="#section-2.1.8-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.8-2">The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when <code>iss</code> is set to <code>https://transparency.example/tenant/1234</code>:<a href="#section-2.1.8-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.8-3">Request:<a href="#section-2.1.8-3" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.8-4">
 <pre>
 GET /.well-known/issuer/tenant/1234 HTTP/1.1
 Host: transparency.example
 Accept: application/json
-</pre><a href="#section-2.2.3-4" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.8-4" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2.3-5">Response:<a href="#section-2.2.3-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2.3-6">
+<p id="section-2.1.8-5">Response:<a href="#section-2.1.8-5" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.8-6">
 <pre>
 HTTP/1.1 200 Ok
 Content-Type: application/json
@@ -2070,7 +2060,7 @@ Content-Type: application/json
     ]
   }
 }
-</pre><a href="#section-2.2.3-6" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.8-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
