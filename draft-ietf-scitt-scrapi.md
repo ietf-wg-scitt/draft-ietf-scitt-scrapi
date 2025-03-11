@@ -540,6 +540,86 @@ application/concise-problem-details+cbor
 
 ## Optional Endpoints
 
+### Exchange Receipt
+
+Authentication SHOULD be implemented for this endpoint.
+
+Request:
+
+~~~ http-message
+POST receipt-exchange HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+/ cose-sign1 / 18([
+  / protected   / <<{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.example",
+      / subject / 2 : "https://green.example/cli@v1.2.3",
+      / iat / 6: 1443944944
+    },
+  }>>,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        <<[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]>>
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'02d227ed...ccd3774f'
+])
+~~~
+
+Response:
+
+#### Status 200 - OK
+
+If a new Receipt can be issued for the given submitted Receipt:
+
+~~~ http-message
+HTTP/1.1 200 Ok
+Content-Type: application/cose
+
+Payload (in CBOR diagnostic notation)
+
+/ cose-sign1 / 18([
+  / protected   / <<{
+    / key / 4 : "0vx7agoebGc...9nndrQmbX",
+    / algorithm / 1 : -35,  # ES384
+    / vds       / 395 : 1,  # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.example",
+      / subject / 2 : "https://green.example/cli@v1.2.3",
+      / iat / 6: 2443944944,
+    },
+  }>>,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        <<[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]>>
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'123227ed...ccd37123'
+])
+~~~
+A TS may limit how often a new receipt can be issued, and respond with a 503 if a client requests new receipts too frequently.
+
 The following HTTP endpoints are optional to implement.
 
 ### Resolve Signed Statement
