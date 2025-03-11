@@ -520,6 +520,8 @@ application/concise-problem-details+cbor
 }
 ~~~
 
+## Optional Endpoints
+
 ### Exchange Receipt
 
 Authentication SHOULD be implemented for this endpoint.
