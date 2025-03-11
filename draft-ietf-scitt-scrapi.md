@@ -596,7 +596,7 @@ Payload (in CBOR diagnostic notation)
   / signature   / h'123227ed...ccd37123'
 ])
 ~~~
-
+A TS may limit how often a new receipt can be issued, and respond with a 503 if a client requests new receipts too frequently.
 ## Optional Endpoints
 
 The following HTTP endpoints are optional to implement.
