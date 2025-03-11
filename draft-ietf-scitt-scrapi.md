@@ -593,7 +593,7 @@ Payload (in CBOR diagnostic notation)
     },
   },
   / payload     / null,
-  / signature   / h'02d227ed...ccd3774f'
+  / signature   / h'123227ed...ccd37123'
 ])
 ~~~
 
