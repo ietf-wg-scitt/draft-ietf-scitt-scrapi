@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-11T00:39:37.351413+00:00",
+  "timestamp": "2025-03-13T00:39:54.191226+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -221,7 +221,7 @@
       ],
       "body": "APIs which enables users to find a collection of signed statements based on protected, or unprotected header properties\r\n\r\nA client may send any known or custom header property, or combination\r\n\r\nTODO:\r\n- Better formated example\r\n- Add paging\r\n\r\nCollection of Signed Statement Header Properties\r\nREQUEST:\r\n```\r\nGET /findstatements?issuer=my-identity.me&subject=my-product-id HTTP/1.1\r\nHost: transparency.example\r\nAccept: application/json\r\n```\r\nRESPONSE:\r\na paged collection of references to Signed Statements, and the possible payload locations\r\n```json\r\n{\r\n   \"signed-statements\": [\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/abc123\",\r\n            \"detached-hash\": \"abc123...321cba\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime\"\r\n         }\r\n      },\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/spdx+json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/def456\",\r\n            \"detached-hash\": \"def246...642fed\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime+1\"\r\n         }\r\n      }\r\n   ]\r\n}\r\n```",
       "createdAt": "2024-05-21T23:09:37Z",
-      "updatedAt": "2024-12-31T23:39:58Z",
+      "updatedAt": "2025-03-11T15:05:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -258,6 +258,13 @@
           "body": "[Resolve signed statement](https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#name-resolve-signed-statement) has the baseline.\r\nHowever, it doesn't specify what parameters could be used, such as `subject`, `cwt_claims.issuer` or other parameters such as [cose-meta-map](https://github.com/SteveLasker/cose-meta-map)\r\n\r\nMarking ready-for-pr to incorporate into a PR.",
           "createdAt": "2024-12-31T23:38:22Z",
           "updatedAt": "2024-12-31T23:38:22Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I suggest that the resolved signed statement has enough, and that more complex search APIs are best left out until more implementations are available.",
+          "createdAt": "2025-03-11T15:05:52Z",
+          "updatedAt": "2025-03-11T15:05:52Z"
         }
       ]
     },
@@ -507,7 +514,7 @@
       "id": "I_kwDOLJjbks6Q4aE-",
       "title": "2.1.2 Fresh receipts may be requested through the resource identified in the Location header.",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/21",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "roywill",
       "authorAssociation": "NONE",
       "assignees": [
@@ -519,8 +526,8 @@
       ],
       "body": "Since this section is talking about registration, why is refresh paradigm left dangling at the end.  Is it thought to use this same method to ask for a refresh?  I can see getting a new receipt, but that may fail due to the time validity of the signed statement.  If you expect it to be based on previous data on the log, then it needs to be indexed based on the previous receipt.",
       "createdAt": "2024-07-25T18:14:41Z",
-      "updatedAt": "2025-01-21T15:41:35Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-11T14:49:23Z",
+      "closedAt": "2025-03-11T14:49:22Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -535,6 +542,13 @@
           "body": "Tagging @achamayou for a proposal",
           "createdAt": "2025-01-21T15:41:33Z",
           "updatedAt": "2025-01-21T15:41:33Z"
+        },
+        {
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Resolved with #69, #70 ",
+          "createdAt": "2025-03-11T14:49:22Z",
+          "updatedAt": "2025-03-11T14:49:22Z"
         }
       ]
     },
@@ -1277,7 +1291,7 @@
       ],
       "body": "What default should we include in the samples.\r\nIn practicality, we're seeing most content be signed as hashed content, driving the https://datatracker.ietf.org/doc/draft-ietf-cose-hash-envelope/ draft. \r\nSuggesting we change the examples to use hash envelope, instead of inline content.",
       "createdAt": "2024-12-31T20:24:12Z",
-      "updatedAt": "2025-02-04T15:47:24Z",
+      "updatedAt": "2025-03-11T15:03:34Z",
       "closedAt": null,
       "comments": [
         {
@@ -1286,6 +1300,13 @@
           "body": "@henkbirkholz to help with pre-allocation https://github.com/cose-wg/draft-ietf-cose-hash-envelope/issues/31",
           "createdAt": "2025-02-04T15:47:23Z",
           "updatedAt": "2025-02-04T15:47:23Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Now the allocation is done, we could add these examples. But do we want the dependency on the COSE Hash Envelope draft getting through first?",
+          "createdAt": "2025-03-11T15:03:33Z",
+          "updatedAt": "2025-03-11T15:03:33Z"
         }
       ]
     },
@@ -1346,6 +1367,30 @@
       "updatedAt": "2025-02-04T15:43:13Z",
       "closedAt": "2025-02-04T15:43:13Z",
       "comments": []
+    },
+    {
+      "number": 68,
+      "id": "I_kwDOLJjbks6tfn91",
+      "title": "Fix Receipt Example in Section 2.1.4.1",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/68",
+      "state": "CLOSED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Include a fully decoded example in the body.\n\n```\n/ cose-sign1 / 18([\n  / protected   / <<{\n    / key / 4 : \"mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk\",\n    / algorithm / 1 : -7,  # ES256\n    / vds           / 395 : 1, # RFC9162 SHA-256\n    / claims / 15 : {\n      / issuer  / 1 : \"https://blue.example\",\n      / subject / 2 : \"https://green.example/cli@v1.2.3\",\n    },\n  }>>,\n  / unprotected / {\n    / proofs / 396 : {\n      / inclusion / -1 : [\n        <<[\n          / size / 9, / leaf / 8,\n          / inclusion path /\n          h'7558a95f...e02e35d6'\n        ]>>\n      ],\n    },\n  },\n  / payload     / null,\n  / signature   / h'02d227ed...ccd3774f'\n])\n```",
+      "createdAt": "2025-03-11T14:21:36Z",
+      "updatedAt": "2025-03-11T14:40:14Z",
+      "closedAt": "2025-03-11T14:40:13Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closes by #69 ",
+          "createdAt": "2025-03-11T14:40:13Z",
+          "updatedAt": "2025-03-11T14:40:13Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -6291,6 +6336,423 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 69,
+      "id": "PR_kwDOLJjbks6OLSQe",
+      "title": "Update Resolve Receipt Example",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/69",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/68\r\n\r\nNote the receipt has unprotected header which includes the inclusion path.",
+      "createdAt": "2025-03-11T14:25:07Z",
+      "updatedAt": "2025-03-11T14:39:51Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "8e710a2b3fa94ab353eea21cb42b212d61549d4e",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "update-resolve-receipt-example",
+      "headRefOid": "d6c03ac704ead24571ffbd17e3e88c9852daf9b7",
+      "closedAt": "2025-03-11T14:39:44Z",
+      "mergedAt": "2025-03-11T14:39:44Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "227f2db6d5af3ada5e42298aabd6839bf35328fb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6fbsq8",
+          "commit": {
+            "abbreviatedOid": "d6c03ac"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-11T14:36:03Z",
+          "updatedAt": "2025-03-11T14:36:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbssA",
+          "commit": {
+            "abbreviatedOid": "d6c03ac"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-03-11T14:36:04Z",
+          "updatedAt": "2025-03-11T14:36:04Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbwy1",
+          "commit": {
+            "abbreviatedOid": "d6c03ac"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-11T14:39:32Z",
+          "updatedAt": "2025-03-11T14:39:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 70,
+      "id": "PR_kwDOLJjbks6OLVJ1",
+      "title": "Propose Receipt Exchange Endpoint",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/70",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As discussed on the call, this endpoint enables a client to submit a receipt which they have, to receipt a new receipt from the TS.\r\n\r\nThis enables the TS to apply a simply policy to decide if a new receipt is required.",
+      "createdAt": "2025-03-11T14:28:20Z",
+      "updatedAt": "2025-03-11T14:48:17Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "8e710a2b3fa94ab353eea21cb42b212d61549d4e",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "propose-receipt-exchange-endpoint",
+      "headRefOid": "68c3c7b7be033ab1881120c7cd6cdb00f0cc500a",
+      "closedAt": "2025-03-11T14:48:08Z",
+      "mergedAt": "2025-03-11T14:48:08Z",
+      "mergedBy": "SteveLasker",
+      "mergeCommit": {
+        "oid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9"
+      },
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closes #21, presumably",
+          "createdAt": "2025-03-11T14:39:20Z",
+          "updatedAt": "2025-03-11T14:39:20Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6fbtmN",
+          "commit": {
+            "abbreviatedOid": "7eb94f7"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-11T14:36:50Z",
+          "updatedAt": "2025-03-11T14:36:50Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbuyq",
+          "commit": {
+            "abbreviatedOid": "7eb94f7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:37:54Z",
+          "updatedAt": "2025-03-11T14:37:55Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nAccept: application/cose\r\n\r\nPayload (in CBOR diagnostic notation)\r\n\r\n/ cose-sign1 / 18([\r\n  / protected   / <<{\r\n    / key / 4 : \"mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk\",\r\n    / algorithm / 1 : -7,  # ES256\r\n    / vds           / 395 : 1, # RFC9162 SHA-256\r\n    / claims / 15 : {\r\n      / issuer  / 1 : \"https://blue.example\",\r\n      / subject / 2 : \"https://green.example/cli@v1.2.3\",\r\n    },\r\n  }>>,\r\n  / unprotected / {\r\n    / proofs / 396 : {\r\n      / inclusion / -1 : [\r\n        <<[\r\n          / size / 9, / leaf / 8,\r\n          / inclusion path /\r\n          h'7558a95f...e02e35d6'\r\n        ]>>\r\n      ],\r\n    },\r\n  },\r\n  / payload     / null,\r\n  / signature   / h'02d227ed...ccd3774f'\r\n])\r\n```",
+              "createdAt": "2025-03-11T14:37:54Z",
+              "updatedAt": "2025-03-11T14:37:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbv2b",
+          "commit": {
+            "abbreviatedOid": "7eb94f7"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:38:34Z",
+          "updatedAt": "2025-03-11T14:38:34Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "```suggestion\r\nA TS may limit how often a new receipt can be issued, and respond with a 503 if a client requests new receipts too frequently.\r\n```",
+              "createdAt": "2025-03-11T14:38:34Z",
+              "updatedAt": "2025-03-11T14:38:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbv27",
+          "commit": {
+            "abbreviatedOid": "f8f8059"
+          },
+          "author": "roywill",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Thank you Orie",
+          "createdAt": "2025-03-11T14:38:34Z",
+          "updatedAt": "2025-03-11T14:38:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbwN8",
+          "commit": {
+            "abbreviatedOid": "f8f8059"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:38:58Z",
+          "updatedAt": "2025-03-11T14:38:59Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "```suggestion\r\n    / algorithm / 1 : -35,  # ES384\r\n```",
+              "createdAt": "2025-03-11T14:38:58Z",
+              "updatedAt": "2025-03-11T14:38:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbwcK",
+          "commit": {
+            "abbreviatedOid": "f8f8059"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:39:09Z",
+          "updatedAt": "2025-03-11T14:39:09Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "```suggestion\r\n    / key / 4 : \"0vx7agoebGc...9nndrQmbX\",\r\n```",
+              "createdAt": "2025-03-11T14:39:09Z",
+              "updatedAt": "2025-03-11T14:39:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbwzQ",
+          "commit": {
+            "abbreviatedOid": "fd23628"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:39:33Z",
+          "updatedAt": "2025-03-11T14:39:33Z",
+          "comments": [
+            {
+              "originalPosition": 77,
+              "body": "```suggestion\r\n  / signature   / h'123227ed...ccd37123'\r\n```",
+              "createdAt": "2025-03-11T14:39:33Z",
+              "updatedAt": "2025-03-11T14:39:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbxNz",
+          "commit": {
+            "abbreviatedOid": "e43f400"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:40:01Z",
+          "updatedAt": "2025-03-11T14:40:01Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "```suggestion\r\n    / vds       / 395 : 1, # RFC9162 SHA-256\r\n```",
+              "createdAt": "2025-03-11T14:40:01Z",
+              "updatedAt": "2025-03-11T14:40:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fbyui",
+          "commit": {
+            "abbreviatedOid": "bfeff4f"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:41:15Z",
+          "updatedAt": "2025-03-11T14:41:15Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\n    / vds        / 395 : 1, # RFC9162 SHA-256\r\n```",
+              "createdAt": "2025-03-11T14:41:15Z",
+              "updatedAt": "2025-03-11T14:41:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fb0E5",
+          "commit": {
+            "abbreviatedOid": "23c8ceb"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:42:23Z",
+          "updatedAt": "2025-03-11T14:42:24Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n      / subject / 2 : \"https://green.example/cli@v1.2.3\",\r\n      / iat / 6: 1443944944\r\n```",
+              "createdAt": "2025-03-11T14:42:23Z",
+              "updatedAt": "2025-03-11T14:42:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fb0qk",
+          "commit": {
+            "abbreviatedOid": "56f5c63"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:42:54Z",
+          "updatedAt": "2025-03-11T14:42:54Z",
+          "comments": [
+            {
+              "originalPosition": 63,
+              "body": "```suggestion\r\n      / subject / 2 : \"https://green.example/cli@v1.2.3\",\r\n      / iat / 6: 2443944944,\r\n```",
+              "createdAt": "2025-03-11T14:42:54Z",
+              "updatedAt": "2025-03-11T14:42:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fb27h",
+          "commit": {
+            "abbreviatedOid": "26cafd6"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:44:56Z",
+          "updatedAt": "2025-03-11T14:44:56Z",
+          "comments": [
+            {
+              "originalPosition": 83,
+              "body": "```suggestion\r\n\r\n```",
+              "createdAt": "2025-03-11T14:44:56Z",
+              "updatedAt": "2025-03-11T14:44:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fb3Lq",
+          "commit": {
+            "abbreviatedOid": "26cafd6"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:45:05Z",
+          "updatedAt": "2025-03-11T14:45:05Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n## Optional Endpoints\r\n\r\n### Exchange Receipt\r\n```",
+              "createdAt": "2025-03-11T14:45:05Z",
+              "updatedAt": "2025-03-11T14:45:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fb4Ry",
+          "commit": {
+            "abbreviatedOid": "5346850"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:46:00Z",
+          "updatedAt": "2025-03-11T14:46:00Z",
+          "comments": [
+            {
+              "originalPosition": 60,
+              "body": "```suggestion\r\n    / vds       / 395 : 1,  # RFC9162 SHA-256\r\n```",
+              "createdAt": "2025-03-11T14:46:00Z",
+              "updatedAt": "2025-03-11T14:46:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fb4nh",
+          "commit": {
+            "abbreviatedOid": "570a131"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-11T14:46:17Z",
+          "updatedAt": "2025-03-11T14:46:17Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\n    / vds       / 395 : 1, # RFC9162 SHA-256\r\n```",
+              "createdAt": "2025-03-11T14:46:17Z",
+              "updatedAt": "2025-03-11T14:46:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fb6AN",
+          "commit": {
+            "abbreviatedOid": "68c3c7b"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-03-11T14:47:36Z",
+          "updatedAt": "2025-03-11T14:47:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6fb6SI",
+          "commit": {
+            "abbreviatedOid": "68c3c7b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "ts...",
+          "createdAt": "2025-03-11T14:47:53Z",
+          "updatedAt": "2025-03-11T14:47:53Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
