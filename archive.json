@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T00:46:55.231273+00:00",
+  "timestamp": "2025-05-15T00:42:29.438803+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -209,7 +209,7 @@
       "id": "I_kwDOLJjbks6JpIwT",
       "title": "API for Collections of Statements",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/9",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -221,8 +221,8 @@
       ],
       "body": "APIs which enables users to find a collection of signed statements based on protected, or unprotected header properties\r\n\r\nA client may send any known or custom header property, or combination\r\n\r\nTODO:\r\n- Better formated example\r\n- Add paging\r\n\r\nCollection of Signed Statement Header Properties\r\nREQUEST:\r\n```\r\nGET /findstatements?issuer=my-identity.me&subject=my-product-id HTTP/1.1\r\nHost: transparency.example\r\nAccept: application/json\r\n```\r\nRESPONSE:\r\na paged collection of references to Signed Statements, and the possible payload locations\r\n```json\r\n{\r\n   \"signed-statements\": [\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/abc123\",\r\n            \"detached-hash\": \"abc123...321cba\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime\"\r\n         }\r\n      },\r\n      {\r\n         \"protected-headers\": {\r\n            \"cwt_claims\": {\r\n               \"iss\": \"my-identity.me\",\r\n               \"sub\": \"my-product-id\"\r\n            },\r\n            \"content_type\": \"application/spdx+json\",\r\n            \"alg\": \"1\",\r\n            \"kid\": \"abc123\",\r\n            \"location-hint\": \"service.storage/def456\",\r\n            \"detached-hash\": \"def246...642fed\"\r\n         },\r\n         \"unprotected-headers\": {\r\n            \"registered\": \"sometime+1\"\r\n         }\r\n      }\r\n   ]\r\n}\r\n```",
       "createdAt": "2024-05-21T23:09:37Z",
-      "updatedAt": "2025-03-11T15:05:53Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-13T12:04:32Z",
+      "closedAt": "2025-05-13T12:04:32Z",
       "comments": [
         {
           "author": "howethomas",
