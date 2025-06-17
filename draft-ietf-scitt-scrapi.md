@@ -176,10 +176,10 @@ Accept: application/cbor
 Response:
 
 ~~~ http-message
-HTTP/1.1 200 Ok
+HTTP/1.1 200 OK
 Content-Type: application/cbor
 
-Payload (in CBOR diagnostic notation)
+Body (in CBOR diagnostic notation)
 
 {
   "issuer": "https://transparency.example",
@@ -207,7 +207,8 @@ Host: transparency.example
 Accept: application/cbor
 Accept: application/cose
 Content-Type: application/cose
-Payload (in CBOR diagnostic notation)
+
+Body (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
@@ -235,13 +236,10 @@ Along with the receipt the Transparency Service MAY return a locator in the HTTP
 
 ~~~ http-message
 HTTP/1.1 201 Created
-
-Location: https://transparency.example/entries\
-/67ed41f1de6a...cfc158694ed0befe
-
+Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 
-Payload (in CBOR diagnostic notation)
+Body (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
@@ -260,7 +258,6 @@ In cases where the registration request is accepted but the Transparency Service
 
 ~~~ http
 HTTP/1.1 303 See Other
-
 Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 Content-Length: 0
@@ -273,7 +270,7 @@ The Transparency Service MAY include a `Retry-After` header in the HTTP response
 
 ### Query Registration Status
 
-This endpoint lets a client query a Transparency Service for the registration status of a payload they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
+This endpoint lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
 
 Request:
 
@@ -297,7 +294,6 @@ If the client requests (GET) the location when the registration is still in prog
 
 ~~~ http-message
 HTTP/1.1 302 Found
-
 Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 Content-Length: 0
@@ -314,13 +310,10 @@ Along with the receipt the Transparency Service MAY return a locator in the HTTP
 
 ~~~ http-message
 HTTP/1.1 200 OK
-
-Location: https://transparency.example/entries\
-/67ed41f1de6a...cfc158694ed0befe
-
+Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 
-Payload (in CBOR diagnostic notation)
+Body (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
@@ -361,7 +354,7 @@ Implementations MAY return other errors, so long as they are valid {{RFC9290}} o
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
-application/concise-problem-details+cbor
+Content-Type: application/concise-problem-details+cbor
 
 {
   / title /         -1: \
@@ -373,7 +366,7 @@ application/concise-problem-details+cbor
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
-application/concise-problem-details+cbor
+Content-Type: application/concise-problem-details+cbor
 
 {
   / title /         -1: "\
@@ -385,7 +378,7 @@ application/concise-problem-details+cbor
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
-application/concise-problem-details+cbor
+Content-Type: application/concise-problem-details+cbor
 
 {
   / title /         -1: \
@@ -398,7 +391,7 @@ application/concise-problem-details+cbor
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
-application/concise-problem-details+cbor
+Content-Type: application/concise-problem-details+cbor
 
 {
   / title /         -1: \
@@ -411,7 +404,7 @@ application/concise-problem-details+cbor
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
-application/concise-problem-details+cbor
+Content-Type: application/concise-problem-details+cbor
 
 {
   / title /         -1: \
@@ -429,7 +422,7 @@ Implementations MAY return other errors, so long as they are valid {{RFC9290}} o
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
-application/concise-problem-details+cbor
+Content-Type: application/concise-problem-details+cbor
 
 {
   / title /         -1: "Invalid locator",
@@ -443,7 +436,7 @@ If no record of the specified running operation is found, the Transparency Servi
 
 ~~~ http-message
 HTTP/1.1 404 Not Found
-application/concise-problem-details+cbor
+Content-Type: application/concise-problem-details+cbor
 
 {
   / title /         -1: \
@@ -493,7 +486,7 @@ HTTP/1.1 200 Ok
 Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 
-Payload (in CBOR diagnostic notation)
+Body (in CBOR diagnostic notation)
 
 / cose-sign1 / 18([
   / protected   / <<{
@@ -527,7 +520,7 @@ If there is no Receipt found for the specified `EntryID` the Transparency Servic
 
 ~~~ http-message
 HTTP/1.1 404 Not Found
-application/concise-problem-details+cbor
+Content-Type: application/concise-problem-details+cbor
 
 {
   / title /         -1: \
@@ -551,7 +544,7 @@ POST receipt-exchange HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 
-Payload (in CBOR diagnostic notation)
+Body (in CBOR diagnostic notation)
 
 / cose-sign1 / 18([
   / protected   / <<{
@@ -590,7 +583,7 @@ If a new Receipt can be issued for the given submitted Receipt:
 HTTP/1.1 200 Ok
 Content-Type: application/cose
 
-Payload (in CBOR diagnostic notation)
+Body (in CBOR diagnostic notation)
 
 / cose-sign1 / 18([
   / protected   / <<{
@@ -644,7 +637,7 @@ One of the following:
 HTTP/1.1 200 Ok
 Content-Type: application/cose
 
-Payload (in CBOR diagnostic notation)
+Body (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
@@ -661,7 +654,7 @@ Implementations MAY return other errors, so long as they are valid {{RFC9290}} o
 
 ~~~ http-message
 HTTP/1.1 404 Not Found
-application/concise-problem-details+cbor
+Content-Type: application/concise-problem-details+cbor
 
 {
   / title /         -1: \
@@ -690,7 +683,8 @@ POST /exchange/receipt HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 Content-Type: application/cose
-Payload (in CBOR diagnostic notation)
+
+Body (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
@@ -707,10 +701,9 @@ A new Receipt:
 ~~~ http-message
 HTTP/1.1 200 Ok
 Location: https://transparency.example/entries/67ed...befe
-
 Content-Type: application/cose
 
-Payload (in CBOR diagnostic notation)
+Body (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
