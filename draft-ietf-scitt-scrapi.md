@@ -580,7 +580,7 @@ Response:
 If a new Receipt can be issued for the given submitted Receipt:
 
 ~~~ http-message
-HTTP/1.1 200 Ok
+HTTP/1.1 200 OK
 Content-Type: application/cose
 
 Body (in CBOR diagnostic notation)
