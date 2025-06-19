@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-15T00:42:29.438803+00:00",
+  "timestamp": "2025-06-19T00:44:54.569126+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1060,16 +1060,24 @@
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
-        "SteveLasker"
+        "achamayou"
       ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "3 issues:\r\n * detached payload doesn't make sense - we have hash envelope now\r\n * also the word 'payload' is used for both COSE payload and HTTP Body. Should be clear and use Body for the HTTP message\r\n * the statement on Reg Policy wrt attached/detached payload is unclear. Needs wordsmithing",
       "createdAt": "2024-11-03T11:16:42Z",
-      "updatedAt": "2025-01-28T15:38:35Z",
+      "updatedAt": "2025-06-17T15:20:32Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@JAG-UK I am struggling with the consistency of your third and first point. Are we saying that we drop all mentions of detached payloads, because we simply talk about Hash Envelope? I am fine with that, to be clear, but I wonder if you meant something more subtle.",
+          "createdAt": "2025-06-17T15:20:32Z",
+          "updatedAt": "2025-06-17T15:20:32Z"
+        }
+      ]
     },
     {
       "number": 44,
@@ -1283,15 +1291,14 @@
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
-        "SteveLasker",
-        "henkbirkholz"
+        "achamayou"
       ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "What default should we include in the samples.\r\nIn practicality, we're seeing most content be signed as hashed content, driving the https://datatracker.ietf.org/doc/draft-ietf-cose-hash-envelope/ draft. \r\nSuggesting we change the examples to use hash envelope, instead of inline content.",
       "createdAt": "2024-12-31T20:24:12Z",
-      "updatedAt": "2025-03-11T15:03:34Z",
+      "updatedAt": "2025-06-17T14:28:04Z",
       "closedAt": null,
       "comments": [
         {
@@ -6751,6 +6758,53 @@
           "createdAt": "2025-03-11T14:47:53Z",
           "updatedAt": "2025-03-11T14:47:53Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 71,
+      "id": "PR_kwDOLJjbks6a7C_Z",
+      "title": "Consistent usage of Payload vs Body",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/71",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses the second point in #43, about usage of (COSE) Payload vs (HTTP) Body.\r\n\r\nContains limited drive-by consistency improvements to the HTTP requests and responses.",
+      "createdAt": "2025-06-17T15:18:30Z",
+      "updatedAt": "2025-06-17T15:43:33Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "fix_payload_usage",
+      "headRefOid": "2561b38060f5251dd44fd50259864f2f06a236fc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6vAoSc",
+          "commit": {
+            "abbreviatedOid": "6afd7cb"
+          },
+          "author": "copilot-pull-request-reviewer",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "## Pull Request Overview\n\nThis PR standardizes HTTP example blocks by consistently renaming \u201cPayload\u201d to \u201cBody,\u201d correcting header formatting, and fixing status reason\u2010phrase casing.\n\n- Standardize HTTP status lines to use \u201cOK\u201d instead of \u201cOk.\u201d\n- Rename \u201cPayload\u201d labels in CBOR diagnostic examples to \u201cBody.\u201d\n- Add missing `Content-Type:` prefixes in concise problem\u2010details examples and shorten sample `Location` URLs.\n\n\n<details>\n<summary>Comments suppressed due to low confidence (1)</summary>\n\n**draft-ietf-scitt-scrapi.md:273**\n* [nitpick] The term 'Signed Statement' may not align with the rest of the spec terminology; consider using the defined term 'Payload' (or update all references consistently) to avoid confusion.\n```\nThis endpoint lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.\n```\n</details>\n\n",
+          "createdAt": "2025-06-17T15:36:25Z",
+          "updatedAt": "2025-06-17T15:36:25Z",
+          "comments": [
+            {
+              "originalPosition": 171,
+              "body": "HTTP status reason phrases should consistently use the uppercase standard 'OK' instead of 'Ok'.\n```suggestion\nHTTP/1.1 200 OK\n```",
+              "createdAt": "2025-06-17T15:36:25Z",
+              "updatedAt": "2025-06-17T15:36:26Z"
+            }
+          ]
         }
       ]
     }
