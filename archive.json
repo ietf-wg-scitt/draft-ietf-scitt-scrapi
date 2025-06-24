@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-19T00:44:54.569126+00:00",
+  "timestamp": "2025-06-24T00:45:11.328357+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -6807,6 +6807,106 @@
           ]
         }
       ]
+    },
+    {
+      "number": 72,
+      "id": "PR_kwDOLJjbks6bpPj9",
+      "title": "Media Type fix",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/72",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Resolves a TODO which no longer seems necessary. Drive-by on the way to #71.",
+      "createdAt": "2025-06-23T11:01:13Z",
+      "updatedAt": "2025-06-23T12:38:19Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "problem_details_media_type",
+      "headRefOid": "df655fb5d047ce390b3b210ab75d1d90efe28532",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@JAG-UK happy to drop the mention of clients if it helps, but whether they are humans or programs, they probably will enjoy format consistency just as much as the implementers?",
+          "createdAt": "2025-06-23T12:11:44Z",
+          "updatedAt": "2025-06-23T12:11:44Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6v0D7S",
+          "commit": {
+            "abbreviatedOid": "df655fb"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Cue discussion about 'clients', but LGTM",
+          "createdAt": "2025-06-23T11:09:28Z",
+          "updatedAt": "2025-06-23T11:09:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 73,
+      "id": "PR_kwDOLJjbks6bqPRT",
+      "title": "Use COSE Hash Envelope in samples",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/73",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Adresses #55 and the rest of #43.",
+      "createdAt": "2025-06-23T12:37:15Z",
+      "updatedAt": "2025-06-23T12:37:15Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "use_cose_hash_envelope_samples",
+      "headRefOid": "e6fcb6707b9d0d39ed5df58e90f3736bf4ab93c9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 74,
+      "id": "PR_kwDOLJjbks6bqjCE",
+      "title": "More consistent and representative receipt samples",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/74",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Noticed while doing #73 that the sample receipts were inconsistent, and in the case of the refresh endpoint, less illustrative than they could be. This PR should address both (minor) points.",
+      "createdAt": "2025-06-23T13:04:36Z",
+      "updatedAt": "2025-06-23T13:04:36Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "consistent_receipt_samples",
+      "headRefOid": "4735a4c0fa427322c77b014b1d0ef3ae6f2ba158",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
