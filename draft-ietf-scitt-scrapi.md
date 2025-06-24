@@ -121,7 +121,7 @@ If the Transparency Service cannot process a client's request, it MUST return ei
 - detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
 
 NOTE: SCRAPI is not a CoAP API.
-Nonetheless Constrained Problem Details objects {{RFC9290}} provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint and client implementations.
+Nonetheless Constrained Problem Details objects {{RFC9290}} provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint or client implementations.
 
 NOTE: Examples use '\\' line wrapping per {{RFC8792}}
 
