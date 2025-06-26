@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-24T00:45:11.328357+00:00",
+  "timestamp": "2025-06-26T00:45:04.506464+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -6773,7 +6773,7 @@
       "labels": [],
       "body": "Addresses the second point in #43, about usage of (COSE) Payload vs (HTTP) Body.\r\n\r\nContains limited drive-by consistency improvements to the HTTP requests and responses.",
       "createdAt": "2025-06-17T15:18:30Z",
-      "updatedAt": "2025-06-17T15:43:33Z",
+      "updatedAt": "2025-06-24T14:07:24Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
@@ -6805,6 +6805,19 @@
               "updatedAt": "2025-06-17T15:36:26Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6wEw4Q",
+          "commit": {
+            "abbreviatedOid": "2561b38"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-06-24T14:07:24Z",
+          "updatedAt": "2025-06-24T14:07:24Z",
+          "comments": []
         }
       ]
     },
@@ -6820,13 +6833,13 @@
       "labels": [],
       "body": "Resolves a TODO which no longer seems necessary. Drive-by on the way to #71.",
       "createdAt": "2025-06-23T11:01:13Z",
-      "updatedAt": "2025-06-23T12:38:19Z",
+      "updatedAt": "2025-06-24T14:10:07Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "problem_details_media_type",
-      "headRefOid": "df655fb5d047ce390b3b210ab75d1d90efe28532",
+      "headRefOid": "eaed77ff18c551faa96c4ed3eaf706b8bb0f685d",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -6853,6 +6866,39 @@
           "createdAt": "2025-06-23T11:09:28Z",
           "updatedAt": "2025-06-23T11:09:28Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6wEzd3",
+          "commit": {
+            "abbreviatedOid": "df655fb"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-24T14:09:30Z",
+          "updatedAt": "2025-06-24T14:09:30Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nNonetheless Constrained Problem Details objects {{RFC9290}} provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint or client implementations.\r\n```",
+              "createdAt": "2025-06-24T14:09:30Z",
+              "updatedAt": "2025-06-24T14:09:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6wE0S1",
+          "commit": {
+            "abbreviatedOid": "df655fb"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-06-24T14:10:07Z",
+          "updatedAt": "2025-06-24T14:10:07Z",
+          "comments": []
         }
       ]
     },
@@ -6868,7 +6914,7 @@
       "labels": [],
       "body": "Adresses #55 and the rest of #43.",
       "createdAt": "2025-06-23T12:37:15Z",
-      "updatedAt": "2025-06-23T12:37:15Z",
+      "updatedAt": "2025-06-24T14:16:55Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
@@ -6880,7 +6926,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6wE7zg",
+          "commit": {
+            "abbreviatedOid": "e6fcb67"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-06-24T14:16:55Z",
+          "updatedAt": "2025-06-24T14:16:55Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 74,
@@ -6894,7 +6954,7 @@
       "labels": [],
       "body": "Noticed while doing #73 that the sample receipts were inconsistent, and in the case of the refresh endpoint, less illustrative than they could be. This PR should address both (minor) points.",
       "createdAt": "2025-06-23T13:04:36Z",
-      "updatedAt": "2025-06-23T13:04:36Z",
+      "updatedAt": "2025-06-24T14:19:58Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
@@ -6906,7 +6966,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6wE-ck",
+          "commit": {
+            "abbreviatedOid": "4735a4c"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-06-24T14:19:58Z",
+          "updatedAt": "2025-06-24T14:19:58Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
