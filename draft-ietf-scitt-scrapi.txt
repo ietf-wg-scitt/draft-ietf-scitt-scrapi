@@ -244,10 +244,10 @@ Table of Contents
 
    Response:
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Content-Type: application/cbor
 
-   Payload (in CBOR diagnostic notation)
+   Body (in CBOR diagnostic notation)
 
    {
      "issuer": "https://transparency.example",
@@ -275,7 +275,8 @@ Table of Contents
    Accept: application/cbor
    Accept: application/cose
    Content-Type: application/cose
-   Payload (in CBOR diagnostic notation)
+
+   Body (in CBOR diagnostic notation)
 
    18([                            / COSE Sign1                                           /
      <<{
@@ -313,13 +314,10 @@ Table of Contents
    URL.
 
    HTTP/1.1 201 Created
-
-   Location: https://transparency.example/entries\
-   /67ed41f1de6a...cfc158694ed0befe
-
+   Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
 
-   Payload (in CBOR diagnostic notation)
+   Body (in CBOR diagnostic notation)
 
    / cose-sign1 / 18([
      / protected   / <<{
@@ -358,7 +356,6 @@ Table of Contents
    this non-normative example:
 
    HTTP/1.1 303 See Other
-
    Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
    Content-Length: 0
@@ -373,9 +370,9 @@ Table of Contents
 2.1.3.  Query Registration Status
 
    This endpoint lets a client query a Transparency Service for the
-   registration status of a payload they have submitted earlier, and for
-   which they have received a 303 or 302 - Registration is running
-   response.
+   registration status of a Signed Statement they have submitted
+   earlier, and for which they have received a 303 or 302 - Registration
+   is running response.
 
    Request:
 
@@ -399,7 +396,6 @@ Table of Contents
    normative example:
 
    HTTP/1.1 302 Found
-
    Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
    Content-Length: 0
@@ -418,13 +414,10 @@ Table of Contents
    URL.
 
    HTTP/1.1 200 OK
-
-   Location: https://transparency.example/entries\
-   /67ed41f1de6a...cfc158694ed0befe
-
+   Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
 
-   Payload (in CBOR diagnostic notation)
+   Body (in CBOR diagnostic notation)
 
    / cose-sign1 / 18([
      / protected   / <<{
@@ -480,7 +473,7 @@ Table of Contents
    return other errors, so long as they are valid [RFC9290] objects.
 
    HTTP/1.1 400 Bad Request
-   application/concise-problem-details+cbor
+   Content-Type: application/concise-problem-details+cbor
 
    {
      / title /         -1: \
@@ -490,7 +483,7 @@ Table of Contents
    }
 
    HTTP/1.1 400 Bad Request
-   application/concise-problem-details+cbor
+   Content-Type: application/concise-problem-details+cbor
 
    {
      / title /         -1: "\
@@ -500,7 +493,7 @@ Table of Contents
    }
 
    HTTP/1.1 400 Bad Request
-   application/concise-problem-details+cbor
+   Content-Type: application/concise-problem-details+cbor
 
    {
      / title /         -1: \
@@ -510,7 +503,7 @@ Table of Contents
    }
 
    HTTP/1.1 400 Bad Request
-   application/concise-problem-details+cbor
+   Content-Type: application/concise-problem-details+cbor
 
    {
      / title /         -1: \
@@ -526,7 +519,7 @@ Table of Contents
    return other errors, so long as they are valid [RFC9290] objects.
 
    HTTP/1.1 400 Bad Request
-   application/concise-problem-details+cbor
+   Content-Type: application/concise-problem-details+cbor
 
    {
      / title /         -1: "Invalid locator",
@@ -539,7 +532,7 @@ Table of Contents
    Transparency Service returns a 404 response.
 
    HTTP/1.1 404 Not Found
-   application/concise-problem-details+cbor
+   Content-Type: application/concise-problem-details+cbor
 
    {
      / title /         -1: \
@@ -585,7 +578,7 @@ Table of Contents
    Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
 
-   Payload (in CBOR diagnostic notation)
+   Body (in CBOR diagnostic notation)
 
    / cose-sign1 / 18([
      / protected   / <<{
@@ -618,7 +611,7 @@ Table of Contents
    Transparency Service returns a 404 response:
 
    HTTP/1.1 404 Not Found
-   application/concise-problem-details+cbor
+   Content-Type: application/concise-problem-details+cbor
 
    {
      / title /         -1: \
@@ -640,7 +633,7 @@ Table of Contents
    Host: transparency.example
    Accept: application/cose
 
-   Payload (in CBOR diagnostic notation)
+   Body (in CBOR diagnostic notation)
 
    / cose-sign1 / 18([
      / protected   / <<{
@@ -674,10 +667,10 @@ Table of Contents
 
    If a new Receipt can be issued for the given submitted Receipt:
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Content-Type: application/cose
 
-   Payload (in CBOR diagnostic notation)
+   Body (in CBOR diagnostic notation)
 
    / cose-sign1 / 18([
      / protected   / <<{
@@ -731,7 +724,7 @@ Table of Contents
    HTTP/1.1 200 Ok
    Content-Type: application/cose
 
-   Payload (in CBOR diagnostic notation)
+   Body (in CBOR diagnostic notation)
 
    18([                            / COSE Sign1         /
      h'a1013822',                  / Protected Header   /
@@ -746,7 +739,7 @@ Table of Contents
    return other errors, so long as they are valid [RFC9290] objects.
 
    HTTP/1.1 404 Not Found
-   application/concise-problem-details+cbor
+   Content-Type: application/concise-problem-details+cbor
 
    {
      / title /         -1: \
@@ -778,7 +771,8 @@ Table of Contents
    Host: transparency.example
    Accept: application/cose
    Content-Type: application/cose
-   Payload (in CBOR diagnostic notation)
+
+   Body (in CBOR diagnostic notation)
 
    / cose-sign1 / 18([
      / protected   / <<{
@@ -812,10 +806,9 @@ Table of Contents
 
    HTTP/1.1 200 Ok
    Location: https://transparency.example/entries/67ed...befe
-
    Content-Type: application/cose
 
-   Payload (in CBOR diagnostic notation)
+   Body (in CBOR diagnostic notation)
 
    / cose-sign1 / 18([
      / protected   / <<{
