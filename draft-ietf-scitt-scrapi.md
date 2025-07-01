@@ -736,7 +736,7 @@ Payload (in CBOR diagnostic notation)
     / claims / 15 : {
       / issuer  / 1 : "https://blue.notary.example",
       / subject / 2 : "https://green.software.example/cli@v1.2.3",
-      / iat     / 6 : 1750683311
+      / iat     / 6 : 1750683311 # Pre-refresh
     },
   }>>,
   / unprotected / {
