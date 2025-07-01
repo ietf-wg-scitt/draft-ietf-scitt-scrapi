@@ -682,29 +682,11 @@ Content-Type: application/cose
 
 Payload (in CBOR diagnostic notation)
 
-/ cose-sign1 / 18([
-  / protected   / <<{
-    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-    / algorithm / 1 : -7,  # ES256
-    / vds       / 395 : 1, # RFC9162 SHA-256
-    / claims / 15 : {
-      / issuer  / 1 : "https://blue.notary.example",
-      / subject / 2 : "https://green.software.example/cli@v1.2.3",
-    },
-  }>>,
-  / unprotected / {
-    / proofs / 396 : {
-      / inclusion / -1 : [
-        <<[
-          / size / 9, / leaf / 8,
-          / inclusion path /
-          h'7558a95f...e02e35d6'
-        ]>>
-      ],
-    },
-  },
-  / payload     / null,
-  / signature   / h'02d227ed...ccd3774f'
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
 ~~~
 
