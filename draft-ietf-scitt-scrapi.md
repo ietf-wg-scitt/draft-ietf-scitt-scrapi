@@ -213,7 +213,7 @@ Payload (in CBOR diagnostic notation)
     / key identifier  / 4:   h'75726e3a...32636573',
     / cose sign1 type / 16:  "application/example+cose",
     / hash algorithm  / 258: -16, # sha-256
-    / media type      / 259: "application/spdx+json",
+    / preimage-content-type / 259: "application/spdx+json",
     / location        / 260: "https://.../manifest.json"
   }>>,                          / Protected Header                                     /
   {},                           / Unprotected Header                                   /
