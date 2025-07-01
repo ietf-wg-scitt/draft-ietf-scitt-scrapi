@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 12 September 2025                               DataTrails Inc.
-                                                           11 March 2025
+Expires: 2 January 2026                                  DataTrails Inc.
+                                                             1 July 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 September 2025.
+   This Internet-Draft will expire on 2 January 2026.
 
 Copyright Notice
 
@@ -262,8 +262,6 @@ Table of Contents
 
 2.1.2.  Register Signed Statement
 
-   See notes on detached payloads below.
-
    This endpoint instructs a Transparency Service to register a Signed
    Statement on its log.  Since log implementations may take many
    seconds or longer to reach finality, this API provides an
@@ -282,18 +280,23 @@ Table of Contents
    Content-Type: application/cose
    Payload (in CBOR diagnostic notation)
 
-   18([                            / COSE Sign1         /
-     h'a1013822',                  / Protected Header   /
-     {},                           / Unprotected Header /
-     null,                         / Detached Payload   /
-     h'269cd68f4211dffc...0dcb29c' / Signature          /
+   18([                            / COSE Sign1                                           /
+     <<{
+       / signature alg         / 1:  -35, # ES384
+       / key identifier        / 4:   h'75726e3a...32636573',
+       / cose sign1 type       / 16:  "application/example+cose",
+       / payload-hash-alg      / 258: -16, # sha-256
+       / preimage-content-type / 259: "application/spdx+json",
+       / payload-location      / 260: "https://.../manifest.json"
+     }>>,                          / Protected Header                                     /
+     {},                           / Unprotected Header                                   /
+     h'935b5a91...e18a588a',       / Payload, sha-256 digest of file stored at Location   /
+     h'269cd68f4211dffc...0dcb29c' / Signature                                            /
    ])
 
-   If the payload is detached, the Transparency Service depends on the
-   client's authentication context in the Registration Policy.  If the
-   payload is attached, the Transparency Service depends on both the
-   client's authentication context (if present) and the verification of
-   the Signed Statement in the Registration Policy.
+   A Transparency Service depends on both the client's authentication
+   context (if present) and the verification of the Signed Statement in
+   the Registration Policy.
 
    The Registration Policy for the Transparency Service MUST be applied
    before any additional processing.  The details of Registration
@@ -470,19 +473,7 @@ Table of Contents
      / title /         -1: \
              "Payload Missing",
      / detail /        -2: \
-             "Signed Statement payload must be attached \
-             (must be present)"
-   }
-
-   HTTP/1.1 400 Bad Request
-   application/concise-problem-details+cbor
-
-   {
-     / title /         -1: \
-             "Payload Forbidden",
-     / detail /        -2: \
-             "Signed Statement payload must be detached \
-             (must not be present)"
+             "Signed Statement payload must be present"
    }
 
    HTTP/1.1 400 Bad Request
@@ -1044,9 +1035,9 @@ Table of Contents
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-11, 3 March
+              Internet-Draft, draft-ietf-scitt-architecture-13, 18 June
               2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-11>.
+              scitt-architecture-13>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1081,9 +1072,9 @@ Table of Contents
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-08, 3 December
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-08>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-09, 28 May
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              oauth-sd-jwt-vc-09>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
