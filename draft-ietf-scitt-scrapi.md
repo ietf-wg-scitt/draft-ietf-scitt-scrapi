@@ -214,7 +214,7 @@ Payload (in CBOR diagnostic notation)
     / cose sign1 type / 16:  "application/example+cose",
     / hash algorithm  / 258: -16, # sha-256
     / preimage-content-type / 259: "application/spdx+json",
-    / location        / 260: "https://.../manifest.json"
+    / payload-location / 260: "https://.../manifest.json"
   }>>,                          / Protected Header                                     /
   {},                           / Unprotected Header                                   /
   h'935b5a91...e18a588a',       / Payload, sha-256 digest of file stored at Location   /
