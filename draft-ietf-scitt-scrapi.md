@@ -115,17 +115,13 @@ All messages are sent as HTTP GET or POST requests.
 If the Transparency Service cannot process a client's request, it MUST return either:
 
 1. an HTTP 3xx code, indicating to the client additional action they must take to complete the request, such as follow a redirection, or
-1. an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise Problem Details object {{RFC9290}} containing:
+1. an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise Problem Details object (application/concise-problem-details+cbor) {{RFC9290}} containing:
 
 - title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
 - detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
 
-TODO: RESOLVE this dangling media-type
-
-application/concise-problem-details+cbor
-
 NOTE: SCRAPI is not a CoAP API.
-Nonetheless Constrained Problem Details objects {{RFC9290}} provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.
+Nonetheless Constrained Problem Details objects {{RFC9290}} provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint or client implementations.
 
 NOTE: Examples use '\\' line wrapping per {{RFC8792}}
 
@@ -192,8 +188,6 @@ Fields that are not understood MUST be ignored.
 
 ### Register Signed Statement
 
-See notes on detached payloads below.
-
 This endpoint instructs a Transparency Service to register a Signed Statement on its log.
 Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator that can be used to check the registration's status asynchronously.
 
@@ -210,16 +204,22 @@ Content-Type: application/cose
 
 Body (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+18([                            / COSE Sign1                                           /
+  <<{
+    / signature alg         / 1:  -35, # ES384
+    / key identifier        / 4:   h'75726e3a...32636573',
+    / cose sign1 type       / 16:  "application/example+cose",
+    / payload-hash-alg      / 258: -16, # sha-256
+    / preimage-content-type / 259: "application/spdx+json",
+    / payload-location      / 260: "https://.../manifest.json"
+  }>>,                          / Protected Header                                     /
+  {},                           / Unprotected Header                                   /
+  h'935b5a91...e18a588a',       / Payload, sha-256 digest of file stored at Location   /
+  h'269cd68f4211dffc...0dcb29c' / Signature                                            /
 ])
 ~~~
 
-If the `payload` is detached, the Transparency Service depends on the client's authentication context in the Registration Policy.
-If the `payload` is attached, the Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.
+A Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.
 
 The Registration Policy for the Transparency Service MUST be applied before any additional processing.
 The details of Registration Policies are out of scope for this document.
@@ -241,11 +241,29 @@ Content-Type: application/cose
 
 Body (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+/ cose-sign1 / 18([
+  / protected   / <<{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.notary.example",
+      / subject / 2 : "https://green.software.example/cli@v1.2.3",
+    },
+  }>>,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        <<[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]>>
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'02d227ed...ccd3774f'
 ])
 ~~~
 
@@ -315,11 +333,29 @@ Content-Type: application/cose
 
 Body (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+/ cose-sign1 / 18([
+  / protected   / <<{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.notary.example",
+      / subject / 2 : "https://green.software.example/cli@v1.2.3",
+    },
+  }>>,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        <<[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]>>
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'02d227ed...ccd3774f'
 ])
 ~~~
 
@@ -384,21 +420,7 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: \
           "Payload Missing",
   / detail /        -2: \
-          "Signed Statement payload must be attached \
-          (must be present)"
-}
-~~~
-
-~~~ http-message
-HTTP/1.1 400 Bad Request
-Content-Type: application/concise-problem-details+cbor
-
-{
-  / title /         -1: \
-          "Payload Forbidden",
-  / detail /        -2: \
-          "Signed Statement payload must be detached \
-          (must not be present)"
+          "Signed Statement payload must be present"
 }
 ~~~
 
@@ -686,11 +708,30 @@ Content-Type: application/cose
 
 Body (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+/ cose-sign1 / 18([
+  / protected   / <<{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.notary.example",
+      / subject / 2 : "https://green.software.example/cli@v1.2.3",
+      / iat     / 6 : 1750683311 # Pre-refresh
+    },
+  }>>,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        <<[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]>>
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'02d227ed...ccd3774f'
 ])
 ~~~
 
@@ -705,11 +746,30 @@ Content-Type: application/cose
 
 Body (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+/ cose-sign1 / 18([
+  / protected   / <<{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.notary.example",
+      / subject / 2 : "https://green.software.example/cli@v1.2.3",
+      / iat     / 6 : 1750683573 # Post-refresh
+    },
+  }>>,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        <<[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]>>
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'48f67a8b...b474bb3a'
 ])
 ~~~
 
