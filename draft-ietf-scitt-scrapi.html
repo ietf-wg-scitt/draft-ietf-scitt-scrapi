@@ -1485,11 +1485,29 @@ Content-Type: application/cose
 
 Payload (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+/ cose-sign1 / 18([
+  / protected   / &lt;&lt;{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.notary.example",
+      / subject / 2 : "https://green.software.example/cli@v1.2.3",
+    },
+  }&gt;&gt;,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        &lt;&lt;[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]&gt;&gt;
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'02d227ed...ccd3774f'
 ])
 </pre><a href="#section-2.1.2.1-3" class="pilcrow">¶</a>
 </div>
@@ -1575,11 +1593,29 @@ Content-Type: application/cose
 
 Payload (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+/ cose-sign1 / 18([
+  / protected   / &lt;&lt;{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.notary.example",
+      / subject / 2 : "https://green.software.example/cli@v1.2.3",
+    },
+  }&gt;&gt;,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        &lt;&lt;[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]&gt;&gt;
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'02d227ed...ccd3774f'
 ])
 </pre><a href="#section-2.1.3.2-2" class="pilcrow">¶</a>
 </div>
@@ -1998,11 +2034,30 @@ Accept: application/cose
 Content-Type: application/cose
 Payload (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+/ cose-sign1 / 18([
+  / protected   / &lt;&lt;{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.notary.example",
+      / subject / 2 : "https://green.software.example/cli@v1.2.3",
+      / iat     / 6 : 1750683311 # Pre-refresh
+    },
+  }&gt;&gt;,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        &lt;&lt;[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]&gt;&gt;
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'02d227ed...ccd3774f'
 ])
 </pre><a href="#section-2.2.3-5" class="pilcrow">¶</a>
 </div>
@@ -2021,11 +2076,30 @@ Content-Type: application/cose
 
 Payload (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+/ cose-sign1 / 18([
+  / protected   / &lt;&lt;{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.notary.example",
+      / subject / 2 : "https://green.software.example/cli@v1.2.3",
+      / iat     / 6 : 1750683573 # Post-refresh
+    },
+  }&gt;&gt;,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        &lt;&lt;[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]&gt;&gt;
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'48f67a8b...b474bb3a'
 ])
 </pre><a href="#section-2.2.3.1-2" class="pilcrow">¶</a>
 </div>
