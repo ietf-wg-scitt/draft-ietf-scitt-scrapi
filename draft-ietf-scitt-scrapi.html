@@ -1353,7 +1353,7 @@ If Authentication is not implemented, rate limiting or other denial of service m
           <p id="section-2-4.1.1">an HTTP 3xx code, indicating to the client additional action they must take to complete the request, such as follow a redirection, or<a href="#section-2-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-2-4.2">
-          <p id="section-2-4.2.1">an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a Concise Problem Details object <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> containing:<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
+          <p id="section-2-4.2.1">an HTTP 4xx or 5xx status code, and the body <span class="bcp14">SHOULD</span> be a Concise Problem Details object (application/concise-problem-details+cbor) <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> containing:<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <ul class="normal">
@@ -1364,13 +1364,11 @@ If Authentication is not implemented, rate limiting or other denial of service m
           <p id="section-2-5.2.1">detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-6">TODO: RESOLVE this dangling media-type<a href="#section-2-6" class="pilcrow">¶</a></p>
-<p id="section-2-7">application/concise-problem-details+cbor<a href="#section-2-7" class="pilcrow">¶</a></p>
-<p id="section-2-8">NOTE: SCRAPI is not a CoAP API.
-Nonetheless Constrained Problem Details objects <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint implementations.<a href="#section-2-8" class="pilcrow">¶</a></p>
-<p id="section-2-9">NOTE: Examples use '\' line wrapping per <span>[<a href="#RFC8792" class="cite xref">RFC8792</a>]</span><a href="#section-2-9" class="pilcrow">¶</a></p>
-<p id="section-2-10">Examples of errors may include:<a href="#section-2-10" class="pilcrow">¶</a></p>
-<div class="lang-cbor-diag sourcecode" id="section-2-11">
+<p id="section-2-6">NOTE: SCRAPI is not a CoAP API.
+Nonetheless Constrained Problem Details objects <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint or client implementations.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-7">NOTE: Examples use '\' line wrapping per <span>[<a href="#RFC8792" class="cite xref">RFC8792</a>]</span><a href="#section-2-7" class="pilcrow">¶</a></p>
+<p id="section-2-8">Examples of errors may include:<a href="#section-2-8" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-2-9">
 <pre>
 {
   / title /         -1: \
@@ -1378,16 +1376,16 @@ Nonetheless Constrained Problem Details objects <span>[<a href="#RFC9290" class=
   / detail /        -2: \
             "Signing algorithm 'WalnutDSA' not supported"
 }
-</pre><a href="#section-2-11" class="pilcrow">¶</a>
+</pre><a href="#section-2-9" class="pilcrow">¶</a>
 </div>
-<p id="section-2-12">Most error types are specific to the type of request and are defined in the respective subsections below.
-The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-2-12" class="pilcrow">¶</a></p>
-<p id="section-2-13"><code>
+<p id="section-2-10">Most error types are specific to the type of request and are defined in the respective subsections below.
+The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-2-10" class="pilcrow">¶</a></p>
+<p id="section-2-11"><code>
 Error code: `malformed` (The request could not be parsed)
-</code><a href="#section-2-13" class="pilcrow">¶</a></p>
-<p id="section-2-14">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-14" class="pilcrow">¶</a></p>
-<p id="section-2-15">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
-In the absence of this header field, this document does not specify a minimum.<a href="#section-2-15" class="pilcrow">¶</a></p>
+</code><a href="#section-2-11" class="pilcrow">¶</a></p>
+<p id="section-2-12">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-12" class="pilcrow">¶</a></p>
+<p id="section-2-13">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
+In the absence of this header field, this document does not specify a minimum.<a href="#section-2-13" class="pilcrow">¶</a></p>
 <div id="sec-mandatory">
 <section id="section-2.1">
         <h3 id="name-mandatory">

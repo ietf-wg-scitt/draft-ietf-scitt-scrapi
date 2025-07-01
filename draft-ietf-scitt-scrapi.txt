@@ -175,7 +175,8 @@ Table of Contents
        or
 
    2.  an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise
-       Problem Details object [RFC9290] containing:
+       Problem Details object (application/concise-problem-details+cbor)
+       [RFC9290] containing:
 
    *  title: A human-readable string identifying the error that
       prevented the Transparency Service from processing the request,
@@ -185,14 +186,10 @@ Table of Contents
       depth, ideally with sufficient detail enabling the error to be
       rectified.
 
-   TODO: RESOLVE this dangling media-type
-
-   application/concise-problem-details+cbor
-
    NOTE: SCRAPI is not a CoAP API.  Nonetheless Constrained Problem
    Details objects [RFC9290] provide a useful CBOR encoding for problem
-   details and avoids the need for mixing CBOR and JSON in endpoint
-   implementations.
+   details and avoids the need for mixing CBOR and JSON in endpoint or
+   client implementations.
 
    NOTE: Examples use '\' line wrapping per [RFC8792]
 
