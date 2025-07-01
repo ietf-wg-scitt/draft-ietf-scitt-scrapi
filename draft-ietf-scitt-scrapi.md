@@ -192,8 +192,6 @@ Fields that are not understood MUST be ignored.
 
 ### Register Signed Statement
 
-See notes on detached payloads below.
-
 This endpoint instructs a Transparency Service to register a Signed Statement on its log.
 Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator that can be used to check the registration's status asynchronously.
 
@@ -209,16 +207,22 @@ Accept: application/cose
 Content-Type: application/cose
 Payload (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
+18([                            / COSE Sign1                                           /
+  <<{
+    / signature alg         / 1:  -35, # ES384
+    / key identifier        / 4:   h'75726e3a...32636573',
+    / cose sign1 type       / 16:  "application/example+cose",
+    / payload-hash-alg      / 258: -16, # sha-256
+    / preimage-content-type / 259: "application/spdx+json",
+    / payload-location      / 260: "https://.../manifest.json"
+  }>>,                          / Protected Header                                     /
+  {},                           / Unprotected Header                                   /
+  h'935b5a91...e18a588a',       / Payload, sha-256 digest of file stored at Location   /
+  h'269cd68f4211dffc...0dcb29c' / Signature                                            /
 ])
 ~~~
 
-If the `payload` is detached, the Transparency Service depends on the client's authentication context in the Registration Policy.
-If the `payload` is attached, the Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.
+A Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.
 
 The Registration Policy for the Transparency Service MUST be applied before any additional processing.
 The details of Registration Policies are out of scope for this document.
@@ -391,21 +395,7 @@ application/concise-problem-details+cbor
   / title /         -1: \
           "Payload Missing",
   / detail /        -2: \
-          "Signed Statement payload must be attached \
-          (must be present)"
-}
-~~~
-
-~~~ http-message
-HTTP/1.1 400 Bad Request
-application/concise-problem-details+cbor
-
-{
-  / title /         -1: \
-          "Payload Forbidden",
-  / detail /        -2: \
-          "Signed Statement payload must be detached \
-          (must not be present)"
+          "Signed Statement payload must be present"
 }
 ~~~
 
