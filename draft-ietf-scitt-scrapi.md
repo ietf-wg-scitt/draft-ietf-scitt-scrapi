@@ -38,7 +38,6 @@ author:
   name: Jon Geater
   organization: DataTrails Inc.
   email: jon.geater@datatrails.ai
-  country: UK
   country: United States
 
 contributor:
