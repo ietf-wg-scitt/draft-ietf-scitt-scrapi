@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-26T00:45:04.506464+00:00",
+  "timestamp": "2025-07-03T00:44:57.676063+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1056,7 +1056,7 @@
       "id": "I_kwDOLJjbks6c1AbS",
       "title": "Problems with example register signed statement ",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/43",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JAG-UK",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1067,8 +1067,8 @@
       ],
       "body": "3 issues:\r\n * detached payload doesn't make sense - we have hash envelope now\r\n * also the word 'payload' is used for both COSE payload and HTTP Body. Should be clear and use Body for the HTTP message\r\n * the statement on Reg Policy wrt attached/detached payload is unclear. Needs wordsmithing",
       "createdAt": "2024-11-03T11:16:42Z",
-      "updatedAt": "2025-06-17T15:20:32Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-01T14:28:11Z",
+      "closedAt": "2025-07-01T14:28:10Z",
       "comments": [
         {
           "author": "achamayou",
@@ -1287,7 +1287,7 @@
       "id": "I_kwDOLJjbks6kyVDp",
       "title": "Examples to use HASH Envelope over inline content",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/55",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SteveLasker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1298,8 +1298,8 @@
       ],
       "body": "What default should we include in the samples.\r\nIn practicality, we're seeing most content be signed as hashed content, driving the https://datatracker.ietf.org/doc/draft-ietf-cose-hash-envelope/ draft. \r\nSuggesting we change the examples to use hash envelope, instead of inline content.",
       "createdAt": "2024-12-31T20:24:12Z",
-      "updatedAt": "2025-06-17T14:28:04Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-01T14:28:52Z",
+      "closedAt": "2025-07-01T14:28:52Z",
       "comments": [
         {
           "author": "SteveLasker",
@@ -6766,24 +6766,26 @@
       "id": "PR_kwDOLJjbks6a7C_Z",
       "title": "Consistent usage of Payload vs Body",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/71",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses the second point in #43, about usage of (COSE) Payload vs (HTTP) Body.\r\n\r\nContains limited drive-by consistency improvements to the HTTP requests and responses.",
       "createdAt": "2025-06-17T15:18:30Z",
-      "updatedAt": "2025-06-24T14:07:24Z",
+      "updatedAt": "2025-07-01T14:27:19Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
-      "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
+      "baseRefOid": "5ef800b387cab5a75700221458c9b56bb768e41c",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "fix_payload_usage",
-      "headRefOid": "2561b38060f5251dd44fd50259864f2f06a236fc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "23bca448ddd3a452c242ac09af6300b663b95e1c",
+      "closedAt": "2025-07-01T14:27:17Z",
+      "mergedAt": "2025-07-01T14:27:17Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "df5e6d5946199db17293ed6b9da2a5ad1ef9e524"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6792,7 +6794,7 @@
             "abbreviatedOid": "6afd7cb"
           },
           "author": "copilot-pull-request-reviewer",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "## Pull Request Overview\n\nThis PR standardizes HTTP example blocks by consistently renaming \u201cPayload\u201d to \u201cBody,\u201d correcting header formatting, and fixing status reason\u2010phrase casing.\n\n- Standardize HTTP status lines to use \u201cOK\u201d instead of \u201cOk.\u201d\n- Rename \u201cPayload\u201d labels in CBOR diagnostic examples to \u201cBody.\u201d\n- Add missing `Content-Type:` prefixes in concise problem\u2010details examples and shorten sample `Location` URLs.\n\n\n<details>\n<summary>Comments suppressed due to low confidence (1)</summary>\n\n**draft-ietf-scitt-scrapi.md:273**\n* [nitpick] The term 'Signed Statement' may not align with the rest of the spec terminology; consider using the defined term 'Payload' (or update all references consistently) to avoid confusion.\n```\nThis endpoint lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.\n```\n</details>\n\n",
           "createdAt": "2025-06-17T15:36:25Z",
@@ -6818,6 +6820,32 @@
           "createdAt": "2025-06-24T14:07:24Z",
           "updatedAt": "2025-06-24T14:07:24Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXQvh",
+          "commit": {
+            "abbreviatedOid": "2561b38"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T14:18:23Z",
+          "updatedAt": "2025-07-01T14:18:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXfn-",
+          "commit": {
+            "abbreviatedOid": "23bca44"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T14:27:19Z",
+          "updatedAt": "2025-07-01T14:27:19Z",
+          "comments": []
         }
       ]
     },
@@ -6826,24 +6854,26 @@
       "id": "PR_kwDOLJjbks6bpPj9",
       "title": "Media Type fix",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/72",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Resolves a TODO which no longer seems necessary. Drive-by on the way to #71.",
       "createdAt": "2025-06-23T11:01:13Z",
-      "updatedAt": "2025-06-24T14:10:07Z",
+      "updatedAt": "2025-07-01T14:22:59Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "problem_details_media_type",
       "headRefOid": "eaed77ff18c551faa96c4ed3eaf706b8bb0f685d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-07-01T14:22:59Z",
+      "mergedAt": "2025-07-01T14:22:59Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "5ef800b387cab5a75700221458c9b56bb768e41c"
+      },
       "comments": [
         {
           "author": "achamayou",
@@ -6899,6 +6929,32 @@
           "createdAt": "2025-06-24T14:10:07Z",
           "updatedAt": "2025-06-24T14:10:07Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXPM8",
+          "commit": {
+            "abbreviatedOid": "eaed77f"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T14:16:46Z",
+          "updatedAt": "2025-07-01T14:16:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXXqY",
+          "commit": {
+            "abbreviatedOid": "eaed77f"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T14:22:51Z",
+          "updatedAt": "2025-07-01T14:22:51Z",
+          "comments": []
         }
       ]
     },
@@ -6907,24 +6963,26 @@
       "id": "PR_kwDOLJjbks6bqPRT",
       "title": "Use COSE Hash Envelope in samples",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/73",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Adresses #55 and the rest of #43.",
       "createdAt": "2025-06-23T12:37:15Z",
-      "updatedAt": "2025-06-24T14:16:55Z",
+      "updatedAt": "2025-07-01T14:19:58Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "use_cose_hash_envelope_samples",
-      "headRefOid": "e6fcb6707b9d0d39ed5df58e90f3736bf4ab93c9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "71c4c803f61731a8e07db0b76b9d985dbdd3b52a",
+      "closedAt": "2025-07-01T14:19:58Z",
+      "mergedAt": "2025-07-01T14:19:58Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "dfc504a47e7776724ef103b92fd55238a5ee796a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6939,6 +6997,132 @@
           "createdAt": "2025-06-24T14:16:55Z",
           "updatedAt": "2025-06-24T14:16:55Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXJiq",
+          "commit": {
+            "abbreviatedOid": "e6fcb67"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T14:12:41Z",
+          "updatedAt": "2025-07-01T14:12:41Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXNkU",
+          "commit": {
+            "abbreviatedOid": "e6fcb67"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T14:15:11Z",
+          "updatedAt": "2025-07-01T14:15:11Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\n    / payload-hash-alg  / 258: -16, # sha-256\r\n```",
+              "createdAt": "2025-07-01T14:15:11Z",
+              "updatedAt": "2025-07-01T14:15:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXN9n",
+          "commit": {
+            "abbreviatedOid": "e6fcb67"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T14:15:30Z",
+          "updatedAt": "2025-07-01T14:15:30Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n    / preimage-content-type / 259: \"application/spdx+json\",\r\n```",
+              "createdAt": "2025-07-01T14:15:30Z",
+              "updatedAt": "2025-07-01T14:15:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXOYH",
+          "commit": {
+            "abbreviatedOid": "e6fcb67"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T14:15:52Z",
+          "updatedAt": "2025-07-01T14:15:52Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n    / payload-location / 260: \"https://.../manifest.json\"\r\n```",
+              "createdAt": "2025-07-01T14:15:52Z",
+              "updatedAt": "2025-07-01T14:15:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXPXU",
+          "commit": {
+            "abbreviatedOid": "10d7766"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T14:16:58Z",
+          "updatedAt": "2025-07-01T14:16:58Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "```suggestion\r\nA Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.\r\n```",
+              "createdAt": "2025-07-01T14:16:58Z",
+              "updatedAt": "2025-07-01T14:16:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXQb7",
+          "commit": {
+            "abbreviatedOid": "3b5ce6b"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T14:18:08Z",
+          "updatedAt": "2025-07-01T14:18:09Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n    / signature alg         / 1:  -35, # ES384\r\n    / key identifier        / 4:   h'75726e3a...32636573',\r\n    / cose sign1 type       / 16:  \"application/example+cose\",\r\n    / payload-hash-alg      / 258: -16, # sha-256\r\n    / preimage-content-type / 259: \"application/spdx+json\",\r\n    / payload-location      / 260: \"https://.../manifest.json\"\r\n```",
+              "createdAt": "2025-07-01T14:18:09Z",
+              "updatedAt": "2025-07-01T14:18:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXSi7",
+          "commit": {
+            "abbreviatedOid": "10d7766"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T14:19:52Z",
+          "updatedAt": "2025-07-01T14:19:52Z",
+          "comments": []
         }
       ]
     },
@@ -6947,24 +7131,26 @@
       "id": "PR_kwDOLJjbks6bqjCE",
       "title": "More consistent and representative receipt samples",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/74",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Noticed while doing #73 that the sample receipts were inconsistent, and in the case of the refresh endpoint, less illustrative than they could be. This PR should address both (minor) points.",
       "createdAt": "2025-06-23T13:04:36Z",
-      "updatedAt": "2025-06-24T14:19:58Z",
+      "updatedAt": "2025-07-01T14:20:10Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "7d73a1ab349b653e7a5b26cf89d882510d06b0c9",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "consistent_receipt_samples",
-      "headRefOid": "4735a4c0fa427322c77b014b1d0ef3ae6f2ba158",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "5cb7bcb5abe6543468ced7d7dfd8a0f54c9c7c33",
+      "closedAt": "2025-07-01T14:20:10Z",
+      "mergedAt": "2025-07-01T14:20:10Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "98716f39840e6123057d3a107ddebf489045341c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6979,8 +7165,170 @@
           "createdAt": "2025-06-24T14:19:58Z",
           "updatedAt": "2025-06-24T14:19:58Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXFBq",
+          "commit": {
+            "abbreviatedOid": "4735a4c"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T14:09:20Z",
+          "updatedAt": "2025-07-01T14:09:20Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "```suggestion\r\n18([                            / COSE Sign1         /\r\n  h'a1013822',                  / Protected Header   /\r\n  {},                           / Unprotected Header /\r\n  null,                         / Detached Payload   /\r\n  h'269cd68f4211dffc...0dcb29c' / Signature          /\r\n```",
+              "createdAt": "2025-07-01T14:09:20Z",
+              "updatedAt": "2025-07-01T14:09:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXGeu",
+          "commit": {
+            "abbreviatedOid": "ed918fd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T14:10:27Z",
+          "updatedAt": "2025-07-01T14:10:27Z",
+          "comments": [
+            {
+              "originalPosition": 87,
+              "body": "```suggestion\r\n      / iat     / 6 : 1750683311 # Pre-refresh\r\n```",
+              "createdAt": "2025-07-01T14:10:27Z",
+              "updatedAt": "2025-07-01T14:10:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXHRy",
+          "commit": {
+            "abbreviatedOid": "5cb7bcb"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T14:11:08Z",
+          "updatedAt": "2025-07-01T14:11:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xXHyF",
+          "commit": {
+            "abbreviatedOid": "5cb7bcb"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T14:11:26Z",
+          "updatedAt": "2025-07-01T14:11:26Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 75,
+      "id": "PR_kwDOLJjbks6c8dSR",
+      "title": "Adding Amaury as a Contributor",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/75",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-01T16:58:04Z",
+      "updatedAt": "2025-07-02T07:54:49Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "df5e6d5946199db17293ed6b9da2a5ad1ef9e524",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "contrib-Amaury",
+      "headRefOid": "50be948bd3b5157a251bba6b14c5f9069c5d16b3",
+      "closedAt": "2025-07-02T07:54:48Z",
+      "mergedAt": "2025-07-02T07:54:48Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "c00373514c423e6ba724aa02528a4c6507e3cab6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6xaSvC",
+          "commit": {
+            "abbreviatedOid": "50be948"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T17:55:20Z",
+          "updatedAt": "2025-07-01T17:55:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xaeDw",
+          "commit": {
+            "abbreviatedOid": "50be948"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-01T18:07:07Z",
+          "updatedAt": "2025-07-01T18:07:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6xgks8",
+          "commit": {
+            "abbreviatedOid": "50be948"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-02T07:46:58Z",
+          "updatedAt": "2025-07-02T07:46:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 76,
+      "id": "PR_kwDOLJjbks6dCdEY",
+      "title": "Updating Henk's Contact",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/76",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-02T08:12:28Z",
+      "updatedAt": "2025-07-02T08:14:10Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "f0f559bfce4c167521459731682eb33f3714066d",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "email-henk",
+      "headRefOid": "0003655ad5dd805f063e59997124434efbeceaf2",
+      "closedAt": "2025-07-02T08:14:10Z",
+      "mergedAt": "2025-07-02T08:14:10Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "80211459584b57b04f9215f33e64d40da9d14cc0"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
