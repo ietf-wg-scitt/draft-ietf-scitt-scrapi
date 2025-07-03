@@ -87,7 +87,7 @@ The SCITT Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and
 
 SCRAPI defines the operations necessary to support supply chain transparency using COSE {{RFC9052}}:
 
-- Issuances of Signed Statements
+- Issuance of Signed Statements
 - Registration of Signed Statements
 - Verification of Signed Statements
 - Issuance of Receipts
@@ -101,6 +101,7 @@ In addition to these operational HTTP endpoints, this specification defines supp
 - Retrieving Receipts Asynchronously
 - Retrieving Signed Statements from an Artifact Repository
 - Retrieving Statements from an Artifact Repository
+- Exchanging Receipts for refreshed Receipts
 
 ## Terminology
 
@@ -113,7 +114,7 @@ This specification uses "payload" as defined in {{RFC9052}}.
 # Endpoints
 
 Authentication is out of scope for this document.
-Implementations MAY authenticate clients, for example authorization or preventing denial of service attacks.
+Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.
 If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be implemented.
 
 All messages are sent as HTTP GET or POST requests.
@@ -126,8 +127,7 @@ If the Transparency Service cannot process a client's request, it MUST return ei
 - title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
 - detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
 
-NOTE: SCRAPI is not a CoAP API.
-Nonetheless Constrained Problem Details objects {{RFC9290}} provide a useful CBOR encoding for problem details and avoids the need for mixing CBOR and JSON in endpoint or client implementations.
+SCRAPI is not a CoAP API, but Constrained Problem Details objects {{RFC9290}} provide a useful encoding for problem details and avoid the need to mix CBOR and JSON in endpoint or client implementations.
 
 NOTE: Examples use '\\' line wrapping per {{RFC8792}}
 
@@ -510,7 +510,7 @@ Response:
 If the Receipt is found:
 
 ~~~ http-message
-HTTP/1.1 200 Ok
+HTTP/1.1 200 OK
 Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 
@@ -610,6 +610,7 @@ If a new Receipt can be issued for the given submitted Receipt:
 ~~~ http-message
 HTTP/1.1 200 OK
 Content-Type: application/cose
+Location: https://transparency.example/entries/67ed...befe
 
 Body (in CBOR diagnostic notation)
 
@@ -662,7 +663,7 @@ One of the following:
 #### Status 200 - Success
 
 ~~~ http-message
-HTTP/1.1 200 Ok
+HTTP/1.1 200 OK
 Content-Type: application/cose
 
 Body (in CBOR diagnostic notation)
@@ -746,7 +747,7 @@ Body (in CBOR diagnostic notation)
 A new Receipt:
 
 ~~~ http-message
-HTTP/1.1 200 Ok
+HTTP/1.1 200 OK
 Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 
@@ -796,7 +797,7 @@ Accept: application/json
 Response:
 
 ~~~ http-message
-HTTP/1.1 200 Ok
+HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
@@ -838,7 +839,7 @@ TODO
 
 This document describes the interoperable API for client calls to, and implementations of, a Transparency Service as specified in {{-SCITT-ARCH}}.
 As such the security considerations in this section are concerned only with security considerations that are relevant at that implementation layer.
-All questions of security of the related COSE formats, algorithm choices, cryptographic envelopes,verifiable data structures and the like are handled elsewhere and out of scope of this document.
+All questions of security of the related COSE formats, algorithm choices, cryptographic envelopes, verifiable data structures and the like are handled elsewhere and out of scope for this document.
 
 ## Applicable Environment
 
@@ -848,7 +849,7 @@ Thus, no assumptions can be made about the security of the computing environment
 ## User-host Authentication
 
 {{-SCITT-ARCH}} defines 2 distinct roles that require authentication:
-Issuers who sign Statements, and clients that submit API calls on behalf of Issuers.
+Issuers who sign Statements, and Clients that submit API calls on behalf of Issuers.
 While Issuer authentication and signing of Statements is very important for the trustworthiness of systems implementing the SCITT building blocks, it is out of scope of this document.
 This document is only concerned with authentication of API clients.
 
@@ -892,7 +893,7 @@ Modification attacks are mitigated by the use of the Issuer signature on the Sig
 
 #### Message Insertion Attacks
 
-Insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, therefore care must be taken in the protection of Issuer keys and credentials to avoid theft Issuer and impersonation.
+Insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, therefore care must be taken in the protection of Issuer keys and credentials to avoid theft and impersonation.
 
 Transparency Services MAY also implement additional protections such as anomaly detection or rate limiting in order to mitigate the impact of any breach.
 
@@ -904,28 +905,14 @@ Replay attacks are not particularly concerning for SCITT or SCRAPI:
 Once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
 There could be issues at the payload level (for instance, the statement "it is raining" may true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
 
-If the semantic content of the payload are time dependent and susceptible to replay attacks in this way then timestamps MAY be added to the protected header signed by the Issuer.
+If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps MAY be added to the protected header signed by the Issuer.
 
 #### Message Deletion Attacks
 
 Once registered with a Transparency Service, Registered Signed Statements cannot be deleted.
 Thus, any message deletion attack must occur prior to registration else it is indistinguishable from a man-in-the-middle or denial-of-service attack on this interface.
 
-# TODO
-
-TODO: Consider negotiation for Receipt as "JSON" or "YAML".
-TODO: Consider impact of media type on "Data URIs" and QR Codes.
-
 # IANA Considerations
-
-## Well-Known URI for Issuers
-
-The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
-
-URI suffix: issuer
-Change controller: IETF
-Specification document(s): RFCthis.
-Related information: N/A
 
 ## Well-Known URI for Transparency Configuration
 
@@ -937,32 +924,5 @@ Specification document(s): RFCthis.
 Related information: N/A
 
 TODO: Register them from here.
-
-## Media Type Registration
-
-This section requests registration of the "application/scitt.receipt+cose" media type {{RFC2046}} in the "Media Types" registry in the manner described in {{RFC6838}}.
-
-To indicate that the content is a SCITT Receipt:
-
-- Type name: application
-- Subtype name: scitt.receipt+cose
-- Required parameters: n/a
-- Optional parameters: n/a
-- Encoding considerations: TODO
-- Security considerations: TODO
-- Interoperability considerations: n/a
-- Published specification: this specification
-- Applications that use this media type: TBD
-- Fragment identifier considerations: n/a
-- Additional information:
-  - Magic number(s): n/a
-  - File extension(s): n/a
-  - Macintosh file type code(s): n/a
-- Person & email address to contact for further information: TODO
-- Intended usage: COMMON
-- Restrictions on usage: none
-- Author: TODO
-- Change Controller: IESG
-- Provisional registration?  No
 
 --- back
