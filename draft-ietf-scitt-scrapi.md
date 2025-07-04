@@ -39,6 +39,11 @@ author:
   organization: DataTrails Inc.
   email: jon.geater@datatrails.ai
   country: United States
+- ins: A. Chamayou
+  name: Amaury Chamayou
+  organization: Microsoft
+  email: amaury.chamayou@microsoft.com
+  country: United Kingdom
 
 contributor:
   - ins: O. Steele
@@ -48,13 +53,6 @@ contributor:
     country: United States
     contribution: >
       Orie contributed examples, text, and URN structure to early version of this draft.
-  - ins: A. Chamayou
-    name: Amaury Chamayou
-    organization: Microsoft
-    email: amaury.chamayou@microsoft.com
-    country: United Kingdom
-    contribution: >
-      Amaury contributed crucial content to ensure interoperability between implementations, improve example expressiveness and consistency, as well as overall document quality.
 
 normative:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
