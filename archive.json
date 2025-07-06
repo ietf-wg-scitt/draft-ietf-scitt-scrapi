@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-03T00:44:57.676063+00:00",
+  "timestamp": "2025-07-06T00:51:34.952005+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -7329,6 +7329,53 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 77,
+      "id": "PR_kwDOLJjbks6dTA49",
+      "title": "Cleanup pass",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/77",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Only contains editorial changes:\r\n\r\n1. Typo fixes, and grammatical corrections\r\n2. Missing top-level operation entry\r\n3. HTTP compliance, accidentally missing Location in one sample\r\n4. Removal of no-longer applicable contents (receipt formats other than COSE, Media Type registration now done in architecture) ",
+      "createdAt": "2025-07-03T16:11:04Z",
+      "updatedAt": "2025-07-03T16:33:13Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "80211459584b57b04f9215f33e64d40da9d14cc0",
+      "headRepository": "achamayou/draft-ietf-scitt-scrapi",
+      "headRefName": "cleanup_pass",
+      "headRefOid": "4ca527cbc391e780ae12164c0e04d8940ba917ec",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks6x2fcH",
+          "commit": {
+            "abbreviatedOid": "4ca527c"
+          },
+          "author": "copilot-pull-request-reviewer",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "## Pull Request Overview\n\nThis PR performs an editorial cleanup of the SCRAPI draft to fix typos/grammar, add a missing operation, ensure HTTP compliance, and remove outdated sections.\n\n- Corrected typos and grammatical inconsistencies across the spec  \n- Added a missing top-level operation and standardized HTTP samples (added Location headers, consistent status codes)  \n- Removed obsolete sections on non-COSE receipt formats and media type registrations\n\n\n<details>\n<summary>Comments suppressed due to low confidence (1)</summary>\n\n**draft-ietf-scitt-scrapi.md:104**\n* [nitpick] To align with the noun-phrase style of other operations, consider renaming this entry to 'Exchange of Receipts for Refreshed Receipts'.\n```\n- Exchanging Receipts for refreshed Receipts\n```\n</details>\n\n",
+          "createdAt": "2025-07-03T16:33:13Z",
+          "updatedAt": "2025-07-03T16:33:13Z",
+          "comments": [
+            {
+              "originalPosition": 94,
+              "body": "[nitpick] Consider using consistent capitalization for 'clients' (e.g., lowercase) to match earlier usage and maintain style consistency throughout the document.\n```suggestion\nIssuers who sign Statements, and clients that submit API calls on behalf of Issuers.\n```",
+              "createdAt": "2025-07-03T16:33:13Z",
+              "updatedAt": "2025-07-03T16:33:13Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
