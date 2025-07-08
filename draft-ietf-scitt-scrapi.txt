@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 3 January 2026                                  DataTrails Inc.
-                                                             2 July 2025
+Expires: 9 January 2026                                  DataTrails Inc.
+                                                             8 July 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 January 2026.
+   This Internet-Draft will expire on 9 January 2026.
 
 Copyright Notice
 
@@ -89,14 +89,11 @@ Table of Contents
      4.4.  Primary Threats
        4.4.1.  In Scope
        4.4.2.  Out of Scope
-   5.   TODO
-   6.  IANA Considerations
-     6.1.  Well-Known URI for Issuers
-     6.2.  Well-Known URI for Transparency Configuration
-     6.3.  Media Type Registration
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   5.  IANA Considerations
+     5.1.  Well-Known URI for Transparency Configuration
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
    Contributors
    Authors' Addresses
 
@@ -117,7 +114,7 @@ Table of Contents
    SCRAPI defines the operations necessary to support supply chain
    transparency using COSE [RFC9052]:
 
-   *  Issuances of Signed Statements
+   *  Issuance of Signed Statements
 
    *  Registration of Signed Statements
 
@@ -142,6 +139,8 @@ Table of Contents
 
    *  Retrieving Statements from an Artifact Repository
 
+   *  Exchanging Receipts for refreshed Receipts
+
 1.1.  Terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -160,10 +159,10 @@ Table of Contents
 2.  Endpoints
 
    Authentication is out of scope for this document.  Implementations
-   MAY authenticate clients, for example authorization or preventing
-   denial of service attacks.  If Authentication is not implemented,
-   rate limiting or other denial of service mitigation MUST be
-   implemented.
+   MAY authenticate clients, for example for the purposes of
+   authorization or preventing denial of service attacks.  If
+   Authentication is not implemented, rate limiting or other denial of
+   service mitigation MUST be implemented.
 
    All messages are sent as HTTP GET or POST requests.
 
@@ -186,10 +185,9 @@ Table of Contents
       depth, ideally with sufficient detail enabling the error to be
       rectified.
 
-   NOTE: SCRAPI is not a CoAP API.  Nonetheless Constrained Problem
-   Details objects [RFC9290] provide a useful CBOR encoding for problem
-   details and avoids the need for mixing CBOR and JSON in endpoint or
-   client implementations.
+   SCRAPI is not a CoAP API, but Constrained Problem Details objects
+   [RFC9290] provide a useful encoding for problem details and avoid the
+   need to mix CBOR and JSON in endpoint or client implementations.
 
    NOTE: Examples use '\' line wrapping per [RFC8792]
 
@@ -574,7 +572,7 @@ Table of Contents
 
    If the Receipt is found:
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
 
@@ -669,6 +667,7 @@ Table of Contents
 
    HTTP/1.1 200 OK
    Content-Type: application/cose
+   Location: https://transparency.example/entries/67ed...befe
 
    Body (in CBOR diagnostic notation)
 
@@ -721,7 +720,7 @@ Table of Contents
 
 2.2.2.1.  Status 200 - Success
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Content-Type: application/cose
 
    Body (in CBOR diagnostic notation)
@@ -804,7 +803,7 @@ Table of Contents
 
    A new Receipt:
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
 
@@ -852,7 +851,7 @@ Table of Contents
 
    Response:
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Content-Type: application/json
 
    {
@@ -897,8 +896,8 @@ Table of Contents
    considerations in this section are concerned only with security
    considerations that are relevant at that implementation layer.  All
    questions of security of the related COSE formats, algorithm choices,
-   cryptographic envelopes,verifiable data structures and the like are
-   handled elsewhere and out of scope of this document.
+   cryptographic envelopes, verifiable data structures and the like are
+   handled elsewhere and out of scope for this document.
 
 4.2.  Applicable Environment
 
@@ -911,7 +910,7 @@ Table of Contents
 4.3.  User-host Authentication
 
    [I-D.draft-ietf-scitt-architecture] defines 2 distinct roles that
-   require authentication: Issuers who sign Statements, and clients that
+   require authentication: Issuers who sign Statements, and Clients that
    submit API calls on behalf of Issuers.  While Issuer authentication
    and signing of Statements is very important for the trustworthiness
    of systems implementing the SCITT building blocks, it is out of scope
@@ -988,8 +987,7 @@ Table of Contents
 
    Insertion attacks are mitigated by the use of the Issuer signature on
    the Signed Statement, therefore care must be taken in the protection
-   of Issuer keys and credentials to avoid theft Issuer and
-   impersonation.
+   of Issuer keys and credentials to avoid theft and impersonation.
 
    Transparency Services MAY also implement additional protections such
    as anomaly detection or rate limiting in order to mitigate the impact
@@ -1007,7 +1005,7 @@ Table of Contents
    when replayed), but being payload-agnostic implementations of SCITT
    services cannot be required to worry about that.
 
-   If the semantic content of the payload are time dependent and
+   If the semantic content of the payload are time-dependent and
    susceptible to replay attacks in this way then timestamps MAY be
    added to the protected header signed by the Issuer.
 
@@ -1018,22 +1016,9 @@ Table of Contents
    occur prior to registration else it is indistinguishable from a man-
    in-the-middle or denial-of-service attack on this interface.
 
-5.   TODO
+5.  IANA Considerations
 
-   TODO: Consider negotiation for Receipt as "JSON" or "YAML".  TODO:
-   Consider impact of media type on "Data URIs" and QR Codes.
-
-6.  IANA Considerations
-
-6.1.  Well-Known URI for Issuers
-
-   The following value is requested to be registered in the "Well-Known
-   URIs" registry (using the template from [RFC8615]):
-
-   URI suffix: issuer Change controller: IETF Specification document(s):
-   RFCthis.  Related information: N/A
-
-6.2.  Well-Known URI for Transparency Configuration
+5.1.  Well-Known URI for Transparency Configuration
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
@@ -1043,65 +1028,12 @@ Table of Contents
 
    TODO: Register them from here.
 
-6.3.  Media Type Registration
+6.  References
 
-   This section requests registration of the "application/
-   scitt.receipt+cose" media type [RFC2046] in the "Media Types"
-   registry in the manner described in [RFC6838].
-
-   To indicate that the content is a SCITT Receipt:
-
-   *  Type name: application
-
-   *  Subtype name: scitt.receipt+cose
-
-   *  Required parameters: n/a
-
-   *  Optional parameters: n/a
-
-   *  Encoding considerations: TODO
-
-   *  Security considerations: TODO
-
-   *  Interoperability considerations: n/a
-
-   *  Published specification: this specification
-
-   *  Applications that use this media type: TBD
-
-   *  Fragment identifier considerations: n/a
-
-   *  Additional information:
-
-      -  Magic number(s): n/a
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
-
-   *  Person & email address to contact for further information: TODO
-
-   *  Intended usage: COMMON
-
-   *  Restrictions on usage: none
-
-   *  Author: TODO
-
-   *  Change Controller: IESG
-
-   *  Provisional registration?  No
-
-7.  References
-
-7.1.  Normative References
+6.1.  Normative References
 
    [I-D.draft-ietf-scitt-architecture]
-              Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
-              Y., and S. Lasker, "An Architecture for Trustworthy and
-              Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-13, 18 June
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-13>.
+              "*** BROKEN REFERENCE ***".
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1131,14 +1063,10 @@ Table of Contents
               DOI 10.17487/RFC9290, October 2022,
               <https://www.rfc-editor.org/rfc/rfc9290>.
 
-7.2.  Informative References
+6.2.  Informative References
 
    [I-D.draft-ietf-oauth-sd-jwt-vc]
-              Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
-              Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-09, 28 May
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-09>.
+              "*** BROKEN REFERENCE ***".
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
