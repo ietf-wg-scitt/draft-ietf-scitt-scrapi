@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-06T00:51:34.952005+00:00",
+  "timestamp": "2025-07-10T00:45:51.783906+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -7335,24 +7335,26 @@
       "id": "PR_kwDOLJjbks6dTA49",
       "title": "Cleanup pass",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/77",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Only contains editorial changes:\r\n\r\n1. Typo fixes, and grammatical corrections\r\n2. Missing top-level operation entry\r\n3. HTTP compliance, accidentally missing Location in one sample\r\n4. Removal of no-longer applicable contents (receipt formats other than COSE, Media Type registration now done in architecture) ",
       "createdAt": "2025-07-03T16:11:04Z",
-      "updatedAt": "2025-07-03T16:33:13Z",
+      "updatedAt": "2025-07-08T14:24:09Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "80211459584b57b04f9215f33e64d40da9d14cc0",
       "headRepository": "achamayou/draft-ietf-scitt-scrapi",
       "headRefName": "cleanup_pass",
       "headRefOid": "4ca527cbc391e780ae12164c0e04d8940ba917ec",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-07-08T14:24:09Z",
+      "mergedAt": "2025-07-08T14:24:09Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "5fddf4fdf40b2812d5bf6f57b3b96449957f0380"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7374,6 +7376,32 @@
               "updatedAt": "2025-07-03T16:33:13Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks6ysDJq",
+          "commit": {
+            "abbreviatedOid": "4ca527c"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-08T14:21:30Z",
+          "updatedAt": "2025-07-08T14:21:30Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks6ysEP2",
+          "commit": {
+            "abbreviatedOid": "4ca527c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "lgtm",
+          "createdAt": "2025-07-08T14:22:42Z",
+          "updatedAt": "2025-07-08T14:22:42Z",
+          "comments": []
         }
       ]
     }
