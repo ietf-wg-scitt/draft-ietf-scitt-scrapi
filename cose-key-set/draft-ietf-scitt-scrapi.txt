@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 2 January 2026                                  DataTrails Inc.
-                                                             1 July 2025
+Expires: 3 April 2026                                    DataTrails Inc.
+                                                       30 September 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2026.
+   This Internet-Draft will expire on 3 April 2026.
 
 Copyright Notice
 
@@ -73,9 +73,10 @@ Table of Contents
    2.  Endpoints
      2.1.  Mandatory
        2.1.1.  Transparency Configuration
-       2.1.2.  Register Signed Statement
-       2.1.3.  Query Registration Status
-       2.1.4.  Resolve Receipt
+       2.1.2.  Transparency Service Keys
+       2.1.3.  Register Signed Statement
+       2.1.4.  Query Registration Status
+       2.1.5.  Resolve Receipt
      2.2.  Optional Endpoints
        2.2.1.  Exchange Receipt
        2.2.2.  Resolve Signed Statement
@@ -89,14 +90,11 @@ Table of Contents
      4.4.  Primary Threats
        4.4.1.  In Scope
        4.4.2.  Out of Scope
-   5.   TODO
-   6.  IANA Considerations
-     6.1.  Well-Known URI for Issuers
-     6.2.  Well-Known URI for Transparency Configuration
-     6.3.  Media Type Registration
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   5.  IANA Considerations
+     5.1.  Well-Known URI for Transparency Configuration
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
    Contributors
    Authors' Addresses
 
@@ -117,7 +115,7 @@ Table of Contents
    SCRAPI defines the operations necessary to support supply chain
    transparency using COSE [RFC9052]:
 
-   *  Issuances of Signed Statements
+   *  Issuance of Signed Statements
 
    *  Registration of Signed Statements
 
@@ -142,6 +140,8 @@ Table of Contents
 
    *  Retrieving Statements from an Artifact Repository
 
+   *  Exchanging Receipts for refreshed Receipts
+
 1.1.  Terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -160,10 +160,10 @@ Table of Contents
 2.  Endpoints
 
    Authentication is out of scope for this document.  Implementations
-   MAY authenticate clients, for example authorization or preventing
-   denial of service attacks.  If Authentication is not implemented,
-   rate limiting or other denial of service mitigation MUST be
-   implemented.
+   MAY authenticate clients, for example for the purposes of
+   authorization or preventing denial of service attacks.  If
+   Authentication is not implemented, rate limiting or other denial of
+   service mitigation MUST be implemented.
 
    All messages are sent as HTTP GET or POST requests.
 
@@ -186,10 +186,9 @@ Table of Contents
       depth, ideally with sufficient detail enabling the error to be
       rectified.
 
-   NOTE: SCRAPI is not a CoAP API.  Nonetheless Constrained Problem
-   Details objects [RFC9290] provide a useful CBOR encoding for problem
-   details and avoids the need for mixing CBOR and JSON in endpoint or
-   client implementations.
+   SCRAPI is not a CoAP API, but Constrained Problem Details objects
+   [RFC9290] provide a useful encoding for problem details and avoid the
+   need to mix CBOR and JSON in endpoint or client implementations.
 
    NOTE: Examples use '\' line wrapping per [RFC8792]
 
@@ -251,13 +250,52 @@ Table of Contents
 
    {
      "issuer": "https://transparency.example",
-     "jwks_uri": "https://transparency.example/jwks"
+     "cose_keys_uri": "https://transparency.example/cose-keys"
    }
 
    Responses to this message are vendor-specific.  Fields that are not
    understood MUST be ignored.
 
-2.1.2.  Register Signed Statement
+2.1.2.  Transparency Service Keys
+
+   This endpoint is used to discover the public keys that can be used by
+   relying parties to verify Receipts issued by the Transparency
+   Service.
+
+   The Transparency Service responds with a COSE Key Set, as defined in
+   Section 7 of [RFC9052].
+
+   Request:
+
+   GET /cose-keys HTTP/1.1
+   Host: transparency.example
+   Accept: application/cbor
+
+   Response:
+
+   HTTP/1.1 200 OK
+   Content-Type: application/cbor
+
+   Body (in CBOR diagnostic notation)
+
+   [
+     {
+       -1:1,
+       -2:h'65eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d',
+       -3:h'1e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c',
+       1:2,
+       2:'kid1'
+     },
+     {
+       -1:1,
+       -2:h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
+       -3:h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e',
+       1:2,
+       2:'kid2'
+     }
+   ]
+
+2.1.3.  Register Signed Statement
 
    This endpoint instructs a Transparency Service to register a Signed
    Statement on its log.  Since log implementations may take many
@@ -304,7 +342,7 @@ Table of Contents
 
    One of the following:
 
-2.1.2.1.  Status 201 - Registration is successful
+2.1.3.1.  Status 201 - Registration is successful
 
    If the Transparency Service is able to produce a Receipt within a
    reasonable time, it MAY return it directly.
@@ -348,7 +386,7 @@ Table of Contents
    Receipts may be requested through the resource identified in the
    Location header.
 
-2.1.2.2.  Status 303 - Registration is running
+2.1.3.2.  Status 303 - Registration is running
 
    In cases where the registration request is accepted but the
    Transparency Service is not able to produce a Receipt in a reasonable
@@ -367,7 +405,7 @@ Table of Contents
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
 
-2.1.3.  Query Registration Status
+2.1.4.  Query Registration Status
 
    This endpoint lets a client query a Transparency Service for the
    registration status of a Signed Statement they have submitted
@@ -386,7 +424,7 @@ Table of Contents
 
    One of the following:
 
-2.1.3.1.  Status 302 - Registration is running
+2.1.4.1.  Status 302 - Registration is running
 
    Registration requests MAY fail, in which case the Location MAY return
    an error when queried.
@@ -407,7 +445,7 @@ Table of Contents
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
 
-2.1.3.2.  Status 200 - Asynchronous registration is successful
+2.1.4.2.  Status 200 - Asynchronous registration is successful
 
    Along with the receipt the Transparency Service MAY return a locator
    in the HTTP response Location header, provided the locator is a valid
@@ -467,7 +505,7 @@ Table of Contents
    Client <-- 200 (Transparent Statement)      --- TS
               Location: .../entries/final123
 
-2.1.3.3.  Status 400 - Invalid Client Request
+2.1.4.3.  Status 400 - Invalid Client Request
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -513,7 +551,7 @@ Table of Contents
              Registration Policy"
    }
 
-2.1.3.4.  Status 400 - Invalid Client Request
+2.1.4.4.  Status 400 - Invalid Client Request
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -526,7 +564,7 @@ Table of Contents
      / detail /        -2: "Operation locator is not in a valid form"
    }
 
-2.1.3.5.  Status 404 - Operation Not Found
+2.1.4.5.  Status 404 - Operation Not Found
 
    If no record of the specified running operation is found, the
    Transparency Service returns a 404 response.
@@ -541,7 +579,7 @@ Table of Contents
              "No running operation was found matching the requested ID"
    }
 
-2.1.3.6.  Status 429 - Too Many Requests
+2.1.4.6.  Status 429 - Too Many Requests
 
    If a client is polling for an in-progress registration too frequently
    then the Transparency Service MAY, in addition to implementing rate
@@ -558,7 +596,7 @@ Table of Contents
              "Only <number> requests per <period> are allowed."
    }
 
-2.1.4.  Resolve Receipt
+2.1.5.  Resolve Receipt
 
    Authentication SHOULD be implemented for this endpoint.
 
@@ -570,11 +608,11 @@ Table of Contents
 
    Response:
 
-2.1.4.1.  Status 200 - OK
+2.1.5.1.  Status 200 - OK
 
    If the Receipt is found:
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
 
@@ -605,7 +643,7 @@ Table of Contents
      / signature   / h'02d227ed...ccd3774f'
    ])
 
-2.1.4.2.  Status 404 - Not Found
+2.1.5.2.  Status 404 - Not Found
 
    If there is no Receipt found for the specified EntryID the
    Transparency Service returns a 404 response:
@@ -669,6 +707,7 @@ Table of Contents
 
    HTTP/1.1 200 OK
    Content-Type: application/cose
+   Location: https://transparency.example/entries/67ed...befe
 
    Body (in CBOR diagnostic notation)
 
@@ -721,7 +760,7 @@ Table of Contents
 
 2.2.2.1.  Status 200 - Success
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Content-Type: application/cose
 
    Body (in CBOR diagnostic notation)
@@ -804,7 +843,7 @@ Table of Contents
 
    A new Receipt:
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
 
@@ -852,7 +891,7 @@ Table of Contents
 
    Response:
 
-   HTTP/1.1 200 Ok
+   HTTP/1.1 200 OK
    Content-Type: application/json
 
    {
@@ -897,8 +936,8 @@ Table of Contents
    considerations in this section are concerned only with security
    considerations that are relevant at that implementation layer.  All
    questions of security of the related COSE formats, algorithm choices,
-   cryptographic envelopes,verifiable data structures and the like are
-   handled elsewhere and out of scope of this document.
+   cryptographic envelopes, verifiable data structures and the like are
+   handled elsewhere and out of scope for this document.
 
 4.2.  Applicable Environment
 
@@ -911,7 +950,7 @@ Table of Contents
 4.3.  User-host Authentication
 
    [I-D.draft-ietf-scitt-architecture] defines 2 distinct roles that
-   require authentication: Issuers who sign Statements, and clients that
+   require authentication: Issuers who sign Statements, and Clients that
    submit API calls on behalf of Issuers.  While Issuer authentication
    and signing of Statements is very important for the trustworthiness
    of systems implementing the SCITT building blocks, it is out of scope
@@ -988,8 +1027,7 @@ Table of Contents
 
    Insertion attacks are mitigated by the use of the Issuer signature on
    the Signed Statement, therefore care must be taken in the protection
-   of Issuer keys and credentials to avoid theft Issuer and
-   impersonation.
+   of Issuer keys and credentials to avoid theft and impersonation.
 
    Transparency Services MAY also implement additional protections such
    as anomaly detection or rate limiting in order to mitigate the impact
@@ -1007,7 +1045,7 @@ Table of Contents
    when replayed), but being payload-agnostic implementations of SCITT
    services cannot be required to worry about that.
 
-   If the semantic content of the payload are time dependent and
+   If the semantic content of the payload are time-dependent and
    susceptible to replay attacks in this way then timestamps MAY be
    added to the protected header signed by the Issuer.
 
@@ -1018,22 +1056,9 @@ Table of Contents
    occur prior to registration else it is indistinguishable from a man-
    in-the-middle or denial-of-service attack on this interface.
 
-5.   TODO
+5.  IANA Considerations
 
-   TODO: Consider negotiation for Receipt as "JSON" or "YAML".  TODO:
-   Consider impact of media type on "Data URIs" and QR Codes.
-
-6.  IANA Considerations
-
-6.1.  Well-Known URI for Issuers
-
-   The following value is requested to be registered in the "Well-Known
-   URIs" registry (using the template from [RFC8615]):
-
-   URI suffix: issuer Change controller: IETF Specification document(s):
-   RFCthis.  Related information: N/A
-
-6.2.  Well-Known URI for Transparency Configuration
+5.1.  Well-Known URI for Transparency Configuration
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
@@ -1043,65 +1068,17 @@ Table of Contents
 
    TODO: Register them from here.
 
-6.3.  Media Type Registration
+6.  References
 
-   This section requests registration of the "application/
-   scitt.receipt+cose" media type [RFC2046] in the "Media Types"
-   registry in the manner described in [RFC6838].
-
-   To indicate that the content is a SCITT Receipt:
-
-   *  Type name: application
-
-   *  Subtype name: scitt.receipt+cose
-
-   *  Required parameters: n/a
-
-   *  Optional parameters: n/a
-
-   *  Encoding considerations: TODO
-
-   *  Security considerations: TODO
-
-   *  Interoperability considerations: n/a
-
-   *  Published specification: this specification
-
-   *  Applications that use this media type: TBD
-
-   *  Fragment identifier considerations: n/a
-
-   *  Additional information:
-
-      -  Magic number(s): n/a
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
-
-   *  Person & email address to contact for further information: TODO
-
-   *  Intended usage: COMMON
-
-   *  Restrictions on usage: none
-
-   *  Author: TODO
-
-   *  Change Controller: IESG
-
-   *  Provisional registration?  No
-
-7.  References
-
-7.1.  Normative References
+6.1.  Normative References
 
    [I-D.draft-ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-13, 18 June
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-13>.
+              Internet-Draft, draft-ietf-scitt-architecture-21, 30
+              September 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-scitt-architecture-21>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1131,14 +1108,14 @@ Table of Contents
               DOI 10.17487/RFC9290, October 2022,
               <https://www.rfc-editor.org/rfc/rfc9290>.
 
-7.2.  Informative References
+6.2.  Informative References
 
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-09, 28 May
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-09>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-11, 15
+              September 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-oauth-sd-jwt-vc-11>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
@@ -1166,6 +1143,16 @@ Contributors
    Orie contributed examples, text, and URN structure to early version
    of this draft.
 
+   Amaury Chamayou
+   Microsoft
+   United Kingdom
+   Email: amaury.chamayou@microsoft.com
+
+
+   Amaury contributed crucial content to ensure interoperability between
+   implementations, improve example expressiveness and consistency, as
+   well as overall document quality.
+
 Authors' Addresses
 
    Henk Birkholz
@@ -1173,7 +1160,7 @@ Authors' Addresses
    Rheinstrasse 75
    64295 Darmstadt
    Germany
-   Email: henk.birkholz@sit.fraunhofer.de
+   Email: henk.birkholz@ietf.contact
 
 
    Jon Geater
