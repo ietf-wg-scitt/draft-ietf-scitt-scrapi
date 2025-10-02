@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-10T00:45:51.783906+00:00",
+  "timestamp": "2025-10-02T00:39:18.613028+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -7401,6 +7401,46 @@
           "body": "lgtm",
           "createdAt": "2025-07-08T14:22:42Z",
           "updatedAt": "2025-07-08T14:22:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 78,
+      "id": "PR_kwDOLJjbks6raq3J",
+      "title": "Proposal: COSE keys discovery endpoint",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/78",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is a late addition, but one that was discussed at IETF123 and seemed to receive positive feedback. It is strictly an addition, and does not have a normative impact on any other endpoints. The goal is to expand the interoperability window by covering key discovery from a TS, something that is current implementation-specific, and which verifiers have to implement per-TS.\r\n\r\nThere is an existing COSE Key Set format, defined in RFC9052, which is arguably a natural fit for an API that is almost pure COSE (except for CBOR error messages and the config endpoint)\r\n\r\nI would like to go a little further even, and define it as `.well-known/transparency-keys`, to separate it from the configuration. That would mean two well-known registration, but would avoid a request for a verifier that does not have the keys cached. Would that be too daring?",
+      "createdAt": "2025-09-30T20:13:35Z",
+      "updatedAt": "2025-09-30T21:04:48Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "5fddf4fdf40b2812d5bf6f57b3b96449957f0380",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "cose-key-set",
+      "headRefOid": "9d19a81593d9914db798254554719a9871212436",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7D50kb",
+          "commit": {
+            "abbreviatedOid": "9d19a81"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-30T21:04:48Z",
+          "updatedAt": "2025-09-30T21:04:48Z",
           "comments": []
         }
       ]
