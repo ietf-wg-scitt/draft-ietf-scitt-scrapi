@@ -170,7 +170,7 @@ Contents of bodies are informative examples only.
 Request:
 
 ~~~ http-message
-GET /.well-known/transparency-configuration HTTP/1.1
+GET /.well-known/scitt-configuration HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
 ~~~
@@ -184,8 +184,7 @@ Content-Type: application/cbor
 Body (in CBOR diagnostic notation)
 
 {
-  "issuer": "https://transparency.example",
-  "cose_keys_uri": "https://transparency.example/cose-keys"
+  "issuer": "https://transparency.example"
 }
 ~~~
 
@@ -201,7 +200,7 @@ The Transparency Service responds with a COSE Key Set, as defined in {{Section 7
 Request:
 
 ~~~ http-message
-GET /cose-keys HTTP/1.1
+GET /.well-known/scitt-keys HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
 ~~~
@@ -958,7 +957,12 @@ Thus, any message deletion attack must occur prior to registration else it is in
 
 The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
 
-URI suffix: transparency-configuration
+URI suffix: scitt-configuration
+Change controller: IETF
+Specification document(s): RFCthis.
+Related information: N/A
+
+URI suffix: scitt-keys
 Change controller: IETF
 Specification document(s): RFCthis.
 Related information: N/A
