@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 3 April 2026                                    DataTrails Inc.
-                                                       30 September 2025
+Expires: 10 April 2026                                   DataTrails Inc.
+                                                          7 October 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 April 2026.
+   This Internet-Draft will expire on 10 April 2026.
 
 Copyright Notice
 
@@ -237,7 +237,7 @@ Table of Contents
 
    Request:
 
-   GET /.well-known/transparency-configuration HTTP/1.1
+   GET /.well-known/scitt-configuration HTTP/1.1
    Host: transparency.example
    Accept: application/cbor
 
@@ -249,8 +249,7 @@ Table of Contents
    Body (in CBOR diagnostic notation)
 
    {
-     "issuer": "https://transparency.example",
-     "cose_keys_uri": "https://transparency.example/cose-keys"
+     "issuer": "https://transparency.example"
    }
 
    Responses to this message are vendor-specific.  Fields that are not
@@ -267,7 +266,7 @@ Table of Contents
 
    Request:
 
-   GET /cose-keys HTTP/1.1
+   GET /.well-known/scitt-keys HTTP/1.1
    Host: transparency.example
    Accept: application/cbor
 
@@ -1063,8 +1062,11 @@ Table of Contents
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
 
-   URI suffix: transparency-configuration Change controller: IETF
-   Specification document(s): RFCthis.  Related information: N/A
+   URI suffix: scitt-configuration Change controller: IETF Specification
+   document(s): RFCthis.  Related information: N/A
+
+   URI suffix: scitt-keys Change controller: IETF Specification
+   document(s): RFCthis.  Related information: N/A
 
    TODO: Register them from here.
 

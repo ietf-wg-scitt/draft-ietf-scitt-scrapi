@@ -27,7 +27,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
     PyYAML 6.0.2
     requests 2.32.5
     setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
 -->
 <link href="draft-ietf-scitt-scrapi.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1046,11 +1046,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SCRAPI</td>
-<td class="right">September 2025</td>
+<td class="right">October 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz &amp; Geater</td>
-<td class="center">Expires 3 April 2026</td>
+<td class="center">Expires 10 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-30" class="published">30 September 2025</time>
+<time datetime="2025-10-07" class="published">7 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-03">3 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-10">10 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1122,7 +1122,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1400,7 +1400,7 @@ These elements are Transparency-Service specific.<a href="#section-2.1.1-2" clas
 <p id="section-2.1.1-4">Request:<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.1.1-5">
 <pre>
-GET /.well-known/transparency-configuration HTTP/1.1
+GET /.well-known/scitt-configuration HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
 </pre><a href="#section-2.1.1-5" class="pilcrow">¶</a>
@@ -1414,8 +1414,7 @@ Content-Type: application/cbor
 Body (in CBOR diagnostic notation)
 
 {
-  "issuer": "https://transparency.example",
-  "cose_keys_uri": "https://transparency.example/cose-keys"
+  "issuer": "https://transparency.example"
 }
 </pre><a href="#section-2.1.1-7" class="pilcrow">¶</a>
 </div>
@@ -1433,7 +1432,7 @@ Fields that are not understood <span class="bcp14">MUST</span> be ignored.<a hre
 <p id="section-2.1.2-3">Request:<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.1.2-4">
 <pre>
-GET /cose-keys HTTP/1.1
+GET /.well-known/scitt-keys HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
 </pre><a href="#section-2.1.2-4" class="pilcrow">¶</a>
@@ -2354,11 +2353,15 @@ Thus, any message deletion attack must occur prior to registration else it is in
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-well-known-uri-for-transpar" class="section-name selfRef">Well-Known URI for Transparency Configuration</a>
         </h3>
 <p id="section-5.1-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>):<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">URI suffix: transparency-configuration
+<p id="section-5.1-2">URI suffix: scitt-configuration
 Change controller: IETF
 Specification document(s): RFCthis.
 Related information: N/A<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">TODO: Register them from here.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">URI suffix: scitt-keys
+Change controller: IETF
+Specification document(s): RFCthis.
+Related information: N/A<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">TODO: Register them from here.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
