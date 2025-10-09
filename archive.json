@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-02T00:39:18.613028+00:00",
+  "timestamp": "2025-10-09T00:40:45.574568+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -7417,18 +7417,33 @@
       "labels": [],
       "body": "This is a late addition, but one that was discussed at IETF123 and seemed to receive positive feedback. It is strictly an addition, and does not have a normative impact on any other endpoints. The goal is to expand the interoperability window by covering key discovery from a TS, something that is current implementation-specific, and which verifiers have to implement per-TS.\r\n\r\nThere is an existing COSE Key Set format, defined in RFC9052, which is arguably a natural fit for an API that is almost pure COSE (except for CBOR error messages and the config endpoint)\r\n\r\nI would like to go a little further even, and define it as `.well-known/transparency-keys`, to separate it from the configuration. That would mean two well-known registration, but would avoid a request for a verifier that does not have the keys cached. Would that be too daring?",
       "createdAt": "2025-09-30T20:13:35Z",
-      "updatedAt": "2025-09-30T21:04:48Z",
+      "updatedAt": "2025-10-07T14:18:35Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "5fddf4fdf40b2812d5bf6f57b3b96449957f0380",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "cose-key-set",
-      "headRefOid": "9d19a81593d9914db798254554719a9871212436",
+      "headRefOid": "b3ce99b0db94ffde958f84684067231974c209dc",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Following @JAG-UK's input and discussion in the WG meeting, I am changing to `.well-known/scitt-keys` AND renaming `transparency-configuration` to `scitt-configuration` for consistency, and to address @JAG-UK's concern about the generic use of the word transparency. ",
+          "createdAt": "2025-10-07T14:16:01Z",
+          "updatedAt": "2025-10-07T14:16:01Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@OR13 a substantive change took place on this PR during the meeting just now, could you review again please?",
+          "createdAt": "2025-10-07T14:18:35Z",
+          "updatedAt": "2025-10-07T14:18:35Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLJjbks7D50kb",
@@ -7441,6 +7456,32 @@
           "body": "",
           "createdAt": "2025-09-30T21:04:48Z",
           "updatedAt": "2025-09-30T21:04:48Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7FTREb",
+          "commit": {
+            "abbreviatedOid": "9d19a81"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Approve the PR itself. \n\nWith reference to the accompanying comment, I'm not sure \".well-known/transparency-keys\" is a good place for this to live: there are other transparency systems on the Internet that are not SCITT so this seems a little too broad. \n\nPerhaps \".well-known/scitt-keys\"? It would be lovely to name it after the RFC number, but we'll only have that once it's all sealed up. ",
+          "createdAt": "2025-10-07T13:35:53Z",
+          "updatedAt": "2025-10-07T13:35:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7FT9Qa",
+          "commit": {
+            "abbreviatedOid": "b3ce99b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": ":+1:\r\n\r\nwith added consistency between. sciit-configuration and scitt-keys",
+          "createdAt": "2025-10-07T14:15:15Z",
+          "updatedAt": "2025-10-07T14:15:15Z",
           "comments": []
         }
       ]
