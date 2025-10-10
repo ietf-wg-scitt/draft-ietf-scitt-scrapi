@@ -170,7 +170,7 @@ Contents of bodies are informative examples only.
 Request:
 
 ~~~ http-message
-GET /.well-known/transparency-configuration HTTP/1.1
+GET /.well-known/scitt-configuration HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
 ~~~
@@ -184,13 +184,52 @@ Content-Type: application/cbor
 Body (in CBOR diagnostic notation)
 
 {
-  "issuer": "https://transparency.example",
-  "jwks_uri": "https://transparency.example/jwks"
+  "issuer": "https://transparency.example"
 }
 ~~~
 
 Responses to this message are vendor-specific.
 Fields that are not understood MUST be ignored.
+
+### Transparency Service Keys
+
+This endpoint is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.
+
+The Transparency Service responds with a COSE Key Set, as defined in {{Section 7 of RFC9052}}.
+
+Request:
+
+~~~ http-message
+GET /.well-known/scitt-keys HTTP/1.1
+Host: transparency.example
+Accept: application/cbor
+~~~
+
+Response:
+
+~~~ http-message
+HTTP/1.1 200 OK
+Content-Type: application/cbor
+
+Body (in CBOR diagnostic notation)
+
+[
+  {
+    -1:1,
+    -2:h'65eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d',
+    -3:h'1e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c',
+    1:2,
+    2:'kid1'
+  },
+  {
+    -1:1,
+    -2:h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
+    -3:h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e',
+    1:2,
+    2:'kid2'
+  }
+]
+~~~
 
 ### Register Signed Statement
 
@@ -918,7 +957,12 @@ Thus, any message deletion attack must occur prior to registration else it is in
 
 The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
 
-URI suffix: transparency-configuration
+URI suffix: scitt-configuration
+Change controller: IETF
+Specification document(s): RFCthis.
+Related information: N/A
+
+URI suffix: scitt-keys
 Change controller: IETF
 Specification document(s): RFCthis.
 Related information: N/A
