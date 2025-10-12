@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-09T00:40:45.574568+00:00",
+  "timestamp": "2025-10-12T00:42:57.256499+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -7410,24 +7410,26 @@
       "id": "PR_kwDOLJjbks6raq3J",
       "title": "Proposal: COSE keys discovery endpoint",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/78",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This is a late addition, but one that was discussed at IETF123 and seemed to receive positive feedback. It is strictly an addition, and does not have a normative impact on any other endpoints. The goal is to expand the interoperability window by covering key discovery from a TS, something that is current implementation-specific, and which verifiers have to implement per-TS.\r\n\r\nThere is an existing COSE Key Set format, defined in RFC9052, which is arguably a natural fit for an API that is almost pure COSE (except for CBOR error messages and the config endpoint)\r\n\r\nI would like to go a little further even, and define it as `.well-known/transparency-keys`, to separate it from the configuration. That would mean two well-known registration, but would avoid a request for a verifier that does not have the keys cached. Would that be too daring?",
       "createdAt": "2025-09-30T20:13:35Z",
-      "updatedAt": "2025-10-07T14:18:35Z",
+      "updatedAt": "2025-10-10T13:12:16Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "5fddf4fdf40b2812d5bf6f57b3b96449957f0380",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "cose-key-set",
       "headRefOid": "b3ce99b0db94ffde958f84684067231974c209dc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-10T13:12:16Z",
+      "mergedAt": "2025-10-10T13:12:16Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "bcfcc25278ada903239693c99453774cb233e7f0"
+      },
       "comments": [
         {
           "author": "achamayou",
@@ -7482,6 +7484,32 @@
           "body": ":+1:\r\n\r\nwith added consistency between. sciit-configuration and scitt-keys",
           "createdAt": "2025-10-07T14:15:15Z",
           "updatedAt": "2025-10-07T14:15:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7Fu8DW",
+          "commit": {
+            "abbreviatedOid": "b3ce99b"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-10-09T06:38:32Z",
+          "updatedAt": "2025-10-09T06:38:32Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7GENDA",
+          "commit": {
+            "abbreviatedOid": "b3ce99b"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-10T12:07:50Z",
+          "updatedAt": "2025-10-10T12:07:50Z",
           "comments": []
         }
       ]
