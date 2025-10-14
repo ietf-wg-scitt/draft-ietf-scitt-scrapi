@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T00:42:57.256499+00:00",
+  "timestamp": "2025-10-14T00:40:28.850260+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1398,6 +1398,22 @@
           "updatedAt": "2025-03-11T14:40:13Z"
         }
       ]
+    },
+    {
+      "number": 79,
+      "id": "I_kwDOLJjbks7REXwU",
+      "title": "Consider a pass with speckit",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/79",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/github/spec-kit\n\nEasy to point this at the architecture, and ask for its help in flushing out scrapi.\n\nIt will identify gaps and clean up consistency issues.\n\nIt can also pull in the right amount of context from the architecture or other references",
+      "createdAt": "2025-10-12T17:31:19Z",
+      "updatedAt": "2025-10-12T17:31:19Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
