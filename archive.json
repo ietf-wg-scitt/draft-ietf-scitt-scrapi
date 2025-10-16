@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-14T00:40:28.850260+00:00",
+  "timestamp": "2025-10-16T00:41:46.535023+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1411,9 +1411,17 @@
       "labels": [],
       "body": "https://github.com/github/spec-kit\n\nEasy to point this at the architecture, and ask for its help in flushing out scrapi.\n\nIt will identify gaps and clean up consistency issues.\n\nIt can also pull in the right amount of context from the architecture or other references",
       "createdAt": "2025-10-12T17:31:19Z",
-      "updatedAt": "2025-10-12T17:31:19Z",
+      "updatedAt": "2025-10-14T14:21:46Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Not sure speckit is really pointed in the right direction for this kind of work - I see it more like a headless Replit than a consistency chacker.\n\nA general pass with some other LLM might be good though: I like to use Claude/Cursor to do a pass for completeness/consistency of references etc. Would that achieve what you're looking for?",
+          "createdAt": "2025-10-14T14:21:46Z",
+          "updatedAt": "2025-10-14T14:21:46Z"
+        }
+      ]
     }
   ],
   "pulls": [
