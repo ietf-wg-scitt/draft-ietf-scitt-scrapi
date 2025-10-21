@@ -160,7 +160,7 @@ The following HTTP endpoints are mandatory to implement to enable conformance to
 
 ### Transparency Configuration
 
-This endpoint is used to discover the capabilities and current configuration of a transparency service implementing this specification.
+This endpoint is used to discover the capabilities and current configuration of a Transparency Service implementing this specification.
 
 The Transparency Service responds with a CBOR map of configuration elements.
 These elements are Transparency-Service specific.
