@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 13 April 2026                                   DataTrails Inc.
-                                                         10 October 2025
+Expires: 24 April 2026                                   DataTrails Inc.
+                                                         21 October 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2026.
+   This Internet-Draft will expire on 24 April 2026.
 
 Copyright Notice
 
@@ -227,7 +227,7 @@ Table of Contents
 2.1.1.  Transparency Configuration
 
    This endpoint is used to discover the capabilities and current
-   configuration of a transparency service implementing this
+   configuration of a Transparency Service implementing this
    specification.
 
    The Transparency Service responds with a CBOR map of configuration
@@ -1115,9 +1115,9 @@ Table of Contents
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-11, 15
-              September 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-oauth-sd-jwt-vc-11>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-12, 20 October
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              oauth-sd-jwt-vc-12>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
