@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-16T00:41:46.535023+00:00",
+  "timestamp": "2025-10-23T00:42:04.046208+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -7534,6 +7534,48 @@
           "body": "",
           "createdAt": "2025-10-10T12:07:50Z",
           "updatedAt": "2025-10-10T12:07:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "id": "PR_kwDOLJjbks6u3_z0",
+      "title": "Correct capitalization of 'Transparency Service'",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/80",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-21T15:47:22Z",
+      "updatedAt": "2025-10-21T19:10:10Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "bcfcc25278ada903239693c99453774cb233e7f0",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-1",
+      "headRefOid": "ee0251d17d870d28b8a061e7c5de51b5cb22fdf1",
+      "closedAt": "2025-10-21T19:10:09Z",
+      "mergedAt": "2025-10-21T19:10:09Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "32f205dfa4c95d4a74cfec9f39a616577fe0060a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7IZBiT",
+          "commit": {
+            "abbreviatedOid": "ee0251d"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-10-21T17:51:59Z",
+          "updatedAt": "2025-10-21T17:51:59Z",
           "comments": []
         }
       ]
