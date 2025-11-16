@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 10 April 2026                                   DataTrails Inc.
-                                                          7 October 2025
+Expires: 20 May 2026                                     DataTrails Inc.
+                                                        16 November 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 April 2026.
+   This Internet-Draft will expire on 20 May 2026.
 
 Copyright Notice
 
@@ -227,7 +227,7 @@ Table of Contents
 2.1.1.  Transparency Configuration
 
    This endpoint is used to discover the capabilities and current
-   configuration of a transparency service implementing this
+   configuration of a Transparency Service implementing this
    specification.
 
    The Transparency Service responds with a CBOR map of configuration
@@ -322,7 +322,11 @@ Table of Contents
        / cose sign1 type       / 16:  "application/example+cose",
        / payload-hash-alg      / 258: -16, # sha-256
        / preimage-content-type / 259: "application/spdx+json",
-       / payload-location      / 260: "https://.../manifest.json"
+       / payload-location      / 260: "https://.../manifest.json",
+       / CWT Claims            / 15: {
+         / Issuer  / 1: "transparency.vendor.example",
+         / Subject / 2: "vendor.product.example",
+       }
      }>>,                          / Protected Header                                     /
      {},                           / Unprotected Header                                   /
      h'935b5a91...e18a588a',       / Payload, sha-256 digest of file stored at Location   /
@@ -1078,9 +1082,9 @@ Table of Contents
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-21, 30
-              September 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-scitt-architecture-21>.
+              Internet-Draft, draft-ietf-scitt-architecture-22, 10
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-scitt-architecture-22>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1115,9 +1119,9 @@ Table of Contents
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-11, 15
-              September 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-oauth-sd-jwt-vc-11>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-13, 6 November
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              oauth-sd-jwt-vc-13>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
