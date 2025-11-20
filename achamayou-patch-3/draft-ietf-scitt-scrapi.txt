@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 20 May 2026                                     DataTrails Inc.
-                                                        16 November 2025
+Expires: 24 May 2026                                     DataTrails Inc.
+                                                        20 November 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 May 2026.
+   This Internet-Draft will expire on 24 May 2026.
 
 Copyright Notice
 
@@ -689,7 +689,7 @@ Table of Contents
        / claims / 15 : {
          / issuer  / 1 : "https://blue.example",
          / subject / 2 : "https://green.example/cli@v1.2.3",
-         / iat / 6: 1443944944
+         / iat / 6: 1443944944 # Pre-refresh
        },
      }>>,
      / unprotected / {
@@ -727,7 +727,7 @@ Table of Contents
        / claims / 15 : {
          / issuer  / 1 : "https://blue.example",
          / subject / 2 : "https://green.example/cli@v1.2.3",
-         / iat / 6: 2443944944,
+         / iat / 6: 2443944944, # Post-refresh
        },
      }>>,
      / unprotected / {
