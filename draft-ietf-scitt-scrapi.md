@@ -620,6 +620,7 @@ Request:
 POST receipt-exchange HTTP/1.1
 Host: transparency.example
 Accept: application/cose
+Content-Type: application/cose
 
 Body (in CBOR diagnostic notation)
 
