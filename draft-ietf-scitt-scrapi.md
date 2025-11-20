@@ -627,7 +627,7 @@ Body (in CBOR diagnostic notation)
     / claims / 15 : {
       / issuer  / 1 : "https://blue.example",
       / subject / 2 : "https://green.example/cli@v1.2.3",
-      / iat / 6: 1443944944
+      / iat / 6: 1443944944 # Pre-refresh
     },
   }>>,
   / unprotected / {
@@ -667,7 +667,7 @@ Body (in CBOR diagnostic notation)
     / claims / 15 : {
       / issuer  / 1 : "https://blue.example",
       / subject / 2 : "https://green.example/cli@v1.2.3",
-      / iat / 6: 2443944944,
+      / iat / 6: 2443944944, # Post-refresh
     },
   }>>,
   / unprotected / {
