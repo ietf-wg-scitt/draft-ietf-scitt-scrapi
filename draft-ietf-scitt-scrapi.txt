@@ -80,8 +80,7 @@ Table of Contents
      2.2.  Optional Endpoints
        2.2.1.  Exchange Receipt
        2.2.2.  Resolve Signed Statement
-       2.2.3.  Exchange Receipt
-       2.2.4.  Resolve Issuer
+       2.2.3.  Resolve Issuer
    3.  Privacy Considerations
    4.  Security Considerations
      4.1.  General Scope
@@ -666,6 +665,16 @@ Table of Contents
 
 2.2.1.  Exchange Receipt
 
+   This endpoint is used to exchange old or expiring Receipts for fresh
+   ones.
+
+   The iat, exp and kid claims can change each time a Receipt is
+   exchanged.
+
+   This means that fresh Receipts can have more recent issued at times,
+   further in the future expiration times, and be signed with new
+   signature algorithms.
+
    Authentication SHOULD be implemented for this endpoint.
 
    Request:
@@ -684,7 +693,7 @@ Table of Contents
        / claims / 15 : {
          / issuer  / 1 : "https://blue.example",
          / subject / 2 : "https://green.example/cli@v1.2.3",
-         / iat / 6: 1443944944
+         / iat / 6: 1443944944 # Pre-refresh
        },
      }>>,
      / unprotected / {
@@ -722,7 +731,7 @@ Table of Contents
        / claims / 15 : {
          / issuer  / 1 : "https://blue.example",
          / subject / 2 : "https://green.example/cli@v1.2.3",
-         / iat / 6: 2443944944,
+         / iat / 6: 2443944944, # Post-refresh
        },
      }>>,
      / unprotected / {
@@ -795,90 +804,7 @@ Table of Contents
    MAY be present.  Support for eventually consistent Receipts is
    implementation specific, and out of scope for this specification.
 
-2.2.3.  Exchange Receipt
-
-   This endpoint is used to exchange old or expiring Receipts for fresh
-   ones.
-
-   The iat, exp and kid claims can change each time a Receipt is
-   exchanged.
-
-   This means that fresh Receipts can have more recent issued at times,
-   further in the future expiration times, and be signed with new
-   signature algorithms.
-
-   Request:
-
-   POST /exchange/receipt HTTP/1.1
-   Host: transparency.example
-   Accept: application/cose
-   Content-Type: application/cose
-
-   Body (in CBOR diagnostic notation)
-
-   / cose-sign1 / 18([
-     / protected   / <<{
-       / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-       / algorithm / 1 : -7,  # ES256
-       / vds       / 395 : 1, # RFC9162 SHA-256
-       / claims / 15 : {
-         / issuer  / 1 : "https://blue.notary.example",
-         / subject / 2 : "https://green.software.example/cli@v1.2.3",
-         / iat     / 6 : 1750683311 # Pre-refresh
-       },
-     }>>,
-     / unprotected / {
-       / proofs / 396 : {
-         / inclusion / -1 : [
-           <<[
-             / size / 9, / leaf / 8,
-             / inclusion path /
-             h'7558a95f...e02e35d6'
-           ]>>
-         ],
-       },
-     },
-     / payload     / null,
-     / signature   / h'02d227ed...ccd3774f'
-   ])
-
-2.2.3.1.  Status 200
-
-   A new Receipt:
-
-   HTTP/1.1 200 OK
-   Location: https://transparency.example/entries/67ed...befe
-   Content-Type: application/cose
-
-   Body (in CBOR diagnostic notation)
-
-   / cose-sign1 / 18([
-     / protected   / <<{
-       / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-       / algorithm / 1 : -7,  # ES256
-       / vds       / 395 : 1, # RFC9162 SHA-256
-       / claims / 15 : {
-         / issuer  / 1 : "https://blue.notary.example",
-         / subject / 2 : "https://green.software.example/cli@v1.2.3",
-         / iat     / 6 : 1750683573 # Post-refresh
-       },
-     }>>,
-     / unprotected / {
-       / proofs / 396 : {
-         / inclusion / -1 : [
-           <<[
-             / size / 9, / leaf / 8,
-             / inclusion path /
-             h'7558a95f...e02e35d6'
-           ]>>
-         ],
-       },
-     },
-     / payload     / null,
-     / signature   / h'48f67a8b...b474bb3a'
-   ])
-
-2.2.4.  Resolve Issuer
+2.2.3.  Resolve Issuer
 
    This endpoint is inspired by [I-D.draft-ietf-oauth-sd-jwt-vc].
 
