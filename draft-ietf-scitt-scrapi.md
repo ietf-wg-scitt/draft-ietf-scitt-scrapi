@@ -606,6 +606,12 @@ Content-Type: application/concise-problem-details+cbor
 
 ### Exchange Receipt
 
+This endpoint is used to exchange old or expiring Receipts for fresh ones.
+
+The `iat`, `exp` and `kid` claims can change each time a Receipt is exchanged.
+
+This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
+
 Authentication SHOULD be implemented for this endpoint.
 
 Request:
@@ -625,7 +631,7 @@ Body (in CBOR diagnostic notation)
     / claims / 15 : {
       / issuer  / 1 : "https://blue.example",
       / subject / 2 : "https://green.example/cli@v1.2.3",
-      / iat / 6: 1443944944
+      / iat / 6: 1443944944 # Pre-refresh
     },
   }>>,
   / unprotected / {
@@ -665,7 +671,7 @@ Body (in CBOR diagnostic notation)
     / claims / 15 : {
       / issuer  / 1 : "https://blue.example",
       / subject / 2 : "https://green.example/cli@v1.2.3",
-      / iat / 6: 2443944944,
+      / iat / 6: 2443944944, # Post-refresh
     },
   }>>,
   / unprotected / {
@@ -739,89 +745,6 @@ Content-Type: application/concise-problem-details+cbor
 
 For all responses additional eventually consistent operation details MAY be present.
 Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.
-
-### Exchange Receipt
-
-This endpoint is used to exchange old or expiring Receipts for fresh ones.
-
-The `iat`, `exp` and `kid` claims can change each time a Receipt is exchanged.
-
-This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
-
-Request:
-
-~~~ http-message
-POST /exchange/receipt HTTP/1.1
-Host: transparency.example
-Accept: application/cose
-Content-Type: application/cose
-
-Body (in CBOR diagnostic notation)
-
-/ cose-sign1 / 18([
-  / protected   / <<{
-    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-    / algorithm / 1 : -7,  # ES256
-    / vds       / 395 : 1, # RFC9162 SHA-256
-    / claims / 15 : {
-      / issuer  / 1 : "https://blue.notary.example",
-      / subject / 2 : "https://green.software.example/cli@v1.2.3",
-      / iat     / 6 : 1750683311 # Pre-refresh
-    },
-  }>>,
-  / unprotected / {
-    / proofs / 396 : {
-      / inclusion / -1 : [
-        <<[
-          / size / 9, / leaf / 8,
-          / inclusion path /
-          h'7558a95f...e02e35d6'
-        ]>>
-      ],
-    },
-  },
-  / payload     / null,
-  / signature   / h'02d227ed...ccd3774f'
-])
-~~~
-
-#### Status 200
-
-A new Receipt:
-
-~~~ http-message
-HTTP/1.1 200 OK
-Location: https://transparency.example/entries/67ed...befe
-Content-Type: application/cose
-
-Body (in CBOR diagnostic notation)
-
-/ cose-sign1 / 18([
-  / protected   / <<{
-    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-    / algorithm / 1 : -7,  # ES256
-    / vds       / 395 : 1, # RFC9162 SHA-256
-    / claims / 15 : {
-      / issuer  / 1 : "https://blue.notary.example",
-      / subject / 2 : "https://green.software.example/cli@v1.2.3",
-      / iat     / 6 : 1750683573 # Post-refresh
-    },
-  }>>,
-  / unprotected / {
-    / proofs / 396 : {
-      / inclusion / -1 : [
-        <<[
-          / size / 9, / leaf / 8,
-          / inclusion path /
-          h'7558a95f...e02e35d6'
-        ]>>
-      ],
-    },
-  },
-  / payload     / null,
-  / signature   / h'48f67a8b...b474bb3a'
-])
-~~~
 
 ### Resolve Issuer
 
