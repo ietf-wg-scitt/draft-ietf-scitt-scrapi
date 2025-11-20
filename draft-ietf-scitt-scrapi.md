@@ -256,7 +256,11 @@ Body (in CBOR diagnostic notation)
     / cose sign1 type       / 16:  "application/example+cose",
     / payload-hash-alg      / 258: -16, # sha-256
     / preimage-content-type / 259: "application/spdx+json",
-    / payload-location      / 260: "https://.../manifest.json"
+    / payload-location      / 260: "https://.../manifest.json",
+    / CWT Claims            / 15: {
+      / Issuer  / 1: "vendor.example",
+      / Subject / 2: "vendor.product.example",
+    }
   }>>,                          / Protected Header                                     /
   {},                           / Unprotected Header                                   /
   h'935b5a91...e18a588a',       / Payload, sha-256 digest of file stored at Location   /
