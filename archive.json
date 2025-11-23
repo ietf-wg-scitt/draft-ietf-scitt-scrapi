@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-20T00:43:01.966827+00:00",
+  "timestamp": "2025-11-23T00:51:55.976985+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -7585,24 +7585,26 @@
       "id": "PR_kwDOLJjbks6zugGo",
       "title": "Add CWT claims to registration endpoint sample",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/81",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Spotted as missing by Dick Brooks:\r\n\r\n> The Receipt, https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-05.html#section-2.1.3.2  for a signed statement contains subject information, but I didn\u2019t find this in the header information in the registration request, https://www.ietf.org/archive/id/draft-ietf-scitt-scrapi-05.html#section-2.1.2 , so I\u2019m assuming this must be the subject information from the digital certificate used to sign the statement.",
       "createdAt": "2025-11-16T16:35:17Z",
-      "updatedAt": "2025-11-18T19:17:26Z",
+      "updatedAt": "2025-11-20T10:48:14Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "32f205dfa4c95d4a74cfec9f39a616577fe0060a",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "achamayou-patch-2",
       "headRefOid": "ebaf5ac80f91bab3b4fbeeb178fa89169d784d1e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-20T10:48:14Z",
+      "mergedAt": "2025-11-20T10:48:14Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "8c65cca009c6922cda764205fae097f3e8da8764"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7645,24 +7647,26 @@
       "id": "PR_kwDOLJjbks6zug2t",
       "title": "Merge Exchange Receipt endpoint details",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/82",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "There were two separate entries for the exchange receipt endpoint, which are overlapped generously. This PR merges them.",
       "createdAt": "2025-11-16T16:39:10Z",
-      "updatedAt": "2025-11-18T20:49:33Z",
+      "updatedAt": "2025-11-20T10:57:41Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "32f205dfa4c95d4a74cfec9f39a616577fe0060a",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "achamayou-patch-3",
-      "headRefOid": "cc64fe15e439c03160279c1afdefb7ae7827a16d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "fe609969263e5c8f1880cd005ea12337b0419a71",
+      "closedAt": "2025-11-20T10:57:40Z",
+      "mergedAt": "2025-11-20T10:57:40Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "a49431e38aafa574c499ba12dc47fdc1590c5adb"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7704,6 +7708,81 @@
               "updatedAt": "2025-11-18T20:49:33Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7P2LFU",
+          "commit": {
+            "abbreviatedOid": "fe60996"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-20T10:50:06Z",
+          "updatedAt": "2025-11-20T10:50:06Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Updated the comment, @henkbirkholz please check",
+              "createdAt": "2025-11-20T10:50:06Z",
+              "updatedAt": "2025-11-20T10:50:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7P2OxW",
+          "commit": {
+            "abbreviatedOid": "fe60996"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-20T10:52:33Z",
+          "updatedAt": "2025-11-20T10:52:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 83,
+      "id": "PR_kwDOLJjbks60kNGk",
+      "title": "Add Content-Type header to receipt-exchange request",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/83",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Added Content-Type header to HTTP POST request example.",
+      "createdAt": "2025-11-20T10:59:36Z",
+      "updatedAt": "2025-11-20T11:04:33Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a49431e38aafa574c499ba12dc47fdc1590c5adb",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-4",
+      "headRefOid": "c5bb00ad2e914a771ef13773ba5110f69f3f12b7",
+      "closedAt": "2025-11-20T11:04:33Z",
+      "mergedAt": "2025-11-20T11:04:33Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "2ea071e87a571aacf0cdf595a45b7fe0c2eaaf91"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7P2eu1",
+          "commit": {
+            "abbreviatedOid": "c5bb00a"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-20T11:03:44Z",
+          "updatedAt": "2025-11-20T11:03:44Z",
+          "comments": []
         }
       ]
     }
