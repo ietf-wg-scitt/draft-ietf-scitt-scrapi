@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 24 April 2026                                   DataTrails Inc.
-                                                         21 October 2025
+Expires: 5 June 2026                                     DataTrails Inc.
+                                                         2 December 2025
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2026.
+   This Internet-Draft will expire on 5 June 2026.
 
 Copyright Notice
 
@@ -80,8 +80,7 @@ Table of Contents
      2.2.  Optional Endpoints
        2.2.1.  Exchange Receipt
        2.2.2.  Resolve Signed Statement
-       2.2.3.  Exchange Receipt
-       2.2.4.  Resolve Issuer
+       2.2.3.  Resolve Issuer
    3.  Privacy Considerations
    4.  Security Considerations
      4.1.  General Scope
@@ -322,7 +321,11 @@ Table of Contents
        / cose sign1 type       / 16:  "application/example+cose",
        / payload-hash-alg      / 258: -16, # sha-256
        / preimage-content-type / 259: "application/spdx+json",
-       / payload-location      / 260: "https://.../manifest.json"
+       / payload-location      / 260: "https://.../manifest.json",
+       / CWT Claims            / 15: {
+         / Issuer  / 1: "vendor.example",
+         / Subject / 2: "vendor.product.example",
+       }
      }>>,                          / Protected Header                                     /
      {},                           / Unprotected Header                                   /
      h'935b5a91...e18a588a',       / Payload, sha-256 digest of file stored at Location   /
@@ -403,6 +406,60 @@ Table of Contents
 
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
+
+2.1.3.3.  Status 400 - Invalid Client Request
+
+   The following expected errors are defined.  Implementations MAY
+   return other errors, so long as they are valid [RFC9290] objects.
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/concise-problem-details+cbor
+
+   {
+     / title /         -1: \
+             "Bad Signature Algorithm",
+     / detail /        -2: \
+             "Signed Statement contained a non supported algorithm"
+   }
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/concise-problem-details+cbor
+
+   {
+     / title /         -1: "\
+             Confirmation Missing",
+     / detail /        -2: \
+             "Signed Statement did not contain proof of possession"
+   }
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/concise-problem-details+cbor
+
+   {
+     / title /         -1: \
+             "Payload Missing",
+     / detail /        -2: \
+             "Signed Statement payload must be present"
+   }
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/concise-problem-details+cbor
+
+   {
+     / title /         -1: \
+             "Rejected",
+     / detail /        -2: \
+             "Signed Statement not accepted by the current\
+             Registration Policy"
+   }
+
+   HTTP/1.1 400 Bad Request
+   Content-Type: application/concise-problem-details+cbor
+
+   {
+     / title /         -1: "Invalid locator",
+     / detail /        -2: "Operation locator is not in a valid form"
+   }
 
 2.1.4.  Query Registration Status
 
@@ -550,11 +607,6 @@ Table of Contents
              Registration Policy"
    }
 
-2.1.4.4.  Status 400 - Invalid Client Request
-
-   The following expected errors are defined.  Implementations MAY
-   return other errors, so long as they are valid [RFC9290] objects.
-
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
 
@@ -563,7 +615,7 @@ Table of Contents
      / detail /        -2: "Operation locator is not in a valid form"
    }
 
-2.1.4.5.  Status 404 - Operation Not Found
+2.1.4.4.  Status 404 - Operation Not Found
 
    If no record of the specified running operation is found, the
    Transparency Service returns a 404 response.
@@ -578,7 +630,7 @@ Table of Contents
              "No running operation was found matching the requested ID"
    }
 
-2.1.4.6.  Status 429 - Too Many Requests
+2.1.4.5.  Status 429 - Too Many Requests
 
    If a client is polling for an in-progress registration too frequently
    then the Transparency Service MAY, in addition to implementing rate
@@ -662,6 +714,16 @@ Table of Contents
 
 2.2.1.  Exchange Receipt
 
+   This endpoint is used to exchange old or expiring Receipts for fresh
+   ones.
+
+   The iat, exp and kid claims can change each time a Receipt is
+   exchanged.
+
+   This means that fresh Receipts can have more recent issued at times,
+   further in the future expiration times, and be signed with new
+   signature algorithms.
+
    Authentication SHOULD be implemented for this endpoint.
 
    Request:
@@ -669,6 +731,7 @@ Table of Contents
    POST receipt-exchange HTTP/1.1
    Host: transparency.example
    Accept: application/cose
+   Content-Type: application/cose
 
    Body (in CBOR diagnostic notation)
 
@@ -680,7 +743,7 @@ Table of Contents
        / claims / 15 : {
          / issuer  / 1 : "https://blue.example",
          / subject / 2 : "https://green.example/cli@v1.2.3",
-         / iat / 6: 1443944944
+         / iat / 6: 1443944944 # Pre-refresh
        },
      }>>,
      / unprotected / {
@@ -718,7 +781,7 @@ Table of Contents
        / claims / 15 : {
          / issuer  / 1 : "https://blue.example",
          / subject / 2 : "https://green.example/cli@v1.2.3",
-         / iat / 6: 2443944944,
+         / iat / 6: 2443944944, # Post-refresh
        },
      }>>,
      / unprotected / {
@@ -791,90 +854,7 @@ Table of Contents
    MAY be present.  Support for eventually consistent Receipts is
    implementation specific, and out of scope for this specification.
 
-2.2.3.  Exchange Receipt
-
-   This endpoint is used to exchange old or expiring Receipts for fresh
-   ones.
-
-   The iat, exp and kid claims can change each time a Receipt is
-   exchanged.
-
-   This means that fresh Receipts can have more recent issued at times,
-   further in the future expiration times, and be signed with new
-   signature algorithms.
-
-   Request:
-
-   POST /exchange/receipt HTTP/1.1
-   Host: transparency.example
-   Accept: application/cose
-   Content-Type: application/cose
-
-   Body (in CBOR diagnostic notation)
-
-   / cose-sign1 / 18([
-     / protected   / <<{
-       / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-       / algorithm / 1 : -7,  # ES256
-       / vds       / 395 : 1, # RFC9162 SHA-256
-       / claims / 15 : {
-         / issuer  / 1 : "https://blue.notary.example",
-         / subject / 2 : "https://green.software.example/cli@v1.2.3",
-         / iat     / 6 : 1750683311 # Pre-refresh
-       },
-     }>>,
-     / unprotected / {
-       / proofs / 396 : {
-         / inclusion / -1 : [
-           <<[
-             / size / 9, / leaf / 8,
-             / inclusion path /
-             h'7558a95f...e02e35d6'
-           ]>>
-         ],
-       },
-     },
-     / payload     / null,
-     / signature   / h'02d227ed...ccd3774f'
-   ])
-
-2.2.3.1.  Status 200
-
-   A new Receipt:
-
-   HTTP/1.1 200 OK
-   Location: https://transparency.example/entries/67ed...befe
-   Content-Type: application/cose
-
-   Body (in CBOR diagnostic notation)
-
-   / cose-sign1 / 18([
-     / protected   / <<{
-       / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-       / algorithm / 1 : -7,  # ES256
-       / vds       / 395 : 1, # RFC9162 SHA-256
-       / claims / 15 : {
-         / issuer  / 1 : "https://blue.notary.example",
-         / subject / 2 : "https://green.software.example/cli@v1.2.3",
-         / iat     / 6 : 1750683573 # Post-refresh
-       },
-     }>>,
-     / unprotected / {
-       / proofs / 396 : {
-         / inclusion / -1 : [
-           <<[
-             / size / 9, / leaf / 8,
-             / inclusion path /
-             h'7558a95f...e02e35d6'
-           ]>>
-         ],
-       },
-     },
-     / payload     / null,
-     / signature   / h'48f67a8b...b474bb3a'
-   ])
-
-2.2.4.  Resolve Issuer
+2.2.3.  Resolve Issuer
 
    This endpoint is inspired by [I-D.draft-ietf-oauth-sd-jwt-vc].
 
@@ -1115,9 +1095,9 @@ Table of Contents
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-12, 20 October
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-13, 6 November
               2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-12>.
+              oauth-sd-jwt-vc-13>.
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
