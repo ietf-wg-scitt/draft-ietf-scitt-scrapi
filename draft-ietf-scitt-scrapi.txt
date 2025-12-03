@@ -1043,12 +1043,12 @@ Table of Contents
    URIs" registry (using the template from [RFC8615]):
 
    URI suffix: scitt-configuration Change controller: IETF Specification
-   document(s): RFCthis.  Related information: N/A
+   document(s): RFCthis Status: Permanent Related information:
+   [I-D.draft-ietf-scitt-architecture]
 
    URI suffix: scitt-keys Change controller: IETF Specification
-   document(s): RFCthis.  Related information: N/A
-
-   TODO: Register them from here.
+   document(s): RFCthis Status: Permanent Related information:
+   [I-D.draft-ietf-scitt-architecture]
 
 6.  References
 
