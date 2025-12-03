@@ -1045,11 +1045,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SCRAPI</td>
-<td class="right">November 2025</td>
+<td class="right">December 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz &amp; Geater</td>
-<td class="center">Expires 24 May 2026</td>
+<td class="center">Expires 6 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-20" class="published">20 November 2025</time>
+<time datetime="2025-12-03" class="published">3 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-24">24 May 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-06">6 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1121,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1568,6 +1568,79 @@ Retry-After: &lt;seconds&gt;
 <p id="section-2.1.3.2-4">The Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header in the HTTP response to help with polling.<a href="#section-2.1.3.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="sec-status-400-invalid-client-request">
+<section id="section-2.1.3.3">
+            <h5 id="name-status-400-invalid-client-r">
+<a href="#section-2.1.3.3" class="section-number selfRef">2.1.3.3. </a><a href="#name-status-400-invalid-client-r" class="section-name selfRef">Status 400 - Invalid Client Request</a>
+            </h5>
+<p id="section-2.1.3.3-1">The following expected errors are defined.
+Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.1.3.3-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.3.3-2">
+<pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Bad Signature Algorithm",
+  / detail /        -2: \
+          "Signed Statement contained a non supported algorithm"
+}
+</pre><a href="#section-2.1.3.3-2" class="pilcrow">¶</a>
+</div>
+<div class="lang-http-message sourcecode" id="section-2.1.3.3-3">
+<pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: "\
+          Confirmation Missing",
+  / detail /        -2: \
+          "Signed Statement did not contain proof of possession"
+}
+</pre><a href="#section-2.1.3.3-3" class="pilcrow">¶</a>
+</div>
+<div class="lang-http-message sourcecode" id="section-2.1.3.3-4">
+<pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Payload Missing",
+  / detail /        -2: \
+          "Signed Statement payload must be present"
+}
+</pre><a href="#section-2.1.3.3-4" class="pilcrow">¶</a>
+</div>
+<div class="lang-http-message sourcecode" id="section-2.1.3.3-5">
+<pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Rejected",
+  / detail /        -2: \
+          "Signed Statement not accepted by the current\
+          Registration Policy"
+}
+</pre><a href="#section-2.1.3.3-5" class="pilcrow">¶</a>
+</div>
+<div class="lang-http-message sourcecode" id="section-2.1.3.3-6">
+<pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: "Invalid locator",
+  / detail /        -2: "Operation locator is not in a valid form"
+}
+</pre><a href="#section-2.1.3.3-6" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-query-registration-status">
@@ -1672,10 +1745,10 @@ Client &lt;-- 200 (Transparent Statement)      --- TS
 </div>
 </section>
 </div>
-<div id="sec-status-400-invalid-client-request">
+<div id="sec-status-400-invalid-client-request-1">
 <section id="section-2.1.4.3">
-            <h5 id="name-status-400-invalid-client-r">
-<a href="#section-2.1.4.3" class="section-number selfRef">2.1.4.3. </a><a href="#name-status-400-invalid-client-r" class="section-name selfRef">Status 400 - Invalid Client Request</a>
+            <h5 id="name-status-400-invalid-client-re">
+<a href="#section-2.1.4.3" class="section-number selfRef">2.1.4.3. </a><a href="#name-status-400-invalid-client-re" class="section-name selfRef">Status 400 - Invalid Client Request</a>
             </h5>
 <p id="section-2.1.4.3-1">The following expected errors are defined.
 Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.1.4.3-1" class="pilcrow">¶</a></p>
@@ -1732,16 +1805,7 @@ Content-Type: application/concise-problem-details+cbor
 }
 </pre><a href="#section-2.1.4.3-5" class="pilcrow">¶</a>
 </div>
-</section>
-</div>
-<div id="sec-status-400-invalid-client-request-1">
-<section id="section-2.1.4.4">
-            <h5 id="name-status-400-invalid-client-re">
-<a href="#section-2.1.4.4" class="section-number selfRef">2.1.4.4. </a><a href="#name-status-400-invalid-client-re" class="section-name selfRef">Status 400 - Invalid Client Request</a>
-            </h5>
-<p id="section-2.1.4.4-1">The following expected errors are defined.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.1.4.4-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.1.4.4-2">
+<div class="lang-http-message sourcecode" id="section-2.1.4.3-6">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1750,17 +1814,17 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: "Invalid locator",
   / detail /        -2: "Operation locator is not in a valid form"
 }
-</pre><a href="#section-2.1.4.4-2" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.4.3-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-status-404-operation-not-found">
-<section id="section-2.1.4.5">
+<section id="section-2.1.4.4">
             <h5 id="name-status-404-operation-not-fo">
-<a href="#section-2.1.4.5" class="section-number selfRef">2.1.4.5. </a><a href="#name-status-404-operation-not-fo" class="section-name selfRef">Status 404 - Operation Not Found</a>
+<a href="#section-2.1.4.4" class="section-number selfRef">2.1.4.4. </a><a href="#name-status-404-operation-not-fo" class="section-name selfRef">Status 404 - Operation Not Found</a>
             </h5>
-<p id="section-2.1.4.5-1">If no record of the specified running operation is found, the Transparency Service returns a 404 response.<a href="#section-2.1.4.5-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.1.4.5-2">
+<p id="section-2.1.4.4-1">If no record of the specified running operation is found, the Transparency Service returns a 404 response.<a href="#section-2.1.4.4-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.4.4-2">
 <pre>
 HTTP/1.1 404 Not Found
 Content-Type: application/concise-problem-details+cbor
@@ -1771,17 +1835,17 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: \
           "No running operation was found matching the requested ID"
 }
-</pre><a href="#section-2.1.4.5-2" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.4.4-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-status-429-too-many-requests">
-<section id="section-2.1.4.6">
+<section id="section-2.1.4.5">
             <h5 id="name-status-429-too-many-request">
-<a href="#section-2.1.4.6" class="section-number selfRef">2.1.4.6. </a><a href="#name-status-429-too-many-request" class="section-name selfRef">Status 429 - Too Many Requests</a>
+<a href="#section-2.1.4.5" class="section-number selfRef">2.1.4.5. </a><a href="#name-status-429-too-many-request" class="section-name selfRef">Status 429 - Too Many Requests</a>
             </h5>
-<p id="section-2.1.4.6-1">If a client is polling for an in-progress registration too frequently then the Transparency Service <span class="bcp14">MAY</span>, in addition to implementing rate limiting, return a 429 response:<a href="#section-2.1.4.6-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.1.4.6-2">
+<p id="section-2.1.4.5-1">If a client is polling for an in-progress registration too frequently then the Transparency Service <span class="bcp14">MAY</span>, in addition to implementing rate limiting, return a 429 response:<a href="#section-2.1.4.5-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.1.4.5-2">
 <pre>
 HTTP/1.1 429 Too Many Requests
 Content-Type: application/concise-problem-details+cbor
@@ -1793,7 +1857,7 @@ Retry-After: &lt;seconds&gt;
   / detail /        -2: \
           "Only &lt;number&gt; requests per &lt;period&gt; are allowed."
 }
-</pre><a href="#section-2.1.4.6-2" class="pilcrow">¶</a>
+</pre><a href="#section-2.1.4.5-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
