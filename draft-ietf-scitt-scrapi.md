@@ -69,6 +69,9 @@ informative:
   RFC6838:
   RFC8792:
 
+entity:
+  SELF: "RFCthis"
+
 --- abstract
 
 This document describes a REST API that supports the normative requirements of the SCITT Architecture.
@@ -887,13 +890,13 @@ The following value is requested to be registered in the "Well-Known URIs" regis
 
 URI suffix: scitt-configuration
 Change controller: IETF
-Specification document(s): RFCthis
+Specification document(s): {{&SELF}}
 Status: Permanent
 Related information: {{-SCITT-ARCH}}
 
 URI suffix: scitt-keys
 Change controller: IETF
-Specification document(s): RFCthis
+Specification document(s): {{&SELF}}
 Status: Permanent
 Related information: {{-SCITT-ARCH}}
 
