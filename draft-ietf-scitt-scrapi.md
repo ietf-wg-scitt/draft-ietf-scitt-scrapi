@@ -335,6 +335,70 @@ The location MAY be temporary, and the service may not serve a relevant response
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
+#### Status 400 - Invalid Client Request
+
+The following expected errors are defined.
+Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+
+~~~ http-message
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Bad Signature Algorithm",
+  / detail /        -2: \
+          "Signed Statement contained a non supported algorithm"
+}
+~~~
+
+~~~ http-message
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: "\
+          Confirmation Missing",
+  / detail /        -2: \
+          "Signed Statement did not contain proof of possession"
+}
+~~~
+
+~~~ http-message
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Payload Missing",
+  / detail /        -2: \
+          "Signed Statement payload must be present"
+}
+~~~
+
+~~~ http-message
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Rejected",
+  / detail /        -2: \
+          "Signed Statement not accepted by the current\
+          Registration Policy"
+}
+~~~
+
+~~~ http-message
+HTTP/1.1 400 Bad Request
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: "Invalid locator",
+  / detail /        -2: "Operation locator is not in a valid form"
+}
+~~~
+
 ### Query Registration Status
 
 This endpoint lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
@@ -485,11 +549,6 @@ Content-Type: application/concise-problem-details+cbor
           Registration Policy"
 }
 ~~~
-
-#### Status 400 - Invalid Client Request
-
-The following expected errors are defined.
-Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
