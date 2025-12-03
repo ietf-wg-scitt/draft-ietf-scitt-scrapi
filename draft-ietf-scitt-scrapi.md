@@ -860,7 +860,7 @@ Content-Type: application/json
 
 # Privacy Considerations
 
-TODO
+The privacy considerations section of {{-SCITT-ARCH}} applies to this document.
 
 # Security Considerations
 
