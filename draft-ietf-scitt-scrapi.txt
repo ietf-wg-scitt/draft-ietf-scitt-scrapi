@@ -903,7 +903,8 @@ Table of Contents
 
 3.  Privacy Considerations
 
-   TODO
+   The privacy considerations section of
+   [I-D.draft-ietf-scitt-architecture] applies to this document.
 
 4.  Security Considerations
 
