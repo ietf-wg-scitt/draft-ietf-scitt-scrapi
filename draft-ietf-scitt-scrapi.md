@@ -191,8 +191,7 @@ Body (in CBOR diagnostic notation)
 }
 ~~~
 
-Responses to this message are vendor-specific.
-Fields that are not understood MUST be ignored.
+Responses to this message are vendor-specific, and out of the scope of this document.
 
 ### Transparency Service Keys
 
