@@ -163,7 +163,7 @@ The following HTTP endpoints are mandatory to implement to enable conformance to
 
 ### Transparency Configuration
 
-This endpoint is used to discover the capabilities and current configuration of a Transparency Service implementing this specification.
+This endpoint is used to discover the capabilities and current configuration of a Transparency Service implementing this specification. A configuration file contains specific relative URL endpoints along with details of specific registration policies which are enforced when using the endpoint. Each endpoint entry in a configuration file contains an endpoint relative URL, Access Control indicator and an absolute URL to the specific Registration Policy enforced at this endpoint. 
 
 The Transparency Service responds with a CBOR map of configuration elements.
 These elements are Transparency-Service specific.
@@ -189,6 +189,32 @@ Body (in CBOR diagnostic notation)
 {
   "issuer": "https://transparency.example"
 }
+{
+  "endpointURL": "/register",
+  "accesscontrol": "NONE",
+  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#default"
+}
+{
+  "endpointURL": "/register-SBOM",
+  "accesscontrol": "OAuth",
+  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#SBOM"
+}
+{
+  "endpointURL": "/register-VRF",
+  "accesscontrol": "OAuth",
+  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#VRF"
+}
+{
+  "endpointURL": "/register-FDAlabel",
+  "accesscontrol": "OAuth",
+  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#FDAlabel"
+}
+{
+  "endpointURL": "/query-FDAlabel",
+  "accesscontrol": "None",
+  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#FDAlabel"
+}
+
 ~~~
 
 Responses to this message are vendor-specific, and out of the scope of this document.
