@@ -163,7 +163,8 @@ The following HTTP endpoints are mandatory to implement to enable conformance to
 
 ### Transparency Configuration
 
-This endpoint is used to discover the capabilities and current configuration of a Transparency Service implementing this specification. A configuration file contains specific relative URL endpoints along with details of specific registration policies which are enforced when using the endpoint. Each endpoint entry in a configuration file contains an endpoint relative URL, Access Control indicator and an absolute URL to the specific Registration Policy enforced at this endpoint. 
+This endpoint is used to discover the capabilities and current configuration of a Transparency Service implementing this specification.
+For example, a service exposing multiple content-specific endpoints, each with a specific registration policy, can return the specific relative URL endpoints along with details of specific registration policies which are enforced when using each endpoint.
 
 The Transparency Service responds with a CBOR map of configuration elements.
 These elements are Transparency-Service specific.
