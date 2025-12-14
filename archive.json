@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-11T00:47:58.414359+00:00",
+  "timestamp": "2025-12-14T00:52:12.369192+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -8158,19 +8158,81 @@
       "labels": [],
       "body": "Proposed config file changes showing endpoint entries detail data ",
       "createdAt": "2025-12-10T18:55:52Z",
-      "updatedAt": "2025-12-10T18:55:52Z",
+      "updatedAt": "2025-12-11T16:36:22Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "6a5d57c6fd56ffe4b3d5e72a668767f4b0995365",
       "headRepository": "rjb4standards/ConfigFileProposal",
       "headRefName": "ConfigFileProposal",
-      "headRefOid": "0e8249205c1ee1b93d2e0763d11de0967291978a",
+      "headRefOid": "f9891fefc6fccef69b7a7500751005260a2a9f09",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks good to me, @OR13 @JAG-UK @henkbirkholz please check.",
+          "createdAt": "2025-12-11T16:36:22Z",
+          "updatedAt": "2025-12-11T16:36:22Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7Ury79",
+          "commit": {
+            "abbreviatedOid": "0e82492"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-12-11T16:17:12Z",
+          "updatedAt": "2025-12-11T16:17:12Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\nThis endpoint is used to discover the capabilities and current configuration of a Transparency Service implementing this specification.\nFor example, a service exposing multiple content-specific endpoints, each with a specific registration policy, can return the specific relative URL endpoints along with details of specific registration policies which are enforced when using each endpoint.\n```\n\nRephrased a little to make it clear it's an illustrative example, using one sentence per line. Does that still capture the intent correctly?",
+              "createdAt": "2025-12-11T16:17:12Z",
+              "updatedAt": "2025-12-11T16:17:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7UsBjz",
+          "commit": {
+            "abbreviatedOid": "0e82492"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-12-11T16:30:31Z",
+          "updatedAt": "2025-12-11T16:30:31Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "No objection to this improvement, thanks Amaury. ",
+              "createdAt": "2025-12-11T16:30:31Z",
+              "updatedAt": "2025-12-11T16:30:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7UsGR9",
+          "commit": {
+            "abbreviatedOid": "f9891fe"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-11T16:35:31Z",
+          "updatedAt": "2025-12-11T16:35:31Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
