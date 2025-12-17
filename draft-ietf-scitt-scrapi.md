@@ -188,34 +188,34 @@ Content-Type: application/cbor
 Body (in CBOR diagnostic notation)
 
 {
-  "issuer": "https://transparency.example"
+  "issuer": "https://transparency.example",
+  "endpoints": [
+  {
+    "endpointURL": "/register",
+    "accesscontrol": "NONE",
+    "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#default"
+  },
+  {
+    "endpointURL": "/register-SBOM",
+    "accesscontrol": "OAuth",
+    "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#SBOM"
+  },
+  {
+    "endpointURL": "/register-VRF",
+    "accesscontrol": "OAuth",
+    "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#VRF"
+  },
+  {
+    "endpointURL": "/register-FDAlabel",
+    "accesscontrol": "OAuth",
+    "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#FDAlabel"
+  },
+  {
+    "endpointURL": "/query-FDAlabel",
+    "accesscontrol": "NONE",
+    "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#FDAlabel"
+  }]
 }
-{
-  "endpointURL": "/register",
-  "accesscontrol": "NONE",
-  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#default"
-}
-{
-  "endpointURL": "/register-SBOM",
-  "accesscontrol": "OAuth",
-  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#SBOM"
-}
-{
-  "endpointURL": "/register-VRF",
-  "accesscontrol": "OAuth",
-  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#VRF"
-}
-{
-  "endpointURL": "/register-FDAlabel",
-  "accesscontrol": "OAuth",
-  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#FDAlabel"
-}
-{
-  "endpointURL": "/query-FDAlabel",
-  "accesscontrol": "None",
-  "registrationpolicyenforced": "https://example.com/RegistrationPolicy.html#FDAlabel"
-}
-
 ~~~
 
 Responses to this message are vendor-specific, and out of the scope of this document.
