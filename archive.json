@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-18T00:43:18.621654+00:00",
+  "timestamp": "2026-01-13T00:44:05.173540+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1589,6 +1589,22 @@
           "updatedAt": "2025-12-10T19:28:19Z"
         }
       ]
+    },
+    {
+      "number": 94,
+      "id": "I_kwDOLJjbks7ixnSi",
+      "title": "2.1.4 return content should be Receipt, not a Transparent Statement",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/94",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Spotted and flagged by arr@watson.org",
+      "createdAt": "2026-01-12T14:49:49Z",
+      "updatedAt": "2026-01-12T14:49:49Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
