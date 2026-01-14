@@ -89,7 +89,7 @@ Table of Contents
        4.4.1.  In Scope
        4.4.2.  Out of Scope
    5.  IANA Considerations
-     5.1.  Well-Known URI for Keys Discovery
+     5.1.  Well-Known URI for Key Discovery
    6.  References
      6.1.  Normative References
      6.2.  Informative References
@@ -1006,7 +1006,7 @@ Table of Contents
 
 5.  IANA Considerations
 
-5.1.  Well-Known URI for Keys Discovery
+5.1.  Well-Known URI for Key Discovery
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
