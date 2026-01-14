@@ -910,7 +910,7 @@ Thus, any message deletion attack must occur prior to registration else it is in
 
 # IANA Considerations
 
-## Well-Known URI for Keys Discovery
+## Well-Known URI for Key Discovery
 
 The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
 
