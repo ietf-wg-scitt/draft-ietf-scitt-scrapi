@@ -493,7 +493,7 @@ Client <-- 302 Location: .../entries/tmp123 --- TS
 Finally:
 
 Client --- GET .../entries/tmp123           --> TS
-Client <-- 200 (Transparent Statement)      --- TS
+Client <-- 200 (Receipt)                    --- TS
            Location: .../entries/final123
 ~~~
 
