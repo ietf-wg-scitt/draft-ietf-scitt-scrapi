@@ -161,38 +161,6 @@ In the absence of this header field, this document does not specify a minimum.
 
 The following HTTP endpoints are mandatory to implement to enable conformance to this specification.
 
-### Transparency Configuration
-
-This endpoint is used to discover the capabilities and current configuration of a Transparency Service implementing this specification.
-
-The Transparency Service responds with a CBOR map of configuration elements.
-These elements are Transparency-Service specific.
-
-Contents of bodies are informative examples only.
-
-Request:
-
-~~~ http-message
-GET /.well-known/scitt-configuration HTTP/1.1
-Host: transparency.example
-Accept: application/cbor
-~~~
-
-Response:
-
-~~~ http-message
-HTTP/1.1 200 OK
-Content-Type: application/cbor
-
-Body (in CBOR diagnostic notation)
-
-{
-  "issuer": "https://transparency.example"
-}
-~~~
-
-Responses to this message are vendor-specific, and out of the scope of this document.
-
 ### Transparency Service Keys
 
 This endpoint is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.
@@ -942,15 +910,9 @@ Thus, any message deletion attack must occur prior to registration else it is in
 
 # IANA Considerations
 
-## Well-Known URI for Transparency Configuration
+## Well-Known URI for Keys Discovery
 
 The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
-
-URI suffix: scitt-configuration
-Change controller: IETF
-Specification document(s): {{&SELF}}
-Status: Permanent
-Related information: {{-SCITT-ARCH}}
 
 URI suffix: scitt-keys
 Change controller: IETF
