@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-13T00:44:05.173540+00:00",
+  "timestamp": "2026-01-15T00:46:17.659387+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1460,19 +1460,19 @@
       "id": "I_kwDOLJjbks7cAEqb",
       "title": "Placeholder for confirguation content proposal",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/89",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rjb4standards",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "TBD",
       "createdAt": "2025-12-03T16:41:58Z",
-      "updatedAt": "2025-12-17T15:05:01Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-14T16:57:31Z",
+      "closedAt": "2026-01-14T16:57:31Z",
       "comments": [
         {
           "author": "rjb4standards",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "Purpose: To enable a single SCITT Transparency Service to support the registration and inquiry of various artifacts that may be stored in a Registry and provide well-known endpoints for the processing of specific registration policies for each type of artifact stored in a SCITT Registry. The configuration content MUST contain at a minimum one well-known endpoint to serve as the default registration policy enforced by the Transparency Service for registration and inquiry processing.\n\nThe configuration content MUST provide tabular information with each row representing one well-known endpoint for processing incoming SCITT requests. Here is an example configuration endpoint table in csv format (other formats may also be supported)\n\nEndpoint,                Registration Policy Reference\n\n/registrar,                 https://microsoft.com/SCITTRegistrationPolicy#DEFAULT\n/registrar/SBOM,      https://microsoft.com/SCITTRegistrationPolicy#SBOM\n/registrar/URL,          https://microsoft.com/SCITTRegistrationPolicy#URL\n\nEndpoints can also be identified for inquiry of various registered artifacts\n\n/inquire,                   https://microsoft.com/SCITTRegistrationPolicy#DEFAULT\n/inquire/SBOM,        https://microsoft.com/SCITTRegistrationPolicy#SBOM\n/inquire/URL,            https://microsoft.com/SCITTRegistrationPolicy#URL\n\nSUMMARY:\nPeople interested in interacting with a SCITT Transparency Service should first retrieve the configuration materials at the well-known location containing its configuration data to decide which well-known endpoint URI to use and any particular requirements that may apply, based on Registration Policies enforced by that endpoint.\n\nNOTE: I am anticipating that the URL lookup service will need to be high performance, handling 1000's of inquiries per second, if people begin to check for trusted URL's as a regular part of processing, almost like a DNS lookup.",
           "createdAt": "2025-12-03T19:44:45Z",
           "updatedAt": "2025-12-03T19:55:35Z"
@@ -1486,7 +1486,7 @@
         },
         {
           "author": "rjb4standards",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "I'm not a listed collaborator and cannot do a PR",
           "createdAt": "2025-12-10T17:47:05Z",
           "updatedAt": "2025-12-10T17:47:05Z"
@@ -1500,7 +1500,7 @@
         },
         {
           "author": "rjb4standards",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "I was trying to do a PR on your PR, should I be doing it on main instead?",
           "createdAt": "2025-12-10T18:00:07Z",
           "updatedAt": "2025-12-10T18:00:07Z"
@@ -1514,14 +1514,14 @@
         },
         {
           "author": "rjb4standards",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "Thanks, will do.",
           "createdAt": "2025-12-10T18:10:53Z",
           "updatedAt": "2025-12-10T18:10:53Z"
         },
         {
           "author": "rjb4standards",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "Done; https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/93\n\nPlease let me know if this  is what you are looking for.",
           "createdAt": "2025-12-10T18:56:59Z",
           "updatedAt": "2025-12-10T18:56:59Z"
@@ -1535,10 +1535,17 @@
         },
         {
           "author": "rjb4standards",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "@achamayou  please change \"accesscontrol\": \"None\" to \"accesscontrol\": \"NONE\" for consistency\n\nFYI: this indicates that artifacts at the endpoint are publicly accessible.\n\nThanks for fixing the JSON format.",
           "createdAt": "2025-12-17T15:04:44Z",
           "updatedAt": "2025-12-17T15:05:01Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "After discussion in the group, this is resolved by #96, which removes the configuration altogether since is has no normative content applicable across all implementations.",
+          "createdAt": "2026-01-14T16:57:31Z",
+          "updatedAt": "2026-01-14T16:57:31Z"
         }
       ]
     },
@@ -1595,15 +1602,15 @@
       "id": "I_kwDOLJjbks7ixnSi",
       "title": "2.1.4 return content should be Receipt, not a Transparent Statement",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/94",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Spotted and flagged by arr@watson.org",
       "createdAt": "2026-01-12T14:49:49Z",
-      "updatedAt": "2026-01-12T14:49:49Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-14T16:44:22Z",
+      "closedAt": "2026-01-14T16:44:22Z",
       "comments": []
     }
   ],
@@ -8181,21 +8188,21 @@
       "id": "PR_kwDOLJjbks64NDaD",
       "title": "Proposed config file changes",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/93",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rjb4standards",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Proposed config file changes showing endpoint entries detail data ",
       "createdAt": "2025-12-10T18:55:52Z",
-      "updatedAt": "2025-12-17T15:58:10Z",
+      "updatedAt": "2026-01-14T16:56:37Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "6a5d57c6fd56ffe4b3d5e72a668767f4b0995365",
       "headRepository": "rjb4standards/ConfigFileProposal",
       "headRefName": "ConfigFileProposal",
       "headRefOid": "fc03b322af206e20c1a265c59ec6a15a7b9425b4",
-      "closedAt": null,
+      "closedAt": "2026-01-14T16:56:37Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -8216,7 +8223,7 @@
         },
         {
           "author": "rjb4standards",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "body": "You are correct JOn, these are human readable artifacts that may be updated over time, version information is contained in the human readable materials provided.\r\n\r\nThe assumption behind this use of human readable registration policies are twofold:\r\n1. It is expected that developers will review the registration policy before beginning any coding to use the service provided by the endpoint to know what needs to \"go in\" and what to expect \"coming out\" \r\n2. The registration policy material may need to be presented in court some day and judges may not know how to read a machine readable document",
           "createdAt": "2025-12-17T15:53:44Z",
           "updatedAt": "2025-12-17T15:53:44Z"
@@ -8227,6 +8234,13 @@
           "body": "> The registration policy links look like pointers to human-readable unstructured prose. This poses a couple of questions for me:\r\n> \r\n> * versioning?\r\n> * do we want to set the impression that registration policy is/should be like a SOC 2 or ISO 27000 type vague statement (which is what I see here) or a formally defined automatic algorithm?\r\n> \r\n> I don't have a particular dog in this fight but it reminds me of prior discussions and if we don't give the policies clear identifiers with hard versioning/integrity then we lose some opportunities later.\r\n\r\nThis is an illustrative example of what an implementation @rjb4standards has in mind might do, it is not normative, so I don't think we are losing opportunities just yet. These are good questions though, and I wonder if there is an existing format that could be re-used. The main thing that comes to mind when it comes to describing endpoints is OpenAPI of course.",
           "createdAt": "2025-12-17T15:54:11Z",
           "updatedAt": "2025-12-17T15:54:11Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Replaced by #96",
+          "createdAt": "2026-01-14T16:56:37Z",
+          "updatedAt": "2026-01-14T16:56:37Z"
         }
       ],
       "reviews": [
@@ -8256,7 +8270,7 @@
             "abbreviatedOid": "0e82492"
           },
           "author": "rjb4standards",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-12-11T16:30:31Z",
@@ -8329,7 +8343,7 @@
             "abbreviatedOid": "f9891fe"
           },
           "author": "rjb4standards",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-12-17T15:00:17Z",
@@ -8362,6 +8376,204 @@
               "updatedAt": "2025-12-17T15:51:15Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 95,
+      "id": "PR_kwDOLJjbks69MclQ",
+      "title": "Change response from 'Transparent Statement' to 'Receipt'",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/95",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #94",
+      "createdAt": "2026-01-14T16:28:22Z",
+      "updatedAt": "2026-01-14T16:45:00Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "6a5d57c6fd56ffe4b3d5e72a668767f4b0995365",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-6",
+      "headRefOid": "a90ba636e7a2cd567443a1dbb9953248aab28555",
+      "closedAt": "2026-01-14T16:44:20Z",
+      "mergedAt": "2026-01-14T16:44:19Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "57a42c45e6b5408a7b55abefba57250538f1292c"
+      },
+      "comments": [
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "No objection\r\n",
+          "createdAt": "2026-01-14T16:45:00Z",
+          "updatedAt": "2026-01-14T16:45:00Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7aQEcx",
+          "commit": {
+            "abbreviatedOid": "a90ba63"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "LGTM (and it this PR is based on Andrew's inout here: https://mailarchive.ietf.org/arch/msg/scitt/z-BOWGxPqdzM1cH3Wtu-GjT_Ga0 Thanks!)",
+          "createdAt": "2026-01-14T16:31:00Z",
+          "updatedAt": "2026-01-14T16:31:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7aQHkG",
+          "commit": {
+            "abbreviatedOid": "a90ba63"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-14T16:34:10Z",
+          "updatedAt": "2026-01-14T16:34:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7aQIsp",
+          "commit": {
+            "abbreviatedOid": "a90ba63"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Still looks good to me.",
+          "createdAt": "2026-01-14T16:35:20Z",
+          "updatedAt": "2026-01-14T16:35:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 96,
+      "id": "PR_kwDOLJjbks69MrQz",
+      "title": "Remove Transparency Configuration and update URIs",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/96",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Removed the Transparency Configuration section and updated the Well-Known URI registration details.\r\n\r\nReplaces #93, as discussed, because there is no agreed normative form for the SCITT configuration at this stage, and its presence and layout is entirely application-specific.",
+      "createdAt": "2026-01-14T16:47:29Z",
+      "updatedAt": "2026-01-14T16:56:21Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "57a42c45e6b5408a7b55abefba57250538f1292c",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-7",
+      "headRefOid": "926acde626203175923a85679b90f2a02292d18c",
+      "closedAt": "2026-01-14T16:56:21Z",
+      "mergedAt": "2026-01-14T16:56:21Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "8cd484c36af71076002c98a43874d58e78df8463"
+      },
+      "comments": [
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "No objections",
+          "createdAt": "2026-01-14T16:49:37Z",
+          "updatedAt": "2026-01-14T16:49:37Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7aQWDm",
+          "commit": {
+            "abbreviatedOid": "1ac36fd"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-14T16:48:14Z",
+          "updatedAt": "2026-01-14T16:48:14Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\n## Well-Known URI for Key Discovery\n```",
+              "createdAt": "2026-01-14T16:48:14Z",
+              "updatedAt": "2026-01-14T16:48:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7aQXEw",
+          "commit": {
+            "abbreviatedOid": "1ac36fd"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-14T16:48:58Z",
+          "updatedAt": "2026-01-14T16:48:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7aQcyw",
+          "commit": {
+            "abbreviatedOid": "926acde"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-14T16:53:44Z",
+          "updatedAt": "2026-01-14T16:53:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7aQeoM",
+          "commit": {
+            "abbreviatedOid": "926acde"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "lgtm, less prescription is good here",
+          "createdAt": "2026-01-14T16:55:15Z",
+          "updatedAt": "2026-01-14T16:55:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7aQeur",
+          "commit": {
+            "abbreviatedOid": "926acde"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "approved",
+          "createdAt": "2026-01-14T16:55:20Z",
+          "updatedAt": "2026-01-14T16:55:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7aQfZa",
+          "commit": {
+            "abbreviatedOid": "926acde"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "approved",
+          "createdAt": "2026-01-14T16:55:56Z",
+          "updatedAt": "2026-01-14T16:55:56Z",
+          "comments": []
         }
       ]
     }
