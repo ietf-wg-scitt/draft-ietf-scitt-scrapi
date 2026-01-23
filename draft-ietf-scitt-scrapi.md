@@ -114,11 +114,13 @@ This specification uses the terms "Signed Statement", "Receipt", "Transparent St
 
 This specification uses "payload" as defined in {{RFC9052}}.
 
-# Endpoints
+# Authentication
 
 Authentication is out of scope for this document.
 Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.
 If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be implemented.
+
+# Endpoints
 
 All messages are sent as HTTP GET or POST requests.
 
