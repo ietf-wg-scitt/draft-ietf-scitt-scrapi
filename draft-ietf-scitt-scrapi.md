@@ -776,55 +776,6 @@ Content-Type: application/concise-problem-details+cbor
 For all responses additional eventually consistent operation details MAY be present.
 Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.
 
-### Resolve Issuer
-
-This endpoint is inspired by {{-SD-JWT-VC}}.
-
-The following is a non-normative example of a HTTP request for the Issuer Metadata configuration when `iss` is set to `https://transparency.example/tenant/1234`:
-
-Request:
-
-~~~ http-message
-GET /.well-known/issuer/tenant/1234 HTTP/1.1
-Host: transparency.example
-Accept: application/json
-~~~
-
-Response:
-
-~~~ http-message
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "issuer": "https://transparency.example/tenant/1234",
-  "jwks": {
-    "keys": [
-      {
-        "kid": "urn:ietf:params:oauth\
-                 :jwk-thumbprint:sha-256:Dgyo...agRo",
-        "alg": "ES256",
-        "use": "sig",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "p-kZ4uOASt9IjQRTrWikGnlbGb-z3LU1ltwRjZaOS9w",
-        "y": "ymXE1yltJPXgjQSRe9NweN3TLlSUALYZTzy83NVfdg0"
-      },
-      {
-        "kid": "urn:ietf:params:oauth\
-                 :jwk-thumbprint:sha-256:4Fzx...0ClE",
-        "alg": "HPKE-Base-P256-SHA256-AES128GCM",
-        "use": "enc",
-        "kty": "EC",
-        "crv": "P-256",
-        "x": "Vreuil95vzR6ixutgBBf2ota-rj97MvKfuJWB4qqp5w",
-        "y": "NkUTeaoNlLRRsVRxHGDA-RsA0ex2tSpcd3G-4SmKXbs"
-      }
-    ]
-  }
-}
-~~~
-
 # Privacy Considerations
 
 The privacy considerations section of {{-SCITT-ARCH}} applies to this document.
