@@ -62,6 +62,9 @@ normative:
   RFC9052:
   RFC9110:
   RFC9290:
+  RFC7515:
+  RFC4648:
+  RFC9679:
 
 informative:
   I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
@@ -200,6 +203,65 @@ Body (in CBOR diagnostic notation)
   }
 ]
 ~~~
+
+The Transparency Service MAY stop returning at that endpoint the keys it no longer uses to issue Receipts, following a reasonable delay.
+
+### Individual Transparency Service Key
+
+This endpoint is used to resolve a single public key, from a `kid` value contained in a Receipt previously issued by the Transparency Service.
+
+Request:
+~~~ http-message
+GET /.well-known/scitt-keys/{kid_value} HTTP/1.1
+Host: transparency.example
+Accept: application/cbor
+~~~
+
+~~~ http-message
+HTTP/1.1 200 OK
+Content-Type: application/cbor
+
+Body (in CBOR diagnostic notation)
+
+[
+  {
+    -1:1,
+    -2:h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
+    -3:h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e',
+    1:2,
+    2:'kid_value'
+  }
+]
+~~~
+
+The following expected error is defined.
+Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+
+~~~ http-message
+HTTP/1.1 404 Not Found
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: "No such key",
+  / detail /        -2: "No key could be found for this kid value"
+}
+~~~
+
+If the `kid` values used by the service (`{kid_value}` in the request above) are not URL-safe, the endpoint MUST accept the base64url encoding of the `kid` value, without padding, in the URL instead.
+
+{{Section 2 of RFC7515}} specifies Base64Url encoding as follows:
+
+{{RFC7515}} specifies Base64url encoding as follows:
+
+"Base64 encoding using the URL- and filename-safe character set
+defined in Section 5 of RFC 4648 {{RFC4648}}, with all trailing '='
+characters omitted and without the inclusion of any line breaks,
+whitespace, or other additional characters.  Note that the base64url
+encoding of the empty octet sequence is the empty string.
+(See Appendix C of {{RFC7515}} for notes on implementing base64url
+encoding without padding.)"
+
+The COSE Key Thumbprint defined in {{RFC9679}} is a convenient and well-defined mechanism to assign a `kid` to Transparency Service keys.
 
 ### Register Signed Statement
 
