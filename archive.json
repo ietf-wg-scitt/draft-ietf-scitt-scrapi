@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-15T00:46:17.659387+00:00",
+  "timestamp": "2026-01-25T00:55:30.982752+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1612,6 +1612,37 @@
       "updatedAt": "2026-01-14T16:44:22Z",
       "closedAt": "2026-01-14T16:44:22Z",
       "comments": []
+    },
+    {
+      "number": 99,
+      "id": "I_kwDOLJjbks7lWPar",
+      "title": "Should the SHOULD for Concise Problem Details be a MUST?",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/99",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Early in endpoints, we say:\n\nhttps://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/8cd484c36af71076002c98a43874d58e78df8463/draft-ietf-scitt-scrapi.md?plain=1#L128\n\nBut we make no mention of valid reasons or particular circumstance where that can be ignored. I expect this to be flagged during review, and propose that we change SHOULD to MUST here, because I cannot come up with reasons why an implementation would like to stray from that, and it would clearly damage interoperability.",
+      "createdAt": "2026-01-23T14:57:06Z",
+      "updatedAt": "2026-01-23T17:23:03Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I guess there's the option of an empty body, but otherwise I'd agree MUST is better. I don't know any implementers who have done any different and making it optional will screw up common libraries",
+          "createdAt": "2026-01-23T15:11:36Z",
+          "updatedAt": "2026-01-23T15:11:36Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I will PR.",
+          "createdAt": "2026-01-23T17:23:03Z",
+          "updatedAt": "2026-01-23T17:23:03Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -8573,6 +8604,402 @@
           "body": "approved",
           "createdAt": "2026-01-14T16:55:56Z",
           "updatedAt": "2026-01-14T16:55:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 97,
+      "id": "PR_kwDOLJjbks6-8u7G",
+      "title": "Update introduction to match document contents",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/97",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The introduction has not been updated as the document became more focused in its endpoint coverage, this PR attempts to correct that and only describe what the document currently contains.",
+      "createdAt": "2026-01-23T14:48:38Z",
+      "updatedAt": "2026-01-23T15:04:07Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "update_introduction",
+      "headRefOid": "d8a5314e39fc50ceed7c852b2e8df371f611bd2d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Look good to me.\r\n> \r\n> Will this change trigger any changes to the configuration section?\r\n\r\nNo, this is purely a change to the introduction.",
+          "createdAt": "2026-01-23T15:04:07Z",
+          "updatedAt": "2026-01-23T15:04:07Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7caeI5",
+          "commit": {
+            "abbreviatedOid": "d8a5314"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Look good to me.\n\nWill this change trigger any changes to the configuration section?",
+          "createdAt": "2026-01-23T14:54:08Z",
+          "updatedAt": "2026-01-23T14:54:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 98,
+      "id": "PR_kwDOLJjbks6-8xaO",
+      "title": "Split authentication section",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/98",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I think splitting authentication into its own section makes for easier reading. Opinion welcome.",
+      "createdAt": "2026-01-23T14:51:27Z",
+      "updatedAt": "2026-01-23T17:31:23Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "split_authentication_section",
+      "headRefOid": "36707c6a558f10b32eefffb932a814e0c9d4d9b5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> How will an end user know if Authentication is required \r\n\r\nYou'll get a 401/403 response\r\n\r\n> how will they learn the implementation details to properly \"sign in\"\r\n\r\nIf it's an authenticated service then you'll have to acquire a token, at which point the only option is to read the docs of the specific service you're trying to call (which you will know, because you know the domain of the TS).\r\n\r\nThis feels very much like transparency logs or blockchain nodes as they work today: all the code and structures are the same and interoperable, but some require an `Authorization` header, and some don't. To find that out you have to check the individual services\r\n\r\n",
+          "createdAt": "2026-01-23T15:09:31Z",
+          "updatedAt": "2026-01-23T15:09:31Z"
+        },
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks Jon. Should we say something about requiring a Transparency Service to provide links to authorization documents when Authentication is required?",
+          "createdAt": "2026-01-23T15:29:19Z",
+          "updatedAt": "2026-01-23T15:29:19Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Should we say something about requiring a Transparency Service to provide links to authorization documents when Authentication is required?\r\n\r\nThat would be pretty unusual. Many servers will supply a hint to supported schemes in the `WWW-Authenticate` return header but that's not really very useful because you still need an _actual_ token from the service operator so at some point you need to interact with it. That might require a sign-up, it might require a phone call, it might take a sneakernet preshared key, it might require a VPN...who knows?\r\n\r\nOne might imagine the server returning a URL pointing to web page for sign-up or something like that, but one can equally imagine things that wouldn't fit well in an error details object. The implementation is totally free to add hints in the `details` field of course so we could suggest that they do that, if it's appropriate to their use case. That's the most plausible compromise.\r\n",
+          "createdAt": "2026-01-23T15:41:34Z",
+          "updatedAt": "2026-01-23T15:41:34Z"
+        },
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Jon, redirecting to a webpage may be appropriate for manual interactions, but may not work so well on system-system interactions. Also, each authentication scheme can have different requirements and protocols that could require \"acquiring an identifier\" beforehand. This could be stated in the \"Authentication Documentation\".",
+          "createdAt": "2026-01-23T15:52:43Z",
+          "updatedAt": "2026-01-23T15:52:43Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@rjb4standards I think we follow the HTTP standards for authn, https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication has a good explanation, although that's probably not what we should use as a reference.\r\n\r\nAs far as I know, there's nothing special about endpoint authn in Transparency Services, it's the same as every other web service, and so I don't think we require specific text beyond a reference. I will look for something suitable.",
+          "createdAt": "2026-01-23T17:29:00Z",
+          "updatedAt": "2026-01-23T17:29:00Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7caenb",
+          "commit": {
+            "abbreviatedOid": "36707c6"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-23T14:54:27Z",
+          "updatedAt": "2026-01-23T14:54:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7caj5O",
+          "commit": {
+            "abbreviatedOid": "36707c6"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "How will an end user know  if Authentication is required and how will they learn the implementation details to properly \"sign in\"",
+          "createdAt": "2026-01-23T14:58:11Z",
+          "updatedAt": "2026-01-23T14:58:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7cdkMC",
+          "commit": {
+            "abbreviatedOid": "36707c6"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "No objection",
+          "createdAt": "2026-01-23T17:31:23Z",
+          "updatedAt": "2026-01-23T17:31:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 100,
+      "id": "PR_kwDOLJjbks6-87I2",
+      "title": "Make Malformed request error consistent with others",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/100",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This error seems to have been forgotten when Concise Problem Details were adopted in #38.",
+      "createdAt": "2026-01-23T15:01:25Z",
+      "updatedAt": "2026-01-23T17:27:45Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "make_malformed_error_consistent_with_cpd",
+      "headRefOid": "a1e25d0bdd3176cd547736828116d3f0d76de33b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Do we also have an Error code for \"Failed Registration Policy Verification\"?\r\n\r\n@rjb4standards yes in https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2.1.2.3\r\n\r\n```\r\nHTTP/1.1 400 Bad Request\r\nContent-Type: application/concise-problem-details+cbor\r\n\r\n{\r\n  / title /         -1: \\\r\n          \"Rejected\",\r\n  / detail /        -2: \\\r\n          \"Signed Statement not accepted by the current\\\r\n          Registration Policy\"\r\n}\r\n```",
+          "createdAt": "2026-01-23T17:24:26Z",
+          "updatedAt": "2026-01-23T17:24:26Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7catrx",
+          "commit": {
+            "abbreviatedOid": "a1e25d0"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Do we also have an Error code for \"Failed Registration Policy Verification\"?",
+          "createdAt": "2026-01-23T15:04:55Z",
+          "updatedAt": "2026-01-23T15:04:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7ca-aE",
+          "commit": {
+            "abbreviatedOid": "a1e25d0"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-23T15:16:51Z",
+          "updatedAt": "2026-01-23T15:16:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7cdggg",
+          "commit": {
+            "abbreviatedOid": "a1e25d0"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-23T17:27:45Z",
+          "updatedAt": "2026-01-23T17:27:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 101,
+      "id": "PR_kwDOLJjbks6-9Cf-",
+      "title": "Clarify Core vs Optional endpoints",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/101",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The introduction previously did not qualify mandatory endpoints, which were in a Mandatory section, and gave a list of \"supporting endpoints\".\r\n\r\n#97 uses the terms \"core\" and \"optional\", this change updates the section titles accordingly, and uses BCP14 language (`MUST`) rather than \"are mandatory\" for the core endpoints.",
+      "createdAt": "2026-01-23T15:09:20Z",
+      "updatedAt": "2026-01-23T15:21:14Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "clarify_core_vs_optional",
+      "headRefOid": "da7592468ac7c566b46670fa7c1a9c0b850c11cd",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7cbAE-",
+          "commit": {
+            "abbreviatedOid": "da75924"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-23T15:18:10Z",
+          "updatedAt": "2026-01-23T15:18:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7cbEdR",
+          "commit": {
+            "abbreviatedOid": "da75924"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Excellent, LGTM",
+          "createdAt": "2026-01-23T15:21:14Z",
+          "updatedAt": "2026-01-23T15:21:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 102,
+      "id": "PR_kwDOLJjbks6-9dx5",
+      "title": "Clarify key retention and add single key resolution",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/102",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses #91 by clarifying that the service does not need to retain keys for all time, and adding a single key resolution mechanism.\r\n\r\nI have not added the wording to propose exchanging the receipt, because that endpoint is currently optional. I think we should either leave it out, or include it and make exchange a core endpoint. To be discussed in the meeting.",
+      "createdAt": "2026-01-23T15:38:30Z",
+      "updatedAt": "2026-01-23T15:57:08Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "clarify_key_retention_and_add_single_key_resolution",
+      "headRefOid": "05fc652d065965cff9f9a2a0296b30d566896e38",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7cbtr8",
+          "commit": {
+            "abbreviatedOid": "05fc652"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "100% agree",
+          "createdAt": "2026-01-23T15:54:08Z",
+          "updatedAt": "2026-01-23T15:54:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7cbwkw",
+          "commit": {
+            "abbreviatedOid": "05fc652"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-23T15:57:08Z",
+          "updatedAt": "2026-01-23T15:57:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 103,
+      "id": "PR_kwDOLJjbks6-9zkS",
+      "title": "Drop Resolve Issuer endpoint",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/103",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I propose that we drop the optional Resolve Issuer endpoint, because:\r\n\r\n1. It does not conceptually fit in the Transparency Service, and is clearly something that a separate Identity Service typically provides.\r\n2. It is the only endpoint that returns JSON, in an other all CBOR/COSE service.\r\n3. There are no TS implementations with such an endpoint, as far as I know.\r\n\r\nTransparency Services that wish to implement that endpoint, or something similar, will be able to do so regardless.",
+      "createdAt": "2026-01-23T16:04:02Z",
+      "updatedAt": "2026-01-23T16:50:23Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "drop_resolve_issuer_endpoint",
+      "headRefOid": "c7bfdd4a7b4717087de6edd87e7b71deae58a09c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7ccANI",
+          "commit": {
+            "abbreviatedOid": "c7bfdd4"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Many issuers are \"concealed\" in SAG-CTR, so this will have no effect on us.",
+          "createdAt": "2026-01-23T16:09:09Z",
+          "updatedAt": "2026-01-23T16:09:09Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7ccprj",
+          "commit": {
+            "abbreviatedOid": "c7bfdd4"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "No heartburn",
+          "createdAt": "2026-01-23T16:39:56Z",
+          "updatedAt": "2026-01-23T16:39:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7cc3gt",
+          "commit": {
+            "abbreviatedOid": "c7bfdd4"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-23T16:50:23Z",
+          "updatedAt": "2026-01-23T16:50:23Z",
           "comments": []
         }
       ]
