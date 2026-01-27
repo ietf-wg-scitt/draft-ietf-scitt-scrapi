@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-25T00:55:30.982752+00:00",
+  "timestamp": "2026-01-27T00:52:55.759325+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -8620,7 +8620,7 @@
       "labels": [],
       "body": "The introduction has not been updated as the document became more focused in its endpoint coverage, this PR attempts to correct that and only describe what the document currently contains.",
       "createdAt": "2026-01-23T14:48:38Z",
-      "updatedAt": "2026-01-23T15:04:07Z",
+      "updatedAt": "2026-01-26T17:28:41Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
@@ -8653,6 +8653,19 @@
           "createdAt": "2026-01-23T14:54:08Z",
           "updatedAt": "2026-01-23T14:54:08Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7c9oa0",
+          "commit": {
+            "abbreviatedOid": "d8a5314"
+          },
+          "author": "nikcal",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM - edits made add clarity and specificity. ",
+          "createdAt": "2026-01-26T17:28:41Z",
+          "updatedAt": "2026-01-26T17:28:41Z",
+          "comments": []
         }
       ]
     },
@@ -8668,7 +8681,7 @@
       "labels": [],
       "body": "I think splitting authentication into its own section makes for easier reading. Opinion welcome.",
       "createdAt": "2026-01-23T14:51:27Z",
-      "updatedAt": "2026-01-23T17:31:23Z",
+      "updatedAt": "2026-01-26T17:30:05Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
@@ -8755,6 +8768,19 @@
           "createdAt": "2026-01-23T17:31:23Z",
           "updatedAt": "2026-01-23T17:31:23Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7c9pmR",
+          "commit": {
+            "abbreviatedOid": "36707c6"
+          },
+          "author": "nikcal",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM - edits enable consistency.",
+          "createdAt": "2026-01-26T17:30:05Z",
+          "updatedAt": "2026-01-26T17:30:05Z",
+          "comments": []
         }
       ]
     },
@@ -8770,7 +8796,7 @@
       "labels": [],
       "body": "This error seems to have been forgotten when Concise Problem Details were adopted in #38.",
       "createdAt": "2026-01-23T15:01:25Z",
-      "updatedAt": "2026-01-23T17:27:45Z",
+      "updatedAt": "2026-01-26T17:31:01Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
@@ -8829,6 +8855,19 @@
           "createdAt": "2026-01-23T17:27:45Z",
           "updatedAt": "2026-01-23T17:27:45Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7c9qYO",
+          "commit": {
+            "abbreviatedOid": "a1e25d0"
+          },
+          "author": "nikcal",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Consistency +",
+          "createdAt": "2026-01-26T17:31:01Z",
+          "updatedAt": "2026-01-26T17:31:01Z",
+          "comments": []
         }
       ]
     },
@@ -8844,7 +8883,7 @@
       "labels": [],
       "body": "The introduction previously did not qualify mandatory endpoints, which were in a Mandatory section, and gave a list of \"supporting endpoints\".\r\n\r\n#97 uses the terms \"core\" and \"optional\", this change updates the section titles accordingly, and uses BCP14 language (`MUST`) rather than \"are mandatory\" for the core endpoints.",
       "createdAt": "2026-01-23T15:09:20Z",
-      "updatedAt": "2026-01-23T15:21:14Z",
+      "updatedAt": "2026-01-26T17:35:57Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
@@ -8882,6 +8921,19 @@
           "createdAt": "2026-01-23T15:21:14Z",
           "updatedAt": "2026-01-23T15:21:14Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7c9uwT",
+          "commit": {
+            "abbreviatedOid": "da75924"
+          },
+          "author": "nikcal",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Clarifications are consistent with edits- LGTM.",
+          "createdAt": "2026-01-26T17:35:57Z",
+          "updatedAt": "2026-01-26T17:35:57Z",
+          "comments": []
         }
       ]
     },
@@ -8897,7 +8949,7 @@
       "labels": [],
       "body": "Addresses #91 by clarifying that the service does not need to retain keys for all time, and adding a single key resolution mechanism.\r\n\r\nI have not added the wording to propose exchanging the receipt, because that endpoint is currently optional. I think we should either leave it out, or include it and make exchange a core endpoint. To be discussed in the meeting.",
       "createdAt": "2026-01-23T15:38:30Z",
-      "updatedAt": "2026-01-23T15:57:08Z",
+      "updatedAt": "2026-01-26T17:36:51Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
@@ -8935,6 +8987,19 @@
           "createdAt": "2026-01-23T15:57:08Z",
           "updatedAt": "2026-01-23T15:57:08Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7c9v0B",
+          "commit": {
+            "abbreviatedOid": "05fc652"
+          },
+          "author": "nikcal",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM- the edits are nice clarifications. ",
+          "createdAt": "2026-01-26T17:36:51Z",
+          "updatedAt": "2026-01-26T17:36:51Z",
+          "comments": []
         }
       ]
     },
@@ -8950,7 +9015,7 @@
       "labels": [],
       "body": "I propose that we drop the optional Resolve Issuer endpoint, because:\r\n\r\n1. It does not conceptually fit in the Transparency Service, and is clearly something that a separate Identity Service typically provides.\r\n2. It is the only endpoint that returns JSON, in an other all CBOR/COSE service.\r\n3. There are no TS implementations with such an endpoint, as far as I know.\r\n\r\nTransparency Services that wish to implement that endpoint, or something similar, will be able to do so regardless.",
       "createdAt": "2026-01-23T16:04:02Z",
-      "updatedAt": "2026-01-23T16:50:23Z",
+      "updatedAt": "2026-01-26T17:37:38Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
@@ -9000,6 +9065,19 @@
           "body": "LGTM",
           "createdAt": "2026-01-23T16:50:23Z",
           "updatedAt": "2026-01-23T16:50:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7c9w0G",
+          "commit": {
+            "abbreviatedOid": "c7bfdd4"
+          },
+          "author": "nikcal",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Agree with proposal to drop. LGTM.",
+          "createdAt": "2026-01-26T17:37:38Z",
+          "updatedAt": "2026-01-26T17:37:38Z",
           "comments": []
         }
       ]
