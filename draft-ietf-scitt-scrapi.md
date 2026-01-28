@@ -65,7 +65,7 @@ normative:
   RFC7515:
   RFC4648:
   RFC9679:
-  RFC7235:
+  RFC9110:
 
 informative:
   I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
