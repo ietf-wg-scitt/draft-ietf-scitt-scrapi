@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 18 July 2026                                    DataTrails Inc.
-                                                         14 January 2026
+Expires: 1 August 2026                                   DataTrails Inc.
+                                                         28 January 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 July 2026.
+   This Internet-Draft will expire on 1 August 2026.
 
 Copyright Notice
 
@@ -110,33 +110,21 @@ Table of Contents
 
    *  Registration Policies
 
-   SCRAPI defines the operations necessary to support supply chain
-   transparency using COSE [RFC9052]:
-
-   *  Issuance of Signed Statements
+   SCRAPI defines HTTP endpoints implementing the core operations that
+   constitute a Transparency Service using COSE ([RFC9052]):
 
    *  Registration of Signed Statements
 
-   *  Verification of Signed Statements
+   *  Issuance and resolution of Receipts
 
-   *  Issuance of Receipts
+   *  Discovery of Transparency Service Keys
 
-   *  Verification of Receipts
+   In addition to these core endpoints, this specification defines
+   optional supporting endpoints:
 
-   *  Production of Transparent Statements
+   *  Retrieving Signed Statements
 
-   *  Verification of Transparent Statements
-
-   In addition to these operational HTTP endpoints, this specification
-   defines supporting endpoints:
-
-   *  Resolving Verification Keys for Issuers
-
-   *  Retrieving Receipts Asynchronously
-
-   *  Retrieving Signed Statements from an Artifact Repository
-
-   *  Retrieving Statements from an Artifact Repository
+   *  Retrieving Transparent Statements
 
    *  Exchanging Receipts for refreshed Receipts
 
