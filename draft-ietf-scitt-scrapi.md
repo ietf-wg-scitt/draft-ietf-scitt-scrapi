@@ -88,22 +88,16 @@ The SCITT Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and
 - Transparent Statements
 - Registration Policies
 
-SCRAPI defines the operations necessary to support supply chain transparency using COSE {{RFC9052}}:
+SCRAPI defines HTTP endpoints implementing the core operations that constitute a Transparency Service using COSE ({{RFC9052}}):
 
-- Issuance of Signed Statements
 - Registration of Signed Statements
-- Verification of Signed Statements
-- Issuance of Receipts
-- Verification of Receipts
-- Production of Transparent Statements
-- Verification of Transparent Statements
+- Issuance and resolution of Receipts
+- Discovery of Transparency Service Keys
 
-In addition to these operational HTTP endpoints, this specification defines supporting endpoints:
+In addition to these core endpoints, this specification defines optional supporting endpoints:
 
-- Resolving Verification Keys for Issuers
-- Retrieving Receipts Asynchronously
-- Retrieving Signed Statements from an Artifact Repository
-- Retrieving Statements from an Artifact Repository
+- Retrieving Signed Statements
+- Retrieving Transparent Statements
 - Exchanging Receipts for refreshed Receipts
 
 ## Terminology
