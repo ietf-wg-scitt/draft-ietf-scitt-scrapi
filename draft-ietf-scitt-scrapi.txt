@@ -74,9 +74,10 @@ Table of Contents
    3.  Endpoints
      3.1.  Core Endpoints
        3.1.1.  Transparency Service Keys
-       3.1.2.  Register Signed Statement
-       3.1.3.  Query Registration Status
-       3.1.4.  Resolve Receipt
+       3.1.2.  Individual Transparency Service Key
+       3.1.3.  Register Signed Statement
+       3.1.4.  Query Registration Status
+       3.1.5.  Resolve Receipt
      3.2.  Optional Endpoints
        3.2.1.  Exchange Receipt
        3.2.2.  Resolve Signed Statement
@@ -257,7 +258,64 @@ Table of Contents
      }
    ]
 
-3.1.2.  Register Signed Statement
+   The Transparency Service MAY stop returning at that endpoint the keys
+   it no longer uses to issue Receipts, following a reasonable delay.
+
+3.1.2.  Individual Transparency Service Key
+
+   This endpoint is used to resolve a single public key, from a kid
+   value contained in a Receipt previously issued by the Transparency
+   Service.
+
+   Request: ~~~ http-message GET /.well-known/scitt-keys/{kid_value}
+   HTTP/1.1 Host: transparency.example Accept: application/cbor ~~~
+
+   HTTP/1.1 200 OK
+   Content-Type: application/cbor
+
+   Body (in CBOR diagnostic notation)
+
+   [
+     {
+       -1:1,
+       -2:h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
+       -3:h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e',
+       1:2,
+       2:'kid_value'
+     }
+   ]
+
+   The following expected error is defined.  Implementations MAY return
+   other errors, so long as they are valid [RFC9290] objects.
+
+   HTTP/1.1 404 Not Found
+   Content-Type: application/concise-problem-details+cbor
+
+   {
+     / title /         -1: "No such key",
+     / detail /        -2: "No key could be found for this kid value"
+   }
+
+   If the kid values used by the service ({kid_value} in the request
+   above) are not URL-safe, the endpoint MUST accept the base64url
+   encoding of the kid value, without padding, in the URL instead.
+
+   Section 2 of [RFC7515] specifies Base64Url encoding as follows:
+
+   [RFC7515] specifies Base64url encoding as follows:
+
+   "Base64 encoding using the URL- and filename-safe character set
+   defined in Section 5 of RFC 4648 [RFC4648], with all trailing '='
+   characters omitted and without the inclusion of any line breaks,
+   whitespace, or other additional characters.  Note that the base64url
+   encoding of the empty octet sequence is the empty string.  (See
+   Appendix C of [RFC7515] for notes on implementing base64url encoding
+   without padding.)"
+
+   It is RECOMMENDED to use COSE Key Thumbprint, as defined in [RFC9679]
+   as the mechanism to assign a kid to Transparency Service keys.
+
+3.1.3.  Register Signed Statement
 
    This endpoint instructs a Transparency Service to register a Signed
    Statement on its log.  Since log implementations may take many
@@ -308,7 +366,7 @@ Table of Contents
 
    One of the following:
 
-3.1.2.1.  Status 201 - Registration is successful
+3.1.3.1.  Status 201 - Registration is successful
 
    If the Transparency Service is able to produce a Receipt within a
    reasonable time, it MAY return it directly.
@@ -352,7 +410,7 @@ Table of Contents
    Receipts may be requested through the resource identified in the
    Location header.
 
-3.1.2.2.  Status 303 - Registration is running
+3.1.3.2.  Status 303 - Registration is running
 
    In cases where the registration request is accepted but the
    Transparency Service is not able to produce a Receipt in a reasonable
@@ -371,7 +429,7 @@ Table of Contents
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
 
-3.1.2.3.  Status 400 - Invalid Client Request
+3.1.3.3.  Status 400 - Invalid Client Request
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -425,7 +483,7 @@ Table of Contents
      / detail /        -2: "Operation locator is not in a valid form"
    }
 
-3.1.3.  Query Registration Status
+3.1.4.  Query Registration Status
 
    This endpoint lets a client query a Transparency Service for the
    registration status of a Signed Statement they have submitted
@@ -444,7 +502,7 @@ Table of Contents
 
    One of the following:
 
-3.1.3.1.  Status 302 - Registration is running
+3.1.4.1.  Status 302 - Registration is running
 
    Registration requests MAY fail, in which case the Location MAY return
    an error when queried.
@@ -465,7 +523,7 @@ Table of Contents
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
 
-3.1.3.2.  Status 200 - Asynchronous registration is successful
+3.1.4.2.  Status 200 - Asynchronous registration is successful
 
    Along with the receipt the Transparency Service MAY return a locator
    in the HTTP response Location header, provided the locator is a valid
@@ -525,7 +583,7 @@ Table of Contents
    Client <-- 200 (Receipt)                    --- TS
               Location: .../entries/final123
 
-3.1.3.3.  Status 400 - Invalid Client Request
+3.1.4.3.  Status 400 - Invalid Client Request
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -579,7 +637,7 @@ Table of Contents
      / detail /        -2: "Operation locator is not in a valid form"
    }
 
-3.1.3.4.  Status 404 - Operation Not Found
+3.1.4.4.  Status 404 - Operation Not Found
 
    If no record of the specified running operation is found, the
    Transparency Service returns a 404 response.
@@ -594,7 +652,7 @@ Table of Contents
              "No running operation was found matching the requested ID"
    }
 
-3.1.3.5.  Status 429 - Too Many Requests
+3.1.4.5.  Status 429 - Too Many Requests
 
    If a client is polling for an in-progress registration too frequently
    then the Transparency Service MAY, in addition to implementing rate
@@ -611,7 +669,7 @@ Table of Contents
              "Only <number> requests per <period> are allowed."
    }
 
-3.1.4.  Resolve Receipt
+3.1.5.  Resolve Receipt
 
    Authentication SHOULD be implemented for this endpoint.
 
@@ -623,7 +681,7 @@ Table of Contents
 
    Response:
 
-3.1.4.1.  Status 200 - OK
+3.1.5.1.  Status 200 - OK
 
    If the Receipt is found:
 
@@ -658,7 +716,7 @@ Table of Contents
      / signature   / h'02d227ed...ccd3774f'
    ])
 
-3.1.4.2.  Status 404 - Not Found
+3.1.5.2.  Status 404 - Not Found
 
    If there is no Receipt found for the specified EntryID the
    Transparency Service returns a 404 response:
@@ -1032,6 +1090,14 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
+              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
+              <https://www.rfc-editor.org/rfc/rfc4648>.
+
+   [RFC7515]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web
+              Signature (JWS)", RFC 7515, DOI 10.17487/RFC7515, May
+              2015, <https://www.rfc-editor.org/rfc/rfc7515>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
@@ -1054,6 +1120,11 @@ Table of Contents
               Constrained Application Protocol (CoAP) APIs", RFC 9290,
               DOI 10.17487/RFC9290, October 2022,
               <https://www.rfc-editor.org/rfc/rfc9290>.
+
+   [RFC9679]  Isobe, K., Tschofenig, H., and O. Steele, "CBOR Object
+              Signing and Encryption (COSE) Key Thumbprint", RFC 9679,
+              DOI 10.17487/RFC9679, December 2024,
+              <https://www.rfc-editor.org/rfc/rfc9679>.
 
 7.2.  Informative References
 
