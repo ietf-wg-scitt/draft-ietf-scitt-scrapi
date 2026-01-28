@@ -834,6 +834,7 @@ Content-Type: application/concise-problem-details+cbor
           "Not Found",
   / detail /        -2: \
           "No Signed Statement found with the specified ID"
+}
 ~~~
 
 #### Eventual Consistency
