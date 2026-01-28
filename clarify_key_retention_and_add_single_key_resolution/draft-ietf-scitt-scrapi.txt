@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 27 July 2026                                    DataTrails Inc.
-                                                         23 January 2026
+Expires: 1 August 2026                                   DataTrails Inc.
+                                                         28 January 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 July 2026.
+   This Internet-Draft will expire on 1 August 2026.
 
 Copyright Notice
 
@@ -316,8 +316,8 @@ Table of Contents
    Appendix C of [RFC7515] for notes on implementing base64url encoding
    without padding.)"
 
-   The COSE Key Thumbprint defined in [RFC9679] is a convenient and
-   well-defined mechanism to assign a kid to Transparency Service keys.
+   It is RECOMMENDED to use COSE Key Thumbprint, as defined in [RFC9679]
+   as the mechanism to assign a kid to Transparency Service keys.
 
 2.1.3.  Register Signed Statement
 
