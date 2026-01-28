@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 27 July 2026                                    DataTrails Inc.
-                                                         23 January 2026
+Expires: 1 August 2026                                   DataTrails Inc.
+                                                         28 January 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 July 2026.
+   This Internet-Draft will expire on 1 August 2026.
 
 Copyright Notice
 
@@ -71,12 +71,12 @@ Table of Contents
    1.  Introduction
      1.1.  Terminology
    2.  Endpoints
-     2.1.  Core
+     2.1.  Core Endpoints
        2.1.1.  Transparency Service Keys
        2.1.2.  Register Signed Statement
        2.1.3.  Query Registration Status
        2.1.4.  Resolve Receipt
-     2.2.  Optional
+     2.2.  Optional Endpoints
        2.2.1.  Exchange Receipt
        2.2.2.  Resolve Signed Statement
        2.2.3.  Resolve Issuer
@@ -217,7 +217,7 @@ Table of Contents
    request.  In the absence of this header field, this document does not
    specify a minimum.
 
-2.1.  Core
+2.1.  Core Endpoints
 
    The following HTTP endpoints MUST be implemented to enable
    conformance to this specification.
@@ -678,7 +678,7 @@ Table of Contents
              to this Transparency Service"
    }
 
-2.2.  Optional
+2.2.  Optional Endpoints
 
    These additional, optional endpoints can be implemented for client
    convenience, but are not required for conformance to this
