@@ -70,29 +70,30 @@ Table of Contents
 
    1.  Introduction
      1.1.  Terminology
-   2.  Endpoints
-     2.1.  Mandatory
-       2.1.1.  Transparency Service Keys
-       2.1.2.  Register Signed Statement
-       2.1.3.  Query Registration Status
-       2.1.4.  Resolve Receipt
-     2.2.  Optional Endpoints
-       2.2.1.  Exchange Receipt
-       2.2.2.  Resolve Signed Statement
-       2.2.3.  Resolve Issuer
-   3.  Privacy Considerations
-   4.  Security Considerations
-     4.1.  General Scope
-     4.2.  Applicable Environment
-     4.3.  User-host Authentication
-     4.4.  Primary Threats
-       4.4.1.  In Scope
-       4.4.2.  Out of Scope
-   5.  IANA Considerations
-     5.1.  Well-Known URI for Key Discovery
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
+   2.  Authentication
+   3.  Endpoints
+     3.1.  Mandatory
+       3.1.1.  Transparency Service Keys
+       3.1.2.  Register Signed Statement
+       3.1.3.  Query Registration Status
+       3.1.4.  Resolve Receipt
+     3.2.  Optional Endpoints
+       3.2.1.  Exchange Receipt
+       3.2.2.  Resolve Signed Statement
+       3.2.3.  Resolve Issuer
+   4.  Privacy Considerations
+   5.  Security Considerations
+     5.1.  General Scope
+     5.2.  Applicable Environment
+     5.3.  User-host Authentication
+     5.4.  Primary Threats
+       5.4.1.  In Scope
+       5.4.2.  Out of Scope
+   6.  IANA Considerations
+     6.1.  Well-Known URI for Key Discovery
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Contributors
    Authors' Addresses
 
@@ -143,13 +144,15 @@ Table of Contents
 
    This specification uses "payload" as defined in [RFC9052].
 
-2.  Endpoints
+2.  Authentication
 
    Authentication is out of scope for this document.  Implementations
    MAY authenticate clients, for example for the purposes of
    authorization or preventing denial of service attacks.  If
    Authentication is not implemented, rate limiting or other denial of
    service mitigation MUST be implemented.
+
+3.  Endpoints
 
    All messages are sent as HTTP GET or POST requests.
 
@@ -205,12 +208,12 @@ Table of Contents
    request.  In the absence of this header field, this document does not
    specify a minimum.
 
-2.1.  Mandatory
+3.1.  Mandatory
 
    The following HTTP endpoints are mandatory to implement to enable
    conformance to this specification.
 
-2.1.1.  Transparency Service Keys
+3.1.1.  Transparency Service Keys
 
    This endpoint is used to discover the public keys that can be used by
    relying parties to verify Receipts issued by the Transparency
@@ -249,7 +252,7 @@ Table of Contents
      }
    ]
 
-2.1.2.  Register Signed Statement
+3.1.2.  Register Signed Statement
 
    This endpoint instructs a Transparency Service to register a Signed
    Statement on its log.  Since log implementations may take many
@@ -300,7 +303,7 @@ Table of Contents
 
    One of the following:
 
-2.1.2.1.  Status 201 - Registration is successful
+3.1.2.1.  Status 201 - Registration is successful
 
    If the Transparency Service is able to produce a Receipt within a
    reasonable time, it MAY return it directly.
@@ -344,7 +347,7 @@ Table of Contents
    Receipts may be requested through the resource identified in the
    Location header.
 
-2.1.2.2.  Status 303 - Registration is running
+3.1.2.2.  Status 303 - Registration is running
 
    In cases where the registration request is accepted but the
    Transparency Service is not able to produce a Receipt in a reasonable
@@ -363,7 +366,7 @@ Table of Contents
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
 
-2.1.2.3.  Status 400 - Invalid Client Request
+3.1.2.3.  Status 400 - Invalid Client Request
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -417,7 +420,7 @@ Table of Contents
      / detail /        -2: "Operation locator is not in a valid form"
    }
 
-2.1.3.  Query Registration Status
+3.1.3.  Query Registration Status
 
    This endpoint lets a client query a Transparency Service for the
    registration status of a Signed Statement they have submitted
@@ -436,7 +439,7 @@ Table of Contents
 
    One of the following:
 
-2.1.3.1.  Status 302 - Registration is running
+3.1.3.1.  Status 302 - Registration is running
 
    Registration requests MAY fail, in which case the Location MAY return
    an error when queried.
@@ -457,7 +460,7 @@ Table of Contents
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
 
-2.1.3.2.  Status 200 - Asynchronous registration is successful
+3.1.3.2.  Status 200 - Asynchronous registration is successful
 
    Along with the receipt the Transparency Service MAY return a locator
    in the HTTP response Location header, provided the locator is a valid
@@ -517,7 +520,7 @@ Table of Contents
    Client <-- 200 (Receipt)                    --- TS
               Location: .../entries/final123
 
-2.1.3.3.  Status 400 - Invalid Client Request
+3.1.3.3.  Status 400 - Invalid Client Request
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -571,7 +574,7 @@ Table of Contents
      / detail /        -2: "Operation locator is not in a valid form"
    }
 
-2.1.3.4.  Status 404 - Operation Not Found
+3.1.3.4.  Status 404 - Operation Not Found
 
    If no record of the specified running operation is found, the
    Transparency Service returns a 404 response.
@@ -586,7 +589,7 @@ Table of Contents
              "No running operation was found matching the requested ID"
    }
 
-2.1.3.5.  Status 429 - Too Many Requests
+3.1.3.5.  Status 429 - Too Many Requests
 
    If a client is polling for an in-progress registration too frequently
    then the Transparency Service MAY, in addition to implementing rate
@@ -603,7 +606,7 @@ Table of Contents
              "Only <number> requests per <period> are allowed."
    }
 
-2.1.4.  Resolve Receipt
+3.1.4.  Resolve Receipt
 
    Authentication SHOULD be implemented for this endpoint.
 
@@ -615,7 +618,7 @@ Table of Contents
 
    Response:
 
-2.1.4.1.  Status 200 - OK
+3.1.4.1.  Status 200 - OK
 
    If the Receipt is found:
 
@@ -650,7 +653,7 @@ Table of Contents
      / signature   / h'02d227ed...ccd3774f'
    ])
 
-2.1.4.2.  Status 404 - Not Found
+3.1.4.2.  Status 404 - Not Found
 
    If there is no Receipt found for the specified EntryID the
    Transparency Service returns a 404 response:
@@ -666,9 +669,9 @@ Table of Contents
              to this Transparency Service"
    }
 
-2.2.  Optional Endpoints
+3.2.  Optional Endpoints
 
-2.2.1.  Exchange Receipt
+3.2.1.  Exchange Receipt
 
    This endpoint is used to exchange old or expiring Receipts for fresh
    ones.
@@ -719,7 +722,7 @@ Table of Contents
 
    Response:
 
-2.2.1.1.  Status 200 - OK
+3.2.1.1.  Status 200 - OK
 
    If a new Receipt can be issued for the given submitted Receipt:
 
@@ -760,7 +763,7 @@ Table of Contents
 
    The following HTTP endpoints are optional to implement.
 
-2.2.2.  Resolve Signed Statement
+3.2.2.  Resolve Signed Statement
 
    This endpoint enables Transparency Service APIs to act like Artifact
    Repositories, and serve Signed Statements directly, instead of
@@ -776,7 +779,7 @@ Table of Contents
 
    One of the following:
 
-2.2.2.1.  Status 200 - Success
+3.2.2.1.  Status 200 - Success
 
    HTTP/1.1 200 OK
    Content-Type: application/cose
@@ -790,7 +793,7 @@ Table of Contents
      h'269cd68f4211dffc...0dcb29c' / Signature          /
    ])
 
-2.2.2.2.  Status 404 - Not Found
+3.2.2.2.  Status 404 - Not Found
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -804,13 +807,13 @@ Table of Contents
      / detail /        -2: \
              "No Signed Statement found with the specified ID"
 
-2.2.2.3.  Eventual Consistency
+3.2.2.3.  Eventual Consistency
 
    For all responses additional eventually consistent operation details
    MAY be present.  Support for eventually consistent Receipts is
    implementation specific, and out of scope for this specification.
 
-2.2.3.  Resolve Issuer
+3.2.3.  Resolve Issuer
 
    This endpoint is inspired by [I-D.draft-ietf-oauth-sd-jwt-vc].
 
@@ -857,14 +860,14 @@ Table of Contents
      }
    }
 
-3.  Privacy Considerations
+4.  Privacy Considerations
 
    The privacy considerations section of
    [I-D.draft-ietf-scitt-architecture] applies to this document.
 
-4.  Security Considerations
+5.  Security Considerations
 
-4.1.  General Scope
+5.1.  General Scope
 
    This document describes the interoperable API for client calls to,
    and implementations of, a Transparency Service as specified in
@@ -875,7 +878,7 @@ Table of Contents
    cryptographic envelopes, verifiable data structures and the like are
    handled elsewhere and out of scope for this document.
 
-4.2.  Applicable Environment
+5.2.  Applicable Environment
 
    SCITT is concerned with issues of cross-boundary supply-chain-wide
    data integrity and as such must assume a very wide range of
@@ -883,7 +886,7 @@ Table of Contents
    security of the computing environment in which any client
    implementation of this specification runs.
 
-4.3.  User-host Authentication
+5.3.  User-host Authentication
 
    [I-D.draft-ietf-scitt-architecture] defines 2 distinct roles that
    require authentication: Issuers who sign Statements, and Clients that
@@ -906,9 +909,9 @@ Table of Contents
    and Transparency Services implementing this specification SHOULD
    allow for the revocation and rolling of authentication secrets.
 
-4.4.  Primary Threats
+5.4.  Primary Threats
 
-4.4.1.  In Scope
+5.4.1.  In Scope
 
    The most serious threats to implementations on Transparency Services
    are ones that would cause the failure of their main promises, to wit:
@@ -923,7 +926,7 @@ Table of Contents
       the presentation or verification of divergent proofs for the same
       Statement payload
 
-4.4.1.1.  Denial of Service Attacks
+5.4.1.1.  Denial of Service Attacks
 
    While denial of service attacks are very hard to defend against
    completely, and Transparency Services are unlikely to be in the
@@ -945,7 +948,7 @@ Table of Contents
    general good practice around network attacks, flooding, rate limiting
    etc.
 
-4.4.1.2.  Eavesdropping
+5.4.1.2.  Eavesdropping
 
    Since the purpose of this API is to ultimately put the message
    payloads on a Transparency Log there is limited risk to
@@ -954,12 +957,12 @@ Table of Contents
    protections against man-in-the-middle and network eavesdropping, such
    as TLS.
 
-4.4.1.3.  Message Modification Attacks
+5.4.1.3.  Message Modification Attacks
 
    Modification attacks are mitigated by the use of the Issuer signature
    on the Signed Statement.
 
-4.4.1.4.  Message Insertion Attacks
+5.4.1.4.  Message Insertion Attacks
 
    Insertion attacks are mitigated by the use of the Issuer signature on
    the Signed Statement, therefore care must be taken in the protection
@@ -969,9 +972,9 @@ Table of Contents
    as anomaly detection or rate limiting in order to mitigate the impact
    of any breach.
 
-4.4.2.  Out of Scope
+5.4.2.  Out of Scope
 
-4.4.2.1.  Replay Attacks
+5.4.2.1.  Replay Attacks
 
    Replay attacks are not particularly concerning for SCITT or SCRAPI:
    Once a statement is made, it is intended to be immutable and non-
@@ -985,16 +988,16 @@ Table of Contents
    susceptible to replay attacks in this way then timestamps MAY be
    added to the protected header signed by the Issuer.
 
-4.4.2.2.  Message Deletion Attacks
+5.4.2.2.  Message Deletion Attacks
 
    Once registered with a Transparency Service, Registered Signed
    Statements cannot be deleted.  Thus, any message deletion attack must
    occur prior to registration else it is indistinguishable from a man-
    in-the-middle or denial-of-service attack on this interface.
 
-5.  IANA Considerations
+6.  IANA Considerations
 
-5.1.  Well-Known URI for Key Discovery
+6.1.  Well-Known URI for Key Discovery
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
@@ -1003,9 +1006,9 @@ Table of Contents
    document(s): RFCthis Status: Permanent Related information:
    [I-D.draft-ietf-scitt-architecture]
 
-6.  References
+7.  References
 
-6.1.  Normative References
+7.1.  Normative References
 
    [I-D.draft-ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
@@ -1043,7 +1046,7 @@ Table of Contents
               DOI 10.17487/RFC9290, October 2022,
               <https://www.rfc-editor.org/rfc/rfc9290>.
 
-6.2.  Informative References
+7.2.  Informative References
 
    [I-D.draft-ietf-oauth-sd-jwt-vc]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
