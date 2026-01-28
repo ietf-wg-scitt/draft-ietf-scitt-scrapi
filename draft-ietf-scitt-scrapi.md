@@ -65,6 +65,7 @@ normative:
   RFC7515:
   RFC4648:
   RFC9679:
+  RFC7235:
 
 informative:
   I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
@@ -113,7 +114,7 @@ This specification uses "payload" as defined in {{RFC9052}}.
 
 # Authentication
 
-Authentication is out of scope for this document.
+Authentication is out of scope for this document, and is expected to follow {{RFC9110}}.
 Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.
 If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be implemented.
 
