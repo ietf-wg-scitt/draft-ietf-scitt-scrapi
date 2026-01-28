@@ -144,9 +144,14 @@ Examples of errors may include:
 Most error types are specific to the type of request and are defined in the respective subsections below.
 The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:
 
-```
-Error code: `malformed` (The request could not be parsed)
-```
+~~~ cbor-diag
+{
+  / title /         -1: \
+            "Malformed request",
+  / detail /        -2: \
+            "The request could not be parsed"
+}
+~~~
 
 Clients SHOULD treat 500 and 503 HTTP status code responses as transient failures and MAY retry the same request without modification at a later date.
 
