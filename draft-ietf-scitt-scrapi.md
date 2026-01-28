@@ -158,9 +158,9 @@ Clients SHOULD treat 500 and 503 HTTP status code responses as transient failure
 Note that in the case of any error response, the Transparency Service MAY include a `Retry-After` header field per {{RFC9110}} in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.
 
-## Mandatory
+## Core Endpoints
 
-The following HTTP endpoints are mandatory to implement to enable conformance to this specification.
+The following HTTP endpoints MUST be implemented to enable conformance to this specification.
 
 ### Transparency Service Keys
 
@@ -633,6 +633,8 @@ Content-Type: application/concise-problem-details+cbor
 ~~~
 
 ## Optional Endpoints
+
+These additional, optional endpoints can be implemented for client convenience, but are not required for conformance to this specification.
 
 ### Exchange Receipt
 
