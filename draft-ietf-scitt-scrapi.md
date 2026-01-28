@@ -837,6 +837,55 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
+### Resolve Transparent Statement
+
+This endpoint enables Transparency Service APIs to serve Transparent Statements directly, including the Receipt they have issued for it.
+
+Request:
+
+~~~ http-message
+GET /transparent-statements/9e4f...688a HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+~~~
+
+Response:
+
+One of the following:
+
+#### Status 200 - Success
+
+~~~ http-message
+HTTP/1.1 200 OK
+Content-Type: application/cose
+
+Body (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  null,                         / Detached Payload   /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+#### Status 404 - Not Found
+
+The following expected errors are defined.
+Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+
+~~~ http-message
+HTTP/1.1 404 Not Found
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Not Found",
+  / detail /        -2: \
+          "No Transparent Statement found with the specified ID"
+}
+~~~
+
 #### Eventual Consistency
 
 For all responses additional eventually consistent operation details MAY be present.
