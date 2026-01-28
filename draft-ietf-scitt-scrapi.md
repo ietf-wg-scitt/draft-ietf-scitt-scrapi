@@ -261,7 +261,7 @@ encoding of the empty octet sequence is the empty string.
 (See Appendix C of {{RFC7515}} for notes on implementing base64url
 encoding without padding.)"
 
-The COSE Key Thumbprint defined in {{RFC9679}} is a convenient and well-defined mechanism to assign a `kid` to Transparency Service keys.
+It is RECOMMENDED to use COSE Key Thumbprint, as defined in {{RFC9679}} as the mechanism to assign a `kid` to Transparency Service keys.
 
 ### Register Signed Statement
 
