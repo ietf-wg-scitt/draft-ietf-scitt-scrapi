@@ -163,7 +163,7 @@ Table of Contents
        must take to complete the request, such as follow a redirection,
        or
 
-   2.  an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise
+   2.  an HTTP 4xx or 5xx status code, and the body MUST be a Concise
        Problem Details object (application/concise-problem-details+cbor)
        [RFC9290] containing:
 
