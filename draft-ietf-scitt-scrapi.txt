@@ -196,7 +196,12 @@ Table of Contents
    could not parse the client's request because it did not comply with
    this document:
 
-   Error code: `malformed` (The request could not be parsed)
+   {
+     / title /         -1: \
+               "Malformed request",
+     / detail /        -2: \
+               "The request could not be parsed"
+   }
 
    Clients SHOULD treat 500 and 503 HTTP status code responses as
    transient failures and MAY retry the same request without

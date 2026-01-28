@@ -1362,9 +1362,16 @@ If Authentication is not implemented, rate limiting or other denial of service m
 </div>
 <p id="section-3-9">Most error types are specific to the type of request and are defined in the respective subsections below.
 The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:<a href="#section-3-9" class="pilcrow">¶</a></p>
-<p id="section-3-10"><code>
-Error code: `malformed` (The request could not be parsed)
-</code><a href="#section-3-10" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-3-10">
+<pre>
+{
+  / title /         -1: \
+            "Malformed request",
+  / detail /        -2: \
+            "The request could not be parsed"
+}
+</pre><a href="#section-3-10" class="pilcrow">¶</a>
+</div>
 <p id="section-3-11">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-3-11" class="pilcrow">¶</a></p>
 <p id="section-3-12">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.<a href="#section-3-12" class="pilcrow">¶</a></p>
