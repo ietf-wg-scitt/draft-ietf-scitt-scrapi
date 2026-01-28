@@ -872,6 +872,7 @@ Table of Contents
              "Not Found",
      / detail /        -2: \
              "No Signed Statement found with the specified ID"
+   }
 
 3.2.2.3.  Eventual Consistency
 
