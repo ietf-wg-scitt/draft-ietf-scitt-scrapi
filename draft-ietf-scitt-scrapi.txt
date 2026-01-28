@@ -72,7 +72,7 @@ Table of Contents
      1.1.  Terminology
    2.  Authentication
    3.  Endpoints
-     3.1.  Mandatory
+     3.1.  Core Endpoints
        3.1.1.  Transparency Service Keys
        3.1.2.  Register Signed Statement
        3.1.3.  Query Registration Status
@@ -213,9 +213,9 @@ Table of Contents
    request.  In the absence of this header field, this document does not
    specify a minimum.
 
-3.1.  Mandatory
+3.1.  Core Endpoints
 
-   The following HTTP endpoints are mandatory to implement to enable
+   The following HTTP endpoints MUST be implemented to enable
    conformance to this specification.
 
 3.1.1.  Transparency Service Keys
@@ -675,6 +675,10 @@ Table of Contents
    }
 
 3.2.  Optional Endpoints
+
+   These additional, optional endpoints can be implemented for client
+   convenience, but are not required for conformance to this
+   specification.
 
 3.2.1.  Exchange Receipt
 
