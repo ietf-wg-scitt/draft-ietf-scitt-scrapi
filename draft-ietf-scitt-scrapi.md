@@ -124,7 +124,7 @@ All messages are sent as HTTP GET or POST requests.
 If the Transparency Service cannot process a client's request, it MUST return either:
 
 1. an HTTP 3xx code, indicating to the client additional action they must take to complete the request, such as follow a redirection, or
-1. an HTTP 4xx or 5xx status code, and the body SHOULD be a Concise Problem Details object (application/concise-problem-details+cbor) {{RFC9290}} containing:
+1. an HTTP 4xx or 5xx status code, and the body MUST be a Concise Problem Details object (application/concise-problem-details+cbor) {{RFC9290}} containing:
 
 - title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
 - detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
