@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-27T00:52:55.759325+00:00",
+  "timestamp": "2026-01-29T00:57:43.395881+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1404,15 +1404,15 @@
       "id": "I_kwDOLJjbks7REXwU",
       "title": "Consider a pass with speckit",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/79",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://github.com/github/spec-kit\n\nEasy to point this at the architecture, and ask for its help in flushing out scrapi.\n\nIt will identify gaps and clean up consistency issues.\n\nIt can also pull in the right amount of context from the architecture or other references",
       "createdAt": "2025-10-12T17:31:19Z",
-      "updatedAt": "2025-10-14T14:21:46Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-28T16:37:39Z",
+      "closedAt": "2026-01-28T16:37:39Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -1420,6 +1420,13 @@
           "body": "Not sure speckit is really pointed in the right direction for this kind of work - I see it more like a headless Replit than a consistency chacker.\n\nA general pass with some other LLM might be good though: I like to use Claude/Cursor to do a pass for completeness/consistency of references etc. Would that achieve what you're looking for?",
           "createdAt": "2025-10-14T14:21:46Z",
           "updatedAt": "2025-10-14T14:21:46Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@OR13 you seem to have done a pass that you described in https://mailarchive.ietf.org/arch/msg/scitt/pj-BZIAkfGXeTW4xshHliVUZVzE/, I don't think anyone else is looking at this at the moment, so I will close this for the time being.",
+          "createdAt": "2026-01-28T16:37:39Z",
+          "updatedAt": "2026-01-28T16:37:39Z"
         }
       ]
     },
@@ -1578,15 +1585,15 @@
       "id": "I_kwDOLJjbks7dNMN4",
       "title": "Clarify 2.1.2 key usage statement",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/91",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "aj-stein",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "[Originally from my WGLC feedback on the list](https://mailarchive.ietf.org/arch/msg/scitt/eshM7qu0gePPOxPx-1_M6XZ9wkg/), I would like to know if only current, only historical, or both forms of key material are meant in 2.1.2 with the statement \"This endpoint is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.\"",
       "createdAt": "2025-12-09T14:36:53Z",
-      "updatedAt": "2025-12-10T19:28:19Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-28T16:32:06Z",
+      "closedAt": "2026-01-28T16:32:06Z",
       "comments": [
         {
           "author": "achamayou",
@@ -1594,6 +1601,13 @@
           "body": "Summary of discussion in meeting of Dec 12 2025:\n\n1. The intent is to serve only a recent set of keys\n2. Adding a /$kid endpoint to access (older) keys more efficiently was brought up, and seems useful\n3. If a key is neither in the set, nor accessible through the kid-specific endpoint, guidance is to use the exchange/refresh endpoint\n\n@aj-stein what do you think?",
           "createdAt": "2025-12-10T16:21:45Z",
           "updatedAt": "2025-12-10T19:28:19Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@aj-stein we believe this is addressed by #102, please re-open if you have remaining concerns.",
+          "createdAt": "2026-01-28T16:32:06Z",
+          "updatedAt": "2026-01-28T16:32:06Z"
         }
       ]
     },
@@ -1618,15 +1632,15 @@
       "id": "I_kwDOLJjbks7lWPar",
       "title": "Should the SHOULD for Concise Problem Details be a MUST?",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/99",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Early in endpoints, we say:\n\nhttps://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/8cd484c36af71076002c98a43874d58e78df8463/draft-ietf-scitt-scrapi.md?plain=1#L128\n\nBut we make no mention of valid reasons or particular circumstance where that can be ignored. I expect this to be flagged during review, and propose that we change SHOULD to MUST here, because I cannot come up with reasons why an implementation would like to stray from that, and it would clearly damage interoperability.",
       "createdAt": "2026-01-23T14:57:06Z",
-      "updatedAt": "2026-01-23T17:23:03Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-28T16:30:59Z",
+      "closedAt": "2026-01-28T16:30:59Z",
       "comments": [
         {
           "author": "JAG-UK",
@@ -1643,6 +1657,62 @@
           "updatedAt": "2026-01-23T17:23:03Z"
         }
       ]
+    },
+    {
+      "number": 105,
+      "id": "I_kwDOLJjbks7mcX4T",
+      "title": "Add missing fetch Transparent Statement endpoint",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/105",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-28T16:10:31Z",
+      "updatedAt": "2026-01-28T16:10:31Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 106,
+      "id": "I_kwDOLJjbks7mcYOl",
+      "title": "Add a reference to RFC7235 for HTTP authentication",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/106",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-28T16:10:51Z",
+      "updatedAt": "2026-01-28T16:58:15Z",
+      "closedAt": "2026-01-28T16:58:15Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Meeting consensus is that this extra wording is not helpful and artificially constraining, \"out of scope is sufficient\".",
+          "createdAt": "2026-01-28T16:58:15Z",
+          "updatedAt": "2026-01-28T16:58:15Z"
+        }
+      ]
+    },
+    {
+      "number": 110,
+      "id": "I_kwDOLJjbks7mdTU0",
+      "title": "Signed and Transparent Statement return samples show detached payloads",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/110",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Detached payloads are not supported by the SCITT Architecture, since they cannot be verified on their own. The samples must be amended with realistic COSE Hash Envelope payloads.\n\nThe Transparent Endpoint statement must include a sample receipt too.",
+      "createdAt": "2026-01-28T17:04:36Z",
+      "updatedAt": "2026-01-28T17:04:36Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -8613,24 +8683,26 @@
       "id": "PR_kwDOLJjbks6-8u7G",
       "title": "Update introduction to match document contents",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/97",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The introduction has not been updated as the document became more focused in its endpoint coverage, this PR attempts to correct that and only describe what the document currently contains.",
       "createdAt": "2026-01-23T14:48:38Z",
-      "updatedAt": "2026-01-26T17:28:41Z",
+      "updatedAt": "2026-01-28T16:08:58Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "update_introduction",
       "headRefOid": "d8a5314e39fc50ceed7c852b2e8df371f611bd2d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-01-28T16:08:58Z",
+      "mergedAt": "2026-01-28T16:08:57Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "1761c94d0a7d1035a81ad59438b9cbc4e76bf18e"
+      },
       "comments": [
         {
           "author": "achamayou",
@@ -8666,6 +8738,19 @@
           "createdAt": "2026-01-26T17:28:41Z",
           "updatedAt": "2026-01-26T17:28:41Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dleZC",
+          "commit": {
+            "abbreviatedOid": "d8a5314"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "+1 for brevity",
+          "createdAt": "2026-01-28T16:05:34Z",
+          "updatedAt": "2026-01-28T16:05:34Z",
+          "comments": []
         }
       ]
     },
@@ -8674,24 +8759,26 @@
       "id": "PR_kwDOLJjbks6-8xaO",
       "title": "Split authentication section",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/98",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I think splitting authentication into its own section makes for easier reading. Opinion welcome.",
       "createdAt": "2026-01-23T14:51:27Z",
-      "updatedAt": "2026-01-26T17:30:05Z",
+      "updatedAt": "2026-01-28T16:11:02Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "split_authentication_section",
       "headRefOid": "36707c6a558f10b32eefffb932a814e0c9d4d9b5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-01-28T16:11:02Z",
+      "mergedAt": "2026-01-28T16:11:02Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "7eaa64e820388103edc358fe108f18b1a4280b78"
+      },
       "comments": [
         {
           "author": "JAG-UK",
@@ -8781,6 +8868,19 @@
           "createdAt": "2026-01-26T17:30:05Z",
           "updatedAt": "2026-01-26T17:30:05Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dle2C",
+          "commit": {
+            "abbreviatedOid": "36707c6"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "yes",
+          "createdAt": "2026-01-28T16:05:58Z",
+          "updatedAt": "2026-01-28T16:05:58Z",
+          "comments": []
         }
       ]
     },
@@ -8789,24 +8889,26 @@
       "id": "PR_kwDOLJjbks6-87I2",
       "title": "Make Malformed request error consistent with others",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/100",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This error seems to have been forgotten when Concise Problem Details were adopted in #38.",
       "createdAt": "2026-01-23T15:01:25Z",
-      "updatedAt": "2026-01-26T17:31:01Z",
+      "updatedAt": "2026-01-28T16:12:18Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "make_malformed_error_consistent_with_cpd",
       "headRefOid": "a1e25d0bdd3176cd547736828116d3f0d76de33b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-01-28T16:12:18Z",
+      "mergedAt": "2026-01-28T16:12:18Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "f8c5ece6432d1d6b4e590bd1f9d5481dd6f60dc7"
+      },
       "comments": [
         {
           "author": "achamayou",
@@ -8868,6 +8970,19 @@
           "createdAt": "2026-01-26T17:31:01Z",
           "updatedAt": "2026-01-26T17:31:01Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dlhXc",
+          "commit": {
+            "abbreviatedOid": "a1e25d0"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "+1 example",
+          "createdAt": "2026-01-28T16:08:09Z",
+          "updatedAt": "2026-01-28T16:08:09Z",
+          "comments": []
         }
       ]
     },
@@ -8876,24 +8991,26 @@
       "id": "PR_kwDOLJjbks6-9Cf-",
       "title": "Clarify Core vs Optional endpoints",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/101",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The introduction previously did not qualify mandatory endpoints, which were in a Mandatory section, and gave a list of \"supporting endpoints\".\r\n\r\n#97 uses the terms \"core\" and \"optional\", this change updates the section titles accordingly, and uses BCP14 language (`MUST`) rather than \"are mandatory\" for the core endpoints.",
       "createdAt": "2026-01-23T15:09:20Z",
-      "updatedAt": "2026-01-26T17:35:57Z",
+      "updatedAt": "2026-01-28T16:15:28Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "clarify_core_vs_optional",
-      "headRefOid": "da7592468ac7c566b46670fa7c1a9c0b850c11cd",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "d430600e6ee06a4bc76f48e923be8d831b68a411",
+      "closedAt": "2026-01-28T16:15:28Z",
+      "mergedAt": "2026-01-28T16:15:28Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "9e4edd2869a73ab33c41c1a85a3c4654b6e282e0"
+      },
       "comments": [],
       "reviews": [
         {
@@ -8934,6 +9051,79 @@
           "createdAt": "2026-01-26T17:35:57Z",
           "updatedAt": "2026-01-26T17:35:57Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dlilJ",
+          "commit": {
+            "abbreviatedOid": "da75924"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-28T16:09:09Z",
+          "updatedAt": "2026-01-28T16:09:10Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I understand \"adding adjectives\" is not wise... just \"core\", though?",
+              "createdAt": "2026-01-28T16:09:09Z",
+              "updatedAt": "2026-01-28T16:09:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dlm24",
+          "commit": {
+            "abbreviatedOid": "da75924"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-28T16:12:59Z",
+          "updatedAt": "2026-01-28T16:12:59Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\n## Core Endpoints\n```",
+              "createdAt": "2026-01-28T16:12:59Z",
+              "updatedAt": "2026-01-28T16:12:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dlnC2",
+          "commit": {
+            "abbreviatedOid": "da75924"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-28T16:13:08Z",
+          "updatedAt": "2026-01-28T16:13:09Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\n## Optional Endpoints\n```",
+              "createdAt": "2026-01-28T16:13:08Z",
+              "updatedAt": "2026-01-28T16:13:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dlouU",
+          "commit": {
+            "abbreviatedOid": "d430600"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-28T16:14:38Z",
+          "updatedAt": "2026-01-28T16:14:38Z",
+          "comments": []
         }
       ]
     },
@@ -8942,24 +9132,26 @@
       "id": "PR_kwDOLJjbks6-9dx5",
       "title": "Clarify key retention and add single key resolution",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/102",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses #91 by clarifying that the service does not need to retain keys for all time, and adding a single key resolution mechanism.\r\n\r\nI have not added the wording to propose exchanging the receipt, because that endpoint is currently optional. I think we should either leave it out, or include it and make exchange a core endpoint. To be discussed in the meeting.",
       "createdAt": "2026-01-23T15:38:30Z",
-      "updatedAt": "2026-01-26T17:36:51Z",
+      "updatedAt": "2026-01-28T16:26:09Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "clarify_key_retention_and_add_single_key_resolution",
-      "headRefOid": "05fc652d065965cff9f9a2a0296b30d566896e38",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "09dfd077900d4ec3b7ea713f861c2d0634190295",
+      "closedAt": "2026-01-28T16:26:09Z",
+      "mergedAt": "2026-01-28T16:26:09Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "59e93566a4783061516abb837763e1cbcf9e3966"
+      },
       "comments": [],
       "reviews": [
         {
@@ -9000,6 +9192,59 @@
           "createdAt": "2026-01-26T17:36:51Z",
           "updatedAt": "2026-01-26T17:36:51Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dljb4",
+          "commit": {
+            "abbreviatedOid": "05fc652"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-28T16:09:55Z",
+          "updatedAt": "2026-01-28T16:09:55Z",
+          "comments": [
+            {
+              "originalPosition": 71,
+              "body": "prose :-)",
+              "createdAt": "2026-01-28T16:09:55Z",
+              "updatedAt": "2026-01-28T16:09:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dlyiQ",
+          "commit": {
+            "abbreviatedOid": "05fc652"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-28T16:23:05Z",
+          "updatedAt": "2026-01-28T16:23:06Z",
+          "comments": [
+            {
+              "originalPosition": 71,
+              "body": "```suggestion\nIt is RECOMMENDED to use COSE Key Thumbprint, as defined in {{RFC9679}} as the mechanism to assign a `kid` to Transparency Service keys.\n```",
+              "createdAt": "2026-01-28T16:23:05Z",
+              "updatedAt": "2026-01-28T16:23:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dlz26",
+          "commit": {
+            "abbreviatedOid": "09dfd07"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-28T16:24:10Z",
+          "updatedAt": "2026-01-28T16:24:10Z",
+          "comments": []
         }
       ]
     },
@@ -9008,24 +9253,26 @@
       "id": "PR_kwDOLJjbks6-9zkS",
       "title": "Drop Resolve Issuer endpoint",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/103",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I propose that we drop the optional Resolve Issuer endpoint, because:\r\n\r\n1. It does not conceptually fit in the Transparency Service, and is clearly something that a separate Identity Service typically provides.\r\n2. It is the only endpoint that returns JSON, in an other all CBOR/COSE service.\r\n3. There are no TS implementations with such an endpoint, as far as I know.\r\n\r\nTransparency Services that wish to implement that endpoint, or something similar, will be able to do so regardless.",
       "createdAt": "2026-01-23T16:04:02Z",
-      "updatedAt": "2026-01-26T17:37:38Z",
+      "updatedAt": "2026-01-28T16:28:13Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "drop_resolve_issuer_endpoint",
       "headRefOid": "c7bfdd4a7b4717087de6edd87e7b71deae58a09c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-01-28T16:28:13Z",
+      "mergedAt": "2026-01-28T16:28:12Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "273ea8f6fbcbad160a165b9556b825ada4dec834"
+      },
       "comments": [],
       "reviews": [
         {
@@ -9079,8 +9326,238 @@
           "createdAt": "2026-01-26T17:37:38Z",
           "updatedAt": "2026-01-26T17:37:38Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dlj6x",
+          "commit": {
+            "abbreviatedOid": "c7bfdd4"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "yes",
+          "createdAt": "2026-01-28T16:10:21Z",
+          "updatedAt": "2026-01-28T16:10:21Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 104,
+      "id": "PR_kwDOLJjbks6_3ctY",
+      "title": "Update error response requirements in Transparency Service",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/104",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Changed the requirement for the body of HTTP 4xx or 5xx responses to be a MUST instead of a SHOULD. Closes #99.",
+      "createdAt": "2026-01-28T14:07:10Z",
+      "updatedAt": "2026-01-28T16:30:58Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "8cd484c36af71076002c98a43874d58e78df8463",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-8",
+      "headRefOid": "b445adb1b57290b3af62a317c6d0b335b0674a8f",
+      "closedAt": "2026-01-28T16:30:57Z",
+      "mergedAt": "2026-01-28T16:30:57Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "ccb3dfe3f8af005420cece18cda7a4290a25d1ee"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7djRcM",
+          "commit": {
+            "abbreviatedOid": "b445adb"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGRM",
+          "createdAt": "2026-01-28T14:26:44Z",
+          "updatedAt": "2026-01-28T14:26:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dlkZf",
+          "commit": {
+            "abbreviatedOid": "b445adb"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-28T16:10:44Z",
+          "updatedAt": "2026-01-28T16:10:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dl_Gc",
+          "commit": {
+            "abbreviatedOid": "b445adb"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-28T16:30:43Z",
+          "updatedAt": "2026-01-28T16:30:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 107,
+      "id": "PR_kwDOLJjbks6_53uy",
+      "title": "Fix formatting in draft-ietf-scitt-scrapi.md",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/107",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Missing bracket",
+      "createdAt": "2026-01-28T16:49:40Z",
+      "updatedAt": "2026-01-28T16:53:36Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "ccb3dfe3f8af005420cece18cda7a4290a25d1ee",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-9",
+      "headRefOid": "ef242524a1e5c468d05ea0f095c70f94075270e1",
+      "closedAt": "2026-01-28T16:53:36Z",
+      "mergedAt": "2026-01-28T16:53:36Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "53d9bbaab8130dae8c76cb051379d94d87211f14"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7dmauB",
+          "commit": {
+            "abbreviatedOid": "ef24252"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-28T16:50:21Z",
+          "updatedAt": "2026-01-28T16:50:21Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dmbMT",
+          "commit": {
+            "abbreviatedOid": "ef24252"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-28T16:50:38Z",
+          "updatedAt": "2026-01-28T16:50:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 108,
+      "id": "PR_kwDOLJjbks6_57Re",
+      "title": "Update authentication section with RFC9110 reference",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/108",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Clarified authentication scope and referenced RFC9110, closes #106.",
+      "createdAt": "2026-01-28T16:52:55Z",
+      "updatedAt": "2026-01-28T16:58:05Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "ccb3dfe3f8af005420cece18cda7a4290a25d1ee",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-10",
+      "headRefOid": "ca39c5261e0fcc8010a0689e8b07ac0c7365badc",
+      "closedAt": "2026-01-28T16:58:05Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Meeting consensus is that this extra wording is not helpful and artificially constraining, \"out of scope is sufficient\".",
+          "createdAt": "2026-01-28T16:58:05Z",
+          "updatedAt": "2026-01-28T16:58:05Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7dme5r",
+          "commit": {
+            "abbreviatedOid": "b7b9011"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-28T16:53:11Z",
+          "updatedAt": "2026-01-28T16:53:12Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\n  RFC9110:\n```",
+              "createdAt": "2026-01-28T16:53:12Z",
+              "updatedAt": "2026-01-28T16:53:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7dmfc1",
+          "commit": {
+            "abbreviatedOid": "ca39c52"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-28T16:53:35Z",
+          "updatedAt": "2026-01-28T16:53:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 109,
+      "id": "PR_kwDOLJjbks6_6ETb",
+      "title": "Add endpoint for resolving Transparent Statements",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/109",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Added endpoint for resolving Transparent Statements with example requests and responses. Closes #105.",
+      "createdAt": "2026-01-28T17:01:42Z",
+      "updatedAt": "2026-01-28T17:01:42Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "53d9bbaab8130dae8c76cb051379d94d87211f14",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-11",
+      "headRefOid": "6912925154e16100d044f49dcb852a6a51299ab1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
