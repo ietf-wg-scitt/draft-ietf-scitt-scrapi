@@ -815,7 +815,7 @@ Body (in CBOR diagnostic notation)
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
   {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
+  h'b158a1...0149a9',           / Payload            /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
 ~~~
@@ -863,8 +863,12 @@ Body (in CBOR diagnostic notation)
 
 18([                            / COSE Sign1         /
   h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  null,                         / Detached Payload   /
+  {                             / Unprotected Header /
+    394:   [                    / Receipts           /
+      h'd284586c...4191f9d2'    / Receipt            /
+    ]
+  },
+  h'b158a1...0149a9',           / Payload            /
   h'269cd68f4211dffc...0dcb29c' / Signature          /
 ])
 ~~~
