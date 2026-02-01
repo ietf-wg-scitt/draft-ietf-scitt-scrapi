@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-29T00:57:43.395881+00:00",
+  "timestamp": "2026-02-01T01:08:11.601018+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -9543,21 +9543,89 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "Added endpoint for resolving Transparent Statements with example requests and responses. Closes #105.",
+      "body": "Added endpoint for resolving Transparent Statements with example requests and responses. Closes #105 and #110 along the way.",
       "createdAt": "2026-01-28T17:01:42Z",
-      "updatedAt": "2026-01-28T17:01:42Z",
+      "updatedAt": "2026-01-30T19:49:59Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "53d9bbaab8130dae8c76cb051379d94d87211f14",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "achamayou-patch-11",
-      "headRefOid": "6912925154e16100d044f49dcb852a6a51299ab1",
+      "headRefOid": "6da28224159490abbdee02618f90c0622e01351c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> LGTM. I assume 404 is a sneaky 'not authorized' response too ;-)\r\n\r\nWell, the door is technically left open to implementations who want to 401/403 by:\r\n\r\n> Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.\r\n\r\nBut unless you're willing to effectively leak a bit to unauthorised callers telling them whether the statement is in the registered sequence or not, you should probably return 404 uniformly.",
+          "createdAt": "2026-01-30T19:08:58Z",
+          "updatedAt": "2026-01-30T19:08:58Z"
+        },
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Jon,\r\n\r\n \r\n\r\nWe return 403 Forbidden when requests are invalid. We front end with Apache, so 401 is also possible.\r\n\r\n \r\n\r\nThanks,\r\n\r\n \r\n\r\nDick Brooks\r\n\r\n   \r\n\r\nActive Member of the CISA Critical Manufacturing Sector, \r\n\r\nSector Coordinating Council \u2013 A Public-Private Partnership\r\n\r\nLifetime IEEE Member\r\n\r\n <https://reliableenergyanalytics.com/products> Never trust software, always verify and report! \u2122\r\n\r\nRisk always exists, but trust must be earned and awarded.\u2122 \r\n\r\nhttps://businesscyberguardian.com/ \r\n\r\nEmail: ***@***.***\r\n\r\nTel: +1 978-696-1788\r\n\r\n \r\n\r\n \r\n\r\nFrom: Jon Geater ***@***.***> \r\nSent: Friday, January 30, 2026 1:06 PM\r\nTo: ietf-wg-scitt/draft-ietf-scitt-scrapi ***@***.***>\r\nCc: Dick Brooks (BCG) ***@***.***>; Review requested ***@***.***>\r\nSubject: Re: [ietf-wg-scitt/draft-ietf-scitt-scrapi] Add endpoint for resolving Transparent Statements (PR #109)\r\n\r\n \r\n\r\n@JAG-UK approved this pull request.\r\n\r\nLGTM. I assume 404 is a sneaky 'not authorized' response too ;-)\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub <https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/109#pullrequestreview-3729702932> , or unsubscribe <https://github.com/notifications/unsubscribe-auth/ABFI3NCL4UZ6CZAUVU5F2OL4JOMQDAVCNFSM6AAAAACTGOOOXGVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZTOMRZG4YDEOJTGI> .\r\nYou are receiving this because your review was requested.Message ID: ***@***.***>\r\n\r\n",
+          "createdAt": "2026-01-30T19:49:59Z",
+          "updatedAt": "2026-01-30T19:49:59Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7eSWjj",
+          "commit": {
+            "abbreviatedOid": "6da2822"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-30T16:43:04Z",
+          "updatedAt": "2026-01-30T16:43:04Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7eSm0K",
+          "commit": {
+            "abbreviatedOid": "6da2822"
+          },
+          "author": "nikcal",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM.",
+          "createdAt": "2026-01-30T16:58:07Z",
+          "updatedAt": "2026-01-30T16:58:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7eTQeC",
+          "commit": {
+            "abbreviatedOid": "6da2822"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-01-30T17:38:09Z",
+          "updatedAt": "2026-01-30T17:38:09Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7eTsAU",
+          "commit": {
+            "abbreviatedOid": "6da2822"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM. I assume 404 is a sneaky 'not authorized' response too ;-)",
+          "createdAt": "2026-01-30T18:05:30Z",
+          "updatedAt": "2026-01-30T18:05:30Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
