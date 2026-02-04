@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 1 August 2026                                   DataTrails Inc.
-                                                         28 January 2026
+Expires: 8 August 2026                                   DataTrails Inc.
+                                                         4 February 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 August 2026.
+   This Internet-Draft will expire on 8 August 2026.
 
 Copyright Notice
 
@@ -81,6 +81,7 @@ Table of Contents
      3.2.  Optional Endpoints
        3.2.1.  Exchange Receipt
        3.2.2.  Resolve Signed Statement
+       3.2.3.  Resolve Transparent Statement
    4.  Privacy Considerations
    5.  Security Considerations
      5.1.  General Scope
@@ -855,7 +856,7 @@ Table of Contents
    18([                            / COSE Sign1         /
      h'a1013822',                  / Protected Header   /
      {},                           / Unprotected Header /
-     null,                         / Detached Payload   /
+     h'b158a1...0149a9',           / Payload            /
      h'269cd68f4211dffc...0dcb29c' / Signature          /
    ])
 
@@ -874,7 +875,55 @@ Table of Contents
              "No Signed Statement found with the specified ID"
    }
 
-3.2.2.3.  Eventual Consistency
+3.2.3.  Resolve Transparent Statement
+
+   This endpoint enables Transparency Service APIs to serve Transparent
+   Statements directly, including the Receipt they have issued for it.
+
+   Request:
+
+   GET /transparent-statements/9e4f...688a HTTP/1.1
+   Host: transparency.example
+   Accept: application/cose
+
+   Response:
+
+   One of the following:
+
+3.2.3.1.  Status 200 - Success
+
+   HTTP/1.1 200 OK
+   Content-Type: application/cose
+
+   Body (in CBOR diagnostic notation)
+
+   18([                            / COSE Sign1         /
+     h'a1013822',                  / Protected Header   /
+     {                             / Unprotected Header /
+       394:   [                    / Receipts           /
+         h'd284586c...4191f9d2'    / Receipt            /
+       ]
+     },
+     h'b158a1...0149a9',           / Payload            /
+     h'269cd68f4211dffc...0dcb29c' / Signature          /
+   ])
+
+3.2.3.2.  Status 404 - Not Found
+
+   The following expected errors are defined.  Implementations MAY
+   return other errors, so long as they are valid [RFC9290] objects.
+
+   HTTP/1.1 404 Not Found
+   Content-Type: application/concise-problem-details+cbor
+
+   {
+     / title /         -1: \
+             "Not Found",
+     / detail /        -2: \
+             "No Transparent Statement found with the specified ID"
+   }
+
+3.2.3.3.  Eventual Consistency
 
    For all responses additional eventually consistent operation details
    MAY be present.  Support for eventually consistent Receipts is
