@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-01T01:08:11.601018+00:00",
+  "timestamp": "2026-02-05T00:59:31.581055+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1663,15 +1663,15 @@
       "id": "I_kwDOLJjbks7mcX4T",
       "title": "Add missing fetch Transparent Statement endpoint",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/105",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-01-28T16:10:31Z",
-      "updatedAt": "2026-01-28T16:10:31Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-04T16:33:43Z",
+      "closedAt": "2026-02-04T16:33:43Z",
       "comments": []
     },
     {
@@ -1703,16 +1703,24 @@
       "id": "I_kwDOLJjbks7mdTU0",
       "title": "Signed and Transparent Statement return samples show detached payloads",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/110",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Detached payloads are not supported by the SCITT Architecture, since they cannot be verified on their own. The samples must be amended with realistic COSE Hash Envelope payloads.\n\nThe Transparent Endpoint statement must include a sample receipt too.",
       "createdAt": "2026-01-28T17:04:36Z",
-      "updatedAt": "2026-01-28T17:04:36Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-02-04T16:35:08Z",
+      "closedAt": "2026-02-04T16:35:07Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Resolved by #109 ",
+          "createdAt": "2026-02-04T16:35:08Z",
+          "updatedAt": "2026-02-04T16:35:08Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -9538,24 +9546,26 @@
       "id": "PR_kwDOLJjbks6_6ETb",
       "title": "Add endpoint for resolving Transparent Statements",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/109",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Added endpoint for resolving Transparent Statements with example requests and responses. Closes #105 and #110 along the way.",
       "createdAt": "2026-01-28T17:01:42Z",
-      "updatedAt": "2026-01-30T19:49:59Z",
+      "updatedAt": "2026-02-04T16:33:42Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "53d9bbaab8130dae8c76cb051379d94d87211f14",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "achamayou-patch-11",
       "headRefOid": "6da28224159490abbdee02618f90c0622e01351c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-04T16:33:42Z",
+      "mergedAt": "2026-02-04T16:33:42Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "d9cb13a2406600be0a492a22231422de27f994e3"
+      },
       "comments": [
         {
           "author": "achamayou",
@@ -9623,6 +9633,19 @@
           "body": "LGTM. I assume 404 is a sneaky 'not authorized' response too ;-)",
           "createdAt": "2026-01-30T18:05:30Z",
           "updatedAt": "2026-01-30T18:05:30Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7fo9mP",
+          "commit": {
+            "abbreviatedOid": "6da2822"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "this is better. thx!",
+          "createdAt": "2026-02-04T16:33:22Z",
+          "updatedAt": "2026-02-04T16:33:22Z",
           "comments": []
         }
       ]
