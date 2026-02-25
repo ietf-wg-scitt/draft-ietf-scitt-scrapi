@@ -62,6 +62,18 @@ contributor:
     country: United States
     contribution: >
       Dick contributed use cases and helped improve example expressiveness and consistency.
+  - ins: R. A. Martin
+    name: Robert Martin
+    organization: MITRE Corporation
+    email: ramartin@mitre.org
+    country: United States
+    contribution: >
+      Bob contributed use cases and helped with authoring and improving the document.
+  - ins: S. Lasker
+    name: Steve Lasker
+    email: stevenlasker@hotmail.com
+    contribution: >
+      Steve contributed architectural insights, particularly around asynchronous operations and participated in the initial writing of the document.
 
 normative:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
