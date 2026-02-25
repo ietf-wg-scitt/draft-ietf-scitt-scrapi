@@ -1173,6 +1173,23 @@ Contributors
    Dick contributed use cases and helped improve example expressiveness
    and consistency.
 
+   Robert Martin
+   MITRE Corporation
+   United States
+   Email: ramartin@mitre.org
+
+
+   Bob contributed use cases and helped with authoring and improving the
+   document.
+
+   Steve Lasker
+   Email: stevenlasker@hotmail.com
+
+
+   Steve contributed architectural insights, particularly around
+   asynchronous operations and participated in the initial writing of
+   the document.
+
 Authors' Addresses
 
    Henk Birkholz
