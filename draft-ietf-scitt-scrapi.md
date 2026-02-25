@@ -212,11 +212,14 @@ The Transparency Service MAY stop returning at that endpoint the keys it no long
 This endpoint is used to resolve a single public key, from a `kid` value contained in a Receipt previously issued by the Transparency Service.
 
 Request:
+
 ~~~ http-message
 GET /.well-known/scitt-keys/{kid_value} HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
 ~~~
+
+Response:
 
 ~~~ http-message
 HTTP/1.1 200 OK
@@ -235,8 +238,7 @@ Body (in CBOR diagnostic notation)
 ]
 ~~~
 
-The following expected error is defined.
-Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+The following expected error is defined:
 
 ~~~ http-message
 HTTP/1.1 404 Not Found
@@ -247,6 +249,8 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: "No key could be found for this kid value"
 }
 ~~~
+
+Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
 
 If the `kid` values used by the service (`{kid_value}` in the request above) are not URL-safe, the endpoint MUST accept the base64url encoding of the `kid` value, without padding, in the URL instead.
 
