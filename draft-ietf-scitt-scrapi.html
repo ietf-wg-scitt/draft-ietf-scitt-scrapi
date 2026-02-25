@@ -1435,13 +1435,16 @@ Body (in CBOR diagnostic notation)
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-individual-transparency-ser" class="section-name selfRef">Individual Transparency Service Key</a>
           </h4>
 <p id="section-3.1.2-1">This endpoint is used to resolve a single public key, from a <code>kid</code> value contained in a Receipt previously issued by the Transparency Service.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-2">Request:
-~~~ http-message
+<p id="section-3.1.2-2">Request:<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.1.2-3">
+<pre>
 GET /.well-known/scitt-keys/{kid_value} HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
-~~~<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.2-3">
+</pre><a href="#section-3.1.2-3" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1.2-4">Response:<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.1.2-5">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/cbor
@@ -1457,11 +1460,10 @@ Body (in CBOR diagnostic notation)
     2:'kid_value'
   }
 ]
-</pre><a href="#section-3.1.2-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.1.2-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.2-4">The following expected error is defined.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.2-5">
+<p id="section-3.1.2-6">The following expected error is defined:<a href="#section-3.1.2-6" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.1.2-7">
 <pre>
 HTTP/1.1 404 Not Found
 Content-Type: application/concise-problem-details+cbor
@@ -1470,19 +1472,20 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: "No such key",
   / detail /        -2: "No key could be found for this kid value"
 }
-</pre><a href="#section-3.1.2-5" class="pilcrow">¶</a>
+</pre><a href="#section-3.1.2-7" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.2-6">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the endpoint <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-3.1.2-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-7"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-3.1.2-7" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-8"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-3.1.2-8" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-9">"Base64 encoding using the URL- and filename-safe character set
+<p id="section-3.1.2-8">Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.1.2-8" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-9">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the endpoint <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-3.1.2-9" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-10"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-3.1.2-10" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-11"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-3.1.2-11" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-12">"Base64 encoding using the URL- and filename-safe character set
 defined in Section 5 of RFC 4648 <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, with all trailing '='
 characters omitted and without the inclusion of any line breaks,
 whitespace, or other additional characters.  Note that the base64url
 encoding of the empty octet sequence is the empty string.
 (See Appendix C of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> for notes on implementing base64url
-encoding without padding.)"<a href="#section-3.1.2-9" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-10">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.<a href="#section-3.1.2-10" class="pilcrow">¶</a></p>
+encoding without padding.)"<a href="#section-3.1.2-12" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-13">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.<a href="#section-3.1.2-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-register-signed-statement">

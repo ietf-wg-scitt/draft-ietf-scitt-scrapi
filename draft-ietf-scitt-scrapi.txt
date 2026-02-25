@@ -267,8 +267,13 @@ Table of Contents
    value contained in a Receipt previously issued by the Transparency
    Service.
 
-   Request: ~~~ http-message GET /.well-known/scitt-keys/{kid_value}
-   HTTP/1.1 Host: transparency.example Accept: application/cbor ~~~
+   Request:
+
+   GET /.well-known/scitt-keys/{kid_value} HTTP/1.1
+   Host: transparency.example
+   Accept: application/cbor
+
+   Response:
 
    HTTP/1.1 200 OK
    Content-Type: application/cbor
@@ -285,8 +290,7 @@ Table of Contents
      }
    ]
 
-   The following expected error is defined.  Implementations MAY return
-   other errors, so long as they are valid [RFC9290] objects.
+   The following expected error is defined:
 
    HTTP/1.1 404 Not Found
    Content-Type: application/concise-problem-details+cbor
@@ -295,6 +299,9 @@ Table of Contents
      / title /         -1: "No such key",
      / detail /        -2: "No key could be found for this kid value"
    }
+
+   Implementations MAY return other errors, so long as they are valid
+   [RFC9290] objects.
 
    If the kid values used by the service ({kid_value} in the request
    above) are not URL-safe, the endpoint MUST accept the base64url
