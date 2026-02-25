@@ -67,9 +67,6 @@ normative:
   RFC9679:
 
 informative:
-  I-D.draft-ietf-oauth-sd-jwt-vc: SD-JWT-VC
-  RFC2046:
-  RFC6838:
   RFC8792:
 
 entity:
