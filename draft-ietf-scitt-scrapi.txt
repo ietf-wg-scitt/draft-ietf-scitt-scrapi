@@ -1156,6 +1156,15 @@ Contributors
    implementations, improve example expressiveness and consistency, as
    well as overall document quality.
 
+   Dick Brooks
+   Business Cyber Guardian
+   United States
+   Email: dick@businesscyberguardian.com
+
+
+   Dick contributed use cases and helped improve example expressiveness
+   and consistency.
+
 Authors' Addresses
 
    Henk Birkholz
