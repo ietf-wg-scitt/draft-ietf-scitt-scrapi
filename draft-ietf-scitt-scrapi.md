@@ -74,6 +74,13 @@ contributor:
     email: stevenlasker@hotmail.com
     contribution: >
       Steve contributed architectural insights, particularly around asynchronous operations and participated in the initial writing of the document.
+  - ins: N. Bates
+    name: Nicole Bates
+    organization: Microsoft
+    email: nicolebates@microsoft.com
+    country: United States
+    contribution: >
+      Nicole contributed reviews and edits that improved the quality of the text.
 
 normative:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
