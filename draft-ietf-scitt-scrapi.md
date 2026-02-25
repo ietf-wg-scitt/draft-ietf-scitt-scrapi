@@ -55,6 +55,13 @@ contributor:
     country: United Kingdom
     contribution: >
       Amaury contributed crucial content to ensure interoperability between implementations, improve example expressiveness and consistency, as well as overall document quality.
+  - ins: D. Brooks
+    name: Dick Brooks
+    organization: Business Cyber Guardian
+    email: dick@businesscyberguardian.com
+    country: United States
+    contribution: >
+      Dick contributed use cases and helped improve example expressiveness and consistency.
 
 normative:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
