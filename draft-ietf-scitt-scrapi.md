@@ -194,15 +194,15 @@ Body (in CBOR diagnostic notation)
 [
   {
     -1:1,
-    -2:h'65eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d',
-    -3:h'1e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c',
+    -2:h'65eda5a1...9c08551d',
+    -3:h'1e52ed75...0084d19c',
     1:2,
     2:'kid1'
   },
   {
     -1:1,
-    -2:h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
-    -3:h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e',
+    -2:h'bac5b11c...d6a09eff',
+    -3:h'20138bf8...bbfc117e',
     1:2,
     2:'kid2'
   }
@@ -234,8 +234,8 @@ Body (in CBOR diagnostic notation)
 [
   {
     -1:1,
-    -2:h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
-    -3:h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e',
+    -2:h'bac5b11c...d6a09eff',
+    -3:h'20138bf8...bbfc117e',
     1:2,
     2:'kid_value'
   }
@@ -290,7 +290,7 @@ Content-Type: application/cose
 
 Body (in CBOR diagnostic notation)
 
-18([                            / COSE Sign1                                           /
+18([ / COSE Sign1           /
   <<{
     / signature alg         / 1:  -35, # ES384
     / key identifier        / 4:   h'75726e3a...32636573',
@@ -302,10 +302,11 @@ Body (in CBOR diagnostic notation)
       / Issuer  / 1: "vendor.example",
       / Subject / 2: "vendor.product.example",
     }
-  }>>,                          / Protected Header                                     /
-  {},                           / Unprotected Header                                   /
-  h'935b5a91...e18a588a',       / Payload, sha-256 digest of file stored at Location   /
-  h'269cd68f4211dffc...0dcb29c' / Signature                                            /
+  }>>,                          / Protected Header   /
+  {},                           / Unprotected Header /
+  / Payload, sha-256 digest of file stored at payload-location /
+  h'935b5a91...e18a588a',
+  h'269cd68f4211dffc...0dcb29c' / Signature /
 ])
 ~~~
 
