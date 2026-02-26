@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-05T00:59:31.581055+00:00",
+  "timestamp": "2026-02-26T00:59:00.241207+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1719,6 +1719,30 @@
           "body": "Resolved by #109 ",
           "createdAt": "2026-02-04T16:35:08Z",
           "updatedAt": "2026-02-04T16:35:08Z"
+        }
+      ]
+    },
+    {
+      "number": 113,
+      "id": "I_kwDOLJjbks7t0dkW",
+      "title": "List all contributors accurately",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/113",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Placeholder to make sure this is done correctly.\n\nI think at @SteveLasker and @aj-stein have made substantial contributions, but please add to this issue anyone I may have missed.",
+      "createdAt": "2026-02-25T14:55:22Z",
+      "updatedAt": "2026-02-25T16:44:38Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@SteveLasker and @bobmartin3000 were added in #116, waiting to hear back from @aj-stein.",
+          "createdAt": "2026-02-25T16:44:38Z",
+          "updatedAt": "2026-02-25T16:44:38Z"
         }
       ]
     }
@@ -9649,6 +9673,536 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 111,
+      "id": "PR_kwDOLJjbks7GPvj5",
+      "title": "Clean up informative references in draft",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/111",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Removed references to SD-JWT-VC, RFC2046, and RFC6838 from the informative section, which were picked up as unused by idnits.",
+      "createdAt": "2026-02-25T14:24:26Z",
+      "updatedAt": "2026-02-25T16:21:27Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "d9cb13a2406600be0a492a22231422de27f994e3",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-12",
+      "headRefOid": "c18afd1daacd9d901668a73b0fb5c7e249c1e757",
+      "closedAt": "2026-02-25T16:21:27Z",
+      "mergedAt": "2026-02-25T16:21:27Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "008331ff5213d56f5489a28a7fd0067bafc24e93"
+      },
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@rjb4standards this is done in #112, I have a preference for single-purpose PRs, but I have not forgotten!",
+          "createdAt": "2026-02-25T14:39:13Z",
+          "updatedAt": "2026-02-25T14:39:13Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7lwONt",
+          "commit": {
+            "abbreviatedOid": "c18afd1"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Please include updated contributors info with this change.",
+          "createdAt": "2026-02-25T14:28:36Z",
+          "updatedAt": "2026-02-25T14:28:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lx-Gv",
+          "commit": {
+            "abbreviatedOid": "c18afd1"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-02-25T15:38:36Z",
+          "updatedAt": "2026-02-25T15:38:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lyqNR",
+          "commit": {
+            "abbreviatedOid": "c18afd1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-25T16:09:21Z",
+          "updatedAt": "2026-02-25T16:09:21Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 112,
+      "id": "PR_kwDOLJjbks7GP28J",
+      "title": "Add contributor Dick Brooks to the document",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/112",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T14:31:14Z",
+      "updatedAt": "2026-02-25T16:39:13Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "d9cb13a2406600be0a492a22231422de27f994e3",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-13",
+      "headRefOid": "6f8d654e1493ec416b576b3cc2ec1e277ae1812f",
+      "closedAt": "2026-02-25T16:22:08Z",
+      "mergedAt": "2026-02-25T16:22:08Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "3c03dba78914a142f0a56451983a6d159b1f2749"
+      },
+      "comments": [
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks, Amaury. Much appreciated.",
+          "createdAt": "2026-02-25T14:42:13Z",
+          "updatedAt": "2026-02-25T14:42:13Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@rjb4standards thank you for your participation!",
+          "createdAt": "2026-02-25T14:51:49Z",
+          "updatedAt": "2026-02-25T14:51:49Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Yes, please! :+1: ",
+          "createdAt": "2026-02-25T16:09:47Z",
+          "updatedAt": "2026-02-25T16:09:47Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7lyBAV",
+          "commit": {
+            "abbreviatedOid": "6f8d654"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-02-25T15:40:28Z",
+          "updatedAt": "2026-02-25T15:40:28Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lyrHE",
+          "commit": {
+            "abbreviatedOid": "6f8d654"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-25T16:09:57Z",
+          "updatedAt": "2026-02-25T16:09:57Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzUGt",
+          "commit": {
+            "abbreviatedOid": "6f8d654"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "thx",
+          "createdAt": "2026-02-25T16:39:13Z",
+          "updatedAt": "2026-02-25T16:39:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 114,
+      "id": "PR_kwDOLJjbks7GRZfb",
+      "title": "Fix formatting for Individual Transparency Service Key",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/114",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T15:58:34Z",
+      "updatedAt": "2026-02-25T16:23:10Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "d9cb13a2406600be0a492a22231422de27f994e3",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "fix_formatting",
+      "headRefOid": "ce0a86234ad946bd404910151b51d2aad4e7851d",
+      "closedAt": "2026-02-25T16:23:10Z",
+      "mergedAt": "2026-02-25T16:23:10Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "f8d218bb51b798bae1f6f2abb5badac6b28b67f4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7lys3J",
+          "commit": {
+            "abbreviatedOid": "ce0a862"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-25T16:11:19Z",
+          "updatedAt": "2026-02-25T16:11:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lyvXv",
+          "commit": {
+            "abbreviatedOid": "ce0a862"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-02-25T16:13:11Z",
+          "updatedAt": "2026-02-25T16:13:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 115,
+      "id": "PR_kwDOLJjbks7GRgoS",
+      "title": "Fix oversized lines in code blocks",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/115",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T16:05:08Z",
+      "updatedAt": "2026-02-25T16:28:28Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "d9cb13a2406600be0a492a22231422de27f994e3",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "fix_oversized_lines",
+      "headRefOid": "140f5c42293ac6d72393babe601d1c872bf01d25",
+      "closedAt": "2026-02-25T16:28:27Z",
+      "mergedAt": "2026-02-25T16:28:27Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "859e39d0e2da6be69182285a0c775ee3b25107c2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7lyuQL",
+          "commit": {
+            "abbreviatedOid": "f780e4c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-25T16:12:19Z",
+          "updatedAt": "2026-02-25T16:12:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lyuf4",
+          "commit": {
+            "abbreviatedOid": "f780e4c"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-02-25T16:12:30Z",
+          "updatedAt": "2026-02-25T16:12:30Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7ly_Vd",
+          "commit": {
+            "abbreviatedOid": "f780e4c"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T16:24:42Z",
+          "updatedAt": "2026-02-25T16:24:42Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\n    -2:h'65eda5a1...9c08551d',\n```",
+              "createdAt": "2026-02-25T16:24:42Z",
+              "updatedAt": "2026-02-25T16:24:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzAHv",
+          "commit": {
+            "abbreviatedOid": "f780e4c"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T16:25:20Z",
+          "updatedAt": "2026-02-25T16:25:21Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\n    -3:h'1e52ed75...0084d19c',\n```",
+              "createdAt": "2026-02-25T16:25:20Z",
+              "updatedAt": "2026-02-25T16:25:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzApM",
+          "commit": {
+            "abbreviatedOid": "f780e4c"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T16:25:45Z",
+          "updatedAt": "2026-02-25T16:25:46Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\n    -2:h'h'bac5b11c...d6a09eff',\n```",
+              "createdAt": "2026-02-25T16:25:45Z",
+              "updatedAt": "2026-02-25T16:25:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzBG_",
+          "commit": {
+            "abbreviatedOid": "f780e4c"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T16:26:08Z",
+          "updatedAt": "2026-02-25T16:26:08Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\n    -3:h'20138bf8...bbfc117e',\n```",
+              "createdAt": "2026-02-25T16:26:08Z",
+              "updatedAt": "2026-02-25T16:26:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzBkL",
+          "commit": {
+            "abbreviatedOid": "f780e4c"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T16:26:27Z",
+          "updatedAt": "2026-02-25T16:26:27Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\n    -2:h'h'bac5b11c...d6a09eff',\n```",
+              "createdAt": "2026-02-25T16:26:27Z",
+              "updatedAt": "2026-02-25T16:26:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzCIy",
+          "commit": {
+            "abbreviatedOid": "f780e4c"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T16:26:45Z",
+          "updatedAt": "2026-02-25T16:26:45Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\n    -3:h'20138bf8...bbfc117e',\n```",
+              "createdAt": "2026-02-25T16:26:45Z",
+              "updatedAt": "2026-02-25T16:26:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzCyf",
+          "commit": {
+            "abbreviatedOid": "89c1321"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T16:27:14Z",
+          "updatedAt": "2026-02-25T16:27:15Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\n    -2:h'bac5b11c...d6a09eff',\n```",
+              "createdAt": "2026-02-25T16:27:15Z",
+              "updatedAt": "2026-02-25T16:27:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzDKL",
+          "commit": {
+            "abbreviatedOid": "7a128c5"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T16:27:31Z",
+          "updatedAt": "2026-02-25T16:27:32Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\n    -2:h'bac5b11c...d6a09eff',\n```",
+              "createdAt": "2026-02-25T16:27:32Z",
+              "updatedAt": "2026-02-25T16:27:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzEuS",
+          "commit": {
+            "abbreviatedOid": "140f5c4"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-25T16:28:26Z",
+          "updatedAt": "2026-02-25T16:28:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 116,
+      "id": "PR_kwDOLJjbks7GSBuE",
+      "title": "Add contributors to draft-ietf-scitt-scrapi.md",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/116",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T16:36:57Z",
+      "updatedAt": "2026-02-25T16:40:00Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "859e39d0e2da6be69182285a0c775ee3b25107c2",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-14",
+      "headRefOid": "76c41da8e73ec8a709ea034c007c8d5ac5329c39",
+      "closedAt": "2026-02-25T16:40:00Z",
+      "mergedAt": "2026-02-25T16:40:00Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "9897014589ce544587899cda81dbf139e4040be5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7lzTNq",
+          "commit": {
+            "abbreviatedOid": "76c41da"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-25T16:38:38Z",
+          "updatedAt": "2026-02-25T16:38:38Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7lzUJo",
+          "commit": {
+            "abbreviatedOid": "76c41da"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-25T16:39:15Z",
+          "updatedAt": "2026-02-25T16:39:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 117,
+      "id": "PR_kwDOLJjbks7GSWHl",
+      "title": "Add contributor Nicole Bates to the document",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/117",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T16:57:51Z",
+      "updatedAt": "2026-02-25T16:57:51Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "9897014589ce544587899cda81dbf139e4040be5",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-15",
+      "headRefOid": "902c7e5e1bc057d80150e7bde12c4fb697fe443a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
