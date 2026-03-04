@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 29 August 2026                                  DataTrails Inc.
-                                                        25 February 2026
+Expires: 5 September 2026                                DataTrails Inc.
+                                                            4 March 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 August 2026.
+   This Internet-Draft will expire on 5 September 2026.
 
 Copyright Notice
 
@@ -1189,6 +1189,14 @@ Contributors
    Steve contributed architectural insights, particularly around
    asynchronous operations and participated in the initial writing of
    the document.
+
+   Roy Williams
+   United States of America
+   Email: roywill@msn.com
+
+
+   Roy contributed the receipt refresh use case and associated endpoint
+   definition.
 
 Authors' Addresses
 
