@@ -81,6 +81,12 @@ contributor:
     country: United States
     contribution: >
       Nicole contributed reviews and edits that improved the quality of the text.
+  - ins: R. Williams
+    name: Roy Williams
+    country: USA
+    email: roywill@msn.com
+    contribution: >
+      Roy contributed the receipt refresh use case and associated endpoint definition.
 
 normative:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
