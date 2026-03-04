@@ -1190,6 +1190,15 @@ Contributors
    asynchronous operations and participated in the initial writing of
    the document.
 
+   Nicole Bates
+   Microsoft
+   United States
+   Email: nicolebates@microsoft.com
+
+
+   Nicole contributed reviews and edits that improved the quality of the
+   text.
+
    Roy Williams
    United States of America
    Email: roywill@msn.com
