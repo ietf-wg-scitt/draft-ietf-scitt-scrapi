@@ -74,6 +74,12 @@ contributor:
     email: stevenlasker@hotmail.com
     contribution: >
       Steve contributed architectural insights, particularly around asynchronous operations and participated in the initial writing of the document.
+  - ins: R. Williams
+    name: Roy Williams
+    country: USA
+    email: roywill@msn.com
+    contribution: >
+      Roy contributed the receipt refresh use case and associated endpoint definition.
 
 normative:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
