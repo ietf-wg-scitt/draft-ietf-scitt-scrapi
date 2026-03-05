@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T00:59:00.241207+00:00",
+  "timestamp": "2026-03-05T01:00:48.304175+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1734,7 +1734,7 @@
       "labels": [],
       "body": "Placeholder to make sure this is done correctly.\n\nI think at @SteveLasker and @aj-stein have made substantial contributions, but please add to this issue anyone I may have missed.",
       "createdAt": "2026-02-25T14:55:22Z",
-      "updatedAt": "2026-02-25T16:44:38Z",
+      "updatedAt": "2026-03-03T20:33:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -1743,6 +1743,13 @@
           "body": "@SteveLasker and @bobmartin3000 were added in #116, waiting to hear back from @aj-stein.",
           "createdAt": "2026-02-25T16:44:38Z",
           "updatedAt": "2026-02-25T16:44:38Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I had also missed Nicole and Roy: #117 and #118",
+          "createdAt": "2026-03-03T20:33:43Z",
+          "updatedAt": "2026-03-03T20:33:43Z"
         }
       ]
     }
@@ -10183,26 +10190,110 @@
       "id": "PR_kwDOLJjbks7GSWHl",
       "title": "Add contributor Nicole Bates to the document",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/117",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-02-25T16:57:51Z",
-      "updatedAt": "2026-02-25T16:57:51Z",
+      "updatedAt": "2026-03-04T16:07:21Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "24d4862a5a49db167d41c153e9a51ebef8eba05c",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-15",
+      "headRefOid": "8a51549a7164cf06c224b64599e74ddc05d4673e",
+      "closedAt": "2026-03-04T16:07:21Z",
+      "mergedAt": "2026-03-04T16:07:21Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "a04befa955aa45857d76fc72a8dc526c5277293d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7nkJfD",
+          "commit": {
+            "abbreviatedOid": "902c7e5"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Certainly.",
+          "createdAt": "2026-03-03T20:58:46Z",
+          "updatedAt": "2026-03-03T20:58:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7nkLSx",
+          "commit": {
+            "abbreviatedOid": "902c7e5"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-03-03T21:00:31Z",
+          "updatedAt": "2026-03-03T21:00:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 118,
+      "id": "PR_kwDOLJjbks7HtKK2",
+      "title": "Add contributor Roy Williams with use case details",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/118",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-03T20:33:06Z",
+      "updatedAt": "2026-03-04T16:05:49Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "9897014589ce544587899cda81dbf139e4040be5",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
-      "headRefName": "achamayou-patch-15",
-      "headRefOid": "902c7e5e1bc057d80150e7bde12c4fb697fe443a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefName": "achamayou-patch-16",
+      "headRefOid": "8a4a0335103e6e43637026057469b8efd419f220",
+      "closedAt": "2026-03-04T16:05:49Z",
+      "mergedAt": "2026-03-04T16:05:49Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "24d4862a5a49db167d41c153e9a51ebef8eba05c"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7nkKft",
+          "commit": {
+            "abbreviatedOid": "8a4a033"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Of course.",
+          "createdAt": "2026-03-03T20:59:43Z",
+          "updatedAt": "2026-03-03T20:59:43Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7nkL1O",
+          "commit": {
+            "abbreviatedOid": "8a4a033"
+          },
+          "author": "SteveLasker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-03-03T21:01:02Z",
+          "updatedAt": "2026-03-03T21:01:02Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
