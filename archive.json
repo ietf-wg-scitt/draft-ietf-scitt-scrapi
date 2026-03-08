@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-05T01:00:48.304175+00:00",
+  "timestamp": "2026-03-08T01:01:01.867553+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1727,15 +1727,15 @@
       "id": "I_kwDOLJjbks7t0dkW",
       "title": "List all contributors accurately",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/113",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Placeholder to make sure this is done correctly.\n\nI think at @SteveLasker and @aj-stein have made substantial contributions, but please add to this issue anyone I may have missed.",
       "createdAt": "2026-02-25T14:55:22Z",
-      "updatedAt": "2026-03-03T20:33:43Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-06T07:08:36Z",
+      "closedAt": "2026-03-06T07:08:36Z",
       "comments": [
         {
           "author": "achamayou",
