@@ -667,7 +667,7 @@ Authentication SHOULD be implemented for this endpoint.
 Request:
 
 ~~~ http-message
-GET entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
+GET /entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 ~~~
@@ -745,7 +745,7 @@ Authentication SHOULD be implemented for this endpoint.
 Request:
 
 ~~~ http-message
-POST receipt-exchange HTTP/1.1
+POST /receipt-exchange HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 Content-Type: application/cose
