@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-08T01:01:01.867553+00:00",
+  "timestamp": "2026-03-22T01:04:15.922895+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -10291,6 +10291,46 @@
           "body": "LGTM",
           "createdAt": "2026-03-03T21:01:02Z",
           "updatedAt": "2026-03-03T21:01:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 119,
+      "id": "PR_kwDOLJjbks7L3A8z",
+      "title": "Clarify HTTP request targets in origin form",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/119",
+      "state": "OPEN",
+      "author": "eddyashton",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This pull request makes minor corrections to the `draft-ietf-scitt-scrapi.md` specification, primarily addressing formatting and clarity issues in HTTP request examples and fixing a typo in the replay attacks section.\r\n\r\n- HTTP Request Path Formatting:\r\n  * Added leading slashes to the request paths in the HTTP examples for the `GET /entries/{id}` and `POST /receipt-exchange` endpoints to ensure correct HTTP syntax.\r\n\r\n- Documentation Clarity:\r\n  * Fixed a typo in the replay attacks section by adding the missing word \"be\" in the example statement for improved readability.",
+      "createdAt": "2026-03-19T13:54:50Z",
+      "updatedAt": "2026-03-20T00:14:41Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a04befa955aa45857d76fc72a8dc526c5277293d",
+      "headRepository": "eddyashton/draft-ietf-scitt-scrapi",
+      "headRefName": "edashton-edit",
+      "headRefOid": "ec04cbe08eb13ef0e5f490004ffdcaf61900e953",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7tJlKJ",
+          "commit": {
+            "abbreviatedOid": "ec04cbe"
+          },
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-03-20T00:14:41Z",
+          "updatedAt": "2026-03-20T00:14:41Z",
           "comments": []
         }
       ]
