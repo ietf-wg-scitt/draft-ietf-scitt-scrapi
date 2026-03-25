@@ -120,13 +120,14 @@ The SCITT Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and
 - Transparent Statements
 - Registration Policies
 
-SCRAPI defines HTTP resources implementing the core operations that constitute a Transparency Service using COSE ({{RFC9052}}):
+SCRAPI defines HTTP resources for a Transparency Service using COSE ({{RFC9052}}).
+Core resources MUST be implemented for conformance to this specification:
 
 - Registration of Signed Statements
 - Issuance and resolution of Receipts
 - Discovery of Transparency Service Keys
 
-In addition to these core resources, this specification defines optional supporting resources:
+Optional resources MAY be implemented for client convenience:
 
 - Retrieving Signed Statements
 - Retrieving Transparent Statements
@@ -730,7 +731,7 @@ Content-Type: application/concise-problem-details+cbor
 
 ## Optional Resources
 
-These additional, optional resources can be implemented for client convenience, but are not required for conformance to this specification.
+These optional resources can be implemented for client convenience, but are not required for conformance to this specification.
 
 ### Exchange Receipt
 
