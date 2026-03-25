@@ -86,7 +86,7 @@ contributor:
     country: USA
     email: roywill@msn.com
     contribution: >
-      Roy contributed the receipt refresh use case and associated endpoint definition.
+      Roy contributed the receipt refresh use case and associated resource definition.
 
 normative:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
@@ -120,13 +120,14 @@ The SCITT Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and
 - Transparent Statements
 - Registration Policies
 
-SCRAPI defines HTTP endpoints implementing the core operations that constitute a Transparency Service using COSE ({{RFC9052}}):
+SCRAPI defines HTTP resources for a Transparency Service using COSE ({{RFC9052}}).
+Core resources MUST be implemented for conformance to this specification:
 
 - Registration of Signed Statements
 - Issuance and resolution of Receipts
 - Discovery of Transparency Service Keys
 
-In addition to these core endpoints, this specification defines optional supporting endpoints:
+Optional resources MAY be implemented for client convenience:
 
 - Retrieving Signed Statements
 - Retrieving Transparent Statements
@@ -146,7 +147,7 @@ Authentication is out of scope for this document.
 Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.
 If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be implemented.
 
-# Endpoints
+# Resources
 
 All messages are sent as HTTP GET or POST requests.
 
@@ -158,7 +159,7 @@ If the Transparency Service cannot process a client's request, it MUST return ei
 - title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
 - detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
 
-SCRAPI is not a CoAP API, but Constrained Problem Details objects {{RFC9290}} provide a useful encoding for problem details and avoid the need to mix CBOR and JSON in endpoint or client implementations.
+SCRAPI is not a CoAP API, but Constrained Problem Details objects {{RFC9290}} provide a useful encoding for problem details and avoid the need to mix CBOR and JSON in resource or client implementations.
 
 NOTE: Examples use '\\' line wrapping per {{RFC8792}}
 
@@ -190,13 +191,13 @@ Clients SHOULD treat 500 and 503 HTTP status code responses as transient failure
 Note that in the case of any error response, the Transparency Service MAY include a `Retry-After` header field per {{RFC9110}} in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.
 
-## Core Endpoints
+## Core Resources
 
-The following HTTP endpoints MUST be implemented to enable conformance to this specification.
+The following HTTP resources MUST be implemented to enable conformance to this specification.
 
 ### Transparency Service Keys
 
-This endpoint is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.
+This resource is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.
 
 The Transparency Service responds with a COSE Key Set, as defined in {{Section 7 of RFC9052}}.
 
@@ -234,11 +235,11 @@ Body (in CBOR diagnostic notation)
 ]
 ~~~
 
-The Transparency Service MAY stop returning at that endpoint the keys it no longer uses to issue Receipts, following a reasonable delay.
+The Transparency Service MAY stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
 
 ### Individual Transparency Service Key
 
-This endpoint is used to resolve a single public key, from a `kid` value contained in a Receipt previously issued by the Transparency Service.
+This resource is used to resolve a single public key, from a `kid` value contained in a Receipt previously issued by the Transparency Service.
 
 Request:
 
@@ -281,7 +282,7 @@ Content-Type: application/concise-problem-details+cbor
 
 Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
 
-If the `kid` values used by the service (`{kid_value}` in the request above) are not URL-safe, the endpoint MUST accept the base64url encoding of the `kid` value, without padding, in the URL instead.
+If the `kid` values used by the service (`{kid_value}` in the request above) are not URL-safe, the resource MUST accept the base64url encoding of the `kid` value, without padding, in the URL instead.
 
 {{Section 2 of RFC7515}} specifies Base64Url encoding as follows:
 
@@ -299,7 +300,7 @@ It is RECOMMENDED to use COSE Key Thumbprint, as defined in {{RFC9679}} as the m
 
 ### Register Signed Statement
 
-This endpoint instructs a Transparency Service to register a Signed Statement on its log.
+This resource instructs a Transparency Service to register a Signed Statement on its log.
 Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator that can be used to check the registration's status asynchronously.
 
 The following is a non-normative example of an HTTP request to register a Signed Statement:
@@ -468,7 +469,7 @@ Content-Type: application/concise-problem-details+cbor
 
 ### Query Registration Status
 
-This endpoint lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
+This resource lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
 
 Request:
 
@@ -662,7 +663,7 @@ Retry-After: <seconds>
 
 ### Resolve Receipt
 
-Authentication SHOULD be implemented for this endpoint.
+Authentication SHOULD be implemented for this resource.
 
 Request:
 
@@ -728,19 +729,19 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
-## Optional Endpoints
+## Optional Resources
 
-These additional, optional endpoints can be implemented for client convenience, but are not required for conformance to this specification.
+These optional resources can be implemented for client convenience, but are not required for conformance to this specification.
 
 ### Exchange Receipt
 
-This endpoint is used to exchange old or expiring Receipts for fresh ones.
+This resource is used to exchange old or expiring Receipts for fresh ones.
 
 The `iat`, `exp` and `kid` claims can change each time a Receipt is exchanged.
 
 This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
 
-Authentication SHOULD be implemented for this endpoint.
+Authentication SHOULD be implemented for this resource.
 
 Request:
 
@@ -820,11 +821,11 @@ Body (in CBOR diagnostic notation)
 ~~~
 A TS may limit how often a new receipt can be issued, and respond with a 503 if a client requests new receipts too frequently.
 
-The following HTTP endpoints are optional to implement.
+The following HTTP resources are optional to implement.
 
 ### Resolve Signed Statement
 
-This endpoint enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.
+This resource enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.
 
 Request:
 
@@ -873,7 +874,7 @@ Content-Type: application/concise-problem-details+cbor
 
 ### Resolve Transparent Statement
 
-This endpoint enables Transparency Service APIs to serve Transparent Statements directly, including the Receipt they have issued for it.
+This resource enables Transparency Service APIs to serve Transparent Statements directly, including the Receipt they have issued for it.
 
 Request:
 
@@ -953,7 +954,7 @@ Issuers who sign Statements, and Clients that submit API calls on behalf of Issu
 While Issuer authentication and signing of Statements is very important for the trustworthiness of systems implementing the SCITT building blocks, it is out of scope of this document.
 This document is only concerned with authentication of API clients.
 
-For those endpoints that require client authentication, Transparency Services MUST support at least one of the following options:
+For those resources that require client authentication, Transparency Services MUST support at least one of the following options:
 
 - HTTP Authorization header with a JWT
 - domain-bound API key
