@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 5 September 2026                                DataTrails Inc.
-                                                            4 March 2026
+Expires: 26 September 2026                               DataTrails Inc.
+                                                           25 March 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 September 2026.
+   This Internet-Draft will expire on 26 September 2026.
 
 Copyright Notice
 
@@ -151,7 +151,7 @@ Table of Contents
    MAY authenticate clients, for example for the purposes of
    authorization or preventing denial of service attacks.  If
    Authentication is not implemented, rate limiting or other denial of
-   service mitigation MUST be implemented.
+   service mitigations MUST be implemented.
 
 3.  Endpoints
 
