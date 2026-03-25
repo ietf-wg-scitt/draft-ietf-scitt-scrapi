@@ -961,7 +961,7 @@ For those endpoints that require client authentication, Transparency Services MU
 
 Where authentication methods rely on long term secrets, both clients and Transparency Services implementing this specification SHOULD allow for the revocation and rolling of authentication secrets.
 
-## Primary Threats
+## Threat Model
 
 ### In Scope
 
