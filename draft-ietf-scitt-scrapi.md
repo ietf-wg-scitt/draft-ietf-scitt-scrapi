@@ -662,8 +662,6 @@ Retry-After: <seconds>
 
 ### Resolve Receipt
 
-Authentication SHOULD be implemented for this endpoint.
-
 Request:
 
 ~~~ http-message
@@ -739,8 +737,6 @@ This endpoint is used to exchange old or expiring Receipts for fresh ones.
 The `iat`, `exp` and `kid` claims can change each time a Receipt is exchanged.
 
 This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
-
-Authentication SHOULD be implemented for this endpoint.
 
 Request:
 
