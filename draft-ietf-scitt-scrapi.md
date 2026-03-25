@@ -980,7 +980,7 @@ Since verification of Receipts does not require the involvement of the Transpare
 
 Clients to Transparency Services SHOULD ensure that Receipts are available for their registered Statements, either on a periodic or needs-must basis, depending on the use case.
 
-Beyond this, implementers of Transparency Services SHOULD implement general good practice around network attacks, flooding, rate limiting etc.
+Beyond this, implementers of Transparency Services MUST implement general good practice around network attacks, flooding, rate limiting etc.
 
 #### Eavesdropping
 
