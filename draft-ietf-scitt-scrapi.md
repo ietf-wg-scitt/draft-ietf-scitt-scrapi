@@ -347,7 +347,7 @@ Body (in CBOR diagnostic notation)
 ])
 ~~~
 
-A Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.
+A Transparency Service depends on the verification of the Signed Statement in the Registration Policy.
 
 The Registration Policy for the Transparency Service MUST be applied before any additional processing.
 The details of Registration Policies are out of scope for this document.
@@ -674,8 +674,6 @@ Retry-After: <seconds>
 
 ### Resolve Receipt
 
-Authentication SHOULD be implemented for this resource.
-
 Request:
 
 ~~~ http-message
@@ -751,8 +749,6 @@ This resource is used to exchange old or expiring Receipts for fresh ones.
 The `iat`, `exp` and `kid` claims can change each time a Receipt is exchanged.
 
 This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
-
-Authentication SHOULD be implemented for this resource.
 
 Request:
 
@@ -957,21 +953,6 @@ All questions of security of the related COSE formats, algorithm choices, crypto
 
 SCITT is concerned with issues of cross-boundary supply-chain-wide data integrity and as such must assume a very wide range of deployment environments.
 Thus, no assumptions can be made about the security of the computing environment in which any client implementation of this specification runs.
-
-## User-host Authentication
-
-{{-SCITT-ARCH}} defines 2 distinct roles that require authentication:
-Issuers who sign Statements, and Clients that submit API calls on behalf of Issuers.
-While Issuer authentication and signing of Statements is very important for the trustworthiness of systems implementing the SCITT building blocks, it is out of scope of this document.
-This document is only concerned with authentication of API clients.
-
-For those resources that require client authentication, Transparency Services MUST support at least one of the following options:
-
-- HTTP Authorization header with a JWT
-- domain-bound API key
-- TLS client authentication
-
-Where authentication methods rely on long term secrets, both clients and Transparency Services implementing this specification SHOULD allow for the revocation and rolling of authentication secrets.
 
 ## Threat Model
 
