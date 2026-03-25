@@ -87,7 +87,7 @@ Table of Contents
      5.1.  General Scope
      5.2.  Applicable Environment
      5.3.  User-host Authentication
-     5.4.  Primary Threats
+     5.4.  Threat Model
        5.4.1.  In Scope
        5.4.2.  Out of Scope
    6.  IANA Considerations
@@ -986,7 +986,7 @@ Table of Contents
    and Transparency Services implementing this specification SHOULD
    allow for the revocation and rolling of authentication secrets.
 
-5.4.  Primary Threats
+5.4.  Threat Model
 
 5.4.1.  In Scope
 
