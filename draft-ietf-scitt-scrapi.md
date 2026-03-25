@@ -120,7 +120,7 @@ The SCITT Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and
 - Transparent Statements
 - Registration Policies
 
-SCRAPI defines HTTP endpoints implementing the core operations that constitute a Transparency Service using COSE ({{RFC9052}}):
+SCRAPI defines HTTP resources implementing the core operations that constitute a Transparency Service using COSE ({{RFC9052}}):
 
 - Registration of Signed Statements
 - Issuance and resolution of Receipts
@@ -192,7 +192,7 @@ In the absence of this header field, this document does not specify a minimum.
 
 ## Core Endpoints
 
-The following HTTP endpoints MUST be implemented to enable conformance to this specification.
+The following HTTP resources MUST be implemented to enable conformance to this specification.
 
 ### Transparency Service Keys
 
@@ -820,7 +820,7 @@ Body (in CBOR diagnostic notation)
 ~~~
 A TS may limit how often a new receipt can be issued, and respond with a 503 if a client requests new receipts too frequently.
 
-The following HTTP endpoints are optional to implement.
+The following HTTP resources are optional to implement.
 
 ### Resolve Signed Statement
 
