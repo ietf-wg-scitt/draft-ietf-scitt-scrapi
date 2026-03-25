@@ -89,7 +89,6 @@ contributor:
       Roy contributed the receipt refresh use case and associated endpoint definition.
 
 normative:
-  BCP14:
   RFC2119:
   RFC8174:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
