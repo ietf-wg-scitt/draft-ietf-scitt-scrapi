@@ -71,14 +71,14 @@ Table of Contents
    1.  Introduction
      1.1.  Terminology
    2.  Authentication
-   3.  Endpoints
-     3.1.  Core Endpoints
+   3.  Resources
+     3.1.  Core Resources
        3.1.1.  Transparency Service Keys
        3.1.2.  Individual Transparency Service Key
        3.1.3.  Register Signed Statement
        3.1.4.  Query Registration Status
        3.1.5.  Resolve Receipt
-     3.2.  Optional Endpoints
+     3.2.  Optional Resources
        3.2.1.  Exchange Receipt
        3.2.2.  Resolve Signed Statement
        3.2.3.  Resolve Transparent Statement
@@ -112,8 +112,9 @@ Table of Contents
 
    *  Registration Policies
 
-   SCRAPI defines HTTP endpoints implementing the core operations that
-   constitute a Transparency Service using COSE ([RFC9052]):
+   SCRAPI defines HTTP resources for a Transparency Service using COSE
+   ([RFC9052]).  Core resources MUST be implemented for conformance to
+   this specification:
 
    *  Registration of Signed Statements
 
@@ -121,8 +122,7 @@ Table of Contents
 
    *  Discovery of Transparency Service Keys
 
-   In addition to these core endpoints, this specification defines
-   optional supporting endpoints:
+   Optional resources MAY be implemented for client convenience:
 
    *  Retrieving Signed Statements
 
@@ -153,7 +153,7 @@ Table of Contents
    Authentication is not implemented, rate limiting or other denial of
    service mitigations MUST be implemented.
 
-3.  Endpoints
+3.  Resources
 
    All messages are sent as HTTP GET or POST requests.
 
@@ -178,7 +178,7 @@ Table of Contents
 
    SCRAPI is not a CoAP API, but Constrained Problem Details objects
    [RFC9290] provide a useful encoding for problem details and avoid the
-   need to mix CBOR and JSON in endpoint or client implementations.
+   need to mix CBOR and JSON in resource or client implementations.
 
    NOTE: Examples use '\' line wrapping per [RFC8792]
 
@@ -214,14 +214,14 @@ Table of Contents
    request.  In the absence of this header field, this document does not
    specify a minimum.
 
-3.1.  Core Endpoints
+3.1.  Core Resources
 
-   The following HTTP endpoints MUST be implemented to enable
+   The following HTTP resources MUST be implemented to enable
    conformance to this specification.
 
 3.1.1.  Transparency Service Keys
 
-   This endpoint is used to discover the public keys that can be used by
+   This resource is used to discover the public keys that can be used by
    relying parties to verify Receipts issued by the Transparency
    Service.
 
@@ -258,12 +258,12 @@ Table of Contents
      }
    ]
 
-   The Transparency Service MAY stop returning at that endpoint the keys
+   The Transparency Service MAY stop returning at that resource the keys
    it no longer uses to issue Receipts, following a reasonable delay.
 
 3.1.2.  Individual Transparency Service Key
 
-   This endpoint is used to resolve a single public key, from a kid
+   This resource is used to resolve a single public key, from a kid
    value contained in a Receipt previously issued by the Transparency
    Service.
 
@@ -304,7 +304,7 @@ Table of Contents
    [RFC9290] objects.
 
    If the kid values used by the service ({kid_value} in the request
-   above) are not URL-safe, the endpoint MUST accept the base64url
+   above) are not URL-safe, the resource MUST accept the base64url
    encoding of the kid value, without padding, in the URL instead.
 
    Section 2 of [RFC7515] specifies Base64Url encoding as follows:
@@ -324,7 +324,7 @@ Table of Contents
 
 3.1.3.  Register Signed Statement
 
-   This endpoint instructs a Transparency Service to register a Signed
+   This resource instructs a Transparency Service to register a Signed
    Statement on its log.  Since log implementations may take many
    seconds or longer to reach finality, this API provides an
    asynchronous mode that returns a locator that can be used to check
@@ -493,7 +493,7 @@ Table of Contents
 
 3.1.4.  Query Registration Status
 
-   This endpoint lets a client query a Transparency Service for the
+   This resource lets a client query a Transparency Service for the
    registration status of a Signed Statement they have submitted
    earlier, and for which they have received a 303 or 302 - Registration
    is running response.
@@ -679,7 +679,7 @@ Table of Contents
 
 3.1.5.  Resolve Receipt
 
-   Authentication SHOULD be implemented for this endpoint.
+   Authentication SHOULD be implemented for this resource.
 
    Request:
 
@@ -740,15 +740,14 @@ Table of Contents
              to this Transparency Service"
    }
 
-3.2.  Optional Endpoints
+3.2.  Optional Resources
 
-   These additional, optional endpoints can be implemented for client
-   convenience, but are not required for conformance to this
-   specification.
+   These optional resources can be implemented for client convenience,
+   but are not required for conformance to this specification.
 
 3.2.1.  Exchange Receipt
 
-   This endpoint is used to exchange old or expiring Receipts for fresh
+   This resource is used to exchange old or expiring Receipts for fresh
    ones.
 
    The iat, exp and kid claims can change each time a Receipt is
@@ -758,7 +757,7 @@ Table of Contents
    further in the future expiration times, and be signed with new
    signature algorithms.
 
-   Authentication SHOULD be implemented for this endpoint.
+   Authentication SHOULD be implemented for this resource.
 
    Request:
 
@@ -836,11 +835,11 @@ Table of Contents
    A TS may limit how often a new receipt can be issued, and respond
    with a 503 if a client requests new receipts too frequently.
 
-   The following HTTP endpoints are optional to implement.
+   The following HTTP resources are optional to implement.
 
 3.2.2.  Resolve Signed Statement
 
-   This endpoint enables Transparency Service APIs to act like Artifact
+   This resource enables Transparency Service APIs to act like Artifact
    Repositories, and serve Signed Statements directly, instead of
    indirectly through Receipts.
 
@@ -885,7 +884,7 @@ Table of Contents
 
 3.2.3.  Resolve Transparent Statement
 
-   This endpoint enables Transparency Service APIs to serve Transparent
+   This resource enables Transparency Service APIs to serve Transparent
    Statements directly, including the Receipt they have issued for it.
 
    Request:
@@ -973,7 +972,7 @@ Table of Contents
    of this document.  This document is only concerned with
    authentication of API clients.
 
-   For those endpoints that require client authentication, Transparency
+   For those resources that require client authentication, Transparency
    Services MUST support at least one of the following options:
 
    *  HTTP Authorization header with a JWT
@@ -1204,7 +1203,7 @@ Contributors
    Email: roywill@msn.com
 
 
-   Roy contributed the receipt refresh use case and associated endpoint
+   Roy contributed the receipt refresh use case and associated resource
    definition.
 
 Authors' Addresses
