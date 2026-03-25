@@ -245,7 +245,7 @@ Body (in CBOR diagnostic notation)
 
 The Transparency Service MAY stop returning at that endpoint the keys it no longer uses to issue Receipts, following a reasonable delay.
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
-Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}}, retired keys SHOULD remain available for as long as any Receipts signed with them may still need to be verified.
+Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4), retired keys SHOULD remain available for as long as any Receipts signed with them may still need to be verified.
 
 ### Individual Transparency Service Key
 
