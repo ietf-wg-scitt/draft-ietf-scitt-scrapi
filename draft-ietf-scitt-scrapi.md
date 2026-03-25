@@ -144,7 +144,7 @@ This specification uses "payload" as defined in {{RFC9052}}.
 
 Authentication is out of scope for this document.
 Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.
-If Authentication is not implemented, rate limiting or other denial of service mitigation MUST be implemented.
+If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be implemented.
 
 # Endpoints
 
