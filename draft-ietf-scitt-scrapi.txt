@@ -1021,7 +1021,7 @@ Table of Contents
    available for their registered Statements, either on a periodic or
    needs-must basis, depending on the use case.
 
-   Beyond this, implementers of Transparency Services SHOULD implement
+   Beyond this, implementers of Transparency Services MUST implement
    general good practice around network attacks, flooding, rate limiting
    etc.
 
