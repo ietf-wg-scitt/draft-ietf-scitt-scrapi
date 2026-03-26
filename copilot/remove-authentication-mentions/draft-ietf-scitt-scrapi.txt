@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 26 September 2026                               DataTrails Inc.
-                                                           25 March 2026
+Expires: 27 September 2026                               DataTrails Inc.
+                                                           26 March 2026
 
 
                           SCITT Reference APIs
@@ -15,10 +15,7 @@ Expires: 26 September 2026                               DataTrails Inc.
 Abstract
 
    This document describes a REST API that supports the normative
-   requirements of the SCITT Architecture.  Optional key discovery and
-   query interfaces are provided to support interoperability with X.509
-   Certificates, alternative methods commonly used to support public key
-   discovery and Artifact Repositories.
+   requirements of the SCITT Architecture.
 
 About This Document
 
@@ -50,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 September 2026.
+   This Internet-Draft will expire on 27 September 2026.
 
 Copyright Notice
 
@@ -72,28 +69,35 @@ Table of Contents
      1.1.  Terminology
    2.  Authentication
    3.  Resources
-     3.1.  Core Resources
-       3.1.1.  Transparency Service Keys
-       3.1.2.  Individual Transparency Service Key
-       3.1.3.  Register Signed Statement
-       3.1.4.  Query Registration Status
-       3.1.5.  Resolve Receipt
-     3.2.  Optional Resources
-       3.2.1.  Exchange Receipt
-       3.2.2.  Resolve Signed Statement
-       3.2.3.  Resolve Transparent Statement
-   4.  Privacy Considerations
-   5.  Security Considerations
-     5.1.  General Scope
-     5.2.  Applicable Environment
-     5.3.  Threat Model
-       5.3.1.  In Scope
-       5.3.2.  Out of Scope
-   6.  IANA Considerations
-     6.1.  Well-Known URI for Key Discovery
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+     3.1.  Transparency Service Keys
+     3.2.  Individual Transparency Service Key
+     3.3.  Register Signed Statement
+       3.3.1.  Status 201 - Registration is successful
+       3.3.2.  Status 303 - Registration is running
+       3.3.3.  Status 400 - Invalid Client Request
+     3.4.  Query Registration Status
+       3.4.1.  Status 302 - Registration is running
+       3.4.2.  Status 200 - Asynchronous registration is successful
+       3.4.3.  Status 400 - Invalid Client Request
+       3.4.4.  Status 404 - Operation Not Found
+       3.4.5.  Status 429 - Too Many Requests
+     3.5.  Resolve Receipt
+       3.5.1.  Status 200 - OK
+       3.5.2.  Status 404 - Not Found
+       3.5.3.  Exchange Receipt
+       3.5.4.  Resolve Signed Statement
+       3.5.5.  Resolve Transparent Statement
+   4.  Security Considerations
+     4.1.  General Scope
+     4.2.  Applicable Environment
+     4.3.  Threat Model
+       4.3.1.  In Scope
+       4.3.2.  Out of Scope
+   5.  IANA Considerations
+     5.1.  Well-Known URI for Key Discovery
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
    Contributors
    Authors' Addresses
 
@@ -112,22 +116,14 @@ Table of Contents
    *  Registration Policies
 
    SCRAPI defines HTTP resources for a Transparency Service using COSE
-   ([RFC9052]).  Core resources MUST be implemented for conformance to
-   this specification:
+   ([RFC9052]).  The following resources MUST be implemented for
+   conformance to this specification:
 
    *  Registration of Signed Statements
 
    *  Issuance and resolution of Receipts
 
    *  Discovery of Transparency Service Keys
-
-   Optional resources MAY be implemented for client convenience:
-
-   *  Retrieving Signed Statements
-
-   *  Retrieving Transparent Statements
-
-   *  Exchanging Receipts for refreshed Receipts
 
 1.1.  Terminology
 
@@ -213,12 +209,10 @@ Table of Contents
    request.  In the absence of this header field, this document does not
    specify a minimum.
 
-3.1.  Core Resources
-
    The following HTTP resources MUST be implemented to enable
    conformance to this specification.
 
-3.1.1.  Transparency Service Keys
+3.1.  Transparency Service Keys
 
    This resource is used to discover the public keys that can be used by
    relying parties to verify Receipts issued by the Transparency
@@ -266,7 +260,7 @@ Table of Contents
    SHOULD remain available for as long as any Receipts signed with them
    may still need to be verified.
 
-3.1.2.  Individual Transparency Service Key
+3.2.  Individual Transparency Service Key
 
    This resource is used to resolve a single public key, from a kid
    value contained in a Receipt previously issued by the Transparency
@@ -327,7 +321,7 @@ Table of Contents
    It is RECOMMENDED to use COSE Key Thumbprint, as defined in [RFC9679]
    as the mechanism to assign a kid to Transparency Service keys.
 
-3.1.3.  Register Signed Statement
+3.3.  Register Signed Statement
 
    This resource instructs a Transparency Service to register a Signed
    Statement on its log.  Since log implementations may take many
@@ -378,7 +372,7 @@ Table of Contents
 
    One of the following:
 
-3.1.3.1.  Status 201 - Registration is successful
+3.3.1.  Status 201 - Registration is successful
 
    If the Transparency Service is able to produce a Receipt within a
    reasonable time, it MAY return it directly.
@@ -422,7 +416,7 @@ Table of Contents
    Receipts may be requested through the resource identified in the
    Location header.
 
-3.1.3.2.  Status 303 - Registration is running
+3.3.2.  Status 303 - Registration is running
 
    In cases where the registration request is accepted but the
    Transparency Service is not able to produce a Receipt in a reasonable
@@ -441,7 +435,7 @@ Table of Contents
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
 
-3.1.3.3.  Status 400 - Invalid Client Request
+3.3.3.  Status 400 - Invalid Client Request
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -495,7 +489,7 @@ Table of Contents
      / detail /        -2: "Operation locator is not in a valid form"
    }
 
-3.1.4.  Query Registration Status
+3.4.  Query Registration Status
 
    This resource lets a client query a Transparency Service for the
    registration status of a Signed Statement they have submitted
@@ -514,7 +508,7 @@ Table of Contents
 
    One of the following:
 
-3.1.4.1.  Status 302 - Registration is running
+3.4.1.  Status 302 - Registration is running
 
    Registration requests MAY fail, in which case the Location MAY return
    an error when queried.
@@ -535,7 +529,7 @@ Table of Contents
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
 
-3.1.4.2.  Status 200 - Asynchronous registration is successful
+3.4.2.  Status 200 - Asynchronous registration is successful
 
    Along with the receipt the Transparency Service MAY return a locator
    in the HTTP response Location header, provided the locator is a valid
@@ -595,7 +589,7 @@ Table of Contents
    Client <-- 200 (Receipt)                    --- TS
               Location: .../entries/final123
 
-3.1.4.3.  Status 400 - Invalid Client Request
+3.4.3.  Status 400 - Invalid Client Request
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -649,7 +643,7 @@ Table of Contents
      / detail /        -2: "Operation locator is not in a valid form"
    }
 
-3.1.4.4.  Status 404 - Operation Not Found
+3.4.4.  Status 404 - Operation Not Found
 
    If no record of the specified running operation is found, the
    Transparency Service returns a 404 response.
@@ -664,7 +658,7 @@ Table of Contents
              "No running operation was found matching the requested ID"
    }
 
-3.1.4.5.  Status 429 - Too Many Requests
+3.4.5.  Status 429 - Too Many Requests
 
    If a client is polling for an in-progress registration too frequently
    then the Transparency Service MAY, in addition to implementing rate
@@ -681,17 +675,17 @@ Table of Contents
              "Only <number> requests per <period> are allowed."
    }
 
-3.1.5.  Resolve Receipt
+3.5.  Resolve Receipt
 
    Request:
 
-   GET entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
+   GET /entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
    Host: transparency.example
    Accept: application/cose
 
    Response:
 
-3.1.5.1.  Status 200 - OK
+3.5.1.  Status 200 - OK
 
    If the Receipt is found:
 
@@ -726,7 +720,7 @@ Table of Contents
      / signature   / h'02d227ed...ccd3774f'
    ])
 
-3.1.5.2.  Status 404 - Not Found
+3.5.2.  Status 404 - Not Found
 
    If there is no Receipt found for the specified EntryID the
    Transparency Service returns a 404 response:
@@ -742,12 +736,12 @@ Table of Contents
              to this Transparency Service"
    }
 
-3.2.  Optional Resources
+   <<<<<<< copilot/remove-authentication-mentions ## Optional Resources
 
    These optional resources can be implemented for client convenience,
    but are not required for conformance to this specification.
 
-3.2.1.  Exchange Receipt
+3.5.3.  Exchange Receipt
 
    This resource is used to exchange old or expiring Receipts for fresh
    ones.
@@ -796,7 +790,7 @@ Table of Contents
 
    Response:
 
-3.2.1.1.  Status 200 - OK
+3.5.3.1.  Status 200 - OK
 
    If a new Receipt can be issued for the given submitted Receipt:
 
@@ -837,7 +831,7 @@ Table of Contents
 
    The following HTTP resources are optional to implement.
 
-3.2.2.  Resolve Signed Statement
+3.5.4.  Resolve Signed Statement
 
    This resource enables Transparency Service APIs to act like Artifact
    Repositories, and serve Signed Statements directly, instead of
@@ -853,7 +847,7 @@ Table of Contents
 
    One of the following:
 
-3.2.2.1.  Status 200 - Success
+3.5.4.1.  Status 200 - Success
 
    HTTP/1.1 200 OK
    Content-Type: application/cose
@@ -867,7 +861,7 @@ Table of Contents
      h'269cd68f4211dffc...0dcb29c' / Signature          /
    ])
 
-3.2.2.2.  Status 404 - Not Found
+3.5.4.2.  Status 404 - Not Found
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -882,7 +876,7 @@ Table of Contents
              "No Signed Statement found with the specified ID"
    }
 
-3.2.3.  Resolve Transparent Statement
+3.5.5.  Resolve Transparent Statement
 
    This resource enables Transparency Service APIs to serve Transparent
    Statements directly, including the Receipt they have issued for it.
@@ -897,7 +891,7 @@ Table of Contents
 
    One of the following:
 
-3.2.3.1.  Status 200 - Success
+3.5.5.1.  Status 200 - Success
 
    HTTP/1.1 200 OK
    Content-Type: application/cose
@@ -915,7 +909,7 @@ Table of Contents
      h'269cd68f4211dffc...0dcb29c' / Signature          /
    ])
 
-3.2.3.2.  Status 404 - Not Found
+3.5.5.2.  Status 404 - Not Found
 
    The following expected errors are defined.  Implementations MAY
    return other errors, so long as they are valid [RFC9290] objects.
@@ -930,20 +924,20 @@ Table of Contents
              "No Transparent Statement found with the specified ID"
    }
 
-3.2.3.3.  Eventual Consistency
+3.5.5.3.  Eventual Consistency
 
    For all responses additional eventually consistent operation details
    MAY be present.  Support for eventually consistent Receipts is
    implementation specific, and out of scope for this specification.
 
-4.  Privacy Considerations
+   ======= >>>>>>> main # Privacy Considerations
 
    The privacy considerations section of
    [I-D.draft-ietf-scitt-architecture] applies to this document.
 
-5.  Security Considerations
+4.  Security Considerations
 
-5.1.  General Scope
+4.1.  General Scope
 
    This document describes the interoperable API for client calls to,
    and implementations of, a Transparency Service as specified in
@@ -954,7 +948,7 @@ Table of Contents
    cryptographic envelopes, verifiable data structures and the like are
    handled elsewhere and out of scope for this document.
 
-5.2.  Applicable Environment
+4.2.  Applicable Environment
 
    SCITT is concerned with issues of cross-boundary supply-chain-wide
    data integrity and as such must assume a very wide range of
@@ -962,9 +956,9 @@ Table of Contents
    security of the computing environment in which any client
    implementation of this specification runs.
 
-5.3.  Threat Model
+4.3.  Threat Model
 
-5.3.1.  In Scope
+4.3.1.  In Scope
 
    The most serious threats to implementations on Transparency Services
    are ones that would cause the failure of their main promises, to wit:
@@ -979,7 +973,7 @@ Table of Contents
       the presentation or verification of divergent proofs for the same
       Statement payload
 
-5.3.1.1.  Denial of Service Attacks
+4.3.1.1.  Denial of Service Attacks
 
    While denial of service attacks are very hard to defend against
    completely, and Transparency Services are unlikely to be in the
@@ -1001,7 +995,7 @@ Table of Contents
    general good practice around network attacks, flooding, rate limiting
    etc.
 
-5.3.1.2.  Eavesdropping
+4.3.1.2.  Eavesdropping
 
    Since the purpose of this API is to ultimately put the message
    payloads on a Transparency Log there is limited risk to
@@ -1010,12 +1004,12 @@ Table of Contents
    protections against man-in-the-middle and network eavesdropping, such
    as TLS.
 
-5.3.1.3.  Message Modification Attacks
+4.3.1.3.  Message Modification Attacks
 
    Modification attacks are mitigated by the use of the Issuer signature
    on the Signed Statement.
 
-5.3.1.4.  Message Insertion Attacks
+4.3.1.4.  Message Insertion Attacks
 
    Insertion attacks are mitigated by the use of the Issuer signature on
    the Signed Statement, therefore care must be taken in the protection
@@ -1025,32 +1019,32 @@ Table of Contents
    as anomaly detection or rate limiting in order to mitigate the impact
    of any breach.
 
-5.3.2.  Out of Scope
+4.3.2.  Out of Scope
 
-5.3.2.1.  Replay Attacks
+4.3.2.1.  Replay Attacks
 
    Replay attacks are not particularly concerning for SCITT or SCRAPI:
    Once a statement is made, it is intended to be immutable and non-
    repudiable, so making it twice should not lead to any particular
    issues.  There could be issues at the payload level (for instance,
-   the statement "it is raining" may true when first submitted but not
-   when replayed), but being payload-agnostic implementations of SCITT
-   services cannot be required to worry about that.
+   the statement "it is raining" may be true when first submitted but
+   not when replayed), but being payload-agnostic implementations of
+   SCITT services cannot be required to worry about that.
 
    If the semantic content of the payload are time-dependent and
    susceptible to replay attacks in this way then timestamps MAY be
    added to the protected header signed by the Issuer.
 
-5.3.2.2.  Message Deletion Attacks
+4.3.2.2.  Message Deletion Attacks
 
    Once registered with a Transparency Service, Registered Signed
    Statements cannot be deleted.  Thus, any message deletion attack must
    occur prior to registration else it is indistinguishable from a man-
    in-the-middle or denial-of-service attack on this interface.
 
-6.  IANA Considerations
+5.  IANA Considerations
 
-6.1.  Well-Known URI for Key Discovery
+5.1.  Well-Known URI for Key Discovery
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
@@ -1059,9 +1053,9 @@ Table of Contents
    document(s): RFCthis Status: Permanent Related information:
    [I-D.draft-ietf-scitt-architecture]
 
-7.  References
+6.  References
 
-7.1.  Normative References
+6.1.  Normative References
 
    [I-D.draft-ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
@@ -1112,7 +1106,7 @@ Table of Contents
               DOI 10.17487/RFC9679, December 2024,
               <https://www.rfc-editor.org/rfc/rfc9679>.
 
-7.2.  Informative References
+6.2.  Informative References
 
    [NIST.SP.800-57pt1r5]
               Barker, E., "Recommendation for Key Management: Part 1 -
