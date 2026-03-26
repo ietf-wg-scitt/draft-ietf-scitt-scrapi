@@ -8,8 +8,7 @@
 <meta content="Henk Birkholz" name="author">
 <meta content="Jon Geater" name="author">
 <meta content="
-       This document describes a REST API that supports the normative requirements of the SCITT Architecture.
-Optional key discovery and query interfaces are provided to support interoperability with X.509 Certificates, alternative methods commonly used to support public key discovery and Artifact Repositories. 
+       This document describes a REST API that supports the normative requirements of the SCITT Architecture. 
     " name="description">
 <meta content="xml2rfc 3.32.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1086,8 +1085,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">SCITT Reference APIs</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document describes a REST API that supports the normative requirements of the SCITT Architecture.
-Optional key discovery and query interfaces are provided to support interoperability with X.509 Certificates, alternative methods commonly used to support public key discovery and Artifact Repositories.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document describes a REST API that supports the normative requirements of the SCITT Architecture.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1167,36 +1165,53 @@ Optional key discovery and query interfaces are provided to support interoperabi
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-resources" class="internal xref">Resources</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-core-resources" class="internal xref">Core Resources</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-transparency-service-keys" class="internal xref">Transparency Service Keys</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-individual-transparency-ser" class="internal xref">Individual Transparency Service Key</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-register-signed-statement" class="internal xref">Register Signed Statement</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
-                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-transparency-service-keys" class="internal xref">Transparency Service Keys</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
+                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-status-201-registration-is-" class="internal xref">Status 201 - Registration is successful</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
-                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-individual-transparency-ser" class="internal xref">Individual Transparency Service Key</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.2">
+                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="auto internal xref">3.3.2</a>.  <a href="#name-status-303-registration-is-" class="internal xref">Status 303 - Registration is running</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.3">
-                    <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="auto internal xref">3.1.3</a>.  <a href="#name-register-signed-statement" class="internal xref">Register Signed Statement</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.4">
-                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-query-registration-status" class="internal xref">Query Registration Status</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.5">
-                    <p id="section-toc.1-1.3.2.1.2.5.1"><a href="#section-3.1.5" class="auto internal xref">3.1.5</a>.  <a href="#name-resolve-receipt" class="internal xref">Resolve Receipt</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.3">
+                    <p id="section-toc.1-1.3.2.3.2.3.1"><a href="#section-3.3.3" class="auto internal xref">3.3.3</a>.  <a href="#name-status-400-invalid-client-r" class="internal xref">Status 400 - Invalid Client Request</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-optional-resources" class="internal xref">Optional Resources</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-query-registration-status" class="internal xref">Query Registration Status</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
-                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-exchange-receipt" class="internal xref">Exchange Receipt</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.1">
+                    <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="auto internal xref">3.4.1</a>.  <a href="#name-status-302-registration-is-" class="internal xref">Status 302 - Registration is running</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
-                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-resolve-signed-statement" class="internal xref">Resolve Signed Statement</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.2">
+                    <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="auto internal xref">3.4.2</a>.  <a href="#name-status-200-asynchronous-reg" class="internal xref">Status 200 - Asynchronous registration is successful</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.3">
-                    <p id="section-toc.1-1.3.2.2.2.3.1"><a href="#section-3.2.3" class="auto internal xref">3.2.3</a>.  <a href="#name-resolve-transparent-stateme" class="internal xref">Resolve Transparent Statement</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.3">
+                    <p id="section-toc.1-1.3.2.4.2.3.1"><a href="#section-3.4.3" class="auto internal xref">3.4.3</a>.  <a href="#name-status-400-invalid-client-re" class="internal xref">Status 400 - Invalid Client Request</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.4">
+                    <p id="section-toc.1-1.3.2.4.2.4.1"><a href="#section-3.4.4" class="auto internal xref">3.4.4</a>.  <a href="#name-status-404-operation-not-fo" class="internal xref">Status 404 - Operation Not Found</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.5">
+                    <p id="section-toc.1-1.3.2.4.2.5.1"><a href="#section-3.4.5" class="auto internal xref">3.4.5</a>.  <a href="#name-status-429-too-many-request" class="internal xref">Status 429 - Too Many Requests</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-resolve-receipt" class="internal xref">Resolve Receipt</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.1">
+                    <p id="section-toc.1-1.3.2.5.2.1.1"><a href="#section-3.5.1" class="auto internal xref">3.5.1</a>.  <a href="#name-status-200-ok" class="internal xref">Status 200 - OK</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5.2.2">
+                    <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="auto internal xref">3.5.2</a>.  <a href="#name-status-404-not-found" class="internal xref">Status 404 - Not Found</a></p>
 </li>
                 </ul>
 </li>
@@ -1280,7 +1295,7 @@ Optional key discovery and query interfaces are provided to support interoperabi
 </li>
       </ul>
 <p id="section-1-3">SCRAPI defines HTTP resources for a Transparency Service using COSE (<span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>).
-Core resources <span class="bcp14">MUST</span> be implemented for conformance to this specification:<a href="#section-1-3" class="pilcrow">¶</a></p>
+The following resources <span class="bcp14">MUST</span> be implemented for conformance to this specification:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-4.1">
           <p id="section-1-4.1.1">Registration of Signed Statements<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
@@ -1290,18 +1305,6 @@ Core resources <span class="bcp14">MUST</span> be implemented for conformance to
 </li>
         <li class="normal" id="section-1-4.3">
           <p id="section-1-4.3.1">Discovery of Transparency Service Keys<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-1-5">Optional resources <span class="bcp14">MAY</span> be implemented for client convenience:<a href="#section-1-5" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-1-6.1">
-          <p id="section-1-6.1.1">Retrieving Signed Statements<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-6.2">
-          <p id="section-1-6.2.1">Retrieving Transparent Statements<a href="#section-1-6.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-6.3">
-          <p id="section-1-6.3.1">Exchanging Receipts for refreshed Receipts<a href="#section-1-6.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="sec-terminology">
@@ -1380,29 +1383,24 @@ The one exception is the "malformed" error type, which indicates that the Transp
 <p id="section-3-11">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-3-11" class="pilcrow">¶</a></p>
 <p id="section-3-12">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.<a href="#section-3-12" class="pilcrow">¶</a></p>
-<div id="sec-core-resources">
-<section id="section-3.1">
-        <h3 id="name-core-resources">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-core-resources" class="section-name selfRef">Core Resources</a>
-        </h3>
-<p id="section-3.1-1">The following HTTP resources <span class="bcp14">MUST</span> be implemented to enable conformance to this specification.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3-13">The following HTTP resources <span class="bcp14">MUST</span> be implemented to enable conformance to this specification.<a href="#section-3-13" class="pilcrow">¶</a></p>
 <div id="sec-transparency-service-keys">
-<section id="section-3.1.1">
-          <h4 id="name-transparency-service-keys">
-<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-transparency-service-keys" class="section-name selfRef">Transparency Service Keys</a>
-          </h4>
-<p id="section-3.1.1-1">This resource is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-2">The Transparency Service responds with a COSE Key Set, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-3">Request:<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.1-4">
+<section id="section-3.1">
+        <h3 id="name-transparency-service-keys">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-transparency-service-keys" class="section-name selfRef">Transparency Service Keys</a>
+        </h3>
+<p id="section-3.1-1">This resource is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The Transparency Service responds with a COSE Key Set, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">Request:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.1-4">
 <pre>
 GET /.well-known/scitt-keys HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
-</pre><a href="#section-3.1.1-4" class="pilcrow">¶</a>
+</pre><a href="#section-3.1-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.1-5">Response:<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.1-6">
+<p id="section-3.1-5">Response:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.1-6">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/cbor
@@ -1425,29 +1423,29 @@ Body (in CBOR diagnostic notation)
     2:'kid2'
   }
 ]
-</pre><a href="#section-3.1.1-6" class="pilcrow">¶</a>
+</pre><a href="#section-3.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.1-7">The Transparency Service <span class="bcp14">MAY</span> stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
+<p id="section-3.1-7">The Transparency Service <span class="bcp14">MAY</span> stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
-Consistent with key management best practices described in <span>[<a href="#NIST.SP.800-57pt1r5" class="cite xref">NIST.SP.800-57pt1r5</a>]</span> (Section 5.3.4), retired keys <span class="bcp14">SHOULD</span> remain available for as long as any Receipts signed with them may still need to be verified.<a href="#section-3.1.1-7" class="pilcrow">¶</a></p>
+Consistent with key management best practices described in <span>[<a href="#NIST.SP.800-57pt1r5" class="cite xref">NIST.SP.800-57pt1r5</a>]</span> (Section 5.3.4), retired keys <span class="bcp14">SHOULD</span> remain available for as long as any Receipts signed with them may still need to be verified.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-individual-transparency-service-key">
-<section id="section-3.1.2">
-          <h4 id="name-individual-transparency-ser">
-<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-individual-transparency-ser" class="section-name selfRef">Individual Transparency Service Key</a>
-          </h4>
-<p id="section-3.1.2-1">This resource is used to resolve a single public key, from a <code>kid</code> value contained in a Receipt previously issued by the Transparency Service.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-2">Request:<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.2-3">
+<section id="section-3.2">
+        <h3 id="name-individual-transparency-ser">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-individual-transparency-ser" class="section-name selfRef">Individual Transparency Service Key</a>
+        </h3>
+<p id="section-3.2-1">This resource is used to resolve a single public key, from a <code>kid</code> value contained in a Receipt previously issued by the Transparency Service.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Request:<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.2-3">
 <pre>
 GET /.well-known/scitt-keys/{kid_value} HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
-</pre><a href="#section-3.1.2-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.2-4">Response:<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.2-5">
+<p id="section-3.2-4">Response:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.2-5">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/cbor
@@ -1463,10 +1461,10 @@ Body (in CBOR diagnostic notation)
     2:'kid_value'
   }
 ]
-</pre><a href="#section-3.1.2-5" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.2-6">The following expected error is defined:<a href="#section-3.1.2-6" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.2-7">
+<p id="section-3.2-6">The following expected error is defined:<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.2-7">
 <pre>
 HTTP/1.1 404 Not Found
 Content-Type: application/concise-problem-details+cbor
@@ -1475,32 +1473,32 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: "No such key",
   / detail /        -2: "No key could be found for this kid value"
 }
-</pre><a href="#section-3.1.2-7" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-7" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.2-8">Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.1.2-8" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-9">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-3.1.2-9" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-10"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-3.1.2-10" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-11"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-3.1.2-11" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-12">"Base64 encoding using the URL- and filename-safe character set
+<p id="section-3.2-8">Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.2-8" class="pilcrow">¶</a></p>
+<p id="section-3.2-9">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-3.2-9" class="pilcrow">¶</a></p>
+<p id="section-3.2-10"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-3.2-10" class="pilcrow">¶</a></p>
+<p id="section-3.2-11"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-3.2-11" class="pilcrow">¶</a></p>
+<p id="section-3.2-12">"Base64 encoding using the URL- and filename-safe character set
 defined in Section 5 of RFC 4648 <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, with all trailing '='
 characters omitted and without the inclusion of any line breaks,
 whitespace, or other additional characters.  Note that the base64url
 encoding of the empty octet sequence is the empty string.
 (See Appendix C of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> for notes on implementing base64url
-encoding without padding.)"<a href="#section-3.1.2-12" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-13">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.<a href="#section-3.1.2-13" class="pilcrow">¶</a></p>
+encoding without padding.)"<a href="#section-3.2-12" class="pilcrow">¶</a></p>
+<p id="section-3.2-13">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.<a href="#section-3.2-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-register-signed-statement">
-<section id="section-3.1.3">
-          <h4 id="name-register-signed-statement">
-<a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-register-signed-statement" class="section-name selfRef">Register Signed Statement</a>
-          </h4>
-<p id="section-3.1.3-1">This resource instructs a Transparency Service to register a Signed Statement on its log.
-Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator that can be used to check the registration's status asynchronously.<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-2">The following is a non-normative example of an HTTP request to register a Signed Statement:<a href="#section-3.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-3">Request:<a href="#section-3.1.3-3" class="pilcrow">¶</a></p>
-<div class="lang-http sourcecode" id="section-3.1.3-4">
+<section id="section-3.3">
+        <h3 id="name-register-signed-statement">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-register-signed-statement" class="section-name selfRef">Register Signed Statement</a>
+        </h3>
+<p id="section-3.3-1">This resource instructs a Transparency Service to register a Signed Statement on its log.
+Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator that can be used to check the registration's status asynchronously.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">The following is a non-normative example of an HTTP request to register a Signed Statement:<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">Request:<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<div class="lang-http sourcecode" id="section-3.3-4">
 <pre>
 POST /entries HTTP/1.1
 Host: transparency.example
@@ -1528,21 +1526,21 @@ Body (in CBOR diagnostic notation)
   h'935b5a91...e18a588a',
   h'269cd68f4211dffc...0dcb29c' / Signature /
 ])
-</pre><a href="#section-3.1.3-4" class="pilcrow">¶</a>
+</pre><a href="#section-3.3-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.3-5">A Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.<a href="#section-3.1.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-6">The Registration Policy for the Transparency Service <span class="bcp14">MUST</span> be applied before any additional processing.
-The details of Registration Policies are out of scope for this document.<a href="#section-3.1.3-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-7">Response:<a href="#section-3.1.3-7" class="pilcrow">¶</a></p>
-<p id="section-3.1.3-8">One of the following:<a href="#section-3.1.3-8" class="pilcrow">¶</a></p>
+<p id="section-3.3-5">A Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">The Registration Policy for the Transparency Service <span class="bcp14">MUST</span> be applied before any additional processing.
+The details of Registration Policies are out of scope for this document.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">Response:<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+<p id="section-3.3-8">One of the following:<a href="#section-3.3-8" class="pilcrow">¶</a></p>
 <div id="sec-status-201-registration-is-successful">
-<section id="section-3.1.3.1">
-            <h5 id="name-status-201-registration-is-">
-<a href="#section-3.1.3.1" class="section-number selfRef">3.1.3.1. </a><a href="#name-status-201-registration-is-" class="section-name selfRef">Status 201 - Registration is successful</a>
-            </h5>
-<p id="section-3.1.3.1-1">If the Transparency Service is able to produce a Receipt within a reasonable time, it <span class="bcp14">MAY</span> return it directly.<a href="#section-3.1.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.3.1-2">Along with the receipt the Transparency Service <span class="bcp14">MAY</span> return a locator in the HTTP response <code>Location</code> header, provided the locator is a valid URL.<a href="#section-3.1.3.1-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.3.1-3">
+<section id="section-3.3.1">
+          <h4 id="name-status-201-registration-is-">
+<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-status-201-registration-is-" class="section-name selfRef">Status 201 - Registration is successful</a>
+          </h4>
+<p id="section-3.3.1-1">If the Transparency Service is able to produce a Receipt within a reasonable time, it <span class="bcp14">MAY</span> return it directly.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-2">Along with the receipt the Transparency Service <span class="bcp14">MAY</span> return a locator in the HTTP response <code>Location</code> header, provided the locator is a valid URL.<a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.3.1-3">
 <pre>
 HTTP/1.1 201 Created
 Location: https://transparency.example/entries/67ed...befe
@@ -1574,39 +1572,39 @@ Body (in CBOR diagnostic notation)
   / payload     / null,
   / signature   / h'02d227ed...ccd3774f'
 ])
-</pre><a href="#section-3.1.3.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.3.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.3.1-4">The response contains the Receipt for the Signed Statement.
-Fresh Receipts may be requested through the resource identified in the Location header.<a href="#section-3.1.3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-4">The response contains the Receipt for the Signed Statement.
+Fresh Receipts may be requested through the resource identified in the Location header.<a href="#section-3.3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-status-303-registration-is-running">
-<section id="section-3.1.3.2">
-            <h5 id="name-status-303-registration-is-">
-<a href="#section-3.1.3.2" class="section-number selfRef">3.1.3.2. </a><a href="#name-status-303-registration-is-" class="section-name selfRef">Status 303 - Registration is running</a>
-            </h5>
-<p id="section-3.1.3.2-1">In cases where the registration request is accepted but the Transparency Service is not able to produce a Receipt in a reasonable time, it <span class="bcp14">MAY</span> return a locator for the registration operation, as in this non-normative example:<a href="#section-3.1.3.2-1" class="pilcrow">¶</a></p>
-<div class="lang-http sourcecode" id="section-3.1.3.2-2">
+<section id="section-3.3.2">
+          <h4 id="name-status-303-registration-is-">
+<a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-status-303-registration-is-" class="section-name selfRef">Status 303 - Registration is running</a>
+          </h4>
+<p id="section-3.3.2-1">In cases where the registration request is accepted but the Transparency Service is not able to produce a Receipt in a reasonable time, it <span class="bcp14">MAY</span> return a locator for the registration operation, as in this non-normative example:<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
+<div class="lang-http sourcecode" id="section-3.3.2-2">
 <pre>
 HTTP/1.1 303 See Other
 Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 Content-Length: 0
 Retry-After: &lt;seconds&gt;
-</pre><a href="#section-3.1.3.2-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.3.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.3.2-3">The location <span class="bcp14">MAY</span> be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.<a href="#section-3.1.3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.3.2-4">The Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header in the HTTP response to help with polling.<a href="#section-3.1.3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-3">The location <span class="bcp14">MAY</span> be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.<a href="#section-3.3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-4">The Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header in the HTTP response to help with polling.<a href="#section-3.3.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-status-400-invalid-client-request">
-<section id="section-3.1.3.3">
-            <h5 id="name-status-400-invalid-client-r">
-<a href="#section-3.1.3.3" class="section-number selfRef">3.1.3.3. </a><a href="#name-status-400-invalid-client-r" class="section-name selfRef">Status 400 - Invalid Client Request</a>
-            </h5>
-<p id="section-3.1.3.3-1">The following expected errors are defined.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.1.3.3-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.3.3-2">
+<section id="section-3.3.3">
+          <h4 id="name-status-400-invalid-client-r">
+<a href="#section-3.3.3" class="section-number selfRef">3.3.3. </a><a href="#name-status-400-invalid-client-r" class="section-name selfRef">Status 400 - Invalid Client Request</a>
+          </h4>
+<p id="section-3.3.3-1">The following expected errors are defined.
+Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.3.3-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.3.3-2">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1617,9 +1615,9 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: \
           "Signed Statement contained a non supported algorithm"
 }
-</pre><a href="#section-3.1.3.3-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.3.3-2" class="pilcrow">¶</a>
 </div>
-<div class="lang-http-message sourcecode" id="section-3.1.3.3-3">
+<div class="lang-http-message sourcecode" id="section-3.3.3-3">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1630,9 +1628,9 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: \
           "Signed Statement did not contain proof of possession"
 }
-</pre><a href="#section-3.1.3.3-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.3.3-3" class="pilcrow">¶</a>
 </div>
-<div class="lang-http-message sourcecode" id="section-3.1.3.3-4">
+<div class="lang-http-message sourcecode" id="section-3.3.3-4">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1643,9 +1641,9 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: \
           "Signed Statement payload must be present"
 }
-</pre><a href="#section-3.1.3.3-4" class="pilcrow">¶</a>
+</pre><a href="#section-3.3.3-4" class="pilcrow">¶</a>
 </div>
-<div class="lang-http-message sourcecode" id="section-3.1.3.3-5">
+<div class="lang-http-message sourcecode" id="section-3.3.3-5">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1657,9 +1655,9 @@ Content-Type: application/concise-problem-details+cbor
           "Signed Statement not accepted by the current\
           Registration Policy"
 }
-</pre><a href="#section-3.1.3.3-5" class="pilcrow">¶</a>
+</pre><a href="#section-3.3.3-5" class="pilcrow">¶</a>
 </div>
-<div class="lang-http-message sourcecode" id="section-3.1.3.3-6">
+<div class="lang-http-message sourcecode" id="section-3.3.3-6">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1668,57 +1666,57 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: "Invalid locator",
   / detail /        -2: "Operation locator is not in a valid form"
 }
-</pre><a href="#section-3.1.3.3-6" class="pilcrow">¶</a>
+</pre><a href="#section-3.3.3-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 </section>
 </div>
 <div id="sec-query-registration-status">
-<section id="section-3.1.4">
-          <h4 id="name-query-registration-status">
-<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-query-registration-status" class="section-name selfRef">Query Registration Status</a>
-          </h4>
-<p id="section-3.1.4-1">This resource lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-2">Request:<a href="#section-3.1.4-2" class="pilcrow">¶</a></p>
-<div class="lang-http sourcecode" id="section-3.1.4-3">
+<section id="section-3.4">
+        <h3 id="name-query-registration-status">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-query-registration-status" class="section-name selfRef">Query Registration Status</a>
+        </h3>
+<p id="section-3.4-1">This resource lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">Request:<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<div class="lang-http sourcecode" id="section-3.4-3">
 <pre>
 GET /entries/67ed...befe HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
 Accept: application/cose
 Content-Type: application/cose
-</pre><a href="#section-3.1.4-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.4-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.4-4">Response:<a href="#section-3.1.4-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-5">One of the following:<a href="#section-3.1.4-5" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">Response:<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-5">One of the following:<a href="#section-3.4-5" class="pilcrow">¶</a></p>
 <div id="sec-status-302-registration-is-running">
-<section id="section-3.1.4.1">
-            <h5 id="name-status-302-registration-is-">
-<a href="#section-3.1.4.1" class="section-number selfRef">3.1.4.1. </a><a href="#name-status-302-registration-is-" class="section-name selfRef">Status 302 - Registration is running</a>
-            </h5>
-<p id="section-3.1.4.1-1">Registration requests <span class="bcp14">MAY</span> fail, in which case the Location <span class="bcp14">MAY</span> return an error when queried.<a href="#section-3.1.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.4.1-2">If the client requests (GET) the location when the registration is still in progress, the TS <span class="bcp14">MAY</span> return a 302 Found, as in this non-normative example:<a href="#section-3.1.4.1-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.4.1-3">
+<section id="section-3.4.1">
+          <h4 id="name-status-302-registration-is-">
+<a href="#section-3.4.1" class="section-number selfRef">3.4.1. </a><a href="#name-status-302-registration-is-" class="section-name selfRef">Status 302 - Registration is running</a>
+          </h4>
+<p id="section-3.4.1-1">Registration requests <span class="bcp14">MAY</span> fail, in which case the Location <span class="bcp14">MAY</span> return an error when queried.<a href="#section-3.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-2">If the client requests (GET) the location when the registration is still in progress, the TS <span class="bcp14">MAY</span> return a 302 Found, as in this non-normative example:<a href="#section-3.4.1-2" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.4.1-3">
 <pre>
 HTTP/1.1 302 Found
 Location: https://transparency.example/entries/67ed...befe
 Content-Type: application/cose
 Content-Length: 0
 Retry-After: &lt;seconds&gt;
-</pre><a href="#section-3.1.4.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.4.1-4">The location <span class="bcp14">MAY</span> be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.<a href="#section-3.1.4.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.4.1-5">The Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header in the HTTP response to help with polling.<a href="#section-3.1.4.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-4">The location <span class="bcp14">MAY</span> be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.<a href="#section-3.4.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-5">The Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header in the HTTP response to help with polling.<a href="#section-3.4.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-status-200-asynchronous-registration-is-successful">
-<section id="section-3.1.4.2">
-            <h5 id="name-status-200-asynchronous-reg">
-<a href="#section-3.1.4.2" class="section-number selfRef">3.1.4.2. </a><a href="#name-status-200-asynchronous-reg" class="section-name selfRef">Status 200 - Asynchronous registration is successful</a>
-            </h5>
-<p id="section-3.1.4.2-1">Along with the receipt the Transparency Service <span class="bcp14">MAY</span> return a locator in the HTTP response <code>Location</code> header, provided the locator is a valid URL.<a href="#section-3.1.4.2-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.4.2-2">
+<section id="section-3.4.2">
+          <h4 id="name-status-200-asynchronous-reg">
+<a href="#section-3.4.2" class="section-number selfRef">3.4.2. </a><a href="#name-status-200-asynchronous-reg" class="section-name selfRef">Status 200 - Asynchronous registration is successful</a>
+          </h4>
+<p id="section-3.4.2-1">Along with the receipt the Transparency Service <span class="bcp14">MAY</span> return a locator in the HTTP response <code>Location</code> header, provided the locator is a valid URL.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.4.2-2">
 <pre>
 HTTP/1.1 200 OK
 Location: https://transparency.example/entries/67ed...befe
@@ -1750,12 +1748,12 @@ Body (in CBOR diagnostic notation)
   / payload     / null,
   / signature   / h'02d227ed...ccd3774f'
 ])
-</pre><a href="#section-3.1.4.2-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.4.2-3">The response contains the Receipt for the Signed Statement.
-Fresh Receipts may be requested through the resource identified in the Location header.<a href="#section-3.1.4.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.4.2-4">As an example, a successful asynchronous follows the following sequence:<a href="#section-3.1.4.2-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.1.4.2-5">
+<p id="section-3.4.2-3">The response contains the Receipt for the Signed Statement.
+Fresh Receipts may be requested through the resource identified in the Location header.<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.4.2-4">As an example, a successful asynchronous follows the following sequence:<a href="#section-3.4.2-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.4.2-5">
 <pre>
 Initial exchange:
 
@@ -1772,18 +1770,18 @@ Finally:
 Client --- GET .../entries/tmp123           --&gt; TS
 Client &lt;-- 200 (Receipt)                    --- TS
            Location: .../entries/final123
-</pre><a href="#section-3.1.4.2-5" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.2-5" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-status-400-invalid-client-request-1">
-<section id="section-3.1.4.3">
-            <h5 id="name-status-400-invalid-client-re">
-<a href="#section-3.1.4.3" class="section-number selfRef">3.1.4.3. </a><a href="#name-status-400-invalid-client-re" class="section-name selfRef">Status 400 - Invalid Client Request</a>
-            </h5>
-<p id="section-3.1.4.3-1">The following expected errors are defined.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.1.4.3-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.4.3-2">
+<section id="section-3.4.3">
+          <h4 id="name-status-400-invalid-client-re">
+<a href="#section-3.4.3" class="section-number selfRef">3.4.3. </a><a href="#name-status-400-invalid-client-re" class="section-name selfRef">Status 400 - Invalid Client Request</a>
+          </h4>
+<p id="section-3.4.3-1">The following expected errors are defined.
+Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.4.3-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.4.3-2">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1794,9 +1792,9 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: \
           "Signed Statement contained a non supported algorithm"
 }
-</pre><a href="#section-3.1.4.3-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.3-2" class="pilcrow">¶</a>
 </div>
-<div class="lang-http-message sourcecode" id="section-3.1.4.3-3">
+<div class="lang-http-message sourcecode" id="section-3.4.3-3">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1807,9 +1805,9 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: \
           "Signed Statement did not contain proof of possession"
 }
-</pre><a href="#section-3.1.4.3-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.3-3" class="pilcrow">¶</a>
 </div>
-<div class="lang-http-message sourcecode" id="section-3.1.4.3-4">
+<div class="lang-http-message sourcecode" id="section-3.4.3-4">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1820,9 +1818,9 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: \
           "Signed Statement payload must be present"
 }
-</pre><a href="#section-3.1.4.3-4" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.3-4" class="pilcrow">¶</a>
 </div>
-<div class="lang-http-message sourcecode" id="section-3.1.4.3-5">
+<div class="lang-http-message sourcecode" id="section-3.4.3-5">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1834,9 +1832,9 @@ Content-Type: application/concise-problem-details+cbor
           "Signed Statement not accepted by the current\
           Registration Policy"
 }
-</pre><a href="#section-3.1.4.3-5" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.3-5" class="pilcrow">¶</a>
 </div>
-<div class="lang-http-message sourcecode" id="section-3.1.4.3-6">
+<div class="lang-http-message sourcecode" id="section-3.4.3-6">
 <pre>
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
@@ -1845,17 +1843,17 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: "Invalid locator",
   / detail /        -2: "Operation locator is not in a valid form"
 }
-</pre><a href="#section-3.1.4.3-6" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.3-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-status-404-operation-not-found">
-<section id="section-3.1.4.4">
-            <h5 id="name-status-404-operation-not-fo">
-<a href="#section-3.1.4.4" class="section-number selfRef">3.1.4.4. </a><a href="#name-status-404-operation-not-fo" class="section-name selfRef">Status 404 - Operation Not Found</a>
-            </h5>
-<p id="section-3.1.4.4-1">If no record of the specified running operation is found, the Transparency Service returns a 404 response.<a href="#section-3.1.4.4-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.4.4-2">
+<section id="section-3.4.4">
+          <h4 id="name-status-404-operation-not-fo">
+<a href="#section-3.4.4" class="section-number selfRef">3.4.4. </a><a href="#name-status-404-operation-not-fo" class="section-name selfRef">Status 404 - Operation Not Found</a>
+          </h4>
+<p id="section-3.4.4-1">If no record of the specified running operation is found, the Transparency Service returns a 404 response.<a href="#section-3.4.4-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.4.4-2">
 <pre>
 HTTP/1.1 404 Not Found
 Content-Type: application/concise-problem-details+cbor
@@ -1866,17 +1864,17 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: \
           "No running operation was found matching the requested ID"
 }
-</pre><a href="#section-3.1.4.4-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.4-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-status-429-too-many-requests">
-<section id="section-3.1.4.5">
-            <h5 id="name-status-429-too-many-request">
-<a href="#section-3.1.4.5" class="section-number selfRef">3.1.4.5. </a><a href="#name-status-429-too-many-request" class="section-name selfRef">Status 429 - Too Many Requests</a>
-            </h5>
-<p id="section-3.1.4.5-1">If a client is polling for an in-progress registration too frequently then the Transparency Service <span class="bcp14">MAY</span>, in addition to implementing rate limiting, return a 429 response:<a href="#section-3.1.4.5-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.4.5-2">
+<section id="section-3.4.5">
+          <h4 id="name-status-429-too-many-request">
+<a href="#section-3.4.5" class="section-number selfRef">3.4.5. </a><a href="#name-status-429-too-many-request" class="section-name selfRef">Status 429 - Too Many Requests</a>
+          </h4>
+<p id="section-3.4.5-1">If a client is polling for an in-progress registration too frequently then the Transparency Service <span class="bcp14">MAY</span>, in addition to implementing rate limiting, return a 429 response:<a href="#section-3.4.5-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.4.5-2">
 <pre>
 HTTP/1.1 429 Too Many Requests
 Content-Type: application/concise-problem-details+cbor
@@ -1888,34 +1886,34 @@ Retry-After: &lt;seconds&gt;
   / detail /        -2: \
           "Only &lt;number&gt; requests per &lt;period&gt; are allowed."
 }
-</pre><a href="#section-3.1.4.5-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.4.5-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 </section>
 </div>
 <div id="sec-resolve-receipt">
-<section id="section-3.1.5">
-          <h4 id="name-resolve-receipt">
-<a href="#section-3.1.5" class="section-number selfRef">3.1.5. </a><a href="#name-resolve-receipt" class="section-name selfRef">Resolve Receipt</a>
-          </h4>
-<p id="section-3.1.5-1">Authentication <span class="bcp14">SHOULD</span> be implemented for this resource.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.5-2">Request:<a href="#section-3.1.5-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.5-3">
+<section id="section-3.5">
+        <h3 id="name-resolve-receipt">
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-resolve-receipt" class="section-name selfRef">Resolve Receipt</a>
+        </h3>
+<p id="section-3.5-1">Authentication <span class="bcp14">SHOULD</span> be implemented for this resource.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.5-2">Request:<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.5-3">
 <pre>
 GET /entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
 Host: transparency.example
 Accept: application/cose
-</pre><a href="#section-3.1.5-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.5-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1.5-4">Response:<a href="#section-3.1.5-4" class="pilcrow">¶</a></p>
+<p id="section-3.5-4">Response:<a href="#section-3.5-4" class="pilcrow">¶</a></p>
 <div id="sec-status-200-ok">
-<section id="section-3.1.5.1">
-            <h5 id="name-status-200-ok">
-<a href="#section-3.1.5.1" class="section-number selfRef">3.1.5.1. </a><a href="#name-status-200-ok" class="section-name selfRef">Status 200 - OK</a>
-            </h5>
-<p id="section-3.1.5.1-1">If the Receipt is found:<a href="#section-3.1.5.1-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.5.1-2">
+<section id="section-3.5.1">
+          <h4 id="name-status-200-ok">
+<a href="#section-3.5.1" class="section-number selfRef">3.5.1. </a><a href="#name-status-200-ok" class="section-name selfRef">Status 200 - OK</a>
+          </h4>
+<p id="section-3.5.1-1">If the Receipt is found:<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.5.1-2">
 <pre>
 HTTP/1.1 200 OK
 Location: https://transparency.example/entries/67ed...befe
@@ -1947,17 +1945,17 @@ Body (in CBOR diagnostic notation)
   / payload     / null,
   / signature   / h'02d227ed...ccd3774f'
 ])
-</pre><a href="#section-3.1.5.1-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.5.1-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-status-404-not-found">
-<section id="section-3.1.5.2">
-            <h5 id="name-status-404-not-found">
-<a href="#section-3.1.5.2" class="section-number selfRef">3.1.5.2. </a><a href="#name-status-404-not-found" class="section-name selfRef">Status 404 - Not Found</a>
-            </h5>
-<p id="section-3.1.5.2-1">If there is no Receipt found for the specified <code>EntryID</code> the Transparency Service returns a 404 response:<a href="#section-3.1.5.2-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.1.5.2-2">
+<section id="section-3.5.2">
+          <h4 id="name-status-404-not-found">
+<a href="#section-3.5.2" class="section-number selfRef">3.5.2. </a><a href="#name-status-404-not-found" class="section-name selfRef">Status 404 - Not Found</a>
+          </h4>
+<p id="section-3.5.2-1">If there is no Receipt found for the specified <code>EntryID</code> the Transparency Service returns a 404 response:<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-3.5.2-2">
 <pre>
 HTTP/1.1 404 Not Found
 Content-Type: application/concise-problem-details+cbor
@@ -1969,248 +1967,7 @@ Content-Type: application/concise-problem-details+cbor
           "Receipt with entry ID &lt;id&gt; not known \
           to this Transparency Service"
 }
-</pre><a href="#section-3.1.5.2-2" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-</section>
-</div>
-</section>
-</div>
-<div id="sec-optional-resources">
-<section id="section-3.2">
-        <h3 id="name-optional-resources">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-optional-resources" class="section-name selfRef">Optional Resources</a>
-        </h3>
-<p id="section-3.2-1">These optional resources can be implemented for client convenience, but are not required for conformance to this specification.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<div id="sec-exchange-receipt">
-<section id="section-3.2.1">
-          <h4 id="name-exchange-receipt">
-<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-exchange-receipt" class="section-name selfRef">Exchange Receipt</a>
-          </h4>
-<p id="section-3.2.1-1">This resource is used to exchange old or expiring Receipts for fresh ones.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-2">The <code>iat</code>, <code>exp</code> and <code>kid</code> claims can change each time a Receipt is exchanged.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-3">This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-4">Authentication <span class="bcp14">SHOULD</span> be implemented for this resource.<a href="#section-3.2.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-5">Request:<a href="#section-3.2.1-5" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.2.1-6">
-<pre>
-POST /receipt-exchange HTTP/1.1
-Host: transparency.example
-Accept: application/cose
-Content-Type: application/cose
-
-Body (in CBOR diagnostic notation)
-
-/ cose-sign1 / 18([
-  / protected   / &lt;&lt;{
-    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-    / algorithm / 1 : -7,  # ES256
-    / vds       / 395 : 1, # RFC9162 SHA-256
-    / claims / 15 : {
-      / issuer  / 1 : "https://blue.example",
-      / subject / 2 : "https://green.example/cli@v1.2.3",
-      / iat / 6: 1443944944 # Pre-refresh
-    },
-  }&gt;&gt;,
-  / unprotected / {
-    / proofs / 396 : {
-      / inclusion / -1 : [
-        &lt;&lt;[
-          / size / 9, / leaf / 8,
-          / inclusion path /
-          h'7558a95f...e02e35d6'
-        ]&gt;&gt;
-      ],
-    },
-  },
-  / payload     / null,
-  / signature   / h'02d227ed...ccd3774f'
-])
-</pre><a href="#section-3.2.1-6" class="pilcrow">¶</a>
-</div>
-<p id="section-3.2.1-7">Response:<a href="#section-3.2.1-7" class="pilcrow">¶</a></p>
-<div id="sec-status-200-ok-1">
-<section id="section-3.2.1.1">
-            <h5 id="name-status-200-ok-2">
-<a href="#section-3.2.1.1" class="section-number selfRef">3.2.1.1. </a><a href="#name-status-200-ok-2" class="section-name selfRef">Status 200 - OK</a>
-            </h5>
-<p id="section-3.2.1.1-1">If a new Receipt can be issued for the given submitted Receipt:<a href="#section-3.2.1.1-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.2.1.1-2">
-<pre>
-HTTP/1.1 200 OK
-Content-Type: application/cose
-Location: https://transparency.example/entries/67ed...befe
-
-Body (in CBOR diagnostic notation)
-
-/ cose-sign1 / 18([
-  / protected   / &lt;&lt;{
-    / key / 4 : "0vx7agoebGc...9nndrQmbX",
-    / algorithm / 1 : -35,  # ES384
-    / vds       / 395 : 1,  # RFC9162 SHA-256
-    / claims / 15 : {
-      / issuer  / 1 : "https://blue.example",
-      / subject / 2 : "https://green.example/cli@v1.2.3",
-      / iat / 6: 2443944944, # Post-refresh
-    },
-  }&gt;&gt;,
-  / unprotected / {
-    / proofs / 396 : {
-      / inclusion / -1 : [
-        &lt;&lt;[
-          / size / 9, / leaf / 8,
-          / inclusion path /
-          h'7558a95f...e02e35d6'
-        ]&gt;&gt;
-      ],
-    },
-  },
-  / payload     / null,
-  / signature   / h'123227ed...ccd37123'
-])
-</pre><a href="#section-3.2.1.1-2" class="pilcrow">¶</a>
-</div>
-<p id="section-3.2.1.1-3">A TS may limit how often a new receipt can be issued, and respond with a 503 if a client requests new receipts too frequently.<a href="#section-3.2.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.2.1.1-4">The following HTTP resources are optional to implement.<a href="#section-3.2.1.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
-<div id="sec-resolve-signed-statement">
-<section id="section-3.2.2">
-          <h4 id="name-resolve-signed-statement">
-<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-resolve-signed-statement" class="section-name selfRef">Resolve Signed Statement</a>
-          </h4>
-<p id="section-3.2.2-1">This resource enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-2">Request:<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.2.2-3">
-<pre>
-GET /signed-statements/9e4f...688a HTTP/1.1
-Host: transparency.example
-Accept: application/cose
-</pre><a href="#section-3.2.2-3" class="pilcrow">¶</a>
-</div>
-<p id="section-3.2.2-4">Response:<a href="#section-3.2.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-5">One of the following:<a href="#section-3.2.2-5" class="pilcrow">¶</a></p>
-<div id="sec-status-200-success">
-<section id="section-3.2.2.1">
-            <h5 id="name-status-200-success">
-<a href="#section-3.2.2.1" class="section-number selfRef">3.2.2.1. </a><a href="#name-status-200-success" class="section-name selfRef">Status 200 - Success</a>
-            </h5>
-<div class="lang-http-message sourcecode" id="section-3.2.2.1-1">
-<pre>
-HTTP/1.1 200 OK
-Content-Type: application/cose
-
-Body (in CBOR diagnostic notation)
-
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {},                           / Unprotected Header /
-  h'b158a1...0149a9',           / Payload            /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
-])
-</pre><a href="#section-3.2.2.1-1" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-<div id="sec-status-404-not-found-1">
-<section id="section-3.2.2.2">
-            <h5 id="name-status-404-not-found-2">
-<a href="#section-3.2.2.2" class="section-number selfRef">3.2.2.2. </a><a href="#name-status-404-not-found-2" class="section-name selfRef">Status 404 - Not Found</a>
-            </h5>
-<p id="section-3.2.2.2-1">The following expected errors are defined.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.2.2.2-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.2.2.2-2">
-<pre>
-HTTP/1.1 404 Not Found
-Content-Type: application/concise-problem-details+cbor
-
-{
-  / title /         -1: \
-          "Not Found",
-  / detail /        -2: \
-          "No Signed Statement found with the specified ID"
-}
-</pre><a href="#section-3.2.2.2-2" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-</section>
-</div>
-<div id="sec-resolve-transparent-statement">
-<section id="section-3.2.3">
-          <h4 id="name-resolve-transparent-stateme">
-<a href="#section-3.2.3" class="section-number selfRef">3.2.3. </a><a href="#name-resolve-transparent-stateme" class="section-name selfRef">Resolve Transparent Statement</a>
-          </h4>
-<p id="section-3.2.3-1">This resource enables Transparency Service APIs to serve Transparent Statements directly, including the Receipt they have issued for it.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-2">Request:<a href="#section-3.2.3-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.2.3-3">
-<pre>
-GET /transparent-statements/9e4f...688a HTTP/1.1
-Host: transparency.example
-Accept: application/cose
-</pre><a href="#section-3.2.3-3" class="pilcrow">¶</a>
-</div>
-<p id="section-3.2.3-4">Response:<a href="#section-3.2.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-5">One of the following:<a href="#section-3.2.3-5" class="pilcrow">¶</a></p>
-<div id="sec-status-200-success-1">
-<section id="section-3.2.3.1">
-            <h5 id="name-status-200-success-2">
-<a href="#section-3.2.3.1" class="section-number selfRef">3.2.3.1. </a><a href="#name-status-200-success-2" class="section-name selfRef">Status 200 - Success</a>
-            </h5>
-<div class="lang-http-message sourcecode" id="section-3.2.3.1-1">
-<pre>
-HTTP/1.1 200 OK
-Content-Type: application/cose
-
-Body (in CBOR diagnostic notation)
-
-18([                            / COSE Sign1         /
-  h'a1013822',                  / Protected Header   /
-  {                             / Unprotected Header /
-    394:   [                    / Receipts           /
-      h'd284586c...4191f9d2'    / Receipt            /
-    ]
-  },
-  h'b158a1...0149a9',           / Payload            /
-  h'269cd68f4211dffc...0dcb29c' / Signature          /
-])
-</pre><a href="#section-3.2.3.1-1" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-<div id="sec-status-404-not-found-2">
-<section id="section-3.2.3.2">
-            <h5 id="name-status-404-not-found-3">
-<a href="#section-3.2.3.2" class="section-number selfRef">3.2.3.2. </a><a href="#name-status-404-not-found-3" class="section-name selfRef">Status 404 - Not Found</a>
-            </h5>
-<p id="section-3.2.3.2-1">The following expected errors are defined.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-3.2.3.2-1" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-3.2.3.2-2">
-<pre>
-HTTP/1.1 404 Not Found
-Content-Type: application/concise-problem-details+cbor
-
-{
-  / title /         -1: \
-          "Not Found",
-  / detail /        -2: \
-          "No Transparent Statement found with the specified ID"
-}
-</pre><a href="#section-3.2.3.2-2" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-<div id="sec-eventual-consistency">
-<section id="section-3.2.3.3">
-            <h5 id="name-eventual-consistency">
-<a href="#section-3.2.3.3" class="section-number selfRef">3.2.3.3. </a><a href="#name-eventual-consistency" class="section-name selfRef">Eventual Consistency</a>
-            </h5>
-<p id="section-3.2.3.3-1">For all responses additional eventually consistent operation details <span class="bcp14">MAY</span> be present.
-Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.<a href="#section-3.2.3.3-1" class="pilcrow">¶</a></p>
-</section>
+</pre><a href="#section-3.5.2-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
