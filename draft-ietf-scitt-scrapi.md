@@ -340,7 +340,7 @@ Body (in CBOR diagnostic notation)
 ])
 ~~~
 
-A Transparency Service depends on both the client's authentication context (if present) and the verification of the Signed Statement in the Registration Policy.
+A Transparency Service depends on the verification of the Signed Statement in the Registration Policy.
 
 The Registration Policy for the Transparency Service MUST be applied before any additional processing.
 The details of Registration Policies are out of scope for this document.
@@ -667,8 +667,6 @@ Retry-After: <seconds>
 
 ## Resolve Receipt
 
-Authentication SHOULD be implemented for this resource.
-
 Request:
 
 ~~~ http-message
@@ -733,6 +731,208 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
+<<<<<<< copilot/remove-authentication-mentions
+## Optional Resources
+
+These optional resources can be implemented for client convenience, but are not required for conformance to this specification.
+
+### Exchange Receipt
+
+This resource is used to exchange old or expiring Receipts for fresh ones.
+
+The `iat`, `exp` and `kid` claims can change each time a Receipt is exchanged.
+
+This means that fresh Receipts can have more recent issued at times, further in the future expiration times, and be signed with new signature algorithms.
+
+Request:
+
+~~~ http-message
+POST receipt-exchange HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+Content-Type: application/cose
+
+Body (in CBOR diagnostic notation)
+
+/ cose-sign1 / 18([
+  / protected   / <<{
+    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
+    / algorithm / 1 : -7,  # ES256
+    / vds       / 395 : 1, # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.example",
+      / subject / 2 : "https://green.example/cli@v1.2.3",
+      / iat / 6: 1443944944 # Pre-refresh
+    },
+  }>>,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        <<[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]>>
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'02d227ed...ccd3774f'
+])
+~~~
+
+Response:
+
+#### Status 200 - OK
+
+If a new Receipt can be issued for the given submitted Receipt:
+
+~~~ http-message
+HTTP/1.1 200 OK
+Content-Type: application/cose
+Location: https://transparency.example/entries/67ed...befe
+
+Body (in CBOR diagnostic notation)
+
+/ cose-sign1 / 18([
+  / protected   / <<{
+    / key / 4 : "0vx7agoebGc...9nndrQmbX",
+    / algorithm / 1 : -35,  # ES384
+    / vds       / 395 : 1,  # RFC9162 SHA-256
+    / claims / 15 : {
+      / issuer  / 1 : "https://blue.example",
+      / subject / 2 : "https://green.example/cli@v1.2.3",
+      / iat / 6: 2443944944, # Post-refresh
+    },
+  }>>,
+  / unprotected / {
+    / proofs / 396 : {
+      / inclusion / -1 : [
+        <<[
+          / size / 9, / leaf / 8,
+          / inclusion path /
+          h'7558a95f...e02e35d6'
+        ]>>
+      ],
+    },
+  },
+  / payload     / null,
+  / signature   / h'123227ed...ccd37123'
+])
+~~~
+A TS may limit how often a new receipt can be issued, and respond with a 503 if a client requests new receipts too frequently.
+
+The following HTTP resources are optional to implement.
+
+### Resolve Signed Statement
+
+This resource enables Transparency Service APIs to act like Artifact Repositories, and serve Signed Statements directly, instead of indirectly through Receipts.
+
+Request:
+
+~~~ http-message
+GET /signed-statements/9e4f...688a HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+~~~
+
+Response:
+
+One of the following:
+
+#### Status 200 - Success
+
+~~~ http-message
+HTTP/1.1 200 OK
+Content-Type: application/cose
+
+Body (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {},                           / Unprotected Header /
+  h'b158a1...0149a9',           / Payload            /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+#### Status 404 - Not Found
+
+The following expected errors are defined.
+Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+
+~~~ http-message
+HTTP/1.1 404 Not Found
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Not Found",
+  / detail /        -2: \
+          "No Signed Statement found with the specified ID"
+}
+~~~
+
+### Resolve Transparent Statement
+
+This resource enables Transparency Service APIs to serve Transparent Statements directly, including the Receipt they have issued for it.
+
+Request:
+
+~~~ http-message
+GET /transparent-statements/9e4f...688a HTTP/1.1
+Host: transparency.example
+Accept: application/cose
+~~~
+
+Response:
+
+One of the following:
+
+#### Status 200 - Success
+
+~~~ http-message
+HTTP/1.1 200 OK
+Content-Type: application/cose
+
+Body (in CBOR diagnostic notation)
+
+18([                            / COSE Sign1         /
+  h'a1013822',                  / Protected Header   /
+  {                             / Unprotected Header /
+    394:   [                    / Receipts           /
+      h'd284586c...4191f9d2'    / Receipt            /
+    ]
+  },
+  h'b158a1...0149a9',           / Payload            /
+  h'269cd68f4211dffc...0dcb29c' / Signature          /
+])
+~~~
+
+#### Status 404 - Not Found
+
+The following expected errors are defined.
+Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+
+~~~ http-message
+HTTP/1.1 404 Not Found
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Not Found",
+  / detail /        -2: \
+          "No Transparent Statement found with the specified ID"
+}
+~~~
+
+#### Eventual Consistency
+
+For all responses additional eventually consistent operation details MAY be present.
+Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.
+
+=======
+>>>>>>> main
 # Privacy Considerations
 
 The privacy considerations section of {{-SCITT-ARCH}} applies to this document.
@@ -749,21 +949,6 @@ All questions of security of the related COSE formats, algorithm choices, crypto
 
 SCITT is concerned with issues of cross-boundary supply-chain-wide data integrity and as such must assume a very wide range of deployment environments.
 Thus, no assumptions can be made about the security of the computing environment in which any client implementation of this specification runs.
-
-## User-host Authentication
-
-{{-SCITT-ARCH}} defines 2 distinct roles that require authentication:
-Issuers who sign Statements, and Clients that submit API calls on behalf of Issuers.
-While Issuer authentication and signing of Statements is very important for the trustworthiness of systems implementing the SCITT building blocks, it is out of scope of this document.
-This document is only concerned with authentication of API clients.
-
-For those resources that require client authentication, Transparency Services MUST support at least one of the following options:
-
-- HTTP Authorization header with a JWT
-- domain-bound API key
-- TLS client authentication
-
-Where authentication methods rely on long term secrets, both clients and Transparency Services implementing this specification SHOULD allow for the revocation and rolling of authentication secrets.
 
 ## Threat Model
 
