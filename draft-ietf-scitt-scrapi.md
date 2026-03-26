@@ -679,7 +679,7 @@ Authentication SHOULD be implemented for this resource.
 Request:
 
 ~~~ http-message
-GET entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
+GET /entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 ~~~
@@ -757,7 +757,7 @@ Authentication SHOULD be implemented for this resource.
 Request:
 
 ~~~ http-message
-POST receipt-exchange HTTP/1.1
+POST /receipt-exchange HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 Content-Type: application/cose
@@ -1015,7 +1015,7 @@ Transparency Services MAY also implement additional protections such as anomaly 
 
 Replay attacks are not particularly concerning for SCITT or SCRAPI:
 Once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
-There could be issues at the payload level (for instance, the statement "it is raining" may true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
+There could be issues at the payload level (for instance, the statement "it is raining" may be true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
 
 If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps MAY be added to the protected header signed by the Issuer.
 
