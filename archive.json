@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-22T01:04:15.922895+00:00",
+  "timestamp": "2026-03-26T01:08:33.683328+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1750,6 +1750,30 @@
           "body": "I had also missed Nicole and Roy: #117 and #118",
           "createdAt": "2026-03-03T20:33:43Z",
           "updatedAt": "2026-03-03T20:33:43Z"
+        }
+      ]
+    },
+    {
+      "number": 120,
+      "id": "I_kwDOLJjbks72Y0ZU",
+      "title": "AD Feedback",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/120",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> Section 1, para 2:  I noticed that your httpdir early review suggested that HTTP endpoints should be HTTP resources.  Is that advice that can be followed?  Note:  that particular review highlighted other issues, it is unclear from Henk's reply whether that ever happened.\n\n- [x] #121\n\n> Section 1:  HTTP endpoints, core operations, core endpoints, optional supporting endpoints.  Do these all represent separate and distinct ideas?  I would suggest that if you call a shovel a spade once, you should do it always in a specification like this (let me know if I need to explain the analogy).  Note:  if you make a change, be sure to do a global search, these terms are all over the draft.\n\n- [x] #121\n\n> Section 3.1.1, last sentence:  Is there any guidance about what is 'reasonable'?\n\n- [x] #125\n\n> Sections 3.1.5, 3.2.1:  Both of these sections say 'authentication SHOULD' while Section 2 states that Authentication is out of scope.  For both of these 'naked SHOULDs' there needs to be a statement about why one might not adhere to the SHOULD.  In addition, it might be wise (given the position espoused by Section 2) to make it a lower case should (i.e. still just as normative, but not BCP14 words).\n\n> Section 4:  The scitt architecture draft states that \"Interactions with Transparency Services are expected to use appropriately strong encryption and authorization technologies.\"  This draft is silent on encryption and authorization.  It also states that Authentication is out of scope.  In light of these distinctions, is it still true that the privacy considerations of this draft follow from the arch draft?  Or does there need to be a few words about how the potential lack of authentication impacts privacy?\n\nIt's true that the document is not very clear on this, Section 5.3 is also inconsistent with the \"Authentication is out of scope\", since it mandates authentication mechanisms. https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-5.3\n\nDepending on the outcome of this discussion, #124 may be counter-productive. See below.\n\n- [x] TBD\n \n> Section 5.3 and Section 2:  Some work needs to be done to harmonize these two sections.   (and another 'naked SHOULD' - when is it acceptable to not allow for revocation and update of authentication secrets?)\n\nSee above.\n\n> Section 5.4, title:  So the rest of the section are 'secondary threats'?  There might be a better title for this section.  (threat model is what the architecture draft uses).\n\n- [x] #123 \n\n> Section 5.4.1.1, last sentence:  Why not MUST?\n\n- [x] #126\n\n> Early comments courtesy of idnits:  \n> 1.  idnits points out that it is preferred if BCP 14 is referenced.  If you need me to find you an example of how to do this, I can.\n\n#127 \n\n> 3.  idnits also points out that RFC2046 and 6838 are referenced but not mentioned in the draft.\n\n#111\n\n> 5.  idnits points out that there are 5 instances of lines that are too long. \n\n#115\n\n> Nits:\n> Section 2:  s/mitigation/mitigations\n\n- [x] #122",
+      "createdAt": "2026-03-25T08:48:50Z",
+      "updatedAt": "2026-03-25T17:59:12Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Following discussion, consensus is that Authentication should stay out of scope for this document. Addressed in #128.",
+          "createdAt": "2026-03-25T17:04:28Z",
+          "updatedAt": "2026-03-25T17:12:34Z"
         }
       ]
     }
@@ -10307,7 +10331,7 @@
       "labels": [],
       "body": "This pull request makes minor corrections to the `draft-ietf-scitt-scrapi.md` specification, primarily addressing formatting and clarity issues in HTTP request examples and fixing a typo in the replay attacks section.\r\n\r\n- HTTP Request Path Formatting:\r\n  * Added leading slashes to the request paths in the HTTP examples for the `GET /entries/{id}` and `POST /receipt-exchange` endpoints to ensure correct HTTP syntax.\r\n\r\n- Documentation Clarity:\r\n  * Fixed a typo in the replay attacks section by adding the missing word \"be\" in the example statement for improved readability.",
       "createdAt": "2026-03-19T13:54:50Z",
-      "updatedAt": "2026-03-20T00:14:41Z",
+      "updatedAt": "2026-03-25T17:08:48Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "a04befa955aa45857d76fc72a8dc526c5277293d",
@@ -10331,6 +10355,562 @@
           "body": "LGTM",
           "createdAt": "2026-03-20T00:14:41Z",
           "updatedAt": "2026-03-20T00:14:41Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7ut6XO",
+          "commit": {
+            "abbreviatedOid": "ec04cbe"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-03-25T08:47:23Z",
+          "updatedAt": "2026-03-25T08:47:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 121,
+      "id": "PR_kwDOLJjbks7NRWFE",
+      "title": "Update all mentions of \"endpoint(s)\" to \"resource(s)\" and clarify core vs optional terminology",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/121",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "## Summary\n\nUpdates all 22 occurrences of \"endpoint(s)\" to \"resource(s)\" in `draft-ietf-scitt-scrapi.md`, including section headings, body text, and acknowledgments. The document now consistently uses \"resource(s)\" terminology throughout.\n\nAdditionally, clarifies the distinction between \"core\" and \"optional\" resources by explicitly tying them to their RFC 2119 keywords (MUST vs MAY) at first usage, and removes redundant adjectives like \"supporting\" and \"additional\" for consistent terminology.\n\nKey changes include:\n\n- **Section headings**: \"# Endpoints\" \u2192 \"# Resources\", \"## Core Endpoints\" \u2192 \"## Core Resources\", \"## Optional Endpoints\" \u2192 \"## Optional Resources\"\n- **\"HTTP endpoints\"** phrases (3 occurrences) updated to \"HTTP resources\"\n- **All standalone \"endpoint(s)\"** references (19 occurrences) updated to \"resource(s)\" \u2014 covering introductory text, resource descriptions, authentication notes, and the security section\n- **Introduction reworded** to clearly define \"core\" (MUST implement) and \"optional\" (MAY implement) before first use, and removed \"supporting\" adjective\n- **Optional Resources section** cleaned up to remove redundant \"additional\" adjective\n\nNo functional or structural changes were made beyond the terminology and consistency updates.\n\n<!-- START COPILOT CODING AGENT TIPS -->\n---\n\n\ud83d\udca1 You can make Copilot smarter by setting up custom instructions, customizing its development environment and configuring Model Context Protocol (MCP) servers. Learn more [Copilot coding agent tips](https://gh.io/copilot-coding-agent-tips) in the docs.",
+      "createdAt": "2026-03-25T08:52:10Z",
+      "updatedAt": "2026-03-25T16:51:42Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a04befa955aa45857d76fc72a8dc526c5277293d",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/update-http-endpoints-to-resources",
+      "headRefOid": "9e1b387622379af562a2adec0d37ad264b9667d2",
+      "closedAt": "2026-03-25T16:51:42Z",
+      "mergedAt": "2026-03-25T16:51:42Z",
+      "mergedBy": "nikcal",
+      "mergeCommit": {
+        "oid": "055ae9a29182bb1c39119a9a5ed036ce7aa9610f"
+      },
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@copilot+claude-opus-4.6 make a list of places where \"endpoint\" is used, with links to the relevant lines.",
+          "createdAt": "2026-03-25T08:56:40Z",
+          "updatedAt": "2026-03-25T08:56:40Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> @copilot+claude-opus-4.6 make a list of places where \"endpoint\" is used, with links to the relevant lines.\n\nHere are all remaining uses of \"endpoint\" in `draft-ietf-scitt-scrapi.md` (on this branch, after the \"HTTP endpoints\" \u2192 \"HTTP resources\" changes):\n\n1. [Line 89](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L89) \u2014 \"associated endpoint definition\" (acknowledgments)\n2. [Line 129](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L129) \u2014 \"core endpoints \u2026 optional supporting endpoints\"\n3. [Line 149](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L149) \u2014 `# Endpoints` (section heading)\n4. [Line 161](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L161) \u2014 \"endpoint or client implementations\"\n5. [Line 193](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L193) \u2014 `## Core Endpoints` (section heading)\n6. [Line 199](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L199) \u2014 \"This endpoint is used to discover the public keys\u2026\"\n7. [Line 237](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L237) \u2014 \"stop returning at that endpoint the keys\u2026\"\n8. [Line 241](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L241) \u2014 \"This endpoint is used to resolve a single public key\u2026\"\n9. [Line 284](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L284) \u2014 \"the endpoint MUST accept the base64url encoding\u2026\"\n10. [Line 302](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L302) \u2014 \"This endpoint instructs a Transparency Service\u2026\"\n11. [Line 471](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L471) \u2014 \"This endpoint lets a client query\u2026\"\n12. [Line 665](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L665) \u2014 \"Authentication SHOULD be implemented for this endpoint.\"\n13. [Line 731](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L731) \u2014 `## Optional Endpoints` (section heading)\n14. [Line 733](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L733) \u2014 \"optional endpoints can be implemented\u2026\"\n15. [Line 737](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L737) \u2014 \"This endpoint is used to exchange old or expiring Receipts\u2026\"\n16. [Line 743](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L743) \u2014 \"Authentication SHOULD be implemented for this endpoint.\"\n17. [Line 827](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L827) \u2014 \"This endpoint enables Transparency Service APIs to act like Artifact Repositories\u2026\"\n18. [Line 876](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L876) \u2014 \"This endpoint enables Transparency Service APIs to serve Transparent Statements\u2026\"\n19. [Line 956](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/copilot/update-http-endpoints-to-resources/draft-ietf-scitt-scrapi.md#L956) \u2014 \"For those endpoints that require client authentication\u2026\"\n\nLet me know if you'd like any or all of these updated to \"resource(s)\" as well.",
+          "createdAt": "2026-03-25T08:58:04Z",
+          "updatedAt": "2026-03-25T08:58:04Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@copilot yes, those all need to be updated to resources as well.",
+          "createdAt": "2026-03-25T08:59:14Z",
+          "updatedAt": "2026-03-25T08:59:14Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> @copilot yes, those all need to be updated to resources as well.\n\nAll 19 remaining occurrences of \"endpoint(s)\" have been updated to \"resource(s)\" in commit `0d1227f`. The file now contains zero uses of the word \"endpoint\".",
+          "createdAt": "2026-03-25T09:01:43Z",
+          "updatedAt": "2026-03-25T09:01:43Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@copilot+claude-opus-4.6 address the following feedback from a reviewer:\r\n\r\n> Section 1: HTTP endpoints, core operations, core endpoints, optional supporting endpoints. Do these all represent separate and distinct ideas? I would suggest that if you call a shovel a spade once, you should do it always in a specification like this (let me know if I need to explain the analogy). Note: if you make a change, be sure to do a global search, these terms are all over the draft.\r\n\r\nDo that by checking that the document consistently uses \"core\"/\"optional\", and remove similar adjectives such as \"supporting\". Have the text clarify the difference between \"core\" and \"optional\" before their first usage (MUST vs MAY).",
+          "createdAt": "2026-03-25T09:12:35Z",
+          "updatedAt": "2026-03-25T09:12:35Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> @copilot+claude-opus-4.6 address the following feedback from a reviewer:\r\n> \r\n> > Section 1: HTTP endpoints, core operations, core endpoints, optional supporting endpoints. Do these all represent separate...\n\nDone in `9e1b387`. Changes:\n\n- Removed \"supporting\" from line 129 \u2014 now just \"Optional resources MAY be implemented for client convenience\"\n- Split the introduction paragraph so \"core\" and \"optional\" are each defined with their RFC 2119 keyword before first use: \"Core resources MUST be implemented...\" / \"Optional resources MAY be implemented...\"\n- Removed redundant \"additional\" from the Optional Resources section (line 733)\n- Verified no other synonyms like \"supporting\" remain in the document",
+          "createdAt": "2026-03-25T09:14:52Z",
+          "updatedAt": "2026-03-25T09:14:52Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7u6VNV",
+          "commit": {
+            "abbreviatedOid": "9e1b387"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T16:50:42Z",
+          "updatedAt": "2026-03-25T16:50:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7u6Wb0",
+          "commit": {
+            "abbreviatedOid": "9e1b387"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T16:51:34Z",
+          "updatedAt": "2026-03-25T16:51:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 122,
+      "id": "PR_kwDOLJjbks7NRdTi",
+      "title": "fix: s/mitigation/mitigations in Section 2",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/122",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Fix typo in Section 2 (Authentication): change \"mitigation\" to \"mitigations\".\n\n**Change:** `denial of service mitigation` \u2192 `denial of service mitigations`",
+      "createdAt": "2026-03-25T08:59:12Z",
+      "updatedAt": "2026-03-25T16:35:28Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a04befa955aa45857d76fc72a8dc526c5277293d",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/update-section-2-replace-mitigation",
+      "headRefOid": "947198a6d43ba336156ba89bc18599a830e8eb8f",
+      "closedAt": "2026-03-25T16:35:28Z",
+      "mergedAt": "2026-03-25T16:35:28Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "7df848784936273f2d12d62c41168898347024be"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7uurqX",
+          "commit": {
+            "abbreviatedOid": "947198a"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T09:23:41Z",
+          "updatedAt": "2026-03-25T09:23:41Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7u55hF",
+          "commit": {
+            "abbreviatedOid": "947198a"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Approved. ",
+          "createdAt": "2026-03-25T16:35:17Z",
+          "updatedAt": "2026-03-25T16:35:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 123,
+      "id": "PR_kwDOLJjbks7NRefK",
+      "title": "Rename Section 5.4 from 'Primary Threats' to 'Threat Model'",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/123",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "## Summary\n\nRenames Section 5.4 of Security Considerations from \"Primary Threats\" to \"Threat Model\".\n\n## Motivation\n\nThe previous title \"Primary Threats\" implied that the rest of the Security Considerations section contained only \"secondary threats\", which is misleading. The new title \"Threat Model\" better describes the section's content and aligns with the terminology used in the architecture draft (draft-ietf-scitt-architecture).\n\n## Changes\n\n- Renamed `## Primary Threats` \u2192 `## Threat Model` in `draft-ietf-scitt-scrapi.md` (line 964)",
+      "createdAt": "2026-03-25T09:00:18Z",
+      "updatedAt": "2026-03-25T16:49:26Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a04befa955aa45857d76fc72a8dc526c5277293d",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-section-5-4-title",
+      "headRefOid": "400bae057742b6812ee7b9cb98749e7c3596fe02",
+      "closedAt": "2026-03-25T16:49:26Z",
+      "mergedAt": "2026-03-25T16:49:26Z",
+      "mergedBy": "nikcal",
+      "mergeCommit": {
+        "oid": "e6dd26a7686c7fcf4bae61d543209027ce803aa7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7uuXsF",
+          "commit": {
+            "abbreviatedOid": "400bae0"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T09:09:10Z",
+          "updatedAt": "2026-03-25T09:09:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7u6SlQ",
+          "commit": {
+            "abbreviatedOid": "400bae0"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T16:49:18Z",
+          "updatedAt": "2026-03-25T16:49:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 124,
+      "id": "PR_kwDOLJjbks7NR6i3",
+      "title": "Drop authentication SHOULD statements from sections 3.1.5 and 3.2.1",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/124",
+      "state": "CLOSED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "## Summary\n\nRemoves the \"Authentication SHOULD be implemented for this endpoint.\" statements from:\n\n- **Section 3.1.5** (Resolve Receipt)\n- **Section 3.2.1** (Exchange Receipt)\n\nSection 2 already makes it abundantly clear that authentication is out of scope for this document, so these per-endpoint SHOULD statements are redundant and potentially confusing.",
+      "createdAt": "2026-03-25T09:24:41Z",
+      "updatedAt": "2026-03-25T17:03:58Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a04befa955aa45857d76fc72a8dc526c5277293d",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/drop-authentication-should-statements",
+      "headRefOid": "9f8c208a19d0a7be5103295c155dfb296809afdb",
+      "closedAt": "2026-03-25T17:03:58Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7uuuXN",
+          "commit": {
+            "abbreviatedOid": "9f8c208"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T09:25:21Z",
+          "updatedAt": "2026-03-25T09:25:21Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 125,
+      "id": "PR_kwDOLJjbks7NR9Bp",
+      "title": "Add guidance on reasonable delay for key retirement in Section 3.1.1",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/125",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "## Summary\n\nAddresses reviewer feedback on Section 3.1.1 (Transparency Service Keys):\n\n> Section 3.1.1, last sentence: Is there any guidance about what is 'reasonable'?\n\n## Changes\n\nAdded two clarifying sentences after the existing \"reasonable delay\" sentence to provide guidance on what constitutes a reasonable delay when retiring keys from the `/.well-known/scitt-keys` endpoint:\n\n1. **Defines \"reasonable\"**: A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.\n2. **References established best practices**: Consistent with NIST SP 800-57 Part 1 key management guidance, retired keys SHOULD remain available for as long as any Receipts signed with them may still need to be verified.\n\nAdded **NIST SP 800-57 Part 1 Revision 5** as an informative reference, which is the authoritative source for cryptographic key management lifecycle guidance (including key retention after retirement for verification purposes).\n\n## Research\n\nThis approach is consistent with how other transparency and key management standards handle key retirement:\n\n- **RFC 6962 (Certificate Transparency)**: Recommends retired log signing keys remain available as long as any signed artifacts (SCTs/STHs) may need verification.\n- **RFC 9162 (CT v2.0)**: Requires log operators to retain and publish retired public keys so historical signatures remain verifiable.\n- **NIST SP 800-57**: States that verification (public) keys should be retained beyond the signing key's cryptoperiod for as long as needed to verify signatures created during the key's active period.",
+      "createdAt": "2026-03-25T09:26:39Z",
+      "updatedAt": "2026-03-25T16:55:45Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "055ae9a29182bb1c39119a9a5ed036ce7aa9610f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/address-reviewer-feedback-section-3-1-1",
+      "headRefOid": "cde7d491f8527eabfd3f167f50b726b1f83dd8db",
+      "closedAt": "2026-03-25T16:55:45Z",
+      "mergedAt": "2026-03-25T16:55:45Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "a62b5ca15279d2253f1e9875a61cbf6e354051fb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7uvBUi",
+          "commit": {
+            "abbreviatedOid": "0fa1527"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-25T09:38:26Z",
+          "updatedAt": "2026-03-25T09:38:26Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\nConsistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4), retired keys SHOULD remain available for as long as any Receipts signed with them may still need to be verified.\n```",
+              "createdAt": "2026-03-25T09:38:26Z",
+              "updatedAt": "2026-03-25T09:38:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks7uvB9u",
+          "commit": {
+            "abbreviatedOid": "35f56b2"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T09:38:51Z",
+          "updatedAt": "2026-03-25T09:38:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7u6Y-Z",
+          "commit": {
+            "abbreviatedOid": "35f56b2"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T16:53:22Z",
+          "updatedAt": "2026-03-25T16:53:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 126,
+      "id": "PR_kwDOLJjbks7NaimF",
+      "title": "Change recommendation from SHOULD to MUST for practices",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/126",
+      "state": "MERGED",
+      "author": "nikcal",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixed AD nit feedback. ",
+      "createdAt": "2026-03-25T16:41:36Z",
+      "updatedAt": "2026-03-25T16:42:18Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "7df848784936273f2d12d62c41168898347024be",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "nikcal-patch-1",
+      "headRefOid": "f4f99ce3afbbbf3de044ec66e271cf143a448734",
+      "closedAt": "2026-03-25T16:42:18Z",
+      "mergedAt": "2026-03-25T16:42:18Z",
+      "mergedBy": "nikcal",
+      "mergeCommit": {
+        "oid": "39e3a03ed295f26b99cd7bf82f4d986936287665"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7u6Ea1",
+          "commit": {
+            "abbreviatedOid": "f4f99ce"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T16:42:11Z",
+          "updatedAt": "2026-03-25T16:42:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 127,
+      "id": "PR_kwDOLJjbks7NaqmK",
+      "title": "Add RFC 2119 and RFC 8174 to normative references for BCP 14",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/127",
+      "state": "OPEN",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "idnits flags that BCP 14 keywords (MUST, SHALL, etc.) require normative references to RFC 2119 and RFC 8174. The document uses `{::boilerplate bcp14-tagged}` which expands to cite these RFCs, but they were missing from the references section.\n\n- Added `RFC2119` and `RFC8174` to `normative:` references\n\nNote: only the individual RFCs are listed (not a standalone `BCP14:` entry) since the boilerplate directive generates citations to `[RFC2119]` and `[RFC8174]` directly \u2014 a separate `BCP14` entry would trigger an unused reference warning.",
+      "createdAt": "2026-03-25T16:47:41Z",
+      "updatedAt": "2026-03-25T23:30:20Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "39e3a03ed295f26b99cd7bf82f4d986936287665",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-bcp-14-reference",
+      "headRefOid": "a86f4b0babdb6b9605840bee4873adc7cead3378",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7u6Pq4",
+          "commit": {
+            "abbreviatedOid": "a86f4b0"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T16:47:59Z",
+          "updatedAt": "2026-03-25T16:47:59Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7vC5qy",
+          "commit": {
+            "abbreviatedOid": "a86f4b0"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T23:30:20Z",
+          "updatedAt": "2026-03-25T23:30:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 128,
+      "id": "PR_kwDOLJjbks7NbCAy",
+      "title": "Remove all mentions of authentication outside of Section 2",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/128",
+      "state": "OPEN",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "## Summary\n\nRemoves all mentions of authentication outside of Section 2 (`# Authentication`), which already clarifies that authentication is out of scope for this document.\n\n## Changes\n\n- **Register Signed Statement section**: Removed \"client's authentication context (if present)\" from the Registration Policy paragraph, simplifying it to focus solely on Signed Statement verification.\n- **Resolve Receipt section**: Removed \"Authentication SHOULD be implemented for this resource.\"\n- **Exchange Receipt section**: Removed \"Authentication SHOULD be implemented for this resource.\"\n- **Security Considerations**: Removed the entire \"User-host Authentication\" subsection (which prescribed specific authentication methods like JWT, API keys, and TLS client auth).\n\nAfter these changes, the only remaining mentions of authentication are in Section 2, which states:\n\n> Authentication is out of scope for this document.\n> Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.\n> If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be implemented.",
+      "createdAt": "2026-03-25T17:07:51Z",
+      "updatedAt": "2026-03-25T17:13:03Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a62b5ca15279d2253f1e9875a61cbf6e354051fb",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/remove-authentication-mentions",
+      "headRefOid": "29c51fb2da6c46c0340498e78a557576c46b0bae",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7u6ylg",
+          "commit": {
+            "abbreviatedOid": "29c51fb"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T17:12:01Z",
+          "updatedAt": "2026-03-25T17:12:01Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 129,
+      "id": "PR_kwDOLJjbks7NbQy8",
+      "title": "Drop Optional Resources section, rename Core Resources to Resources",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/129",
+      "state": "OPEN",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "This may be a little controversial, but the value of optional resources in the document is questionable for interoperability, and will only make review slower and more difficult. @OR13 floated the idea of dropping them altogether, which I like, and so I am proposing that we do.\r\n\r\nPlease review!\r\n\r\n## Summary\r\n\r\nThis PR removes the entire \"Optional Resources\" section and all references to it throughout the document. The \"Core Resources\" subsection is effectively renamed to \"Resources\" by merging it into the existing parent `# Resources` section. The requirement that a Service MUST implement these resources is preserved.\r\n\r\n## Changes\r\n\r\n- **Abstract**: Removed the sentence about optional key discovery and query interfaces\r\n- **Introduction**: Removed the \"Optional resources MAY be implemented\" bullet list; changed \"Core resources MUST be implemented\" to \"The following resources MUST be implemented\"\r\n- **Resources section**: Removed the `## Core Resources` sub-heading, merging the MUST-implement statement directly into the `# Resources` section; promoted all resource heading levels accordingly (`###` \u2192 `##`, `####` \u2192 `###`)\r\n- **Optional Resources**: Deleted the entire section including:\r\n  - Exchange Receipt\r\n  - Resolve Signed Statement\r\n  - Resolve Transparent Statement\r\n  - Eventual Consistency",
+      "createdAt": "2026-03-25T17:20:47Z",
+      "updatedAt": "2026-03-25T17:53:09Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a62b5ca15279d2253f1e9875a61cbf6e354051fb",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/remove-optional-resources",
+      "headRefOid": "ebbb229ff1fd8ec1c2ae83288179d1369d272d3c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This fits our planned use. We only intend to use the ledger for auditing purposes. All operational work will be performed outside of the Transparency Service Ledger operations; i.e. Generating US Cyber Trust Market Labels will be handled in SAG-CTR.",
+          "createdAt": "2026-03-25T17:53:09Z",
+          "updatedAt": "2026-03-25T17:53:09Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7u7LMp",
+          "commit": {
+            "abbreviatedOid": "ebbb229"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T17:28:32Z",
+          "updatedAt": "2026-03-25T17:28:32Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7u7r4e",
+          "commit": {
+            "abbreviatedOid": "ebbb229"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-25T17:50:08Z",
+          "updatedAt": "2026-03-25T17:50:08Z",
           "comments": []
         }
       ]
