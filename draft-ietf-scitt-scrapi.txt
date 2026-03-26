@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 26 September 2026                               DataTrails Inc.
-                                                           25 March 2026
+Expires: 27 September 2026                               DataTrails Inc.
+                                                           26 March 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 September 2026.
+   This Internet-Draft will expire on 27 September 2026.
 
 Copyright Notice
 
@@ -689,7 +689,7 @@ Table of Contents
 
    Request:
 
-   GET entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
+   GET /entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
    Host: transparency.example
    Accept: application/cose
 
@@ -767,7 +767,7 @@ Table of Contents
 
    Request:
 
-   POST receipt-exchange HTTP/1.1
+   POST /receipt-exchange HTTP/1.1
    Host: transparency.example
    Accept: application/cose
    Content-Type: application/cose
@@ -1062,9 +1062,9 @@ Table of Contents
    Once a statement is made, it is intended to be immutable and non-
    repudiable, so making it twice should not lead to any particular
    issues.  There could be issues at the payload level (for instance,
-   the statement "it is raining" may true when first submitted but not
-   when replayed), but being payload-agnostic implementations of SCITT
-   services cannot be required to worry about that.
+   the statement "it is raining" may be true when first submitted but
+   not when replayed), but being payload-agnostic implementations of
+   SCITT services cannot be required to worry about that.
 
    If the semantic content of the payload are time-dependent and
    susceptible to replay attacks in this way then timestamps MAY be
