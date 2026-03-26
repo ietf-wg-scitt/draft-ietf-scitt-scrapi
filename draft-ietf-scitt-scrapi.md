@@ -89,6 +89,8 @@ contributor:
       Roy contributed the receipt refresh use case and associated resource definition.
 
 normative:
+  RFC2119:
+  RFC8174:
   I-D.draft-ietf-scitt-architecture: SCITT-ARCH
   RFC8615:
   RFC9052:
@@ -116,7 +118,6 @@ entity:
 --- abstract
 
 This document describes a REST API that supports the normative requirements of the SCITT Architecture.
-Optional key discovery and query interfaces are provided to support interoperability with X.509 Certificates, alternative methods commonly used to support public key discovery and Artifact Repositories.
 
 --- middle
 
@@ -130,17 +131,11 @@ The SCITT Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and
 - Registration Policies
 
 SCRAPI defines HTTP resources for a Transparency Service using COSE ({{RFC9052}}).
-Core resources MUST be implemented for conformance to this specification:
+The following resources MUST be implemented for conformance to this specification:
 
 - Registration of Signed Statements
 - Issuance and resolution of Receipts
 - Discovery of Transparency Service Keys
-
-Optional resources MAY be implemented for client convenience:
-
-- Retrieving Signed Statements
-- Retrieving Transparent Statements
-- Exchanging Receipts for refreshed Receipts
 
 ## Terminology
 
@@ -200,11 +195,9 @@ Clients SHOULD treat 500 and 503 HTTP status code responses as transient failure
 Note that in the case of any error response, the Transparency Service MAY include a `Retry-After` header field per {{RFC9110}} in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.
 
-## Core Resources
-
 The following HTTP resources MUST be implemented to enable conformance to this specification.
 
-### Transparency Service Keys
+## Transparency Service Keys
 
 This resource is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.
 
@@ -248,7 +241,7 @@ The Transparency Service MAY stop returning at that resource the keys it no long
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
 Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4), retired keys SHOULD remain available for as long as any Receipts signed with them may still need to be verified.
 
-### Individual Transparency Service Key
+## Individual Transparency Service Key
 
 This resource is used to resolve a single public key, from a `kid` value contained in a Receipt previously issued by the Transparency Service.
 
@@ -309,7 +302,7 @@ encoding without padding.)"
 
 It is RECOMMENDED to use COSE Key Thumbprint, as defined in {{RFC9679}} as the mechanism to assign a `kid` to Transparency Service keys.
 
-### Register Signed Statement
+## Register Signed Statement
 
 This resource instructs a Transparency Service to register a Signed Statement on its log.
 Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator that can be used to check the registration's status asynchronously.
@@ -356,7 +349,7 @@ Response:
 
 One of the following:
 
-#### Status 201 - Registration is successful
+### Status 201 - Registration is successful
 
 If the Transparency Service is able to produce a Receipt within a reasonable time, it MAY return it directly.
 
@@ -398,7 +391,7 @@ Body (in CBOR diagnostic notation)
 The response contains the Receipt for the Signed Statement.
 Fresh Receipts may be requested through the resource identified in the Location header.
 
-#### Status 303 - Registration is running
+### Status 303 - Registration is running
 
 In cases where the registration request is accepted but the Transparency Service is not able to produce a Receipt in a reasonable time, it MAY return a locator for the registration operation, as in this non-normative example:
 
@@ -414,7 +407,7 @@ The location MAY be temporary, and the service may not serve a relevant response
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
-#### Status 400 - Invalid Client Request
+### Status 400 - Invalid Client Request
 
 The following expected errors are defined.
 Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
@@ -478,7 +471,7 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
-### Query Registration Status
+## Query Registration Status
 
 This resource lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
 
@@ -496,7 +489,7 @@ Response:
 
 One of the following:
 
-#### Status 302 - Registration is running
+### Status 302 - Registration is running
 
 Registration requests MAY fail, in which case the Location MAY return an error when queried.
 
@@ -514,7 +507,7 @@ The location MAY be temporary, and the service may not serve a relevant response
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
-#### Status 200 - Asynchronous registration is successful
+### Status 200 - Asynchronous registration is successful
 
 Along with the receipt the Transparency Service MAY return a locator in the HTTP response `Location` header, provided the locator is a valid URL.
 
@@ -575,7 +568,7 @@ Client <-- 200 (Receipt)                    --- TS
 ~~~
 
 
-#### Status 400 - Invalid Client Request
+### Status 400 - Invalid Client Request
 
 The following expected errors are defined.
 Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
@@ -639,7 +632,7 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
-#### Status 404 - Operation Not Found
+### Status 404 - Operation Not Found
 
 If no record of the specified running operation is found, the Transparency Service returns a 404 response.
 
@@ -655,7 +648,7 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
-#### Status 429 - Too Many Requests
+### Status 429 - Too Many Requests
 
 If a client is polling for an in-progress registration too frequently then the Transparency Service MAY, in addition to implementing rate limiting, return a 429 response:
 
@@ -672,19 +665,19 @@ Retry-After: <seconds>
 }
 ~~~
 
-### Resolve Receipt
+## Resolve Receipt
 
 Request:
 
 ~~~ http-message
-GET entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
+GET /entries/67ed41f1de6a...cfc158694ed0befe HTTP/1.1
 Host: transparency.example
 Accept: application/cose
 ~~~
 
 Response:
 
-#### Status 200 - OK
+### Status 200 - OK
 
 If the Receipt is found:
 
@@ -721,7 +714,7 @@ Body (in CBOR diagnostic notation)
 ])
 ~~~
 
-#### Status 404 - Not Found
+### Status 404 - Not Found
 
 If there is no Receipt found for the specified `EntryID` the Transparency Service returns a 404 response:
 
@@ -738,6 +731,7 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
+<<<<<<< copilot/remove-authentication-mentions
 ## Optional Resources
 
 These optional resources can be implemented for client convenience, but are not required for conformance to this specification.
@@ -937,6 +931,8 @@ Content-Type: application/concise-problem-details+cbor
 For all responses additional eventually consistent operation details MAY be present.
 Support for eventually consistent Receipts is implementation specific, and out of scope for this specification.
 
+=======
+>>>>>>> main
 # Privacy Considerations
 
 The privacy considerations section of {{-SCITT-ARCH}} applies to this document.
@@ -996,7 +992,7 @@ Transparency Services MAY also implement additional protections such as anomaly 
 
 Replay attacks are not particularly concerning for SCITT or SCRAPI:
 Once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
-There could be issues at the payload level (for instance, the statement "it is raining" may true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
+There could be issues at the payload level (for instance, the statement "it is raining" may be true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
 
 If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps MAY be added to the protected header signed by the Issuer.
 
