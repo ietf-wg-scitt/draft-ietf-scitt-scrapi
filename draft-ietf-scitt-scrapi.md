@@ -36,9 +36,16 @@ author:
   country: Germany
 - ins: J. Geater
   name: Jon Geater
-  organization: DataTrails Inc.
-  email: jon.geater@datatrails.ai
-  country: United States
+  organization: Bowball Technologies Ltd
+  email: jonathan@bowball-tech.com
+  country: United Kingdom
+- name: Antoine Delignat-Lavaud
+  organization: Microsoft Research
+  street: 21 Station Road
+  code: 'CB1 2FB'
+  city: Cambridge
+  email: antdl@microsoft.com
+  country: UK
 
 contributor:
   - ins: O. Steele
