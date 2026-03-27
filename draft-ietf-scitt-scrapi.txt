@@ -5,7 +5,9 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 28 September 2026                               DataTrails Inc.
+Expires: 28 September 2026                      Bowball Technologies Ltd
+                                                      A. Delignat-Lavaud
+                                                      Microsoft Research
                                                            27 March 2026
 
 
@@ -998,6 +1000,15 @@ Authors' Addresses
 
 
    Jon Geater
-   DataTrails Inc.
-   United States
-   Email: jon.geater@datatrails.ai
+   Bowball Technologies Ltd
+   United Kingdom
+   Email: jonathan@bowball-tech.com
+
+
+   Antoine Delignat-Lavaud
+   Microsoft Research
+   21 Station Road
+   Cambridge
+   CB1 2FB
+   United Kingdom
+   Email: antdl@microsoft.com
