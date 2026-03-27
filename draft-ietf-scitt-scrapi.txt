@@ -5,8 +5,8 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 27 September 2026                               DataTrails Inc.
-                                                           26 March 2026
+Expires: 28 September 2026                               DataTrails Inc.
+                                                           27 March 2026
 
 
                           SCITT Reference APIs
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 September 2026.
+   This Internet-Draft will expire on 28 September 2026.
 
 Copyright Notice
 
@@ -84,20 +84,18 @@ Table of Contents
      3.5.  Resolve Receipt
        3.5.1.  Status 200 - OK
        3.5.2.  Status 404 - Not Found
-       3.5.3.  Exchange Receipt
-       3.5.4.  Resolve Signed Statement
-       3.5.5.  Resolve Transparent Statement
-   4.  Security Considerations
-     4.1.  General Scope
-     4.2.  Applicable Environment
-     4.3.  Threat Model
-       4.3.1.  In Scope
-       4.3.2.  Out of Scope
-   5.  IANA Considerations
-     5.1.  Well-Known URI for Key Discovery
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
+   4.  Privacy Considerations
+   5.  Security Considerations
+     5.1.  General Scope
+     5.2.  Applicable Environment
+     5.3.  Threat Model
+       5.3.1.  In Scope
+       5.3.2.  Out of Scope
+   6.  IANA Considerations
+     6.1.  Well-Known URI for Key Discovery
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Contributors
    Authors' Addresses
 
@@ -736,208 +734,14 @@ Table of Contents
              to this Transparency Service"
    }
 
-   <<<<<<< copilot/remove-authentication-mentions ## Optional Resources
-
-   These optional resources can be implemented for client convenience,
-   but are not required for conformance to this specification.
-
-3.5.3.  Exchange Receipt
-
-   This resource is used to exchange old or expiring Receipts for fresh
-   ones.
-
-   The iat, exp and kid claims can change each time a Receipt is
-   exchanged.
-
-   This means that fresh Receipts can have more recent issued at times,
-   further in the future expiration times, and be signed with new
-   signature algorithms.
-
-   Request:
-
-   POST receipt-exchange HTTP/1.1
-   Host: transparency.example
-   Accept: application/cose
-   Content-Type: application/cose
-
-   Body (in CBOR diagnostic notation)
-
-   / cose-sign1 / 18([
-     / protected   / <<{
-       / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-       / algorithm / 1 : -7,  # ES256
-       / vds       / 395 : 1, # RFC9162 SHA-256
-       / claims / 15 : {
-         / issuer  / 1 : "https://blue.example",
-         / subject / 2 : "https://green.example/cli@v1.2.3",
-         / iat / 6: 1443944944 # Pre-refresh
-       },
-     }>>,
-     / unprotected / {
-       / proofs / 396 : {
-         / inclusion / -1 : [
-           <<[
-             / size / 9, / leaf / 8,
-             / inclusion path /
-             h'7558a95f...e02e35d6'
-           ]>>
-         ],
-       },
-     },
-     / payload     / null,
-     / signature   / h'02d227ed...ccd3774f'
-   ])
-
-   Response:
-
-3.5.3.1.  Status 200 - OK
-
-   If a new Receipt can be issued for the given submitted Receipt:
-
-   HTTP/1.1 200 OK
-   Content-Type: application/cose
-   Location: https://transparency.example/entries/67ed...befe
-
-   Body (in CBOR diagnostic notation)
-
-   / cose-sign1 / 18([
-     / protected   / <<{
-       / key / 4 : "0vx7agoebGc...9nndrQmbX",
-       / algorithm / 1 : -35,  # ES384
-       / vds       / 395 : 1,  # RFC9162 SHA-256
-       / claims / 15 : {
-         / issuer  / 1 : "https://blue.example",
-         / subject / 2 : "https://green.example/cli@v1.2.3",
-         / iat / 6: 2443944944, # Post-refresh
-       },
-     }>>,
-     / unprotected / {
-       / proofs / 396 : {
-         / inclusion / -1 : [
-           <<[
-             / size / 9, / leaf / 8,
-             / inclusion path /
-             h'7558a95f...e02e35d6'
-           ]>>
-         ],
-       },
-     },
-     / payload     / null,
-     / signature   / h'123227ed...ccd37123'
-   ])
-
-   A TS may limit how often a new receipt can be issued, and respond
-   with a 503 if a client requests new receipts too frequently.
-
-   The following HTTP resources are optional to implement.
-
-3.5.4.  Resolve Signed Statement
-
-   This resource enables Transparency Service APIs to act like Artifact
-   Repositories, and serve Signed Statements directly, instead of
-   indirectly through Receipts.
-
-   Request:
-
-   GET /signed-statements/9e4f...688a HTTP/1.1
-   Host: transparency.example
-   Accept: application/cose
-
-   Response:
-
-   One of the following:
-
-3.5.4.1.  Status 200 - Success
-
-   HTTP/1.1 200 OK
-   Content-Type: application/cose
-
-   Body (in CBOR diagnostic notation)
-
-   18([                            / COSE Sign1         /
-     h'a1013822',                  / Protected Header   /
-     {},                           / Unprotected Header /
-     h'b158a1...0149a9',           / Payload            /
-     h'269cd68f4211dffc...0dcb29c' / Signature          /
-   ])
-
-3.5.4.2.  Status 404 - Not Found
-
-   The following expected errors are defined.  Implementations MAY
-   return other errors, so long as they are valid [RFC9290] objects.
-
-   HTTP/1.1 404 Not Found
-   Content-Type: application/concise-problem-details+cbor
-
-   {
-     / title /         -1: \
-             "Not Found",
-     / detail /        -2: \
-             "No Signed Statement found with the specified ID"
-   }
-
-3.5.5.  Resolve Transparent Statement
-
-   This resource enables Transparency Service APIs to serve Transparent
-   Statements directly, including the Receipt they have issued for it.
-
-   Request:
-
-   GET /transparent-statements/9e4f...688a HTTP/1.1
-   Host: transparency.example
-   Accept: application/cose
-
-   Response:
-
-   One of the following:
-
-3.5.5.1.  Status 200 - Success
-
-   HTTP/1.1 200 OK
-   Content-Type: application/cose
-
-   Body (in CBOR diagnostic notation)
-
-   18([                            / COSE Sign1         /
-     h'a1013822',                  / Protected Header   /
-     {                             / Unprotected Header /
-       394:   [                    / Receipts           /
-         h'd284586c...4191f9d2'    / Receipt            /
-       ]
-     },
-     h'b158a1...0149a9',           / Payload            /
-     h'269cd68f4211dffc...0dcb29c' / Signature          /
-   ])
-
-3.5.5.2.  Status 404 - Not Found
-
-   The following expected errors are defined.  Implementations MAY
-   return other errors, so long as they are valid [RFC9290] objects.
-
-   HTTP/1.1 404 Not Found
-   Content-Type: application/concise-problem-details+cbor
-
-   {
-     / title /         -1: \
-             "Not Found",
-     / detail /        -2: \
-             "No Transparent Statement found with the specified ID"
-   }
-
-3.5.5.3.  Eventual Consistency
-
-   For all responses additional eventually consistent operation details
-   MAY be present.  Support for eventually consistent Receipts is
-   implementation specific, and out of scope for this specification.
-
-   ======= >>>>>>> main # Privacy Considerations
+4.  Privacy Considerations
 
    The privacy considerations section of
    [I-D.draft-ietf-scitt-architecture] applies to this document.
 
-4.  Security Considerations
+5.  Security Considerations
 
-4.1.  General Scope
+5.1.  General Scope
 
    This document describes the interoperable API for client calls to,
    and implementations of, a Transparency Service as specified in
@@ -948,7 +752,7 @@ Table of Contents
    cryptographic envelopes, verifiable data structures and the like are
    handled elsewhere and out of scope for this document.
 
-4.2.  Applicable Environment
+5.2.  Applicable Environment
 
    SCITT is concerned with issues of cross-boundary supply-chain-wide
    data integrity and as such must assume a very wide range of
@@ -956,9 +760,9 @@ Table of Contents
    security of the computing environment in which any client
    implementation of this specification runs.
 
-4.3.  Threat Model
+5.3.  Threat Model
 
-4.3.1.  In Scope
+5.3.1.  In Scope
 
    The most serious threats to implementations on Transparency Services
    are ones that would cause the failure of their main promises, to wit:
@@ -973,7 +777,7 @@ Table of Contents
       the presentation or verification of divergent proofs for the same
       Statement payload
 
-4.3.1.1.  Denial of Service Attacks
+5.3.1.1.  Denial of Service Attacks
 
    While denial of service attacks are very hard to defend against
    completely, and Transparency Services are unlikely to be in the
@@ -995,7 +799,7 @@ Table of Contents
    general good practice around network attacks, flooding, rate limiting
    etc.
 
-4.3.1.2.  Eavesdropping
+5.3.1.2.  Eavesdropping
 
    Since the purpose of this API is to ultimately put the message
    payloads on a Transparency Log there is limited risk to
@@ -1004,12 +808,12 @@ Table of Contents
    protections against man-in-the-middle and network eavesdropping, such
    as TLS.
 
-4.3.1.3.  Message Modification Attacks
+5.3.1.3.  Message Modification Attacks
 
    Modification attacks are mitigated by the use of the Issuer signature
    on the Signed Statement.
 
-4.3.1.4.  Message Insertion Attacks
+5.3.1.4.  Message Insertion Attacks
 
    Insertion attacks are mitigated by the use of the Issuer signature on
    the Signed Statement, therefore care must be taken in the protection
@@ -1019,9 +823,9 @@ Table of Contents
    as anomaly detection or rate limiting in order to mitigate the impact
    of any breach.
 
-4.3.2.  Out of Scope
+5.3.2.  Out of Scope
 
-4.3.2.1.  Replay Attacks
+5.3.2.1.  Replay Attacks
 
    Replay attacks are not particularly concerning for SCITT or SCRAPI:
    Once a statement is made, it is intended to be immutable and non-
@@ -1035,16 +839,16 @@ Table of Contents
    susceptible to replay attacks in this way then timestamps MAY be
    added to the protected header signed by the Issuer.
 
-4.3.2.2.  Message Deletion Attacks
+5.3.2.2.  Message Deletion Attacks
 
    Once registered with a Transparency Service, Registered Signed
    Statements cannot be deleted.  Thus, any message deletion attack must
    occur prior to registration else it is indistinguishable from a man-
    in-the-middle or denial-of-service attack on this interface.
 
-5.  IANA Considerations
+6.  IANA Considerations
 
-5.1.  Well-Known URI for Key Discovery
+6.1.  Well-Known URI for Key Discovery
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
@@ -1053,9 +857,9 @@ Table of Contents
    document(s): RFCthis Status: Permanent Related information:
    [I-D.draft-ietf-scitt-architecture]
 
-6.  References
+7.  References
 
-6.1.  Normative References
+7.1.  Normative References
 
    [I-D.draft-ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
@@ -1106,7 +910,7 @@ Table of Contents
               DOI 10.17487/RFC9679, December 2024,
               <https://www.rfc-editor.org/rfc/rfc9679>.
 
-6.2.  Informative References
+7.2.  Informative References
 
    [NIST.SP.800-57pt1r5]
               Barker, E., "Recommendation for Key Management: Part 1 -
