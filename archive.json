@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-26T01:08:33.683328+00:00",
+  "timestamp": "2026-03-29T01:11:33.748308+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1765,7 +1765,7 @@
       "labels": [],
       "body": "> Section 1, para 2:  I noticed that your httpdir early review suggested that HTTP endpoints should be HTTP resources.  Is that advice that can be followed?  Note:  that particular review highlighted other issues, it is unclear from Henk's reply whether that ever happened.\n\n- [x] #121\n\n> Section 1:  HTTP endpoints, core operations, core endpoints, optional supporting endpoints.  Do these all represent separate and distinct ideas?  I would suggest that if you call a shovel a spade once, you should do it always in a specification like this (let me know if I need to explain the analogy).  Note:  if you make a change, be sure to do a global search, these terms are all over the draft.\n\n- [x] #121\n\n> Section 3.1.1, last sentence:  Is there any guidance about what is 'reasonable'?\n\n- [x] #125\n\n> Sections 3.1.5, 3.2.1:  Both of these sections say 'authentication SHOULD' while Section 2 states that Authentication is out of scope.  For both of these 'naked SHOULDs' there needs to be a statement about why one might not adhere to the SHOULD.  In addition, it might be wise (given the position espoused by Section 2) to make it a lower case should (i.e. still just as normative, but not BCP14 words).\n\n> Section 4:  The scitt architecture draft states that \"Interactions with Transparency Services are expected to use appropriately strong encryption and authorization technologies.\"  This draft is silent on encryption and authorization.  It also states that Authentication is out of scope.  In light of these distinctions, is it still true that the privacy considerations of this draft follow from the arch draft?  Or does there need to be a few words about how the potential lack of authentication impacts privacy?\n\nIt's true that the document is not very clear on this, Section 5.3 is also inconsistent with the \"Authentication is out of scope\", since it mandates authentication mechanisms. https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-5.3\n\nDepending on the outcome of this discussion, #124 may be counter-productive. See below.\n\n- [x] TBD\n \n> Section 5.3 and Section 2:  Some work needs to be done to harmonize these two sections.   (and another 'naked SHOULD' - when is it acceptable to not allow for revocation and update of authentication secrets?)\n\nSee above.\n\n> Section 5.4, title:  So the rest of the section are 'secondary threats'?  There might be a better title for this section.  (threat model is what the architecture draft uses).\n\n- [x] #123 \n\n> Section 5.4.1.1, last sentence:  Why not MUST?\n\n- [x] #126\n\n> Early comments courtesy of idnits:  \n> 1.  idnits points out that it is preferred if BCP 14 is referenced.  If you need me to find you an example of how to do this, I can.\n\n#127 \n\n> 3.  idnits also points out that RFC2046 and 6838 are referenced but not mentioned in the draft.\n\n#111\n\n> 5.  idnits points out that there are 5 instances of lines that are too long. \n\n#115\n\n> Nits:\n> Section 2:  s/mitigation/mitigations\n\n- [x] #122",
       "createdAt": "2026-03-25T08:48:50Z",
-      "updatedAt": "2026-03-25T17:59:12Z",
+      "updatedAt": "2026-03-27T15:48:51Z",
       "closedAt": null,
       "comments": [
         {
@@ -1774,6 +1774,27 @@
           "body": "Following discussion, consensus is that Authentication should stay out of scope for this document. Addressed in #128.",
           "createdAt": "2026-03-25T17:04:28Z",
           "updatedAt": "2026-03-25T17:12:34Z"
+        },
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "Ok, I looked at most of this.  PRs# 121, 122, 123, 125, 126 are perfect.  \n\nI think that leaves 124 and 128?  These may be completely fine (a bunch of work, so thank you).  I'd like to look at the complete specification to see how it reads (altogether).  My github skills aren't really up to snuff here, so either issue the draft (and I'll play w/ the history), or send me something that I can use the author's tools to make a diff.\n\nI'll apologize again, your old AD is indeed old...  going forward your new AD is much more up-to-date.  A trade up, as it were.",
+          "createdAt": "2026-03-27T13:02:02Z",
+          "updatedAt": "2026-03-27T13:02:02Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@debcooley thank you for checking, we are trying to get a draft published as soon as possible. It is possible to read the latest version of the specification at any time here: https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html, but there is not a very good way to have pretty diffs without a new draft unfortunately.\n\n#124 was abandoned in favour of #128 and #130, which remove all mentions of authentication except for Section 2. I will reply as soon as the group has been able to cut a draft, apologies for the delay.\n\n",
+          "createdAt": "2026-03-27T13:54:06Z",
+          "updatedAt": "2026-03-27T13:54:06Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@debcooley a [draft-08](https://datatracker.ietf.org/doc/draft-ietf-scitt-scrapi/08/) has been submitted now, so the [side-by-side is available](https://author-tools.ietf.org/iddiff?url1=draft-ietf-scitt-scrapi-07&url2=draft-ietf-scitt-scrapi-08&difftype=--html).",
+          "createdAt": "2026-03-27T15:48:51Z",
+          "updatedAt": "2026-03-27T15:48:51Z"
         }
       ]
     }
@@ -10324,24 +10345,26 @@
       "id": "PR_kwDOLJjbks7L3A8z",
       "title": "Clarify HTTP request targets in origin form",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/119",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "eddyashton",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This pull request makes minor corrections to the `draft-ietf-scitt-scrapi.md` specification, primarily addressing formatting and clarity issues in HTTP request examples and fixing a typo in the replay attacks section.\r\n\r\n- HTTP Request Path Formatting:\r\n  * Added leading slashes to the request paths in the HTTP examples for the `GET /entries/{id}` and `POST /receipt-exchange` endpoints to ensure correct HTTP syntax.\r\n\r\n- Documentation Clarity:\r\n  * Fixed a typo in the replay attacks section by adding the missing word \"be\" in the example statement for improved readability.",
       "createdAt": "2026-03-19T13:54:50Z",
-      "updatedAt": "2026-03-25T17:08:48Z",
+      "updatedAt": "2026-03-26T15:35:53Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "a04befa955aa45857d76fc72a8dc526c5277293d",
       "headRepository": "eddyashton/draft-ietf-scitt-scrapi",
       "headRefName": "edashton-edit",
       "headRefOid": "ec04cbe08eb13ef0e5f490004ffdcaf61900e953",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-26T15:35:53Z",
+      "mergedAt": "2026-03-26T15:35:53Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "b110088db34a9a69efea776d015d1f700d01f7fd"
+      },
       "comments": [],
       "reviews": [
         {
@@ -10368,6 +10391,19 @@
           "body": "LGTM",
           "createdAt": "2026-03-25T08:47:23Z",
           "updatedAt": "2026-03-25T08:47:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7vSf0A",
+          "commit": {
+            "abbreviatedOid": "ec04cbe"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-26T14:16:05Z",
+          "updatedAt": "2026-03-26T14:16:05Z",
           "comments": []
         }
       ]
@@ -10757,7 +10793,7 @@
       "id": "PR_kwDOLJjbks7NaqmK",
       "title": "Add RFC 2119 and RFC 8174 to normative references for BCP 14",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/127",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "copilot-swe-agent",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -10767,17 +10803,19 @@
       "labels": [],
       "body": "idnits flags that BCP 14 keywords (MUST, SHALL, etc.) require normative references to RFC 2119 and RFC 8174. The document uses `{::boilerplate bcp14-tagged}` which expands to cite these RFCs, but they were missing from the references section.\n\n- Added `RFC2119` and `RFC8174` to `normative:` references\n\nNote: only the individual RFCs are listed (not a standalone `BCP14:` entry) since the boilerplate directive generates citations to `[RFC2119]` and `[RFC8174]` directly \u2014 a separate `BCP14` entry would trigger an unused reference warning.",
       "createdAt": "2026-03-25T16:47:41Z",
-      "updatedAt": "2026-03-25T23:30:20Z",
+      "updatedAt": "2026-03-26T15:36:07Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "39e3a03ed295f26b99cd7bf82f4d986936287665",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "copilot/fix-bcp-14-reference",
       "headRefOid": "a86f4b0babdb6b9605840bee4873adc7cead3378",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-26T15:36:07Z",
+      "mergedAt": "2026-03-26T15:36:07Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "28e4b9335bb286a72beba085d1cc0b34677d6c53"
+      },
       "comments": [],
       "reviews": [
         {
@@ -10813,7 +10851,7 @@
       "id": "PR_kwDOLJjbks7NbCAy",
       "title": "Remove all mentions of authentication outside of Section 2",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/128",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "copilot-swe-agent",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -10823,17 +10861,19 @@
       "labels": [],
       "body": "## Summary\n\nRemoves all mentions of authentication outside of Section 2 (`# Authentication`), which already clarifies that authentication is out of scope for this document.\n\n## Changes\n\n- **Register Signed Statement section**: Removed \"client's authentication context (if present)\" from the Registration Policy paragraph, simplifying it to focus solely on Signed Statement verification.\n- **Resolve Receipt section**: Removed \"Authentication SHOULD be implemented for this resource.\"\n- **Exchange Receipt section**: Removed \"Authentication SHOULD be implemented for this resource.\"\n- **Security Considerations**: Removed the entire \"User-host Authentication\" subsection (which prescribed specific authentication methods like JWT, API keys, and TLS client auth).\n\nAfter these changes, the only remaining mentions of authentication are in Section 2, which states:\n\n> Authentication is out of scope for this document.\n> Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.\n> If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be implemented.",
       "createdAt": "2026-03-25T17:07:51Z",
-      "updatedAt": "2026-03-25T17:13:03Z",
+      "updatedAt": "2026-03-26T17:40:15Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
-      "baseRefOid": "a62b5ca15279d2253f1e9875a61cbf6e354051fb",
+      "baseRefOid": "66e9a7290206903e243cc50c4b9ef8e936a9252b",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "copilot/remove-authentication-mentions",
-      "headRefOid": "29c51fb2da6c46c0340498e78a557576c46b0bae",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "8706dc0d3c8acfe24c9b2a26b6d967a6577e7208",
+      "closedAt": "2026-03-26T17:40:15Z",
+      "mergedAt": "2026-03-26T17:40:15Z",
+      "mergedBy": "nikcal",
+      "mergeCommit": {
+        "oid": "55dfd2349cd452ee8511f2bc1f59ddd4eb4190e9"
+      },
       "comments": [],
       "reviews": [
         {
@@ -10848,6 +10888,32 @@
           "createdAt": "2026-03-25T17:12:01Z",
           "updatedAt": "2026-03-25T17:12:01Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7vSe2B",
+          "commit": {
+            "abbreviatedOid": "29c51fb"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-26T14:15:42Z",
+          "updatedAt": "2026-03-26T14:15:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7vYK3v",
+          "commit": {
+            "abbreviatedOid": "29c51fb"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "authentication is out of scope- and the edits help with the structure and scope.",
+          "createdAt": "2026-03-26T17:37:28Z",
+          "updatedAt": "2026-03-26T17:37:28Z",
+          "comments": []
         }
       ]
     },
@@ -10856,7 +10922,7 @@
       "id": "PR_kwDOLJjbks7NbQy8",
       "title": "Drop Optional Resources section, rename Core Resources to Resources",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/129",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "copilot-swe-agent",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -10866,17 +10932,19 @@
       "labels": [],
       "body": "This may be a little controversial, but the value of optional resources in the document is questionable for interoperability, and will only make review slower and more difficult. @OR13 floated the idea of dropping them altogether, which I like, and so I am proposing that we do.\r\n\r\nPlease review!\r\n\r\n## Summary\r\n\r\nThis PR removes the entire \"Optional Resources\" section and all references to it throughout the document. The \"Core Resources\" subsection is effectively renamed to \"Resources\" by merging it into the existing parent `# Resources` section. The requirement that a Service MUST implement these resources is preserved.\r\n\r\n## Changes\r\n\r\n- **Abstract**: Removed the sentence about optional key discovery and query interfaces\r\n- **Introduction**: Removed the \"Optional resources MAY be implemented\" bullet list; changed \"Core resources MUST be implemented\" to \"The following resources MUST be implemented\"\r\n- **Resources section**: Removed the `## Core Resources` sub-heading, merging the MUST-implement statement directly into the `# Resources` section; promoted all resource heading levels accordingly (`###` \u2192 `##`, `####` \u2192 `###`)\r\n- **Optional Resources**: Deleted the entire section including:\r\n  - Exchange Receipt\r\n  - Resolve Signed Statement\r\n  - Resolve Transparent Statement\r\n  - Eventual Consistency",
       "createdAt": "2026-03-25T17:20:47Z",
-      "updatedAt": "2026-03-25T17:53:09Z",
+      "updatedAt": "2026-03-26T17:36:00Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
-      "baseRefOid": "a62b5ca15279d2253f1e9875a61cbf6e354051fb",
+      "baseRefOid": "28e4b9335bb286a72beba085d1cc0b34677d6c53",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "copilot/remove-optional-resources",
-      "headRefOid": "ebbb229ff1fd8ec1c2ae83288179d1369d272d3c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "d89df9bd203e7fdae44517a4a9702da53f61ea64",
+      "closedAt": "2026-03-26T17:36:00Z",
+      "mergedAt": "2026-03-26T17:36:00Z",
+      "mergedBy": "nikcal",
+      "mergeCommit": {
+        "oid": "66e9a7290206903e243cc50c4b9ef8e936a9252b"
+      },
       "comments": [
         {
           "author": "rjb4standards",
@@ -10911,6 +10979,89 @@
           "body": "",
           "createdAt": "2026-03-25T17:50:08Z",
           "updatedAt": "2026-03-25T17:50:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7vSeHA",
+          "commit": {
+            "abbreviatedOid": "ebbb229"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-26T14:15:26Z",
+          "updatedAt": "2026-03-26T14:15:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 130,
+      "id": "PR_kwDOLJjbks7ODhCc",
+      "title": "Fix bad merge conflict resolution from #128",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/130",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "#128 was merged without the conflict resolution applied correctly",
+      "createdAt": "2026-03-27T13:48:08Z",
+      "updatedAt": "2026-03-27T13:49:29Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "55dfd2349cd452ee8511f2bc1f59ddd4eb4190e9",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-17",
+      "headRefOid": "a802b49b74db611fa5d2a627aadac349c7bda0e7",
+      "closedAt": "2026-03-27T13:49:29Z",
+      "mergedAt": "2026-03-27T13:49:29Z",
+      "mergedBy": "nikcal",
+      "mergeCommit": {
+        "oid": "f439e6d75b1a793255f6ec5bc4adb8c81d5e5d71"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 131,
+      "id": "PR_kwDOLJjbks7OE9Va",
+      "title": "Update authors",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/131",
+      "state": "MERGED",
+      "author": "JAG-UK",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add Antoine and update routable email address for Jon Geater",
+      "createdAt": "2026-03-27T14:59:26Z",
+      "updatedAt": "2026-03-27T15:34:54Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "f439e6d75b1a793255f6ec5bc4adb8c81d5e5d71",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "add-antoine",
+      "headRefOid": "5a6890b04afacc4feb9702ee49d06eeec7a89965",
+      "closedAt": "2026-03-27T15:34:54Z",
+      "mergedAt": "2026-03-27T15:34:54Z",
+      "mergedBy": "JAG-UK",
+      "mergeCommit": {
+        "oid": "3732cbea18ebcaa584b43fbe95d9f1969a2bcb2b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7vt42R",
+          "commit": {
+            "abbreviatedOid": "5a6890b"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-27T15:01:25Z",
+          "updatedAt": "2026-03-27T15:01:25Z",
           "comments": []
         }
       ]
