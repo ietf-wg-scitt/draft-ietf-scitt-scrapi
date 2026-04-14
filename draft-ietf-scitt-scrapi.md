@@ -120,7 +120,7 @@ informative:
     target: https://doi.org/10.6028/NIST.SP.800-57pt1r5
 
 entity:
-  SELF: "RFCthis"
+  SELF: "RFC this"
 
 --- abstract
 
@@ -279,7 +279,7 @@ Body (in CBOR diagnostic notation)
 ]
 ~~~
 
-The following expected error is defined:
+The following expected error is defined and MUST be returned when the corresponding condition is encountered:
 
 ~~~ http-message
 HTTP/1.1 404 Not Found
@@ -416,7 +416,7 @@ The Transparency Service MAY include a `Retry-After` header in the HTTP response
 
 ### Status 400 - Invalid Client Request
 
-The following expected errors are defined.
+The following expected errors MUST be returned when the corresponding conditions are encountered.
 Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
 
 ~~~ http-message
@@ -577,7 +577,7 @@ Client <-- 200 (Receipt)                    --- TS
 
 ### Status 400 - Invalid Client Request
 
-The following expected errors are defined.
+The following expected errors MUST be returned when the corresponding conditions are encountered.
 Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
 
 ~~~ http-message
