@@ -810,27 +810,7 @@ Thus, any message deletion attack must occur prior to registration else it is in
 
 ## Well-Known URI for Key Discovery
 
-This section defines the `/.well-known/scitt-keys` resource in accordance with {{RFC8615}}.
-
-### Resource Definition
-
-The `/.well-known/scitt-keys` resource allows clients to discover the public keys used by a Transparency Service to issue Receipts.
-
-Clients interact with this resource by issuing an HTTP GET request to `/.well-known/scitt-keys`.
-The Transparency Service MUST respond with a COSE Key Set (as defined in {{Section 7 of RFC9052}}) serialized as `application/cbor`.
-
-The following media types are used with this resource:
-
-- Request: Clients SHOULD include `Accept: application/cbor` in the request.
-- Response: The Transparency Service MUST use `Content-Type: application/cbor`.
-
-The `/.well-known/scitt-keys/{kid_value}` sub-resource allows clients to resolve a single public key by its key identifier (`kid`).
-Clients interact with this sub-resource by issuing an HTTP GET request.
-The Transparency Service MUST respond with a COSE Key Set containing the matching key, serialized as `application/cbor`, or a 404 status if no matching key is found.
-
-The full normative behavior of these resources, including key lifecycle, error handling, and `kid` encoding requirements, is defined in {{sec-transparency-service-keys}} and {{sec-individual-transparency-service-key}}.
-
-### Registration Template
+The `/.well-known/scitt-keys` resource and its `/.well-known/scitt-keys/{kid_value}` sub-resource are defined in {{sec-transparency-service-keys}} and {{sec-individual-transparency-service-key}} respectively.
 
 The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
 
