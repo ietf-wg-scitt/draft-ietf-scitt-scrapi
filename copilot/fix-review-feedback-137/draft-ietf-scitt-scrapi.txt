@@ -95,6 +95,8 @@ Table of Contents
        5.3.2.  Out of Scope
    6.  IANA Considerations
      6.1.  Well-Known URI for Key Discovery
+       6.1.1.  Resource Definition
+       6.1.2.  Registration Template
    7.  References
      7.1.  Normative References
      7.2.  Informative References
@@ -852,9 +854,39 @@ Table of Contents
 
 6.1.  Well-Known URI for Key Discovery
 
-   The /.well-known/scitt-keys resource and its /.well-known/scitt-
-   keys/{kid_value} sub-resource are defined in Section 3.1 and
-   Section 3.2 respectively.
+   This section defines the /.well-known/scitt-keys resource in
+   accordance with [RFC8615].
+
+6.1.1.  Resource Definition
+
+   The /.well-known/scitt-keys resource allows clients to discover the
+   public keys used by a Transparency Service to issue Receipts.
+
+   Clients interact with this resource by issuing an HTTP GET request to
+   /.well-known/scitt-keys.  The Transparency Service MUST respond with
+   a COSE Key Set (as defined in Section 7 of [RFC9052]) serialized as
+   application/cbor.
+
+   The following media types are used with this resource:
+
+   *  Request: Clients SHOULD include Accept: application/cbor in the
+      request.
+
+   *  Response: The Transparency Service MUST use Content-Type:
+      application/cbor.
+
+   The /.well-known/scitt-keys/{kid_value} sub-resource allows clients
+   to resolve a single public key by its key identifier (kid).  Clients
+   interact with this sub-resource by issuing an HTTP GET request.  The
+   Transparency Service MUST respond with a COSE Key Set containing the
+   matching key, serialized as application/cbor, or a 404 status if no
+   matching key is found.
+
+   The full normative behavior of these resources, including key
+   lifecycle, error handling, and kid encoding requirements, is defined
+   in Section 3.1 and Section 3.2.
+
+6.1.2.  Registration Template
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
