@@ -120,7 +120,7 @@ informative:
     target: https://doi.org/10.6028/NIST.SP.800-57pt1r5
 
 entity:
-  SELF: "RFC this"
+  SELF: "RFCthis"
 
 --- abstract
 
