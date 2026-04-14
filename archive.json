@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-29T01:11:33.748308+00:00",
+  "timestamp": "2026-04-14T01:16:32.329085+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1758,15 +1758,15 @@
       "id": "I_kwDOLJjbks72Y0ZU",
       "title": "AD Feedback",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/120",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "> Section 1, para 2:  I noticed that your httpdir early review suggested that HTTP endpoints should be HTTP resources.  Is that advice that can be followed?  Note:  that particular review highlighted other issues, it is unclear from Henk's reply whether that ever happened.\n\n- [x] #121\n\n> Section 1:  HTTP endpoints, core operations, core endpoints, optional supporting endpoints.  Do these all represent separate and distinct ideas?  I would suggest that if you call a shovel a spade once, you should do it always in a specification like this (let me know if I need to explain the analogy).  Note:  if you make a change, be sure to do a global search, these terms are all over the draft.\n\n- [x] #121\n\n> Section 3.1.1, last sentence:  Is there any guidance about what is 'reasonable'?\n\n- [x] #125\n\n> Sections 3.1.5, 3.2.1:  Both of these sections say 'authentication SHOULD' while Section 2 states that Authentication is out of scope.  For both of these 'naked SHOULDs' there needs to be a statement about why one might not adhere to the SHOULD.  In addition, it might be wise (given the position espoused by Section 2) to make it a lower case should (i.e. still just as normative, but not BCP14 words).\n\n> Section 4:  The scitt architecture draft states that \"Interactions with Transparency Services are expected to use appropriately strong encryption and authorization technologies.\"  This draft is silent on encryption and authorization.  It also states that Authentication is out of scope.  In light of these distinctions, is it still true that the privacy considerations of this draft follow from the arch draft?  Or does there need to be a few words about how the potential lack of authentication impacts privacy?\n\nIt's true that the document is not very clear on this, Section 5.3 is also inconsistent with the \"Authentication is out of scope\", since it mandates authentication mechanisms. https://ietf-wg-scitt.github.io/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-5.3\n\nDepending on the outcome of this discussion, #124 may be counter-productive. See below.\n\n- [x] TBD\n \n> Section 5.3 and Section 2:  Some work needs to be done to harmonize these two sections.   (and another 'naked SHOULD' - when is it acceptable to not allow for revocation and update of authentication secrets?)\n\nSee above.\n\n> Section 5.4, title:  So the rest of the section are 'secondary threats'?  There might be a better title for this section.  (threat model is what the architecture draft uses).\n\n- [x] #123 \n\n> Section 5.4.1.1, last sentence:  Why not MUST?\n\n- [x] #126\n\n> Early comments courtesy of idnits:  \n> 1.  idnits points out that it is preferred if BCP 14 is referenced.  If you need me to find you an example of how to do this, I can.\n\n#127 \n\n> 3.  idnits also points out that RFC2046 and 6838 are referenced but not mentioned in the draft.\n\n#111\n\n> 5.  idnits points out that there are 5 instances of lines that are too long. \n\n#115\n\n> Nits:\n> Section 2:  s/mitigation/mitigations\n\n- [x] #122",
       "createdAt": "2026-03-25T08:48:50Z",
-      "updatedAt": "2026-03-27T15:48:51Z",
-      "closedAt": null,
+      "updatedAt": "2026-04-13T13:12:57Z",
+      "closedAt": "2026-04-13T13:12:57Z",
       "comments": [
         {
           "author": "achamayou",
@@ -1795,6 +1795,99 @@
           "body": "@debcooley a [draft-08](https://datatracker.ietf.org/doc/draft-ietf-scitt-scrapi/08/) has been submitted now, so the [side-by-side is available](https://author-tools.ietf.org/iddiff?url1=draft-ietf-scitt-scrapi-07&url2=draft-ietf-scitt-scrapi-08&difftype=--html).",
           "createdAt": "2026-03-27T15:48:51Z",
           "updatedAt": "2026-03-27T15:48:51Z"
+        }
+      ]
+    },
+    {
+      "number": 132,
+      "id": "I_kwDOLJjbks79nYwg",
+      "title": "Key discovery lifetime for long-lived receipts",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/132",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From Myles Bryning\u00a0on the mailing list:\n\n> Section 3.1 says a Transparency Service MAY stop returning keys it no longer uses, following \"a reasonable delay.\" For supply chain use cases, receipts might be verified weeks or months later. For AI audit trails under the EU AI Act or DORA, the verification window is measured in years. The current language defers entirely to the TS operator's judgement on what \"reasonable\" means.\n> \n> A SHOULD level recommendation for the TS to publish a minimum key retention period (via a discoverable metadata field or the TS's Registration Policy) would give relying parties something concrete to build against. Without it, an implementer building long-term audit infrastructure has no way to know whether the keys will still be there when an auditor needs them.",
+      "createdAt": "2026-04-13T13:15:26Z",
+      "updatedAt": "2026-04-13T14:54:57Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Receipts can be re-signed, either with the same proof and a fresh key, or with a proof anchored in a newer version of the VDS (whose sequence of statements is a suffix of the one used to issue the previous receipt) signed by a fresh key. An earlier version of the draft proposed an optional exchange resource that could be exposed by the service, but it did not gather consensus as a mandatory resource and so was dropped.\n\nIt is unclear if exposing a minimum retention period is helpful, because the service may need to rotate the key before the end of the period the key is compromised, or the algorithm is no longer secure.\n\nI think we ought to discuss this in the weekly meeting.",
+          "createdAt": "2026-04-13T14:54:57Z",
+          "updatedAt": "2026-04-13T14:54:57Z"
+        }
+      ]
+    },
+    {
+      "number": 133,
+      "id": "I_kwDOLJjbks79qvDO",
+      "title": "Privacy-preserving registration for sensitive payloads",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/133",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From Myles Bryning on the mailing list:\n\n> Section 4 (Privacy Considerations) notes that Signed Statements may contain sensitive information and that Issuers should carefully review inclusion of private materials. In AI provenance, the payload routinely contains query text, user session identifiers, and retrieved evidence excerpts. These cannot be published to a transparency log.\n> \n> The architecture draft references hash-only registration using the COSE header parameters payload-hash-alg, preimage-content-type, and payload-location. But SCRAPI itself does not describe how the registration endpoint should behave when receiving a Signed Statement with a detached payload. Does the TS validate the payload hash against a supplied preimage? Or does it register the statement without ever seeing the payload content? A short paragraph in Section 3.3 clarifying the expected TS behaviour for detached payload registration would remove ambiguity for implementers building privacy sensitive application profiles.",
+      "createdAt": "2026-04-13T14:55:52Z",
+      "updatedAt": "2026-04-13T18:47:00Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "COSE Hash Envelope allows and is mostly written with the [digest as an inline payload](https://www.ietf.org/archive/id/draft-ietf-cose-hash-envelope-10.html#name-envelope-extended-diagnosti) although it allows detached as well.\n\nSignature verification is a mandatory check in the [architecture](https://ietf-wg-scitt.github.io/draft-ietf-scitt-architecture/draft-ietf-scitt-architecture.html#section-5.1.1.1), and so if envelopes are submitted with detached payloads, then the payload must be available to the TS at submission in some other, implementation-specific way.\n\nWould adding a reference in 3.3 help with clarity?",
+          "createdAt": "2026-04-13T15:13:51Z",
+          "updatedAt": "2026-04-13T15:13:51Z"
+        },
+        {
+          "author": "CueCrux-Myles",
+          "authorAssociation": "NONE",
+          "body": "Yes, a reference in 3.3 would help. A sentence confirming that Signed Statements with detached payloads are accepted, with signature verification requiring the payload to be available to the TS by implementation-specific means, would close the gap for implementers building privacy-sensitive profiles.",
+          "createdAt": "2026-04-13T18:47:00Z",
+          "updatedAt": "2026-04-13T18:47:00Z"
+        }
+      ]
+    },
+    {
+      "number": 134,
+      "id": "I_kwDOLJjbks79q8bT",
+      "title": "Content type signalling for application profiles",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/134",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From Myles Bryning on the mailing list:\n\n> Section 3.3 accepts application/cose as the Content Type for registration. When multiple application profiles share the same TS (supply chain attestations alongside AI provenance receipts alongside refusal event records), the TS currently has no Content-Type signal to distinguish them before parsing the COSE envelope. The typ header (label 16, RFC 9596) helps after decoding, but a media type parameter or Accept header convention at the HTTP layer would let a TS route or apply profile-specific Registration Policy before touching CBOR.\n> \n> This may be out of scope for SCRAPI-08. If so, a note in Security Considerations or a forward reference acknowledging that multi-profile TS deployments will need a profile discrimination mechanism would be useful.",
+      "createdAt": "2026-04-13T15:04:37Z",
+      "updatedAt": "2026-04-13T16:55:34Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I suggest this is best discussed in the weekly meeting, but:\n\n1. I don't think there is any wording in the current draft that forbids dispatch to different policies based on HTTP headers.\n2. Dispatching based on unauthenticated content is questionable. There is no offline-verifiable provenance for that content, it is not committed to the VDS, and cannot be usefully provided to auditors.\n\nAs an early routing hint in a particular implementation, it may be fine, but I do not think it should be explicitly recommended.",
+          "createdAt": "2026-04-13T15:11:45Z",
+          "updatedAt": "2026-04-13T15:11:45Z"
+        },
+        {
+          "author": "JAG-UK",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I may be misunderstanding the original comment but I don't think we would even want to change this, would we? Let alone recommending a course of action. \n\nThe thing you send to the TS is always COSE, that's its type. Trying to signal 'profiles' through a different layer's type info sounds wrong to me - after all the kinds of differences he mentions might all accept 'image/jpeg' or 'application/pdf'. Isn't it a better to point to conventions in use of issuer/subject if we want to do anything at all on the multi-clients-and-profiles thing?",
+          "createdAt": "2026-04-13T16:11:16Z",
+          "updatedAt": "2026-04-13T16:11:16Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I read this as an addition, for early dispatch, subject to later checking against the value in the payload.\n\nThe authoritative value definitely must be part of what is signed, it's definitely not ok to have the Client try its luck with various profiles unbeknownst to the Issuer.",
+          "createdAt": "2026-04-13T16:55:34Z",
+          "updatedAt": "2026-04-13T16:55:34Z"
         }
       ]
     }
