@@ -109,6 +109,7 @@ normative:
 
 informative:
   RFC8792:
+  RFC9921:
   NIST.SP.800-57pt1r5:
     title: "Recommendation for Key Management: Part 1 - General"
     author:
@@ -801,6 +802,7 @@ Once a statement is made, it is intended to be immutable and non-repudiable, so 
 There could be issues at the payload level (for instance, the statement "it is raining" may be true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
 
 If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps MUST be added to the protected header signed by the Issuer.
+{{RFC9921}} defines COSE header parameters for including RFC 3161 timestamp tokens that MAY be used for this purpose.
 
 #### Message Deletion Attacks
 
