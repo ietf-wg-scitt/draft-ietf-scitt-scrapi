@@ -825,9 +825,6 @@ Table of Contents
    the Signed Statement, therefore care must be taken in the protection
    of Issuer keys and credentials to avoid theft and impersonation.
 
-   Transparency Services MAY also implement additional protections such
-   as anomaly detection in order to mitigate the impact of any breach.
-
 4.4.2.  Out of Scope
 
 4.4.2.1.  Replay Attacks
