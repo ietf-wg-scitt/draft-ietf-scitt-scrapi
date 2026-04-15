@@ -289,7 +289,8 @@ Table of Contents
      }
    ]
 
-   The following expected error is defined:
+   The following expected error is defined and MUST be returned when the
+   corresponding condition is encountered:
 
    HTTP/1.1 404 Not Found
    Content-Type: application/concise-problem-details+cbor
@@ -445,8 +446,9 @@ Table of Contents
 
 3.3.3.  Status 400 - Invalid Client Request
 
-   The following expected errors are defined.  Implementations MAY
-   return other errors, so long as they are valid [RFC9290] objects.
+   The following expected errors MUST be returned when the corresponding
+   conditions are encountered.  Implementations MAY return other errors,
+   so long as they are valid [RFC9290] objects.
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
@@ -599,8 +601,9 @@ Table of Contents
 
 3.4.3.  Status 400 - Invalid Client Request
 
-   The following expected errors are defined.  Implementations MAY
-   return other errors, so long as they are valid [RFC9290] objects.
+   The following expected errors MUST be returned when the corresponding
+   conditions are encountered.  Implementations MAY return other errors,
+   so long as they are valid [RFC9290] objects.
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
