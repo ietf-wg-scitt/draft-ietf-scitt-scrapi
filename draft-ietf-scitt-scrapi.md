@@ -808,9 +808,15 @@ Thus, any message deletion attack must occur prior to registration else it is in
 
 #### Use of Unauthenticated HTTP Metadata
 
-Note: Implementations that serve multiple application profiles MAY use unauthenticated HTTP-layer signals, such as request headers or distinct registration endpoints, to route incoming Signed Statements to profile-specific processing.
+Implementations that serve multiple application profiles MAY use unauthenticated HTTP-layer signals, such as request headers or distinct registration endpoints, to route incoming Signed Statements to
+profile-specific processing.
+
 However, these signals are not signed, are not committed to the Verifiable Data Structure, and cannot be replayed by Auditors.
+
 Implementations MUST NOT use unauthenticated signals as authoritative inputs to the registration decision.
+
+Implementations that use such signals for early dispatch MUST ensure that any processing decisions that affect the outcome of registration are fully determined by authenticated inputs, or are otherwise captured in the Verifiable Data Structure, such that the registration process remains deterministic and replayable by Auditors.
+
 The authoritative identification of the application profile is carried within the protected header or payload of the Signed Statement, and MUST be verified after signature authentication.
 
 # IANA Considerations
