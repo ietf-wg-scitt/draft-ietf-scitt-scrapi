@@ -352,6 +352,11 @@ A Transparency Service depends on the verification of the Signed Statement in th
 The Registration Policy for the Transparency Service MUST be applied before any additional processing.
 The details of Registration Policies are out of scope for this document.
 
+Signed Statements MAY use detached payloads, as described in {{-SCITT-ARCH}}.
+When a Signed Statement is submitted with a detached payload,
+the Transparency Service still requires access to the payload content in order to verify the signature as part of applying the Registration Policy.
+The mechanism by which the payload is made available to the Transparency Service is implementation-specific.
+
 Response:
 
 One of the following:
