@@ -2084,7 +2084,7 @@ Nonetheless transparency may mean 'within a limited community' rather than 'in f
 Once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
 There could be issues at the payload level (for instance, the statement "it is raining" may be true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.<a href="#section-4.4.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.2.1-2">If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps <span class="bcp14">MUST</span> be added to the protected header signed by the Issuer.
-<span>[<a href="#RFC9921" class="cite xref">RFC9921</a>]</span> defines COSE header parameters for including RFC 3161 timestamp tokens that <span class="bcp14">MAY</span> be used for this purpose.<a href="#section-4.4.2.1-2" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC9921" class="cite xref">RFC9921</a>]</span> defines COSE header parameters for including <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> timestamp tokens that <span class="bcp14">MAY</span> be used for this purpose.<a href="#section-4.4.2.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-message-deletion-attacks">
@@ -2185,6 +2185,10 @@ Related information: <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="
 <dt id="NIST.SP.800-57pt1r5">[NIST.SP.800-57pt1r5]</dt>
         <dd>
 <span class="refAuthor">Barker, E.</span>, <span class="refTitle">"Recommendation for Key Management: Part 1 - General"</span>, <span class="seriesInfo">NIST Special Publication 800-57 Part 1 Revision 5</span>, <time datetime="2020-05" class="refDate">May 2020</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">https://doi.org/10.6028/NIST.SP.800-57pt1r5</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3161">[RFC3161]</dt>
+        <dd>
+<span class="refAuthor">Adams, C.</span>, <span class="refAuthor">Cain, P.</span>, <span class="refAuthor">Pinkas, D.</span>, and <span class="refAuthor">R. Zuccherato</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)"</span>, <span class="seriesInfo">RFC 3161</span>, <span class="seriesInfo">DOI 10.17487/RFC3161</span>, <time datetime="2001-08" class="refDate">August 2001</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3161">https://www.rfc-editor.org/rfc/rfc3161</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8792">[RFC8792]</dt>
         <dd>

@@ -840,7 +840,7 @@ Table of Contents
    If the semantic content of the payload are time-dependent and
    susceptible to replay attacks in this way then timestamps MUST be
    added to the protected header signed by the Issuer.  [RFC9921]
-   defines COSE header parameters for including RFC 3161 timestamp
+   defines COSE header parameters for including [RFC3161] timestamp
    tokens that MAY be used for this purpose.
 
 4.4.2.2.  Message Deletion Attacks
@@ -921,6 +921,11 @@ Table of Contents
               General", NIST Special Publication 800-57 Part 1 Revision
               5, May 2020,
               <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
+
+   [RFC3161]  Adams, C., Cain, P., Pinkas, D., and R. Zuccherato,
+              "Internet X.509 Public Key Infrastructure Time-Stamp
+              Protocol (TSP)", RFC 3161, DOI 10.17487/RFC3161, August
+              2001, <https://www.rfc-editor.org/rfc/rfc3161>.
 
    [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
               "Handling Long Lines in Content of Internet-Drafts and
