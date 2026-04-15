@@ -806,6 +806,13 @@ If the semantic content of the payload are time-dependent and susceptible to rep
 Once registered with a Transparency Service, Registered Signed Statements cannot be deleted.
 Thus, any message deletion attack must occur prior to registration else it is indistinguishable from a man-in-the-middle or denial-of-service attack on this interface.
 
+#### Use of Unauthenticated HTTP Metadata
+
+Note: Implementations that serve multiple application profiles MAY use unauthenticated HTTP-layer signals, such as request headers or distinct registration endpoints, to route incoming Signed Statements to profile-specific processing.
+However, these signals are not signed, are not committed to the Verifiable Data Structure, and cannot be replayed by Auditors.
+Implementations MUST NOT use unauthenticated signals as authoritative inputs to the registration decision.
+The authoritative identification of the application profile is carried within the protected header or payload of the Signed Statement, and MUST be verified after signature authentication.
+
 # IANA Considerations
 
 ## Well-Known URI for Key Discovery
