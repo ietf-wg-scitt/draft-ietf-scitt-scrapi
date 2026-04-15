@@ -776,7 +776,7 @@ However, this relies on clients actively checking for Receipts and does not prev
 
 Clients to Transparency Services SHOULD ensure that Receipts are available for their registered Statements, either on a periodic or needs-must basis, depending on the use case.
 
-Beyond this, implementers of Transparency Services MUST implement general good practice around defending against network attacks such as flooding, including defenses such as rate limiting.
+Beyond this, implementers of Transparency Services MUST follow general good practice around defending against network attacks such as flooding, including defenses such as rate limiting.
 
 #### Eavesdropping
 
