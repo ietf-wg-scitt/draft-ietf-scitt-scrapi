@@ -110,6 +110,7 @@ normative:
 informative:
   RFC8792:
   RFC9921:
+  RFC3161:
   NIST.SP.800-57pt1r5:
     title: "Recommendation for Key Management: Part 1 - General"
     author:
