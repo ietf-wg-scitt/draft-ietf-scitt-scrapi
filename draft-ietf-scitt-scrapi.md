@@ -109,6 +109,8 @@ normative:
 
 informative:
   RFC8792:
+  RFC9921:
+  RFC3161:
   NIST.SP.800-57pt1r5:
     title: "Recommendation for Key Management: Part 1 - General"
     author:
@@ -124,20 +126,20 @@ entity:
 
 --- abstract
 
-This document describes a REST API that supports the normative requirements of the SCITT Architecture.
+This document describes a REST API that supports the normative requirements of the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
 
 --- middle
 
 # Introduction
 
-The SCITT Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and workflows necessary to interact with a SCITT Transparency Service:
+The Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and workflows necessary to interact with a SCITT Transparency Service:
 
 - Signed Statements
 - Receipts
 - Transparent Statements
 - Registration Policies
 
-SCRAPI defines HTTP resources for a Transparency Service using COSE ({{RFC9052}}).
+SCITT Reference APIs (SCRAPI) defines HTTP resources for a Transparency Service using COSE ({{RFC9052}}).
 The following resources MUST be implemented for conformance to this specification:
 
 - Registration of Signed Statements
@@ -151,12 +153,6 @@ The following resources MUST be implemented for conformance to this specificatio
 This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service" and "Registration Policy" as defined in {{-SCITT-ARCH}}.
 
 This specification uses "payload" as defined in {{RFC9052}}.
-
-# Authentication
-
-Authentication is out of scope for this document.
-Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.
-If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be implemented.
 
 # Resources
 
@@ -760,6 +756,12 @@ All questions of security of the related COSE formats, algorithm choices, crypto
 SCITT is concerned with issues of cross-boundary supply-chain-wide data integrity and as such must assume a very wide range of deployment environments.
 Thus, no assumptions can be made about the security of the computing environment in which any client implementation of this specification runs.
 
+## Authentication
+
+Authentication is out of scope for this document.
+Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.
+If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be implemented.
+
 ## Threat Model
 
 ### In Scope
@@ -774,12 +776,13 @@ The most serious threats to implementations on Transparency Services are ones th
 
 While denial of service attacks are very hard to defend against completely, and Transparency Services are unlikely to be in the critical path of any safety-liable operation, any attack which could cause the _silent_ failure of Signed Statement registration, for example, should be considered in scope.
 
-In principle DoS attacks are easily mitigated by the client checking that the Transparency Service has registered any submitted Signed Statement and returned a Receipt.
-Since verification of Receipts does not require the involvement of the Transparency Service DoS attacks are not a major issue.
+The impact of DoS attacks can be detected by a client checking that the Transparency Service has registered any submitted Signed Statement and returned a Receipt.
+Since verification of Receipts does not require the involvement of the Transparency Service, a DoS attack cannot cause the silent loss of a registration.
+However, this relies on clients actively checking for Receipts and does not prevent the disruption itself.
 
 Clients to Transparency Services SHOULD ensure that Receipts are available for their registered Statements, either on a periodic or needs-must basis, depending on the use case.
 
-Beyond this, implementers of Transparency Services MUST implement general good practice around network attacks, flooding, rate limiting etc.
+Beyond this, implementers of Transparency Services MUST follow general good practice around defending against network attacks such as flooding, including defenses such as rate limiting.
 
 #### Eavesdropping
 
@@ -794,7 +797,6 @@ Modification attacks are mitigated by the use of the Issuer signature on the Sig
 
 Insertion attacks are mitigated by the use of the Issuer signature on the Signed Statement, therefore care must be taken in the protection of Issuer keys and credentials to avoid theft and impersonation.
 
-Transparency Services MAY also implement additional protections such as anomaly detection or rate limiting in order to mitigate the impact of any breach.
 
 ### Out of Scope
 
@@ -804,7 +806,8 @@ Replay attacks are not particularly concerning for SCITT or SCRAPI:
 Once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
 There could be issues at the payload level (for instance, the statement "it is raining" may be true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
 
-If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps MAY be added to the protected header signed by the Issuer.
+If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps MUST be added to the protected header signed by the Issuer.
+{{RFC9921}} defines COSE header parameters for including {{RFC3161}} timestamp tokens that MAY be used for this purpose.
 
 #### Message Deletion Attacks
 
