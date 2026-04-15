@@ -1252,6 +1252,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-well-known-uri-for-key-disc" class="internal xref">Well-Known URI for Key Discovery</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.1">
+                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.  <a href="#name-resource-definition" class="internal xref">Resource Definition</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.2">
+                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="auto internal xref">5.1.2</a>.  <a href="#name-registration-template" class="internal xref">Registration Template</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
@@ -2116,12 +2124,43 @@ Thus, any message deletion attack must occur prior to registration else it is in
         <h3 id="name-well-known-uri-for-key-disc">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-well-known-uri-for-key-disc" class="section-name selfRef">Well-Known URI for Key Discovery</a>
         </h3>
-<p id="section-5.1-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>):<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">URI suffix: scitt-keys
+<p id="section-5.1-1">This section defines the <code>/.well-known/scitt-keys</code> resource in accordance with <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<div id="sec-resource-definition">
+<section id="section-5.1.1">
+          <h4 id="name-resource-definition">
+<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-resource-definition" class="section-name selfRef">Resource Definition</a>
+          </h4>
+<p id="section-5.1.1-1">The <code>/.well-known/scitt-keys</code> resource allows clients to discover the public keys used by a Transparency Service to issue Receipts.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-2">Clients interact with this resource by issuing an HTTP GET request to <code>/.well-known/scitt-keys</code>.
+The Transparency Service <span class="bcp14">MUST</span> respond with a COSE Key Set (as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>) serialized as <code>application/cbor</code>.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-3">The following media types are used with this resource:<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1.1-4.1">
+              <p id="section-5.1.1-4.1.1">Request: Clients <span class="bcp14">SHOULD</span> include <code>Accept: application/cbor</code> in the request.<a href="#section-5.1.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-5.1.1-4.2">
+              <p id="section-5.1.1-4.2.1">Response: The Transparency Service <span class="bcp14">MUST</span> use <code>Content-Type: application/cbor</code>.<a href="#section-5.1.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-5.1.1-5">The <code>/.well-known/scitt-keys/{kid_value}</code> sub-resource allows clients to resolve a single public key by its key identifier (<code>kid</code>).
+Clients interact with this sub-resource by issuing an HTTP GET request.
+The Transparency Service <span class="bcp14">MUST</span> respond with a COSE Key Set containing the matching key, serialized as <code>application/cbor</code>, or a 404 status if no matching key is found.<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-6">The full normative behavior of these resources, including key lifecycle, error handling, and <code>kid</code> encoding requirements, is defined in <a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a> and <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>.<a href="#section-5.1.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-registration-template">
+<section id="section-5.1.2">
+          <h4 id="name-registration-template">
+<a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-registration-template" class="section-name selfRef">Registration Template</a>
+          </h4>
+<p id="section-5.1.2-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>):<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-2">URI suffix: scitt-keys
 Change controller: IETF
 Specification document(s): RFCthis
 Status: Permanent
-Related information: <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span><a href="#section-5.1-2" class="pilcrow">¶</a></p>
+Related information: <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span><a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 </section>
