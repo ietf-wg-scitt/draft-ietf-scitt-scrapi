@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 16 October 2026                        Bowball Technologies Ltd
+Expires: 17 October 2026                        Bowball Technologies Ltd
                                                       A. Delignat-Lavaud
                                                       Microsoft Research
-                                                           14 April 2026
+                                                           15 April 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 October 2026.
+   This Internet-Draft will expire on 17 October 2026.
 
 Copyright Notice
 
@@ -801,7 +801,7 @@ Table of Contents
    available for their registered Statements, either on a periodic or
    needs-must basis, depending on the use case.
 
-   Beyond this, implementers of Transparency Services MUST implement
+   Beyond this, implementers of Transparency Services MUST follow
    general good practice around defending against network attacks such
    as flooding, including defenses such as rate limiting.
 
@@ -842,7 +842,9 @@ Table of Contents
 
    If the semantic content of the payload are time-dependent and
    susceptible to replay attacks in this way then timestamps MUST be
-   added to the protected header signed by the Issuer.
+   added to the protected header signed by the Issuer.  [RFC9921]
+   defines COSE header parameters for including RFC 3161 timestamp
+   tokens that MAY be used for this purpose.
 
 4.4.2.2.  Message Deletion Attacks
 
@@ -927,6 +929,12 @@ Table of Contents
               "Handling Long Lines in Content of Internet-Drafts and
               RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
               <https://www.rfc-editor.org/rfc/rfc8792>.
+
+   [RFC9921]  Birkholz, H., Fossati, T., and M. Riechert, "CBOR Object
+              Signing and Encryption (COSE) Header Parameter for
+              Timestamp Tokens as Defined in RFC 3161", RFC 9921,
+              DOI 10.17487/RFC9921, February 2026,
+              <https://www.rfc-editor.org/rfc/rfc9921>.
 
 Contributors
 
