@@ -2107,6 +2107,19 @@ There could be issues at the payload level (for instance, the statement "it is r
 Thus, any message deletion attack must occur prior to registration else it is indistinguishable from a man-in-the-middle or denial-of-service attack on this interface.<a href="#section-4.4.2.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="sec-use-of-unauthenticated-http-metadata">
+<section id="section-4.4.2.3">
+            <h5 id="name-use-of-unauthenticated-http">
+<a href="#section-4.4.2.3" class="section-number selfRef">4.4.2.3. </a><a href="#name-use-of-unauthenticated-http" class="section-name selfRef">Use of Unauthenticated HTTP Metadata</a>
+            </h5>
+<p id="section-4.4.2.3-1">Implementations that serve multiple application profiles <span class="bcp14">MAY</span> use unauthenticated HTTP-layer signals, such as request headers or distinct registration endpoints, to route incoming Signed Statements to
+profile-specific processing.<a href="#section-4.4.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.2.3-2">However, these signals are not signed, are not committed to the Verifiable Data Structure, and cannot be replayed by Auditors.<a href="#section-4.4.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.2.3-3">Implementations <span class="bcp14">MUST NOT</span> use unauthenticated signals as authoritative inputs to the registration decision.<a href="#section-4.4.2.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.4.2.3-4">Implementations that use such signals for early dispatch <span class="bcp14">MUST</span> ensure that any processing decisions that affect the outcome of registration are fully determined by authenticated inputs, or are otherwise captured in the Verifiable Data Structure, such that the registration process remains deterministic and replayable by Auditors.<a href="#section-4.4.2.3-4" class="pilcrow">¶</a></p>
+<p id="section-4.4.2.3-5">The authoritative identification of the application profile is carried within the protected header or payload of the Signed Statement, and <span class="bcp14">MUST</span> be verified after signature authentication.<a href="#section-4.4.2.3-5" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 </section>
