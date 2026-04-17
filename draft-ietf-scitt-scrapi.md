@@ -248,6 +248,8 @@ Consistent with key management best practices described in {{NIST.SP.800-57pt1r5
 
 This resource is used to resolve a single public key, from a `kid` value contained in a Receipt previously issued by the Transparency Service.
 
+The Transparency Service responds with a single COSE Key, as defined in {{Section 7 of RFC9052}}.
+
 Request:
 
 ~~~ http-message
@@ -264,15 +266,13 @@ Content-Type: application/cbor
 
 Body (in CBOR diagnostic notation)
 
-[
-  {
-    -1:1,
-    -2:h'bac5b11c...d6a09eff',
-    -3:h'20138bf8...bbfc117e',
-    1:2,
-    2:'kid_value'
-  }
-]
+{
+  -1:1,
+  -2:h'bac5b11c...d6a09eff',
+  -3:h'20138bf8...bbfc117e',
+  1:2,
+  2:'kid_value'
+}
 ~~~
 
 The following expected error is defined and MUST be returned when the corresponding condition is encountered:
@@ -834,7 +834,7 @@ The following media types are used with this resource:
 
 The `/.well-known/scitt-keys/{kid_value}` sub-resource allows clients to resolve a single public key by its key identifier (`kid`).
 Clients interact with this sub-resource by issuing an HTTP GET request.
-The Transparency Service MUST respond with a COSE Key Set containing the matching key, serialized as `application/cbor`, or a 404 status if no matching key is found.
+The Transparency Service MUST respond with a single COSE Key (as defined in {{Section 7 of RFC9052}}) serialized as `application/cbor`, or a 404 status if no matching key is found.
 
 The full normative behavior of these resources, including key lifecycle, error handling, and `kid` encoding requirements, is defined in {{sec-transparency-service-keys}} and {{sec-individual-transparency-service-key}}.
 
