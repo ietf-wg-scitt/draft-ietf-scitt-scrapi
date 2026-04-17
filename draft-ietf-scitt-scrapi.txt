@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 17 October 2026                        Bowball Technologies Ltd
+Expires: 19 October 2026                        Bowball Technologies Ltd
                                                       A. Delignat-Lavaud
                                                       Microsoft Research
-                                                           15 April 2026
+                                                           17 April 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 October 2026.
+   This Internet-Draft will expire on 19 October 2026.
 
 Copyright Notice
 
@@ -262,6 +262,9 @@ Table of Contents
    value contained in a Receipt previously issued by the Transparency
    Service.
 
+   The Transparency Service responds with a single COSE Key, as defined
+   in Section 7 of [RFC9052].
+
    Request:
 
    GET /.well-known/scitt-keys/{kid_value} HTTP/1.1
@@ -275,15 +278,13 @@ Table of Contents
 
    Body (in CBOR diagnostic notation)
 
-   [
-     {
-       -1:1,
-       -2:h'bac5b11c...d6a09eff',
-       -3:h'20138bf8...bbfc117e',
-       1:2,
-       2:'kid_value'
-     }
-   ]
+   {
+     -1:1,
+     -2:h'bac5b11c...d6a09eff',
+     -3:h'20138bf8...bbfc117e',
+     1:2,
+     2:'kid_value'
+   }
 
    The following expected error is defined and MUST be returned when the
    corresponding condition is encountered:
@@ -891,9 +892,9 @@ Table of Contents
    The /.well-known/scitt-keys/{kid_value} sub-resource allows clients
    to resolve a single public key by its key identifier (kid).  Clients
    interact with this sub-resource by issuing an HTTP GET request.  The
-   Transparency Service MUST respond with a COSE Key Set containing the
-   matching key, serialized as application/cbor, or a 404 status if no
-   matching key is found.
+   Transparency Service MUST respond with a single COSE Key (as defined
+   in Section 7 of [RFC9052]) serialized as application/cbor, or a 404
+   status if no matching key is found.
 
    The full normative behavior of these resources, including key
    lifecycle, error handling, and kid encoding requirements, is defined

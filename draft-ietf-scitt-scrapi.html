@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 17 October 2026</td>
+<td class="center">Expires 19 October 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-15" class="published">15 April 2026</time>
+<time datetime="2026-04-17" class="published">17 April 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-10-17">17 October 2026</time></dd>
+<dd class="expires"><time datetime="2026-10-19">19 October 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1126,7 +1126,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1436,35 +1436,34 @@ Consistent with key management best practices described in <span>[<a href="#NIST
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-individual-transparency-ser" class="section-name selfRef">Individual Transparency Service Key</a>
         </h3>
 <p id="section-2.2-1">This resource is used to resolve a single public key, from a <code>kid</code> value contained in a Receipt previously issued by the Transparency Service.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">Request:<a href="#section-2.2-2" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2-3">
+<p id="section-2.2-2">The Transparency Service responds with a single COSE Key, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">Request:<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2-4">
 <pre>
 GET /.well-known/scitt-keys/{kid_value} HTTP/1.1
 Host: transparency.example
 Accept: application/cbor
-</pre><a href="#section-2.2-3" class="pilcrow">¶</a>
+</pre><a href="#section-2.2-4" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2-4">Response:<a href="#section-2.2-4" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2-5">
+<p id="section-2.2-5">Response:<a href="#section-2.2-5" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2-6">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/cbor
 
 Body (in CBOR diagnostic notation)
 
-[
-  {
-    -1:1,
-    -2:h'bac5b11c...d6a09eff',
-    -3:h'20138bf8...bbfc117e',
-    1:2,
-    2:'kid_value'
-  }
-]
-</pre><a href="#section-2.2-5" class="pilcrow">¶</a>
+{
+  -1:1,
+  -2:h'bac5b11c...d6a09eff',
+  -3:h'20138bf8...bbfc117e',
+  1:2,
+  2:'kid_value'
+}
+</pre><a href="#section-2.2-6" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2-6">The following expected error is defined and <span class="bcp14">MUST</span> be returned when the corresponding condition is encountered:<a href="#section-2.2-6" class="pilcrow">¶</a></p>
-<div class="lang-http-message sourcecode" id="section-2.2-7">
+<p id="section-2.2-7">The following expected error is defined and <span class="bcp14">MUST</span> be returned when the corresponding condition is encountered:<a href="#section-2.2-7" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.2-8">
 <pre>
 HTTP/1.1 404 Not Found
 Content-Type: application/concise-problem-details+cbor
@@ -1473,20 +1472,20 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: "No such key",
   / detail /        -2: "No key could be found for this kid value"
 }
-</pre><a href="#section-2.2-7" class="pilcrow">¶</a>
+</pre><a href="#section-2.2-8" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2-8">Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2-8" class="pilcrow">¶</a></p>
-<p id="section-2.2-9">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-2.2-9" class="pilcrow">¶</a></p>
-<p id="section-2.2-10"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-2.2-10" class="pilcrow">¶</a></p>
-<p id="section-2.2-11"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-2.2-11" class="pilcrow">¶</a></p>
-<p id="section-2.2-12">"Base64 encoding using the URL- and filename-safe character set
+<p id="section-2.2-9">Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2-9" class="pilcrow">¶</a></p>
+<p id="section-2.2-10">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-2.2-10" class="pilcrow">¶</a></p>
+<p id="section-2.2-11"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-2.2-11" class="pilcrow">¶</a></p>
+<p id="section-2.2-12"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-2.2-12" class="pilcrow">¶</a></p>
+<p id="section-2.2-13">"Base64 encoding using the URL- and filename-safe character set
 defined in Section 5 of RFC 4648 <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, with all trailing '='
 characters omitted and without the inclusion of any line breaks,
 whitespace, or other additional characters.  Note that the base64url
 encoding of the empty octet sequence is the empty string.
 (See Appendix C of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> for notes on implementing base64url
-encoding without padding.)"<a href="#section-2.2-12" class="pilcrow">¶</a></p>
-<p id="section-2.2-13">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.<a href="#section-2.2-13" class="pilcrow">¶</a></p>
+encoding without padding.)"<a href="#section-2.2-13" class="pilcrow">¶</a></p>
+<p id="section-2.2-14">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.<a href="#section-2.2-14" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-register-signed-statement">
@@ -2144,7 +2143,7 @@ The Transparency Service <span class="bcp14">MUST</span> respond with a COSE Key
           </ul>
 <p id="section-5.1.1-5">The <code>/.well-known/scitt-keys/{kid_value}</code> sub-resource allows clients to resolve a single public key by its key identifier (<code>kid</code>).
 Clients interact with this sub-resource by issuing an HTTP GET request.
-The Transparency Service <span class="bcp14">MUST</span> respond with a COSE Key Set containing the matching key, serialized as <code>application/cbor</code>, or a 404 status if no matching key is found.<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
+The Transparency Service <span class="bcp14">MUST</span> respond with a single COSE Key (as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>) serialized as <code>application/cbor</code>, or a 404 status if no matching key is found.<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
 <p id="section-5.1.1-6">The full normative behavior of these resources, including key lifecycle, error handling, and <code>kid</code> encoding requirements, is defined in <a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a> and <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>.<a href="#section-5.1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
