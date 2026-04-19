@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-16T01:19:02.828223+00:00",
+  "timestamp": "2026-04-19T01:18:32.283217+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1810,7 +1810,7 @@
       "labels": [],
       "body": "From Myles Bryning\u00a0on the mailing list:\n\n> Section 3.1 says a Transparency Service MAY stop returning keys it no longer uses, following \"a reasonable delay.\" For supply chain use cases, receipts might be verified weeks or months later. For AI audit trails under the EU AI Act or DORA, the verification window is measured in years. The current language defers entirely to the TS operator's judgement on what \"reasonable\" means.\n> \n> A SHOULD level recommendation for the TS to publish a minimum key retention period (via a discoverable metadata field or the TS's Registration Policy) would give relying parties something concrete to build against. Without it, an implementer building long-term audit infrastructure has no way to know whether the keys will still be there when an auditor needs them.",
       "createdAt": "2026-04-13T13:15:26Z",
-      "updatedAt": "2026-04-15T17:18:53Z",
+      "updatedAt": "2026-04-18T20:06:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -1861,6 +1861,27 @@
           "body": "We address these operational characteristics within our Registration Policies.\r\n\r\n \r\n\r\nThanks,\r\n\r\n \r\n\r\nDick Brooks\r\n\r\n   \r\n\r\nActive Member of the CISA Critical Manufacturing Sector, \r\n\r\nSector Coordinating Council \u2013 A Public-Private Partnership\r\n\r\nLifetime IEEE Member\r\n\r\n <https://reliableenergyanalytics.com/products> Never trust software, always verify and report! \u2122\r\n\r\nRisk always exists, but trust must be earned and awarded.\u2122 \r\n\r\nhttps://businesscyberguardian.com/ \r\n\r\nEmail: ***@***.***\r\n\r\nTel: +1 978-696-1788\r\n\r\n \r\n\r\n \r\n\r\nFrom: Myles Bryning ***@***.***> \r\nSent: Wednesday, April 15, 2026 12:52 PM\r\nTo: ietf-wg-scitt/draft-ietf-scitt-scrapi ***@***.***>\r\nCc: Dick Brooks (BCG) ***@***.***>; Comment ***@***.***>\r\nSubject: Re: [ietf-wg-scitt/draft-ietf-scitt-scrapi] Key discovery lifetime for long-lived receipts (Issue #132)\r\n\r\n \r\n\r\nCueCrux-Myles left a comment (ietf-wg-scitt/draft-ietf-scitt-scrapi#132) <https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/132#issuecomment-4253892096> \r\n\r\nFair question. Here's the concrete scenario.\r\n\r\nWe mint CROWN receipts for AI retrieval decisions. Each receipt carries the TS's receipt as a countersignature. Under EU AI Act Article 13, a deployer may need to demonstrate the provenance chain to a regulator years after the decision was made. The auditor needs to verify both our signature (which we control) and the TS's receipt (which we don't).\r\n\r\nIf the TS publishes a retention intention of, say, 12 months, we know to cache the TS verification keys at registration time and store them alongside the receipt. We build that into the registration client as a mandatory step.\r\n\r\nIf there's no signal at all, we have two choices: assume keys might vanish at any time and always cache (which every implementer will end up doing independently, duplicating effort), or assume they'll be there and risk an unverifiable receipt when the auditor arrives.\r\n\r\nThe change between 6 months and 3 months is that we'd adjust how aggressively we trigger receipt refresh via the re-signing mechanism you described. A shorter retention period means we need to re-sign more frequently to stay within the window.\r\n\r\nSo \"build against\" means: the retention signal determines whether we cache keys at registration, how often we refresh receipts, and what verification guarantees we can make to customers. Without it, every implementer makes those decisions blind.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub <https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/132#issuecomment-4253892096> , or unsubscribe <https://github.com/notifications/unsubscribe-auth/ABFI3NC5HOQ6NWALNC2EQQT4V644VAVCNFSM6AAAAACXXJX67SVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHM2DENJTHA4TEMBZGY> .\r\nYou are receiving this because you commented.Message ID: ***@***.***>\r\n\r\n",
           "createdAt": "2026-04-15T17:18:53Z",
           "updatedAt": "2026-04-15T17:18:53Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> If there's no signal at all, we have two choices: assume keys might vanish at any time and always cache (which every implementer will end up doing independently, duplicating effort), or assume they'll be there and risk an unverifiable receipt when the auditor arrives.\n\nI think choice 1 is the only robust course of action, plenty of things can happen to the service or the company running the TS in 6 months. I don't think the alternative is an unverifiable receipt, I think it's:\n\n1. Do you still have the key for kid?\n2. No? Ok, can you give me a fresh version of this receipt then, with the same value committed in the VDS [at the same position, for the VDSs that have that concept]\n3. Great, now that comes with a fresh key and kid, I can verify that.\n\nOf course, it's possible to implement a halfway house (\"you store something that is almost, but not quite verifiable offline, that relies on a promise, and that eventually may become completely unverifiable\"). I don't think it's very useful, the size of the keys is insignificant compared to the receipts and the statements themselves, I don't see anyone wanting to make this tradeoff.\n\nHaving said, or perhaps repeated that (sorry!), if there are several implementations that want to do it, and want to be interoperable in the way they expose it, that's great, that's what the group is for. Since SCRAPI is a REST API, it probably makes sense to leverage an existing mechanism like [`Expires`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Expires), rather than come up with something new.",
+          "createdAt": "2026-04-17T17:29:06Z",
+          "updatedAt": "2026-04-17T17:29:06Z"
+        },
+        {
+          "author": "CueCrux-Myles",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agreed, choice 1 is the only robust path. I was framing the two options to surface why the signal matters, not to argue for the halfway house. We cache keys at registration as a mandatory step already.\n\nThe re-registration flow you describe is clean. If the key is gone, request a fresh receipt at the same position with a new key. That works when the TS is still operating. The harder case is when the TS is gone entirely, which is exactly why caching is non-negotiable rather than a tradeoff.\n\nThe Expires header suggestion is sharp. Existing mechanism, no new vocabulary, already understood by HTTP clients. If the TS sets Expires on the registration response, the client knows the retention window without any spec-level invention. That gives implementers the signal they need to schedule receipt refresh, and it degrades gracefully. No Expires header, assume nothing, cache everything.\n\nIf that framing works for the group, I'm happy to draft language for it.",
+          "createdAt": "2026-04-18T19:50:49Z",
+          "updatedAt": "2026-04-18T19:50:49Z"
+        },
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This works for me. I would also add this Expires feature, with retention details, into Registration Policies so that a party will know, up front, that a TS implements Expiration support in their implementation.",
+          "createdAt": "2026-04-18T20:06:33Z",
+          "updatedAt": "2026-04-18T20:06:33Z"
         }
       ]
     },
@@ -1921,15 +1942,15 @@
       "id": "I_kwDOLJjbks79q8bT",
       "title": "Content type signalling for application profiles",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/134",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From Myles Bryning on the mailing list:\n\n> Section 3.3 accepts application/cose as the Content Type for registration. When multiple application profiles share the same TS (supply chain attestations alongside AI provenance receipts alongside refusal event records), the TS currently has no Content-Type signal to distinguish them before parsing the COSE envelope. The typ header (label 16, RFC 9596) helps after decoding, but a media type parameter or Accept header convention at the HTTP layer would let a TS route or apply profile-specific Registration Policy before touching CBOR.\n> \n> This may be out of scope for SCRAPI-08. If so, a note in Security Considerations or a forward reference acknowledging that multi-profile TS deployments will need a profile discrimination mechanism would be useful.",
       "createdAt": "2026-04-13T15:04:37Z",
-      "updatedAt": "2026-04-15T13:38:02Z",
-      "closedAt": null,
+      "updatedAt": "2026-04-17T16:05:45Z",
+      "closedAt": "2026-04-17T16:05:45Z",
       "comments": [
         {
           "author": "achamayou",
@@ -2028,15 +2049,15 @@
       "id": "I_kwDOLJjbks7-hFyq",
       "title": "The key fetching endpoint by kid value should return a single key, not a key set",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/143",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Spotted while working on #140.",
       "createdAt": "2026-04-15T15:51:46Z",
-      "updatedAt": "2026-04-15T15:51:46Z",
-      "closedAt": null,
+      "updatedAt": "2026-04-17T13:41:14Z",
+      "closedAt": "2026-04-17T13:41:14Z",
       "comments": []
     },
     {
@@ -2051,9 +2072,24 @@
       "labels": [],
       "body": "# Reference test vectors for verification\n\nThe draft specifies COSE_Sign1 envelopes, CBOR encoding, CWT claims, and inclusion proof verification. What it doesn't ship is a single test vector an implementer can validate against. There's precedent for this split (RFC 9052 spec vs RFC 9338 examples), but the gap is felt today.\n\nThe scitt-for-phi reference implementation has around a hundred lines of hand-rolled MMR tree maths. index_height, hash_pospair64, included_root, all derived from prose specification alone. Without known-good vectors, the only way to check whether you've got it right is to cross-test against a live Transparency Service. That means infrastructure, credentials, and a working registration pipeline just to find out if your tree maths is correct. The CCF path delegates to a library. The MMR path has nothing to test against.\n\nA minimum viable set would cover three cases: one complete Signed Statement COSE_Sign1 with issuer public key, one complete Receipt with inclusion proof and service public key, and one isolated inclusion proof vector with a known tree, known leaf, known proof path, and expected root hash. Negative vectors (tampered payload, wrong key, invalid proof) would sharpen things further but aren't essential.\n\nIf a full companion document isn't in scope for this draft cycle, there's a simpler step. The scitt-for-phi binary artefacts already exist. Annotating them with documented expected verification outcomes would give implementers something concrete to validate against. The artefacts are there. They just need a write-up.",
       "createdAt": "2026-04-15T21:26:44Z",
-      "updatedAt": "2026-04-15T21:26:44Z",
+      "updatedAt": "2026-04-18T19:45:12Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I am extremely supporting of having a repository of test vectors, and very happy to contribute vectors from Microsoft Signing Transparency, but I am not sure a companion document is the way to go because:\n\n1. It's quite a lot of process (*).\n2. We probably want to be able to expand it, refresh it etc. Having something that becomes immutable is counter-productive for this.\n\n> The MMR path has nothing to test against.\n\nI believe there are some test vectors in: https://github.com/robinbryce/merkle-mountain-range-proofs/blob/main/draft-bryce-cose-merkle-mountain-range-proofs-00.md\n\n(*) But if you're keen to explore doing it, perhaps that's an opportunity?\n\nSteve was running https://scitt.io/, but I don't think it's been updated for a while now. It may be a good place to host test vectors.",
+          "createdAt": "2026-04-17T16:53:47Z",
+          "updatedAt": "2026-04-17T16:53:47Z"
+        },
+        {
+          "author": "CueCrux-Myles",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Good to know the appetite is there. A companion document wasn't a hill I was planning to defend. Something that lives in a repo and can grow is better for this.\n\nThe Robin Bryce vectors are useful. I hadn't traced that back to a standalone set. That covers the MMR path specifically, which was the sharpest gap.\n\nFor the broader set, a repo of annotated artefacts that Microsoft and others can contribute to feels like the right shape. Signed Statements, Receipts, and inclusion proofs, with documented expected outcomes. Expandable, not frozen. scitt.io could work as a home if Steve is open to it being picked back up.\n\nOn the opportunity question. Happy to help put structure around this. I've been building verification tooling against the spec already, so I'm close to the pain. If there's a useful shape for me to contribute, I'm in.",
+          "createdAt": "2026-04-18T19:45:12Z",
+          "updatedAt": "2026-04-18T19:45:12Z"
+        }
+      ]
     },
     {
       "number": 146,
@@ -2067,9 +2103,24 @@
       "labels": [],
       "body": "SCRAPI relies on hashing for integrity. Payload hashes in protected headers, Merkle tree leaf hashes, inclusion proofs. But it doesn't mandate a canonical CBOR encoding form. RFC 8949 Section 4.2 defines Deterministically Encoded CBOR, and draft-ietf-cbor-cde is standardising a common deterministic encoding profile. SCRAPI references neither.\n\nThis works today because implementations tend to use a single CBOR library. Cross-implementation scenarios are fragile. scitt-for-phi's staple_receipt.py modifies the unprotected header and re-serialises via cbor2, then strip_uhdr.py strips and re-serialises for signature verification using hashlib.sha256(empty_uhdr_statement). If a different CBOR library encoded the same logical structure with different map ordering or integer width, the hash would differ and verification would fail silently. No error. Just a wrong answer.\n\nOne normative sentence would close this. Something like: \"Implementations MUST use Deterministically Encoded CBOR (RFC 8949 Section 4.2) when encoding any data structure that will be input to a hash function or included in a Sig_structure.\" That prevents the entire class of interop bug. COSE itself already recommends deterministic encoding in RFC 9052 Section 9.\n\nIf the WG prefers to wait for draft-ietf-cbor-cde to mature, a SHOULD referencing CDE would still be an improvement over silence.",
       "createdAt": "2026-04-15T22:08:44Z",
-      "updatedAt": "2026-04-15T22:08:44Z",
+      "updatedAt": "2026-04-18T19:10:26Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> This works today because implementations tend to use a single CBOR library. Cross-implementation scenarios are fragile. scitt-for-phi's staple_receipt.py modifies the unprotected header and re-serialises via cbor2, then strip_uhdr.py strips and re-serialises for signature verification using hashlib.sha256(empty_uhdr_statement). If a different CBOR library encoded the same logical structure with different map ordering or integer width, the hash would differ and verification would fail silently. No error. Just a wrong answer.\n\nThere is existing interoperability in practice, Microsoft has deployments that mix C++, Rust, Python, C# and Go, all using different CBOR libraries.\n\nThere was extensive discussion in the Architecture of whether to strip the Unprotected Header or not, mainly in https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/issues/321 and https://github.com/ietf-wg-scitt/draft-ietf-scitt-architecture/pull/349. Because this is mandated, Signed Statements re-serialised from Transparent Statements never have to encode maps, they only ever need to re-encode a CBOR array with four elements, 3 of which are bstr, and one which is the empty map.\n\nIt's also worth nothing that this only applied to the outer structure of the envelope, there is no benefit to the payload and to the protected header being canonically encoded.\n\nWhile it is true that it would be nicer to have absolute certainty about the serialisation of the outer envelope, there are a few things that weigh against mandating it:\n\n1. One has to be quite creative to find alternative encodings of that array in CBOR. It's not impossible, but it's also not massively likely to happen by accident (intuitively and in practice so far).\n2. There is a lot of non-canonically encoded CBOR out there, and preventing it from ever becoming transparent is a serious restriction.\n3. There is also not great support for CDE in existing libraries, so even for new statements, this would damage applicability.",
+          "createdAt": "2026-04-17T15:09:40Z",
+          "updatedAt": "2026-04-17T15:09:40Z"
+        },
+        {
+          "author": "CueCrux-Myles",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Fair points, all three. I was reasoning from the general case. The interop evidence across five languages settles it.\n\nThe applicability concern is the one I hadn't weighted properly. Blocking non-canonically encoded CBOR from ever becoming transparent is a real cost for a marginal safety gain. That changes the story.\n\nThe residual gap is discoverability. Someone arriving at the spec fresh, without the context of #321 and #349, reads \"hash this structure\" and has to work out for themselves whether canonical encoding matters here. A non-normative note would close that. \n\nSomething like \"the structures subject to hashing in this specification are sufficiently constrained that deterministic encoding is not required for interoperability.\" No new requirements, no applicability restrictions. Just the answer written down where an implementer would actually find it.",
+          "createdAt": "2026-04-18T19:10:26Z",
+          "updatedAt": "2026-04-18T19:10:26Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -11832,24 +11883,26 @@
       "id": "PR_kwDOLJjbks7Sq3SI",
       "title": "Add security note on unauthenticated profile dispatch signals (#134)",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/142",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CueCrux-Myles",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Add section on unauthenticated HTTP metadata usage and requirements. (fixes #134)",
       "createdAt": "2026-04-15T14:22:37Z",
-      "updatedAt": "2026-04-15T16:15:32Z",
+      "updatedAt": "2026-04-17T16:05:44Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "20cd621f84b71eec392224117fb7031dd1358e84",
       "headRepository": "CueCrux-Myles/draft-ietf-scitt-scrapi",
       "headRefName": "profile-dispatch-note-134",
       "headRefOid": "6922707a8aeecf1675bf8face29d147902a7febc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-04-17T16:05:44Z",
+      "mergedAt": "2026-04-17T16:05:44Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f"
+      },
       "comments": [],
       "reviews": [
         {
@@ -11904,6 +11957,78 @@
               "updatedAt": "2026-04-15T16:15:32Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks72IJzA",
+          "commit": {
+            "abbreviatedOid": "6922707"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-04-17T13:48:07Z",
+          "updatedAt": "2026-04-17T13:48:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks72IKPq",
+          "commit": {
+            "abbreviatedOid": "1747a45"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-17T13:48:22Z",
+          "updatedAt": "2026-04-17T13:48:23Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Thank you, the new text looks good me.",
+              "createdAt": "2026-04-17T13:48:22Z",
+              "updatedAt": "2026-04-17T13:48:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks72IYVZ",
+          "commit": {
+            "abbreviatedOid": "6922707"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "This works well with our current \"Cyber ecosystem identity scheme\" concept where every action is associated with an Entity ID, we call the a Cyber DNAID. \n\nNo objections.",
+          "createdAt": "2026-04-17T13:55:48Z",
+          "updatedAt": "2026-04-17T13:55:48Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks72IZaS",
+          "commit": {
+            "abbreviatedOid": "6922707"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-04-17T13:56:25Z",
+          "updatedAt": "2026-04-17T13:56:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks72L0Je",
+          "commit": {
+            "abbreviatedOid": "6922707"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I appreciate the clarifying edits and expansion. ",
+          "createdAt": "2026-04-17T16:03:32Z",
+          "updatedAt": "2026-04-17T16:03:32Z",
+          "comments": []
         }
       ]
     },
@@ -11912,7 +12037,7 @@
       "id": "PR_kwDOLJjbks7Sslta",
       "title": "Fix individual key endpoint to return single COSE Key instead of COSE Key Set",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/144",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "copilot-swe-agent",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -11922,17 +12047,19 @@
       "labels": [],
       "body": "Updates the `/.well-known/scitt-keys/{kid_value}` endpoint to return a single COSE Key instead of a COSE Key Set (array).\n\n## Changes Made\n\n- **Response example**: Removed the array wrapper from the response example in the \"Individual Transparency Service Key\" section so it shows a single COSE Key map instead of a COSE Key Set array.\n- **Normative text**: Added explicit text stating the response is a single COSE Key, as defined in Section 7 of RFC 9052 (consistent with the key set endpoint which says \"COSE Key Set\").\n- **IANA section**: Added a Resource Definition subsection to the \"Well-Known URI for Key Discovery\" IANA section that formally describes both the `/.well-known/scitt-keys` resource (returns a COSE Key Set) and the `/.well-known/scitt-keys/{kid_value}` sub-resource (returns a single COSE Key), along with media type requirements and cross-references to the normative sections.",
       "createdAt": "2026-04-15T15:58:50Z",
-      "updatedAt": "2026-04-15T19:43:04Z",
+      "updatedAt": "2026-04-17T13:41:13Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
-      "baseRefOid": "20cd621f84b71eec392224117fb7031dd1358e84",
+      "baseRefOid": "d917079b2e8a26884c66ae4da1256431df621855",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "copilot/fix-issue-143",
-      "headRefOid": "cd04cf470456c78fa35e7b49a9cf84eee3d437fc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f8611d29b92214cdc98f7d973f9ba9fe5d40aae7",
+      "closedAt": "2026-04-17T13:41:13Z",
+      "mergedAt": "2026-04-17T13:41:12Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "cf7606a21a8ae8943d78ba2517fe49e471623516"
+      },
       "comments": [
         {
           "author": "achamayou",
