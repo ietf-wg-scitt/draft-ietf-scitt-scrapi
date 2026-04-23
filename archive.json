@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-19T01:18:32.283217+00:00",
+  "timestamp": "2026-04-23T01:20:06.193697+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1806,11 +1806,13 @@
       "state": "OPEN",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "henkbirkholz"
+      ],
       "labels": [],
       "body": "From Myles Bryning\u00a0on the mailing list:\n\n> Section 3.1 says a Transparency Service MAY stop returning keys it no longer uses, following \"a reasonable delay.\" For supply chain use cases, receipts might be verified weeks or months later. For AI audit trails under the EU AI Act or DORA, the verification window is measured in years. The current language defers entirely to the TS operator's judgement on what \"reasonable\" means.\n> \n> A SHOULD level recommendation for the TS to publish a minimum key retention period (via a discoverable metadata field or the TS's Registration Policy) would give relying parties something concrete to build against. Without it, an implementer building long-term audit infrastructure has no way to know whether the keys will still be there when an auditor needs them.",
       "createdAt": "2026-04-13T13:15:26Z",
-      "updatedAt": "2026-04-18T20:06:33Z",
+      "updatedAt": "2026-04-22T15:53:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -2068,11 +2070,13 @@
       "state": "OPEN",
       "author": "CueCrux-Myles",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "achamayou"
+      ],
       "labels": [],
       "body": "# Reference test vectors for verification\n\nThe draft specifies COSE_Sign1 envelopes, CBOR encoding, CWT claims, and inclusion proof verification. What it doesn't ship is a single test vector an implementer can validate against. There's precedent for this split (RFC 9052 spec vs RFC 9338 examples), but the gap is felt today.\n\nThe scitt-for-phi reference implementation has around a hundred lines of hand-rolled MMR tree maths. index_height, hash_pospair64, included_root, all derived from prose specification alone. Without known-good vectors, the only way to check whether you've got it right is to cross-test against a live Transparency Service. That means infrastructure, credentials, and a working registration pipeline just to find out if your tree maths is correct. The CCF path delegates to a library. The MMR path has nothing to test against.\n\nA minimum viable set would cover three cases: one complete Signed Statement COSE_Sign1 with issuer public key, one complete Receipt with inclusion proof and service public key, and one isolated inclusion proof vector with a known tree, known leaf, known proof path, and expected root hash. Negative vectors (tampered payload, wrong key, invalid proof) would sharpen things further but aren't essential.\n\nIf a full companion document isn't in scope for this draft cycle, there's a simpler step. The scitt-for-phi binary artefacts already exist. Annotating them with documented expected verification outcomes would give implementers something concrete to validate against. The artefacts are there. They just need a write-up.",
       "createdAt": "2026-04-15T21:26:44Z",
-      "updatedAt": "2026-04-18T19:45:12Z",
+      "updatedAt": "2026-04-22T15:53:22Z",
       "closedAt": null,
       "comments": [
         {
@@ -2088,6 +2092,13 @@
           "body": "Good to know the appetite is there. A companion document wasn't a hill I was planning to defend. Something that lives in a repo and can grow is better for this.\n\nThe Robin Bryce vectors are useful. I hadn't traced that back to a standalone set. That covers the MMR path specifically, which was the sharpest gap.\n\nFor the broader set, a repo of annotated artefacts that Microsoft and others can contribute to feels like the right shape. Signed Statements, Receipts, and inclusion proofs, with documented expected outcomes. Expandable, not frozen. scitt.io could work as a home if Steve is open to it being picked back up.\n\nOn the opportunity question. Happy to help put structure around this. I've been building verification tooling against the spec already, so I'm close to the pain. If there's a useful shape for me to contribute, I'm in.",
           "createdAt": "2026-04-18T19:45:12Z",
           "updatedAt": "2026-04-18T19:45:12Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@henkbirkholz has proposed creating an `examples` repo under https://github.com/ietf-wg-scitt/, similar to the one under cose-wg, which we can use to host the samples.",
+          "createdAt": "2026-04-22T15:36:15Z",
+          "updatedAt": "2026-04-22T15:38:12Z"
         }
       ]
     },
@@ -2099,11 +2110,13 @@
       "state": "OPEN",
       "author": "CueCrux-Myles",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "henkbirkholz"
+      ],
       "labels": [],
       "body": "SCRAPI relies on hashing for integrity. Payload hashes in protected headers, Merkle tree leaf hashes, inclusion proofs. But it doesn't mandate a canonical CBOR encoding form. RFC 8949 Section 4.2 defines Deterministically Encoded CBOR, and draft-ietf-cbor-cde is standardising a common deterministic encoding profile. SCRAPI references neither.\n\nThis works today because implementations tend to use a single CBOR library. Cross-implementation scenarios are fragile. scitt-for-phi's staple_receipt.py modifies the unprotected header and re-serialises via cbor2, then strip_uhdr.py strips and re-serialises for signature verification using hashlib.sha256(empty_uhdr_statement). If a different CBOR library encoded the same logical structure with different map ordering or integer width, the hash would differ and verification would fail silently. No error. Just a wrong answer.\n\nOne normative sentence would close this. Something like: \"Implementations MUST use Deterministically Encoded CBOR (RFC 8949 Section 4.2) when encoding any data structure that will be input to a hash function or included in a Sig_structure.\" That prevents the entire class of interop bug. COSE itself already recommends deterministic encoding in RFC 9052 Section 9.\n\nIf the WG prefers to wait for draft-ietf-cbor-cde to mature, a SHOULD referencing CDE would still be an improvement over silence.",
       "createdAt": "2026-04-15T22:08:44Z",
-      "updatedAt": "2026-04-18T19:10:26Z",
+      "updatedAt": "2026-04-22T15:53:49Z",
       "closedAt": null,
       "comments": [
         {
