@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-23T01:20:06.193697+00:00",
+  "timestamp": "2026-04-26T01:21:23.038489+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2067,7 +2067,7 @@
       "id": "I_kwDOLJjbks7-nnrU",
       "title": "Test vectors for Signed Statement and Receipt verification",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/145",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "CueCrux-Myles",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2076,8 +2076,8 @@
       "labels": [],
       "body": "# Reference test vectors for verification\n\nThe draft specifies COSE_Sign1 envelopes, CBOR encoding, CWT claims, and inclusion proof verification. What it doesn't ship is a single test vector an implementer can validate against. There's precedent for this split (RFC 9052 spec vs RFC 9338 examples), but the gap is felt today.\n\nThe scitt-for-phi reference implementation has around a hundred lines of hand-rolled MMR tree maths. index_height, hash_pospair64, included_root, all derived from prose specification alone. Without known-good vectors, the only way to check whether you've got it right is to cross-test against a live Transparency Service. That means infrastructure, credentials, and a working registration pipeline just to find out if your tree maths is correct. The CCF path delegates to a library. The MMR path has nothing to test against.\n\nA minimum viable set would cover three cases: one complete Signed Statement COSE_Sign1 with issuer public key, one complete Receipt with inclusion proof and service public key, and one isolated inclusion proof vector with a known tree, known leaf, known proof path, and expected root hash. Negative vectors (tampered payload, wrong key, invalid proof) would sharpen things further but aren't essential.\n\nIf a full companion document isn't in scope for this draft cycle, there's a simpler step. The scitt-for-phi binary artefacts already exist. Annotating them with documented expected verification outcomes would give implementers something concrete to validate against. The artefacts are there. They just need a write-up.",
       "createdAt": "2026-04-15T21:26:44Z",
-      "updatedAt": "2026-04-22T15:53:22Z",
-      "closedAt": null,
+      "updatedAt": "2026-04-24T15:43:49Z",
+      "closedAt": "2026-04-24T15:43:49Z",
       "comments": [
         {
           "author": "achamayou",
@@ -2099,6 +2099,20 @@
           "body": "@henkbirkholz has proposed creating an `examples` repo under https://github.com/ietf-wg-scitt/, similar to the one under cose-wg, which we can use to host the samples.",
           "createdAt": "2026-04-22T15:36:15Z",
           "updatedAt": "2026-04-22T15:38:12Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you @JAG-UK for setting up https://github.com/ietf-wg-scitt/examples. @CueCrux-Myles let's PR sample statements and receipts.",
+          "createdAt": "2026-04-24T14:06:20Z",
+          "updatedAt": "2026-04-24T14:06:20Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@CueCrux-Myles please review https://github.com/ietf-wg-scitt/examples/pull/1.",
+          "createdAt": "2026-04-24T15:43:49Z",
+          "updatedAt": "2026-04-24T15:43:49Z"
         }
       ]
     },
@@ -2107,7 +2121,7 @@
       "id": "I_kwDOLJjbks7-oYQZ",
       "title": "Require deterministic CBOR encoding for structures subject to hashing",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/146",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "CueCrux-Myles",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2116,8 +2130,8 @@
       "labels": [],
       "body": "SCRAPI relies on hashing for integrity. Payload hashes in protected headers, Merkle tree leaf hashes, inclusion proofs. But it doesn't mandate a canonical CBOR encoding form. RFC 8949 Section 4.2 defines Deterministically Encoded CBOR, and draft-ietf-cbor-cde is standardising a common deterministic encoding profile. SCRAPI references neither.\n\nThis works today because implementations tend to use a single CBOR library. Cross-implementation scenarios are fragile. scitt-for-phi's staple_receipt.py modifies the unprotected header and re-serialises via cbor2, then strip_uhdr.py strips and re-serialises for signature verification using hashlib.sha256(empty_uhdr_statement). If a different CBOR library encoded the same logical structure with different map ordering or integer width, the hash would differ and verification would fail silently. No error. Just a wrong answer.\n\nOne normative sentence would close this. Something like: \"Implementations MUST use Deterministically Encoded CBOR (RFC 8949 Section 4.2) when encoding any data structure that will be input to a hash function or included in a Sig_structure.\" That prevents the entire class of interop bug. COSE itself already recommends deterministic encoding in RFC 9052 Section 9.\n\nIf the WG prefers to wait for draft-ietf-cbor-cde to mature, a SHOULD referencing CDE would still be an improvement over silence.",
       "createdAt": "2026-04-15T22:08:44Z",
-      "updatedAt": "2026-04-22T15:53:49Z",
-      "closedAt": null,
+      "updatedAt": "2026-04-24T15:43:15Z",
+      "closedAt": "2026-04-24T15:43:15Z",
       "comments": [
         {
           "author": "achamayou",
@@ -2132,6 +2146,27 @@
           "body": "Fair points, all three. I was reasoning from the general case. The interop evidence across five languages settles it.\n\nThe applicability concern is the one I hadn't weighted properly. Blocking non-canonically encoded CBOR from ever becoming transparent is a real cost for a marginal safety gain. That changes the story.\n\nThe residual gap is discoverability. Someone arriving at the spec fresh, without the context of #321 and #349, reads \"hash this structure\" and has to work out for themselves whether canonical encoding matters here. A non-normative note would close that. \n\nSomething like \"the structures subject to hashing in this specification are sufficiently constrained that deterministic encoding is not required for interoperability.\" No new requirements, no applicability restrictions. Just the answer written down where an implementer would actually find it.",
           "createdAt": "2026-04-18T19:10:26Z",
           "updatedAt": "2026-04-18T19:10:26Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Hi Myles,\n\nthis issues was escalated to me. Let me try to unpack the content and understand the issue, step-by-step.\n\n1. `SCRAPI relies on hashing for integrity. Payload hashes in protected headers, Merkle tree leaf hashes, inclusion proofs. But it doesn't mandate a canonical CBOR encoding form.`\nIt doesn\u2019t have to. Please mind that the payload acn be anything, the data items that registered and get receipts don\u2019t even have to be CBOR. Any CBOR-encoded data that is used as a data item here is treated like any other binary data, and we even have a preimage-content-type to indicate what kind of data. Data are never expected to be deterministically (canonically) encoded, we just use what we get.\n\n2. `RFC 8949 Section 4.2 defines Deterministically Encoded CBOR, and draft-ietf-cbor-cde is standardising a common deterministic encoding profile.\nSCRAPI references neither.`\nRight, and it shouldn't.\n\n3. `This works today because implementations tend to use a single CBOR library.`\nNo, that is not a factor.\n\n4. `Cross-implementation scenarios are fragile. scitt-for-phi's staple_receipt.py modifies the unprotected header and re-serialises via cbor2, then strip_uhdr.py strips and re-serialises for signature verification using hashlib.sha256(empty_uhdr_statement).`\nWhat is protected (signed/hashed) is what was the actual outcome of these operations; these are not second-guessed in any other place.\n\n5. `If a different CBOR library encoded the same logical structure with different map ordering or integer width, the hash would differ and verification would fail silently. No error. Just a wrong answer.`\nI am sorry, but I that is not how SCITT is supposed to work.\n\n6. `One normative sentence would close this. Something like: \"Implementations MUST use Deterministically Encoded CBOR (RFC 8949 Section 4.2) when encoding any data structure that will be input to a hash function or included in a Sig_structure.\u201d`\nIn the current RFC 9942-to-be, the building of the hash inputs is left to the algorithms of RFC 9162, which are supposed to be deterministic. The intent is that the actual data that are signed need to be preserved; you cannot throw them away and think you might be able to regenerate them from scratch later. It might have been a rather unique and antique cat video - how would you retrieve that again?\n\n7. `That prevents the entire class of interop bug. COSE itself already recommends deterministic encoding in RFC 9052 Section 9.`\nCOSE uses deterministic encoding (a subset of CDE) exactly for building the XXX_structure hashing/signing inputs out of the actual data items that are hashed/signed; these need to be preserved.\n\n8. `If the WG prefers to wait for draft-ietf-cbor-cde to mature, a SHOULD referencing CDE would still be an improvement over silence.`\nThis is more like a cross-wg thing. We are commenting on SCITT SCRAPI, while the CBOR WG currently.... struggles to complete the CDE I-D. I am very very sure that we do not want to enter that mess, rn. But I also think we really don't need to.\n\nWe can also involve @cabo, if we need more in-depth expertise on CBOR & COSE.",
+          "createdAt": "2026-04-24T13:42:38Z",
+          "updatedAt": "2026-04-24T13:42:38Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">> That prevents the entire class of interop bug. COSE itself already recommends deterministic encoding in RFC 9052 Section 9.\n\n> COSE uses deterministic encoding (a subset of CDE) exactly for building the XXX_structure hashing/signing inputs out of the actual data items that are hashed/signed; these need to be preserved.\n\nThat's the most important point, and specifically the fact that the [Sig_structure MUST be encoded with minimal length](https://www.rfc-editor.org/rfc/rfc9052.html#section-9-2.2), because the only re-encoding Relying Parties ever need to do is the `Sig_structure` containing `bstr` (wrapped phdr), `nil` ([empty uhdr](https://ietf-wg-scitt.github.io/draft-ietf-scitt-architecture/draft-ietf-scitt-architecture.html#section-6.3)), `bstr` (wrapped payload). There is no need to re-encode the components themselves, and so whether they have been encoded canonically is immaterial for verification.",
+          "createdAt": "2026-04-24T14:04:04Z",
+          "updatedAt": "2026-04-24T14:04:04Z"
+        },
+        {
+          "author": "CueCrux-Myles",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Henk, thanks for taking the time to walk through this end to end.\n\nYou've answered the question I was actually circling. The mental model I was working from treated the SCRAPI structures as things being re-derived from underlying data, which is where the canonical-encoding worry comes from. That isn't what's happening. The signed bytes are the signed bytes. They're preserved, not regenerated from a logical structure on each verification. Once I hold that picture, the canonical CBOR concern dissolves, because the only re-encoding anyone ever does is the Sig_structure, and COSE has already put the minimal-length requirement exactly there.\n\nThe antique cat video made the point concrete. The statement is the artefact. You can't re-derive it.\n\nGiven that, I don't think the non-normative note is worth adding either. The reason an implementer might reach for it is the same misread I made, and the fix for that is better architecture framing, not a paragraph in SCRAPI. \n\nHappy for this to be closed.\n\nThanks again, both of you, for your patience.",
+          "createdAt": "2026-04-24T15:21:59Z",
+          "updatedAt": "2026-04-24T15:21:59Z"
         }
       ]
     }
