@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-26T01:21:23.038489+00:00",
+  "timestamp": "2026-04-28T01:29:12.935008+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1812,7 +1812,7 @@
       "labels": [],
       "body": "From Myles Bryning\u00a0on the mailing list:\n\n> Section 3.1 says a Transparency Service MAY stop returning keys it no longer uses, following \"a reasonable delay.\" For supply chain use cases, receipts might be verified weeks or months later. For AI audit trails under the EU AI Act or DORA, the verification window is measured in years. The current language defers entirely to the TS operator's judgement on what \"reasonable\" means.\n> \n> A SHOULD level recommendation for the TS to publish a minimum key retention period (via a discoverable metadata field or the TS's Registration Policy) would give relying parties something concrete to build against. Without it, an implementer building long-term audit infrastructure has no way to know whether the keys will still be there when an auditor needs them.",
       "createdAt": "2026-04-13T13:15:26Z",
-      "updatedAt": "2026-04-22T15:53:02Z",
+      "updatedAt": "2026-04-27T16:25:35Z",
       "closedAt": null,
       "comments": [
         {
@@ -1884,6 +1884,13 @@
           "body": "This works for me. I would also add this Expires feature, with retention details, into Registration Policies so that a party will know, up front, that a TS implements Expiration support in their implementation.",
           "createdAt": "2026-04-18T20:06:33Z",
           "updatedAt": "2026-04-18T20:06:33Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@CueCrux-Myles Sounds good to me, can you open a PR to add language saying that implementations of the TS MAY use the Expire header to communicate to clients how long they can cache keys, with a reference to the section in RFC9111 that covers that header?",
+          "createdAt": "2026-04-27T16:25:35Z",
+          "updatedAt": "2026-04-27T16:25:35Z"
         }
       ]
     },
