@@ -102,6 +102,7 @@ normative:
   RFC8615:
   RFC9052:
   RFC9110:
+  RFC9111:
   RFC9290:
   RFC7515:
   RFC4648:
@@ -243,6 +244,14 @@ Body (in CBOR diagnostic notation)
 The Transparency Service MAY stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
 Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4), retired keys SHOULD remain available for as long as any Receipts signed with them may still need to be verified.
+
+A Transparency Service MAY include the `Expires` header field, as defined in {{Section 5.3 of RFC9111}}, in responses returned by this resource and by the Individual Transparency Service Key resource ({{sec-individual-transparency-service-key}}) to indicate how long clients may cache the returned keys.
+A Transparency Service MAY use the `Cache-Control` header field with the `max-age` directive, as defined in {{Section 5.2.2.1 of RFC9111}}, for the same purpose; when both are present, `Cache-Control: max-age` takes precedence per {{Section 4.2.1 of RFC9111}}.
+In the absence of either header, clients SHOULD NOT cache the returned keys beyond the immediate verification operation.
+
+The presence of these headers does not constitute a guarantee of key availability.
+A Transparency Service may still need to retire a key before any indicated cache lifetime has elapsed, for example in response to suspected compromise or cryptographic algorithm deprecation.
+In such cases, a relying party that holds a Receipt signed with a retired key can request a fresh Receipt for the same Signed Statement at the same position in the Verifiable Data Structure, signed with a current key.
 
 ## Individual Transparency Service Key
 
