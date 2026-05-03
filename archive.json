@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-28T01:29:12.935008+00:00",
+  "timestamp": "2026-05-03T01:27:51.804724+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1812,7 +1812,7 @@
       "labels": [],
       "body": "From Myles Bryning\u00a0on the mailing list:\n\n> Section 3.1 says a Transparency Service MAY stop returning keys it no longer uses, following \"a reasonable delay.\" For supply chain use cases, receipts might be verified weeks or months later. For AI audit trails under the EU AI Act or DORA, the verification window is measured in years. The current language defers entirely to the TS operator's judgement on what \"reasonable\" means.\n> \n> A SHOULD level recommendation for the TS to publish a minimum key retention period (via a discoverable metadata field or the TS's Registration Policy) would give relying parties something concrete to build against. Without it, an implementer building long-term audit infrastructure has no way to know whether the keys will still be there when an auditor needs them.",
       "createdAt": "2026-04-13T13:15:26Z",
-      "updatedAt": "2026-04-27T16:25:35Z",
+      "updatedAt": "2026-04-30T12:32:44Z",
       "closedAt": null,
       "comments": [
         {
@@ -1891,6 +1891,13 @@
           "body": "@CueCrux-Myles Sounds good to me, can you open a PR to add language saying that implementations of the TS MAY use the Expire header to communicate to clients how long they can cache keys, with a reference to the section in RFC9111 that covers that header?",
           "createdAt": "2026-04-27T16:25:35Z",
           "updatedAt": "2026-04-27T16:25:35Z"
+        },
+        {
+          "author": "CueCrux-Myles",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@achamayou PR added as requested: https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/147 ",
+          "createdAt": "2026-04-30T12:32:43Z",
+          "updatedAt": "2026-04-30T12:32:43Z"
         }
       ]
     },
@@ -2083,7 +2090,7 @@
       "labels": [],
       "body": "# Reference test vectors for verification\n\nThe draft specifies COSE_Sign1 envelopes, CBOR encoding, CWT claims, and inclusion proof verification. What it doesn't ship is a single test vector an implementer can validate against. There's precedent for this split (RFC 9052 spec vs RFC 9338 examples), but the gap is felt today.\n\nThe scitt-for-phi reference implementation has around a hundred lines of hand-rolled MMR tree maths. index_height, hash_pospair64, included_root, all derived from prose specification alone. Without known-good vectors, the only way to check whether you've got it right is to cross-test against a live Transparency Service. That means infrastructure, credentials, and a working registration pipeline just to find out if your tree maths is correct. The CCF path delegates to a library. The MMR path has nothing to test against.\n\nA minimum viable set would cover three cases: one complete Signed Statement COSE_Sign1 with issuer public key, one complete Receipt with inclusion proof and service public key, and one isolated inclusion proof vector with a known tree, known leaf, known proof path, and expected root hash. Negative vectors (tampered payload, wrong key, invalid proof) would sharpen things further but aren't essential.\n\nIf a full companion document isn't in scope for this draft cycle, there's a simpler step. The scitt-for-phi binary artefacts already exist. Annotating them with documented expected verification outcomes would give implementers something concrete to validate against. The artefacts are there. They just need a write-up.",
       "createdAt": "2026-04-15T21:26:44Z",
-      "updatedAt": "2026-04-24T15:43:49Z",
+      "updatedAt": "2026-05-01T09:22:29Z",
       "closedAt": "2026-04-24T15:43:49Z",
       "comments": [
         {
@@ -2120,6 +2127,20 @@
           "body": "@CueCrux-Myles please review https://github.com/ietf-wg-scitt/examples/pull/1.",
           "createdAt": "2026-04-24T15:43:49Z",
           "updatedAt": "2026-04-24T15:43:49Z"
+        },
+        {
+          "author": "CueCrux-Myles",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Following up on this and ietf-wg-scitt/examples#2. The examples repo currently has one issuer and ledger pair, one payload shape, an in-toto model manifest. Worth broadening the surface. I'd like to propose a second example from our own work on AI retrieval provenance.\n\nThe use case is the one from #132. A Signed Statement attesting to an AI retrieval decision, made transparent in a non-DataTrails ledger, produced by a non-Microsoft issuer. Distinct CWT subject. Distinct payload shape, an AI decision attestation rather than a software supply chain manifest. Different DID method on the issuer side. The motivation is the long-tail audit case under EU AI Act Article 13 that the #132 thread converged on, where the verifier needs to replay both the original TS attestation and the downstream actor's claim it was relied upon.\n\nTwo questions before I produce artefacts.\n\nIs the examples repo the right home for non-vendor examples, or would the WG prefer a separate companion repo? \n\nAnything specific you'd want the example to demonstrate? Detached vs hash-envelope payloads, multi-receipt embedding, a key-rotation trace per #132 and ietf-wg-scitt/draft-ietf-scitt-scrapi#147?\n\nHappy to scope to whatever's most useful.",
+          "createdAt": "2026-04-30T13:33:58Z",
+          "updatedAt": "2026-04-30T13:33:58Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@CueCrux-Myles I don't think it matters if the examples from a vendor or not, it is preferable for discoverability that they are all in the same place.\n\nA way to start may be to take the existing signed statement that's there and to add a receipt produced by your implementation?",
+          "createdAt": "2026-05-01T09:22:29Z",
+          "updatedAt": "2026-05-01T09:22:29Z"
         }
       ]
     },
@@ -12157,6 +12178,133 @@
           "createdAt": "2026-04-15T19:43:04Z",
           "updatedAt": "2026-04-15T19:43:04Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 147,
+      "id": "PR_kwDOLJjbks7XGSi9",
+      "title": "Add cache-lifetime guidance for key discovery resources (#132)",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/147",
+      "state": "OPEN",
+      "author": "CueCrux-Myles",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## Summary\n\nResolves the discussion in #132 by adding MAY-level guidance permitting a Transparency Service to use existing HTTP cache-freshness headers on the key discovery resources, rather than introducing a new retention-period vocabulary.\n\n- Adds `RFC9111` as a normative reference.\n- Adds two paragraphs to \u00a7\"Transparency Service Keys\":\n  - **Caching mechanism** \u2014 TS MAY use `Expires` ([RFC 9111 \u00a75.3](https://www.rfc-editor.org/rfc/rfc9111#section-5.3)) or `Cache-Control: max-age` ([\u00a75.2.2.1](https://www.rfc-editor.org/rfc/rfc9111#section-5.2.2.1)) on responses from this resource and from the Individual Transparency Service Key resource. Notes the precedence rule from [\u00a74.2.1](https://www.rfc-editor.org/rfc/rfc9111#section-4.2.1) when both are present. Default-deny when neither is present.\n  - **No-guarantee clause** \u2014 explicitly states that the headers do not promise availability; a TS can still retire a key earlier in response to suspected compromise or algorithm deprecation, in which case a relying party can request a fresh Receipt at the same position in the VDS signed with a current key.\n\n## Rationale\n\nThis matches the convergence point in #132:\n\n- @achamayou: \"_it probably makes sense to leverage an existing mechanism like `Expires`, rather than come up with something new_\" and \"_can you open a PR to add language saying that implementations of the TS MAY use the Expire header to communicate to clients how long they can cache keys, with a reference to the section in RFC9111 that covers that header?_\"\n- @rjb4standards: supportive of surfacing a cache-lifetime signal to relying parties.\n\nThe MAY-level posture preserves the TS's freedom to rotate keys at any time (the core constraint @achamayou raised), while giving relying parties a deterministic signal when one is offered. `Cache-Control: max-age` is included alongside `Expires` because RFC 9111 itself prefers it and \u00a74.2.1 already defines the precedence rule \u2014 happy to drop it if the WG would rather match the issue ask verbatim.\n\n## Test plan\n\n- [ ] Render via `make` (kramdown-rfc) and visually check the new paragraphs in \u00a7\"Transparency Service Keys\"\n- [ ] Confirm RFC 9111 normative reference appears in the references section\n- [ ] Confirm the cross-reference `{{sec-individual-transparency-service-key}}` resolves correctly\n- [ ] WG review for wording, particularly the \"fresh Receipt at the same VDS position\" sentence (paraphrased from #132 discussion)\n\nCloses #132.",
+      "createdAt": "2026-04-30T12:27:18Z",
+      "updatedAt": "2026-05-01T13:28:46Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "headRepository": "CueCrux-Myles/draft-ietf-scitt-scrapi",
+      "headRefName": "expires-header-key-cache-132",
+      "headRefOid": "46cba373d9463d81ffe54de3b932dbf74029bfbb",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks76xADQ",
+          "commit": {
+            "abbreviatedOid": "46cba37"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-30T17:21:57Z",
+          "updatedAt": "2026-04-30T17:21:57Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "I am confused by this line, surely the clients can cache keys however long they would like, the expiry does not say \"you must scrub them after X\", if anything it's the opposite \"you will probably be able to get those from me _until_ X, but AFTER that, you may need to have kept your own copy, because I'll definitely be signing with other keys and I may not serve old keys anymore\".\n\nAm I missing something?",
+              "createdAt": "2026-04-30T17:21:57Z",
+              "updatedAt": "2026-04-30T17:21:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks762yY4",
+          "commit": {
+            "abbreviatedOid": "46cba37"
+          },
+          "author": "CueCrux-Myles",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-30T21:34:02Z",
+          "updatedAt": "2026-04-30T21:34:03Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "You're right, had it backwards. Cache headers are server freshness signals, not client retention policy. For SCITT the relying party with a long-lived Receipt wants to keep the key past any cache lifetime, because the TS may stop serving it.\r\n\r\nProposed replacement for that sentence:\r\n\r\n_The cache lifetime indicated by these headers is a freshness hint about server availability and does not constrain client retention. A relying party that holds a Receipt SHOULD retain the verification key for as long as it may need to verify that Receipt, independent of any cache lifetime indicated by the Transparency Service._\r\n\r\nSymmetric with the server-side guidance already above it. Retired keys SHOULD remain available for as long as Receipts signed with them may need verification, clients SHOULD keep them for the same reason. Will update the PR if that direction works.",
+              "createdAt": "2026-04-30T21:34:03Z",
+              "updatedAt": "2026-04-30T21:34:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks769u35",
+          "commit": {
+            "abbreviatedOid": "46cba37"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-01T07:56:09Z",
+          "updatedAt": "2026-05-01T07:56:10Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "New sentence sounds good to me, Expires here is about server availability, it's not about freshness in the traditional sense: the key itself can never change, the only reason to fetch it is if you don't have it. You can never have an old copy for a given kid.",
+              "createdAt": "2026-05-01T07:56:10Z",
+              "updatedAt": "2026-05-01T07:56:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks76-tOn",
+          "commit": {
+            "abbreviatedOid": "46cba37"
+          },
+          "author": "CueCrux-Myles",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-01T09:43:36Z",
+          "updatedAt": "2026-05-01T09:43:36Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Good point on freshness, the key for a given kid is immutable so there's nothing to be fresh about. Will drop \"freshness\" from the sentence and push the PR update. text:\r\n\r\n_The cache lifetime indicated by these headers is a hint about server availability and does not constrain client retention. A relying party that holds a Receipt SHOULD retain the verification key for as long as it may need to verify that Receipt, independent of any cache lifetime indicated by the Transparency Service._",
+              "createdAt": "2026-05-01T09:43:36Z",
+              "updatedAt": "2026-05-01T09:43:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks77A4J3",
+          "commit": {
+            "abbreviatedOid": "46cba37"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-01T13:28:46Z",
+          "updatedAt": "2026-05-01T13:28:46Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "That sounds good to me!",
+              "createdAt": "2026-05-01T13:28:46Z",
+              "updatedAt": "2026-05-01T13:28:46Z"
+            }
+          ]
         }
       ]
     }
