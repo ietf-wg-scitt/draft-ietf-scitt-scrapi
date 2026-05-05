@@ -833,7 +833,7 @@ The authoritative identification of the application profile is carried within th
 
 Aggressive client retry or polling behavior can significantly impact a Transparency Service, increasing load and, in extreme cases, amplifying transient failures into sustained outages.
 
-Clients SHOULD honor any `Retry-After` header field returned by the Transparency Service, treating it as a minimum interval before retrying.
+Clients SHOULD honor any `Retry-After` header field (defined in {Section 7.1.3 of RFC7231}) returned by the Transparency Service, treating it as a minimum interval before retrying.
 In its absence, clients SHOULD apply exponential backoff with jitter, cap the total number of retries, and avoid synchronizing retries across clients.
 
 ## Server-Side Retry Configuration
