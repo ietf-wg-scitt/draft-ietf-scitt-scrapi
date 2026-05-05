@@ -130,7 +130,7 @@ This document describes a REST API that supports the normative requirements of t
 
 --- middle
 
-# Introduction {#introduction}
+# Introduction
 
 The Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture {{-SCITT-ARCH}} defines the core objects, identifiers and workflows necessary to interact with a SCITT Transparency Service:
 
@@ -142,9 +142,9 @@ The Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture {{-SCIT
 SCITT Reference APIs (SCRAPI) defines HTTP resources for a Transparency Service using COSE ({{RFC9052}}).
 The following resources MUST be implemented for conformance to this specification:
 
-- Registration of Signed Statements ({{register-signed-statement}}, {{query-registration-status}})
-- Issuance and resolution of Receipts ({{resolve-receipt}})
-- Discovery of Transparency Service Keys ({{transparency-service-keys}}, {{individual-transparency-service-key}})
+- Registration of Signed Statements ({{sec-register-signed-statement}}, {{sec-query-registration-status}})
+- Issuance and resolution of Receipts ({{sec-resolve-receipt}})
+- Discovery of Transparency Service Keys ({{sec-transparency-service-keys}}, {{sec-individual-transparency-service-key}})
 
 ## Terminology
 
@@ -198,9 +198,9 @@ Clients SHOULD treat 500 and 503 HTTP status code responses as transient failure
 Note that in the case of any error response, the Transparency Service MAY include a `Retry-After` header field per {{RFC9110}} in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.
 
-The following subsections specify the HTTP resources required for conformance, as listed in {{introduction}}.
+The following subsections specify the HTTP resources required for conformance, as listed in {{sec-introduction}}.
 
-## Transparency Service Keys {#transparency-service-keys}
+## Transparency Service Keys
 
 This resource is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.
 
@@ -244,7 +244,7 @@ The Transparency Service MAY stop returning at that resource the keys it no long
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
 Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4), retired keys SHOULD remain available for as long as any Receipts signed with them may still need to be verified.
 
-## Individual Transparency Service Key {#individual-transparency-service-key}
+## Individual Transparency Service Key
 
 This resource is used to resolve a single public key, from a `kid` value contained in a Receipt previously issued by the Transparency Service.
 
@@ -305,7 +305,7 @@ encoding without padding.)"
 
 It is RECOMMENDED to use COSE Key Thumbprint, as defined in {{RFC9679}} as the mechanism to assign a `kid` to Transparency Service keys.
 
-## Register Signed Statement {#register-signed-statement}
+## Register Signed Statement
 
 This resource instructs a Transparency Service to register a Signed Statement on its log.
 Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator that can be used to check the registration's status asynchronously.
@@ -479,7 +479,7 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
-## Query Registration Status {#query-registration-status}
+## Query Registration Status
 
 This resource lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
 
@@ -673,7 +673,7 @@ Retry-After: <seconds>
 }
 ~~~
 
-## Resolve Receipt {#resolve-receipt}
+## Resolve Receipt
 
 Request:
 
