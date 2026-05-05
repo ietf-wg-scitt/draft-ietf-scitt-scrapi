@@ -829,50 +829,24 @@ The authoritative identification of the application profile is carried within th
 
 # Operational Considerations
 
-This section discusses operational considerations relating to client retry behavior and server-side rate limiting that are not strictly required for protocol interoperability, but that implementers and operators of Transparency Services and their clients ought to take into account.
-
 ## Client Retry Behavior
 
-As described in {{sec-resources}}, clients MAY retry requests after transient failures, and the Transparency Service MAY include a `Retry-After` header field per {{RFC9110}} to request a minimum time for the client to wait before retrying.
-Similarly, when polling the status of an in-progress registration (see {{sec-query-registration-status}}), clients MAY use the `Retry-After` header field included by the Transparency Service to determine how long to wait before issuing the next poll.
+Aggressive client retry or polling behavior can significantly impact a Transparency Service, increasing load and, in extreme cases, amplifying transient failures into sustained outages.
 
-Aggressive client retry or polling behavior can have significant operational impact on a Transparency Service, including increased load on the registration pipeline, increased load on storage and verification subsystems, and degraded service for other clients.
-In extreme cases, aggressive retries from a population of clients can amplify transient failures into sustained outages (for example, by preventing a service from recovering after a brief disruption).
+Clients SHOULD honor any `Retry-After` header field returned by the Transparency Service, treating it as a minimum interval before retrying.
+In its absence, clients SHOULD apply exponential backoff with jitter, cap the total number of retries, and avoid synchronizing retries across clients.
 
-To mitigate these impacts, clients SHOULD:
+## Server-Side Retry Configuration
 
-- Honor any `Retry-After` header field returned by the Transparency Service, and treat it as a minimum interval before issuing a subsequent request.
-- In the absence of a `Retry-After` header field, use a conservative default retry interval and apply exponential backoff with jitter for repeated failures, rather than retrying immediately or at a fixed short interval.
-- Limit the total number of retries for a given request, and surface persistent failures to the calling application rather than retrying indefinitely.
-- Avoid synchronizing retries across clients (for example, by adding randomized jitter), to reduce the risk of correlated load spikes.
-
-## Server-Side Retry and Polling Configuration
-
-Operators of Transparency Services SHOULD configure a minimum retry interval that is appropriate for the expected registration latency and the capacity of the service, and SHOULD communicate this interval to clients using the `Retry-After` header field on relevant responses (for example, 202, 429, 503, and other error responses where retrying may be appropriate).
-
-When choosing a minimum retry interval, operators ought to consider:
-
-- The typical and worst-case time required to complete a registration, so that clients are not encouraged to poll before a result can plausibly be available.
-- The aggregate request volume that the service can sustain, including bursts caused by many clients retrying simultaneously after a transient failure.
-- The behavior of intermediaries (for example, proxies, load balancers, and CDNs) that may amplify or coalesce retries.
-
-Operators SHOULD also document the retry and polling expectations for their service so that client implementers can configure appropriate defaults.
+Operators SHOULD configure a minimum retry interval appropriate for the expected registration latency and service capacity, and SHOULD communicate it to clients via the `Retry-After` header on relevant responses (e.g., 202, 429, 503).
+The interval should account for worst-case registration time, sustainable request volume, and intermediary behavior.
 
 ## Rate Limiting
 
-As noted in {{sec-authentication}}, if authentication is not implemented, rate limiting or other denial of service mitigations MUST be implemented; and as noted in {{sec-denial-of-service-attacks}}, implementers MUST follow general good practice for defending against network attacks, including rate limiting.
+As noted in {{sec-authentication}} and {{sec-denial-of-service-attacks}}, rate limiting or other denial of service mitigations are required.
+The specific per-client policy is implementation dependent and typically varies with whether and how clients are authenticated (e.g., per-identity for authenticated clients versus per source IP for unauthenticated clients), the cost of the operation, and the deployment environment.
 
-The specific policy for rate-limiting queries per client is implementation dependent.
-Such policies typically depend on factors such as:
-
-- Whether and how clients are authenticated.
-  Authenticated clients can be rate-limited per identity, while unauthenticated clients are typically rate-limited based on weaker signals such as source IP address or other request metadata.
-- The cost and criticality of different operations (for example, registration versus read-only queries).
-- The deployment environment, including expected client populations, network topology, and service capacity.
-
-When a client exceeds the configured rate limit, the Transparency Service SHOULD return a 429 response (see {{sec-status-429-too-many-requests}}) and SHOULD include a `Retry-After` header field indicating when the client may resume issuing requests.
-
-Operators SHOULD document any client-visible aspects of their rate-limiting policy (such as applicable limits, scopes, and the headers used to communicate them) so that client implementers can build clients that interoperate well with the service.
+When a client exceeds the configured rate limit, the Transparency Service SHOULD return a 429 response (see {{sec-status-429-too-many-requests}}) including a `Retry-After` header field.
 
 # IANA Considerations
 
