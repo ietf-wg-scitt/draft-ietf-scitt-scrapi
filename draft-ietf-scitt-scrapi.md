@@ -126,7 +126,7 @@ entity:
 
 --- abstract
 
-This document describes a REST API that supports the normative requirements of the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
+This document describes a REST API with the HTTP resources, request and response messages, and error handling needed for an interoperable implementation of a SCITT Transparency Service, as defined by the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
 
 --- middle
 
@@ -145,6 +145,27 @@ The following resources MUST be implemented for conformance to this specificatio
 - Registration of Signed Statements
 - Issuance and resolution of Receipts
 - Discovery of Transparency Service Keys
+
+## Scope and Relation to the SCITT Architecture {#sec-scope}
+
+The SCITT Architecture {{-SCITT-ARCH}} specifies the conceptual roles, message structures, and workflows of a Transparency Service, but does not define a concrete protocol by which clients interact with that service.
+This document specifies one such concrete protocol: an HTTP-based REST API that realizes those interactions in an interoperable way.
+References in this specification to "normative requirements of the SCITT Architecture" are to the requirements expressed using BCP 14 keywords {{RFC2119}} {{RFC8174}} in {{-SCITT-ARCH}} that pertain to the externally observable behavior of a Transparency Service, such as the registration of Signed Statements, the issuance and validation of Receipts, and the publication of the keys used to verify Receipts.
+
+In particular, this document defines HTTP resources that satisfy the requirements in the following sections of {{-SCITT-ARCH}}:
+
+- Registration of Signed Statements (Section 6.3 of {{-SCITT-ARCH}}), realized by the Signed Statement registration resources defined in {{sec-register-signed-statement}}, {{sec-query-registration-status}} and {{sec-resolve-receipt}}.
+- Issuance of Receipts and construction of Transparent Statements (Section 7 of {{-SCITT-ARCH}}), realized by the Receipt resolution resource defined in {{sec-resolve-receipt}}.
+- Discovery of the Transparency Service verification keys used by Verifiers to validate Receipts (Section 5.1.2 and Section 9.4 of {{-SCITT-ARCH}}), realized by the resource defined in {{sec-transparency-service-keys}}.
+
+The mandatory-to-implement resources listed above are sufficient for an interoperable Transparency Service.
+
+The following aspects of {{-SCITT-ARCH}} are intentionally out of scope for this document and are not covered by this API:
+
+- The internal structure and operation of the Transparency Service's Verifiable Data Structure (Section 5.1.3 of {{-SCITT-ARCH}}).
+- The contents and evaluation of Registration Policies (Section 5.1.1 of {{-SCITT-ARCH}}); this document only defines how the outcome of a policy decision is communicated to clients.
+- The format and semantics of Signed Statements, Receipts, and Transparent Statements themselves, which are defined in {{-SCITT-ARCH}} and the COSE specifications referenced therein.
+- Transports other than HTTP, and bindings of these resources to other application protocols.
 
 ## Terminology
 
