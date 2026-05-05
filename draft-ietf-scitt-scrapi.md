@@ -1,7 +1,7 @@
 ---
 v: 3
 
-title: SCITT Reference APIs
+title: Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs
 abbrev: SCRAPI
 docname: draft-ietf-scitt-scrapi-latest
 stand_alone: true
