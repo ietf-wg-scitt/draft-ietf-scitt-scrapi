@@ -1487,10 +1487,18 @@ encoding of the empty octet sequence is the empty string.
 encoding without padding.)"<a href="#section-2.2-13" class="pilcrow">¶</a></p>
 <p id="section-2.2-14">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.
 <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> provides a well-specified, canonical method to deterministically derive a unique <code>kid</code> value directly from the COSE Key itself.
-Using this mechanism offers several benefits to implementers:
-it ensures that the <code>kid</code> is uniquely and reproducibly bound to the key material,
-it removes the need for an out-of-band identifier assignment process,
-and it enables independent parties to compute and verify the same <code>kid</code> for a given key, which simplifies key discovery and reduces the risk of <code>kid</code> collisions across Transparency Services.<a href="#section-2.2-14" class="pilcrow">¶</a></p>
+Using this mechanism offers several benefits to implementers:<a href="#section-2.2-14" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.2-15.1">
+            <p id="section-2.2-15.1.1">it ensures that the <code>kid</code> is uniquely and reproducibly bound to the key material,<a href="#section-2.2-15.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.2-15.2">
+            <p id="section-2.2-15.2.1">it removes the need for an out-of-band identifier assignment process,<a href="#section-2.2-15.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.2-15.3">
+            <p id="section-2.2-15.3.1">it enables independent parties to compute and verify the same <code>kid</code> for a given key, which simplifies key discovery and reduces the risk of <code>kid</code> collisions across Transparency Services.<a href="#section-2.2-15.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 </section>
 </div>
 <div id="sec-register-signed-statement">
