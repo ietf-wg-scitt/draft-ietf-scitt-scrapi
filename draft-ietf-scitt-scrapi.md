@@ -306,9 +306,10 @@ encoding without padding.)"
 It is RECOMMENDED to use COSE Key Thumbprint, as defined in {{RFC9679}} as the mechanism to assign a `kid` to Transparency Service keys.
 {{RFC9679}} provides a well-specified, canonical method to deterministically derive a unique `kid` value directly from the COSE Key itself.
 Using this mechanism offers several benefits to implementers:
-it ensures that the `kid` is uniquely and reproducibly bound to the key material,
-it removes the need for an out-of-band identifier assignment process,
-and it enables independent parties to compute and verify the same `kid` for a given key, which simplifies key discovery and reduces the risk of `kid` collisions across Transparency Services.
+
+- it ensures that the `kid` is uniquely and reproducibly bound to the key material,
+- it removes the need for an out-of-band identifier assignment process,
+- it enables independent parties to compute and verify the same `kid` for a given key, which simplifies key discovery and reduces the risk of `kid` collisions across Transparency Services.
 
 ## Register Signed Statement
 
