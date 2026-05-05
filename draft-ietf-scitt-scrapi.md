@@ -106,11 +106,6 @@ normative:
   RFC7515:
   RFC4648:
   RFC9679:
-
-informative:
-  RFC8792:
-  RFC9921:
-  RFC3161:
   NIST.SP.800-57pt1r5:
     title: "Recommendation for Key Management: Part 1 - General"
     author:
@@ -120,6 +115,11 @@ informative:
     seriesinfo:
       NIST: Special Publication 800-57 Part 1 Revision 5
     target: https://doi.org/10.6028/NIST.SP.800-57pt1r5
+
+informative:
+  RFC8792:
+  RFC9921:
+  RFC3161:
 
 entity:
   SELF: "RFCthis"
@@ -242,7 +242,9 @@ Body (in CBOR diagnostic notation)
 
 The Transparency Service MAY stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
-Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4), retired keys SHOULD remain available for as long as any Receipts signed with them may still need to be verified.
+Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4, which distinguishes the originator-usage period during which a private key is used to apply cryptographic protection from the recipient-usage period during which the corresponding public key is used to verify that protection), retired signing keys SHOULD remain available for verification for as long as any Receipts signed with them may still need to be verified.
+Retaining retired keys has operational implications: the Transparency Service is responsible for storing those keys (and their associated metadata, such as `kid` values and validity periods) securely and continuously, and for serving them via the Individual Transparency Service Key resource (see {{sec-individual-transparency-service-key}}) for the entire retention period.
+If retired keys are not retained, Receipts issued under those keys can no longer be verified by relying parties using only the Transparency Service's published key material, which may break the verifiability of previously issued Receipts and disrupt downstream consumers that depend on long-term verification.
 
 ## Individual Transparency Service Key
 
