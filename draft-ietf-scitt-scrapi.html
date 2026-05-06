@@ -1308,13 +1308,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
 The following resources <span class="bcp14">MUST</span> be implemented for conformance to this specification:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-4.1">
-          <p id="section-1-4.1.1">Registration of Signed Statements<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.1.1">Registration of Signed Statements (<a href="#sec-register-signed-statement" class="auto internal xref">Section 2.3</a>, <a href="#sec-query-registration-status" class="auto internal xref">Section 2.4</a>)<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.2">
-          <p id="section-1-4.2.1">Issuance and resolution of Receipts<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.2.1">Issuance and resolution of Receipts (<a href="#sec-resolve-receipt" class="auto internal xref">Section 2.5</a>)<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.3">
-          <p id="section-1-4.3.1">Discovery of Transparency Service Keys<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.3.1">Discovery of Transparency Service Keys (<a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a>, <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>)<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="sec-terminology">
@@ -1383,7 +1383,7 @@ The one exception is the "malformed" error type, which indicates that the Transp
 <p id="section-2-11">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-11" class="pilcrow">¶</a></p>
 <p id="section-2-12">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.<a href="#section-2-12" class="pilcrow">¶</a></p>
-<p id="section-2-13">The following HTTP resources <span class="bcp14">MUST</span> be implemented to enable conformance to this specification.<a href="#section-2-13" class="pilcrow">¶</a></p>
+<p id="section-2-13">The following subsections specify the HTTP resources required for conformance, as listed in <a href="#sec-introduction" class="auto internal xref">Section 1</a>.<a href="#section-2-13" class="pilcrow">¶</a></p>
 <div id="sec-transparency-service-keys">
 <section id="section-2.1">
         <h3 id="name-transparency-service-keys">

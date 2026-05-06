@@ -123,11 +123,11 @@ Table of Contents
    Transparency Service using COSE ([RFC9052]).  The following resources
    MUST be implemented for conformance to this specification:
 
-   *  Registration of Signed Statements
+   *  Registration of Signed Statements (Section 2.3, Section 2.4)
 
-   *  Issuance and resolution of Receipts
+   *  Issuance and resolution of Receipts (Section 2.5)
 
-   *  Discovery of Transparency Service Keys
+   *  Discovery of Transparency Service Keys (Section 2.1, Section 2.2)
 
 1.1.  Terminology
 
@@ -205,8 +205,8 @@ Table of Contents
    request.  In the absence of this header field, this document does not
    specify a minimum.
 
-   The following HTTP resources MUST be implemented to enable
-   conformance to this specification.
+   The following subsections specify the HTTP resources required for
+   conformance, as listed in Section 1.
 
 2.1.  Transparency Service Keys
 
