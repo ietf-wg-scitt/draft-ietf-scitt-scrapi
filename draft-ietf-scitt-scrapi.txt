@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 19 October 2026                        Bowball Technologies Ltd
+Expires: 7 November 2026                        Bowball Technologies Ltd
                                                       A. Delignat-Lavaud
                                                       Microsoft Research
-                                                           17 April 2026
+                                                              6 May 2026
 
 
                           SCITT Reference APIs
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 October 2026.
+   This Internet-Draft will expire on 7 November 2026.
 
 Copyright Notice
 
@@ -517,7 +517,7 @@ Table of Contents
 
 2.4.1.  Status 302 - Registration is running
 
-   Registration requests MAY fail, in which case the Location MAY return
+   Registration requests may fail, in which case the Location MAY return
    an error when queried.
 
    If the client requests (GET) the location when the registration is
