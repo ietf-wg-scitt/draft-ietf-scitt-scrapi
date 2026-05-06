@@ -1442,7 +1442,9 @@ Body (in CBOR diagnostic notation)
 </div>
 <p id="section-2.1-7">The Transparency Service <span class="bcp14">MAY</span> stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
-Consistent with key management best practices described in <span>[<a href="#NIST.SP.800-57pt1r5" class="cite xref">NIST.SP.800-57pt1r5</a>]</span> (Section 5.3.4), retired keys <span class="bcp14">SHOULD</span> remain available for as long as any Receipts signed with them may still need to be verified.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
+Consistent with key management best practices described in <span>[<a href="#NIST.SP.800-57pt1r5" class="cite xref">NIST.SP.800-57pt1r5</a>]</span> (Section 5.3.4, which distinguishes the originator-usage period during which a private key is used to apply cryptographic protection from the recipient-usage period during which the corresponding public key is used to verify that protection), retired public keys used for signing <span class="bcp14">SHOULD</span> remain available for verification for as long as any Receipts signed with them may still need to be verified.
+Retaining retired keys has operational implications: the Transparency Service is responsible for storing those keys (and their associated metadata, such as <code>kid</code> values and validity periods) securely and continuously, and for serving them via the Individual Transparency Service Key resource (see <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>) for the entire retention period.
+If retired public keys are not retained, Receipts issued under those keys can no longer be verified by relying parties using only the Transparency Service's published key material, which may break the verifiability of previously issued Receipts and disrupt downstream consumers that depend on long-term verification.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-individual-transparency-service-key">
@@ -2238,6 +2240,10 @@ Related information: <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-22</span>, <time datetime="2025-10-10" class="refDate">10 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-22">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-22</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="NIST.SP.800-57pt1r5">[NIST.SP.800-57pt1r5]</dt>
+        <dd>
+<span class="refAuthor">Barker, E.</span>, <span class="refTitle">"Recommendation for Key Management: Part 1 - General"</span>, <span class="seriesInfo">NIST Special Publication 800-57 Part 1 Revision 5</span>, <time datetime="2020-05" class="refDate">May 2020</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">https://doi.org/10.6028/NIST.SP.800-57pt1r5</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -2287,10 +2293,6 @@ Related information: <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="NIST.SP.800-57pt1r5">[NIST.SP.800-57pt1r5]</dt>
-        <dd>
-<span class="refAuthor">Barker, E.</span>, <span class="refTitle">"Recommendation for Key Management: Part 1 - General"</span>, <span class="seriesInfo">NIST Special Publication 800-57 Part 1 Revision 5</span>, <time datetime="2020-05" class="refDate">May 2020</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">https://doi.org/10.6028/NIST.SP.800-57pt1r5</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC3161">[RFC3161]</dt>
         <dd>
 <span class="refAuthor">Adams, C.</span>, <span class="refAuthor">Cain, P.</span>, <span class="refAuthor">Pinkas, D.</span>, and <span class="refAuthor">R. Zuccherato</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)"</span>, <span class="seriesInfo">RFC 3161</span>, <span class="seriesInfo">DOI 10.17487/RFC3161</span>, <time datetime="2001-08" class="refDate">August 2001</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3161">https://www.rfc-editor.org/rfc/rfc3161</a>&gt;</span>. </dd>

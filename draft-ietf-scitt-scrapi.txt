@@ -271,9 +271,23 @@ Table of Contents
    delay is considered reasonable if it is sufficient for relying
    parties to have obtained the key needed to verify any previously
    issued Receipt.  Consistent with key management best practices
-   described in [NIST.SP.800-57pt1r5] (Section 5.3.4), retired keys
-   SHOULD remain available for as long as any Receipts signed with them
-   may still need to be verified.
+   described in [NIST.SP.800-57pt1r5] (Section 5.3.4, which
+   distinguishes the originator-usage period during which a private key
+   is used to apply cryptographic protection from the recipient-usage
+   period during which the corresponding public key is used to verify
+   that protection), retired public keys used for signing SHOULD remain
+   available for verification for as long as any Receipts signed with
+   them may still need to be verified.  Retaining retired keys has
+   operational implications: the Transparency Service is responsible for
+   storing those keys (and their associated metadata, such as kid values
+   and validity periods) securely and continuously, and for serving them
+   via the Individual Transparency Service Key resource (see
+   Section 2.2) for the entire retention period.  If retired public keys
+   are not retained, Receipts issued under those keys can no longer be
+   verified by relying parties using only the Transparency Service's
+   published key material, which may break the verifiability of
+   previously issued Receipts and disrupt downstream consumers that
+   depend on long-term verification.
 
 2.2.  Individual Transparency Service Key
 
@@ -997,6 +1011,12 @@ Table of Contents
               October 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-scitt-architecture-22>.
 
+   [NIST.SP.800-57pt1r5]
+              Barker, E., "Recommendation for Key Management: Part 1 -
+              General", NIST Special Publication 800-57 Part 1 Revision
+              5, May 2020,
+              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -1043,12 +1063,6 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc9679>.
 
 7.2.  Informative References
-
-   [NIST.SP.800-57pt1r5]
-              Barker, E., "Recommendation for Key Management: Part 1 -
-              General", NIST Special Publication 800-57 Part 1 Revision
-              5, May 2020,
-              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
 
    [RFC3161]  Adams, C., Cain, P., Pinkas, D., and R. Zuccherato,
               "Internet X.509 Public Key Infrastructure Time-Stamp
