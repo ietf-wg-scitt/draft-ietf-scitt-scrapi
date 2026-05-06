@@ -499,7 +499,7 @@ One of the following:
 
 ### Status 302 - Registration is running
 
-Registration requests MAY fail, in which case the Location MAY return an error when queried.
+Registration requests may fail, in which case the Location MAY return an error when queried.
 
 If the client requests (GET) the location when the registration is still in progress, the TS MAY return a 302 Found, as in this non-normative example:
 
