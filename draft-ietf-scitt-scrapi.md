@@ -122,9 +122,6 @@ normative:
       NIST: Special Publication 800-57 Part 1 Revision 5
     target: https://doi.org/10.6028/NIST.SP.800-57pt1r5
 
-informative:
-  RFC8792:
-
 entity:
   SELF: "RFCthis"
 
