@@ -9,7 +9,7 @@
 <meta content="Jon Geater" name="author">
 <meta content="Antoine Delignat-Lavaud" name="author">
 <meta content="
-       This document describes a REST API that supports the normative requirements of the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture. 
+       This document describes a REST API with the HTTP resources, request and response messages, and error handling needed for an interoperable implementation of a SCITT Transparency Service, as defined by the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture. 
     " name="description">
 <meta content="xml2rfc 3.33.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1090,7 +1090,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document describes a REST API that supports the normative requirements of the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document describes a REST API with the HTTP resources, request and response messages, and error handling needed for an interoperable implementation of a SCITT Transparency Service, as defined by the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1159,7 +1159,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-scope-and-relation-to-the-s" class="internal xref">Scope and Relation to the SCITT Architecture</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
             </ul>
 </li>
@@ -1167,7 +1170,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-resources" class="internal xref">Resources</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-transparency-service-keys" class="internal xref">Transparency Service Keys</a></p>
+                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-transparency-service-keys" class="internal xref">Transparency Service Keys</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
                 <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-individual-transparency-ser" class="internal xref">Individual Transparency Service Key</a></p>
@@ -1328,17 +1331,55 @@ The following resources <span class="bcp14">MUST</span> be implemented for confo
           <p id="section-1-4.3.1">Discovery of Transparency Service Keys (<a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a>, <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>)<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<div id="sec-terminology">
+<div id="sec-scope">
 <section id="section-1.1">
-        <h3 id="name-terminology">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+        <h3 id="name-scope-and-relation-to-the-s">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-scope-and-relation-to-the-s" class="section-name selfRef">Scope and Relation to the SCITT Architecture</a>
         </h3>
-<p id="section-1.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-1.1-1">The SCITT Architecture <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> specifies the conceptual roles, message structures, and workflows of a Transparency Service, but does not define a concrete protocol by which clients interact with that service.
+This document specifies one such concrete protocol: an HTTP-based REST API that realizes those interactions in an interoperable way.
+References in this specification to "normative requirements of the SCITT Architecture" are to the requirements expressed using BCP 14 keywords <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> that pertain to the externally observable behavior of a Transparency Service, such as the registration of Signed Statements, the issuance and validation of Receipts, and the publication of the keys used to verify Receipts.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">In particular, this document defines HTTP resources that satisfy the requirements in the following sections of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>:<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.1-3.1">
+            <p id="section-1.1-3.1.1">Registration of Signed Statements (Section 6.3 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>), realized by the Signed Statement registration resources defined in <a href="#sec-register-signed-statement" class="auto internal xref">Section 2.3</a>, <a href="#sec-query-registration-status" class="auto internal xref">Section 2.4</a> and <a href="#sec-resolve-receipt" class="auto internal xref">Section 2.5</a>.<a href="#section-1.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-3.2">
+            <p id="section-1.1-3.2.1">Issuance of Receipts and construction of Transparent Statements (Section 7 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>), realized by the Receipt resolution resource defined in <a href="#sec-resolve-receipt" class="auto internal xref">Section 2.5</a>.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-3.3">
+            <p id="section-1.1-3.3.1">Discovery of the Transparency Service verification keys used by Verifiers to validate Receipts (Section 5.1.2 and Section 9.4 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>), realized by the resource defined in <a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a>.<a href="#section-1.1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-1.1-4">The mandatory-to-implement resources listed above are sufficient for an interoperable Transparency Service.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">The following aspects of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> are intentionally out of scope for this document and are not covered by this API:<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.1-6.1">
+            <p id="section-1.1-6.1.1">The internal structure and operation of the Transparency Service's Verifiable Data Structure (Section 5.1.3 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>).<a href="#section-1.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-6.2">
+            <p id="section-1.1-6.2.1">The contents and evaluation of Registration Policies (Section 5.1.1 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>); this document only defines how the outcome of a policy decision is communicated to clients.<a href="#section-1.1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-6.3">
+            <p id="section-1.1-6.3.1">The format and semantics of Signed Statements, Receipts, and Transparent Statements themselves, which are defined in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> and the COSE specifications referenced therein.<a href="#section-1.1-6.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-6.4">
+            <p id="section-1.1-6.4.1">Transports other than HTTP, and bindings of these resources to other application protocols.<a href="#section-1.1-6.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="sec-terminology">
+<section id="section-1.2">
+        <h3 id="name-terminology">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+        </h3>
+<p id="section-1.2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service" and "Registration Policy" as defined in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3">This specification uses "payload" as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service" and "Registration Policy" as defined in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+<p id="section-1.2-3">This specification uses "payload" as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-1.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
