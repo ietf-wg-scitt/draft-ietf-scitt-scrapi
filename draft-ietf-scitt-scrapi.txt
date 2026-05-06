@@ -11,7 +11,7 @@ Expires: 7 November 2026                        Bowball Technologies Ltd
                                                               6 May 2026
 
 
-                          SCITT Reference APIs
+ Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs
                      draft-ietf-scitt-scrapi-latest
 
 Abstract
