@@ -833,6 +833,27 @@ Implementations that use such signals for early dispatch MUST ensure that any pr
 
 The authoritative identification of the application profile is carried within the protected header or payload of the Signed Statement, and MUST be verified after signature authentication.
 
+# Operational Considerations
+
+## Client Retry Behavior
+
+Aggressive client retry or polling behavior can significantly impact a Transparency Service, increasing load and, in extreme cases, amplifying transient failures into sustained outages.
+
+Clients SHOULD honor any `Retry-After` header field (defined in {Section 7.1.3 of RFC7231}) returned by the Transparency Service, treating it as a minimum interval before retrying.
+In its absence, clients SHOULD apply exponential backoff with jitter, cap the total number of retries, and avoid synchronizing retries across clients.
+
+## Server-Side Retry Configuration
+
+Operators SHOULD configure a minimum retry interval appropriate for the expected registration latency and service capacity, and SHOULD communicate it to clients via the `Retry-After` header on relevant responses (e.g., 202, 429, 503).
+The interval should account for worst-case registration time, sustainable request volume, and intermediary behavior.
+
+## Rate Limiting
+
+As noted in {{sec-authentication}} and {{sec-denial-of-service-attacks}}, rate limiting or other denial of service mitigations are required.
+The specific per-client policy is implementation dependent and typically varies with whether and how clients are authenticated (e.g., per-identity for authenticated clients versus per source IP for unauthenticated clients), the cost of the operation, and the deployment environment.
+
+When a client exceeds the configured rate limit, the Transparency Service SHOULD return a 429 response (see {{sec-status-429-too-many-requests}}) including a `Retry-After` header field.
+
 # IANA Considerations
 
 ## Well-Known URI for Key Discovery
