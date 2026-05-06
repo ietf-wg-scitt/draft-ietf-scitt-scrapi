@@ -142,9 +142,9 @@ The Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture {{-SCIT
 SCITT Reference APIs (SCRAPI) defines HTTP resources for a Transparency Service using COSE ({{RFC9052}}).
 The following resources MUST be implemented for conformance to this specification:
 
-- Registration of Signed Statements
-- Issuance and resolution of Receipts
-- Discovery of Transparency Service Keys
+- Registration of Signed Statements ({{sec-register-signed-statement}}, {{sec-query-registration-status}})
+- Issuance and resolution of Receipts ({{sec-resolve-receipt}})
+- Discovery of Transparency Service Keys ({{sec-transparency-service-keys}}, {{sec-individual-transparency-service-key}})
 
 ## Terminology
 
@@ -198,7 +198,7 @@ Clients SHOULD treat 500 and 503 HTTP status code responses as transient failure
 Note that in the case of any error response, the Transparency Service MAY include a `Retry-After` header field per {{RFC9110}} in order to request a minimum time for the client to wait before retrying the request.
 In the absence of this header field, this document does not specify a minimum.
 
-The following HTTP resources MUST be implemented to enable conformance to this specification.
+The following subsections specify the HTTP resources required for conformance, as listed in {{sec-introduction}}.
 
 ## Transparency Service Keys
 
