@@ -124,8 +124,6 @@ normative:
 
 informative:
   RFC8792:
-  RFC9921:
-  RFC3161:
 
 entity:
   SELF: "RFCthis"
