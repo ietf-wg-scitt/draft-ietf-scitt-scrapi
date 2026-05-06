@@ -850,8 +850,8 @@ Once a statement is made, it is intended to be immutable and non-repudiable, so 
 There could be issues at the payload level (for instance, the statement "it is raining" may be true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.
 
 If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps MUST be added to the protected header signed by the Issuer.
-The `iat` claim in a `CWT_Claims` header parameter ({{RFC9597}}) MUST be used when the Issuer provides the timestamp directly.
-Where a timestamp from a third party is required, the COSE header parameters defined in {{RFC9921}} for including {{RFC3161}} timestamp tokens MUST be used.
+The `iat` claim in a `CWT_Claims` header parameter ({{RFC9597}}) MUST be used when the Issuer provides the timestamp themselves.
+The COSE header parameters defined in {{RFC9921}} for including {{RFC3161}} timestamp tokens SHOULD be used, where a timestamp from a third party is required.
 Other mechanisms for including timestamps in the protected header MAY also be used.
 
 #### Message Deletion Attacks
