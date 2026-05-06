@@ -1478,7 +1478,9 @@ Body (in CBOR diagnostic notation)
 }
 </pre><a href="#section-2.2-6" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2-7">When the corresponding condition is encountered, the Transparency Service <span class="bcp14">SHOULD</span> respond with a 4xx-class status code (typically 404 Not Found) and a Concise Problem Details <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object as in the following example:<a href="#section-2.2-7" class="pilcrow">¶</a></p>
+<p id="section-2.2-7">The following expected error is defined for the condition described below.
+When this condition is encountered, an implementation <span class="bcp14">MUST</span> return an error response that is a valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object.
+Implementations <span class="bcp14">SHOULD</span> use the error defined below, but <span class="bcp14">MAY</span> return another valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> error instead:<a href="#section-2.2-7" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.2-8">
 <pre>
 HTTP/1.1 404 Not Found
@@ -1490,29 +1492,28 @@ Content-Type: application/concise-problem-details+cbor
 }
 </pre><a href="#section-2.2-8" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2-9">Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2-9" class="pilcrow">¶</a></p>
-<p id="section-2.2-10">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-2.2-10" class="pilcrow">¶</a></p>
-<p id="section-2.2-11"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-2.2-11" class="pilcrow">¶</a></p>
-<p id="section-2.2-12"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-2.2-12" class="pilcrow">¶</a></p>
-<p id="section-2.2-13">"Base64 encoding using the URL- and filename-safe character set
+<p id="section-2.2-9">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-2.2-9" class="pilcrow">¶</a></p>
+<p id="section-2.2-10"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-2.2-10" class="pilcrow">¶</a></p>
+<p id="section-2.2-11"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-2.2-11" class="pilcrow">¶</a></p>
+<p id="section-2.2-12">"Base64 encoding using the URL- and filename-safe character set
 defined in Section 5 of RFC 4648 <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, with all trailing '='
 characters omitted and without the inclusion of any line breaks,
 whitespace, or other additional characters.  Note that the base64url
 encoding of the empty octet sequence is the empty string.
 (See Appendix C of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> for notes on implementing base64url
-encoding without padding.)"<a href="#section-2.2-13" class="pilcrow">¶</a></p>
-<p id="section-2.2-14">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.
+encoding without padding.)"<a href="#section-2.2-12" class="pilcrow">¶</a></p>
+<p id="section-2.2-13">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.
 <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> provides a well-specified, canonical method to deterministically derive a unique <code>kid</code> value directly from the COSE Key itself.
-Using this mechanism offers several benefits to implementers:<a href="#section-2.2-14" class="pilcrow">¶</a></p>
+Using this mechanism offers several benefits to implementers:<a href="#section-2.2-13" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2.2-15.1">
-            <p id="section-2.2-15.1.1">it ensures that the <code>kid</code> is uniquely and reproducibly bound to the key material,<a href="#section-2.2-15.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2.2-14.1">
+            <p id="section-2.2-14.1.1">it ensures that the <code>kid</code> is uniquely and reproducibly bound to the key material,<a href="#section-2.2-14.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-2.2-15.2">
-            <p id="section-2.2-15.2.1">it removes the need for an out-of-band identifier assignment process,<a href="#section-2.2-15.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-2.2-14.2">
+            <p id="section-2.2-14.2.1">it removes the need for an out-of-band identifier assignment process,<a href="#section-2.2-14.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-2.2-15.3">
-            <p id="section-2.2-15.3.1">it enables independent parties to compute and verify the same <code>kid</code> for a given key, which simplifies key discovery and reduces the risk of <code>kid</code> collisions across Transparency Services.<a href="#section-2.2-15.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-2.2-14.3">
+            <p id="section-2.2-14.3.1">it enables independent parties to compute and verify the same <code>kid</code> for a given key, which simplifies key discovery and reduces the risk of <code>kid</code> collisions across Transparency Services.<a href="#section-2.2-14.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1634,8 +1635,9 @@ Retry-After: &lt;seconds&gt;
           <h4 id="name-status-400-invalid-client-r">
 <a href="#section-2.3.3" class="section-number selfRef">2.3.3. </a><a href="#name-status-400-invalid-client-r" class="section-name selfRef">Status 400 - Invalid Client Request</a>
           </h4>
-<p id="section-2.3.3-1">When the corresponding conditions are encountered, the Transparency Service <span class="bcp14">SHOULD</span> respond with a 4xx-class status code (typically 400 Bad Request) and a Concise Problem Details <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object conveying one of the following error types.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3.3-1">The following expected errors are defined for the conditions described below.
+When such a condition is encountered, an implementation <span class="bcp14">MUST</span> return an error response that is a valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object.
+Implementations <span class="bcp14">SHOULD</span> use the corresponding error defined below, but <span class="bcp14">MAY</span> return another valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> error instead.<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.3.3-2">
 <pre>
 HTTP/1.1 400 Bad Request
@@ -1811,8 +1813,9 @@ Client &lt;-- 200 (Receipt)                    --- TS
           <h4 id="name-status-400-invalid-client-re">
 <a href="#section-2.4.3" class="section-number selfRef">2.4.3. </a><a href="#name-status-400-invalid-client-re" class="section-name selfRef">Status 400 - Invalid Client Request</a>
           </h4>
-<p id="section-2.4.3-1">When the corresponding conditions are encountered, the Transparency Service <span class="bcp14">SHOULD</span> respond with a 4xx-class status code (typically 400 Bad Request) and a Concise Problem Details <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object conveying one of the following error types.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.3-1">The following expected errors are defined for the conditions described below.
+When such a condition is encountered, an implementation <span class="bcp14">MUST</span> return an error response that is a valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object.
+Implementations <span class="bcp14">SHOULD</span> use the corresponding error defined below, but <span class="bcp14">MAY</span> return another valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> error instead.<a href="#section-2.4.3-1" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.4.3-2">
 <pre>
 HTTP/1.1 400 Bad Request
