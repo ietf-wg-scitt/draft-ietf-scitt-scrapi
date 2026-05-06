@@ -100,8 +100,7 @@ Table of Contents
      5.3.  Rate Limiting
    6.  IANA Considerations
      6.1.  Well-Known URI for Key Discovery
-       6.1.1.  Resource Definition
-       6.1.2.  Registration Template
+       6.1.1.  Registration Template
    7.  References
      7.1.  Normative References
      7.2.  Informative References
@@ -227,12 +226,15 @@ Table of Contents
 
 2.1.  Transparency Service Keys
 
-   This resource is used to discover the public keys that can be used by
-   relying parties to verify Receipts issued by the Transparency
-   Service.
+   This resource, located at /.well-known/scitt-keys (registered in
+   accordance with [RFC8615]; see Section 6.1), is used to discover the
+   public keys that can be used by relying parties to verify Receipts
+   issued by the Transparency Service.
 
-   The Transparency Service responds with a COSE Key Set, as defined in
-   Section 7 of [RFC9052].
+   Clients interact with this resource by issuing an HTTP GET request,
+   and SHOULD include Accept: application/cbor in the request.  The
+   Transparency Service MUST respond with a COSE Key Set, as defined in
+   Section 7 of [RFC9052], serialized as application/cbor.
 
    Request:
 
@@ -275,12 +277,15 @@ Table of Contents
 
 2.2.  Individual Transparency Service Key
 
-   This resource is used to resolve a single public key, from a kid
-   value contained in a Receipt previously issued by the Transparency
-   Service.
+   This sub-resource, located at /.well-known/scitt-keys/{kid_value}, is
+   used to resolve a single public key, from a kid value contained in a
+   Receipt previously issued by the Transparency Service.
 
-   The Transparency Service responds with a single COSE Key, as defined
-   in Section 7 of [RFC9052].
+   Clients interact with this sub-resource by issuing an HTTP GET
+   request, and SHOULD include Accept: application/cbor in the request.
+   The Transparency Service MUST respond with a single COSE Key, as
+   defined in Section 7 of [RFC9052], serialized as application/cbor, or
+   a 404 status if no matching key is found.
 
    Request:
 
@@ -968,41 +973,12 @@ Table of Contents
 
 6.1.  Well-Known URI for Key Discovery
 
-   This section defines the /.well-known/scitt-keys resource in
-   accordance with [RFC8615].
+   IANA is requested to register the /.well-known/scitt-keys URI in the
+   "Well-Known URIs" registry defined in [RFC8615].  The normative
+   behavior of this resource and its /{kid_value} sub-resource is
+   specified in Section 2.1 and Section 2.2.
 
-6.1.1.  Resource Definition
-
-   The /.well-known/scitt-keys resource allows clients to discover the
-   public keys used by a Transparency Service to issue Receipts.
-
-   Clients interact with this resource by issuing an HTTP GET request to
-   /.well-known/scitt-keys.  The Transparency Service MUST respond with
-   a COSE Key Set (as defined in Section 7 of [RFC9052]) serialized as
-   application/cbor.
-
-   The following media types are used with this resource:
-
-   *  Request: Clients SHOULD include Accept: application/cbor in the
-      request.
-
-   *  Response: The Transparency Service MUST use Content-Type:
-      application/cbor.
-
-   The /.well-known/scitt-keys/{kid_value} sub-resource allows clients
-   to resolve a single public key by its key identifier (kid).  Clients
-   interact with this sub-resource by issuing an HTTP GET request.  The
-   Transparency Service MUST respond with a single COSE Key (as defined
-   in Section 7 of [RFC9052]) serialized as application/cbor if a
-   matching key is found.  If no matching key is found, the Transparency
-   Service SHOULD respond with a 4xx-class status code (typically 404
-   Not Found).
-
-   The full normative behavior of these resources, including key
-   lifecycle, error handling, and kid encoding requirements, is defined
-   in Section 2.1 and Section 2.2.
-
-6.1.2.  Registration Template
+6.1.1.  Registration Template
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):

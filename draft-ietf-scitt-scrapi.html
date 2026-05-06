@@ -1268,10 +1268,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-well-known-uri-for-key-disc" class="internal xref">Well-Known URI for Key Discovery</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
-                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-resource-definition" class="internal xref">Resource Definition</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.2">
-                    <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-registration-template" class="internal xref">Registration Template</a></p>
+                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-registration-template" class="internal xref">Registration Template</a></p>
 </li>
                 </ul>
 </li>
@@ -1406,8 +1403,9 @@ In the absence of this header field, this document does not specify a minimum.<a
         <h3 id="name-transparency-service-keys">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-transparency-service-keys" class="section-name selfRef">Transparency Service Keys</a>
         </h3>
-<p id="section-2.1-1">This resource is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1-2">The Transparency Service responds with a COSE Key Set, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">This resource, located at <code>/.well-known/scitt-keys</code> (registered in accordance with <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>; see <a href="#sec-well-known-uri-for-key-discovery" class="auto internal xref">Section 6.1</a>), is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">Clients interact with this resource by issuing an HTTP GET request, and <span class="bcp14">SHOULD</span> include <code>Accept: application/cbor</code> in the request.
+The Transparency Service <span class="bcp14">MUST</span> respond with a COSE Key Set, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>, serialized as <code>application/cbor</code>.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 <p id="section-2.1-3">Request:<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.1-4">
 <pre>
@@ -1452,8 +1450,9 @@ Consistent with key management best practices described in <span>[<a href="#NIST
         <h3 id="name-individual-transparency-ser">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-individual-transparency-ser" class="section-name selfRef">Individual Transparency Service Key</a>
         </h3>
-<p id="section-2.2-1">This resource is used to resolve a single public key, from a <code>kid</code> value contained in a Receipt previously issued by the Transparency Service.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">The Transparency Service responds with a single COSE Key, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">This sub-resource, located at <code>/.well-known/scitt-keys/{kid_value}</code>, is used to resolve a single public key, from a <code>kid</code> value contained in a Receipt previously issued by the Transparency Service.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">Clients interact with this sub-resource by issuing an HTTP GET request, and <span class="bcp14">SHOULD</span> include <code>Accept: application/cbor</code> in the request.
+The Transparency Service <span class="bcp14">MUST</span> respond with a single COSE Key, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>, serialized as <code>application/cbor</code>, or a 404 status if no matching key is found.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.2-3">Request:<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.2-4">
 <pre>
@@ -2202,42 +2201,19 @@ The specific per-client policy is implementation dependent and typically varies 
         <h3 id="name-well-known-uri-for-key-disc">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-well-known-uri-for-key-disc" class="section-name selfRef">Well-Known URI for Key Discovery</a>
         </h3>
-<p id="section-6.1-1">This section defines the <code>/.well-known/scitt-keys</code> resource in accordance with <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<div id="sec-resource-definition">
-<section id="section-6.1.1">
-          <h4 id="name-resource-definition">
-<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-resource-definition" class="section-name selfRef">Resource Definition</a>
-          </h4>
-<p id="section-6.1.1-1">The <code>/.well-known/scitt-keys</code> resource allows clients to discover the public keys used by a Transparency Service to issue Receipts.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1.1-2">Clients interact with this resource by issuing an HTTP GET request to <code>/.well-known/scitt-keys</code>.
-The Transparency Service <span class="bcp14">MUST</span> respond with a COSE Key Set (as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>) serialized as <code>application/cbor</code>.<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1.1-3">The following media types are used with this resource:<a href="#section-6.1.1-3" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-6.1.1-4.1">
-              <p id="section-6.1.1-4.1.1">Request: Clients <span class="bcp14">SHOULD</span> include <code>Accept: application/cbor</code> in the request.<a href="#section-6.1.1-4.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-6.1.1-4.2">
-              <p id="section-6.1.1-4.2.1">Response: The Transparency Service <span class="bcp14">MUST</span> use <code>Content-Type: application/cbor</code>.<a href="#section-6.1.1-4.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-6.1.1-5">The <code>/.well-known/scitt-keys/{kid_value}</code> sub-resource allows clients to resolve a single public key by its key identifier (<code>kid</code>).
-Clients interact with this sub-resource by issuing an HTTP GET request.
-The Transparency Service <span class="bcp14">MUST</span> respond with a single COSE Key (as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>) serialized as <code>application/cbor</code> if a matching key is found.
-If no matching key is found, the Transparency Service <span class="bcp14">SHOULD</span> respond with a 4xx-class status code (typically 404 Not Found).<a href="#section-6.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-6.1.1-6">The full normative behavior of these resources, including key lifecycle, error handling, and <code>kid</code> encoding requirements, is defined in <a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a> and <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>.<a href="#section-6.1.1-6" class="pilcrow">¶</a></p>
-</section>
-</div>
+<p id="section-6.1-1">IANA is requested to register the <code>/.well-known/scitt-keys</code> URI in the "Well-Known URIs" registry defined in <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>.
+The normative behavior of this resource and its <code>/{kid_value}</code> sub-resource is specified in <a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a> and <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <div id="sec-registration-template">
-<section id="section-6.1.2">
+<section id="section-6.1.1">
           <h4 id="name-registration-template">
-<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-registration-template" class="section-name selfRef">Registration Template</a>
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-registration-template" class="section-name selfRef">Registration Template</a>
           </h4>
-<p id="section-6.1.2-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>):<a href="#section-6.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.1.2-2">URI suffix: scitt-keys
+<p id="section-6.1.1-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>):<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-2">URI suffix: scitt-keys
 Change controller: IETF
 Specification document(s): RFCthis
 Status: Permanent
-Related information: <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span><a href="#section-6.1.2-2" class="pilcrow">¶</a></p>
+Related information: <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span><a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
