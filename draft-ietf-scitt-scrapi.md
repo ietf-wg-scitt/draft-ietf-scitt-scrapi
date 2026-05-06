@@ -247,7 +247,7 @@ Consistent with key management best practices described in {{NIST.SP.800-57pt1r5
 
 A Transparency Service MAY include the `Expires` header field, as defined in {{Section 5.3 of RFC9111}}, in responses returned by this resource and by the Individual Transparency Service Key resource ({{sec-individual-transparency-service-key}}) to indicate how long clients may cache the returned keys.
 A Transparency Service MAY use the `Cache-Control` header field with the `max-age` directive, as defined in {{Section 5.2.2.1 of RFC9111}}, for the same purpose; when both are present, `Cache-Control: max-age` takes precedence per {{Section 4.2.1 of RFC9111}}.
-In the absence of either header, clients SHOULD NOT cache the returned keys beyond the immediate verification operation.
+The cache lifetime indicated by these headers is a hint about server availability and does not constrain client retention. A relying party that holds a Receipt SHOULD retain the verification key for as long as it may need to verify that Receipt, independent of any cache lifetime indicated by the Transparency Service.
 
 The presence of these headers does not constitute a guarantee of key availability.
 A Transparency Service may still need to retire a key before any indicated cache lifetime has elapsed, for example in response to suspected compromise or cryptographic algorithm deprecation.
