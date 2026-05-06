@@ -282,7 +282,9 @@ Body (in CBOR diagnostic notation)
 }
 ~~~
 
-When the corresponding condition is encountered, the Transparency Service SHOULD respond with a 4xx-class status code (typically 404 Not Found) and a Concise Problem Details {{RFC9290}} object as in the following example:
+The following expected error is defined for the condition described below.
+When this condition is encountered, an implementation MUST return an error response that is a valid {{RFC9290}} object.
+Implementations SHOULD use the error defined below, but MAY return another valid {{RFC9290}} error instead:
 
 ~~~ http-message
 HTTP/1.1 404 Not Found
@@ -293,8 +295,6 @@ Content-Type: application/concise-problem-details+cbor
   / detail /        -2: "No key could be found for this kid value"
 }
 ~~~
-
-Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
 
 If the `kid` values used by the service (`{kid_value}` in the request above) are not URL-safe, the resource MUST accept the base64url encoding of the `kid` value, without padding, in the URL instead.
 
@@ -430,8 +430,9 @@ The Transparency Service MAY include a `Retry-After` header in the HTTP response
 
 ### Status 400 - Invalid Client Request
 
-When the corresponding conditions are encountered, the Transparency Service SHOULD respond with a 4xx-class status code (typically 400 Bad Request) and a Concise Problem Details {{RFC9290}} object conveying one of the following error types.
-Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+The following expected errors are defined for the conditions described below.
+When such a condition is encountered, an implementation MUST return an error response that is a valid {{RFC9290}} object.
+Implementations SHOULD use the corresponding error defined below, but MAY return another valid {{RFC9290}} error instead.
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
@@ -591,8 +592,9 @@ Client <-- 200 (Receipt)                    --- TS
 
 ### Status 400 - Invalid Client Request
 
-When the corresponding conditions are encountered, the Transparency Service SHOULD respond with a 4xx-class status code (typically 400 Bad Request) and a Concise Problem Details {{RFC9290}} object conveying one of the following error types.
-Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.
+The following expected errors are defined for the conditions described below.
+When such a condition is encountered, an implementation MUST return an error response that is a valid {{RFC9290}} object.
+Implementations SHOULD use the corresponding error defined below, but MAY return another valid {{RFC9290}} error instead.
 
 ~~~ http-message
 HTTP/1.1 400 Bad Request
