@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>SCITT Reference APIs</title>
+<title>Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs</title>
 <meta content="Henk Birkholz" name="author">
 <meta content="Jon Geater" name="author">
 <meta content="Antoine Delignat-Lavaud" name="author">
 <meta content="
-       This document describes a REST API that supports the normative requirements of the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture. 
+       This document describes a REST API with the HTTP resources, request and response messages, and error handling needed for an interoperable implementation of a SCITT Transparency Service, as defined by the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture. 
     " name="description">
 <meta content="xml2rfc 3.33.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 6 November 2026</td>
+<td class="center">Expires 7 November 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-scitt-scrapi-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-05-05" class="published">5 May 2026</time>
+<time datetime="2026-05-06" class="published">6 May 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-11-06">6 November 2026</time></dd>
+<dd class="expires"><time datetime="2026-11-07">7 November 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1087,10 +1087,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">SCITT Reference APIs</h1>
+<h1 id="title">Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document describes a REST API that supports the normative requirements of the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document describes a REST API with the HTTP resources, request and response messages, and error handling needed for an interoperable implementation of a SCITT Transparency Service, as defined by the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1126,7 +1126,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1159,7 +1159,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-scope-and-relation-to-the-s" class="internal xref">Scope and Relation to the SCITT Architecture</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
             </ul>
 </li>
@@ -1167,7 +1170,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-resources" class="internal xref">Resources</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-transparency-service-keys" class="internal xref">Transparency Service Keys</a></p>
+                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-transparency-service-keys" class="internal xref">Transparency Service Keys</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
                 <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-individual-transparency-ser" class="internal xref">Individual Transparency Service Key</a></p>
@@ -1248,37 +1251,40 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-well-known-uri-for-key-disc" class="internal xref">Well-Known URI for Key Discovery</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.1">
-                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.  <a href="#name-resource-definition" class="internal xref">Resource Definition</a></p>
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-client-retry-behavior" class="internal xref">Client Retry Behavior</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.2">
-                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="auto internal xref">5.1.2</a>.  <a href="#name-registration-template" class="internal xref">Registration Template</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-server-side-retry-configura" class="internal xref">Server-Side Retry Configuration</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-rate-limiting" class="internal xref">Rate Limiting</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-well-known-uri-for-key-disc" class="internal xref">Well-Known URI for Key Discovery</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
+                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-registration-template" class="internal xref">Registration Template</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-            </ul>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1308,26 +1314,64 @@ svg :is([fill="white"], [fill^="#fff"]) {
 The following resources <span class="bcp14">MUST</span> be implemented for conformance to this specification:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-4.1">
-          <p id="section-1-4.1.1">Registration of Signed Statements<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.1.1">Registration of Signed Statements (<a href="#sec-register-signed-statement" class="auto internal xref">Section 2.3</a>, <a href="#sec-query-registration-status" class="auto internal xref">Section 2.4</a>)<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.2">
-          <p id="section-1-4.2.1">Issuance and resolution of Receipts<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.2.1">Issuance and resolution of Receipts (<a href="#sec-resolve-receipt" class="auto internal xref">Section 2.5</a>)<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.3">
-          <p id="section-1-4.3.1">Discovery of Transparency Service Keys<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.3.1">Discovery of Transparency Service Keys (<a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a>, <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>)<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<div id="sec-terminology">
+<div id="sec-scope">
 <section id="section-1.1">
-        <h3 id="name-terminology">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+        <h3 id="name-scope-and-relation-to-the-s">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-scope-and-relation-to-the-s" class="section-name selfRef">Scope and Relation to the SCITT Architecture</a>
         </h3>
-<p id="section-1.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-1.1-1">The SCITT Architecture <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> specifies the conceptual roles, message structures, and workflows of a Transparency Service, but does not define a concrete protocol by which clients interact with that service.
+This document specifies one such concrete protocol: an HTTP-based REST API that realizes those interactions in an interoperable way.
+References in this specification to "normative requirements of the SCITT Architecture" are to the requirements expressed using BCP 14 keywords <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> that pertain to the externally observable behavior of a Transparency Service, such as the registration of Signed Statements, the issuance and validation of Receipts, and the publication of the keys used to verify Receipts.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">In particular, this document defines HTTP resources that satisfy the requirements in the following sections of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>:<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.1-3.1">
+            <p id="section-1.1-3.1.1">Registration of Signed Statements (Section 6.3 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>), realized by the Signed Statement registration resources defined in <a href="#sec-register-signed-statement" class="auto internal xref">Section 2.3</a>, <a href="#sec-query-registration-status" class="auto internal xref">Section 2.4</a> and <a href="#sec-resolve-receipt" class="auto internal xref">Section 2.5</a>.<a href="#section-1.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-3.2">
+            <p id="section-1.1-3.2.1">Issuance of Receipts and construction of Transparent Statements (Section 7 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>), realized by the Receipt resolution resource defined in <a href="#sec-resolve-receipt" class="auto internal xref">Section 2.5</a>.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-3.3">
+            <p id="section-1.1-3.3.1">Discovery of the Transparency Service verification keys used by Verifiers to validate Receipts (Section 5.1.2 and Section 9.4 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>), realized by the resource defined in <a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a>.<a href="#section-1.1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-1.1-4">The mandatory-to-implement resources listed above are sufficient for an interoperable Transparency Service.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">The following aspects of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> are intentionally out of scope for this document and are not covered by this API:<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.1-6.1">
+            <p id="section-1.1-6.1.1">The internal structure and operation of the Transparency Service's Verifiable Data Structure (Section 5.1.3 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>).<a href="#section-1.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-6.2">
+            <p id="section-1.1-6.2.1">The contents and evaluation of Registration Policies (Section 5.1.1 of <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>); this document only defines how the outcome of a policy decision is communicated to clients.<a href="#section-1.1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-6.3">
+            <p id="section-1.1-6.3.1">The format and semantics of Signed Statements, Receipts, and Transparent Statements themselves, which are defined in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span> and the COSE specifications referenced therein.<a href="#section-1.1-6.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-6.4">
+            <p id="section-1.1-6.4.1">Transports other than HTTP, and bindings of these resources to other application protocols.<a href="#section-1.1-6.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="sec-terminology">
+<section id="section-1.2">
+        <h3 id="name-terminology">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+        </h3>
+<p id="section-1.2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service" and "Registration Policy" as defined in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3">This specification uses "payload" as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">This specification uses the terms "Signed Statement", "Receipt", "Transparent Statement", "Artifact Repositories", "Transparency Service" and "Registration Policy" as defined in <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span>.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+<p id="section-1.2-3">This specification uses "payload" as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-1.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1380,17 +1424,21 @@ The one exception is the "malformed" error type, which indicates that the Transp
 }
 </pre><a href="#section-2-10" class="pilcrow">¶</a>
 </div>
-<p id="section-2-11">Clients <span class="bcp14">SHOULD</span> treat 500 and 503 HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-11" class="pilcrow">¶</a></p>
-<p id="section-2-12">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
-In the absence of this header field, this document does not specify a minimum.<a href="#section-2-12" class="pilcrow">¶</a></p>
-<p id="section-2-13">The following HTTP resources <span class="bcp14">MUST</span> be implemented to enable conformance to this specification.<a href="#section-2-13" class="pilcrow">¶</a></p>
+<p id="section-2-11">Per the guidance in <span><a href="https://rfc-editor.org/rfc/rfc9205#section-4.6" class="relref">Section 4.6</a> of [<a href="#RFC9205" class="cite xref">RFC9205</a>]</span>, the specific HTTP status codes shown in the examples throughout this document are illustrative.
+Status codes can be generated by generic HTTP components (caches, intermediaries, captive portals, gateways, etc.) that are not part of the Transparency Service, and the set of registered HTTP status codes can be extended over time.
+Clients <span class="bcp14">MUST</span> therefore be prepared to handle any HTTP status code by falling back to the generic class semantics (1xx, 2xx, 3xx, 4xx, or 5xx) of the response when a more specific code is not recognized, and <span class="bcp14">MUST</span> rely on the Concise Problem Details <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object (when present) rather than the status code alone to determine the application-level cause of an error.<a href="#section-2-11" class="pilcrow">¶</a></p>
+<p id="section-2-12">Clients <span class="bcp14">SHOULD</span> treat 5xx HTTP status code responses as transient failures and <span class="bcp14">MAY</span> retry the same request without modification at a later date.<a href="#section-2-12" class="pilcrow">¶</a></p>
+<p id="section-2-13">Note that in the case of any error response, the Transparency Service <span class="bcp14">MAY</span> include a <code>Retry-After</code> header field per <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> in order to request a minimum time for the client to wait before retrying the request.
+In the absence of this header field, this document does not specify a minimum.<a href="#section-2-13" class="pilcrow">¶</a></p>
+<p id="section-2-14">The following subsections specify the HTTP resources required for conformance, as listed in <a href="#sec-introduction" class="auto internal xref">Section 1</a>.<a href="#section-2-14" class="pilcrow">¶</a></p>
 <div id="sec-transparency-service-keys">
 <section id="section-2.1">
         <h3 id="name-transparency-service-keys">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-transparency-service-keys" class="section-name selfRef">Transparency Service Keys</a>
         </h3>
-<p id="section-2.1-1">This resource is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1-2">The Transparency Service responds with a COSE Key Set, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">This resource, located at <code>/.well-known/scitt-keys</code> (registered in accordance with <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>; see <a href="#sec-well-known-uri-for-key-discovery" class="auto internal xref">Section 6.1</a>), is used to discover the public keys that can be used by relying parties to verify Receipts issued by the Transparency Service.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">Clients interact with this resource by issuing an HTTP GET request, and <span class="bcp14">SHOULD</span> include <code>Accept: application/cbor</code> in the request.
+The Transparency Service <span class="bcp14">MUST</span> respond with a COSE Key Set, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>, serialized as <code>application/cbor</code>.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 <p id="section-2.1-3">Request:<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.1-4">
 <pre>
@@ -1427,7 +1475,9 @@ Body (in CBOR diagnostic notation)
 </div>
 <p id="section-2.1-7">The Transparency Service <span class="bcp14">MAY</span> stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
-Consistent with key management best practices described in <span>[<a href="#NIST.SP.800-57pt1r5" class="cite xref">NIST.SP.800-57pt1r5</a>]</span> (Section 5.3.4), retired keys <span class="bcp14">SHOULD</span> remain available for as long as any Receipts signed with them may still need to be verified.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
+Consistent with key management best practices described in <span>[<a href="#NIST.SP.800-57pt1r5" class="cite xref">NIST.SP.800-57pt1r5</a>]</span> (Section 5.3.4, which distinguishes the originator-usage period during which a private key is used to apply cryptographic protection from the recipient-usage period during which the corresponding public key is used to verify that protection), retired public keys used for signing <span class="bcp14">SHOULD</span> remain available for verification for as long as any Receipts signed with them may still need to be verified.
+Retaining retired keys has operational implications: the Transparency Service is responsible for storing those keys (and their associated metadata, such as <code>kid</code> values and validity periods) securely and continuously, and for serving them via the Individual Transparency Service Key resource (see <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>) for the entire retention period.
+If retired public keys are not retained, Receipts issued under those keys can no longer be verified by relying parties using only the Transparency Service's published key material, which may break the verifiability of previously issued Receipts and disrupt downstream consumers that depend on long-term verification.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-individual-transparency-service-key">
@@ -1435,8 +1485,9 @@ Consistent with key management best practices described in <span>[<a href="#NIST
         <h3 id="name-individual-transparency-ser">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-individual-transparency-ser" class="section-name selfRef">Individual Transparency Service Key</a>
         </h3>
-<p id="section-2.2-1">This resource is used to resolve a single public key, from a <code>kid</code> value contained in a Receipt previously issued by the Transparency Service.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">The Transparency Service responds with a single COSE Key, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">This sub-resource, located at <code>/.well-known/scitt-keys/{kid_value}</code>, is used to resolve a single public key, from a <code>kid</code> value contained in a Receipt previously issued by the Transparency Service.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">Clients interact with this sub-resource by issuing an HTTP GET request, and <span class="bcp14">SHOULD</span> include <code>Accept: application/cbor</code> in the request.
+The Transparency Service <span class="bcp14">MUST</span> respond with a single COSE Key, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>, serialized as <code>application/cbor</code>, or a 404 status if no matching key is found.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.2-3">Request:<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.2-4">
 <pre>
@@ -1462,7 +1513,9 @@ Body (in CBOR diagnostic notation)
 }
 </pre><a href="#section-2.2-6" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2-7">The following expected error is defined and <span class="bcp14">MUST</span> be returned when the corresponding condition is encountered:<a href="#section-2.2-7" class="pilcrow">¶</a></p>
+<p id="section-2.2-7">The following expected error is defined for the condition described below.
+When this condition is encountered, an implementation <span class="bcp14">MUST</span> return an error response that is a valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object.
+Implementations <span class="bcp14">SHOULD</span> use the error defined below, but <span class="bcp14">MAY</span> return another valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> error instead:<a href="#section-2.2-7" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.2-8">
 <pre>
 HTTP/1.1 404 Not Found
@@ -1474,18 +1527,30 @@ Content-Type: application/concise-problem-details+cbor
 }
 </pre><a href="#section-2.2-8" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2-9">Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.2-9" class="pilcrow">¶</a></p>
-<p id="section-2.2-10">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-2.2-10" class="pilcrow">¶</a></p>
-<p id="section-2.2-11"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-2.2-11" class="pilcrow">¶</a></p>
-<p id="section-2.2-12"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-2.2-12" class="pilcrow">¶</a></p>
-<p id="section-2.2-13">"Base64 encoding using the URL- and filename-safe character set
+<p id="section-2.2-9">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-2.2-9" class="pilcrow">¶</a></p>
+<p id="section-2.2-10"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-2.2-10" class="pilcrow">¶</a></p>
+<p id="section-2.2-11"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64url encoding as follows:<a href="#section-2.2-11" class="pilcrow">¶</a></p>
+<p id="section-2.2-12">"Base64 encoding using the URL- and filename-safe character set
 defined in Section 5 of RFC 4648 <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, with all trailing '='
 characters omitted and without the inclusion of any line breaks,
 whitespace, or other additional characters.  Note that the base64url
 encoding of the empty octet sequence is the empty string.
 (See Appendix C of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> for notes on implementing base64url
-encoding without padding.)"<a href="#section-2.2-13" class="pilcrow">¶</a></p>
-<p id="section-2.2-14">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.<a href="#section-2.2-14" class="pilcrow">¶</a></p>
+encoding without padding.)"<a href="#section-2.2-12" class="pilcrow">¶</a></p>
+<p id="section-2.2-13">It is <span class="bcp14">RECOMMENDED</span> to use COSE Key Thumbprint, as defined in <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> as the mechanism to assign a <code>kid</code> to Transparency Service keys.
+<span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> provides a well-specified, canonical method to deterministically derive a unique <code>kid</code> value directly from the COSE Key itself.
+Using this mechanism offers several benefits to implementers:<a href="#section-2.2-13" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.2-14.1">
+            <p id="section-2.2-14.1.1">it ensures that the <code>kid</code> is uniquely and reproducibly bound to the key material,<a href="#section-2.2-14.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.2-14.2">
+            <p id="section-2.2-14.2.1">it removes the need for an out-of-band identifier assignment process,<a href="#section-2.2-14.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.2-14.3">
+            <p id="section-2.2-14.3.1">it enables independent parties to compute and verify the same <code>kid</code> for a given key, which simplifies key discovery and reduces the risk of <code>kid</code> collisions across Transparency Services.<a href="#section-2.2-14.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 </section>
 </div>
 <div id="sec-register-signed-statement">
@@ -1605,8 +1670,9 @@ Retry-After: &lt;seconds&gt;
           <h4 id="name-status-400-invalid-client-r">
 <a href="#section-2.3.3" class="section-number selfRef">2.3.3. </a><a href="#name-status-400-invalid-client-r" class="section-name selfRef">Status 400 - Invalid Client Request</a>
           </h4>
-<p id="section-2.3.3-1">The following expected errors <span class="bcp14">MUST</span> be returned when the corresponding conditions are encountered.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3.3-1">The following expected errors are defined for the conditions described below.
+When such a condition is encountered, an implementation <span class="bcp14">MUST</span> return an error response that is a valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object.
+Implementations <span class="bcp14">SHOULD</span> use the corresponding error defined below, but <span class="bcp14">MAY</span> return another valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> error instead.<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.3.3-2">
 <pre>
 HTTP/1.1 400 Bad Request
@@ -1698,7 +1764,7 @@ Content-Type: application/cose
           <h4 id="name-status-302-registration-is-">
 <a href="#section-2.4.1" class="section-number selfRef">2.4.1. </a><a href="#name-status-302-registration-is-" class="section-name selfRef">Status 302 - Registration is running</a>
           </h4>
-<p id="section-2.4.1-1">Registration requests <span class="bcp14">MAY</span> fail, in which case the Location <span class="bcp14">MAY</span> return an error when queried.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.1-1">Registration requests may fail, in which case the Location <span class="bcp14">MAY</span> return an error when queried.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.4.1-2">If the client requests (GET) the location when the registration is still in progress, the TS <span class="bcp14">MAY</span> return a 302 Found, as in this non-normative example:<a href="#section-2.4.1-2" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.4.1-3">
 <pre>
@@ -1782,8 +1848,9 @@ Client &lt;-- 200 (Receipt)                    --- TS
           <h4 id="name-status-400-invalid-client-re">
 <a href="#section-2.4.3" class="section-number selfRef">2.4.3. </a><a href="#name-status-400-invalid-client-re" class="section-name selfRef">Status 400 - Invalid Client Request</a>
           </h4>
-<p id="section-2.4.3-1">The following expected errors <span class="bcp14">MUST</span> be returned when the corresponding conditions are encountered.
-Implementations <span class="bcp14">MAY</span> return other errors, so long as they are valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> objects.<a href="#section-2.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.3-1">The following expected errors are defined for the conditions described below.
+When such a condition is encountered, an implementation <span class="bcp14">MUST</span> return an error response that is a valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object.
+Implementations <span class="bcp14">SHOULD</span> use the corresponding error defined below, but <span class="bcp14">MAY</span> return another valid <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> error instead.<a href="#section-2.4.3-1" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.4.3-2">
 <pre>
 HTTP/1.1 400 Bad Request
@@ -1855,7 +1922,7 @@ Content-Type: application/concise-problem-details+cbor
           <h4 id="name-status-404-operation-not-fo">
 <a href="#section-2.4.4" class="section-number selfRef">2.4.4. </a><a href="#name-status-404-operation-not-fo" class="section-name selfRef">Status 404 - Operation Not Found</a>
           </h4>
-<p id="section-2.4.4-1">If no record of the specified running operation is found, the Transparency Service returns a 404 response.<a href="#section-2.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.4-1">If no record of the specified running operation is found, the Transparency Service <span class="bcp14">SHOULD</span> respond with a 4xx-class status code (typically 404 Not Found) and a Concise Problem Details <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object as in the following example:<a href="#section-2.4.4-1" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.4.4-2">
 <pre>
 HTTP/1.1 404 Not Found
@@ -1956,7 +2023,7 @@ Body (in CBOR diagnostic notation)
           <h4 id="name-status-404-not-found">
 <a href="#section-2.5.2" class="section-number selfRef">2.5.2. </a><a href="#name-status-404-not-found" class="section-name selfRef">Status 404 - Not Found</a>
           </h4>
-<p id="section-2.5.2-1">If there is no Receipt found for the specified <code>EntryID</code> the Transparency Service returns a 404 response:<a href="#section-2.5.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.5.2-1">If there is no Receipt found for the specified <code>EntryID</code> the Transparency Service <span class="bcp14">SHOULD</span> respond with a 4xx-class status code (typically 404 Not Found) and a Concise Problem Details <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> object as in the following example:<a href="#section-2.5.2-1" class="pilcrow">¶</a></p>
 <div class="lang-http-message sourcecode" id="section-2.5.2-2">
 <pre>
 HTTP/1.1 404 Not Found
@@ -2095,8 +2162,8 @@ Nonetheless transparency may mean 'within a limited community' rather than 'in f
 Once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues.
 There could be issues at the payload level (for instance, the statement "it is raining" may be true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.<a href="#section-4.4.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.2.1-2">If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps <span class="bcp14">MUST</span> be added to the protected header signed by the Issuer.
-The <code>iat</code> claim in a <code>CWT_Claims</code> header parameter (<span>[<a href="#RFC9597" class="cite xref">RFC9597</a>]</span>) <span class="bcp14">MUST</span> be used when the Issuer provides the timestamp directly.
-Where a timestamp from a third party is required, the COSE header parameters defined in <span>[<a href="#RFC9921" class="cite xref">RFC9921</a>]</span> for including <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> timestamp tokens <span class="bcp14">MUST</span> be used.
+The <code>iat</code> claim in a <code>CWT_Claims</code> header parameter (<span>[<a href="#RFC9597" class="cite xref">RFC9597</a>]</span>) <span class="bcp14">MUST</span> be used when the Issuer provides the timestamp themselves.
+The COSE header parameters defined in <span>[<a href="#RFC9921" class="cite xref">RFC9921</a>]</span> for including <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> timestamp tokens <span class="bcp14">SHOULD</span> be used, where a timestamp from a third party is required.
 Other mechanisms for including timestamps in the protected header <span class="bcp14">MAY</span> also be used.<a href="#section-4.4.2.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2128,140 +2195,142 @@ profile-specific processing.<a href="#section-4.4.2.3-1" class="pilcrow">¶</a><
 </div>
 </section>
 </div>
-<div id="sec-iana-considerations">
+<div id="sec-operational-considerations">
 <section id="section-5">
-      <h2 id="name-iana-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      <h2 id="name-operational-considerations">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
-<div id="sec-well-known-uri-for-key-discovery">
+<div id="sec-client-retry-behavior">
 <section id="section-5.1">
-        <h3 id="name-well-known-uri-for-key-disc">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-well-known-uri-for-key-disc" class="section-name selfRef">Well-Known URI for Key Discovery</a>
+        <h3 id="name-client-retry-behavior">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-client-retry-behavior" class="section-name selfRef">Client Retry Behavior</a>
         </h3>
-<p id="section-5.1-1">This section defines the <code>/.well-known/scitt-keys</code> resource in accordance with <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<div id="sec-resource-definition">
-<section id="section-5.1.1">
-          <h4 id="name-resource-definition">
-<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-resource-definition" class="section-name selfRef">Resource Definition</a>
-          </h4>
-<p id="section-5.1.1-1">The <code>/.well-known/scitt-keys</code> resource allows clients to discover the public keys used by a Transparency Service to issue Receipts.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-2">Clients interact with this resource by issuing an HTTP GET request to <code>/.well-known/scitt-keys</code>.
-The Transparency Service <span class="bcp14">MUST</span> respond with a COSE Key Set (as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>) serialized as <code>application/cbor</code>.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-3">The following media types are used with this resource:<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.1.1-4.1">
-              <p id="section-5.1.1-4.1.1">Request: Clients <span class="bcp14">SHOULD</span> include <code>Accept: application/cbor</code> in the request.<a href="#section-5.1.1-4.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-5.1.1-4.2">
-              <p id="section-5.1.1-4.2.1">Response: The Transparency Service <span class="bcp14">MUST</span> use <code>Content-Type: application/cbor</code>.<a href="#section-5.1.1-4.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-5.1.1-5">The <code>/.well-known/scitt-keys/{kid_value}</code> sub-resource allows clients to resolve a single public key by its key identifier (<code>kid</code>).
-Clients interact with this sub-resource by issuing an HTTP GET request.
-The Transparency Service <span class="bcp14">MUST</span> respond with a single COSE Key (as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-7" class="relref">Section 7</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>) serialized as <code>application/cbor</code>, or a 404 status if no matching key is found.<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-6">The full normative behavior of these resources, including key lifecycle, error handling, and <code>kid</code> encoding requirements, is defined in <a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a> and <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>.<a href="#section-5.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">Aggressive client retry or polling behavior can significantly impact a Transparency Service, increasing load and, in extreme cases, amplifying transient failures into sustained outages.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Clients <span class="bcp14">SHOULD</span> honor any <code>Retry-After</code> header field (defined in {Section 7.1.3 of RFC7231}) returned by the Transparency Service, treating it as a minimum interval before retrying.
+In its absence, clients <span class="bcp14">SHOULD</span> apply exponential backoff with jitter, cap the total number of retries, and avoid synchronizing retries across clients.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="sec-server-side-retry-configuration">
+<section id="section-5.2">
+        <h3 id="name-server-side-retry-configura">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-server-side-retry-configura" class="section-name selfRef">Server-Side Retry Configuration</a>
+        </h3>
+<p id="section-5.2-1">Operators <span class="bcp14">SHOULD</span> configure a minimum retry interval appropriate for the expected registration latency and service capacity, and <span class="bcp14">SHOULD</span> communicate it to clients via the <code>Retry-After</code> header on relevant responses (e.g., 202, 429, 503).
+The interval should account for worst-case registration time, sustainable request volume, and intermediary behavior.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-rate-limiting">
+<section id="section-5.3">
+        <h3 id="name-rate-limiting">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-rate-limiting" class="section-name selfRef">Rate Limiting</a>
+        </h3>
+<p id="section-5.3-1">As noted in <a href="#sec-authentication" class="auto internal xref">Section 4.3</a> and <a href="#sec-denial-of-service-attacks" class="auto internal xref">Section 4.4.1.1</a>, rate limiting or other denial of service mitigations are required.
+The specific per-client policy is implementation dependent and typically varies with whether and how clients are authenticated (e.g., per-identity for authenticated clients versus per source IP for unauthenticated clients), the cost of the operation, and the deployment environment.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">When a client exceeds the configured rate limit, the Transparency Service <span class="bcp14">SHOULD</span> return a 429 response (see <a href="#sec-status-429-too-many-requests" class="auto internal xref">Section 2.4.5</a>) including a <code>Retry-After</code> header field.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="sec-iana-considerations">
+<section id="section-6">
+      <h2 id="name-iana-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<div id="sec-well-known-uri-for-key-discovery">
+<section id="section-6.1">
+        <h3 id="name-well-known-uri-for-key-disc">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-well-known-uri-for-key-disc" class="section-name selfRef">Well-Known URI for Key Discovery</a>
+        </h3>
+<p id="section-6.1-1">IANA is requested to register the <code>/.well-known/scitt-keys</code> URI in the "Well-Known URIs" registry defined in <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>.
+The normative behavior of this resource and its <code>/{kid_value}</code> sub-resource is specified in <a href="#sec-transparency-service-keys" class="auto internal xref">Section 2.1</a> and <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <div id="sec-registration-template">
-<section id="section-5.1.2">
+<section id="section-6.1.1">
           <h4 id="name-registration-template">
-<a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-registration-template" class="section-name selfRef">Registration Template</a>
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-registration-template" class="section-name selfRef">Registration Template</a>
           </h4>
-<p id="section-5.1.2-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>):<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.2-2">URI suffix: scitt-keys
+<p id="section-6.1.1-1">The following value is requested to be registered in the "Well-Known URIs" registry (using the template from <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>):<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-2">URI suffix: scitt-keys
 Change controller: IETF
 Specification document(s): RFCthis
 Status: Permanent
-Related information: <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span><a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
+Related information: <span>[<a href="#I-D.draft-ietf-scitt-architecture" class="cite xref">I-D.draft-ietf-scitt-architecture</a>]</span><a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 </section>
 </div>
-<div id="sec-combined-references">
-<section id="section-6">
-      <h2 id="name-references">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-references" class="section-name selfRef">References</a>
-      </h2>
 <div id="sec-normative-references">
-<section id="section-6.1">
-        <h3 id="name-normative-references">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-        </h3>
+<section id="section-7">
+      <h2 id="name-normative-references">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      </h2>
 <dl class="references">
 <dt id="I-D.draft-ietf-scitt-architecture">[I-D.draft-ietf-scitt-architecture]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-22</span>, <time datetime="2025-10-10" class="refDate">10 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-22">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-22</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="NIST.SP.800-57pt1r5">[NIST.SP.800-57pt1r5]</dt>
+      <dd>
+<span class="refAuthor">Barker, E.</span>, <span class="refTitle">"Recommendation for Key Management: Part 1 - General"</span>, <span class="seriesInfo">NIST Special Publication 800-57 Part 1 Revision 5</span>, <time datetime="2020-05" class="refDate">May 2020</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">https://doi.org/10.6028/NIST.SP.800-57pt1r5</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC3161">[RFC3161]</dt>
+      <dd>
+<span class="refAuthor">Adams, C.</span>, <span class="refAuthor">Cain, P.</span>, <span class="refAuthor">Pinkas, D.</span>, and <span class="refAuthor">R. Zuccherato</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)"</span>, <span class="seriesInfo">RFC 3161</span>, <span class="seriesInfo">DOI 10.17487/RFC3161</span>, <time datetime="2001-08" class="refDate">August 2001</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3161">https://www.rfc-editor.org/rfc/rfc3161</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC4648">[RFC4648]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10" class="refDate">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4648">https://www.rfc-editor.org/rfc/rfc4648</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7515">[RFC7515]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Signature (JWS)"</span>, <span class="seriesInfo">RFC 7515</span>, <span class="seriesInfo">DOI 10.17487/RFC7515</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7515">https://www.rfc-editor.org/rfc/rfc7515</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8615">[RFC8615]</dt>
-        <dd>
-<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Well-Known Uniform Resource Identifiers (URIs)"</span>, <span class="seriesInfo">RFC 8615</span>, <span class="seriesInfo">DOI 10.17487/RFC8615</span>, <time datetime="2019-05" class="refDate">May 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8615">https://www.rfc-editor.org/rfc/rfc8615</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9052">[RFC9052]</dt>
-        <dd>
-<span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9052">https://www.rfc-editor.org/rfc/rfc9052</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9110">[RFC9110]</dt>
-        <dd>
-<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9290">[RFC9290]</dt>
-        <dd>
-<span class="refAuthor">Fossati, T.</span> and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Problem Details for Constrained Application Protocol (CoAP) APIs"</span>, <span class="seriesInfo">RFC 9290</span>, <span class="seriesInfo">DOI 10.17487/RFC9290</span>, <time datetime="2022-10" class="refDate">October 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9290">https://www.rfc-editor.org/rfc/rfc9290</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9597">[RFC9597]</dt>
-        <dd>
-<span class="refAuthor">Looker, T.</span> and <span class="refAuthor">M.B. Jones</span>, <span class="refTitle">"CBOR Web Token (CWT) Claims in COSE Headers"</span>, <span class="seriesInfo">RFC 9597</span>, <span class="seriesInfo">DOI 10.17487/RFC9597</span>, <time datetime="2024-06" class="refDate">June 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9597">https://www.rfc-editor.org/rfc/rfc9597</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9679">[RFC9679]</dt>
-        <dd>
-<span class="refAuthor">Isobe, K.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE) Key Thumbprint"</span>, <span class="seriesInfo">RFC 9679</span>, <span class="seriesInfo">DOI 10.17487/RFC9679</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9679">https://www.rfc-editor.org/rfc/rfc9679</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9921">[RFC9921]</dt>
       <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">M. Riechert</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE) Header Parameter for Timestamp Tokens as Defined in RFC 3161"</span>, <span class="seriesInfo">RFC 9921</span>, <span class="seriesInfo">DOI 10.17487/RFC9921</span>, <time datetime="2026-02" class="refDate">February 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9921">https://www.rfc-editor.org/rfc/rfc9921</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-</dl>
-</section>
-</div>
-<div id="sec-informative-references">
-<section id="section-6.2">
-        <h3 id="name-informative-references">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-        </h3>
-<dl class="references">
-<dt id="NIST.SP.800-57pt1r5">[NIST.SP.800-57pt1r5]</dt>
-        <dd>
-<span class="refAuthor">Barker, E.</span>, <span class="refTitle">"Recommendation for Key Management: Part 1 - General"</span>, <span class="seriesInfo">NIST Special Publication 800-57 Part 1 Revision 5</span>, <time datetime="2020-05" class="refDate">May 2020</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">https://doi.org/10.6028/NIST.SP.800-57pt1r5</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC3161">[RFC3161]</dt>
-        <dd>
-<span class="refAuthor">Adams, C.</span>, <span class="refAuthor">Cain, P.</span>, <span class="refAuthor">Pinkas, D.</span>, and <span class="refAuthor">R. Zuccherato</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)"</span>, <span class="seriesInfo">RFC 3161</span>, <span class="seriesInfo">DOI 10.17487/RFC3161</span>, <time datetime="2001-08" class="refDate">August 2001</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3161">https://www.rfc-editor.org/rfc/rfc3161</a>&gt;</span>. </dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Well-Known Uniform Resource Identifiers (URIs)"</span>, <span class="seriesInfo">RFC 8615</span>, <span class="seriesInfo">DOI 10.17487/RFC8615</span>, <time datetime="2019-05" class="refDate">May 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8615">https://www.rfc-editor.org/rfc/rfc8615</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8792">[RFC8792]</dt>
       <dd>
 <span class="refAuthor">Watsen, K.</span>, <span class="refAuthor">Auerswald, E.</span>, <span class="refAuthor">Farrel, A.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Handling Long Lines in Content of Internet-Drafts and RFCs"</span>, <span class="seriesInfo">RFC 8792</span>, <span class="seriesInfo">DOI 10.17487/RFC8792</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8792">https://www.rfc-editor.org/rfc/rfc8792</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9052">[RFC9052]</dt>
+      <dd>
+<span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9052">https://www.rfc-editor.org/rfc/rfc9052</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9110">[RFC9110]</dt>
+      <dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9205">[RFC9205]</dt>
+      <dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Building Protocols with HTTP"</span>, <span class="seriesInfo">BCP 56</span>, <span class="seriesInfo">RFC 9205</span>, <span class="seriesInfo">DOI 10.17487/RFC9205</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9205">https://www.rfc-editor.org/rfc/rfc9205</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9290">[RFC9290]</dt>
+      <dd>
+<span class="refAuthor">Fossati, T.</span> and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Problem Details for Constrained Application Protocol (CoAP) APIs"</span>, <span class="seriesInfo">RFC 9290</span>, <span class="seriesInfo">DOI 10.17487/RFC9290</span>, <time datetime="2022-10" class="refDate">October 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9290">https://www.rfc-editor.org/rfc/rfc9290</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9597">[RFC9597]</dt>
+      <dd>
+<span class="refAuthor">Looker, T.</span> and <span class="refAuthor">M.B. Jones</span>, <span class="refTitle">"CBOR Web Token (CWT) Claims in COSE Headers"</span>, <span class="seriesInfo">RFC 9597</span>, <span class="seriesInfo">DOI 10.17487/RFC9597</span>, <time datetime="2024-06" class="refDate">June 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9597">https://www.rfc-editor.org/rfc/rfc9597</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9679">[RFC9679]</dt>
+      <dd>
+<span class="refAuthor">Isobe, K.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE) Key Thumbprint"</span>, <span class="seriesInfo">RFC 9679</span>, <span class="seriesInfo">DOI 10.17487/RFC9679</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9679">https://www.rfc-editor.org/rfc/rfc9679</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9921">[RFC9921]</dt>
+    <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">M. Riechert</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE) Header Parameter for Timestamp Tokens as Defined in RFC 3161"</span>, <span class="seriesInfo">RFC 9921</span>, <span class="seriesInfo">DOI 10.17487/RFC9921</span>, <time datetime="2026-02" class="refDate">February 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9921">https://www.rfc-editor.org/rfc/rfc9921</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 </dl>
-</section>
-</div>
 </section>
 </div>
 <div id="contributors">

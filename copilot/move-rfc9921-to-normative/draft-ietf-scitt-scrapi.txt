@@ -5,20 +5,21 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 6 November 2026                        Bowball Technologies Ltd
+Expires: 7 November 2026                        Bowball Technologies Ltd
                                                       A. Delignat-Lavaud
                                                       Microsoft Research
-                                                              5 May 2026
+                                                              6 May 2026
 
 
-                          SCITT Reference APIs
+ Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs
                      draft-ietf-scitt-scrapi-latest
 
 Abstract
 
-   This document describes a REST API that supports the normative
-   requirements of the Supply Chain Integrity, Transparency, and Trust
-   (SCITT) Architecture.
+   This document describes a REST API with the HTTP resources, request
+   and response messages, and error handling needed for an interoperable
+   implementation of a SCITT Transparency Service, as defined by the
+   Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
 
 About This Document
 
@@ -50,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 November 2026.
+   This Internet-Draft will expire on 7 November 2026.
 
 Copyright Notice
 
@@ -69,7 +70,8 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Terminology
+     1.1.  Scope and Relation to the SCITT Architecture
+     1.2.  Terminology
    2.  Resources
      2.1.  Transparency Service Keys
      2.2.  Individual Transparency Service Key
@@ -94,13 +96,14 @@ Table of Contents
      4.4.  Threat Model
        4.4.1.  In Scope
        4.4.2.  Out of Scope
-   5.  IANA Considerations
-     5.1.  Well-Known URI for Key Discovery
-       5.1.1.  Resource Definition
-       5.1.2.  Registration Template
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
+   5.  Operational Considerations
+     5.1.  Client Retry Behavior
+     5.2.  Server-Side Retry Configuration
+     5.3.  Rate Limiting
+   6.  IANA Considerations
+     6.1.  Well-Known URI for Key Discovery
+       6.1.1.  Registration Template
+   7.  Normative References
    Contributors
    Authors' Addresses
 
@@ -123,13 +126,70 @@ Table of Contents
    Transparency Service using COSE ([RFC9052]).  The following resources
    MUST be implemented for conformance to this specification:
 
-   *  Registration of Signed Statements
+   *  Registration of Signed Statements (Section 2.3, Section 2.4)
 
-   *  Issuance and resolution of Receipts
+   *  Issuance and resolution of Receipts (Section 2.5)
 
-   *  Discovery of Transparency Service Keys
+   *  Discovery of Transparency Service Keys (Section 2.1, Section 2.2)
 
-1.1.  Terminology
+1.1.  Scope and Relation to the SCITT Architecture
+
+   The SCITT Architecture [I-D.draft-ietf-scitt-architecture] specifies
+   the conceptual roles, message structures, and workflows of a
+   Transparency Service, but does not define a concrete protocol by
+   which clients interact with that service.  This document specifies
+   one such concrete protocol: an HTTP-based REST API that realizes
+   those interactions in an interoperable way.  References in this
+   specification to "normative requirements of the SCITT Architecture"
+   are to the requirements expressed using BCP 14 keywords [RFC2119]
+   [RFC8174] in [I-D.draft-ietf-scitt-architecture] that pertain to the
+   externally observable behavior of a Transparency Service, such as the
+   registration of Signed Statements, the issuance and validation of
+   Receipts, and the publication of the keys used to verify Receipts.
+
+   In particular, this document defines HTTP resources that satisfy the
+   requirements in the following sections of
+   [I-D.draft-ietf-scitt-architecture]:
+
+   *  Registration of Signed Statements (Section 6.3 of
+      [I-D.draft-ietf-scitt-architecture]), realized by the Signed
+      Statement registration resources defined in Section 2.3,
+      Section 2.4 and Section 2.5.
+
+   *  Issuance of Receipts and construction of Transparent Statements
+      (Section 7 of [I-D.draft-ietf-scitt-architecture]), realized by
+      the Receipt resolution resource defined in Section 2.5.
+
+   *  Discovery of the Transparency Service verification keys used by
+      Verifiers to validate Receipts (Section 5.1.2 and Section 9.4 of
+      [I-D.draft-ietf-scitt-architecture]), realized by the resource
+      defined in Section 2.1.
+
+   The mandatory-to-implement resources listed above are sufficient for
+   an interoperable Transparency Service.
+
+   The following aspects of [I-D.draft-ietf-scitt-architecture] are
+   intentionally out of scope for this document and are not covered by
+   this API:
+
+   *  The internal structure and operation of the Transparency Service's
+      Verifiable Data Structure (Section 5.1.3 of
+      [I-D.draft-ietf-scitt-architecture]).
+
+   *  The contents and evaluation of Registration Policies
+      (Section 5.1.1 of [I-D.draft-ietf-scitt-architecture]); this
+      document only defines how the outcome of a policy decision is
+      communicated to clients.
+
+   *  The format and semantics of Signed Statements, Receipts, and
+      Transparent Statements themselves, which are defined in
+      [I-D.draft-ietf-scitt-architecture] and the COSE specifications
+      referenced therein.
+
+   *  Transports other than HTTP, and bindings of these resources to
+      other application protocols.
+
+1.2.  Terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -195,9 +255,22 @@ Table of Contents
                "The request could not be parsed"
    }
 
-   Clients SHOULD treat 500 and 503 HTTP status code responses as
-   transient failures and MAY retry the same request without
-   modification at a later date.
+   Per the guidance in Section 4.6 of [RFC9205], the specific HTTP
+   status codes shown in the examples throughout this document are
+   illustrative.  Status codes can be generated by generic HTTP
+   components (caches, intermediaries, captive portals, gateways, etc.)
+   that are not part of the Transparency Service, and the set of
+   registered HTTP status codes can be extended over time.  Clients MUST
+   therefore be prepared to handle any HTTP status code by falling back
+   to the generic class semantics (1xx, 2xx, 3xx, 4xx, or 5xx) of the
+   response when a more specific code is not recognized, and MUST rely
+   on the Concise Problem Details [RFC9290] object (when present) rather
+   than the status code alone to determine the application-level cause
+   of an error.
+
+   Clients SHOULD treat 5xx HTTP status code responses as transient
+   failures and MAY retry the same request without modification at a
+   later date.
 
    Note that in the case of any error response, the Transparency Service
    MAY include a Retry-After header field per [RFC9110] in order to
@@ -205,17 +278,20 @@ Table of Contents
    request.  In the absence of this header field, this document does not
    specify a minimum.
 
-   The following HTTP resources MUST be implemented to enable
-   conformance to this specification.
+   The following subsections specify the HTTP resources required for
+   conformance, as listed in Section 1.
 
 2.1.  Transparency Service Keys
 
-   This resource is used to discover the public keys that can be used by
-   relying parties to verify Receipts issued by the Transparency
-   Service.
+   This resource, located at /.well-known/scitt-keys (registered in
+   accordance with [RFC8615]; see Section 6.1), is used to discover the
+   public keys that can be used by relying parties to verify Receipts
+   issued by the Transparency Service.
 
-   The Transparency Service responds with a COSE Key Set, as defined in
-   Section 7 of [RFC9052].
+   Clients interact with this resource by issuing an HTTP GET request,
+   and SHOULD include Accept: application/cbor in the request.  The
+   Transparency Service MUST respond with a COSE Key Set, as defined in
+   Section 7 of [RFC9052], serialized as application/cbor.
 
    Request:
 
@@ -252,18 +328,35 @@ Table of Contents
    delay is considered reasonable if it is sufficient for relying
    parties to have obtained the key needed to verify any previously
    issued Receipt.  Consistent with key management best practices
-   described in [NIST.SP.800-57pt1r5] (Section 5.3.4), retired keys
-   SHOULD remain available for as long as any Receipts signed with them
-   may still need to be verified.
+   described in [NIST.SP.800-57pt1r5] (Section 5.3.4, which
+   distinguishes the originator-usage period during which a private key
+   is used to apply cryptographic protection from the recipient-usage
+   period during which the corresponding public key is used to verify
+   that protection), retired public keys used for signing SHOULD remain
+   available for verification for as long as any Receipts signed with
+   them may still need to be verified.  Retaining retired keys has
+   operational implications: the Transparency Service is responsible for
+   storing those keys (and their associated metadata, such as kid values
+   and validity periods) securely and continuously, and for serving them
+   via the Individual Transparency Service Key resource (see
+   Section 2.2) for the entire retention period.  If retired public keys
+   are not retained, Receipts issued under those keys can no longer be
+   verified by relying parties using only the Transparency Service's
+   published key material, which may break the verifiability of
+   previously issued Receipts and disrupt downstream consumers that
+   depend on long-term verification.
 
 2.2.  Individual Transparency Service Key
 
-   This resource is used to resolve a single public key, from a kid
-   value contained in a Receipt previously issued by the Transparency
-   Service.
+   This sub-resource, located at /.well-known/scitt-keys/{kid_value}, is
+   used to resolve a single public key, from a kid value contained in a
+   Receipt previously issued by the Transparency Service.
 
-   The Transparency Service responds with a single COSE Key, as defined
-   in Section 7 of [RFC9052].
+   Clients interact with this sub-resource by issuing an HTTP GET
+   request, and SHOULD include Accept: application/cbor in the request.
+   The Transparency Service MUST respond with a single COSE Key, as
+   defined in Section 7 of [RFC9052], serialized as application/cbor, or
+   a 404 status if no matching key is found.
 
    Request:
 
@@ -286,8 +379,11 @@ Table of Contents
      2:'kid_value'
    }
 
-   The following expected error is defined and MUST be returned when the
-   corresponding condition is encountered:
+   The following expected error is defined for the condition described
+   below.  When this condition is encountered, an implementation MUST
+   return an error response that is a valid [RFC9290] object.
+   Implementations SHOULD use the error defined below, but MAY return
+   another valid [RFC9290] error instead:
 
    HTTP/1.1 404 Not Found
    Content-Type: application/concise-problem-details+cbor
@@ -296,9 +392,6 @@ Table of Contents
      / title /         -1: "No such key",
      / detail /        -2: "No key could be found for this kid value"
    }
-
-   Implementations MAY return other errors, so long as they are valid
-   [RFC9290] objects.
 
    If the kid values used by the service ({kid_value} in the request
    above) are not URL-safe, the resource MUST accept the base64url
@@ -318,6 +411,20 @@ Table of Contents
 
    It is RECOMMENDED to use COSE Key Thumbprint, as defined in [RFC9679]
    as the mechanism to assign a kid to Transparency Service keys.
+   [RFC9679] provides a well-specified, canonical method to
+   deterministically derive a unique kid value directly from the COSE
+   Key itself.  Using this mechanism offers several benefits to
+   implementers:
+
+   *  it ensures that the kid is uniquely and reproducibly bound to the
+      key material,
+
+   *  it removes the need for an out-of-band identifier assignment
+      process,
+
+   *  it enables independent parties to compute and verify the same kid
+      for a given key, which simplifies key discovery and reduces the
+      risk of kid collisions across Transparency Services.
 
 2.3.  Register Signed Statement
 
@@ -443,9 +550,11 @@ Table of Contents
 
 2.3.3.  Status 400 - Invalid Client Request
 
-   The following expected errors MUST be returned when the corresponding
-   conditions are encountered.  Implementations MAY return other errors,
-   so long as they are valid [RFC9290] objects.
+   The following expected errors are defined for the conditions
+   described below.  When such a condition is encountered, an
+   implementation MUST return an error response that is a valid
+   [RFC9290] object.  Implementations SHOULD use the corresponding error
+   defined below, but MAY return another valid [RFC9290] error instead.
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
@@ -517,7 +626,7 @@ Table of Contents
 
 2.4.1.  Status 302 - Registration is running
 
-   Registration requests MAY fail, in which case the Location MAY return
+   Registration requests may fail, in which case the Location MAY return
    an error when queried.
 
    If the client requests (GET) the location when the registration is
@@ -598,9 +707,11 @@ Table of Contents
 
 2.4.3.  Status 400 - Invalid Client Request
 
-   The following expected errors MUST be returned when the corresponding
-   conditions are encountered.  Implementations MAY return other errors,
-   so long as they are valid [RFC9290] objects.
+   The following expected errors are defined for the conditions
+   described below.  When such a condition is encountered, an
+   implementation MUST return an error response that is a valid
+   [RFC9290] object.  Implementations SHOULD use the corresponding error
+   defined below, but MAY return another valid [RFC9290] error instead.
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
@@ -654,7 +765,9 @@ Table of Contents
 2.4.4.  Status 404 - Operation Not Found
 
    If no record of the specified running operation is found, the
-   Transparency Service returns a 404 response.
+   Transparency Service SHOULD respond with a 4xx-class status code
+   (typically 404 Not Found) and a Concise Problem Details [RFC9290]
+   object as in the following example:
 
    HTTP/1.1 404 Not Found
    Content-Type: application/concise-problem-details+cbor
@@ -731,7 +844,9 @@ Table of Contents
 2.5.2.  Status 404 - Not Found
 
    If there is no Receipt found for the specified EntryID the
-   Transparency Service returns a 404 response:
+   Transparency Service SHOULD respond with a 4xx-class status code
+   (typically 404 Not Found) and a Concise Problem Details [RFC9290]
+   object as in the following example:
 
    HTTP/1.1 404 Not Found
    Content-Type: application/concise-problem-details+cbor
@@ -855,11 +970,11 @@ Table of Contents
    susceptible to replay attacks in this way then timestamps MUST be
    added to the protected header signed by the Issuer.  The iat claim in
    a CWT_Claims header parameter ([RFC9597]) MUST be used when the
-   Issuer provides the timestamp directly.  Where a timestamp from a
-   third party is required, the COSE header parameters defined in
-   [RFC9921] for including [RFC3161] timestamp tokens MUST be used.
-   Other mechanisms for including timestamps in the protected header MAY
-   also be used.
+   Issuer provides the timestamp themselves.  The COSE header parameters
+   defined in [RFC9921] for including [RFC3161] timestamp tokens SHOULD
+   be used, where a timestamp from a third party is required.  Other
+   mechanisms for including timestamps in the protected header MAY also
+   be used.
 
 4.4.2.2.  Message Deletion Attacks
 
@@ -891,43 +1006,52 @@ Table of Contents
    carried within the protected header or payload of the Signed
    Statement, and MUST be verified after signature authentication.
 
-5.  IANA Considerations
+5.  Operational Considerations
 
-5.1.  Well-Known URI for Key Discovery
+5.1.  Client Retry Behavior
 
-   This section defines the /.well-known/scitt-keys resource in
-   accordance with [RFC8615].
+   Aggressive client retry or polling behavior can significantly impact
+   a Transparency Service, increasing load and, in extreme cases,
+   amplifying transient failures into sustained outages.
 
-5.1.1.  Resource Definition
+   Clients SHOULD honor any Retry-After header field (defined in
+   {Section 7.1.3 of RFC7231}) returned by the Transparency Service,
+   treating it as a minimum interval before retrying.  In its absence,
+   clients SHOULD apply exponential backoff with jitter, cap the total
+   number of retries, and avoid synchronizing retries across clients.
 
-   The /.well-known/scitt-keys resource allows clients to discover the
-   public keys used by a Transparency Service to issue Receipts.
+5.2.  Server-Side Retry Configuration
 
-   Clients interact with this resource by issuing an HTTP GET request to
-   /.well-known/scitt-keys.  The Transparency Service MUST respond with
-   a COSE Key Set (as defined in Section 7 of [RFC9052]) serialized as
-   application/cbor.
+   Operators SHOULD configure a minimum retry interval appropriate for
+   the expected registration latency and service capacity, and SHOULD
+   communicate it to clients via the Retry-After header on relevant
+   responses (e.g., 202, 429, 503).  The interval should account for
+   worst-case registration time, sustainable request volume, and
+   intermediary behavior.
 
-   The following media types are used with this resource:
+5.3.  Rate Limiting
 
-   *  Request: Clients SHOULD include Accept: application/cbor in the
-      request.
+   As noted in Section 4.3 and Section 4.4.1.1, rate limiting or other
+   denial of service mitigations are required.  The specific per-client
+   policy is implementation dependent and typically varies with whether
+   and how clients are authenticated (e.g., per-identity for
+   authenticated clients versus per source IP for unauthenticated
+   clients), the cost of the operation, and the deployment environment.
 
-   *  Response: The Transparency Service MUST use Content-Type:
-      application/cbor.
+   When a client exceeds the configured rate limit, the Transparency
+   Service SHOULD return a 429 response (see Section 2.4.5) including a
+   Retry-After header field.
 
-   The /.well-known/scitt-keys/{kid_value} sub-resource allows clients
-   to resolve a single public key by its key identifier (kid).  Clients
-   interact with this sub-resource by issuing an HTTP GET request.  The
-   Transparency Service MUST respond with a single COSE Key (as defined
-   in Section 7 of [RFC9052]) serialized as application/cbor, or a 404
-   status if no matching key is found.
+6.  IANA Considerations
 
-   The full normative behavior of these resources, including key
-   lifecycle, error handling, and kid encoding requirements, is defined
-   in Section 2.1 and Section 2.2.
+6.1.  Well-Known URI for Key Discovery
 
-5.1.2.  Registration Template
+   IANA is requested to register the /.well-known/scitt-keys URI in the
+   "Well-Known URIs" registry defined in [RFC8615].  The normative
+   behavior of this resource and its /{kid_value} sub-resource is
+   specified in Section 2.1 and Section 2.2.
+
+6.1.1.  Registration Template
 
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
@@ -936,9 +1060,7 @@ Table of Contents
    document(s): RFCthis Status: Permanent Related information:
    [I-D.draft-ietf-scitt-architecture]
 
-6.  References
-
-6.1.  Normative References
+7.  Normative References
 
    [I-D.draft-ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
@@ -948,10 +1070,21 @@ Table of Contents
               October 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-scitt-architecture-22>.
 
+   [NIST.SP.800-57pt1r5]
+              Barker, E., "Recommendation for Key Management: Part 1 -
+              General", NIST Special Publication 800-57 Part 1 Revision
+              5, May 2020,
+              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC3161]  Adams, C., Cain, P., Pinkas, D., and R. Zuccherato,
+              "Internet X.509 Public Key Infrastructure Time-Stamp
+              Protocol (TSP)", RFC 3161, DOI 10.17487/RFC3161, August
+              2001, <https://www.rfc-editor.org/rfc/rfc3161>.
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
@@ -969,6 +1102,11 @@ Table of Contents
               (URIs)", RFC 8615, DOI 10.17487/RFC8615, May 2019,
               <https://www.rfc-editor.org/rfc/rfc8615>.
 
+   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
+              "Handling Long Lines in Content of Internet-Drafts and
+              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
+              <https://www.rfc-editor.org/rfc/rfc8792>.
+
    [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
@@ -978,6 +1116,10 @@ Table of Contents
               Ed., "HTTP Semantics", STD 97, RFC 9110,
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9110>.
+
+   [RFC9205]  Nottingham, M., "Building Protocols with HTTP", BCP 56,
+              RFC 9205, DOI 10.17487/RFC9205, June 2022,
+              <https://www.rfc-editor.org/rfc/rfc9205>.
 
    [RFC9290]  Fossati, T. and C. Bormann, "Concise Problem Details for
               Constrained Application Protocol (CoAP) APIs", RFC 9290,
@@ -998,24 +1140,6 @@ Table of Contents
               Timestamp Tokens as Defined in RFC 3161", RFC 9921,
               DOI 10.17487/RFC9921, February 2026,
               <https://www.rfc-editor.org/rfc/rfc9921>.
-
-6.2.  Informative References
-
-   [NIST.SP.800-57pt1r5]
-              Barker, E., "Recommendation for Key Management: Part 1 -
-              General", NIST Special Publication 800-57 Part 1 Revision
-              5, May 2020,
-              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
-
-   [RFC3161]  Adams, C., Cain, P., Pinkas, D., and R. Zuccherato,
-              "Internet X.509 Public Key Infrastructure Time-Stamp
-              Protocol (TSP)", RFC 3161, DOI 10.17487/RFC3161, August
-              2001, <https://www.rfc-editor.org/rfc/rfc3161>.
-
-   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
-              "Handling Long Lines in Content of Internet-Drafts and
-              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
-              <https://www.rfc-editor.org/rfc/rfc8792>.
 
 Contributors
 
