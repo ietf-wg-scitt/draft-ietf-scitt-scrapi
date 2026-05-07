@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-03T01:27:51.804724+00:00",
+  "timestamp": "2026-05-07T01:30:06.288522+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -62,6 +62,11 @@
       "name": "pending-close",
       "description": "",
       "color": "fbca04"
+    },
+    {
+      "name": "Needs Discussion",
+      "description": "",
+      "color": "d23b27"
     }
   ],
   "issues": [
@@ -2197,6 +2202,225 @@
           "updatedAt": "2026-04-24T15:21:59Z"
         }
       ]
+    },
+    {
+      "number": 148,
+      "id": "I_kwDOLJjbks8AAAABBTxK3w",
+      "title": "Clarify characterization of \"normative requirements\" of SCITT",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/148",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Current text:**\n\n> This document defines a REST API that supports the normative requirements \u2026\n\n**Feedback:**\n\n1. It is not clear what the \"normative requirements\" refer to. There is no mapping with specific parts in the architecture document.\n2. Assuming those are characterized, does this spec cover all \"requirements\" or a subset? Are there requirements that are not normative?\n3. Some text is needed to help walk through the intended goal and how the current specification meets it.\n\n**Suggested action:** Add text clarifying which normative requirements from the architecture are being addressed, provide a mapping to the architecture document, and explain the scope of coverage.",
+      "createdAt": "2026-05-05T08:57:26Z",
+      "updatedAt": "2026-05-06T15:54:50Z",
+      "closedAt": "2026-05-06T15:54:50Z",
+      "comments": []
+    },
+    {
+      "number": 149,
+      "id": "I_kwDOLJjbks8AAAABBTxTsw",
+      "title": "NIST.SP.800-57pt1r5 reference: clarify mapping, consider making normative, and note operational implications",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/149",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Current text:**\n\n> Consistent with key management best practices described in [NIST.SP.800-57pt1r5] (Section 5.3.4), retired keys SHOULD remain available for as long as any Receipts signed with them\n\n**Feedback:**\n\n1. Which part of Section 5.3.4 is being referred to? There are some normative uses in that section but not a 1:1 mapping with the language used here.\n2. Since that reference backs this recommendation and its citation strengthens the \"best practice\" claim, this reference is normative (per IESG Statement on Normative and Informative References).\n3. There are operational implications for storing such keys that should be called out. Likewise, there may be operational disruption if the SHOULD is not followed. Please consider flagging this in the spec.\n\n**Suggested action:** Clarify the specific part of Section 5.3.4 being referenced, consider reclassifying the reference as normative, and add text about operational implications of key retention (and the consequences of not retaining them).",
+      "createdAt": "2026-05-05T08:57:48Z",
+      "updatedAt": "2026-05-06T15:46:26Z",
+      "closedAt": "2026-05-06T15:46:26Z",
+      "comments": []
+    },
+    {
+      "number": 150,
+      "id": "I_kwDOLJjbks8AAAABBTxang",
+      "title": "MAY conflicts with MUST in error handling requirements",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/150",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Current text (appears in multiple places):**\n\n> The following expected errors MUST be returned when the corresponding conditions are encountered. Implementations MAY return other errors, so long as they are valid [RFC9290] objects.\n\n**Feedback:**\n\nThe construct \"MUST be returned ... MAY return other errors\" appears contradictory and needs adjustment. The combination of MUST and MAY in these constructs creates ambiguity about the actual requirements.\n\n**Suggested action:** Revise the language to avoid the apparent conflict between MUST and MAY in these error-handling requirements.",
+      "createdAt": "2026-05-05T08:58:06Z",
+      "updatedAt": "2026-05-06T15:37:38Z",
+      "closedAt": "2026-05-06T15:37:38Z",
+      "comments": []
+    },
+    {
+      "number": 151,
+      "id": "I_kwDOLJjbks8AAAABBTxgVQ",
+      "title": "RFC9921 reference should be normative",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/151",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [
+        "Needs Discussion"
+      ],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Current text:**\n\n> [RFC9921] defines COSE header parameters for including [RFC3161] timestamp tokens that MAY be used for this purpose.\n\n**Feedback:**\n\nPer the [IESG Statement on Normative and Informative References](https://www.ietf.org/about/groups/iesg/statements/normative-informative-references/): \"Even references that are relevant only for optional features must be classified as normative if they meet the above conditions for normative references.\"\n\nSince RFC9921 is used with normative language (MAY), it should be classified as a normative reference.\n\n**Suggested action:** Move RFC9921 from informative to normative references.",
+      "createdAt": "2026-05-05T08:58:22Z",
+      "updatedAt": "2026-05-05T15:14:59Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I disagree that this is a good change:\n\n> Replay attacks are not particularly concerning for SCITT or SCRAPI: Once a statement is made, it is intended to be immutable and non-repudiable, so making it twice should not lead to any particular issues. There could be issues at the payload level (for instance, the statement \"it is raining\" may be true when first submitted but not when replayed), but being payload-agnostic implementations of SCITT services cannot be required to worry about that.\n\n> If the semantic content of the payload are time-dependent and susceptible to replay attacks in this way then timestamps MUST be added to the protected header signed by the Issuer. {{RFC9921}} defines COSE header parameters for including {{RFC3161}} timestamp tokens that MAY be used for this purpose.\n\n`CWT_Claims.iat` can also be a perfectly good timestamp to use in that context, RFC9921 is only of interest if a timestamp from a party other than the Issuer is necessary.\n\nI see two ways forward:\n\n1. Update the text to clarify that if the payload is time-dependent and susceptible to replay attacks in this way, then timestamps MUST be added, using `CWT_Claims.iat` if they can be produced by the Issuer themselves, or attached using RFC9921 if they come from a third party. This is more interoperable, but constraining.\n2. Deliberately allow extension, since this is payload-dependent anyway. List the two mechanisms as explicit possibilities but not exclusive of other means.\n\nI lean quite strongly towards the second possibility. Payloads are very explicitly out of charter for the WG, and the risk of being overly normative here is real considering the limited datapoints available for this corner case.",
+          "createdAt": "2026-05-05T10:17:17Z",
+          "updatedAt": "2026-05-05T10:17:17Z"
+        }
+      ]
+    },
+    {
+      "number": 152,
+      "id": "I_kwDOLJjbks8AAAABBTxjDg",
+      "title": "Move normative content from IANA Section 5.1.1 to the main body",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/152",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Feedback:**\n\nSection 5.1.1 (Resource Definition) provides normative behavior that is not appropriate in an IANA considerations section. Only the registration itself belongs there.\n\n**Suggested action:** Move the normative behavioral content of Section 5.1.1 to the main body of the specification, and keep only the IANA registration details in the IANA Considerations section.",
+      "createdAt": "2026-05-05T08:58:30Z",
+      "updatedAt": "2026-05-06T15:33:57Z",
+      "closedAt": "2026-05-06T15:33:57Z",
+      "comments": []
+    },
+    {
+      "number": 153,
+      "id": "I_kwDOLJjbks8AAAABBTxl-w",
+      "title": "Expand SCITT acronym in the document title",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/153",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Feedback:**\n\nPlease expand SCITT in the title (Supply Chain Integrity, Transparency, and Trust).\n\n**Suggested action:** Update the document title to expand the SCITT acronym.",
+      "createdAt": "2026-05-05T08:58:36Z",
+      "updatedAt": "2026-05-06T15:26:58Z",
+      "closedAt": "2026-05-06T15:26:58Z",
+      "comments": []
+    },
+    {
+      "number": 154,
+      "id": "I_kwDOLJjbks8AAAABBTxovQ",
+      "title": "Review normative language for compliance with BCP56 (RFC 9205 Section 4.6)",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/154",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Feedback:**\n\nPlease check the use of normative language (and requiring some status codes) for compliance with the guidance in Section 4.6 of RFC 9205 (BCP 56). Some of the current usage may not be compliant.\n\n**Suggested action:** Audit all uses of normative language related to HTTP status codes and other HTTP-specific requirements against RFC 9205 Section 4.6, and adjust as needed.",
+      "createdAt": "2026-05-05T08:58:45Z",
+      "updatedAt": "2026-05-06T15:26:30Z",
+      "closedAt": "2026-05-06T15:26:30Z",
+      "comments": []
+    },
+    {
+      "number": 155,
+      "id": "I_kwDOLJjbks8AAAABBTxsJA",
+      "title": "Add Operational Considerations section for retry behavior and rate limiting",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/155",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Current text:**\n\n> In the absence of this header field, this document does not specify a minimum.\n\nAnd:\n\n> If a client is polling for an in-progress registration too frequently then the Transparency Service MAY, in addition to implementing rate limiting\n\n**Feedback:**\n\nThe current text leaves retry behavior and rate limiting entirely to implementations. However, there are operational impacts if clients adopt an aggressive retry time. \n\n**Suggested action:** Add a new Operational Considerations section that discusses:\n- Operational impacts of aggressive client retry behavior\n- The need to configure servers with a minimum retry interval\n- A policy for rate-limiting queries per client",
+      "createdAt": "2026-05-05T08:58:54Z",
+      "updatedAt": "2026-05-06T15:21:31Z",
+      "closedAt": "2026-05-06T15:21:31Z",
+      "comments": []
+    },
+    {
+      "number": 156,
+      "id": "I_kwDOLJjbks8AAAABBTxvsQ",
+      "title": "Add cross-references for conformance resources and deduplicate MUST requirements",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/156",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Current text (Introduction):**\n\n> SCITT Reference APIs (SCRAPI) defines HTTP resources for a Transparency Service using COSE ([RFC9052]). The following resources MUST be implemented for conformance to this specification:\n> - Registration of Signed Statements\n> - Issuance and resolution of Receipts\n> - Discovery of Transparency Service Keys\n\n**And in Section 2:**\n\n> The following HTTP resources MUST be implemented to enable conformance to this specification.\n\n**Feedback:**\n\n1. Consider adding cross-references to correlate each conformance item with the section(s) that define them.\n2. The conformance MUST appears in both the Introduction and Section 2. Please keep the MUST in one single place to avoid duplication and potential inconsistency.\n\n**Suggested action:** Add section cross-references to the conformance resource list, and consolidate the MUST requirement to a single location.",
+      "createdAt": "2026-05-05T08:59:05Z",
+      "updatedAt": "2026-05-06T15:12:35Z",
+      "closedAt": "2026-05-06T15:12:35Z",
+      "comments": []
+    },
+    {
+      "number": 157,
+      "id": "I_kwDOLJjbks8AAAABBTxyTQ",
+      "title": "Add justification for COSE Key Thumbprint (RFC 9679) recommendation",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/157",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Current text:**\n\n> It is RECOMMENDED to use COSE Key Thumbprint, as defined in [RFC9679] as the mechanism to assign a kid to Transparency Service keys.\n\n**Feedback:**\n\nAdding some justification or explanation of why this mechanism is recommended would be helpful for those who will deploy the system to make their decision.\n\n**Suggested action:** Add text explaining the motivation and benefits of using COSE Key Thumbprint for assigning key identifiers to Transparency Service keys.",
+      "createdAt": "2026-05-05T08:59:14Z",
+      "updatedAt": "2026-05-06T15:09:24Z",
+      "closedAt": "2026-05-06T15:09:24Z",
+      "comments": []
+    },
+    {
+      "number": 158,
+      "id": "I_kwDOLJjbks8AAAABBTx1Fw",
+      "title": "Fix inappropriate normative language: \"MAY fail\" should be \"may fail\"",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/158",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Current text:**\n\n> Registration requests MAY fail,\n\n**Feedback:**\n\nThis is an inappropriate use of normative language. The uppercase \"MAY\" (RFC 2119 keyword) is not correct here \u2014 this is a statement of fact about what can happen, not a grant of permission to an implementer.\n\n**Suggested fix:**\n\n> Registration requests may fail,\n\n**Suggested action:** Change \"MAY\" to lowercase \"may\" in this context.",
+      "createdAt": "2026-05-05T08:59:21Z",
+      "updatedAt": "2026-05-06T15:07:10Z",
+      "closedAt": "2026-05-06T15:07:10Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -12193,18 +12417,26 @@
       "labels": [],
       "body": "## Summary\n\nResolves the discussion in #132 by adding MAY-level guidance permitting a Transparency Service to use existing HTTP cache-freshness headers on the key discovery resources, rather than introducing a new retention-period vocabulary.\n\n- Adds `RFC9111` as a normative reference.\n- Adds two paragraphs to \u00a7\"Transparency Service Keys\":\n  - **Caching mechanism** \u2014 TS MAY use `Expires` ([RFC 9111 \u00a75.3](https://www.rfc-editor.org/rfc/rfc9111#section-5.3)) or `Cache-Control: max-age` ([\u00a75.2.2.1](https://www.rfc-editor.org/rfc/rfc9111#section-5.2.2.1)) on responses from this resource and from the Individual Transparency Service Key resource. Notes the precedence rule from [\u00a74.2.1](https://www.rfc-editor.org/rfc/rfc9111#section-4.2.1) when both are present. Default-deny when neither is present.\n  - **No-guarantee clause** \u2014 explicitly states that the headers do not promise availability; a TS can still retire a key earlier in response to suspected compromise or algorithm deprecation, in which case a relying party can request a fresh Receipt at the same position in the VDS signed with a current key.\n\n## Rationale\n\nThis matches the convergence point in #132:\n\n- @achamayou: \"_it probably makes sense to leverage an existing mechanism like `Expires`, rather than come up with something new_\" and \"_can you open a PR to add language saying that implementations of the TS MAY use the Expire header to communicate to clients how long they can cache keys, with a reference to the section in RFC9111 that covers that header?_\"\n- @rjb4standards: supportive of surfacing a cache-lifetime signal to relying parties.\n\nThe MAY-level posture preserves the TS's freedom to rotate keys at any time (the core constraint @achamayou raised), while giving relying parties a deterministic signal when one is offered. `Cache-Control: max-age` is included alongside `Expires` because RFC 9111 itself prefers it and \u00a74.2.1 already defines the precedence rule \u2014 happy to drop it if the WG would rather match the issue ask verbatim.\n\n## Test plan\n\n- [ ] Render via `make` (kramdown-rfc) and visually check the new paragraphs in \u00a7\"Transparency Service Keys\"\n- [ ] Confirm RFC 9111 normative reference appears in the references section\n- [ ] Confirm the cross-reference `{{sec-individual-transparency-service-key}}` resolves correctly\n- [ ] WG review for wording, particularly the \"fresh Receipt at the same VDS position\" sentence (paraphrased from #132 discussion)\n\nCloses #132.",
       "createdAt": "2026-04-30T12:27:18Z",
-      "updatedAt": "2026-05-01T13:28:46Z",
+      "updatedAt": "2026-05-06T17:09:46Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
-      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "baseRefOid": "eb06ab0465503ac4ea716d58be75ab90a07bfeb6",
       "headRepository": "CueCrux-Myles/draft-ietf-scitt-scrapi",
       "headRefName": "expires-header-key-cache-132",
-      "headRefOid": "46cba373d9463d81ffe54de3b932dbf74029bfbb",
+      "headRefOid": "5ab80bbaada2ed4ce3f0497d7e5f3342ebd8a32f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks good to me, I agree this closes #132 by providing to TSs who wish to implement it a way to signal how long they intend to serve public keys. ",
+          "createdAt": "2026-05-06T16:37:56Z",
+          "updatedAt": "2026-05-06T16:37:56Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLJjbks76xADQ",
@@ -12305,6 +12537,1182 @@
               "updatedAt": "2026-05-01T13:28:46Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks78j4Cu",
+          "commit": {
+            "abbreviatedOid": "46cba37"
+          },
+          "author": "CueCrux-Myles",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T15:05:01Z",
+          "updatedAt": "2026-05-06T15:05:01Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Hi @achamayou, I've committed the change as discussed.  ",
+              "createdAt": "2026-05-06T15:05:01Z",
+              "updatedAt": "2026-05-06T15:05:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks78mL4V",
+          "commit": {
+            "abbreviatedOid": "5ab80bb"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T16:28:13Z",
+          "updatedAt": "2026-05-06T16:28:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78nErX",
+          "commit": {
+            "abbreviatedOid": "5ab80bb"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Edits address feedback on Expires header field. ",
+          "createdAt": "2026-05-06T17:09:46Z",
+          "updatedAt": "2026-05-06T17:09:46Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 159,
+      "id": "PR_kwDOLJjbks7YVBH2",
+      "title": "Fix inappropriate normative language: \"MAY fail\" \u2192 \"may fail\"",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/159",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Per [Mohamed Boucadair's review](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/), the uppercase RFC 2119 \"MAY\" in \"Registration requests MAY fail\" is misused \u2014 it describes a possible outcome, not a permission granted to implementers.\n\n### Changes\n- `draft-ietf-scitt-scrapi.md` (line 502): lowercased \"MAY\" \u2192 \"may\" in \"Registration requests MAY fail\".\n\nThe trailing \"the Location MAY return an error when queried\" on the same line is left untouched, as the issue scoped the fix to \"MAY fail\". Worth flagging for reviewers whether that second occurrence warrants the same treatment.\n\n```diff\n-Registration requests MAY fail, in which case the Location MAY return an error when queried.\n+Registration requests may fail, in which case the Location MAY return an error when queried.\n```",
+      "createdAt": "2026-05-05T09:03:36Z",
+      "updatedAt": "2026-05-06T15:07:14Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-inappropriate-normative-language",
+      "headRefOid": "57cc48bd0c791a36f75c6044874e276f4ce39533",
+      "closedAt": "2026-05-06T15:07:09Z",
+      "mergedAt": "2026-05-06T15:07:09Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "d9fd27e61f3c882f562a7866ffd271355a69e4f1"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks777R5q",
+          "commit": {
+            "abbreviatedOid": "57cc48b"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T09:05:36Z",
+          "updatedAt": "2026-05-05T09:05:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks77_gN-",
+          "commit": {
+            "abbreviatedOid": "57cc48b"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Agree",
+          "createdAt": "2026-05-05T12:03:07Z",
+          "updatedAt": "2026-05-05T12:03:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78Aann",
+          "commit": {
+            "abbreviatedOid": "57cc48b"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Agree",
+          "createdAt": "2026-05-05T12:34:56Z",
+          "updatedAt": "2026-05-05T12:34:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78j8TP",
+          "commit": {
+            "abbreviatedOid": "57cc48b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "applied suggested fix.",
+          "createdAt": "2026-05-06T15:07:14Z",
+          "updatedAt": "2026-05-06T15:07:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 160,
+      "id": "PR_kwDOLJjbks7YVF63",
+      "title": "Add justification for COSE Key Thumbprint (RFC 9679) recommendation",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/160",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Per [review feedback](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/) from Mohamed Boucadair, the draft recommends RFC 9679 COSE Key Thumbprint for assigning `kid` to Transparency Service keys without explaining why, leaving deployers to guess the rationale.\n\n### Changes\n- **`draft-ietf-scitt-scrapi.md`**: Append a paragraph after the existing RECOMMENDED statement covering:\n  - RFC 9679 is a canonical, deterministic derivation of `kid` from the COSE Key itself\n  - Reproducible binding of `kid` to key material\n  - Eliminates out-of-band identifier assignment\n  - Enables independent parties to compute/verify the same `kid`, simplifying discovery and reducing collision risk across Transparency Services",
+      "createdAt": "2026-05-05T09:07:32Z",
+      "updatedAt": "2026-05-06T15:10:39Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/add-justification-for-cose-key-thumbprint",
+      "headRefOid": "f0025fac3335069e367d851207d99ea322925677",
+      "closedAt": "2026-05-06T15:09:22Z",
+      "mergedAt": "2026-05-06T15:09:22Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "2fa9a42633381f5115a493b3d18adef167909adb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks777ZRh",
+          "commit": {
+            "abbreviatedOid": "c0a6c04"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-05T09:10:17Z",
+          "updatedAt": "2026-05-05T09:10:18Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\nUsing this mechanism offers several benefits to implementers:\n```",
+              "createdAt": "2026-05-05T09:10:18Z",
+              "updatedAt": "2026-05-05T09:10:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks777bK0",
+          "commit": {
+            "abbreviatedOid": "4d10edf"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-05T09:11:05Z",
+          "updatedAt": "2026-05-05T09:11:05Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "@copilot make those markdown bullet points",
+              "createdAt": "2026-05-05T09:11:05Z",
+              "updatedAt": "2026-05-05T09:11:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks777dIa",
+          "commit": {
+            "abbreviatedOid": "f0025fa"
+          },
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-05T09:11:53Z",
+          "updatedAt": "2026-05-05T09:11:53Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Converted to markdown bullet points in f0025fa.",
+              "createdAt": "2026-05-05T09:11:53Z",
+              "updatedAt": "2026-05-05T09:11:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks777hGH",
+          "commit": {
+            "abbreviatedOid": "f0025fa"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T09:13:40Z",
+          "updatedAt": "2026-05-05T09:13:40Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78AZN9",
+          "commit": {
+            "abbreviatedOid": "f0025fa"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T12:34:14Z",
+          "updatedAt": "2026-05-05T12:34:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78kAYM",
+          "commit": {
+            "abbreviatedOid": "f0025fa"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:09:14Z",
+          "updatedAt": "2026-05-06T15:09:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78kDbs",
+          "commit": {
+            "abbreviatedOid": "f0025fa"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "No objection",
+          "createdAt": "2026-05-06T15:10:39Z",
+          "updatedAt": "2026-05-06T15:10:39Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 161,
+      "id": "PR_kwDOLJjbks7YVGld",
+      "title": "Add cross-references for conformance resources and deduplicate MUST",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/161",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Addresses Mohamed Boucadair's <a href=\"https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/\">review</a>: the conformance resource list lacked section cross-references, and the \"MUST be implemented\" requirement was stated in both the Introduction and Section 2 (Resources), risking inconsistency.\n\n### Changes (`draft-ietf-scitt-scrapi.md`)\n- **Introduction**: annotate each conformance bullet with the section(s) defining it.\n- **Section 2 (Resources)**: drop the duplicated normative sentence; replace with a non-normative back-pointer to the Introduction, leaving the MUST in a single location.\n\nThe cross-references use the `sec-` prefix to match the document's `auto_id_prefix: sec-` setting (and the existing `{{sec-...}}` style already used elsewhere in the document), so that xml2rfc IDREFs resolve cleanly in the Update Editor's Copy CI job.\n\n```diff\n The following resources MUST be implemented for conformance to this specification:\n\n-- Registration of Signed Statements\n-- Issuance and resolution of Receipts\n-- Discovery of Transparency Service Keys\n+- Registration of Signed Statements ({{sec-register-signed-statement}}, {{sec-query-registration-status}})\n+- Issuance and resolution of Receipts ({{sec-resolve-receipt}})\n+- Discovery of Transparency Service Keys ({{sec-transparency-service-keys}}, {{sec-individual-transparency-service-key}})\n```\n\n```diff\n-The following HTTP resources MUST be implemented to enable conformance to this specification.\n+The following subsections specify the HTTP resources required for conformance, as listed in {{sec-introduction}}.\n```",
+      "createdAt": "2026-05-05T09:08:03Z",
+      "updatedAt": "2026-05-06T15:12:34Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/add-cross-references-conformance-resources",
+      "headRefOid": "f27e6159590c51e5405a056769708fd74cb86670",
+      "closedAt": "2026-05-06T15:12:34Z",
+      "mergedAt": "2026-05-06T15:12:34Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "ae27c9e7de68746ec629fcd6f2815a2e85f9c4a2"
+      },
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@copilot make sure the references exist, if they don't, add them:\r\n\r\n```\r\ndraft-ietf-scitt-scrapi.xml(0): Error: IDREF attribute target references an unknown ID \"introduction\", at None\r\ndraft-ietf-scitt-scrapi.xml(0): Error: IDREF attribute target references an unknown ID \"individual-transparency-service-key\", at None\r\ndraft-ietf-scitt-scrapi.xml(0): Error: IDREF attribute target references an unknown ID \"query-registration-status\", at None\r\ndraft-ietf-scitt-scrapi.xml(0): Error: IDREF attribute target references an unknown ID \"register-signed-statement\", at None\r\ndraft-ietf-scitt-scrapi.xml(0): Error: IDREF attribute target references an unknown ID \"transparency-service-keys\", at None\r\ndraft-ietf-scitt-scrapi.xml(0): Error: IDREF attribute target references an unknown ID \"resolve-receipt\", at None\r\n```\r\n\r\nrun the steps in the Update Editor's Copy CI job to make sure there are no issues left.",
+          "createdAt": "2026-05-05T09:16:06Z",
+          "updatedAt": "2026-05-05T09:16:06Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> @copilot make sure the references exist, if they don't, add them:\r\n> \r\n> ```\r...\n\nAdded explicit `{#...}` anchors to Introduction and the six referenced subsections in 4c4b682. Locally ran `kramdown-rfc` and verified that all six `xref target=\"...\"` IDs in the generated XML resolve to matching `section anchor=\"...\"` elements, so the IDREF errors are resolved.\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `bib.ietf.org`\n>   - Triggering command: `/home/REDACTED/.local/share/gem/ruby/3.2.0/bin/kramdown-rfc kramdown-rfc draft-ietf-scitt-scrapi.md` (dns block)\n> - `datatracker.ietf.org`\n>   - Triggering command: `/home/REDACTED/.local/share/gem/ruby/3.2.0/bin/kramdown-rfc kramdown-rfc draft-ietf-scitt-scrapi.md` (dns block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>\n\n",
+          "createdAt": "2026-05-05T09:18:15Z",
+          "updatedAt": "2026-05-05T09:18:57Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@copilot run the steps in the Update Editor's Copy CI job to make sure there are no issues left, fix references if needed.",
+          "createdAt": "2026-05-05T09:22:20Z",
+          "updatedAt": "2026-05-05T09:22:20Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> @copilot run the steps in the Update Editor's Copy CI job to make sure there are no issues left, fix references if needed.\n\nReproduced the CI build locally (`kramdown-rfc --v3` \u2192 `xml2rfc --v2v3` \u2192 `--html`/`--text`). The doc has `auto_id_prefix: sec-` in its YAML header, so anchors are auto-generated as `sec-...` (and an existing reference at line 852 already uses that form). My previous explicit `{#...}` anchors shadowed those and broke the existing `sec-` references. Reverted the explicit anchors and changed the new cross-references to use the `sec-` prefix in f27e615. Local build is now clean with no IDREF errors.",
+          "createdAt": "2026-05-05T09:26:59Z",
+          "updatedAt": "2026-05-05T09:26:59Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks777uxu",
+          "commit": {
+            "abbreviatedOid": "4c4b682"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T09:21:20Z",
+          "updatedAt": "2026-05-05T09:21:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks778RrJ",
+          "commit": {
+            "abbreviatedOid": "f27e615"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T09:41:54Z",
+          "updatedAt": "2026-05-05T09:41:54Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78AXOJ",
+          "commit": {
+            "abbreviatedOid": "f27e615"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Seems appropriate.",
+          "createdAt": "2026-05-05T12:33:13Z",
+          "updatedAt": "2026-05-05T12:33:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78AYcu",
+          "commit": {
+            "abbreviatedOid": "f27e615"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T12:33:51Z",
+          "updatedAt": "2026-05-05T12:33:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78kGfq",
+          "commit": {
+            "abbreviatedOid": "f27e615"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:12:10Z",
+          "updatedAt": "2026-05-06T15:12:10Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 162,
+      "id": "PR_kwDOLJjbks7YVI1r",
+      "title": "Add Operational Considerations section for retry behavior and rate limiting",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/162",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Per [Mohamed Boucadair's mailing list review](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/), the spec left retry intervals and rate limiting entirely to implementations, with no guidance on the operational consequences of aggressive client retry behavior.\n\nAdds a new top-level `# Operational Considerations` section between Security and IANA Considerations:\n\n- **Client Retry Behavior** \u2014 Operational impact of aggressive retries/polling (load amplification, preventing recovery from transient failures); clients SHOULD honor `Retry-After`, apply exponential backoff with jitter, cap retries, and avoid synchronized retries.\n- **Server-Side Retry and Polling Configuration** \u2014 Operators SHOULD configure a minimum retry interval and communicate it via `Retry-After` on 202/429/5xx responses; lists factors to consider (registration latency, capacity, intermediary behavior).\n- **Rate Limiting** \u2014 Policy is implementation dependent and varies with whether/how clients are authenticated (per-identity vs. source-IP/metadata), operation cost, and deployment environment. Cross-references existing Authentication, Denial of Service Attacks, and 429 sections rather than restating their normative requirements.\n\nNo normative changes to existing sections; existing `Retry-After` and 429 text is referenced rather than duplicated.\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `bib.ietf.org`\n>   - Triggering command: `/home/REDACTED/.local/share/gem/ruby/3.2.0/bin/kramdown-rfc kramdown-rfc draft-ietf-scitt-scrapi.md` (dns block)\n> - `datatracker.ietf.org`\n>   - Triggering command: `/home/REDACTED/.local/share/gem/ruby/3.2.0/bin/kramdown-rfc kramdown-rfc draft-ietf-scitt-scrapi.md` (dns block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-05T09:09:50Z",
+      "updatedAt": "2026-05-06T15:26:13Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/add-operational-considerations",
+      "headRefOid": "80a8868c7a2a0ed20a06c62fa5f93b3379c08f5b",
+      "closedAt": "2026-05-06T15:21:30Z",
+      "mergedAt": "2026-05-06T15:21:29Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "1cefcaca547f86d1e63ddb3130e049b483173060"
+      },
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@copilot good first pass, but this is way too long. Be about 50% briefer.",
+          "createdAt": "2026-05-05T09:43:21Z",
+          "updatedAt": "2026-05-05T09:43:21Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> @copilot good first pass, but this is way too long. Be about 50% briefer.\n\nTrimmed the section by roughly half in 57047a6 \u2014 kept the core points (impact of aggressive retries, key client SHOULDs, server `Retry-After` config, rate-limiting policy is implementation/auth dependent, 429 response) and dropped the longer prose and bullet lists.",
+          "createdAt": "2026-05-05T09:45:01Z",
+          "updatedAt": "2026-05-05T09:45:01Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks778b72",
+          "commit": {
+            "abbreviatedOid": "57047a6"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-05T09:47:15Z",
+          "updatedAt": "2026-05-05T09:47:16Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\nClients SHOULD honor any `Retry-After` header field (defined in {Section 7.1.3 of RFC7231}) returned by the Transparency Service, treating it as a minimum interval before retrying.\n```",
+              "createdAt": "2026-05-05T09:47:15Z",
+              "updatedAt": "2026-05-05T09:47:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks778dzK",
+          "commit": {
+            "abbreviatedOid": "80a8868"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T09:48:22Z",
+          "updatedAt": "2026-05-05T09:48:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78AVCj",
+          "commit": {
+            "abbreviatedOid": "80a8868"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T12:32:07Z",
+          "updatedAt": "2026-05-05T12:32:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78kZxc",
+          "commit": {
+            "abbreviatedOid": "80a8868"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:21:22Z",
+          "updatedAt": "2026-05-06T15:21:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78kjtA",
+          "commit": {
+            "abbreviatedOid": "80a8868"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM",
+          "createdAt": "2026-05-06T15:26:13Z",
+          "updatedAt": "2026-05-06T15:26:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 163,
+      "id": "PR_kwDOLJjbks7YV7TF",
+      "title": "Audit normative HTTP status code language for BCP 56 / RFC 9205 \u00a74.6 compliance",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/163",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Per Mohamed Boucadair's [SCITT mailing list review](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/), several uses of normative language pin specific HTTP status codes in ways that conflict with [RFC 9205 \u00a74.6](https://www.rfc-editor.org/rfc/rfc9205#section-4.6): one-to-one mappings between application errors and status codes, `MUST`-level requirements on codes that intermediaries/caches can override, and no guidance instructing clients to fall back to generic class (`n00`) semantics.\n\n### Changes\n\n- **Normative reference**: added RFC 9205.\n- **General client guidance** (Resources section): clients `MUST` handle any status code via generic class fallback (1xx/2xx/3xx/4xx/5xx) and rely on the Concise Problem Details object \u2014 not the status code \u2014 for application error semantics.\n- **Retry rule generalized**: `500 and 503` \u2192 `5xx`.\n- **Removed 1:1 error\u2192code `MUST` mappings** in *Register Signed Statement*, *Query Registration Status*, and *Individual Transparency Service Key*. Lead-in changed from:\n\n  > The following expected errors MUST be returned when the corresponding conditions are encountered.\n\n  to:\n\n  > the Transparency Service SHOULD respond with a 4xx-class status code (typically 400 Bad Request) and a Concise Problem Details object conveying one of the following error types.\n\n- **Softened 404 pinning** in *Operation Not Found*, *Resolve Receipt*, and the IANA key-discovery section to \"4xx-class status code (typically 404 Not Found)\".\n\n3xx redirect handling and the 429 rate-limit case already used `MAY` and were left unchanged.\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `www.rfc-editor.org`\n>   - Triggering command: `/home/REDACTED/work/_temp/ghcca-node/node/bin/node /home/REDACTED/work/_temp/ghcca-node/node/bin/node --enable-source-maps /home/REDACTED/work/_temp/copilot-developer-action-main/dist/index.js` (dns block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-05T09:49:13Z",
+      "updatedAt": "2026-05-06T15:26:34Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/audit-normative-language-compliance",
+      "headRefOid": "c83aa46765b37ff3f9b52a023cefe60949576665",
+      "closedAt": "2026-05-06T15:26:29Z",
+      "mergedAt": "2026-05-06T15:26:29Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "e3611fd886dca1473d1907c78247fb0140d1b85a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7784I1",
+          "commit": {
+            "abbreviatedOid": "c83aa46"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T10:04:53Z",
+          "updatedAt": "2026-05-05T10:04:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks77_Z7_",
+          "commit": {
+            "abbreviatedOid": "c83aa46"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "This language is much clearer.",
+          "createdAt": "2026-05-05T11:58:40Z",
+          "updatedAt": "2026-05-05T11:58:40Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78ASbe",
+          "commit": {
+            "abbreviatedOid": "c83aa46"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T12:30:50Z",
+          "updatedAt": "2026-05-05T12:30:50Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78kkaa",
+          "commit": {
+            "abbreviatedOid": "c83aa46"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:26:34Z",
+          "updatedAt": "2026-05-06T15:26:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 164,
+      "id": "PR_kwDOLJjbks7YV7kT",
+      "title": "Expand SCITT acronym in document title",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/164",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Per [Mohamed Boucadair's review](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/) on the SCITT mailing list, the document title should expand the SCITT acronym.\n\n### Changes\n- `draft-ietf-scitt-scrapi.md`: update front-matter `title` from `SCITT Reference APIs` to `Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs`. The `abbrev: SCRAPI` field is unchanged, preserving the running short title.",
+      "createdAt": "2026-05-05T09:49:25Z",
+      "updatedAt": "2026-05-06T15:27:01Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/update-document-title-for-scitt",
+      "headRefOid": "c5b88cab4be341900b0cb301dd1a3d6b6d9be166",
+      "closedAt": "2026-05-06T15:26:57Z",
+      "mergedAt": "2026-05-06T15:26:57Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "790a676402c24b0e618c20024b9a94ebf500a1b9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks778wTt",
+          "commit": {
+            "abbreviatedOid": "c5b88ca"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T09:59:23Z",
+          "updatedAt": "2026-05-05T09:59:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks77_bwo",
+          "commit": {
+            "abbreviatedOid": "c5b88ca"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T11:59:52Z",
+          "updatedAt": "2026-05-05T11:59:52Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78ATc9",
+          "commit": {
+            "abbreviatedOid": "c5b88ca"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T12:31:21Z",
+          "updatedAt": "2026-05-05T12:31:21Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78klXR",
+          "commit": {
+            "abbreviatedOid": "c5b88ca"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:27:01Z",
+          "updatedAt": "2026-05-06T15:27:01Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 165,
+      "id": "PR_kwDOLJjbks7YV8ZJ",
+      "title": "Move normative content from IANA \u00a75.1.1 to main body",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/165",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Per [Mohamed Boucadair's SCITT WG review](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/), IANA Considerations \u00a75.1.1 (Resource Definition) contained normative behavior that belongs in the body of the spec; only the registration itself should remain under IANA.\n\n### Changes to `draft-ietf-scitt-scrapi.md`\n\n- **\u00a72.1 Transparency Service Keys**: folded in the unique normative bits from \u00a75.1.1 \u2014 resource path `/.well-known/scitt-keys`, `MUST` respond with a COSE Key Set serialized as `application/cbor`, and clients `SHOULD` send `Accept: application/cbor`.\n- **\u00a72.2 Individual Transparency Service Key**: same treatment for the `/{kid_value}` sub-resource (`MUST` return single COSE Key as `application/cbor`, or 404).\n- **\u00a75.1 Well-Known URI for Key Discovery (IANA)**: removed the \"Resource Definition\" subsection; replaced with a one-line registration request plus a cross-reference to {{sec-transparency-service-keys}} / {{sec-individual-transparency-service-key}}. Registration Template is unchanged.\n\nContent already present in the main body (HTTP examples, key lifecycle, `kid` encoding, error handling) was not duplicated.",
+      "createdAt": "2026-05-05T09:50:04Z",
+      "updatedAt": "2026-05-06T15:33:56Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "790a676402c24b0e618c20024b9a94ebf500a1b9",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/move-normative-content-to-main-body",
+      "headRefOid": "792184692f68002aaaf9428f5e46393788ee241e",
+      "closedAt": "2026-05-06T15:33:56Z",
+      "mergedAt": "2026-05-06T15:33:56Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "3dd950f09326cd1b57928b102c081f7d358e8142"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks77_d3c",
+          "commit": {
+            "abbreviatedOid": "bb0173c"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T12:01:20Z",
+          "updatedAt": "2026-05-05T12:01:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78ARcD",
+          "commit": {
+            "abbreviatedOid": "bb0173c"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T12:30:21Z",
+          "updatedAt": "2026-05-05T12:30:21Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78kx4X",
+          "commit": {
+            "abbreviatedOid": "bb0173c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:33:23Z",
+          "updatedAt": "2026-05-06T15:33:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 166,
+      "id": "PR_kwDOLJjbks7YWeqn",
+      "title": "Resolve MUST/MAY conflict in error handling requirements",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/166",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Per Mohamed Boucadair's [SCITT list review](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/), the construct *\"the following errors MUST be returned ... Implementations MAY return other errors\"* is self-contradictory: the MUST mandates a specific response while the MAY permits an alternative.\n\n### Changes\nReworded the three affected sites in `draft-ietf-scitt-scrapi.md` (the 404 \"No such key\" section and both Status 400 \"Invalid Client Request\" sections) to separate the unconditional requirement from the recommendation:\n\n- **MUST** \u2014 return an error response that is a valid {{RFC9290}} object when the condition is encountered.\n- **SHOULD** \u2014 use the listed error.\n- **MAY** \u2014 substitute another valid {{RFC9290}} error.\n\n### Before\n> The following expected errors MUST be returned when the corresponding conditions are encountered.\n> Implementations MAY return other errors, so long as they are valid {{RFC9290}} objects.\n\n### After\n> The following expected errors are defined for the conditions described below.\n> When such a condition is encountered, an implementation MUST return an error response that is a valid {{RFC9290}} object.\n> Implementations SHOULD use the corresponding error defined below, but MAY return another valid {{RFC9290}} error instead.\n\nAlso removed a now-redundant trailing \"Implementations MAY return other errors...\" sentence at the single-error 404 site, since the clarification is folded into the lead-in.",
+      "createdAt": "2026-05-05T10:18:24Z",
+      "updatedAt": "2026-05-06T15:37:48Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "3dd950f09326cd1b57928b102c081f7d358e8142",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/revise-error-handling-requirements",
+      "headRefOid": "3a90cf61279a650f6a09c5bd5c1a7bae3984e522",
+      "closedAt": "2026-05-06T15:37:37Z",
+      "mergedAt": "2026-05-06T15:37:37Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "c64f3060554022c50c7fd08dadbd79a09d7a28f8"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks77_hS8",
+          "commit": {
+            "abbreviatedOid": "0d220ff"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T12:03:56Z",
+          "updatedAt": "2026-05-05T12:03:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78AQKU",
+          "commit": {
+            "abbreviatedOid": "0d220ff"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T12:29:41Z",
+          "updatedAt": "2026-05-05T12:29:41Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78k3ml",
+          "commit": {
+            "abbreviatedOid": "0d220ff"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:36:18Z",
+          "updatedAt": "2026-05-06T15:36:18Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78k6ZU",
+          "commit": {
+            "abbreviatedOid": "3a90cf6"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:37:48Z",
+          "updatedAt": "2026-05-06T15:37:48Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 167,
+      "id": "PR_kwDOLJjbks7YWfa1",
+      "title": "Clarify NIST SP 800-57 reference, promote to normative, and document key-retention operational implications",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/167",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Addresses [Mohamed Boucadair's review](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/) of the retired-key retention guidance: the reference to NIST SP 800-57 Pt 1 Rev 5 \u00a75.3.4 lacked a precise mapping, was misclassified as informative despite backing a SHOULD, and the spec did not call out the operational impact of (not) retaining retired keys.\n\n### Changes to `draft-ietf-scitt-scrapi.md`\n\n- **Reference reclassified as normative.** Moved `NIST.SP.800-57pt1r5` from the `informative:` to the `normative:` block, consistent with the IESG Statement on Normative and Informative References given that it underpins a SHOULD-level requirement.\n- **Section 5.3.4 mapping clarified.** The citation now identifies the relevant concept being borrowed: the distinction between the *originator-usage period* (private key applies protection) and the *recipient-usage period* (public key verifies protection), which is what justifies keeping verification keys available past signing retirement.\n- **Operational implications called out.** Added text describing the Transparency Service's responsibility to securely and continuously store retired keys plus associated metadata (`kid`, validity periods) and to keep serving them from the Individual Transparency Service Key resource for the full retention period.\n- **Consequences of not following the SHOULD.** Added text noting that dropping retired keys breaks verifiability of previously issued Receipts and disrupts downstream consumers relying on long-term verification.\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-05T10:19:08Z",
+      "updatedAt": "2026-05-06T15:46:25Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/clarify-mapping-normative-reference",
+      "headRefOid": "3cb2d0f3f312c219255e7cdb678e9e4c0df503de",
+      "closedAt": "2026-05-06T15:46:25Z",
+      "mergedAt": "2026-05-06T15:46:25Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "5a644f91616a83760e4b57101c8ee1567abb3c06"
+      },
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> This may be more related to the architecture document as opposed to scrapi, IMO: \"Retaining retired keys has operational implications: the Transparency Service is responsible for storing those keys (and their associated metadata, such as `kid` values and validity periods) securely and continuously, and for serving them via the Individual Transparency Service Key resource (see {{sec-individual-transparency-service-key}}) for the entire retention period.\"\r\n\r\nYes, 100% agree, but the architecture is locked now. I think addresses the gist of Mohamed's review point (#149), but I am of course open to alternatives (particularly shorter ones!).",
+          "createdAt": "2026-05-05T15:51:32Z",
+          "updatedAt": "2026-05-05T15:51:32Z"
+        },
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'll approve in order to move scrapi along, now that Google has annouced their own Trust Registry, we have no time to waste in gettering SCITT/SCRAPI approved ",
+          "createdAt": "2026-05-05T16:04:49Z",
+          "updatedAt": "2026-05-05T16:04:49Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks77_lOa",
+          "commit": {
+            "abbreviatedOid": "5cebadc"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T12:06:15Z",
+          "updatedAt": "2026-05-05T12:06:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78GUWm",
+          "commit": {
+            "abbreviatedOid": "5cebadc"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "This may be more related to the architecture document as opposed to scrapi, IMO: \"Retaining retired keys has operational implications: the Transparency Service is responsible for storing those keys (and their associated metadata, such as `kid` values and validity periods) securely and continuously, and for serving them via the Individual Transparency Service Key resource (see {{sec-individual-transparency-service-key}}) for the entire retention period.\"",
+          "createdAt": "2026-05-05T15:35:27Z",
+          "updatedAt": "2026-05-05T15:35:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78HGDJ",
+          "commit": {
+            "abbreviatedOid": "5cebadc"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "see earlier comments",
+          "createdAt": "2026-05-05T16:05:10Z",
+          "updatedAt": "2026-05-05T16:05:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78H31M",
+          "commit": {
+            "abbreviatedOid": "5cebadc"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T16:34:22Z",
+          "updatedAt": "2026-05-05T16:34:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78lH9F",
+          "commit": {
+            "abbreviatedOid": "3cb2d0f"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:46:00Z",
+          "updatedAt": "2026-05-06T15:46:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 168,
+      "id": "PR_kwDOLJjbks7YWfrs",
+      "title": "Clarify characterization of \"normative requirements\" of SCITT",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/168",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Review feedback on the abstract noted that the phrase \"supports the normative requirements of the SCITT Architecture\" was unclear: it didn't say which requirements, whether coverage was complete, or how SCRAPI maps to the architecture document.\n\n### Changes to `draft-ietf-scitt-scrapi.md`\n\n- **Abstract**: replaced the vague \"normative requirements\" wording with a concrete description of what SCRAPI defines \u2014 HTTP resources, request/response messages, and error handling for an interoperable Transparency Service.\n- **New `Scope and Relation to the SCITT Architecture` subsection** (Introduction):\n  - Defines what \"normative requirements of the SCITT Architecture\" means in this spec \u2014 BCP 14 requirements in `{{-SCITT-ARCH}}` pertaining to externally observable Transparency Service behavior.\n  - Maps each MUST-implement resource to its architecture section:\n    - Registration of Signed Statements \u2192 \u00a76.3\n    - Receipts / Transparent Statements \u2192 \u00a77\n    - Verification key discovery \u2192 \u00a75.1.2 and \u00a79.4\n  - States that the mandatory-to-implement resources are sufficient for interoperability.\n  - Calls out what is **intentionally out of scope**: Verifiable Data Structure internals (\u00a75.1.3), Registration Policy contents (\u00a75.1.1), the COSE message formats themselves, and non-HTTP transports.\n\nNo normative behavior changes; this is purely a clarification of scope and a forward-mapping to the architecture document.",
+      "createdAt": "2026-05-05T10:19:24Z",
+      "updatedAt": "2026-05-06T15:54:49Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "a48ed6ae9044e7ef99caf2f5ea5374149a88359f",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/clarify-normative-requirements",
+      "headRefOid": "a4d2c3d441f1c58cb507e5fb06307058d1e79c48",
+      "closedAt": "2026-05-06T15:54:48Z",
+      "mergedAt": "2026-05-06T15:54:48Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "eb06ab0465503ac4ea716d58be75ab90a07bfeb6"
+      },
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Should we consider adding support for a Zero Trust identity of the party requesting SCRAPI services? I have submitted a IANA URI request for ztdnaid for these very scenarios. This should not be required but we may want to consider supporting Zero Trust implementations\r\n\r\nIt's a good question, but considering we're past WGLC and lined up for telechat in a couple of weeks, I would say it is too late to make anything other than changes in response to reviews. @henkbirkholz and @nikcal can correct me if I'm wrong about the process.",
+          "createdAt": "2026-05-05T15:42:50Z",
+          "updatedAt": "2026-05-05T15:42:50Z"
+        },
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This need for \"Zero Trust\" verification is becoming a hot topic that I'm following closely. We can always address this in a later release",
+          "createdAt": "2026-05-05T16:07:15Z",
+          "updatedAt": "2026-05-05T16:07:15Z"
+        },
+        {
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@achamayou is correct. SCRAPI is on the 5/21 telechat, however, I'm not seeing anything in the spec that would block/or conflict with your scenario @rjb4standards, am I missing something? ",
+          "createdAt": "2026-05-05T16:09:12Z",
+          "updatedAt": "2026-05-05T16:09:12Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> This need for \"Zero Trust\" verification is becoming a hot topic that I'm following closely. We can always address this in a later release\r\n\r\nUnless I am missing something, the specs are not only compatible but essentially achieve this because they mandate that any RP should be able to verify the proofs, and that Auditors must be given enough material to re-evaluate all registration policies (https://ietf-wg-scitt.github.io/draft-ietf-scitt-architecture/draft-ietf-scitt-architecture.html#section-5.1.1.2).",
+          "createdAt": "2026-05-05T16:10:28Z",
+          "updatedAt": "2026-05-05T16:10:28Z"
+        },
+        {
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > This need for \"Zero Trust\" verification is becoming a hot topic that I'm following closely. We can always address this in a later release\r\n> \r\n> Unless I am missing something, the specs are not only compatible but essentially achieve this because they mandate that any RP should be able to verify the proofs, and that Auditors must be given enough material to re-evaluate all registration policies (https://ietf-wg-scitt.github.io/draft-ietf-scitt-architecture/draft-ietf-scitt-architecture.html#section-5.1.1.2).\r\n\r\nAmaury, a Zero Trust check takes place early in connection processing, i.e. the HTTP layer where an Entity asserts an identify that can be verified using a Zero Trust Registry that authorizes an Entity to interact with a Resource (Transparency Service) before any actual SCITT protocol exchanges occur.",
+          "createdAt": "2026-05-05T16:38:15Z",
+          "updatedAt": "2026-05-05T16:38:15Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks78C6JN",
+          "commit": {
+            "abbreviatedOid": "a4d2c3d"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T13:49:32Z",
+          "updatedAt": "2026-05-05T13:49:32Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78FkC0",
+          "commit": {
+            "abbreviatedOid": "a4d2c3d"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T15:10:13Z",
+          "updatedAt": "2026-05-05T15:10:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78GPeQ",
+          "commit": {
+            "abbreviatedOid": "a4d2c3d"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Should we consider adding support for a Zero Trust identity of the party requesting SCRAPI services? I have submitted a IANA URI request for ztdnaid for these very scenarios.\nThis should not be required but we may want to consider supporting Zero Trust implementations",
+          "createdAt": "2026-05-05T15:32:27Z",
+          "updatedAt": "2026-05-05T15:32:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78HKod",
+          "commit": {
+            "abbreviatedOid": "a4d2c3d"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "See earlier comments",
+          "createdAt": "2026-05-05T16:07:58Z",
+          "updatedAt": "2026-05-05T16:07:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78H2uM",
+          "commit": {
+            "abbreviatedOid": "a4d2c3d"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-05T16:33:38Z",
+          "updatedAt": "2026-05-05T16:33:38Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78lRwx",
+          "commit": {
+            "abbreviatedOid": "a4d2c3d"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-06T15:52:15Z",
+          "updatedAt": "2026-05-06T15:52:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 169,
+      "id": "PR_kwDOLJjbks7Yct4f",
+      "title": "Move RFC9921 to normative references and clarify timestamp mechanisms",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/169",
+      "state": "OPEN",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Per [IESG policy](https://www.ietf.org/about/groups/iesg/statements/normative-informative-references/), any reference used with normative language (including MAY) must be classified normative. RFC9921 was incorrectly listed as informative despite being referenced with MAY.\n\n## Changes\n\n**References**\n- Moved `RFC9921` from `informative` to `normative`\n- Added `RFC9597` (CWT Claims in COSE Headers) to `normative` \u2014 needed for the `CWT_Claims` header parameter added to the text\n\n**Replay Attacks section**\n\nReplaces the single vague mention of RFC9921 with explicit guidance distinguishing two timestamp mechanisms, while preserving extensibility:\n\n```\nIf the semantic content of the payload are time-dependent and susceptible to\nreplay attacks in this way then timestamps MUST be added to the protected\nheader signed by the Issuer.\nThe `iat` claim in a `CWT_Claims` header parameter (RFC9597) MAY be used\nwhen the Issuer provides the timestamp directly.\nWhere a timestamp from a third party is required, the COSE header parameters\ndefined in RFC9921 for including RFC3161 timestamp tokens MAY be used.\nOther mechanisms for including timestamps in the protected header MAY also\nbe used.\n```\n\n`RFC3161` remains informative \u2014 it is only cited descriptively in context of RFC9921, not referenced with normative language directly.",
+      "createdAt": "2026-05-05T15:15:07Z",
+      "updatedAt": "2026-05-06T16:34:31Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "eb06ab0465503ac4ea716d58be75ab90a07bfeb6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/move-rfc9921-to-normative",
+      "headRefOid": "1c590f0289629ee29c3e8a5bde20127739543132",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks78F5e1",
+          "commit": {
+            "abbreviatedOid": "ecb81ba"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-05T15:20:04Z",
+          "updatedAt": "2026-05-05T15:20:05Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\nThe `iat` claim in a `CWT_Claims` header parameter ({{RFC9597}}) MUST be used when the Issuer provides the timestamp directly.\nWhere a timestamp from a third party is required, the COSE header parameters defined in {{RFC9921}} for including {{RFC3161}} timestamp tokens MUST be used.\n```",
+              "createdAt": "2026-05-05T15:20:04Z",
+              "updatedAt": "2026-05-05T15:20:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks78GG1S",
+          "commit": {
+            "abbreviatedOid": "a783fe0"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "No objection",
+          "createdAt": "2026-05-05T15:27:19Z",
+          "updatedAt": "2026-05-05T15:27:29Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78Gu2F",
+          "commit": {
+            "abbreviatedOid": "a783fe0"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Per feedback, this edit adds clarity to the section. ",
+          "createdAt": "2026-05-05T15:51:07Z",
+          "updatedAt": "2026-05-05T15:51:07Z",
+          "comments": []
         }
       ]
     }
