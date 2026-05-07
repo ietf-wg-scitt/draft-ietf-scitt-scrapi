@@ -112,6 +112,8 @@ normative:
   RFC8792:
   RFC3161:
 
+informative:
+  I-D.ietf-rats-epoch-markers: EPOCH-MARKERS
   NIST.SP.800-57pt1r5:
     title: "Recommendation for Key Management: Part 1 - General"
     author:
