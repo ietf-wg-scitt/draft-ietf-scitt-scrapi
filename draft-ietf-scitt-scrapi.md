@@ -102,6 +102,7 @@ normative:
   RFC8615:
   RFC9052:
   RFC9110:
+  RFC9111:
   RFC9205:
   RFC9290:
   RFC7515:
@@ -272,6 +273,14 @@ A delay is considered reasonable if it is sufficient for relying parties to have
 Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4, which distinguishes the originator-usage period during which a private key is used to apply cryptographic protection from the recipient-usage period during which the corresponding public key is used to verify that protection), retired public keys used for signing SHOULD remain available for verification for as long as any Receipts signed with them may still need to be verified.
 Retaining retired keys has operational implications: the Transparency Service is responsible for storing those keys (and their associated metadata, such as `kid` values and validity periods) securely and continuously, and for serving them via the Individual Transparency Service Key resource (see {{sec-individual-transparency-service-key}}) for the entire retention period.
 If retired public keys are not retained, Receipts issued under those keys can no longer be verified by relying parties using only the Transparency Service's published key material, which may break the verifiability of previously issued Receipts and disrupt downstream consumers that depend on long-term verification.
+
+A Transparency Service MAY include the `Expires` header field, as defined in {{Section 5.3 of RFC9111}}, in responses returned by this resource and by the Individual Transparency Service Key resource ({{sec-individual-transparency-service-key}}) to indicate how long clients may cache the returned keys.
+A Transparency Service MAY use the `Cache-Control` header field with the `max-age` directive, as defined in {{Section 5.2.2.1 of RFC9111}}, for the same purpose; when both are present, `Cache-Control: max-age` takes precedence per {{Section 4.2.1 of RFC9111}}.
+The cache lifetime indicated by these headers is a hint about server availability and does not constrain client retention. A relying party that holds a Receipt SHOULD retain the verification key for as long as it may need to verify that Receipt, independent of any cache lifetime indicated by the Transparency Service.
+
+The presence of these headers does not constitute a guarantee of key availability.
+A Transparency Service may still need to retire a key before any indicated cache lifetime has elapsed, for example in response to suspected compromise or cryptographic algorithm deprecation.
+In such cases, a relying party that holds a Receipt signed with a retired key can request a fresh Receipt for the same Signed Statement at the same position in the Verifiable Data Structure, signed with a current key.
 
 ## Individual Transparency Service Key
 
