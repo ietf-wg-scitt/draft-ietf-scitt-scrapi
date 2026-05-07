@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 7 November 2026                        Bowball Technologies Ltd
+Expires: 8 November 2026                        Bowball Technologies Ltd
                                                       A. Delignat-Lavaud
                                                       Microsoft Research
-                                                              6 May 2026
+                                                              7 May 2026
 
 
  Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 November 2026.
+   This Internet-Draft will expire on 8 November 2026.
 
 Copyright Notice
 
@@ -103,7 +103,9 @@ Table of Contents
    6.  IANA Considerations
      6.1.  Well-Known URI for Key Discovery
        6.1.1.  Registration Template
-   7.  Normative References
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Contributors
    Authors' Addresses
 
@@ -971,10 +973,12 @@ Table of Contents
    added to the protected header signed by the Issuer.  The iat claim in
    a CWT_Claims header parameter ([RFC9597]) MUST be used when the
    Issuer provides the timestamp themselves.  The COSE header parameters
-   defined in [RFC9921] for including [RFC3161] timestamp tokens SHOULD
-   be used, where a timestamp from a third party is required.  Other
-   mechanisms for including timestamps in the protected header MAY also
-   be used.
+   defined in [RFC9921] for including [RFC3161] timestamp tokens or a
+   similar mechanic, for example an Epoch Marker
+   [I-D.ietf-rats-epoch-markers] Claim in the 'CWT_Claims' header
+   parameter, SHOULD be used, where a timestamp from a third party is
+   required.  Other mechanisms for including timestamps in the protected
+   header MAY also be used.
 
 4.4.2.2.  Message Deletion Attacks
 
@@ -1060,7 +1064,9 @@ Table of Contents
    document(s): RFCthis Status: Permanent Related information:
    [I-D.draft-ietf-scitt-architecture]
 
-7.  Normative References
+7.  References
+
+7.1.  Normative References
 
    [I-D.draft-ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
@@ -1069,12 +1075,6 @@ Table of Contents
               Internet-Draft, draft-ietf-scitt-architecture-22, 10
               October 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-scitt-architecture-22>.
-
-   [NIST.SP.800-57pt1r5]
-              Barker, E., "Recommendation for Key Management: Part 1 -
-              General", NIST Special Publication 800-57 Part 1 Revision
-              5, May 2020,
-              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1140,6 +1140,21 @@ Table of Contents
               Timestamp Tokens as Defined in RFC 3161", RFC 9921,
               DOI 10.17487/RFC9921, February 2026,
               <https://www.rfc-editor.org/rfc/rfc9921>.
+
+7.2.  Informative References
+
+   [I-D.ietf-rats-epoch-markers]
+              Birkholz, H., Fossati, T., Pan, W., Mihalcea, I., and C.
+              Bormann, "Epoch Markers", Work in Progress, Internet-
+              Draft, draft-ietf-rats-epoch-markers-03, 2 March 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              epoch-markers-03>.
+
+   [NIST.SP.800-57pt1r5]
+              Barker, E., "Recommendation for Key Management: Part 1 -
+              General", NIST Special Publication 800-57 Part 1 Revision
+              5, May 2020,
+              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
 
 Contributors
 
