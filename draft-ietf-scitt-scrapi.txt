@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 7 November 2026                        Bowball Technologies Ltd
+Expires: 8 November 2026                        Bowball Technologies Ltd
                                                       A. Delignat-Lavaud
                                                       Microsoft Research
-                                                              6 May 2026
+                                                              7 May 2026
 
 
  Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 November 2026.
+   This Internet-Draft will expire on 8 November 2026.
 
 Copyright Notice
 
@@ -347,6 +347,29 @@ Table of Contents
    published key material, which may break the verifiability of
    previously issued Receipts and disrupt downstream consumers that
    depend on long-term verification.
+
+   A Transparency Service MAY include the Expires header field, as
+   defined in Section 5.3 of [RFC9111], in responses returned by this
+   resource and by the Individual Transparency Service Key resource
+   (Section 2.2) to indicate how long clients may cache the returned
+   keys.  A Transparency Service MAY use the Cache-Control header field
+   with the max-age directive, as defined in Section 5.2.2.1 of
+   [RFC9111], for the same purpose; when both are present, Cache-
+   Control: max-age takes precedence per Section 4.2.1 of [RFC9111].
+   The cache lifetime indicated by these headers is a hint about server
+   availability and does not constrain client retention.  A relying
+   party that holds a Receipt SHOULD retain the verification key for as
+   long as it may need to verify that Receipt, independent of any cache
+   lifetime indicated by the Transparency Service.
+
+   The presence of these headers does not constitute a guarantee of key
+   availability.  A Transparency Service may still need to retire a key
+   before any indicated cache lifetime has elapsed, for example in
+   response to suspected compromise or cryptographic algorithm
+   deprecation.  In such cases, a relying party that holds a Receipt
+   signed with a retired key can request a fresh Receipt for the same
+   Signed Statement at the same position in the Verifiable Data
+   Structure, signed with a current key.
 
 2.2.  Individual Transparency Service Key
 
@@ -1106,6 +1129,11 @@ Table of Contents
               Ed., "HTTP Semantics", STD 97, RFC 9110,
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9110>.
+
+   [RFC9111]  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
+              Ed., "HTTP Caching", STD 98, RFC 9111,
+              DOI 10.17487/RFC9111, June 2022,
+              <https://www.rfc-editor.org/rfc/rfc9111>.
 
    [RFC9205]  Nottingham, M., "Building Protocols with HTTP", BCP 56,
               RFC 9205, DOI 10.17487/RFC9205, June 2022,
