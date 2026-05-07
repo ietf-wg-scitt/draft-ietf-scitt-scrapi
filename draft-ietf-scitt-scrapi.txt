@@ -993,9 +993,15 @@ Table of Contents
 
    If the semantic content of the payload are time-dependent and
    susceptible to replay attacks in this way then timestamps MUST be
-   added to the protected header signed by the Issuer.  [RFC9921]
-   defines COSE header parameters for including [RFC3161] timestamp
-   tokens that MAY be used for this purpose.
+   added to the protected header signed by the Issuer.  The iat claim in
+   a CWT_Claims header parameter ([RFC9597]) MUST be used when the
+   Issuer provides the timestamp themselves.  The COSE header parameters
+   defined in [RFC9921] for including [RFC3161] timestamp tokens or a
+   similar mechanic, for example an Epoch Marker
+   [I-D.ietf-rats-epoch-markers] Claim in the 'CWT_Claims' header
+   parameter, SHOULD be used, where a timestamp from a third party is
+   required.  Other mechanisms for including timestamps in the protected
+   header MAY also be used.
 
 4.4.2.2.  Message Deletion Attacks
 
@@ -1093,16 +1099,15 @@ Table of Contents
               October 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-scitt-architecture-22>.
 
-   [NIST.SP.800-57pt1r5]
-              Barker, E., "Recommendation for Key Management: Part 1 -
-              General", NIST Special Publication 800-57 Part 1 Revision
-              5, May 2020,
-              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC3161]  Adams, C., Cain, P., Pinkas, D., and R. Zuccherato,
+              "Internet X.509 Public Key Infrastructure Time-Stamp
+              Protocol (TSP)", RFC 3161, DOI 10.17487/RFC3161, August
+              2001, <https://www.rfc-editor.org/rfc/rfc3161>.
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
@@ -1119,6 +1124,11 @@ Table of Contents
    [RFC8615]  Nottingham, M., "Well-Known Uniform Resource Identifiers
               (URIs)", RFC 8615, DOI 10.17487/RFC8615, May 2019,
               <https://www.rfc-editor.org/rfc/rfc8615>.
+
+   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
+              "Handling Long Lines in Content of Internet-Drafts and
+              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
+              <https://www.rfc-editor.org/rfc/rfc8792>.
 
    [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Structures and Process", STD 96, RFC 9052,
@@ -1144,28 +1154,35 @@ Table of Contents
               DOI 10.17487/RFC9290, October 2022,
               <https://www.rfc-editor.org/rfc/rfc9290>.
 
+   [RFC9597]  Looker, T. and M.B. Jones, "CBOR Web Token (CWT) Claims in
+              COSE Headers", RFC 9597, DOI 10.17487/RFC9597, June 2024,
+              <https://www.rfc-editor.org/rfc/rfc9597>.
+
    [RFC9679]  Isobe, K., Tschofenig, H., and O. Steele, "CBOR Object
               Signing and Encryption (COSE) Key Thumbprint", RFC 9679,
               DOI 10.17487/RFC9679, December 2024,
               <https://www.rfc-editor.org/rfc/rfc9679>.
-
-7.2.  Informative References
-
-   [RFC3161]  Adams, C., Cain, P., Pinkas, D., and R. Zuccherato,
-              "Internet X.509 Public Key Infrastructure Time-Stamp
-              Protocol (TSP)", RFC 3161, DOI 10.17487/RFC3161, August
-              2001, <https://www.rfc-editor.org/rfc/rfc3161>.
-
-   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
-              "Handling Long Lines in Content of Internet-Drafts and
-              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
-              <https://www.rfc-editor.org/rfc/rfc8792>.
 
    [RFC9921]  Birkholz, H., Fossati, T., and M. Riechert, "CBOR Object
               Signing and Encryption (COSE) Header Parameter for
               Timestamp Tokens as Defined in RFC 3161", RFC 9921,
               DOI 10.17487/RFC9921, February 2026,
               <https://www.rfc-editor.org/rfc/rfc9921>.
+
+7.2.  Informative References
+
+   [I-D.ietf-rats-epoch-markers]
+              Birkholz, H., Fossati, T., Pan, W., Mihalcea, I., and C.
+              Bormann, "Epoch Markers", Work in Progress, Internet-
+              Draft, draft-ietf-rats-epoch-markers-03, 2 March 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              epoch-markers-03>.
+
+   [NIST.SP.800-57pt1r5]
+              Barker, E., "Recommendation for Key Management: Part 1 -
+              General", NIST Special Publication 800-57 Part 1 Revision
+              5, May 2020,
+              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
 
 Contributors
 
