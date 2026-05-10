@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-07T01:30:06.288522+00:00",
+  "timestamp": "2026-05-10T01:43:08.900811+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -1808,7 +1808,7 @@
       "id": "I_kwDOLJjbks79nYwg",
       "title": "Key discovery lifetime for long-lived receipts",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/132",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1817,8 +1817,8 @@
       "labels": [],
       "body": "From Myles Bryning\u00a0on the mailing list:\n\n> Section 3.1 says a Transparency Service MAY stop returning keys it no longer uses, following \"a reasonable delay.\" For supply chain use cases, receipts might be verified weeks or months later. For AI audit trails under the EU AI Act or DORA, the verification window is measured in years. The current language defers entirely to the TS operator's judgement on what \"reasonable\" means.\n> \n> A SHOULD level recommendation for the TS to publish a minimum key retention period (via a discoverable metadata field or the TS's Registration Policy) would give relying parties something concrete to build against. Without it, an implementer building long-term audit infrastructure has no way to know whether the keys will still be there when an auditor needs them.",
       "createdAt": "2026-04-13T13:15:26Z",
-      "updatedAt": "2026-04-30T12:32:44Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-07T18:39:08Z",
+      "closedAt": "2026-05-07T18:39:08Z",
       "comments": [
         {
           "author": "achamayou",
@@ -2265,7 +2265,7 @@
       "id": "I_kwDOLJjbks8AAAABBTxgVQ",
       "title": "RFC9921 reference should be normative",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/151",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2277,8 +2277,8 @@
       ],
       "body": "From [Mohamed Boucadair review on the SCITT mailing list](https://mailarchive.ietf.org/arch/msg/scitt/aynYWkU1mIR1CD8YF5YHXi7S7jI/):\n\n**Current text:**\n\n> [RFC9921] defines COSE header parameters for including [RFC3161] timestamp tokens that MAY be used for this purpose.\n\n**Feedback:**\n\nPer the [IESG Statement on Normative and Informative References](https://www.ietf.org/about/groups/iesg/statements/normative-informative-references/): \"Even references that are relevant only for optional features must be classified as normative if they meet the above conditions for normative references.\"\n\nSince RFC9921 is used with normative language (MAY), it should be classified as a normative reference.\n\n**Suggested action:** Move RFC9921 from informative to normative references.",
       "createdAt": "2026-05-05T08:58:22Z",
-      "updatedAt": "2026-05-05T15:14:59Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-07T20:17:42Z",
+      "closedAt": "2026-05-07T20:17:42Z",
       "comments": [
         {
           "author": "achamayou",
@@ -12410,24 +12410,26 @@
       "id": "PR_kwDOLJjbks7XGSi9",
       "title": "Add cache-lifetime guidance for key discovery resources (#132)",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/147",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CueCrux-Myles",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "## Summary\n\nResolves the discussion in #132 by adding MAY-level guidance permitting a Transparency Service to use existing HTTP cache-freshness headers on the key discovery resources, rather than introducing a new retention-period vocabulary.\n\n- Adds `RFC9111` as a normative reference.\n- Adds two paragraphs to \u00a7\"Transparency Service Keys\":\n  - **Caching mechanism** \u2014 TS MAY use `Expires` ([RFC 9111 \u00a75.3](https://www.rfc-editor.org/rfc/rfc9111#section-5.3)) or `Cache-Control: max-age` ([\u00a75.2.2.1](https://www.rfc-editor.org/rfc/rfc9111#section-5.2.2.1)) on responses from this resource and from the Individual Transparency Service Key resource. Notes the precedence rule from [\u00a74.2.1](https://www.rfc-editor.org/rfc/rfc9111#section-4.2.1) when both are present. Default-deny when neither is present.\n  - **No-guarantee clause** \u2014 explicitly states that the headers do not promise availability; a TS can still retire a key earlier in response to suspected compromise or algorithm deprecation, in which case a relying party can request a fresh Receipt at the same position in the VDS signed with a current key.\n\n## Rationale\n\nThis matches the convergence point in #132:\n\n- @achamayou: \"_it probably makes sense to leverage an existing mechanism like `Expires`, rather than come up with something new_\" and \"_can you open a PR to add language saying that implementations of the TS MAY use the Expire header to communicate to clients how long they can cache keys, with a reference to the section in RFC9111 that covers that header?_\"\n- @rjb4standards: supportive of surfacing a cache-lifetime signal to relying parties.\n\nThe MAY-level posture preserves the TS's freedom to rotate keys at any time (the core constraint @achamayou raised), while giving relying parties a deterministic signal when one is offered. `Cache-Control: max-age` is included alongside `Expires` because RFC 9111 itself prefers it and \u00a74.2.1 already defines the precedence rule \u2014 happy to drop it if the WG would rather match the issue ask verbatim.\n\n## Test plan\n\n- [ ] Render via `make` (kramdown-rfc) and visually check the new paragraphs in \u00a7\"Transparency Service Keys\"\n- [ ] Confirm RFC 9111 normative reference appears in the references section\n- [ ] Confirm the cross-reference `{{sec-individual-transparency-service-key}}` resolves correctly\n- [ ] WG review for wording, particularly the \"fresh Receipt at the same VDS position\" sentence (paraphrased from #132 discussion)\n\nCloses #132.",
       "createdAt": "2026-04-30T12:27:18Z",
-      "updatedAt": "2026-05-06T17:09:46Z",
+      "updatedAt": "2026-05-07T18:39:07Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "eb06ab0465503ac4ea716d58be75ab90a07bfeb6",
       "headRepository": "CueCrux-Myles/draft-ietf-scitt-scrapi",
       "headRefName": "expires-header-key-cache-132",
       "headRefOid": "5ab80bbaada2ed4ce3f0497d7e5f3342ebd8a32f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-05-07T18:39:07Z",
+      "mergedAt": "2026-05-07T18:39:07Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "d2f42c28f6179220f076e8011c09fcd15dd22a64"
+      },
       "comments": [
         {
           "author": "achamayou",
@@ -12435,6 +12437,13 @@
           "body": "Looks good to me, I agree this closes #132 by providing to TSs who wish to implement it a way to signal how long they intend to serve public keys. ",
           "createdAt": "2026-05-06T16:37:56Z",
           "updatedAt": "2026-05-06T16:37:56Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "fixes #132 ",
+          "createdAt": "2026-05-07T18:38:52Z",
+          "updatedAt": "2026-05-07T18:38:52Z"
         }
       ],
       "reviews": [
@@ -12582,6 +12591,19 @@
           "body": "Edits address feedback on Expires header field. ",
           "createdAt": "2026-05-06T17:09:46Z",
           "updatedAt": "2026-05-06T17:09:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks79ILKl",
+          "commit": {
+            "abbreviatedOid": "5ab80bb"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-07T18:37:15Z",
+          "updatedAt": "2026-05-07T18:37:15Z",
           "comments": []
         }
       ]
@@ -13645,7 +13667,7 @@
       "id": "PR_kwDOLJjbks7Yct4f",
       "title": "Move RFC9921 to normative references and clarify timestamp mechanisms",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/169",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "copilot-swe-agent",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -13655,17 +13677,19 @@
       "labels": [],
       "body": "Per [IESG policy](https://www.ietf.org/about/groups/iesg/statements/normative-informative-references/), any reference used with normative language (including MAY) must be classified normative. RFC9921 was incorrectly listed as informative despite being referenced with MAY.\n\n## Changes\n\n**References**\n- Moved `RFC9921` from `informative` to `normative`\n- Added `RFC9597` (CWT Claims in COSE Headers) to `normative` \u2014 needed for the `CWT_Claims` header parameter added to the text\n\n**Replay Attacks section**\n\nReplaces the single vague mention of RFC9921 with explicit guidance distinguishing two timestamp mechanisms, while preserving extensibility:\n\n```\nIf the semantic content of the payload are time-dependent and susceptible to\nreplay attacks in this way then timestamps MUST be added to the protected\nheader signed by the Issuer.\nThe `iat` claim in a `CWT_Claims` header parameter (RFC9597) MAY be used\nwhen the Issuer provides the timestamp directly.\nWhere a timestamp from a third party is required, the COSE header parameters\ndefined in RFC9921 for including RFC3161 timestamp tokens MAY be used.\nOther mechanisms for including timestamps in the protected header MAY also\nbe used.\n```\n\n`RFC3161` remains informative \u2014 it is only cited descriptively in context of RFC9921, not referenced with normative language directly.",
       "createdAt": "2026-05-05T15:15:07Z",
-      "updatedAt": "2026-05-06T16:34:31Z",
+      "updatedAt": "2026-05-07T20:17:41Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "eb06ab0465503ac4ea716d58be75ab90a07bfeb6",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "copilot/move-rfc9921-to-normative",
-      "headRefOid": "1c590f0289629ee29c3e8a5bde20127739543132",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "da51ecef3b451419158f04e2c5d510a94e587587",
+      "closedAt": "2026-05-07T20:17:41Z",
+      "mergedAt": "2026-05-07T20:17:41Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "3156c7746ae78cb7df2358c545b47c5318bc6f1c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -13713,8 +13737,69 @@
           "createdAt": "2026-05-05T15:51:07Z",
           "updatedAt": "2026-05-05T15:51:07Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks78lrdf",
+          "commit": {
+            "abbreviatedOid": "0e5fc23"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T16:06:27Z",
+          "updatedAt": "2026-05-07T18:44:18Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\nThe COSE header parameters defined in {{RFC9921}} for including {{RFC3161}} timestamp tokens or a similar mechanic, for example an Epoch Marker {{-EPOCH-MARKERS}} Claim in the 'CWT_Claims' header parameter, SHOULD be used, where a timestamp from a third party is required.\n```",
+              "createdAt": "2026-05-07T18:44:18Z",
+              "updatedAt": "2026-05-07T18:44:18Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 170,
+      "id": "PR_kwDOLJjbks7Zb27O",
+      "title": "Correct reference re-classification that happened by accident in #169 and undid #167",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/170",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-05-08T07:09:43Z",
+      "updatedAt": "2026-05-08T16:18:07Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "3156c7746ae78cb7df2358c545b47c5318bc6f1c",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-18",
+      "headRefOid": "f212d5b516c6d3d281a5784a77bc5e6402351bda",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@copilot looks at build failures and propose a fix",
+          "createdAt": "2026-05-08T16:15:17Z",
+          "updatedAt": "2026-05-08T16:15:17Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> @copilot looks at build failures and propose a fix\n\nI checked the failing GitHub Actions run and fixed it in commit `f212d5b`: the failure was from `lint-whitespace` due to trailing whitespace at line 124 in `draft-ietf-scitt-scrapi.md`. I removed that whitespace, which should unblock the build. (No UI changes in this PR.)\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>\n\n",
+          "createdAt": "2026-05-08T16:17:23Z",
+          "updatedAt": "2026-05-08T16:18:07Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
