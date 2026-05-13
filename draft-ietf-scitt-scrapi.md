@@ -334,8 +334,6 @@ If the `kid` values used by the service (`{kid_value}` in the request above) are
 
 {{Section 2 of RFC7515}} specifies Base64Url encoding as follows:
 
-{{RFC7515}} specifies Base64url encoding as follows:
-
 "Base64 encoding using the URL- and filename-safe character set
 defined in Section 5 of RFC 4648 {{RFC4648}}, with all trailing '='
 characters omitted and without the inclusion of any line breaks,
