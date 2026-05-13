@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 8 November 2026                        Bowball Technologies Ltd
+Expires: 14 November 2026                       Bowball Technologies Ltd
                                                       A. Delignat-Lavaud
                                                       Microsoft Research
-                                                              7 May 2026
+                                                             13 May 2026
 
 
  Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 November 2026.
+   This Internet-Draft will expire on 14 November 2026.
 
 Copyright Notice
 
@@ -1099,6 +1099,12 @@ Table of Contents
               October 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-scitt-architecture-22>.
 
+   [NIST.SP.800-57pt1r5]
+              Barker, E., "Recommendation for Key Management: Part 1 -
+              General", NIST Special Publication 800-57 Part 1 Revision
+              5, May 2020,
+              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -1177,12 +1183,6 @@ Table of Contents
               Draft, draft-ietf-rats-epoch-markers-03, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               epoch-markers-03>.
-
-   [NIST.SP.800-57pt1r5]
-              Barker, E., "Recommendation for Key Management: Part 1 -
-              General", NIST Special Publication 800-57 Part 1 Revision
-              5, May 2020,
-              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
 
 Contributors
 
