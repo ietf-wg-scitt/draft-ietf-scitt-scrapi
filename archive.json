@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-10T01:43:08.900811+00:00",
+  "timestamp": "2026-05-14T01:53:25.694223+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -13765,24 +13765,26 @@
       "id": "PR_kwDOLJjbks7Zb27O",
       "title": "Correct reference re-classification that happened by accident in #169 and undid #167",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/170",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-05-08T07:09:43Z",
-      "updatedAt": "2026-05-08T16:18:07Z",
+      "updatedAt": "2026-05-13T13:53:09Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "3156c7746ae78cb7df2358c545b47c5318bc6f1c",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "achamayou-patch-18",
       "headRefOid": "f212d5b516c6d3d281a5784a77bc5e6402351bda",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-05-13T13:53:08Z",
+      "mergedAt": "2026-05-13T13:53:08Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "5e0f09e10c5ec9634bdf47635abb9394cfdaf574"
+      },
       "comments": [
         {
           "author": "achamayou",
@@ -13797,9 +13799,85 @@
           "body": "\n> @copilot looks at build failures and propose a fix\n\nI checked the failing GitHub Actions run and fixed it in commit `f212d5b`: the failure was from `lint-whitespace` due to trailing whitespace at line 124 in `draft-ietf-scitt-scrapi.md`. I removed that whitespace, which should unblock the build. (No UI changes in this PR.)\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>\n\n",
           "createdAt": "2026-05-08T16:17:23Z",
           "updatedAt": "2026-05-08T16:18:07Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "I thought I did that somewhere already, but better twice than not at all!",
+          "createdAt": "2026-05-13T13:49:08Z",
+          "updatedAt": "2026-05-13T13:49:08Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7_Peot",
+          "commit": {
+            "abbreviatedOid": "f212d5b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-13T13:48:39Z",
+          "updatedAt": "2026-05-13T13:48:39Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 171,
+      "id": "PR_kwDOLJjbks7bLQAR",
+      "title": "Remove duplicate Base64Url encoding reference",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/171",
+      "state": "MERGED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Removed duplicate mention of Base64Url encoding from the document.\r\n\r\nFlagged by https://mailarchive.ietf.org/arch/msg/scitt/F8Elv2na-HZkQSYdS98N81NWfHE",
+      "createdAt": "2026-05-13T15:16:04Z",
+      "updatedAt": "2026-05-13T15:29:03Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "5e0f09e10c5ec9634bdf47635abb9394cfdaf574",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "achamayou-patch-19",
+      "headRefOid": "d6a984fdd645989a11366d6a42182244e6853d78",
+      "closedAt": "2026-05-13T15:18:21Z",
+      "mergedAt": "2026-05-13T15:18:21Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "11450d25b1967e1608b51267292b4c13cde518a6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks7_SYUo",
+          "commit": {
+            "abbreviatedOid": "d6a984f"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Obvious fix! good catch, redundant line removal. ",
+          "createdAt": "2026-05-13T15:18:13Z",
+          "updatedAt": "2026-05-13T15:18:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks7_SsJO",
+          "commit": {
+            "abbreviatedOid": "d6a984f"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM",
+          "createdAt": "2026-05-13T15:29:03Z",
+          "updatedAt": "2026-05-13T15:29:03Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
