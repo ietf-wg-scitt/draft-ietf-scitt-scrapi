@@ -144,11 +144,6 @@ The Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture {{-SCIT
 - Registration Policies
 
 SCITT Reference APIs (SCRAPI) defines HTTP resources for a Transparency Service using COSE ({{RFC9052}}).
-The following resources MUST be implemented for conformance to this specification:
-
-- Registration of Signed Statements ({{sec-register-signed-statement}}, {{sec-query-registration-status}})
-- Issuance and resolution of Receipts ({{sec-resolve-receipt}})
-- Discovery of Transparency Service Keys ({{sec-transparency-service-keys}}, {{sec-individual-transparency-service-key}})
 
 ## Scope and Relation to the SCITT Architecture {#sec-scope}
 
