@@ -806,8 +806,8 @@ Thus, no assumptions can be made about the security of the computing environment
 ## Authentication
 
 Authentication is out of scope for this document.
-Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.
-If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be implemented.
+Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial-of-service attacks.
+If Authentication is not implemented, rate limiting or other denial-of-service mitigations MUST be implemented.
 
 ## Threat Model
 
@@ -819,9 +819,9 @@ The most serious threats to implementations on Transparency Services are ones th
 - Threats to payload integrity, for example changing the contents of a Signed Statement before making it transparent
 - Threats to non-equivocation, for example attacks that would enable the presentation or verification of divergent proofs for the same Statement payload
 
-#### Denial of Service Attacks
+#### Denial-of-Service Attacks
 
-While denial of service attacks are very hard to defend against completely, and Transparency Services are unlikely to be in the critical path of any safety-liable operation, any attack which could cause the _silent_ failure of Signed Statement registration, for example, should be considered in scope.
+While denial-of-service attacks are very hard to defend against completely, and Transparency Services are unlikely to be in the critical path of any safety-liable operation, any attack which could cause the _silent_ failure of Signed Statement registration, for example, should be considered in scope.
 
 The impact of DoS attacks can be detected by a client checking that the Transparency Service has registered any submitted Signed Statement and returned a Receipt.
 Since verification of Receipts does not require the involvement of the Transparency Service, a DoS attack cannot cause the silent loss of a registration.
@@ -892,7 +892,7 @@ The interval should account for worst-case registration time, sustainable reques
 
 ## Rate Limiting
 
-As noted in {{sec-authentication}} and {{sec-denial-of-service-attacks}}, rate limiting or other denial of service mitigations are required.
+As noted in {{sec-authentication}} and {{sec-denial-of-service-attacks}}, rate limiting or other denial-of-service mitigations are required.
 The specific per-client policy is implementation dependent and typically varies with whether and how clients are authenticated (e.g., per-identity for authenticated clients versus per source IP for unauthenticated clients), the cost of the operation, and the deployment environment.
 
 When a client exceeds the configured rate limit, the Transparency Service SHOULD return a 429 response (see {{sec-status-429-too-many-requests}}) including a `Retry-After` header field.
