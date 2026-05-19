@@ -834,7 +834,7 @@ Beyond this, implementers of Transparency Services MUST follow general good prac
 #### Eavesdropping
 
 Since the purpose of this API is to ultimately put the message payloads on a Transparency Log there is limited risk to eavesdropping.
-Nonetheless transparency may mean 'within a limited community' rather than 'in full public', so implementers MUST add protections against man-in-the-middle and network eavesdropping, such as TLS.
+Nonetheless, transparency may mean 'within a limited community' rather than 'in full public', so implementers MUST add protections against man-in-the-middle and network eavesdropping, such as TLS.
 
 #### Message Modification Attacks
 
