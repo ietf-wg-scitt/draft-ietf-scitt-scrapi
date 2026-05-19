@@ -456,7 +456,7 @@ Content-Length: 0
 Retry-After: <seconds>
 ~~~
 
-The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
+The location MAY be temporary, and the server might remove the resource after a reasonable delay.
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
@@ -557,7 +557,7 @@ Content-Length: 0
 Retry-After: <seconds>
 ~~~
 
-The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
+The location MAY be temporary, and the server might remove the resource after a reasonable delay.
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
