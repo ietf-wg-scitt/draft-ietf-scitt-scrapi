@@ -124,13 +124,14 @@ normative:
 
 informative:
   I-D.ietf-rats-epoch-markers: EPOCH-MARKERS
+  RFC9162:
 
 entity:
   SELF: "RFCthis"
 
 --- abstract
 
-This document describes a REST API with the HTTP resources, request and response messages, and error handling needed for an interoperable implementation of a SCITT Transparency Service, as defined by the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
+This document specifies a REST API with the HTTP resources, request and response messages, and error handling needed for an interoperable implementation of a SCITT Transparency Service, as defined by the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
 
 --- middle
 
@@ -144,11 +145,6 @@ The Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture {{-SCIT
 - Registration Policies
 
 SCITT Reference APIs (SCRAPI) defines HTTP resources for a Transparency Service using COSE ({{RFC9052}}).
-The following resources MUST be implemented for conformance to this specification:
-
-- Registration of Signed Statements ({{sec-register-signed-statement}}, {{sec-query-registration-status}})
-- Issuance and resolution of Receipts ({{sec-resolve-receipt}})
-- Discovery of Transparency Service Keys ({{sec-transparency-service-keys}}, {{sec-individual-transparency-service-key}})
 
 ## Scope and Relation to the SCITT Architecture {#sec-scope}
 
@@ -186,7 +182,9 @@ All messages are sent as HTTP GET or POST requests.
 If the Transparency Service cannot process a client's request, it MUST return either:
 
 1. an HTTP 3xx code, indicating to the client additional action they must take to complete the request, such as follow a redirection, or
-1. an HTTP 4xx or 5xx status code, and the body MUST be a Concise Problem Details object (application/concise-problem-details+cbor) {{RFC9290}} containing:
+1. an HTTP 4xx or 5xx status code, and the body MUST be a Concise Problem Details object (application/concise-problem-details+cbor) {{RFC9290}}.
+
+The Concise Problem Details object MUST contain the following fields:
 
 - title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
 - detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
@@ -270,7 +268,7 @@ Body (in CBOR diagnostic notation)
 ]
 ~~~
 
-The Transparency Service MAY stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
+The Transparency Service MAY stop returning keys it no longer uses to issue Receipts from that resource, following a reasonable delay.
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
 Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4, which distinguishes the originator-usage period during which a private key is used to apply cryptographic protection from the recipient-usage period during which the corresponding public key is used to verify that protection), retired public keys used for signing SHOULD remain available for verification for as long as any Receipts signed with them may still need to be verified, unless an alternative key archival or distribution mechanism preserves verifiability for relying parties.
 Retaining retired keys has operational implications: the Transparency Service is responsible for storing those keys (and their associated metadata, such as `kid` values and validity periods) securely and continuously, and for serving them via the Individual Transparency Service Key resource (see {{sec-individual-transparency-service-key}}) for the entire retention period.
@@ -330,7 +328,11 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
-If the `kid` values used by the service (`{kid_value}` in the request above) are not URL-safe, the resource MUST accept the base64url encoding of the `kid` value, without padding, in the URL instead.
+To avoid requiring clients to infer an encoding convention from any particular `kid` value, the base64url form is always valid.
+For every `kid` value used by the service, this resource MUST accept the base64url encoding of the `kid` value, without padding, as `{kid_value}`.
+If a `kid` value is safe for use as a URI path segment without percent-encoding, this resource MUST also accept the `kid` value itself as `{kid_value}`.
+Both forms, when present, identify the same key.
+A Transparency Service MUST NOT use `kid` values whose raw and base64url forms would make the same URL identify different keys.
 
 {{Section 2 of RFC7515}} specifies Base64Url encoding as follows:
 
@@ -456,7 +458,7 @@ Content-Length: 0
 Retry-After: <seconds>
 ~~~
 
-The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
+The location MAY be temporary, and the server might remove the resource after a reasonable delay.
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
@@ -474,7 +476,7 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: \
           "Bad Signature Algorithm",
   / detail /        -2: \
-          "Signed Statement contained a non supported algorithm"
+          "Signed Statement contained a non-supported algorithm"
 }
 ~~~
 
@@ -557,7 +559,7 @@ Content-Length: 0
 Retry-After: <seconds>
 ~~~
 
-The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.
+The location MAY be temporary, and the server might remove the resource after a reasonable delay.
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
@@ -636,7 +638,7 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: \
           "Bad Signature Algorithm",
   / detail /        -2: \
-          "Signed Statement contained a non supported algorithm"
+          "Signed Statement contained a non-supported algorithm"
 }
 ~~~
 
@@ -806,8 +808,8 @@ Thus, no assumptions can be made about the security of the computing environment
 ## Authentication
 
 Authentication is out of scope for this document.
-Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial of service attacks.
-If Authentication is not implemented, rate limiting or other denial of service mitigations MUST be implemented.
+Implementations MAY authenticate clients, for example for the purposes of authorization or preventing denial-of-service attacks.
+If Authentication is not implemented, rate limiting or other denial-of-service mitigations MUST be implemented.
 
 ## Threat Model
 
@@ -819,9 +821,9 @@ The most serious threats to implementations on Transparency Services are ones th
 - Threats to payload integrity, for example changing the contents of a Signed Statement before making it transparent
 - Threats to non-equivocation, for example attacks that would enable the presentation or verification of divergent proofs for the same Statement payload
 
-#### Denial of Service Attacks
+#### Denial-of-Service Attacks
 
-While denial of service attacks are very hard to defend against completely, and Transparency Services are unlikely to be in the critical path of any safety-liable operation, any attack which could cause the _silent_ failure of Signed Statement registration, for example, should be considered in scope.
+While denial-of-service attacks are very hard to defend against completely, and Transparency Services are unlikely to be in the critical path of any safety-liable operation, any attack which could cause the _silent_ failure of Signed Statement registration, for example, should be considered in scope.
 
 The impact of DoS attacks can be detected by a client checking that the Transparency Service has registered any submitted Signed Statement and returned a Receipt.
 Since verification of Receipts does not require the involvement of the Transparency Service, a DoS attack cannot cause the silent loss of a registration.
@@ -834,7 +836,7 @@ Beyond this, implementers of Transparency Services MUST follow general good prac
 #### Eavesdropping
 
 Since the purpose of this API is to ultimately put the message payloads on a Transparency Log there is limited risk to eavesdropping.
-Nonetheless transparency may mean 'within a limited community' rather than 'in full public', so implementers MUST add protections against man-in-the-middle and network eavesdropping, such as TLS.
+Nonetheless, transparency may mean 'within a limited community' rather than 'in full public', so implementers MUST add protections against man-in-the-middle and network eavesdropping, such as TLS.
 
 #### Message Modification Attacks
 
@@ -882,7 +884,7 @@ The authoritative identification of the application profile is carried within th
 
 Aggressive client retry or polling behavior can significantly impact a Transparency Service, increasing load and, in extreme cases, amplifying transient failures into sustained outages.
 
-Clients that retry a request MUST honor any `Retry-After` header field (defined in {Section 7.1.3 of RFC7231}) returned by the Transparency Service, treating it as a minimum interval before retrying.
+Clients that retry a request MUST honor any `Retry-After` header field (defined in {{Section 10.2.3 of RFC9110}}) returned by the Transparency Service, treating it as a minimum interval before retrying.
 In its absence, clients that retry a request MUST apply exponential backoff with jitter, cap the total number of retries, and avoid synchronizing retries across clients.
 
 ## Server-Side Retry Configuration
@@ -892,7 +894,7 @@ The interval should account for worst-case registration time, sustainable reques
 
 ## Rate Limiting
 
-As noted in {{sec-authentication}} and {{sec-denial-of-service-attacks}}, rate limiting or other denial of service mitigations are required.
+As noted in {{sec-authentication}} and {{sec-denial-of-service-attacks}}, rate limiting or other denial-of-service mitigations are required.
 The specific per-client policy is implementation dependent and typically varies with whether and how clients are authenticated (e.g., per-identity for authenticated clients versus per source IP for unauthenticated clients), the cost of the operation, and the deployment environment.
 
 When a client exceeds the configured rate limit, the Transparency Service MUST return a 429 response (see {{sec-status-429-too-many-requests}}) including a `Retry-After` header field.
@@ -908,10 +910,10 @@ The normative behavior of this resource and its `/{kid_value}` sub-resource is s
 
 The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
 
-URI suffix: scitt-keys
-Change controller: IETF
-Specification document(s): {{&SELF}}
-Status: Permanent
-Related information: {{-SCITT-ARCH}}
+* URI suffix: scitt-keys
+* Change controller: IETF
+* Specification document(s): {{&SELF}}
+* Status: Permanent
+* Related information: {{-SCITT-ARCH}}
 
 --- back
