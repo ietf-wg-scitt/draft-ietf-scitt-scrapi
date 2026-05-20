@@ -130,7 +130,7 @@ entity:
 
 --- abstract
 
-This document describes a REST API with the HTTP resources, request and response messages, and error handling needed for an interoperable implementation of a SCITT Transparency Service, as defined by the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
+This document specifies a REST API with the HTTP resources, request and response messages, and error handling needed for an interoperable implementation of a SCITT Transparency Service, as defined by the Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
 
 --- middle
 
