@@ -267,7 +267,7 @@ Body (in CBOR diagnostic notation)
 ]
 ~~~
 
-The Transparency Service MAY stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
+The Transparency Service MAY stop returning keys it no longer uses to issue Receipts from that resource, following a reasonable delay.
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
 Consistent with key management best practices described in {{NIST.SP.800-57pt1r5}} (Section 5.3.4, which distinguishes the originator-usage period during which a private key is used to apply cryptographic protection from the recipient-usage period during which the corresponding public key is used to verify that protection), retired public keys used for signing SHOULD remain available for verification for as long as any Receipts signed with them may still need to be verified.
 Retaining retired keys has operational implications: the Transparency Service is responsible for storing those keys (and their associated metadata, such as `kid` values and validity periods) securely and continuously, and for serving them via the Individual Transparency Service Key resource (see {{sec-individual-transparency-service-key}}) for the entire retention period.
