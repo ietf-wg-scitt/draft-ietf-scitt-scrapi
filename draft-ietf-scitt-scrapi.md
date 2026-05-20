@@ -191,11 +191,12 @@ The Concise Problem Details object MUST contain the following fields:
 
 SCRAPI is not a CoAP API, but Constrained Problem Details objects {{RFC9290}} provide a useful encoding for problem details and avoid the need to mix CBOR and JSON in resource or client implementations.
 
-NOTE: Examples use '\\' line wrapping per {{RFC8792}}
 
 Examples of errors may include:
 
 ~~~ cbor-diag
+NOTE: '\' line wrapping per RFC 8792
+
 {
   / title /         -1: \
             "Bad Signature Algorithm",
@@ -208,6 +209,8 @@ Most error types are specific to the type of request and are defined in the resp
 The one exception is the "malformed" error type, which indicates that the Transparency Service could not parse the client's request because it did not comply with this document:
 
 ~~~ cbor-diag
+NOTE: '\' line wrapping per RFC 8792
+
 {
   / title /         -1: \
             "Malformed request",
@@ -469,6 +472,8 @@ When such a condition is encountered, an implementation MUST return an error res
 Implementations SHOULD use the corresponding error defined below, unless another valid {{RFC9290}} error better describes the condition.
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
 
@@ -481,6 +486,8 @@ Content-Type: application/concise-problem-details+cbor
 ~~~
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
 
@@ -493,6 +500,8 @@ Content-Type: application/concise-problem-details+cbor
 ~~~
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
 
@@ -505,6 +514,8 @@ Content-Type: application/concise-problem-details+cbor
 ~~~
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
 
@@ -631,6 +642,8 @@ When such a condition is encountered, an implementation MUST return an error res
 Implementations SHOULD use the corresponding error defined below, unless another valid {{RFC9290}} error better describes the condition.
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
 
@@ -643,6 +656,8 @@ Content-Type: application/concise-problem-details+cbor
 ~~~
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
 
@@ -655,6 +670,8 @@ Content-Type: application/concise-problem-details+cbor
 ~~~
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
 
@@ -667,6 +684,8 @@ Content-Type: application/concise-problem-details+cbor
 ~~~
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 400 Bad Request
 Content-Type: application/concise-problem-details+cbor
 
@@ -694,6 +713,8 @@ Content-Type: application/concise-problem-details+cbor
 If no record of the specified running operation is found, the Transparency Service MUST respond with a 4xx-class status code (typically 404 Not Found) and a Concise Problem Details {{RFC9290}} object as in the following example:
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 404 Not Found
 Content-Type: application/concise-problem-details+cbor
 
@@ -710,6 +731,8 @@ Content-Type: application/concise-problem-details+cbor
 If a client is polling for an in-progress registration too frequently then the Transparency Service MAY, in addition to implementing rate limiting, return a 429 response:
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 429 Too Many Requests
 Content-Type: application/concise-problem-details+cbor
 Retry-After: <seconds>
@@ -776,6 +799,8 @@ Body (in CBOR diagnostic notation)
 If there is no Receipt found for the specified `EntryID` the Transparency Service MUST respond with a 4xx-class status code (typically 404 Not Found) and a Concise Problem Details {{RFC9290}} object as in the following example:
 
 ~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
 HTTP/1.1 404 Not Found
 Content-Type: application/concise-problem-details+cbor
 
