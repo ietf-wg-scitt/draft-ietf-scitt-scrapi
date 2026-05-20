@@ -907,8 +907,8 @@ Table of Contents
 
    Authentication is out of scope for this document.  Implementations
    MAY authenticate clients, for example for the purposes of
-   authorization or preventing denial of service attacks.  If
-   Authentication is not implemented, rate limiting or other denial of
+   authorization or preventing denial-of-service attacks.  If
+   Authentication is not implemented, rate limiting or other denial-of-
    service mitigations MUST be implemented.
 
 4.4.  Threat Model
@@ -928,9 +928,9 @@ Table of Contents
       the presentation or verification of divergent proofs for the same
       Statement payload
 
-4.4.1.1.  Denial of Service Attacks
+4.4.1.1.  Denial-of-Service Attacks
 
-   While denial of service attacks are very hard to defend against
+   While denial-of-service attacks are very hard to defend against
    completely, and Transparency Services are unlikely to be in the
    critical path of any safety-liable operation, any attack which could
    cause the _silent_ failure of Signed Statement registration, for
@@ -1052,7 +1052,7 @@ Table of Contents
 5.3.  Rate Limiting
 
    As noted in Section 4.3 and Section 4.4.1.1, rate limiting or other
-   denial of service mitigations are required.  The specific per-client
+   denial-of-service mitigations are required.  The specific per-client
    policy is implementation dependent and typically varies with whether
    and how clients are authenticated (e.g., per-identity for
    authenticated clients versus per source IP for unauthenticated
