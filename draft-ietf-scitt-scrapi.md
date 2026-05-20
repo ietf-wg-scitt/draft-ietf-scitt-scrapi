@@ -905,10 +905,10 @@ The normative behavior of this resource and its `/{kid_value}` sub-resource is s
 
 The following value is requested to be registered in the "Well-Known URIs" registry (using the template from {{RFC8615}}):
 
-URI suffix: scitt-keys
-Change controller: IETF
-Specification document(s): {{&SELF}}
-Status: Permanent
-Related information: {{-SCITT-ARCH}}
+* URI suffix: scitt-keys
+* Change controller: IETF
+* Specification document(s): {{&SELF}}
+* Status: Permanent
+* Related information: {{-SCITT-ARCH}}
 
 --- back
