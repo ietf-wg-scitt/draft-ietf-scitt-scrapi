@@ -189,6 +189,10 @@ The Concise Problem Details object MUST contain the following fields:
 - title: A human-readable string identifying the error that prevented the Transparency Service from processing the request, ideally short and suitable for inclusion in log messages.
 - detail: A human-readable string describing the error in more depth, ideally with sufficient detail enabling the error to be rectified.
 
+As specified by {{Section 2 of RFC9290}}, the `title` and `detail` values use `oltext`, which is either an unadorned CBOR text string (`text`) or a language-tagged text string (`tag38`).
+When a language needs to be identified explicitly, `tag38` carries a BCP 47 language tag as described in {{Appendix A of RFC9290}}.
+If no explicit or implicit language context is available, unadorned text is interpreted with the language tag `en`.
+
 SCRAPI is not a CoAP API, but Constrained Problem Details objects {{RFC9290}} provide a useful encoding for problem details and avoid the need to mix CBOR and JSON in resource or client implementations.
 
 
