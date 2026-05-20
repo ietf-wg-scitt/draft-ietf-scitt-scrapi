@@ -320,8 +320,8 @@ Table of Contents
      }
    ]
 
-   The Transparency Service MAY stop returning at that resource the keys
-   it no longer uses to issue Receipts, following a reasonable delay.  A
+   The Transparency Service MAY stop returning keys it no longer uses to
+   issue Receipts from that resource, following a reasonable delay.  A
    delay is considered reasonable if it is sufficient for relying
    parties to have obtained the key needed to verify any previously
    issued Receipt.  Consistent with key management best practices
@@ -1076,9 +1076,15 @@ Table of Contents
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
 
-   URI suffix: scitt-keys Change controller: IETF Specification
-   document(s): RFCthis Status: Permanent Related information:
-   [I-D.draft-ietf-scitt-architecture]
+   *  URI suffix: scitt-keys
+
+   *  Change controller: IETF
+
+   *  Specification document(s): RFCthis
+
+   *  Status: Permanent
+
+   *  Related information: [I-D.draft-ietf-scitt-architecture]
 
 7.  References
 
