@@ -1470,7 +1470,7 @@ Body (in CBOR diagnostic notation)
 ]
 </pre><a href="#section-2.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-2.1-7">The Transparency Service <span class="bcp14">MAY</span> stop returning at that resource the keys it no longer uses to issue Receipts, following a reasonable delay.
+<p id="section-2.1-7">The Transparency Service <span class="bcp14">MAY</span> stop returning keys it no longer uses to issue Receipts from that resource, following a reasonable delay.
 A delay is considered reasonable if it is sufficient for relying parties to have obtained the key needed to verify any previously issued Receipt.
 Consistent with key management best practices described in <span>[<a href="#NIST.SP.800-57pt1r5" class="cite xref">NIST.SP.800-57pt1r5</a>]</span> (Section 5.3.4, which distinguishes the originator-usage period during which a private key is used to apply cryptographic protection from the recipient-usage period during which the corresponding public key is used to verify that protection), retired public keys used for signing <span class="bcp14">SHOULD</span> remain available for verification for as long as any Receipts signed with them may still need to be verified.
 Retaining retired keys has operational implications: the Transparency Service is responsible for storing those keys (and their associated metadata, such as <code>kid</code> values and validity periods) securely and continuously, and for serving them via the Individual Transparency Service Key resource (see <a href="#sec-individual-transparency-service-key" class="auto internal xref">Section 2.2</a>) for the entire retention period.
@@ -1530,7 +1530,11 @@ Content-Type: application/concise-problem-details+cbor
 }
 </pre><a href="#section-2.2-8" class="pilcrow">¶</a>
 </div>
-<p id="section-2.2-9">If the <code>kid</code> values used by the service (<code>{kid_value}</code> in the request above) are not URL-safe, the resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, in the URL instead.<a href="#section-2.2-9" class="pilcrow">¶</a></p>
+<p id="section-2.2-9">To avoid requiring clients to infer an encoding convention from any particular <code>kid</code> value, the base64url form is always valid.
+For every <code>kid</code> value used by the service, this resource <span class="bcp14">MUST</span> accept the base64url encoding of the <code>kid</code> value, without padding, as <code>{kid_value}</code>.
+If a <code>kid</code> value is safe for use as a URI path segment without percent-encoding, this resource <span class="bcp14">MUST</span> also accept the <code>kid</code> value itself as <code>{kid_value}</code>.
+Both forms, when present, identify the same key.
+A Transparency Service <span class="bcp14">MUST NOT</span> use <code>kid</code> values whose raw and base64url forms would make the same URL identify different keys.<a href="#section-2.2-9" class="pilcrow">¶</a></p>
 <p id="section-2.2-10"><span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> specifies Base64Url encoding as follows:<a href="#section-2.2-10" class="pilcrow">¶</a></p>
 <p id="section-2.2-11">"Base64 encoding using the URL- and filename-safe character set
 defined in Section 5 of RFC 4648 <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, with all trailing '='
