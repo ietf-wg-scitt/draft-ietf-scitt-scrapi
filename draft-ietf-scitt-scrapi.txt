@@ -125,14 +125,7 @@ Table of Contents
    *  Registration Policies
 
    SCITT Reference APIs (SCRAPI) defines HTTP resources for a
-   Transparency Service using COSE ([RFC9052]).  The following resources
-   MUST be implemented for conformance to this specification:
-
-   *  Registration of Signed Statements (Section 2.3, Section 2.4)
-
-   *  Issuance and resolution of Receipts (Section 2.5)
-
-   *  Discovery of Transparency Service Keys (Section 2.1, Section 2.2)
+   Transparency Service using COSE ([RFC9052]).
 
 1.1.  Scope and Relation to the SCITT Architecture
 
