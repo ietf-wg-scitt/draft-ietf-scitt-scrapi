@@ -474,7 +474,7 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: \
           "Bad Signature Algorithm",
   / detail /        -2: \
-          "Signed Statement contained a non supported algorithm"
+          "Signed Statement contained a non-supported algorithm"
 }
 ~~~
 
@@ -636,7 +636,7 @@ Content-Type: application/concise-problem-details+cbor
   / title /         -1: \
           "Bad Signature Algorithm",
   / detail /        -2: \
-          "Signed Statement contained a non supported algorithm"
+          "Signed Statement contained a non-supported algorithm"
 }
 ~~~
 
