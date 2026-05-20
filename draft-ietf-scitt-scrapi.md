@@ -327,7 +327,11 @@ Content-Type: application/concise-problem-details+cbor
 }
 ~~~
 
-If the `kid` values used by the service (`{kid_value}` in the request above) are not URL-safe, the resource MUST accept the base64url encoding of the `kid` value, without padding, in the URL instead.
+To avoid requiring clients to infer an encoding convention from any particular `kid` value, the base64url form is always valid.
+For every `kid` value used by the service, this resource MUST accept the base64url encoding of the `kid` value, without padding, as `{kid_value}`.
+If a `kid` value is safe for use as a URI path segment without percent-encoding, this resource MUST also accept the `kid` value itself as `{kid_value}`.
+Both forms, when present, identify the same key.
+A Transparency Service MUST NOT use `kid` values whose raw and base64url forms would make the same URL identify different keys.
 
 {{Section 2 of RFC7515}} specifies Base64Url encoding as follows:
 
