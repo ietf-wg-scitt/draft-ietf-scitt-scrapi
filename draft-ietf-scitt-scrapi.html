@@ -2212,7 +2212,7 @@ profile-specific processing.<a href="#section-4.4.2.3-1" class="pilcrow">¶</a><
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-client-retry-behavior" class="section-name selfRef">Client Retry Behavior</a>
         </h3>
 <p id="section-5.1-1">Aggressive client retry or polling behavior can significantly impact a Transparency Service, increasing load and, in extreme cases, amplifying transient failures into sustained outages.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">Clients <span class="bcp14">SHOULD</span> honor any <code>Retry-After</code> header field (defined in {Section 7.1.3 of RFC7231}) returned by the Transparency Service, treating it as a minimum interval before retrying.
+<p id="section-5.1-2">Clients <span class="bcp14">SHOULD</span> honor any <code>Retry-After</code> header field (defined in <span><a href="https://rfc-editor.org/rfc/rfc9110#section-10.2.3" class="relref">Section 10.2.3</a> of [<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>) returned by the Transparency Service, treating it as a minimum interval before retrying.
 In its absence, clients <span class="bcp14">SHOULD</span> apply exponential backoff with jitter, cap the total number of retries, and avoid synchronizing retries across clients.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2367,8 +2367,12 @@ The normative behavior of this resource and its <code>/{kid_value}</code> sub-re
         </h3>
 <dl class="references">
 <dt id="I-D.ietf-rats-epoch-markers">[I-D.ietf-rats-epoch-markers]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Pan, W.</span>, <span class="refAuthor">Mihalcea, I.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Epoch Markers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-epoch-markers-04</span>, <time datetime="2026-05-18" class="refDate">18 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-04">https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-04</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9162">[RFC9162]</dt>
+      <dd>
+<span class="refAuthor">Laurie, B.</span>, <span class="refAuthor">Messeri, E.</span>, and <span class="refAuthor">R. Stradling</span>, <span class="refTitle">"Certificate Transparency Version 2.0"</span>, <span class="seriesInfo">RFC 9162</span>, <span class="seriesInfo">DOI 10.17487/RFC9162</span>, <time datetime="2021-12" class="refDate">December 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9162">https://www.rfc-editor.org/rfc/rfc9162</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
