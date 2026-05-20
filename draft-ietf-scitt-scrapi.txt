@@ -16,7 +16,7 @@ Expires: 21 November 2026                       Bowball Technologies Ltd
 
 Abstract
 
-   This document describes a REST API with the HTTP resources, request
+   This document specifies a REST API with the HTTP resources, request
    and response messages, and error handling needed for an interoperable
    implementation of a SCITT Transparency Service, as defined by the
    Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
