@@ -320,8 +320,8 @@ Table of Contents
      }
    ]
 
-   The Transparency Service MAY stop returning keys it no longer uses to
-   issue Receipts from that resource, following a reasonable delay.  A
+   The Transparency Service MAY stop returning at that resource the keys
+   it no longer uses to issue Receipts, following a reasonable delay.  A
    delay is considered reasonable if it is sufficient for relying
    parties to have obtained the key needed to verify any previously
    issued Receipt.  Consistent with key management best practices
