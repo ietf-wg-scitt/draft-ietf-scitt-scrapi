@@ -5,10 +5,10 @@
 SCITT                                                        H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                               J. Geater
-Expires: 20 November 2026                       Bowball Technologies Ltd
+Expires: 21 November 2026                       Bowball Technologies Ltd
                                                       A. Delignat-Lavaud
                                                       Microsoft Research
-                                                             19 May 2026
+                                                             20 May 2026
 
 
  Supply Chain Integrity, Transparency, and Trust (SCITT) Reference APIs
@@ -16,7 +16,7 @@ Expires: 20 November 2026                       Bowball Technologies Ltd
 
 Abstract
 
-   This document describes a REST API with the HTTP resources, request
+   This document specifies a REST API with the HTTP resources, request
    and response messages, and error handling needed for an interoperable
    implementation of a SCITT Transparency Service, as defined by the
    Supply Chain Integrity, Transparency, and Trust (SCITT) Architecture.
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 November 2026.
+   This Internet-Draft will expire on 21 November 2026.
 
 Copyright Notice
 
@@ -125,14 +125,7 @@ Table of Contents
    *  Registration Policies
 
    SCITT Reference APIs (SCRAPI) defines HTTP resources for a
-   Transparency Service using COSE ([RFC9052]).  The following resources
-   MUST be implemented for conformance to this specification:
-
-   *  Registration of Signed Statements (Section 2.3, Section 2.4)
-
-   *  Issuance and resolution of Receipts (Section 2.5)
-
-   *  Discovery of Transparency Service Keys (Section 2.1, Section 2.2)
+   Transparency Service using COSE ([RFC9052]).
 
 1.1.  Scope and Relation to the SCITT Architecture
 
@@ -219,7 +212,9 @@ Table of Contents
 
    2.  an HTTP 4xx or 5xx status code, and the body MUST be a Concise
        Problem Details object (application/concise-problem-details+cbor)
-       [RFC9290] containing:
+       [RFC9290].
+
+   The Concise Problem Details object MUST contain the following fields:
 
    *  title: A human-readable string identifying the error that
       prevented the Transparency Service from processing the request,
@@ -325,8 +320,8 @@ Table of Contents
      }
    ]
 
-   The Transparency Service MAY stop returning at that resource the keys
-   it no longer uses to issue Receipts, following a reasonable delay.  A
+   The Transparency Service MAY stop returning keys it no longer uses to
+   issue Receipts from that resource, following a reasonable delay.  A
    delay is considered reasonable if it is sufficient for relying
    parties to have obtained the key needed to verify any previously
    issued Receipt.  Consistent with key management best practices
@@ -418,9 +413,15 @@ Table of Contents
      / detail /        -2: "No key could be found for this kid value"
    }
 
-   If the kid values used by the service ({kid_value} in the request
-   above) are not URL-safe, the resource MUST accept the base64url
-   encoding of the kid value, without padding, in the URL instead.
+   To avoid requiring clients to infer an encoding convention from any
+   particular kid value, the base64url form is always valid.  For every
+   kid value used by the service, this resource MUST accept the
+   base64url encoding of the kid value, without padding, as {kid_value}.
+   If a kid value is safe for use as a URI path segment without percent-
+   encoding, this resource MUST also accept the kid value itself as
+   {kid_value}. Both forms, when present, identify the same key.  A
+   Transparency Service MUST NOT use kid values whose raw and base64url
+   forms would make the same URL identify different keys.
 
    Section 2 of [RFC7515] specifies Base64Url encoding as follows:
 
@@ -565,8 +566,8 @@ Table of Contents
    Content-Length: 0
    Retry-After: <seconds>
 
-   The location MAY be temporary, and the service may not serve a
-   relevant response at this Location after a reasonable delay.
+   The location MAY be temporary, and the server might remove the
+   resource after a reasonable delay.
 
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
@@ -586,7 +587,7 @@ Table of Contents
      / title /         -1: \
              "Bad Signature Algorithm",
      / detail /        -2: \
-             "Signed Statement contained a non supported algorithm"
+             "Signed Statement contained a non-supported algorithm"
    }
 
    HTTP/1.1 400 Bad Request
@@ -662,8 +663,8 @@ Table of Contents
    Content-Length: 0
    Retry-After: <seconds>
 
-   The location MAY be temporary, and the service may not serve a
-   relevant response at this Location after a reasonable delay.
+   The location MAY be temporary, and the server might remove the
+   resource after a reasonable delay.
 
    The Transparency Service MAY include a Retry-After header in the HTTP
    response to help with polling.
@@ -743,7 +744,7 @@ Table of Contents
      / title /         -1: \
              "Bad Signature Algorithm",
      / detail /        -2: \
-             "Signed Statement contained a non supported algorithm"
+             "Signed Statement contained a non-supported algorithm"
    }
 
    HTTP/1.1 400 Bad Request
@@ -912,8 +913,8 @@ Table of Contents
 
    Authentication is out of scope for this document.  Implementations
    MAY authenticate clients, for example for the purposes of
-   authorization or preventing denial of service attacks.  If
-   Authentication is not implemented, rate limiting or other denial of
+   authorization or preventing denial-of-service attacks.  If
+   Authentication is not implemented, rate limiting or other denial-of-
    service mitigations MUST be implemented.
 
 4.4.  Threat Model
@@ -933,9 +934,9 @@ Table of Contents
       the presentation or verification of divergent proofs for the same
       Statement payload
 
-4.4.1.1.  Denial of Service Attacks
+4.4.1.1.  Denial-of-Service Attacks
 
-   While denial of service attacks are very hard to defend against
+   While denial-of-service attacks are very hard to defend against
    completely, and Transparency Services are unlikely to be in the
    critical path of any safety-liable operation, any attack which could
    cause the _silent_ failure of Signed Statement registration, for
@@ -961,7 +962,7 @@ Table of Contents
 
    Since the purpose of this API is to ultimately put the message
    payloads on a Transparency Log there is limited risk to
-   eavesdropping.  Nonetheless transparency may mean 'within a limited
+   eavesdropping.  Nonetheless, transparency may mean 'within a limited
    community' rather than 'in full public', so implementers MUST add
    protections against man-in-the-middle and network eavesdropping, such
    as TLS.
@@ -1057,7 +1058,7 @@ Table of Contents
 5.3.  Rate Limiting
 
    As noted in Section 4.3 and Section 4.4.1.1, rate limiting or other
-   denial of service mitigations are required.  The specific per-client
+   denial-of-service mitigations are required.  The specific per-client
    policy is implementation dependent and typically varies with whether
    and how clients are authenticated (e.g., per-identity for
    authenticated clients versus per source IP for unauthenticated
@@ -1081,9 +1082,15 @@ Table of Contents
    The following value is requested to be registered in the "Well-Known
    URIs" registry (using the template from [RFC8615]):
 
-   URI suffix: scitt-keys Change controller: IETF Specification
-   document(s): RFCthis Status: Permanent Related information:
-   [I-D.draft-ietf-scitt-architecture]
+   *  URI suffix: scitt-keys
+
+   *  Change controller: IETF
+
+   *  Specification document(s): RFCthis
+
+   *  Status: Permanent
+
+   *  Related information: [I-D.draft-ietf-scitt-architecture]
 
 7.  References
 
