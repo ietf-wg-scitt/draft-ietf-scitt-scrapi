@@ -228,9 +228,9 @@ Table of Contents
    [RFC9290] provide a useful encoding for problem details and avoid the
    need to mix CBOR and JSON in resource or client implementations.
 
-   NOTE: Examples use '\' line wrapping per [RFC8792]
-
    Examples of errors may include:
+
+   NOTE: '\' line wrapping per RFC 8792
 
    {
      / title /         -1: \
@@ -244,6 +244,8 @@ Table of Contents
    "malformed" error type, which indicates that the Transparency Service
    could not parse the client's request because it did not comply with
    this document:
+
+   NOTE: '\' line wrapping per RFC 8792
 
    {
      / title /         -1: \
@@ -582,6 +584,8 @@ Table of Contents
    defined below, unless another valid [RFC9290] error better describes
    the condition.
 
+   NOTE: '\' line wrapping per RFC 8792
+
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
 
@@ -591,6 +595,8 @@ Table of Contents
      / detail /        -2: \
              "Signed Statement contained a non-supported algorithm"
    }
+
+   NOTE: '\' line wrapping per RFC 8792
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
@@ -602,6 +608,8 @@ Table of Contents
              "Signed Statement did not contain proof of possession"
    }
 
+   NOTE: '\' line wrapping per RFC 8792
+
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
 
@@ -611,6 +619,8 @@ Table of Contents
      / detail /        -2: \
              "Signed Statement payload must be present"
    }
+
+   NOTE: '\' line wrapping per RFC 8792
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
@@ -740,6 +750,8 @@ Table of Contents
    defined below, unless another valid [RFC9290] error better describes
    the condition.
 
+   NOTE: '\' line wrapping per RFC 8792
+
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
 
@@ -749,6 +761,8 @@ Table of Contents
      / detail /        -2: \
              "Signed Statement contained a non-supported algorithm"
    }
+
+   NOTE: '\' line wrapping per RFC 8792
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
@@ -760,6 +774,8 @@ Table of Contents
              "Signed Statement did not contain proof of possession"
    }
 
+   NOTE: '\' line wrapping per RFC 8792
+
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
 
@@ -769,6 +785,8 @@ Table of Contents
      / detail /        -2: \
              "Signed Statement payload must be present"
    }
+
+   NOTE: '\' line wrapping per RFC 8792
 
    HTTP/1.1 400 Bad Request
    Content-Type: application/concise-problem-details+cbor
@@ -796,6 +814,8 @@ Table of Contents
    (typically 404 Not Found) and a Concise Problem Details [RFC9290]
    object as in the following example:
 
+   NOTE: '\' line wrapping per RFC 8792
+
    HTTP/1.1 404 Not Found
    Content-Type: application/concise-problem-details+cbor
 
@@ -811,6 +831,8 @@ Table of Contents
    If a client is polling for an in-progress registration too frequently
    then the Transparency Service MAY, in addition to implementing rate
    limiting, return a 429 response:
+
+   NOTE: '\' line wrapping per RFC 8792
 
    HTTP/1.1 429 Too Many Requests
    Content-Type: application/concise-problem-details+cbor
@@ -874,6 +896,8 @@ Table of Contents
    Transparency Service MUST respond with a 4xx-class status code
    (typically 404 Not Found) and a Concise Problem Details [RFC9290]
    object as in the following example:
+
+   NOTE: '\' line wrapping per RFC 8792
 
    HTTP/1.1 404 Not Found
    Content-Type: application/concise-problem-details+cbor
