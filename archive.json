@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-14T01:53:25.694223+00:00",
+  "timestamp": "2026-05-21T01:56:29.646745+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2421,6 +2421,568 @@
       "updatedAt": "2026-05-06T15:07:10Z",
       "closedAt": "2026-05-06T15:07:10Z",
       "comments": []
+    },
+    {
+      "number": 173,
+      "id": "I_kwDOLJjbks8AAAABCwxfsA",
+      "title": "[Vyncke DISCUSS] Section 2: language of human-readable strings",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/173",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Section 2\n\nIs there any constrain in which language is the `human-readable` ? MUST it be US English ? It may be implicit due to HTTP protocol though, then I will obviously stand corrected.\n\nFrom \u00c9ric Vyncke's INT AD review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_eric-vyncke",
+      "createdAt": "2026-05-19T19:20:23Z",
+      "updatedAt": "2026-05-20T16:35:54Z",
+      "closedAt": "2026-05-20T16:35:54Z",
+      "comments": []
+    },
+    {
+      "number": 174,
+      "id": "I_kwDOLJjbks8AAAABCwxgNg",
+      "title": "[Vyncke DISCUSS] Use of SHOULD vs MUST",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/174",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Use of SHOULD\n\nThere are several `SHOULD` in the document that could easily be a `MUST`. E.g., section 2 `Clients SHOULD treat`, section 2.1 `SHOULD include Accept: application/cbor in the request`. So, either change the `SHOULD` in `MUST` or provide guidance when the `SHOULD` can be bypassed. Currently, it is really ambiguous.\n\nSee also https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/\n\nFrom \u00c9ric Vyncke's INT AD review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_eric-vyncke",
+      "createdAt": "2026-05-19T19:20:25Z",
+      "updatedAt": "2026-05-20T16:32:14Z",
+      "closedAt": "2026-05-20T16:32:14Z",
+      "comments": []
+    },
+    {
+      "number": 175,
+      "id": "I_kwDOLJjbks8AAAABCwxg1g",
+      "title": "[Vyncke COMMENT] Support for Med's DISCUSS (MUST vs MAY conflict)",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/175",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Med's DISCUSS\n\nI support Med Boucadair's DISCUSS point about the apparent conflict between `MUST` and `MAY`.\n\nFrom \u00c9ric Vyncke's INT AD review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_eric-vyncke",
+      "createdAt": "2026-05-19T19:20:26Z",
+      "updatedAt": "2026-05-19T19:28:12Z",
+      "closedAt": "2026-05-19T19:28:11Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Resolved in #150 already.",
+          "createdAt": "2026-05-19T19:28:11Z",
+          "updatedAt": "2026-05-19T19:28:11Z"
+        }
+      ]
+    },
+    {
+      "number": 176,
+      "id": "I_kwDOLJjbks8AAAABCwxhZg",
+      "title": "[Vyncke COMMENT] Abstract: use \"specifies\" instead of \"describes\"",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/176",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Abstract\n\ns/This document describes/This document *specifies*/ as this I-D aims for PS.\n\nFrom \u00c9ric Vyncke's INT AD review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_eric-vyncke",
+      "createdAt": "2026-05-19T19:20:28Z",
+      "updatedAt": "2026-05-20T16:02:01Z",
+      "closedAt": "2026-05-20T16:02:01Z",
+      "comments": []
+    },
+    {
+      "number": 177,
+      "id": "I_kwDOLJjbks8AAAABCwxh-Q",
+      "title": "[Vyncke COMMENT] Section 1: redundant \"conformance\" paragraph",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/177",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Section 1\n\n`The following resources MUST be implemented for conformance to this specification`, unsure whether the IETF is in the business of defining \"conformance\". Also, as all the refered sections are normative, this paragraph is fully redundant.\n\nFrom \u00c9ric Vyncke's INT AD review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_eric-vyncke",
+      "createdAt": "2026-05-19T19:20:29Z",
+      "updatedAt": "2026-05-20T16:03:20Z",
+      "closedAt": "2026-05-20T16:03:20Z",
+      "comments": []
+    },
+    {
+      "number": 178,
+      "id": "I_kwDOLJjbks8AAAABCwxibw",
+      "title": "[Vyncke COMMENT] Section 2: HTML rendering of `* title:` list item",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/178",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Section 2\n\nIn the HTML rendering, it is unclear whether `* title:` is part of the numbered list just above. It also needs some leading text.\n\nFrom \u00c9ric Vyncke's INT AD review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_eric-vyncke",
+      "createdAt": "2026-05-19T19:20:31Z",
+      "updatedAt": "2026-05-20T16:08:30Z",
+      "closedAt": "2026-05-20T16:08:30Z",
+      "comments": []
+    },
+    {
+      "number": 184,
+      "id": "I_kwDOLJjbks8AAAABCw9PpQ",
+      "title": "[Bishop DISCUSS] Section 2.4.1: 302 redirect from a resource to itself",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/184",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "Needs Discussion"
+      ],
+      "body": "### Section 2.4.1, paragraph 2\n\n```\n     If the client requests (GET) the location when the registration is\n     still in progress, the TS MAY return a 302 Found, as in this non-\n     normative example:\n```\n\nI'm a bit uncomfortable with the idea of a 302 redirect from a resource to itself. Redirects to the same URI don't really fit into any of the categories described in Section 15.4 of RFC 9110.\n\nFundamentally, I think you need to decide whether this resource represents the operation or the result. If it represents the operation, it should return a 200 and a description of the operation's status (complete, in-progress, failed, etc.); completed operations will include the URL of the result or might redirect there.\n\nIf it represents the result itself, it won't exist (404) until the operation completes.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:48:55Z",
+      "updatedAt": "2026-05-19T20:01:02Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 185,
+      "id": "I_kwDOLJjbks8AAAABCw9Qhw",
+      "title": "[Bishop COMMENT] Section 2.2: URL-safety of kid values",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/185",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Section 2.2, paragraph 12\n\n```\n     If the kid values used by the service ({kid_value} in the request\n     above) are not URL-safe, the resource MUST accept the base64url\n     encoding of the kid value, without padding, in the URL instead.\n```\n\nDoes this imply that clients determine the request format based on whether the kid_value they're querying is URL-safe? Can a client infer whether *all* kid values are URL-safe based on examining one kid?\n\nI'd be inclined to make this say either that resources must exist for both the raw kid value (if URL-safe) and the base64url-encoded value, or that a server publishes somewhere whether it commits to URL-safe kid values.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:48:56Z",
+      "updatedAt": "2026-05-20T16:12:10Z",
+      "closedAt": "2026-05-20T16:12:10Z",
+      "comments": []
+    },
+    {
+      "number": 186,
+      "id": "I_kwDOLJjbks8AAAABCw9Rqg",
+      "title": "[Bishop COMMENT] Section 2.3.2: 202 vs 303 status code",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/186",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "Needs Discussion"
+      ],
+      "body": "### Section 2.3.2, paragraph 1\n\nI would have expected 202 here, but 303 also seems defensible. No change necessarily required, just review the definitions of each to be sure.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:48:58Z",
+      "updatedAt": "2026-05-20T17:12:03Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Both 202 and 303 seem applicable, but 303 was picked for consistency with the redirection mechanism chosen to deal with eventual consistency. This is controversial though, see #184, so depending on how that gets settled, it may tilt the balance here.",
+          "createdAt": "2026-05-19T20:00:50Z",
+          "updatedAt": "2026-05-19T20:00:50Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Summary of discussion in the group of on 2026-05-20:\n\nSwitching to 202 and returning a temporary/operation body is not an attractive choice, because:\n1. it requires the introduction of an ad-hoc, application-level CBOR response format, where all other response types in SCRAPI are already standard (COSE, CPD for CoAP).\n2. it requires application-specific client handling, where 303/302 instead leverages existing and widespread library support.\n\nA suggestion was made to use 303 for both 2.3.3 and 2.4.1.",
+          "createdAt": "2026-05-20T17:12:01Z",
+          "updatedAt": "2026-05-20T17:12:01Z"
+        }
+      ]
+    },
+    {
+      "number": 187,
+      "id": "I_kwDOLJjbks8AAAABCw9S3g",
+      "title": "[Bishop COMMENT] Section 2.4.1: rephrase \"may not serve\" for clarity",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/187",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Section 2.4.1, paragraph 3\n\n```\n     The location MAY be temporary, and the service may not serve a\n     relevant response at this Location after a reasonable delay.\n```\n\nThere are several instances of this sentence; I'd suggest a slight rephrase throughout to ensure \"may not serve\" is read as permission not to serve rather than a prohibition on serving. \"...the server might remove the resource after a reasonable delay.\"\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:48:59Z",
+      "updatedAt": "2026-05-19T19:54:52Z",
+      "closedAt": "2026-05-19T19:53:37Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #197 (script ran twice). Closing in favour of #197.",
+          "createdAt": "2026-05-19T19:53:37Z",
+          "updatedAt": "2026-05-19T19:53:37Z"
+        }
+      ]
+    },
+    {
+      "number": 188,
+      "id": "I_kwDOLJjbks8AAAABCw9TcA",
+      "title": "[Bishop COMMENT] Missing references: RFC9162 and RFC7231",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/188",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Missing references\n\nNo reference entries found for these items, which were mentioned in the text: `[RFC9162]` and `[RFC7231]`.\n\n(But note that 7231 is obsoleted by 9110, so you probably want to update that text rather than adding the reference.)\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:01Z",
+      "updatedAt": "2026-05-19T19:54:53Z",
+      "closedAt": "2026-05-19T19:53:39Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #198 (script ran twice). Closing in favour of #198.",
+          "createdAt": "2026-05-19T19:53:38Z",
+          "updatedAt": "2026-05-19T19:53:38Z"
+        }
+      ]
+    },
+    {
+      "number": 189,
+      "id": "I_kwDOLJjbks8AAAABCw9T5w",
+      "title": "[Bishop NIT] Section 2.1: typo \"returning at that resource\"",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/189",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Section 2.1, paragraph 9\n\n```\n-    The Transparency Service MAY stop returning at that resource the keys\n-                                                ---------------------\n```\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:02Z",
+      "updatedAt": "2026-05-19T19:54:53Z",
+      "closedAt": "2026-05-19T19:53:41Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #199 (script ran twice). Closing in favour of #199.",
+          "createdAt": "2026-05-19T19:53:40Z",
+          "updatedAt": "2026-05-19T19:53:40Z"
+        }
+      ]
+    },
+    {
+      "number": 190,
+      "id": "I_kwDOLJjbks8AAAABCw9UZA",
+      "title": "[Bishop NIT] Section 6.1.1: list formatting",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/190",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Section 6.1.1, paragraph 2\n\n```\n     URI suffix: scitt-keys Change controller: IETF Specification\n     document(s): RFCthis Status: Permanent Related information:\n     [I-D.draft-ietf-scitt-architecture]\n```\n\nI suspect this is not the formatting you intended for this list.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:04Z",
+      "updatedAt": "2026-05-19T19:54:54Z",
+      "closedAt": "2026-05-19T19:53:46Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #200 (script ran twice). Closing in favour of #200.",
+          "createdAt": "2026-05-19T19:53:46Z",
+          "updatedAt": "2026-05-19T19:53:46Z"
+        }
+      ]
+    },
+    {
+      "number": 191,
+      "id": "I_kwDOLJjbks8AAAABCw9U4Q",
+      "title": "[Bishop NIT] Grammar: \"non-supported\" should be hyphenated",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/191",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Sections 2.3.1 and 2.4.1\n\n```\n \"Signed Statement contained a non supported algorithm\" } HTTP/1.1 400 Bad Re\n                               ^^^^^^^^^^^^^\n```\n\nThis expression is usually spelled with a hyphen (`non-supported`). Appears in both Section 2.3.1, paragraph 5 and Section 2.4.1, paragraph 7.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:05Z",
+      "updatedAt": "2026-05-19T19:54:55Z",
+      "closedAt": "2026-05-19T19:53:45Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #201 (script ran twice). Closing in favour of #201.",
+          "createdAt": "2026-05-19T19:53:44Z",
+          "updatedAt": "2026-05-19T19:53:44Z"
+        }
+      ]
+    },
+    {
+      "number": 192,
+      "id": "I_kwDOLJjbks8AAAABCw9Vsw",
+      "title": "[Bishop NIT] Grammar: \"denial-of-service\" should be hyphenated",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/192",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Sections 2.4.5 and 2.5.1\n\nSection 2.4.5, paragraph 1:\n```\nf authorization or preventing denial of service attacks. If Authentication i\n                              ^^^^^^^^^^^^^^^^^\n```\n\nSection 2.5.1, paragraph 3:\n```\nal of Service Attacks While denial of service attacks are very hard to defen\n                            ^^^^^^^^^^^^^^^^^\n```\n\nIt appears that hyphens are missing (`denial-of-service attacks`).\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:07Z",
+      "updatedAt": "2026-05-19T19:54:56Z",
+      "closedAt": "2026-05-19T19:53:49Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #202 (script ran twice). Closing in favour of #202.",
+          "createdAt": "2026-05-19T19:53:48Z",
+          "updatedAt": "2026-05-19T19:53:48Z"
+        }
+      ]
+    },
+    {
+      "number": 193,
+      "id": "I_kwDOLJjbks8AAAABCw9WMw",
+      "title": "[Bishop NIT] Section 2.5.2: missing comma after \"Nonetheless\"",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/193",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Section 2.5.2, paragraph 4\n\n```\n limited risk to eavesdropping. Nonetheless transparency may mean 'within a\n                                ^^^^^^^^^^^\n```\n\nA comma may be missing after the conjunctive/linking adverb \"Nonetheless\".\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:08Z",
+      "updatedAt": "2026-05-20T16:12:31Z",
+      "closedAt": "2026-05-20T16:12:31Z",
+      "comments": []
+    },
+    {
+      "number": 194,
+      "id": "I_kwDOLJjbks8AAAABCw9mpQ",
+      "title": "[Bishop DISCUSS] Section 2.4.1: 302 redirect from a resource to itself",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/194",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Section 2.4.1, paragraph 2\n\n```\n     If the client requests (GET) the location when the registration is\n     still in progress, the TS MAY return a 302 Found, as in this non-\n     normative example:\n```\n\nI'm a bit uncomfortable with the idea of a 302 redirect from a resource to itself. Redirects to the same URI don't really fit into any of the categories described in Section 15.4 of RFC 9110.\n\nFundamentally, I think you need to decide whether this resource represents the operation or the result. If it represents the operation, it should return a 200 and a description of the operation's status (complete, in-progress, failed, etc.); completed operations will include the URL of the result or might redirect there.\n\nIf it represents the result itself, it won't exist (404) until the operation completes.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:44Z",
+      "updatedAt": "2026-05-19T19:54:56Z",
+      "closedAt": "2026-05-19T19:53:52Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #184 (script ran twice). Closing in favour of #184.",
+          "createdAt": "2026-05-19T19:53:51Z",
+          "updatedAt": "2026-05-19T19:53:51Z"
+        }
+      ]
+    },
+    {
+      "number": 195,
+      "id": "I_kwDOLJjbks8AAAABCw9nOQ",
+      "title": "[Bishop COMMENT] Section 2.2: URL-safety of kid values",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/195",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Section 2.2, paragraph 12\n\n```\n     If the kid values used by the service ({kid_value} in the request\n     above) are not URL-safe, the resource MUST accept the base64url\n     encoding of the kid value, without padding, in the URL instead.\n```\n\nDoes this imply that clients determine the request format based on whether the kid_value they're querying is URL-safe? Can a client infer whether *all* kid values are URL-safe based on examining one kid?\n\nI'd be inclined to make this say either that resources must exist for both the raw kid value (if URL-safe) and the base64url-encoded value, or that a server publishes somewhere whether it commits to URL-safe kid values.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:45Z",
+      "updatedAt": "2026-05-19T19:54:57Z",
+      "closedAt": "2026-05-19T19:53:50Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #185 (script ran twice). Closing in favour of #185.",
+          "createdAt": "2026-05-19T19:53:50Z",
+          "updatedAt": "2026-05-19T19:53:50Z"
+        }
+      ]
+    },
+    {
+      "number": 196,
+      "id": "I_kwDOLJjbks8AAAABCw9nxA",
+      "title": "[Bishop COMMENT] Section 2.3.2: 202 vs 303 status code",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/196",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Section 2.3.2, paragraph 1\n\nI would have expected 202 here, but 303 also seems defensible. No change necessarily required, just review the definitions of each to be sure.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:47Z",
+      "updatedAt": "2026-05-19T19:54:58Z",
+      "closedAt": "2026-05-19T19:53:54Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #186 (script ran twice). Closing in favour of #186.",
+          "createdAt": "2026-05-19T19:53:53Z",
+          "updatedAt": "2026-05-19T19:53:53Z"
+        }
+      ]
+    },
+    {
+      "number": 197,
+      "id": "I_kwDOLJjbks8AAAABCw9oVQ",
+      "title": "[Bishop COMMENT] Section 2.4.1: rephrase \"may not serve\" for clarity",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/197",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Section 2.4.1, paragraph 3\n\n```\n     The location MAY be temporary, and the service may not serve a\n     relevant response at this Location after a reasonable delay.\n```\n\nThere are several instances of this sentence; I'd suggest a slight rephrase throughout to ensure \"may not serve\" is read as permission not to serve rather than a prohibition on serving. \"...the server might remove the resource after a reasonable delay.\"\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:48Z",
+      "updatedAt": "2026-05-20T15:56:20Z",
+      "closedAt": "2026-05-20T15:56:20Z",
+      "comments": []
+    },
+    {
+      "number": 198,
+      "id": "I_kwDOLJjbks8AAAABCw9o7A",
+      "title": "[Bishop COMMENT] Missing references: RFC9162 and RFC7231",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/198",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Missing references\n\nNo reference entries found for these items, which were mentioned in the text: `[RFC9162]` and `[RFC7231]`.\n\n(But note that 7231 is obsoleted by 9110, so you probably want to update that text rather than adding the reference.)\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:50Z",
+      "updatedAt": "2026-05-20T16:20:08Z",
+      "closedAt": "2026-05-20T16:20:08Z",
+      "comments": []
+    },
+    {
+      "number": 199,
+      "id": "I_kwDOLJjbks8AAAABCw9pmQ",
+      "title": "[Bishop NIT] Section 2.1: typo \"returning at that resource\"",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/199",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Section 2.1, paragraph 9\n\n```\n-    The Transparency Service MAY stop returning at that resource the keys\n-                                                ---------------------\n```\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:51Z",
+      "updatedAt": "2026-05-20T16:11:12Z",
+      "closedAt": "2026-05-20T16:11:12Z",
+      "comments": []
+    },
+    {
+      "number": 200,
+      "id": "I_kwDOLJjbks8AAAABCw9qDw",
+      "title": "[Bishop NIT] Section 6.1.1: list formatting",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/200",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Section 6.1.1, paragraph 2\n\n```\n     URI suffix: scitt-keys Change controller: IETF Specification\n     document(s): RFCthis Status: Permanent Related information:\n     [I-D.draft-ietf-scitt-architecture]\n```\n\nI suspect this is not the formatting you intended for this list.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:53Z",
+      "updatedAt": "2026-05-20T16:10:45Z",
+      "closedAt": "2026-05-20T16:10:45Z",
+      "comments": []
+    },
+    {
+      "number": 201,
+      "id": "I_kwDOLJjbks8AAAABCw9rIQ",
+      "title": "[Bishop NIT] Grammar: \"non-supported\" should be hyphenated",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/201",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Sections 2.3.1 and 2.4.1\n\n```\n \"Signed Statement contained a non supported algorithm\" } HTTP/1.1 400 Bad Re\n                               ^^^^^^^^^^^^^\n```\n\nThis expression is usually spelled with a hyphen (`non-supported`). Appears in both Section 2.3.1, paragraph 5 and Section 2.4.1, paragraph 7.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:54Z",
+      "updatedAt": "2026-05-20T16:01:07Z",
+      "closedAt": "2026-05-20T16:01:07Z",
+      "comments": []
+    },
+    {
+      "number": 202,
+      "id": "I_kwDOLJjbks8AAAABCw9ryw",
+      "title": "[Bishop NIT] Grammar: \"denial-of-service\" should be hyphenated",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/202",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "### Sections 2.4.5 and 2.5.1\n\nSection 2.4.5, paragraph 1:\n```\nf authorization or preventing denial of service attacks. If Authentication i\n                              ^^^^^^^^^^^^^^^^^\n```\n\nSection 2.5.1, paragraph 3:\n```\nal of Service Attacks While denial of service attacks are very hard to defen\n                            ^^^^^^^^^^^^^^^^^\n```\n\nIt appears that hyphens are missing (`denial-of-service attacks`).\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:56Z",
+      "updatedAt": "2026-05-20T16:10:05Z",
+      "closedAt": "2026-05-20T16:10:05Z",
+      "comments": []
+    },
+    {
+      "number": 203,
+      "id": "I_kwDOLJjbks8AAAABCw9scQ",
+      "title": "[Bishop NIT] Section 2.5.2: missing comma after \"Nonetheless\"",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/203",
+      "state": "CLOSED",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Section 2.5.2, paragraph 4\n\n```\n limited risk to eavesdropping. Nonetheless transparency may mean 'within a\n                                ^^^^^^^^^^^\n```\n\nA comma may be missing after the conjunctive/linking adverb \"Nonetheless\".\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
+      "createdAt": "2026-05-19T19:49:58Z",
+      "updatedAt": "2026-05-19T19:54:59Z",
+      "closedAt": "2026-05-19T19:53:43Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Duplicate of #193 (script ran twice). Closing in favour of #193.",
+          "createdAt": "2026-05-19T19:53:42Z",
+          "updatedAt": "2026-05-19T19:53:42Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -13875,6 +14437,1411 @@
           "body": "LGTM",
           "createdAt": "2026-05-13T15:29:03Z",
           "updatedAt": "2026-05-13T15:29:03Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 172,
+      "id": "PR_kwDOLJjbks7dI8FF",
+      "title": "Add RFC8792 folding headers to wrapped examples",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/172",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "Proposal to address further comment from Mohamed Boucadair in https://mailarchive.ietf.org/arch/msg/scitt/hnBbJkFVsDhRTL74ILVoyezJMSw/\r\n\r\nRFC8792 requires each folded text block to include the standard two-line header before content using `\\` line wrapping. Several draft examples used folded lines without that per-snippet header.\r\n\r\n- **Folded examples**\r\n  - Added the required RFC8792 header to every fenced snippet that uses `\\` wrapping.\r\n  - Applied this consistently across CBOR diagnostic and HTTP message examples.\r\n\r\n- **Draft note cleanup**\r\n  - Removed the broad \u201cExamples use\u2026\u201d note now that each folded block carries the required header.\r\n\r\nExample:\r\n\r\n```text\r\nNOTE: '\\' line wrapping per RFC 8792\r\n\r\nHTTP/1.1 400 Bad Request\r\nContent-Type: application/concise-problem-details+cbor\r\n\r\n{\r\n  / title /         -1: \\\r\n          \"Bad Signature Algorithm\"\r\n}\r\n```",
+      "createdAt": "2026-05-19T15:45:13Z",
+      "updatedAt": "2026-05-20T16:34:03Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "026ec22739704a9c488aabfb9fd2f3da8f5b4bd9",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/update-snippets-for-rfc8792-compliance",
+      "headRefOid": "1324692d43016f7114edb21e2306f6db00473cfe",
+      "closedAt": "2026-05-20T16:34:02Z",
+      "mergedAt": "2026-05-20T16:34:02Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "885f2e7b7d740330ccac9c0d4967eedb4b0132cb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAYhrpQ",
+          "commit": {
+            "abbreviatedOid": "1324692"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T15:58:06Z",
+          "updatedAt": "2026-05-20T16:32:43Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAY5nXw",
+          "commit": {
+            "abbreviatedOid": "1324692"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T16:43:17Z",
+          "updatedAt": "2026-05-20T16:32:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaZH0g",
+          "commit": {
+            "abbreviatedOid": "1324692"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "no objections",
+          "createdAt": "2026-05-19T19:52:19Z",
+          "updatedAt": "2026-05-20T16:32:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAacLoA",
+          "commit": {
+            "abbreviatedOid": "1324692"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T19:58:04Z",
+          "updatedAt": "2026-05-20T16:32:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb8Jng",
+          "commit": {
+            "abbreviatedOid": "1324692"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:14:15Z",
+          "updatedAt": "2026-05-20T16:32:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 179,
+      "id": "PR_kwDOLJjbks7dN6D6",
+      "title": "Clarify SCRAPI SHOULD requirements",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/179",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "\u00c9ric Vyncke\u2019s DISCUSS identified ambiguous BCP 14 `SHOULD` usage where requirements either appeared mandatory or lacked guidance for exceptions.\n\n- **Promoted mandatory behavior to `MUST`**\n  - `Accept: application/cbor` on SCITT key discovery requests\n  - Missing operation / receipt error responses\n  - Client retry behavior and rate-limit responses\n\n- **Delegated 5xx handling to HTTP semantics**\n  - Client handling of 5xx responses now refers to RFC 9110 Sections 15.6 and 9.2.2\n\n- **Added exception guidance for retained `SHOULD`s**\n  - Retired key availability\n  - Preferred RFC9290 error bodies\n  - Third-party timestamp mechanisms\n  - Server-side retry interval configuration\n\nExample:\n\n```markdown\nClients interact with this resource by issuing an HTTP GET request,\nand MUST include `Accept: application/cbor` in the request.\n```\n\n&gt; [!WARNING]\n&gt;\n&gt;",
+      "createdAt": "2026-05-19T19:23:42Z",
+      "updatedAt": "2026-05-20T16:32:12Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "0ac0d3dd3c74b91f1961a7b7fcc2e80fa16a9c24",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-should-vs-must-ambiguity",
+      "headRefOid": "381f80d0be59e7279012096bab4e2e1199084ca4",
+      "closedAt": "2026-05-20T16:32:12Z",
+      "mergedAt": "2026-05-20T16:32:12Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "026ec22739704a9c488aabfb9fd2f3da8f5b4bd9"
+      },
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@copilot Refer to RFC 9110 \u2014 replace the sentence with \"Clients handle 5xx responses as defined in {{RFC9110}}, Sections 15.6 and 9.2.2.\" (i.e., delegate entirely to HTTP semantics).",
+          "createdAt": "2026-05-19T19:36:00Z",
+          "updatedAt": "2026-05-19T19:36:00Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> @copilot Refer to RFC 9110 \u2014 replace the sentence with \"Clients handle 5xx responses as defined in {{RFC9110}}, Sections 15.6 and 9.2.2.\" (i.e., delegate entirely to HTTP semantics).\n\nUpdated the 5xx handling sentence to delegate to RFC 9110 Sections 15.6 and 9.2.2 in commit 003bef5.\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>\n\n",
+          "createdAt": "2026-05-19T19:37:26Z",
+          "updatedAt": "2026-05-19T19:37:43Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Just as a heads up, I was blocked by some firewall rules while working on your feedback. Expand below for details.\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>\n\n",
+          "createdAt": "2026-05-19T19:45:16Z",
+          "updatedAt": "2026-05-19T19:45:16Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@copilot resolve the merge conflicts in this pull request",
+          "createdAt": "2026-05-20T16:28:09Z",
+          "updatedAt": "2026-05-20T16:28:09Z"
+        },
+        {
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> @copilot resolve the merge conflicts in this pull request\n\nResolved the merge conflicts with `main` and pushed the merge commit 381f80d.\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>\n\n",
+          "createdAt": "2026-05-20T16:31:05Z",
+          "updatedAt": "2026-05-20T16:31:32Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaUbUg",
+          "commit": {
+            "abbreviatedOid": "003bef5"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-19T19:43:25Z",
+          "updatedAt": "2026-05-19T19:43:25Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "@copilot make those {{Section 15.6 of etc",
+              "createdAt": "2026-05-19T19:43:25Z",
+              "updatedAt": "2026-05-19T19:43:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaVVww",
+          "commit": {
+            "abbreviatedOid": "124b28f"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:45:02Z",
+          "updatedAt": "2026-05-19T19:45:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaVXrQ",
+          "commit": {
+            "abbreviatedOid": "124b28f"
+          },
+          "author": "copilot-swe-agent",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-19T19:45:05Z",
+          "updatedAt": "2026-05-19T19:45:05Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Updated the RFC 9110 references to use explicit section citations in commit 124b28f.",
+              "createdAt": "2026-05-19T19:45:05Z",
+              "updatedAt": "2026-05-19T19:45:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaaMgA",
+          "commit": {
+            "abbreviatedOid": "124b28f"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "no objections",
+          "createdAt": "2026-05-19T19:54:15Z",
+          "updatedAt": "2026-05-19T19:54:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaawBg",
+          "commit": {
+            "abbreviatedOid": "124b28f"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T19:55:15Z",
+          "updatedAt": "2026-05-19T19:55:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 180,
+      "id": "PR_kwDOLJjbks7dN_03",
+      "title": "Clarify language handling for human-readable problem details",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/180",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "Section 2 did not state how languages are represented for human-readable `title` and `detail` strings in Concise Problem Details.\n\n- **RFC9290 alignment**\n  - Clarifies that `title` and `detail` use RFC9290 `oltext`.\n  - Notes that values may be plain CBOR `text` or language-tagged `tag38`.\n\n- **Language tagging semantics**\n  - Documents that `tag38` can carry a BCP 47 language tag.\n  - States that unadorned text is interpreted as `en` when no explicit or implicit language context is available.\n\n```cbor-diag\n{\n  / title /  -1: \"Bad Signature Algorithm\",\n  / detail / -2: 38([\"fr\", \"Algorithme de signature non pris en charge\"])\n}\n```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ****** --allow-local-file-access --cache=/home/REDACTED/work/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi/.refcache --v2v3 /dev/stdin -o /dev/stdout` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:27:39Z",
+      "updatedAt": "2026-05-20T16:35:53Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "885f2e7b7d740330ccac9c0d4967eedb4b0132cb",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/clarify-human-readable-strings-language",
+      "headRefOid": "a242e054b83727c71675176a160d0e936d79dd1a",
+      "closedAt": "2026-05-20T16:35:53Z",
+      "mergedAt": "2026-05-20T16:35:53Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "b35e4094c0cc2332d6d591794c5c9aa0fb98da15"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaTpzg",
+          "commit": {
+            "abbreviatedOid": "a242e05"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:42:01Z",
+          "updatedAt": "2026-05-20T16:34:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaYmUg",
+          "commit": {
+            "abbreviatedOid": "a242e05"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T19:51:17Z",
+          "updatedAt": "2026-05-20T16:34:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhpp9A",
+          "commit": {
+            "abbreviatedOid": "a242e05"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T16:13:00Z",
+          "updatedAt": "2026-05-20T16:34:53Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 181,
+      "id": "PR_kwDOLJjbks7dOBGF",
+      "title": "Use \u201cspecifies\u201d in SCRAPI abstract",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/181",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "\u00c9ric Vyncke\u2019s INT AD review requested standards-track wording in the abstract: use \u201cspecifies\u201d rather than \u201cdescribes\u201d.\n\n- **Abstract**\n  - Updated the opening sentence to state that the document specifies the SCRAPI REST API.\n\n```diff\n-This document describes a REST API...\n+This document specifies a REST API...\n```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:28:38Z",
+      "updatedAt": "2026-05-20T16:02:00Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-abstract-description",
+      "headRefOid": "ae49f25e1143dd2bdaf54363e82f8af4f1d3b8cb",
+      "closedAt": "2026-05-20T16:01:59Z",
+      "mergedAt": "2026-05-20T16:01:59Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "9ff942b7d4b65a250da6108e8e3a4fc0774414f1"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaTTzg",
+          "commit": {
+            "abbreviatedOid": "ae49f25"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:41:21Z",
+          "updatedAt": "2026-05-19T19:41:21Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaYEZw",
+          "commit": {
+            "abbreviatedOid": "ae49f25"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T19:50:16Z",
+          "updatedAt": "2026-05-19T19:50:16Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaYbkQ",
+          "commit": {
+            "abbreviatedOid": "ae49f25"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:50:56Z",
+          "updatedAt": "2026-05-19T19:50:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb8EXg",
+          "commit": {
+            "abbreviatedOid": "ae49f25"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:13:58Z",
+          "updatedAt": "2026-05-20T00:13:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhjFhg",
+          "commit": {
+            "abbreviatedOid": "ae49f25"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Agree with edits.",
+          "createdAt": "2026-05-20T15:58:26Z",
+          "updatedAt": "2026-05-20T15:58:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 182,
+      "id": "PR_kwDOLJjbks7dOBK7",
+      "title": "Remove redundant Section 1 conformance paragraph",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/182",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "\u00c9ric Vyncke noted that Section 1\u2019s \u201cconformance\u201d paragraph was redundant with the normative resource definitions that follow. The paragraph also introduced unnecessary conformance wording.\n\n- **Section 1**\n  - Removed the redundant mandatory-to-implement resource list from the Introduction.\n  - Left the more detailed Scope section as the single place describing how SCRAPI maps to SCITT Architecture requirements.\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:28:42Z",
+      "updatedAt": "2026-05-20T16:03:18Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/remove-redundant-conformance-paragraph",
+      "headRefOid": "b13e92125f6561ffd42fd3e7171b8da7420750bf",
+      "closedAt": "2026-05-20T16:03:18Z",
+      "mergedAt": "2026-05-20T16:03:18Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "a95c8ae71597ecbb6280d76763cb52c79aa29060"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaTIPg",
+          "commit": {
+            "abbreviatedOid": "b13e921"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:41:00Z",
+          "updatedAt": "2026-05-19T19:41:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaZL4Q",
+          "commit": {
+            "abbreviatedOid": "b13e921"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T19:52:26Z",
+          "updatedAt": "2026-05-19T19:52:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb7_MA",
+          "commit": {
+            "abbreviatedOid": "b13e921"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:13:44Z",
+          "updatedAt": "2026-05-20T00:13:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhiu1w",
+          "commit": {
+            "abbreviatedOid": "b13e921"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Agree - redundant.",
+          "createdAt": "2026-05-20T15:57:44Z",
+          "updatedAt": "2026-05-20T15:57:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 183,
+      "id": "PR_kwDOLJjbks7dOBe2",
+      "title": "Clarify Section 2 problem details field list rendering",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/183",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "Section 2\u2019s HTML rendering made the `title` / `detail` bullets look like they might belong to the preceding numbered list, and the field list lacked introductory text.\n\n- **Rendering structure**\n  - Ends the numbered error-response alternatives before introducing the Concise Problem Details fields.\n  - Ensures the generated HTML renders the fields as a separate bullet list.\n\n- **Prose clarification**\n  - Adds explicit leading text for the field list:\n\n```markdown\nThe Concise Problem Details object MUST contain the following fields:\n```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `accounts.google.com`\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --use-angle=swiftshader-webgl --crashpad-handler-pid=4493 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,1606246263362691325,11166564356233206912,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,15017494463729434918,1632374473604367252,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n>   - Triggering command: `/usr/bin/chromium chromium --headless --no-sandbox --disable-gpu --user-data-dir=/tmp/scrapi-screenshot-profile --window-size=1280,900 --screenshot=/tmp/scrapi-screenshots/section-2-problem-details.png file:///home/REDACTED/work/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2-4` (dns block)\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader-webgl --crashpad-handler-pid=4614 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,3145102677285179946,11793949253157678913,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,6758730198951507139,10040412957310407482,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n> - `android.clients.google.com`\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --use-angle=swiftshader-webgl --crashpad-handler-pid=4493 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,1606246263362691325,11166564356233206912,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,15017494463729434918,1632374473604367252,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n>   - Triggering command: `/usr/bin/chromium chromium --headless --no-sandbox --disable-gpu --user-data-dir=/tmp/scrapi-screenshot-profile --window-size=1280,900 --screenshot=/tmp/scrapi-screenshots/section-2-problem-details.png file:///home/REDACTED/work/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2-4` (dns block)\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader-webgl --crashpad-handler-pid=4614 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,3145102677285179946,11793949253157678913,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,6758730198951507139,10040412957310407482,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n> - `clients2.google.com`\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --use-angle=swiftshader-webgl --crashpad-handler-pid=4493 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,1606246263362691325,11166564356233206912,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,15017494463729434918,1632374473604367252,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n>   - Triggering command: `/usr/bin/chromium chromium --headless --no-sandbox --disable-gpu --user-data-dir=/tmp/scrapi-screenshot-profile --window-size=1280,900 --screenshot=/tmp/scrapi-screenshots/section-2-problem-details.png file:///home/REDACTED/work/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2-4` (dns block)\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader-webgl --crashpad-handler-pid=4614 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,3145102677285179946,11793949253157678913,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,6758730198951507139,10040412957310407482,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n> - `clientservices.googleapis.com`\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader-webgl --crashpad-handler-pid=4753 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-chrome-profile --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,8674043995151488479,17695852114117074538,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,17976519796173322195,6047170183531718156,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n>   - Triggering command: `/opt/google/chrome/chrome /usr/bin/google-chrome-stable --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-extensions --user-data-dir=/tmp/scrapi-chrome-profile --window-size=1280,900 --screenshot=/tmp/scrapi-screenshots/section-2-problem-details.png file:///home/REDACTED/work/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2-4 etf-scitt-scrapi.html#section-2-4` (dns block)\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n> - `martinthomson.github.io`\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --use-angle=swiftshader-webgl --crashpad-handler-pid=4493 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,1606246263362691325,11166564356233206912,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,15017494463729434918,1632374473604367252,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n>   - Triggering command: `/usr/bin/chromium chromium --headless --no-sandbox --disable-gpu --user-data-dir=/tmp/scrapi-screenshot-profile --window-size=1280,900 --screenshot=/tmp/scrapi-screenshots/section-2-problem-details.png file:///home/REDACTED/work/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2-4` (dns block)\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader-webgl --crashpad-handler-pid=4614 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,3145102677285179946,11793949253157678913,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,6758730198951507139,10040412957310407482,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n> - `redirector.gvt1.com`\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --use-angle=swiftshader-webgl --crashpad-handler-pid=4493 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,1606246263362691325,11166564356233206912,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,15017494463729434918,1632374473604367252,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n>   - Triggering command: `/usr/bin/chromium chromium --headless --no-sandbox --disable-gpu --user-data-dir=/tmp/scrapi-screenshot-profile --window-size=1280,900 --screenshot=/tmp/scrapi-screenshots/section-2-problem-details.png file:///home/REDACTED/work/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2-4` (dns block)\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader-webgl --crashpad-handler-pid=4614 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,3145102677285179946,11793949253157678913,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,6758730198951507139,10040412957310407482,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n> - `safebrowsingohttpgateway.googleapis.com`\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader-webgl --crashpad-handler-pid=4753 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-chrome-profile --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,8674043995151488479,17695852114117074538,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,17976519796173322195,6047170183531718156,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n>   - Triggering command: `/opt/google/chrome/chrome /usr/bin/google-chrome-stable --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-extensions --user-data-dir=/tmp/scrapi-chrome-profile --window-size=1280,900 --screenshot=/tmp/scrapi-screenshots/section-2-problem-details.png file:///home/REDACTED/work/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2-4 etf-scitt-scrapi.html#section-2-4` (dns block)\n> - `www.google.com`\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --use-angle=swiftshader-webgl --crashpad-handler-pid=4493 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,1606246263362691325,11166564356233206912,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,15017494463729434918,1632374473604367252,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n>   - Triggering command: `/usr/bin/chromium chromium --headless --no-sandbox --disable-gpu --user-data-dir=/tmp/scrapi-screenshot-profile --window-size=1280,900 --screenshot=/tmp/scrapi-screenshots/section-2-problem-details.png file:///home/REDACTED/work/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi/draft-ietf-scitt-scrapi.html#section-2-4` (dns block)\n>   - Triggering command: `/proc/self/exe /proc/self/exe --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=network --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader-webgl --crashpad-handler-pid=4614 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/scrapi-screenshot-profile --change-stack-guard-on-fork=enable --shared-files=network_parent_dirs_pipe:100,v8_context_snapshot_data:101 --field-trial-handle=3,i,3145102677285179946,11793949253157678913,262144 --disable-features=PaintHolding --variations-seed-version --pseudonymization-salt-handle=7,i,6758730198951507139,10040412957310407482,4 --trace-process-track-uuid=3190708989122997041` (dns block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:28:57Z",
+      "updatedAt": "2026-05-20T16:08:21Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/update-html-rendering-list-item",
+      "headRefOid": "9e83fee9b1f25f4c9d01ca58213fe93e0e3b47a6",
+      "closedAt": "2026-05-20T16:08:20Z",
+      "mergedAt": "2026-05-20T16:08:20Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "edfabdcfa1f5456ba0d67dd29a58a9eb5fe95693"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaS1rA",
+          "commit": {
+            "abbreviatedOid": "9e83fee"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:40:27Z",
+          "updatedAt": "2026-05-19T19:40:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaYJHw",
+          "commit": {
+            "abbreviatedOid": "9e83fee"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "lgtm",
+          "createdAt": "2026-05-19T19:50:25Z",
+          "updatedAt": "2026-05-19T19:50:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaaA7A",
+          "commit": {
+            "abbreviatedOid": "9e83fee"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T19:53:55Z",
+          "updatedAt": "2026-05-19T19:53:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb77zQ",
+          "commit": {
+            "abbreviatedOid": "9e83fee"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:13:30Z",
+          "updatedAt": "2026-05-20T00:13:30Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhh9yw",
+          "commit": {
+            "abbreviatedOid": "9e83fee"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Edits match feedback. ",
+          "createdAt": "2026-05-20T15:56:15Z",
+          "updatedAt": "2026-05-20T15:56:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 204,
+      "id": "PR_kwDOLJjbks7dOg6E",
+      "title": "Hyphenate denial-of-service terminology",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/204",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "Mike Bishop\u2019s IESG nit noted unhyphenated \u201cdenial of service\u201d adjective usage in the Security Considerations text. This updates the draft to use \u201cdenial-of-service\u201d consistently where it modifies attacks or mitigations.\n\n- **Authentication**\n  - Changed prevention and mitigation references to `denial-of-service`.\n\n- **Threat Model**\n  - Updated the section heading and opening sentence to `Denial-of-Service Attacks`.\n\n- **Rate Limiting**\n  - Updated the cross-referenced mitigation wording to `denial-of-service`.\n\nExample:\n\n```markdown\nWhile denial-of-service attacks are very hard to defend against completely...\n```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:50:30Z",
+      "updatedAt": "2026-05-20T16:10:03Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-denial-of-service-hyphenation",
+      "headRefOid": "f810bbcb03c88ad9f4aa3311e0b47892c62a1716",
+      "closedAt": "2026-05-20T16:10:03Z",
+      "mergedAt": "2026-05-20T16:10:03Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "b282768c214c43d9c894d9a474830095b87171c6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaaw1A",
+          "commit": {
+            "abbreviatedOid": "f810bbc"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:55:16Z",
+          "updatedAt": "2026-05-19T19:55:16Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAadVAQ",
+          "commit": {
+            "abbreviatedOid": "f810bbc"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:00:26Z",
+          "updatedAt": "2026-05-19T20:00:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAahEfg",
+          "commit": {
+            "abbreviatedOid": "f810bbc"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "These are the situations where an asserted identify, like a ztdnaid, can be effective.\nThe ztdnaid concept aims to protect a resource, i.e. Transparency Service from unauthorized access, by checking that a client identity, contained in a  ztdnaid, is registered as trusted before performing any processing ",
+          "createdAt": "2026-05-19T20:08:13Z",
+          "updatedAt": "2026-05-19T20:08:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb72BQ",
+          "commit": {
+            "abbreviatedOid": "f810bbc"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:13:13Z",
+          "updatedAt": "2026-05-20T00:13:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhhchQ",
+          "commit": {
+            "abbreviatedOid": "f810bbc"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Edits are inline with feedback. ",
+          "createdAt": "2026-05-20T15:55:15Z",
+          "updatedAt": "2026-05-20T15:55:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 205,
+      "id": "PR_kwDOLJjbks7dOhG-",
+      "title": "Hyphenate \u201cnon-supported\u201d in SCRAPI error examples",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/205",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "Mike Bishop\u2019s IESG review noted that \u201cnon supported\u201d should be hyphenated in the Bad Signature Algorithm examples in Sections 2.3.1 and 2.4.1.\n\n- **Draft text**\n  - Updated both affected Concise Problem Details examples:\n    ```text\n    Signed Statement contained a non-supported algorithm\n    ```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:50:38Z",
+      "updatedAt": "2026-05-20T16:01:06Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-hyphen-in-non-supported",
+      "headRefOid": "e9af9f741b5f8d1e36353bd42304a33161d62419",
+      "closedAt": "2026-05-20T16:01:06Z",
+      "mergedAt": "2026-05-20T16:01:06Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "1c3d3740f949a3f44ba459d7df30b18ff04be6df"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAabAtQ",
+          "commit": {
+            "abbreviatedOid": "e9af9f7"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:55:42Z",
+          "updatedAt": "2026-05-19T19:55:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAac2CQ",
+          "commit": {
+            "abbreviatedOid": "e9af9f7"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T19:59:26Z",
+          "updatedAt": "2026-05-19T19:59:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaho4g",
+          "commit": {
+            "abbreviatedOid": "e9af9f7"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:09:17Z",
+          "updatedAt": "2026-05-19T20:09:17Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhg98A",
+          "commit": {
+            "abbreviatedOid": "e9af9f7"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T15:54:18Z",
+          "updatedAt": "2026-05-20T15:54:18Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhiU_Q",
+          "commit": {
+            "abbreviatedOid": "e9af9f7"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T15:56:57Z",
+          "updatedAt": "2026-05-20T15:56:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 206,
+      "id": "PR_kwDOLJjbks7dOhZu",
+      "title": "Fix Section 6.1.1 IANA registration template formatting",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/206",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "Section 6.1.1 rendered the Well-Known URI registration fields as a collapsed paragraph, making the template hard to read.\n\n- **Registration template**\n  - Converted the field list to explicit Markdown bullets so each RFC8615 template field renders separately.\n\n```markdown\n* URI suffix: scitt-keys\n* Change controller: IETF\n* Specification document(s): {{&SELF}}\n* Status: Permanent\n* Related information: {{-SCITT-ARCH}}\n```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:50:49Z",
+      "updatedAt": "2026-05-20T16:10:44Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-list-formatting-section-6-1-1",
+      "headRefOid": "89786f18b6810bdc9a6b0f7c3662cedb57929763",
+      "closedAt": "2026-05-20T16:10:44Z",
+      "mergedAt": "2026-05-20T16:10:44Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "cd4f2774fcebb4bf28fb0214e277ca98067e95f0"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAabOnw",
+          "commit": {
+            "abbreviatedOid": "89786f1"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:56:07Z",
+          "updatedAt": "2026-05-19T19:56:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAadr2w",
+          "commit": {
+            "abbreviatedOid": "89786f1"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:01:09Z",
+          "updatedAt": "2026-05-19T20:01:09Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaiDPw",
+          "commit": {
+            "abbreviatedOid": "89786f1"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:10:08Z",
+          "updatedAt": "2026-05-19T20:10:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb7y3Q",
+          "commit": {
+            "abbreviatedOid": "89786f1"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:13:00Z",
+          "updatedAt": "2026-05-20T00:13:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhgSlQ",
+          "commit": {
+            "abbreviatedOid": "89786f1"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-20T15:52:57Z",
+          "updatedAt": "2026-05-20T15:52:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 207,
+      "id": "PR_kwDOLJjbks7dOhn8",
+      "title": "Fix Section 2.1 key discovery wording typo",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/207",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "Section 2.1 contained an awkward phrase from the IESG review: \u201creturning at that resource the keys\u201d. This updates the sentence to read naturally while preserving the intended key-retirement behavior.\n\n- **Draft wording**\n  - Rephrased the Transparency Service Keys paragraph to say retired keys may stop being returned \u201cfrom that resource\u201d.\n\n```markdown\nThe Transparency Service MAY stop returning keys it no longer uses to issue Receipts from that resource, following a reasonable delay.\n```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:51:00Z",
+      "updatedAt": "2026-05-20T16:11:11Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-typo-section-2-1",
+      "headRefOid": "a9b27d1c0338af5215ede69ddca832ae9b52d375",
+      "closedAt": "2026-05-20T16:11:10Z",
+      "mergedAt": "2026-05-20T16:11:10Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "84dfe0a92b66c443d65c4ffc9004f2658c3f36b0"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAabbyA",
+          "commit": {
+            "abbreviatedOid": "a9b27d1"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:56:32Z",
+          "updatedAt": "2026-05-19T19:56:32Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaeMbQ",
+          "commit": {
+            "abbreviatedOid": "a9b27d1"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:02:10Z",
+          "updatedAt": "2026-05-19T20:02:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaiYmw",
+          "commit": {
+            "abbreviatedOid": "a9b27d1"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:10:49Z",
+          "updatedAt": "2026-05-19T20:10:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb7rZQ",
+          "commit": {
+            "abbreviatedOid": "a9b27d1"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:12:33Z",
+          "updatedAt": "2026-05-20T00:12:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhf3xQ",
+          "commit": {
+            "abbreviatedOid": "a9b27d1"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Clearer language...edits are good.",
+          "createdAt": "2026-05-20T15:52:11Z",
+          "updatedAt": "2026-05-20T15:52:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 208,
+      "id": "PR_kwDOLJjbks7dOh6p",
+      "title": "Resolve missing RFC references in SCRAPI draft",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/208",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "The draft referenced `RFC9162` without a bibliography entry and cited obsolete `RFC7231` text for `Retry-After`. `RFC7231` is superseded by `RFC9110`.\n\n- **References**\n  - Add `RFC9162` as an informative reference for receipt examples using RFC9162 SHA-256 VDS identifiers.\n\n- **HTTP citation update**\n  - Replace the obsolete `RFC7231` `Retry-After` citation with the corresponding `RFC9110` section:\n\n```markdown\n{{Section 10.2.3 of RFC9110}}\n```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:51:12Z",
+      "updatedAt": "2026-05-20T16:20:07Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "ee0de10050b686abf9c7fa2602db8387b595ee9c",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-missing-references-rfc9162-rfc7231",
+      "headRefOid": "4baedd51340702f0447d07006bba1baa36f5f85f",
+      "closedAt": "2026-05-20T16:20:06Z",
+      "mergedAt": "2026-05-20T16:20:06Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "0ac0d3dd3c74b91f1961a7b7fcc2e80fa16a9c24"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAabnKA",
+          "commit": {
+            "abbreviatedOid": "4baedd5"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:56:56Z",
+          "updatedAt": "2026-05-20T16:13:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaefaw",
+          "commit": {
+            "abbreviatedOid": "4baedd5"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:02:44Z",
+          "updatedAt": "2026-05-20T16:13:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaizjg",
+          "commit": {
+            "abbreviatedOid": "4baedd5"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:11:40Z",
+          "updatedAt": "2026-05-20T16:13:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb7mRA",
+          "commit": {
+            "abbreviatedOid": "4baedd5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:12:18Z",
+          "updatedAt": "2026-05-20T16:13:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhe6Hg",
+          "commit": {
+            "abbreviatedOid": "4baedd5"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM.",
+          "createdAt": "2026-05-20T15:50:22Z",
+          "updatedAt": "2026-05-20T16:13:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 209,
+      "id": "PR_kwDOLJjbks7dOiN7",
+      "title": "Clarify temporary Location resource wording",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/209",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "rjb4standards",
+        "OR13",
+        "henkbirkholz",
+        "JAG-UK"
+      ],
+      "labels": [],
+      "body": "Mike Bishop\u2019s IESG review noted that \u201cmay not serve\u201d could be read as a normative permission rather than a descriptive possibility. The affected Location guidance now avoids that ambiguity.\n\n- **Temporary Location guidance**\n  - Rephrased both repeated instances to describe possible resource removal clearly.\n  - Preserved the surrounding normative `MAY` language about temporary locations.\n\n```diff\n-The location MAY be temporary, and the service may not serve a relevant response at this Location after a reasonable delay.\n+The location MAY be temporary, and the server might remove the resource after a reasonable delay.\n```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:51:26Z",
+      "updatedAt": "2026-05-20T15:56:19Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/rephrase-section-2-4-1",
+      "headRefOid": "14b35e40f038b210de0feaf76dfeb82384e5334e",
+      "closedAt": "2026-05-20T15:56:19Z",
+      "mergedAt": "2026-05-20T15:56:19Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "0194ead7c48787f62a6366ea39bde1c451a492b4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAabz2g",
+          "commit": {
+            "abbreviatedOid": "14b35e4"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T19:57:20Z",
+          "updatedAt": "2026-05-19T19:57:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAaevSQ",
+          "commit": {
+            "abbreviatedOid": "14b35e4"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:03:14Z",
+          "updatedAt": "2026-05-19T20:03:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAagnqQ",
+          "commit": {
+            "abbreviatedOid": "14b35e4"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:07:12Z",
+          "updatedAt": "2026-05-19T20:07:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAajTIg",
+          "commit": {
+            "abbreviatedOid": "14b35e4"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "no objections",
+          "createdAt": "2026-05-19T20:12:33Z",
+          "updatedAt": "2026-05-19T20:12:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb7hHA",
+          "commit": {
+            "abbreviatedOid": "14b35e4"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:12:02Z",
+          "updatedAt": "2026-05-20T00:12:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAheSww",
+          "commit": {
+            "abbreviatedOid": "14b35e4"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Agree with edits.",
+          "createdAt": "2026-05-20T15:49:09Z",
+          "updatedAt": "2026-05-20T15:49:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 210,
+      "id": "PR_kwDOLJjbks7dOsX_",
+      "title": "Add missing comma after \u201cNonetheless\u201d in Section 2.5.2",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/210",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Section 2.5.2 was missing a comma after the linking adverb \u201cNonetheless\u201d in the eavesdropping discussion.\n\n- **Draft text**\n  - Adds the comma in the affected sentence.\n\n```diff\n-Nonetheless transparency may mean 'within a limited community' rather than 'in full public'\n+Nonetheless, transparency may mean 'within a limited community' rather than 'in full public'\n```\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T19:58:01Z",
+      "updatedAt": "2026-05-20T16:12:30Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-missing-comma-section-2-5-2",
+      "headRefOid": "18d1e67fa774d592842023e89e26f5099694f9ca",
+      "closedAt": "2026-05-20T16:12:30Z",
+      "mergedAt": "2026-05-20T16:12:29Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "ee0de10050b686abf9c7fa2602db8387b595ee9c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAagW9g",
+          "commit": {
+            "abbreviatedOid": "18d1e67"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-19T20:06:40Z",
+          "updatedAt": "2026-05-19T20:06:40Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAakEJg",
+          "commit": {
+            "abbreviatedOid": "18d1e67"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-19T20:14:04Z",
+          "updatedAt": "2026-05-19T20:14:04Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAb7Xug",
+          "commit": {
+            "abbreviatedOid": "18d1e67"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T00:11:34Z",
+          "updatedAt": "2026-05-20T00:11:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhdvRA",
+          "commit": {
+            "abbreviatedOid": "18d1e67"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Clarifying edits are helpful",
+          "createdAt": "2026-05-20T15:48:05Z",
+          "updatedAt": "2026-05-20T15:48:05Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 211,
+      "id": "PR_kwDOLJjbks7dO5DJ",
+      "title": "Clarify URL forms for `kid` key discovery",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/211",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Section 2.2 left clients to infer whether to request raw or base64url-encoded `kid` values. This clarifies that base64url is always valid, while raw `kid` URLs are also required when URI-safe.\n\n- **Key discovery URL behavior**\n  - Require `/.well-known/scitt-keys/{kid_value}` to accept base64url-without-padding for every `kid`.\n  - Also require the raw `kid` form when it is safe as a URI path segment.\n\n- **Ambiguity prevention**\n  - State that both URL forms identify the same key.\n  - Prohibit `kid` assignments where raw and base64url forms could make the same URL refer to different keys.\n\n> [!WARNING]\n>\n> <details>\n> <summary>Firewall rules blocked me from connecting to one or more addresses (expand for details)</summary>\n>\n> #### I tried to connect to the following addresses, but was blocked by firewall rules:\n>\n> - `https://api.github.com/repos/ietf-wg-scitt/draft-ietf-scitt-scrapi`\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ******` (http block)\n>   - Triggering command: `/usr/bin/python3 python3 lib/default-branch.py ietf-wg-scitt draft-ietf-scitt-scrapi ****** 0 -j ACCEPT` (http block)\n>\n> If you need me to access, download, or install something from one of these locations, you can either:\n>\n> - Configure [Actions setup steps](https://gh.io/copilot/actions-setup-steps) to set up my environment, which run before the firewall is enabled\n> - Add the appropriate URLs or hosts to the custom allowlist in this repository's [Copilot coding agent settings](https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/settings/copilot/coding_agent) (admins only)\n>\n> </details>",
+      "createdAt": "2026-05-19T20:06:28Z",
+      "updatedAt": "2026-05-20T16:12:09Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "11450d25b1967e1608b51267292b4c13cde518a6",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-url-safety-kid-values",
+      "headRefOid": "9d06113b7b9f247a80b985e4e37ba418d114a679",
+      "closedAt": "2026-05-20T16:12:09Z",
+      "mergedAt": "2026-05-20T16:12:09Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "bcaeb33f1cd5b87050e610e28aa71cbb7a0826ad"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAdpwhQ",
+          "commit": {
+            "abbreviatedOid": "9d06113"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T07:20:40Z",
+          "updatedAt": "2026-05-20T07:20:40Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAfbWvg",
+          "commit": {
+            "abbreviatedOid": "9d06113"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-05-20T11:19:46Z",
+          "updatedAt": "2026-05-20T11:19:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAfmlkw",
+          "commit": {
+            "abbreviatedOid": "9d06113"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "100% agree. This is useful.",
+          "createdAt": "2026-05-20T11:43:34Z",
+          "updatedAt": "2026-05-20T11:43:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAgC3Xw",
+          "commit": {
+            "abbreviatedOid": "9d06113"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-20T12:46:28Z",
+          "updatedAt": "2026-05-20T12:46:28Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABAhdYTA",
+          "commit": {
+            "abbreviatedOid": "9d06113"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Agree with the additional clarifications.",
+          "createdAt": "2026-05-20T15:47:23Z",
+          "updatedAt": "2026-05-20T15:47:23Z",
           "comments": []
         }
       ]
