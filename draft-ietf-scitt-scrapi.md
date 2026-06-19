@@ -154,7 +154,7 @@ References in this specification to "normative requirements of the SCITT Archite
 
 In particular, this document defines HTTP resources that satisfy the requirements in the following sections of {{-SCITT-ARCH}}:
 
-- Registration of Signed Statements (Section 6.3 of {{-SCITT-ARCH}}), realized by the Signed Statement registration resources defined in {{sec-register-signed-statement}}, {{sec-query-registration-status}} and {{sec-resolve-receipt}}.
+- Registration of Signed Statements (Section 6.3 of {{-SCITT-ARCH}}), realized by the Signed Statement registration resources defined in {{sec-register-signed-statement}} and {{sec-resolve-receipt}}.
 - Issuance of Receipts and construction of Transparent Statements (Section 7 of {{-SCITT-ARCH}}), realized by the Receipt resolution resource defined in {{sec-resolve-receipt}}.
 - Discovery of the Transparency Service verification keys used by Verifiers to validate Receipts (Section 5.1.2 and Section 9.4 of {{-SCITT-ARCH}}), realized by the resource defined in {{sec-transparency-service-keys}}.
 
@@ -179,10 +179,7 @@ This specification uses "payload" as defined in {{RFC9052}}.
 
 All messages are sent as HTTP GET or POST requests.
 
-If the Transparency Service cannot process a client's request, it MUST return either:
-
-1. an HTTP 3xx code, indicating to the client additional action they must take to complete the request, such as follow a redirection, or
-1. an HTTP 4xx or 5xx status code, and the body MUST be a Concise Problem Details object (application/concise-problem-details+cbor) {{RFC9290}}.
+If the Transparency Service cannot process a client's request, it MUST return an HTTP 4xx or 5xx status code, and the body MUST be a Concise Problem Details object (application/concise-problem-details+cbor) {{RFC9290}}.
 
 The Concise Problem Details object MUST contain the following fields:
 
@@ -362,7 +359,7 @@ Using this mechanism offers several benefits to implementers:
 ## Register Signed Statement
 
 This resource instructs a Transparency Service to register a Signed Statement on its log.
-Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator that can be used to check the registration's status asynchronously.
+Since log implementations may take many seconds or longer to reach finality, this API provides an asynchronous mode that returns a locator for the eventual Receipt resource, which the client can poll to retrieve the Receipt once registration completes.
 
 The following is a non-normative example of an HTTP request to register a Signed Statement:
 
@@ -453,19 +450,19 @@ Body (in CBOR diagnostic notation)
 The response contains the Receipt for the Signed Statement.
 Fresh Receipts may be requested through the resource identified in the Location header.
 
-### Status 303 - Registration is running
+### Status 202 - Registration is running
 
-In cases where the registration request is accepted but the Transparency Service is not able to produce a Receipt in a reasonable time, it MAY return a locator for the registration operation, as in this non-normative example:
+In cases where the registration request is accepted but the Transparency Service is not able to produce a Receipt in a reasonable time, it returns a 202 Accepted response, as in this non-normative example:
 
 ~~~ http
-HTTP/1.1 303 See Other
+HTTP/1.1 202 Accepted
 Location: https://transparency.example/entries/67ed...befe
-Content-Type: application/cose
 Content-Length: 0
 Retry-After: <seconds>
 ~~~
 
-The location MAY be temporary, and the server might remove the resource after a reasonable delay.
+The response MUST contain a `Location` header field whose value is the URL of the eventual Receipt resource (see {{sec-resolve-receipt}}).
+The client polls this resource to retrieve the Receipt once registration completes.
 
 The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
 
@@ -539,194 +536,6 @@ Content-Type: application/concise-problem-details+cbor
 {
   / title /         -1: "Invalid locator",
   / detail /        -2: "Operation locator is not in a valid form"
-}
-~~~
-
-## Query Registration Status
-
-This resource lets a client query a Transparency Service for the registration status of a Signed Statement they have submitted earlier, and for which they have received a 303 or 302 - Registration is running response.
-
-Request:
-
-~~~http
-GET /entries/67ed...befe HTTP/1.1
-Host: transparency.example
-Accept: application/cbor
-Accept: application/cose
-Content-Type: application/cose
-~~~
-
-Response:
-
-One of the following:
-
-### Status 302 - Registration is running
-
-Registration requests may fail, in which case the Location MAY return an error when queried.
-
-If the client requests (GET) the location when the registration is still in progress, the TS MAY return a 302 Found, as in this non-normative example:
-
-~~~ http-message
-HTTP/1.1 302 Found
-Location: https://transparency.example/entries/67ed...befe
-Content-Type: application/cose
-Content-Length: 0
-Retry-After: <seconds>
-~~~
-
-The location MAY be temporary, and the server might remove the resource after a reasonable delay.
-
-The Transparency Service MAY include a `Retry-After` header in the HTTP response to help with polling.
-
-### Status 200 - Asynchronous registration is successful
-
-Along with the receipt the Transparency Service MAY return a locator in the HTTP response `Location` header, provided the locator is a valid URL.
-
-~~~ http-message
-HTTP/1.1 200 OK
-Location: https://transparency.example/entries/67ed...befe
-Content-Type: application/cose
-
-Body (in CBOR diagnostic notation)
-
-/ cose-sign1 / 18([
-  / protected   / <<{
-    / key / 4 : "mxA4KiOkQFZ-dkLebSo3mLOEPR7rN8XtxkJe45xuyJk",
-    / algorithm / 1 : -7,  # ES256
-    / vds       / 395 : 1, # RFC9162 SHA-256
-    / claims / 15 : {
-      / issuer  / 1 : "https://blue.notary.example",
-      / subject / 2 : "https://green.software.example/cli@v1.2.3",
-    },
-  }>>,
-  / unprotected / {
-    / proofs / 396 : {
-      / inclusion / -1 : [
-        <<[
-          / size / 9, / leaf / 8,
-          / inclusion path /
-          h'7558a95f...e02e35d6'
-        ]>>
-      ],
-    },
-  },
-  / payload     / null,
-  / signature   / h'02d227ed...ccd3774f'
-])
-~~~
-
-The response contains the Receipt for the Signed Statement.
-Fresh Receipts may be requested through the resource identified in the Location header.
-
-As an example, a successful asynchronous follows the following sequence:
-
-~~~
-Initial exchange:
-
-Client --- POST /entries (Signed Statement) --> TS
-Client <-- 303 Location: .../entries/tmp123 --- TS
-
-May happen zero or more times:
-
-Client --- GET .../entries/tmp123           --> TS
-Client <-- 302 Location: .../entries/tmp123 --- TS
-
-Finally:
-
-Client --- GET .../entries/tmp123           --> TS
-Client <-- 200 (Receipt)                    --- TS
-           Location: .../entries/final123
-~~~
-
-
-### Status 400 - Invalid Client Request
-
-The following expected errors are defined for the conditions described below.
-When such a condition is encountered, an implementation MUST return an error response that is a valid {{RFC9290}} object.
-Implementations SHOULD use the corresponding error defined below, unless another valid {{RFC9290}} error better describes the condition.
-
-~~~ http-message
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 400 Bad Request
-Content-Type: application/concise-problem-details+cbor
-
-{
-  / title /         -1: \
-          "Bad Signature Algorithm",
-  / detail /        -2: \
-          "Signed Statement contained a non-supported algorithm"
-}
-~~~
-
-~~~ http-message
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 400 Bad Request
-Content-Type: application/concise-problem-details+cbor
-
-{
-  / title /         -1: "\
-          Confirmation Missing",
-  / detail /        -2: \
-          "Signed Statement did not contain proof of possession"
-}
-~~~
-
-~~~ http-message
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 400 Bad Request
-Content-Type: application/concise-problem-details+cbor
-
-{
-  / title /         -1: \
-          "Payload Missing",
-  / detail /        -2: \
-          "Signed Statement payload must be present"
-}
-~~~
-
-~~~ http-message
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 400 Bad Request
-Content-Type: application/concise-problem-details+cbor
-
-{
-  / title /         -1: \
-          "Rejected",
-  / detail /        -2: \
-          "Signed Statement not accepted by the current\
-          Registration Policy"
-}
-~~~
-
-~~~ http-message
-HTTP/1.1 400 Bad Request
-Content-Type: application/concise-problem-details+cbor
-
-{
-  / title /         -1: "Invalid locator",
-  / detail /        -2: "Operation locator is not in a valid form"
-}
-~~~
-
-### Status 404 - Operation Not Found
-
-If no record of the specified running operation is found, the Transparency Service MUST respond with a 4xx-class status code (typically 404 Not Found) and a Concise Problem Details {{RFC9290}} object as in the following example:
-
-~~~ http-message
-NOTE: '\' line wrapping per RFC 8792
-
-HTTP/1.1 404 Not Found
-Content-Type: application/concise-problem-details+cbor
-
-{
-  / title /         -1: \
-          "Operation Not Found",
-  / detail /        -2: \
-          "No running operation was found matching the requested ID"
 }
 ~~~
 
@@ -751,6 +560,16 @@ Retry-After: <seconds>
 
 ## Resolve Receipt
 
+This resource resolves the Receipt for a given `EntryID`.
+It is the resource identified by the `Location` header returned in the 202 Accepted response to an asynchronous registration request (see {{sec-register-signed-statement}}), and may also be used at any later time to obtain a fresh Receipt for a previously registered Signed Statement.
+
+A client polls this resource to obtain the Receipt.
+The response is one of:
+
+- 200, once registration is complete and the Receipt is available;
+- 204, while registration is still in progress; or
+- 404, if no Receipt exists for the `EntryID`, including when registration has failed.
+
 Request:
 
 ~~~ http-message
@@ -760,6 +579,8 @@ Accept: application/cose
 ~~~
 
 Response:
+
+One of the following:
 
 ### Status 200 - OK
 
@@ -798,6 +619,19 @@ Body (in CBOR diagnostic notation)
 ])
 ~~~
 
+### Status 204 - Registration is running
+
+If the registration identified by the `EntryID` is still in progress, the Transparency Service returns a 204 No Content response, as in this non-normative example:
+
+~~~ http-message
+HTTP/1.1 204 No Content
+Retry-After: <seconds>
+Cache-Control: no-store
+~~~
+
+The Transparency Service SHOULD include a `Retry-After` header in the HTTP response to help with polling.
+Because a 204 response is transient and the resource is expected to return a Receipt once registration completes, the Transparency Service SHOULD set `Cache-Control: no-store` to prevent caching of the in-progress response.
+
 ### Status 404 - Not Found
 
 If there is no Receipt found for the specified `EntryID` the Transparency Service MUST respond with a 4xx-class status code (typically 404 Not Found) and a Concise Problem Details {{RFC9290}} object as in the following example:
@@ -815,6 +649,43 @@ Content-Type: application/concise-problem-details+cbor
           "Receipt with entry ID <id> not known \
           to this Transparency Service"
 }
+~~~
+
+A 404 response is also returned when an asynchronous registration has failed and no Receipt will be produced.
+In that case, the Transparency Service MAY enrich the Concise Problem Details object with application-specific detail explaining why registration did not complete, as in this non-normative example:
+
+~~~ http-message
+NOTE: '\' line wrapping per RFC 8792
+
+HTTP/1.1 404 Not Found
+Content-Type: application/concise-problem-details+cbor
+
+{
+  / title /         -1: \
+          "Registration Failed",
+  / detail /        -2: \
+          "Signed Statement with entry ID <id> could not \
+          be persisted to the log"
+}
+~~~
+
+As an example, a successful asynchronous registration followed by Receipt resolution follows this sequence:
+
+~~~
+Initial exchange:
+
+Client --- POST /entries (Signed Statement) --> TS
+Client <-- 202 Location: .../entries/123     --- TS
+
+May happen zero or more times:
+
+Client --- GET .../entries/123              --> TS
+Client <-- 204 Retry-After: <seconds>       --- TS
+
+Finally:
+
+Client --- GET .../entries/123              --> TS
+Client <-- 200 (Receipt)                    --- TS
 ~~~
 
 # Privacy Considerations
@@ -918,7 +789,7 @@ In its absence, clients that retry a request MUST apply exponential backoff with
 
 ## Server-Side Retry Configuration
 
-Operators SHOULD configure a minimum retry interval appropriate for the expected registration latency and service capacity, and SHOULD communicate it to clients via the `Retry-After` header on relevant responses (e.g., 202, 429, 503), unless the service does not support client polling or retries for those responses.
+Operators SHOULD configure a minimum retry interval appropriate for the expected registration latency and service capacity, and SHOULD communicate it to clients via the `Retry-After` header on relevant responses (e.g., 202, 204, 429, 503), unless the service does not support client polling or retries for those responses.
 The interval should account for worst-case registration time, sustainable request volume, and intermediary behavior.
 
 ## Rate Limiting
