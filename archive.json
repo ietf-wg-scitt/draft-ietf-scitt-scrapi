@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-21T01:56:29.646745+00:00",
+  "timestamp": "2026-06-21T02:13:47.446018+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2592,7 +2592,7 @@
       ],
       "body": "### Section 2.3.2, paragraph 1\n\nI would have expected 202 here, but 303 also seems defensible. No change necessarily required, just review the definitions of each to be sure.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
       "createdAt": "2026-05-19T19:48:58Z",
-      "updatedAt": "2026-05-20T17:12:03Z",
+      "updatedAt": "2026-06-19T16:17:00Z",
       "closedAt": null,
       "comments": [
         {
@@ -2608,6 +2608,13 @@
           "body": "Summary of discussion in the group of on 2026-05-20:\n\nSwitching to 202 and returning a temporary/operation body is not an attractive choice, because:\n1. it requires the introduction of an ad-hoc, application-level CBOR response format, where all other response types in SCRAPI are already standard (COSE, CPD for CoAP).\n2. it requires application-specific client handling, where 303/302 instead leverages existing and widespread library support.\n\nA suggestion was made to use 303 for both 2.3.3 and 2.4.1.",
           "createdAt": "2026-05-20T17:12:01Z",
           "updatedAt": "2026-05-20T17:12:01Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Summary of meeting on 06/19 with Mike Bishop:\n\n1. the initial response to an async registration request must be a 202, and contain a Location to the eventual receipt resource.\n2. further GET requests made to that eventual location either result in 404 (same as now) if persistence has failed, 200 (same as now) once complete, or 204 with a Retry-After if the registration is still pending - setting Cache-control: no-store may be a good way to indicate that these 204 results are transient.\n3. 404 failures can be enriched with application-specific detail explaining why the persistence failed, using the concise problem details format.\n4. As a consequence of 1 and 2, 3xx usage is removed.",
+          "createdAt": "2026-06-19T16:16:59Z",
+          "updatedAt": "2026-06-19T16:16:59Z"
         }
       ]
     },
@@ -15842,6 +15849,75 @@
           "body": "Agree with the additional clarifications.",
           "createdAt": "2026-05-20T15:47:23Z",
           "updatedAt": "2026-05-20T15:47:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 212,
+      "id": "PR_kwDOLJjbks7ogFPQ",
+      "title": "Use 202/204 polling for async registration; merge Query Registration Status into Resolve Receipt",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/212",
+      "state": "OPEN",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "Per the 06/19 discussion with Mike Bishop (issue #186), async registration should rely on standard 202/204 polling rather than 3xx redirection, and the separate status-query resource is redundant with receipt resolution.\n\n### Register Signed Statement (2.3)\n- Replaced **303 See Other** with **202 Accepted**; response MUST carry a `Location` header pointing to the eventual Receipt resource.\n- Moved the **429 Too Many Requests** response here (formerly under Query Registration Status).\n\n### Resolve Receipt (2.4)\n- Absorbed the former **Query Registration Status** resource \u2014 both described GETs on the same locator.\n- Polling outcomes are now: **200** (Receipt available), **204** with `Retry-After` + `Cache-Control: no-store` (registration in progress, replaces 302), **404** (no Receipt, including failed registration).\n- 404 for a failed registration MAY be enriched with application-specific Concise Problem Details.\n\n### Consistency pass\n- Removed the 3xx option from the generic error-handling text in the Resources intro (no 3xx responses remain).\n- Updated the intro resource list (dropped the deleted `sec-query-registration-status` anchor) and the Operational Considerations `Retry-After` list (now `202, 204, 429, 503`).\n- Rewrote the flow-chart example to the new sequence.\n\n```\nClient --- POST /entries (Signed Statement) --> TS\nClient <-- 202 Location: .../entries/123     --- TS\n\nClient --- GET .../entries/123              --> TS   (zero or more)\nClient <-- 204 Retry-After: <seconds>       --- TS\n\nClient --- GET .../entries/123              --> TS\nClient <-- 200 (Receipt)                    --- TS\n```\n\n**Open question for review:** the `Invalid locator` 400 example currently sits under Register (2.3) to follow \"400s move to 2.3\", though it semantically applies to a malformed GET on Resolve Receipt. Happy to relocate it.",
+      "createdAt": "2026-06-19T19:56:34Z",
+      "updatedAt": "2026-06-19T23:52:28Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "b35e4094c0cc2332d6d591794c5c9aa0fb98da15",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/update-2-4-5-collapse-reserve-receipt",
+      "headRefOid": "5f4606c43d327dd1f753b728ad80360fa91a6984",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABDlPMUA",
+          "commit": {
+            "abbreviatedOid": "5f4606c"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "@achamayou this matches what I believe we agreed to with Mike today. It appears that a registeration request will return a 202, even if the registration completes successfully synchronously. Correct? ",
+          "createdAt": "2026-06-19T21:30:37Z",
+          "updatedAt": "2026-06-19T21:30:37Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABDlUGJw",
+          "commit": {
+            "abbreviatedOid": "5f4606c"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-06-19T21:50:39Z",
+          "updatedAt": "2026-06-19T21:50:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABDls9Zw",
+          "commit": {
+            "abbreviatedOid": "5f4606c"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Changes are inline with 6/19 discussion with Mike Biship.",
+          "createdAt": "2026-06-19T23:52:28Z",
+          "updatedAt": "2026-06-19T23:52:28Z",
           "comments": []
         }
       ]
