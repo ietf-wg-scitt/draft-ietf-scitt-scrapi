@@ -516,10 +516,6 @@ Table of Contents
    If the Transparency Service is able to produce a Receipt within a
    reasonable time, it MAY return it directly.
 
-   Along with the receipt the Transparency Service MAY return a locator
-   in the HTTP response Location header, provided the locator is a valid
-   URL.
-
    HTTP/1.1 201 Created
    Location: https://transparency.example/entries/67ed...befe
    Content-Type: application/cose
@@ -551,9 +547,15 @@ Table of Contents
      / signature   / h'02d227ed...ccd3774f'
    ])
 
-   The response contains the Receipt for the Signed Statement.  Fresh
-   Receipts may be requested through the resource identified in the
-   Location header.
+   The response contains the Receipt for the Signed Statement.  The
+   response MUST contain a Location header field whose value is the URL
+   of the Receipt resource (see Section 2.4).  Fresh Receipts may be
+   requested through the resource identified in the Location header.
+
+   Transparency Services that support both synchronous and asynchronous
+   registration MUST return the same Location URL for the same
+   registered Signed Statement regardless of which registration mode was
+   used.
 
 2.3.2.  Status 202 - Registration is running
 
