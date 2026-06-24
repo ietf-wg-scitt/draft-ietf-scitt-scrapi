@@ -412,8 +412,6 @@ One of the following:
 
 If the Transparency Service is able to produce a Receipt within a reasonable time, it MAY return it directly.
 
-Along with the receipt the Transparency Service MAY return a locator in the HTTP response `Location` header, provided the locator is a valid URL.
-
 ~~~ http-message
 HTTP/1.1 201 Created
 Location: https://transparency.example/entries/67ed...befe
@@ -448,7 +446,10 @@ Body (in CBOR diagnostic notation)
 ~~~
 
 The response contains the Receipt for the Signed Statement.
-Fresh Receipts may be requested through the resource identified in the Location header.
+The response MUST contain a `Location` header field whose value is the URL of the Receipt resource (see {{sec-resolve-receipt}}).
+Fresh Receipts may be requested through the resource identified in the `Location` header.
+
+Transparency Services that support both synchronous and asynchronous registration MUST return the same `Location` URL for the same registered Signed Statement regardless of which registration mode was used.
 
 ### Status 202 - Registration is running
 
