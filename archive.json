@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-21T02:13:47.446018+00:00",
+  "timestamp": "2026-06-25T01:58:36.166610+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2592,7 +2592,7 @@
       ],
       "body": "### Section 2.3.2, paragraph 1\n\nI would have expected 202 here, but 303 also seems defensible. No change necessarily required, just review the definitions of each to be sure.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
       "createdAt": "2026-05-19T19:48:58Z",
-      "updatedAt": "2026-06-19T16:17:00Z",
+      "updatedAt": "2026-06-24T15:34:16Z",
       "closedAt": null,
       "comments": [
         {
@@ -2615,6 +2615,13 @@
           "body": "Summary of meeting on 06/19 with Mike Bishop:\n\n1. the initial response to an async registration request must be a 202, and contain a Location to the eventual receipt resource.\n2. further GET requests made to that eventual location either result in 404 (same as now) if persistence has failed, 200 (same as now) once complete, or 204 with a Retry-After if the registration is still pending - setting Cache-control: no-store may be a good way to indicate that these 204 results are transient.\n3. 404 failures can be enriched with application-specific detail explaining why the persistence failed, using the concise problem details format.\n4. As a consequence of 1 and 2, 3xx usage is removed.",
           "createdAt": "2026-06-19T16:16:59Z",
           "updatedAt": "2026-06-19T16:16:59Z"
+        },
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "#212 is now merged and addresses these points, but a new draft needs to be submitted.",
+          "createdAt": "2026-06-24T15:34:03Z",
+          "updatedAt": "2026-06-24T15:34:16Z"
         }
       ]
     },
@@ -2990,6 +2997,25 @@
           "updatedAt": "2026-05-19T19:53:42Z"
         }
       ]
+    },
+    {
+      "number": 213,
+      "id": "I_kwDOLJjbks8AAAABGk2E7A",
+      "title": "Clarifications about similarities between sync and async workflows",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/213",
+      "state": "OPEN",
+      "author": "achamayou",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "1. Location MUST be present on 201, there is no valid reason to let a TS omit it\n2. Services that implement both sync and async registration MUST return the same Location for the same receipt. ",
+      "createdAt": "2026-06-24T15:35:43Z",
+      "updatedAt": "2026-06-24T15:40:35Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -15858,7 +15884,7 @@
       "id": "PR_kwDOLJjbks7ogFPQ",
       "title": "Use 202/204 polling for async registration; merge Query Registration Status into Resolve Receipt",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/212",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "copilot-swe-agent",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -15868,17 +15894,19 @@
       "labels": [],
       "body": "Per the 06/19 discussion with Mike Bishop (issue #186), async registration should rely on standard 202/204 polling rather than 3xx redirection, and the separate status-query resource is redundant with receipt resolution.\n\n### Register Signed Statement (2.3)\n- Replaced **303 See Other** with **202 Accepted**; response MUST carry a `Location` header pointing to the eventual Receipt resource.\n- Moved the **429 Too Many Requests** response here (formerly under Query Registration Status).\n\n### Resolve Receipt (2.4)\n- Absorbed the former **Query Registration Status** resource \u2014 both described GETs on the same locator.\n- Polling outcomes are now: **200** (Receipt available), **204** with `Retry-After` + `Cache-Control: no-store` (registration in progress, replaces 302), **404** (no Receipt, including failed registration).\n- 404 for a failed registration MAY be enriched with application-specific Concise Problem Details.\n\n### Consistency pass\n- Removed the 3xx option from the generic error-handling text in the Resources intro (no 3xx responses remain).\n- Updated the intro resource list (dropped the deleted `sec-query-registration-status` anchor) and the Operational Considerations `Retry-After` list (now `202, 204, 429, 503`).\n- Rewrote the flow-chart example to the new sequence.\n\n```\nClient --- POST /entries (Signed Statement) --> TS\nClient <-- 202 Location: .../entries/123     --- TS\n\nClient --- GET .../entries/123              --> TS   (zero or more)\nClient <-- 204 Retry-After: <seconds>       --- TS\n\nClient --- GET .../entries/123              --> TS\nClient <-- 200 (Receipt)                    --- TS\n```\n\n**Open question for review:** the `Invalid locator` 400 example currently sits under Register (2.3) to follow \"400s move to 2.3\", though it semantically applies to a malformed GET on Resolve Receipt. Happy to relocate it.",
       "createdAt": "2026-06-19T19:56:34Z",
-      "updatedAt": "2026-06-19T23:52:28Z",
+      "updatedAt": "2026-06-24T15:33:30Z",
       "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "baseRefName": "main",
       "baseRefOid": "b35e4094c0cc2332d6d591794c5c9aa0fb98da15",
       "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
       "headRefName": "copilot/update-2-4-5-collapse-reserve-receipt",
       "headRefOid": "5f4606c43d327dd1f753b728ad80360fa91a6984",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-06-24T15:33:30Z",
+      "mergedAt": "2026-06-24T15:33:30Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "593a8a335bc2e7c107d9832e9be8cc79c4e338ab"
+      },
       "comments": [],
       "reviews": [
         {
@@ -15918,6 +15946,98 @@
           "body": "Changes are inline with 6/19 discussion with Mike Biship.",
           "createdAt": "2026-06-19T23:52:28Z",
           "updatedAt": "2026-06-19T23:52:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 214,
+      "id": "PR_kwDOLJjbks7qLlPt",
+      "title": "Strengthen Location header requirements for 201 and sync/async consistency",
+      "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/pull/214",
+      "state": "MERGED",
+      "author": "copilot-swe-agent",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "achamayou",
+        "Copilot"
+      ],
+      "labels": [],
+      "body": "The 201 response spec allowed `Location` as optional (`MAY`), creating ambiguity for clients and inconsistency with the 202 response. Services supporting both modes had no requirement to return stable, consistent URLs.\n\n## Changes\n\n- **Status 201**: Replaces the weak `MAY return a locator` language with a `MUST contain a Location header` requirement, aligned with the existing MUST on Status 202.\n- **Sync/async consistency**: Adds an explicit requirement that Transparency Services supporting both synchronous and asynchronous registration MUST return the same `Location` URL for the same registered Signed Statement, regardless of registration mode.\n\n```\nBefore:\n  Along with the receipt the Transparency Service MAY return a locator in the\n  HTTP response `Location` header, provided the locator is a valid URL.\n\nAfter:\n  The response MUST contain a `Location` header field whose value is the URL\n  of the Receipt resource (see {{sec-resolve-receipt}}).\n\n  Transparency Services that support both synchronous and asynchronous\n  registration MUST return the same `Location` URL for the same registered\n  Signed Statement regardless of which registration mode was used.\n```",
+      "createdAt": "2026-06-24T15:40:41Z",
+      "updatedAt": "2026-06-24T15:49:39Z",
+      "baseRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "baseRefName": "main",
+      "baseRefOid": "593a8a335bc2e7c107d9832e9be8cc79c4e338ab",
+      "headRepository": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
+      "headRefName": "copilot/fix-location-requirement-sync-async-workflows",
+      "headRefOid": "b56ebe36a7222ec67c1b5090dcadb7d86de6a38f",
+      "closedAt": "2026-06-24T15:49:38Z",
+      "mergedAt": "2026-06-24T15:49:38Z",
+      "mergedBy": "achamayou",
+      "mergeCommit": {
+        "oid": "eaa562436f68326488105470166b26df7037dd93"
+      },
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closes #213",
+          "createdAt": "2026-06-24T15:45:26Z",
+          "updatedAt": "2026-06-24T15:45:26Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLJjbks8AAAABEAVHgw",
+          "commit": {
+            "abbreviatedOid": "b56ebe3"
+          },
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-24T15:45:01Z",
+          "updatedAt": "2026-06-24T15:45:01Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABEAVHyQ",
+          "commit": {
+            "abbreviatedOid": "b56ebe3"
+          },
+          "author": "nikcal",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM.",
+          "createdAt": "2026-06-24T15:45:02Z",
+          "updatedAt": "2026-06-24T15:45:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABEAWsiQ",
+          "commit": {
+            "abbreviatedOid": "b56ebe3"
+          },
+          "author": "bobmartin3000",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-06-24T15:48:12Z",
+          "updatedAt": "2026-06-24T15:48:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLJjbks8AAAABEAW3Fw",
+          "commit": {
+            "abbreviatedOid": "b56ebe3"
+          },
+          "author": "rjb4standards",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Perfect.",
+          "createdAt": "2026-06-24T15:48:32Z",
+          "updatedAt": "2026-06-24T15:48:32Z",
           "comments": []
         }
       ]
