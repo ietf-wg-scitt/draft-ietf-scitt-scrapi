@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-25T01:58:36.166610+00:00",
+  "timestamp": "2026-06-30T01:58:59.858522+00:00",
   "repo": "ietf-wg-scitt/draft-ietf-scitt-scrapi",
   "labels": [
     {
@@ -2546,7 +2546,7 @@
       "id": "I_kwDOLJjbks8AAAABCw9PpQ",
       "title": "[Bishop DISCUSS] Section 2.4.1: 302 redirect from a resource to itself",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/184",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -2555,9 +2555,17 @@
       ],
       "body": "### Section 2.4.1, paragraph 2\n\n```\n     If the client requests (GET) the location when the registration is\n     still in progress, the TS MAY return a 302 Found, as in this non-\n     normative example:\n```\n\nI'm a bit uncomfortable with the idea of a 302 redirect from a resource to itself. Redirects to the same URI don't really fit into any of the categories described in Section 15.4 of RFC 9110.\n\nFundamentally, I think you need to decide whether this resource represents the operation or the result. If it represents the operation, it should return a 200 and a description of the operation's status (complete, in-progress, failed, etc.); completed operations will include the URL of the result or might redirect there.\n\nIf it represents the result itself, it won't exist (404) until the operation completes.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
       "createdAt": "2026-05-19T19:48:55Z",
-      "updatedAt": "2026-05-19T20:01:02Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-06-29T17:00:47Z",
+      "closedAt": "2026-06-29T17:00:46Z",
+      "comments": [
+        {
+          "author": "achamayou",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Resolved in #212 ",
+          "createdAt": "2026-06-29T17:00:46Z",
+          "updatedAt": "2026-06-29T17:00:46Z"
+        }
+      ]
     },
     {
       "number": 185,
@@ -2583,7 +2591,7 @@
       "id": "I_kwDOLJjbks8AAAABCw9Rqg",
       "title": "[Bishop COMMENT] Section 2.3.2: 202 vs 303 status code",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/186",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -2592,8 +2600,8 @@
       ],
       "body": "### Section 2.3.2, paragraph 1\n\nI would have expected 202 here, but 303 also seems defensible. No change necessarily required, just review the definitions of each to be sure.\n\nFrom Mike Bishop's IESG review of draft-ietf-scitt-scrapi-10.\nBallot: https://datatracker.ietf.org/iesg/agenda/documents/#draft-ietf-scitt-scrapi_mike-bishop",
       "createdAt": "2026-05-19T19:48:58Z",
-      "updatedAt": "2026-06-24T15:34:16Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-29T17:00:37Z",
+      "closedAt": "2026-06-29T17:00:37Z",
       "comments": [
         {
           "author": "achamayou",
@@ -3003,7 +3011,7 @@
       "id": "I_kwDOLJjbks8AAAABGk2E7A",
       "title": "Clarifications about similarities between sync and async workflows",
       "url": "https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/issues/213",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "achamayou",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -3013,8 +3021,8 @@
       "labels": [],
       "body": "1. Location MUST be present on 201, there is no valid reason to let a TS omit it\n2. Services that implement both sync and async registration MUST return the same Location for the same receipt. ",
       "createdAt": "2026-06-24T15:35:43Z",
-      "updatedAt": "2026-06-24T15:40:35Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-29T17:00:23Z",
+      "closedAt": "2026-06-29T17:00:23Z",
       "comments": []
     }
   ],
